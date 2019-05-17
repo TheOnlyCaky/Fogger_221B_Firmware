@@ -321,7 +321,7 @@
                                     321 ;	-----------------------------------------
                                     322 ;	 function wirelessBreakDetectISR
                                     323 ;	-----------------------------------------
-      00240F                        324 _wirelessBreakDetectISR:
+      0023B8                        324 _wirelessBreakDetectISR:
                            000007   325 	ar7 = 0x07
                            000006   326 	ar6 = 0x06
                            000005   327 	ar5 = 0x05
@@ -330,59 +330,59 @@
                            000002   330 	ar2 = 0x02
                            000001   331 	ar1 = 0x01
                            000000   332 	ar0 = 0x00
-      00240F C0 20            [24]  333 	push	bits
-      002411 C0 E0            [24]  334 	push	acc
-      002413 C0 F0            [24]  335 	push	b
-      002415 C0 82            [24]  336 	push	dpl
-      002417 C0 83            [24]  337 	push	dph
-      002419 C0 07            [24]  338 	push	(0+7)
-      00241B C0 06            [24]  339 	push	(0+6)
-      00241D C0 05            [24]  340 	push	(0+5)
-      00241F C0 04            [24]  341 	push	(0+4)
-      002421 C0 03            [24]  342 	push	(0+3)
-      002423 C0 02            [24]  343 	push	(0+2)
-      002425 C0 01            [24]  344 	push	(0+1)
-      002427 C0 00            [24]  345 	push	(0+0)
-      002429 C0 D0            [24]  346 	push	psw
-      00242B 75 D0 00         [24]  347 	mov	psw,#0x00
+      0023B8 C0 20            [24]  333 	push	bits
+      0023BA C0 E0            [24]  334 	push	acc
+      0023BC C0 F0            [24]  335 	push	b
+      0023BE C0 82            [24]  336 	push	dpl
+      0023C0 C0 83            [24]  337 	push	dph
+      0023C2 C0 07            [24]  338 	push	(0+7)
+      0023C4 C0 06            [24]  339 	push	(0+6)
+      0023C6 C0 05            [24]  340 	push	(0+5)
+      0023C8 C0 04            [24]  341 	push	(0+4)
+      0023CA C0 03            [24]  342 	push	(0+3)
+      0023CC C0 02            [24]  343 	push	(0+2)
+      0023CE C0 01            [24]  344 	push	(0+1)
+      0023D0 C0 00            [24]  345 	push	(0+0)
+      0023D2 C0 D0            [24]  346 	push	psw
+      0023D4 75 D0 00         [24]  347 	mov	psw,#0x00
                                     348 ;	../Wireless_Manager/wireless.c:40: if(!P3_7){
-      00242E 20 B7 14         [24]  349 	jb	_P3_7,00104$
+      0023D7 20 B7 14         [24]  349 	jb	_P3_7,00104$
                                     350 ;	../Wireless_Manager/wireless.c:41: if(Break_Count++ > BREAK_COUNT){
-      002431 AF 1A            [24]  351 	mov	r7,_Break_Count
-      002433 05 1A            [12]  352 	inc	_Break_Count
-      002435 EF               [12]  353 	mov	a,r7
-      002436 24 F0            [12]  354 	add	a,#0xff - 0x0f
-      002438 50 0E            [24]  355 	jnc	00105$
+      0023DA AF 1A            [24]  351 	mov	r7,_Break_Count
+      0023DC 05 1A            [12]  352 	inc	_Break_Count
+      0023DE EF               [12]  353 	mov	a,r7
+      0023DF 24 F0            [12]  354 	add	a,#0xff - 0x0f
+      0023E1 50 0E            [24]  355 	jnc	00105$
                                     356 ;	../Wireless_Manager/wireless.c:43: Current_Action = getWirelessAction();
-      00243A 12 26 52         [24]  357 	lcall	_getWirelessAction
-      00243D 85 82 1B         [24]  358 	mov	_Current_Action,dpl
+      0023E3 12 25 FB         [24]  357 	lcall	_getWirelessAction
+      0023E6 85 82 1B         [24]  358 	mov	_Current_Action,dpl
                                     359 ;	../Wireless_Manager/wireless.c:45: Break_Count = 0;
-      002440 75 1A 00         [24]  360 	mov	_Break_Count,#0x00
-      002443 80 03            [24]  361 	sjmp	00105$
-      002445                        362 00104$:
+      0023E9 75 1A 00         [24]  360 	mov	_Break_Count,#0x00
+      0023EC 80 03            [24]  361 	sjmp	00105$
+      0023EE                        362 00104$:
                                     363 ;	../Wireless_Manager/wireless.c:48: Break_Count = 0;
-      002445 75 1A 00         [24]  364 	mov	_Break_Count,#0x00
-      002448                        365 00105$:
+      0023EE 75 1A 00         [24]  364 	mov	_Break_Count,#0x00
+      0023F1                        365 00105$:
                                     366 ;	../Wireless_Manager/wireless.c:52: TH0 = COUNTER_HI;
-      002448 75 8C 84         [24]  367 	mov	_TH0,#0x84
+      0023F1 75 8C 84         [24]  367 	mov	_TH0,#0x84
                                     368 ;	../Wireless_Manager/wireless.c:53: TL0 = COUNTER_LO;
-      00244B 75 8A 5F         [24]  369 	mov	_TL0,#0x5f
+      0023F4 75 8A 5F         [24]  369 	mov	_TL0,#0x5f
                                     370 ;	../Wireless_Manager/wireless.c:55: }
-      00244E D0 D0            [24]  371 	pop	psw
-      002450 D0 00            [24]  372 	pop	(0+0)
-      002452 D0 01            [24]  373 	pop	(0+1)
-      002454 D0 02            [24]  374 	pop	(0+2)
-      002456 D0 03            [24]  375 	pop	(0+3)
-      002458 D0 04            [24]  376 	pop	(0+4)
-      00245A D0 05            [24]  377 	pop	(0+5)
-      00245C D0 06            [24]  378 	pop	(0+6)
-      00245E D0 07            [24]  379 	pop	(0+7)
-      002460 D0 83            [24]  380 	pop	dph
-      002462 D0 82            [24]  381 	pop	dpl
-      002464 D0 F0            [24]  382 	pop	b
-      002466 D0 E0            [24]  383 	pop	acc
-      002468 D0 20            [24]  384 	pop	bits
-      00246A 32               [24]  385 	reti
+      0023F7 D0 D0            [24]  371 	pop	psw
+      0023F9 D0 00            [24]  372 	pop	(0+0)
+      0023FB D0 01            [24]  373 	pop	(0+1)
+      0023FD D0 02            [24]  374 	pop	(0+2)
+      0023FF D0 03            [24]  375 	pop	(0+3)
+      002401 D0 04            [24]  376 	pop	(0+4)
+      002403 D0 05            [24]  377 	pop	(0+5)
+      002405 D0 06            [24]  378 	pop	(0+6)
+      002407 D0 07            [24]  379 	pop	(0+7)
+      002409 D0 83            [24]  380 	pop	dph
+      00240B D0 82            [24]  381 	pop	dpl
+      00240D D0 F0            [24]  382 	pop	b
+      00240F D0 E0            [24]  383 	pop	acc
+      002411 D0 20            [24]  384 	pop	bits
+      002413 32               [24]  385 	reti
                                     386 ;------------------------------------------------------------
                                     387 ;Allocation info for local variables in function 'tick_wireless'
                                     388 ;------------------------------------------------------------
@@ -392,105 +392,105 @@
                                     392 ;	-----------------------------------------
                                     393 ;	 function tick_wireless
                                     394 ;	-----------------------------------------
-      00246B                        395 _tick_wireless:
+      002414                        395 _tick_wireless:
                                     396 ;	../Wireless_Manager/wireless.c:60: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
-      00246B 75 82 10         [24]  397 	mov	dpl,#0x10
-      00246E 12 27 6A         [24]  398 	lcall	_get_runtime_data
-      002471 E5 82            [12]  399 	mov	a,dpl
-      002473 70 04            [24]  400 	jnz	00102$
+      002414 75 82 10         [24]  397 	mov	dpl,#0x10
+      002417 12 27 13         [24]  398 	lcall	_get_runtime_data
+      00241A E5 82            [12]  399 	mov	a,dpl
+      00241C 70 04            [24]  400 	jnz	00102$
                                     401 ;	../Wireless_Manager/wireless.c:62: TCON &= ~TIMER_ON; 
-      002475 53 88 EF         [24]  402 	anl	_TCON,#0xef
+      00241E 53 88 EF         [24]  402 	anl	_TCON,#0xef
                                     403 ;	../Wireless_Manager/wireless.c:63: return;
-      002478 22               [24]  404 	ret
-      002479                        405 00102$:
+      002421 22               [24]  404 	ret
+      002422                        405 00102$:
                                     406 ;	../Wireless_Manager/wireless.c:67: TCON |= TIMER_ON; 
-      002479 AE 88            [24]  407 	mov	r6,_TCON
-      00247B 43 06 10         [24]  408 	orl	ar6,#0x10
-      00247E 8E 88            [24]  409 	mov	_TCON,r6
+      002422 AE 88            [24]  407 	mov	r6,_TCON
+      002424 43 06 10         [24]  408 	orl	ar6,#0x10
+      002427 8E 88            [24]  409 	mov	_TCON,r6
                                     410 ;	../Wireless_Manager/wireless.c:69: switch (Current_Action)
-      002480 E5 1B            [12]  411 	mov	a,_Current_Action
-      002482 FF               [12]  412 	mov	r7,a
-      002483 24 F9            [12]  413 	add	a,#0xff - 0x06
-      002485 40 51            [24]  414 	jc	00115$
-      002487 EF               [12]  415 	mov	a,r7
-      002488 2F               [12]  416 	add	a,r7
+      002429 E5 1B            [12]  411 	mov	a,_Current_Action
+      00242B FF               [12]  412 	mov	r7,a
+      00242C 24 F9            [12]  413 	add	a,#0xff - 0x06
+      00242E 40 51            [24]  414 	jc	00115$
+      002430 EF               [12]  415 	mov	a,r7
+      002431 2F               [12]  416 	add	a,r7
                                     417 ;	../Wireless_Manager/wireless.c:71: case WIRELESS_ACTION_PLAY: //continual
-      002489 90 24 8D         [24]  418 	mov	dptr,#00151$
-      00248C 73               [24]  419 	jmp	@a+dptr
-      00248D                        420 00151$:
-      00248D 80 49            [24]  421 	sjmp	00115$
-      00248F 80 0A            [24]  422 	sjmp	00103$
-      002491 80 0D            [24]  423 	sjmp	00104$
-      002493 80 10            [24]  424 	sjmp	00105$
-      002495 80 16            [24]  425 	sjmp	00106$
-      002497 80 23            [24]  426 	sjmp	00109$
-      002499 80 30            [24]  427 	sjmp	00112$
-      00249B                        428 00103$:
+      002432 90 24 36         [24]  418 	mov	dptr,#00151$
+      002435 73               [24]  419 	jmp	@a+dptr
+      002436                        420 00151$:
+      002436 80 49            [24]  421 	sjmp	00115$
+      002438 80 0A            [24]  422 	sjmp	00103$
+      00243A 80 0D            [24]  423 	sjmp	00104$
+      00243C 80 10            [24]  424 	sjmp	00105$
+      00243E 80 16            [24]  425 	sjmp	00106$
+      002440 80 23            [24]  426 	sjmp	00109$
+      002442 80 30            [24]  427 	sjmp	00112$
+      002444                        428 00103$:
                                     429 ;	../Wireless_Manager/wireless.c:72: set_playing(PLAY);
-      00249B 75 69 01         [24]  430 	mov	_Playing,#0x01
+      002444 75 69 01         [24]  430 	mov	_Playing,#0x01
                                     431 ;	../Wireless_Manager/wireless.c:73: break;
                                     432 ;	../Wireless_Manager/wireless.c:74: case WIRELESS_ACTION_PAUSE: //continual
-      00249E 80 38            [24]  433 	sjmp	00115$
-      0024A0                        434 00104$:
+      002447 80 38            [24]  433 	sjmp	00115$
+      002449                        434 00104$:
                                     435 ;	../Wireless_Manager/wireless.c:75: set_playing(PAUSE);
-      0024A0 75 69 00         [24]  436 	mov	_Playing,#0x00
+      002449 75 69 00         [24]  436 	mov	_Playing,#0x00
                                     437 ;	../Wireless_Manager/wireless.c:76: break;
                                     438 ;	../Wireless_Manager/wireless.c:77: case WIRELESS_ACTION_BURST: //continual
-      0024A3 80 33            [24]  439 	sjmp	00115$
-      0024A5                        440 00105$:
+      00244C 80 33            [24]  439 	sjmp	00115$
+      00244E                        440 00105$:
                                     441 ;	../Wireless_Manager/wireless.c:78: power_pump(PUMP_OVERRIDE);
-      0024A5 75 82 02         [24]  442 	mov	dpl,#0x02
-      0024A8 12 2C 83         [24]  443 	lcall	_power_pump
+      00244E 75 82 02         [24]  442 	mov	dpl,#0x02
+      002451 12 2C 2C         [24]  443 	lcall	_power_pump
                                     444 ;	../Wireless_Manager/wireless.c:79: break;
                                     445 ;	../Wireless_Manager/wireless.c:80: case WIRELESS_ACTION_USER_CONFIG_1: //press
-      0024AB 80 2B            [24]  446 	sjmp	00115$
-      0024AD                        447 00106$:
+      002454 80 2B            [24]  446 	sjmp	00115$
+      002456                        447 00106$:
                                     448 ;	../Wireless_Manager/wireless.c:81: if(lastAction == WIRELESS_ACTION_NA){
-      0024AD E5 1C            [12]  449 	mov	a,_tick_wireless_lastAction_65536_45
-      0024AF 70 27            [24]  450 	jnz	00115$
+      002456 E5 1C            [12]  449 	mov	a,_tick_wireless_lastAction_65536_45
+      002458 70 27            [24]  450 	jnz	00115$
                                     451 ;	../Wireless_Manager/wireless.c:82: handleUserConfigAction(get_runtime_data(R4_INDEX));
-      0024B1 75 82 09         [24]  452 	mov	dpl,#0x09
-      0024B4 12 27 6A         [24]  453 	lcall	_get_runtime_data
-      0024B7 12 24 EE         [24]  454 	lcall	_handleUserConfigAction
+      00245A 75 82 09         [24]  452 	mov	dpl,#0x09
+      00245D 12 27 13         [24]  453 	lcall	_get_runtime_data
+      002460 12 24 97         [24]  454 	lcall	_handleUserConfigAction
                                     455 ;	../Wireless_Manager/wireless.c:84: break;
                                     456 ;	../Wireless_Manager/wireless.c:85: case WIRELESS_ACTION_USER_CONFIG_2: //press
-      0024BA 80 1C            [24]  457 	sjmp	00115$
-      0024BC                        458 00109$:
+      002463 80 1C            [24]  457 	sjmp	00115$
+      002465                        458 00109$:
                                     459 ;	../Wireless_Manager/wireless.c:86: if(lastAction == WIRELESS_ACTION_NA){
-      0024BC E5 1C            [12]  460 	mov	a,_tick_wireless_lastAction_65536_45
-      0024BE 70 18            [24]  461 	jnz	00115$
+      002465 E5 1C            [12]  460 	mov	a,_tick_wireless_lastAction_65536_45
+      002467 70 18            [24]  461 	jnz	00115$
                                     462 ;	../Wireless_Manager/wireless.c:87: handleUserConfigAction(get_runtime_data(R5_INDEX));
-      0024C0 75 82 0A         [24]  463 	mov	dpl,#0x0a
-      0024C3 12 27 6A         [24]  464 	lcall	_get_runtime_data
-      0024C6 12 24 EE         [24]  465 	lcall	_handleUserConfigAction
+      002469 75 82 0A         [24]  463 	mov	dpl,#0x0a
+      00246C 12 27 13         [24]  464 	lcall	_get_runtime_data
+      00246F 12 24 97         [24]  465 	lcall	_handleUserConfigAction
                                     466 ;	../Wireless_Manager/wireless.c:89: break;
                                     467 ;	../Wireless_Manager/wireless.c:90: case WIRELESS_ACTION_USER_CONFIG_3: //press
-      0024C9 80 0D            [24]  468 	sjmp	00115$
-      0024CB                        469 00112$:
+      002472 80 0D            [24]  468 	sjmp	00115$
+      002474                        469 00112$:
                                     470 ;	../Wireless_Manager/wireless.c:91: if(lastAction == WIRELESS_ACTION_NA){
-      0024CB E5 1C            [12]  471 	mov	a,_tick_wireless_lastAction_65536_45
-      0024CD 70 09            [24]  472 	jnz	00115$
+      002474 E5 1C            [12]  471 	mov	a,_tick_wireless_lastAction_65536_45
+      002476 70 09            [24]  472 	jnz	00115$
                                     473 ;	../Wireless_Manager/wireless.c:92: handleUserConfigAction(get_runtime_data(R6_INDEX));
-      0024CF 75 82 0B         [24]  474 	mov	dpl,#0x0b
-      0024D2 12 27 6A         [24]  475 	lcall	_get_runtime_data
-      0024D5 12 24 EE         [24]  476 	lcall	_handleUserConfigAction
+      002478 75 82 0B         [24]  474 	mov	dpl,#0x0b
+      00247B 12 27 13         [24]  475 	lcall	_get_runtime_data
+      00247E 12 24 97         [24]  476 	lcall	_handleUserConfigAction
                                     477 ;	../Wireless_Manager/wireless.c:95: }
-      0024D8                        478 00115$:
+      002481                        478 00115$:
                                     479 ;	../Wireless_Manager/wireless.c:97: if(lastAction == WIRELESS_ACTION_BURST && Current_Action != WIRELESS_ACTION_BURST){
-      0024D8 74 03            [12]  480 	mov	a,#0x03
-      0024DA B5 1C 0D         [24]  481 	cjne	a,_tick_wireless_lastAction_65536_45,00117$
-      0024DD 74 03            [12]  482 	mov	a,#0x03
-      0024DF B5 1B 02         [24]  483 	cjne	a,_Current_Action,00157$
-      0024E2 80 06            [24]  484 	sjmp	00117$
-      0024E4                        485 00157$:
+      002481 74 03            [12]  480 	mov	a,#0x03
+      002483 B5 1C 0D         [24]  481 	cjne	a,_tick_wireless_lastAction_65536_45,00117$
+      002486 74 03            [12]  482 	mov	a,#0x03
+      002488 B5 1B 02         [24]  483 	cjne	a,_Current_Action,00157$
+      00248B 80 06            [24]  484 	sjmp	00117$
+      00248D                        485 00157$:
                                     486 ;	../Wireless_Manager/wireless.c:98: power_pump(PUMP_OFF);
-      0024E4 75 82 00         [24]  487 	mov	dpl,#0x00
-      0024E7 12 2C 83         [24]  488 	lcall	_power_pump
-      0024EA                        489 00117$:
+      00248D 75 82 00         [24]  487 	mov	dpl,#0x00
+      002490 12 2C 2C         [24]  488 	lcall	_power_pump
+      002493                        489 00117$:
                                     490 ;	../Wireless_Manager/wireless.c:101: lastAction = Current_Action;
-      0024EA 85 1B 1C         [24]  491 	mov	_tick_wireless_lastAction_65536_45,_Current_Action
+      002493 85 1B 1C         [24]  491 	mov	_tick_wireless_lastAction_65536_45,_Current_Action
                                     492 ;	../Wireless_Manager/wireless.c:103: }
-      0024ED 22               [24]  493 	ret
+      002496 22               [24]  493 	ret
                                     494 ;------------------------------------------------------------
                                     495 ;Allocation info for local variables in function 'handleUserConfigAction'
                                     496 ;------------------------------------------------------------
@@ -506,297 +506,297 @@
                                     506 ;	-----------------------------------------
                                     507 ;	 function handleUserConfigAction
                                     508 ;	-----------------------------------------
-      0024EE                        509 _handleUserConfigAction:
-      0024EE AF 82            [24]  510 	mov	r7,dpl
+      002497                        509 _handleUserConfigAction:
+      002497 AF 82            [24]  510 	mov	r7,dpl
                                     511 ;	../Wireless_Manager/wireless.c:108: uint8_t off = 0x00;
-      0024F0 7E 00            [12]  512 	mov	r6,#0x00
+      002499 7E 00            [12]  512 	mov	r6,#0x00
                                     513 ;	../Wireless_Manager/wireless.c:109: uint8_t red = 0, green = 0, blue = 0;
-      0024F2 7D 00            [12]  514 	mov	r5,#0x00
-      0024F4 7C 00            [12]  515 	mov	r4,#0x00
+      00249B 7D 00            [12]  514 	mov	r5,#0x00
+      00249D 7C 00            [12]  515 	mov	r4,#0x00
                                     516 ;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0x00
-      0024F6 8E 1F            [24]  517 	mov	_handleUserConfigAction_blue_65536_53,r6
+      00249F 8E 1F            [24]  517 	mov	_handleUserConfigAction_blue_65536_53,r6
                                     518 ;	../Wireless_Manager/wireless.c:112: if(!action){ return; }
-      0024F8 EF               [12]  519 	mov	a,r7
-      0024F9 70 01            [24]  520 	jnz	00102$
-      0024FB 22               [24]  521 	ret
-      0024FC                        522 00102$:
+      0024A1 EF               [12]  519 	mov	a,r7
+      0024A2 70 01            [24]  520 	jnz	00102$
+      0024A4 22               [24]  521 	ret
+      0024A5                        522 00102$:
                                     523 ;	../Wireless_Manager/wireless.c:115: changedBit = 1 << (action-1);
-      0024FC EF               [12]  524 	mov	a,r7
-      0024FD 14               [12]  525 	dec	a
-      0024FE FA               [12]  526 	mov	r2,a
-      0024FF 8A F0            [24]  527 	mov	b,r2
-      002501 05 F0            [12]  528 	inc	b
-      002503 79 01            [12]  529 	mov	r1,#0x01
-      002505 7A 00            [12]  530 	mov	r2,#0x00
-      002507 80 06            [24]  531 	sjmp	00172$
-      002509                        532 00171$:
-      002509 E9               [12]  533 	mov	a,r1
-      00250A 29               [12]  534 	add	a,r1
-      00250B F9               [12]  535 	mov	r1,a
-      00250C EA               [12]  536 	mov	a,r2
-      00250D 33               [12]  537 	rlc	a
-      00250E FA               [12]  538 	mov	r2,a
-      00250F                        539 00172$:
-      00250F D5 F0 F7         [24]  540 	djnz	b,00171$
+      0024A5 EF               [12]  524 	mov	a,r7
+      0024A6 14               [12]  525 	dec	a
+      0024A7 FA               [12]  526 	mov	r2,a
+      0024A8 8A F0            [24]  527 	mov	b,r2
+      0024AA 05 F0            [12]  528 	inc	b
+      0024AC 79 01            [12]  529 	mov	r1,#0x01
+      0024AE 7A 00            [12]  530 	mov	r2,#0x00
+      0024B0 80 06            [24]  531 	sjmp	00172$
+      0024B2                        532 00171$:
+      0024B2 E9               [12]  533 	mov	a,r1
+      0024B3 29               [12]  534 	add	a,r1
+      0024B4 F9               [12]  535 	mov	r1,a
+      0024B5 EA               [12]  536 	mov	a,r2
+      0024B6 33               [12]  537 	rlc	a
+      0024B7 FA               [12]  538 	mov	r2,a
+      0024B8                        539 00172$:
+      0024B8 D5 F0 F7         [24]  540 	djnz	b,00171$
                                     541 ;	../Wireless_Manager/wireless.c:117: if(changed & changedBit){
-      002512 E9               [12]  542 	mov	a,r1
-      002513 55 1D            [12]  543 	anl	a,_handleUserConfigAction_changed_65536_53
-      002515 F8               [12]  544 	mov	r0,a
-      002516 EA               [12]  545 	mov	a,r2
-      002517 55 1E            [12]  546 	anl	a,(_handleUserConfigAction_changed_65536_53 + 1)
-      002519 FB               [12]  547 	mov	r3,a
-      00251A 48               [12]  548 	orl	a,r0
-      00251B 60 10            [24]  549 	jz	00104$
+      0024BB E9               [12]  542 	mov	a,r1
+      0024BC 55 1D            [12]  543 	anl	a,_handleUserConfigAction_changed_65536_53
+      0024BE F8               [12]  544 	mov	r0,a
+      0024BF EA               [12]  545 	mov	a,r2
+      0024C0 55 1E            [12]  546 	anl	a,(_handleUserConfigAction_changed_65536_53 + 1)
+      0024C2 FB               [12]  547 	mov	r3,a
+      0024C3 48               [12]  548 	orl	a,r0
+      0024C4 60 10            [24]  549 	jz	00104$
                                     550 ;	../Wireless_Manager/wireless.c:118: off = 0xFF;
-      00251D 7E FF            [12]  551 	mov	r6,#0xff
+      0024C6 7E FF            [12]  551 	mov	r6,#0xff
                                     552 ;	../Wireless_Manager/wireless.c:119: changed &= ~changedBit;
-      00251F E9               [12]  553 	mov	a,r1
-      002520 F4               [12]  554 	cpl	a
-      002521 F8               [12]  555 	mov	r0,a
-      002522 EA               [12]  556 	mov	a,r2
-      002523 F4               [12]  557 	cpl	a
-      002524 FB               [12]  558 	mov	r3,a
-      002525 E8               [12]  559 	mov	a,r0
-      002526 52 1D            [12]  560 	anl	_handleUserConfigAction_changed_65536_53,a
-      002528 EB               [12]  561 	mov	a,r3
-      002529 52 1E            [12]  562 	anl	(_handleUserConfigAction_changed_65536_53 + 1),a
-      00252B 80 06            [24]  563 	sjmp	00105$
-      00252D                        564 00104$:
+      0024C8 E9               [12]  553 	mov	a,r1
+      0024C9 F4               [12]  554 	cpl	a
+      0024CA F8               [12]  555 	mov	r0,a
+      0024CB EA               [12]  556 	mov	a,r2
+      0024CC F4               [12]  557 	cpl	a
+      0024CD FB               [12]  558 	mov	r3,a
+      0024CE E8               [12]  559 	mov	a,r0
+      0024CF 52 1D            [12]  560 	anl	_handleUserConfigAction_changed_65536_53,a
+      0024D1 EB               [12]  561 	mov	a,r3
+      0024D2 52 1E            [12]  562 	anl	(_handleUserConfigAction_changed_65536_53 + 1),a
+      0024D4 80 06            [24]  563 	sjmp	00105$
+      0024D6                        564 00104$:
                                     565 ;	../Wireless_Manager/wireless.c:121: changed |= changedBit;
-      00252D E9               [12]  566 	mov	a,r1
-      00252E 42 1D            [12]  567 	orl	_handleUserConfigAction_changed_65536_53,a
-      002530 EA               [12]  568 	mov	a,r2
-      002531 42 1E            [12]  569 	orl	(_handleUserConfigAction_changed_65536_53 + 1),a
-      002533                        570 00105$:
+      0024D6 E9               [12]  566 	mov	a,r1
+      0024D7 42 1D            [12]  567 	orl	_handleUserConfigAction_changed_65536_53,a
+      0024D9 EA               [12]  568 	mov	a,r2
+      0024DA 42 1E            [12]  569 	orl	(_handleUserConfigAction_changed_65536_53 + 1),a
+      0024DC                        570 00105$:
                                     571 ;	../Wireless_Manager/wireless.c:125: switch (action)
-      002533 EF               [12]  572 	mov	a,r7
-      002534 24 F3            [12]  573 	add	a,#0xff - 0x0c
-      002536 50 03            [24]  574 	jnc	00174$
-      002538 02 25 E5         [24]  575 	ljmp	00118$
-      00253B                        576 00174$:
-      00253B EF               [12]  577 	mov	a,r7
-      00253C 24 0A            [12]  578 	add	a,#(00175$-3-.)
-      00253E 83               [24]  579 	movc	a,@a+pc
-      00253F F5 82            [12]  580 	mov	dpl,a
-      002541 EF               [12]  581 	mov	a,r7
-      002542 24 11            [12]  582 	add	a,#(00176$-3-.)
-      002544 83               [24]  583 	movc	a,@a+pc
-      002545 F5 83            [12]  584 	mov	dph,a
-      002547 E4               [12]  585 	clr	a
-      002548 73               [24]  586 	jmp	@a+dptr
-      002549                        587 00175$:
-      002549 E5                     588 	.db	00118$
-      00254A 63                     589 	.db	00106$
-      00254B 6F                     590 	.db	00107$
-      00254C 74                     591 	.db	00108$
-      00254D 7B                     592 	.db	00109$
-      00254E 7F                     593 	.db	00110$
-      00254F 85                     594 	.db	00111$
-      002550 8A                     595 	.db	00112$
-      002551 91                     596 	.db	00113$
-      002552 A9                     597 	.db	00114$
-      002553 C1                     598 	.db	00115$
-      002554 D9                     599 	.db	00116$
-      002555 DD                     600 	.db	00117$
-      002556                        601 00176$:
-      002556 25                     602 	.db	00118$>>8
-      002557 25                     603 	.db	00106$>>8
-      002558 25                     604 	.db	00107$>>8
-      002559 25                     605 	.db	00108$>>8
-      00255A 25                     606 	.db	00109$>>8
-      00255B 25                     607 	.db	00110$>>8
-      00255C 25                     608 	.db	00111$>>8
-      00255D 25                     609 	.db	00112$>>8
-      00255E 25                     610 	.db	00113$>>8
-      00255F 25                     611 	.db	00114$>>8
-      002560 25                     612 	.db	00115$>>8
-      002561 25                     613 	.db	00116$>>8
-      002562 25                     614 	.db	00117$>>8
+      0024DC EF               [12]  572 	mov	a,r7
+      0024DD 24 F3            [12]  573 	add	a,#0xff - 0x0c
+      0024DF 50 03            [24]  574 	jnc	00174$
+      0024E1 02 25 8E         [24]  575 	ljmp	00118$
+      0024E4                        576 00174$:
+      0024E4 EF               [12]  577 	mov	a,r7
+      0024E5 24 0A            [12]  578 	add	a,#(00175$-3-.)
+      0024E7 83               [24]  579 	movc	a,@a+pc
+      0024E8 F5 82            [12]  580 	mov	dpl,a
+      0024EA EF               [12]  581 	mov	a,r7
+      0024EB 24 11            [12]  582 	add	a,#(00176$-3-.)
+      0024ED 83               [24]  583 	movc	a,@a+pc
+      0024EE F5 83            [12]  584 	mov	dph,a
+      0024F0 E4               [12]  585 	clr	a
+      0024F1 73               [24]  586 	jmp	@a+dptr
+      0024F2                        587 00175$:
+      0024F2 8E                     588 	.db	00118$
+      0024F3 0C                     589 	.db	00106$
+      0024F4 18                     590 	.db	00107$
+      0024F5 1D                     591 	.db	00108$
+      0024F6 24                     592 	.db	00109$
+      0024F7 28                     593 	.db	00110$
+      0024F8 2E                     594 	.db	00111$
+      0024F9 33                     595 	.db	00112$
+      0024FA 3A                     596 	.db	00113$
+      0024FB 52                     597 	.db	00114$
+      0024FC 6A                     598 	.db	00115$
+      0024FD 82                     599 	.db	00116$
+      0024FE 86                     600 	.db	00117$
+      0024FF                        601 00176$:
+      0024FF 25                     602 	.db	00118$>>8
+      002500 25                     603 	.db	00106$>>8
+      002501 25                     604 	.db	00107$>>8
+      002502 25                     605 	.db	00108$>>8
+      002503 25                     606 	.db	00109$>>8
+      002504 25                     607 	.db	00110$>>8
+      002505 25                     608 	.db	00111$>>8
+      002506 25                     609 	.db	00112$>>8
+      002507 25                     610 	.db	00113$>>8
+      002508 25                     611 	.db	00114$>>8
+      002509 25                     612 	.db	00115$>>8
+      00250A 25                     613 	.db	00116$>>8
+      00250B 25                     614 	.db	00117$>>8
                                     615 ;	../Wireless_Manager/wireless.c:127: case OPTION_WIRELESS_ACTION_CHOOSE_MACRO:
-      002563                        616 00106$:
+      00250C                        616 00106$:
                                     617 ;	../Wireless_Manager/wireless.c:128: set_runtime_data(MACRO_INDEX, INC, NULL);
-      002563 75 65 01         [24]  618 	mov	_set_runtime_data_PARM_2,#0x01
-      002566 75 66 00         [24]  619 	mov	_set_runtime_data_PARM_3,#0x00
-      002569 75 82 03         [24]  620 	mov	dpl,#0x03
+      00250C 75 65 01         [24]  618 	mov	_set_runtime_data_PARM_2,#0x01
+      00250F 75 66 00         [24]  619 	mov	_set_runtime_data_PARM_3,#0x00
+      002512 75 82 03         [24]  620 	mov	dpl,#0x03
                                     621 ;	../Wireless_Manager/wireless.c:129: return;
-      00256C 02 27 FE         [24]  622 	ljmp	_set_runtime_data
+      002515 02 27 A7         [24]  622 	ljmp	_set_runtime_data
                                     623 ;	../Wireless_Manager/wireless.c:130: case OPTION_WIRELESS_ACTION_RED:
-      00256F                        624 00107$:
+      002518                        624 00107$:
                                     625 ;	../Wireless_Manager/wireless.c:131: red = WIRELESS_VALUE_FULL;
-      00256F 7D FF            [12]  626 	mov	r5,#0xff
+      002518 7D FF            [12]  626 	mov	r5,#0xff
                                     627 ;	../Wireless_Manager/wireless.c:132: break;
-      002571 02 25 E6         [24]  628 	ljmp	00119$
+      00251A 02 25 8F         [24]  628 	ljmp	00119$
                                     629 ;	../Wireless_Manager/wireless.c:133: case OPTION_WIRELESS_ACTION_YELLOW:
-      002574                        630 00108$:
+      00251D                        630 00108$:
                                     631 ;	../Wireless_Manager/wireless.c:134: red = WIRELESS_VALUE_FULL;
-      002574 7D FF            [12]  632 	mov	r5,#0xff
+      00251D 7D FF            [12]  632 	mov	r5,#0xff
                                     633 ;	../Wireless_Manager/wireless.c:135: green = WIRELESS_VALUE_FULL;
-      002576 7C FF            [12]  634 	mov	r4,#0xff
+      00251F 7C FF            [12]  634 	mov	r4,#0xff
                                     635 ;	../Wireless_Manager/wireless.c:136: break;
-      002578 02 25 E6         [24]  636 	ljmp	00119$
+      002521 02 25 8F         [24]  636 	ljmp	00119$
                                     637 ;	../Wireless_Manager/wireless.c:137: case OPTION_WIRELESS_ACTION_GREEN:
-      00257B                        638 00109$:
+      002524                        638 00109$:
                                     639 ;	../Wireless_Manager/wireless.c:138: green = WIRELESS_VALUE_FULL;
-      00257B 7C FF            [12]  640 	mov	r4,#0xff
+      002524 7C FF            [12]  640 	mov	r4,#0xff
                                     641 ;	../Wireless_Manager/wireless.c:139: break;
                                     642 ;	../Wireless_Manager/wireless.c:140: case OPTION_WIRELESS_ACTION_CYAN:
-      00257D 80 67            [24]  643 	sjmp	00119$
-      00257F                        644 00110$:
+      002526 80 67            [24]  643 	sjmp	00119$
+      002528                        644 00110$:
                                     645 ;	../Wireless_Manager/wireless.c:141: green = WIRELESS_VALUE_FULL;
-      00257F 7C FF            [12]  646 	mov	r4,#0xff
+      002528 7C FF            [12]  646 	mov	r4,#0xff
                                     647 ;	../Wireless_Manager/wireless.c:142: blue = WIRELESS_VALUE_FULL;
                                     648 ;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0xff
-      002581 8C 1F            [24]  649 	mov	_handleUserConfigAction_blue_65536_53,r4
+      00252A 8C 1F            [24]  649 	mov	_handleUserConfigAction_blue_65536_53,r4
                                     650 ;	../Wireless_Manager/wireless.c:143: break;
                                     651 ;	../Wireless_Manager/wireless.c:144: case OPTION_WIRELESS_ACTION_BLUE:
-      002583 80 61            [24]  652 	sjmp	00119$
-      002585                        653 00111$:
+      00252C 80 61            [24]  652 	sjmp	00119$
+      00252E                        653 00111$:
                                     654 ;	../Wireless_Manager/wireless.c:145: blue = WIRELESS_VALUE_FULL;
-      002585 75 1F FF         [24]  655 	mov	_handleUserConfigAction_blue_65536_53,#0xff
+      00252E 75 1F FF         [24]  655 	mov	_handleUserConfigAction_blue_65536_53,#0xff
                                     656 ;	../Wireless_Manager/wireless.c:146: break;
                                     657 ;	../Wireless_Manager/wireless.c:147: case OPTION_WIRELESS_ACTION_MAGENTA:
-      002588 80 5C            [24]  658 	sjmp	00119$
-      00258A                        659 00112$:
+      002531 80 5C            [24]  658 	sjmp	00119$
+      002533                        659 00112$:
                                     660 ;	../Wireless_Manager/wireless.c:148: blue = WIRELESS_VALUE_FULL;
-      00258A 75 1F FF         [24]  661 	mov	_handleUserConfigAction_blue_65536_53,#0xff
+      002533 75 1F FF         [24]  661 	mov	_handleUserConfigAction_blue_65536_53,#0xff
                                     662 ;	../Wireless_Manager/wireless.c:149: red = WIRELESS_VALUE_FULL;
-      00258D 7D FF            [12]  663 	mov	r5,#0xff
+      002536 7D FF            [12]  663 	mov	r5,#0xff
                                     664 ;	../Wireless_Manager/wireless.c:150: break;
                                     665 ;	../Wireless_Manager/wireless.c:151: case OPTION_WIRELESS_ACTION_STROBE_SLOW:
-      00258F 80 55            [24]  666 	sjmp	00119$
-      002591                        667 00113$:
+      002538 80 55            [24]  666 	sjmp	00119$
+      00253A                        667 00113$:
                                     668 ;	../Wireless_Manager/wireless.c:152: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_SLOW);
-      002591 EE               [12]  669 	mov	a,r6
-      002592 60 06            [24]  670 	jz	00122$
-      002594 7B 00            [12]  671 	mov	r3,#0x00
-      002596 7F 00            [12]  672 	mov	r7,#0x00
-      002598 80 04            [24]  673 	sjmp	00123$
-      00259A                        674 00122$:
-      00259A 7B 01            [12]  675 	mov	r3,#0x01
-      00259C 7F 00            [12]  676 	mov	r7,#0x00
-      00259E                        677 00123$:
-      00259E 8B 66            [24]  678 	mov	_set_runtime_data_PARM_3,r3
-      0025A0 75 65 00         [24]  679 	mov	_set_runtime_data_PARM_2,#0x00
-      0025A3 75 82 08         [24]  680 	mov	dpl,#0x08
+      00253A EE               [12]  669 	mov	a,r6
+      00253B 60 06            [24]  670 	jz	00122$
+      00253D 7B 00            [12]  671 	mov	r3,#0x00
+      00253F 7F 00            [12]  672 	mov	r7,#0x00
+      002541 80 04            [24]  673 	sjmp	00123$
+      002543                        674 00122$:
+      002543 7B 01            [12]  675 	mov	r3,#0x01
+      002545 7F 00            [12]  676 	mov	r7,#0x00
+      002547                        677 00123$:
+      002547 8B 66            [24]  678 	mov	_set_runtime_data_PARM_3,r3
+      002549 75 65 00         [24]  679 	mov	_set_runtime_data_PARM_2,#0x00
+      00254C 75 82 08         [24]  680 	mov	dpl,#0x08
                                     681 ;	../Wireless_Manager/wireless.c:153: return;
-      0025A6 02 27 FE         [24]  682 	ljmp	_set_runtime_data
+      00254F 02 27 A7         [24]  682 	ljmp	_set_runtime_data
                                     683 ;	../Wireless_Manager/wireless.c:154: case OPTION_WIRELESS_ACTION_STROBE_MEDIUM:
-      0025A9                        684 00114$:
+      002552                        684 00114$:
                                     685 ;	../Wireless_Manager/wireless.c:155: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_MEDIUM);
-      0025A9 EE               [12]  686 	mov	a,r6
-      0025AA 60 06            [24]  687 	jz	00124$
-      0025AC 7B 00            [12]  688 	mov	r3,#0x00
-      0025AE 7F 00            [12]  689 	mov	r7,#0x00
-      0025B0 80 04            [24]  690 	sjmp	00125$
-      0025B2                        691 00124$:
-      0025B2 7B 79            [12]  692 	mov	r3,#0x79
-      0025B4 7F 00            [12]  693 	mov	r7,#0x00
-      0025B6                        694 00125$:
-      0025B6 8B 66            [24]  695 	mov	_set_runtime_data_PARM_3,r3
-      0025B8 75 65 00         [24]  696 	mov	_set_runtime_data_PARM_2,#0x00
-      0025BB 75 82 08         [24]  697 	mov	dpl,#0x08
+      002552 EE               [12]  686 	mov	a,r6
+      002553 60 06            [24]  687 	jz	00124$
+      002555 7B 00            [12]  688 	mov	r3,#0x00
+      002557 7F 00            [12]  689 	mov	r7,#0x00
+      002559 80 04            [24]  690 	sjmp	00125$
+      00255B                        691 00124$:
+      00255B 7B 79            [12]  692 	mov	r3,#0x79
+      00255D 7F 00            [12]  693 	mov	r7,#0x00
+      00255F                        694 00125$:
+      00255F 8B 66            [24]  695 	mov	_set_runtime_data_PARM_3,r3
+      002561 75 65 00         [24]  696 	mov	_set_runtime_data_PARM_2,#0x00
+      002564 75 82 08         [24]  697 	mov	dpl,#0x08
                                     698 ;	../Wireless_Manager/wireless.c:156: return;
-      0025BE 02 27 FE         [24]  699 	ljmp	_set_runtime_data
+      002567 02 27 A7         [24]  699 	ljmp	_set_runtime_data
                                     700 ;	../Wireless_Manager/wireless.c:157: case OPTION_WIRELESS_ACTION_STROBE_FAST:
-      0025C1                        701 00115$:
+      00256A                        701 00115$:
                                     702 ;	../Wireless_Manager/wireless.c:158: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_FAST);
-      0025C1 EE               [12]  703 	mov	a,r6
-      0025C2 60 06            [24]  704 	jz	00126$
-      0025C4 7B 00            [12]  705 	mov	r3,#0x00
-      0025C6 7F 00            [12]  706 	mov	r7,#0x00
-      0025C8 80 04            [24]  707 	sjmp	00127$
-      0025CA                        708 00126$:
-      0025CA 7B FF            [12]  709 	mov	r3,#0xff
-      0025CC 7F 00            [12]  710 	mov	r7,#0x00
-      0025CE                        711 00127$:
-      0025CE 8B 66            [24]  712 	mov	_set_runtime_data_PARM_3,r3
-      0025D0 75 65 00         [24]  713 	mov	_set_runtime_data_PARM_2,#0x00
-      0025D3 75 82 08         [24]  714 	mov	dpl,#0x08
+      00256A EE               [12]  703 	mov	a,r6
+      00256B 60 06            [24]  704 	jz	00126$
+      00256D 7B 00            [12]  705 	mov	r3,#0x00
+      00256F 7F 00            [12]  706 	mov	r7,#0x00
+      002571 80 04            [24]  707 	sjmp	00127$
+      002573                        708 00126$:
+      002573 7B FF            [12]  709 	mov	r3,#0xff
+      002575 7F 00            [12]  710 	mov	r7,#0x00
+      002577                        711 00127$:
+      002577 8B 66            [24]  712 	mov	_set_runtime_data_PARM_3,r3
+      002579 75 65 00         [24]  713 	mov	_set_runtime_data_PARM_2,#0x00
+      00257C 75 82 08         [24]  714 	mov	dpl,#0x08
                                     715 ;	../Wireless_Manager/wireless.c:159: return;
-      0025D6 02 27 FE         [24]  716 	ljmp	_set_runtime_data
+      00257F 02 27 A7         [24]  716 	ljmp	_set_runtime_data
                                     717 ;	../Wireless_Manager/wireless.c:160: case OPTION_WIRELESS_ACTION_BLACKOUT:
-      0025D9                        718 00116$:
+      002582                        718 00116$:
                                     719 ;	../Wireless_Manager/wireless.c:161: off = 0xFF;
-      0025D9 7E FF            [12]  720 	mov	r6,#0xff
+      002582 7E FF            [12]  720 	mov	r6,#0xff
                                     721 ;	../Wireless_Manager/wireless.c:162: break;
                                     722 ;	../Wireless_Manager/wireless.c:163: case OPTION_WIRELESS_ACTION_WHITEOUT:
-      0025DB 80 09            [24]  723 	sjmp	00119$
-      0025DD                        724 00117$:
+      002584 80 09            [24]  723 	sjmp	00119$
+      002586                        724 00117$:
                                     725 ;	../Wireless_Manager/wireless.c:164: red = WIRELESS_VALUE_FULL;
-      0025DD 7D FF            [12]  726 	mov	r5,#0xff
+      002586 7D FF            [12]  726 	mov	r5,#0xff
                                     727 ;	../Wireless_Manager/wireless.c:165: green = WIRELESS_VALUE_FULL;
-      0025DF 7C FF            [12]  728 	mov	r4,#0xff
+      002588 7C FF            [12]  728 	mov	r4,#0xff
                                     729 ;	../Wireless_Manager/wireless.c:166: blue = WIRELESS_VALUE_FULL;
                                     730 ;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0xff
-      0025E1 8D 1F            [24]  731 	mov	_handleUserConfigAction_blue_65536_53,r5
+      00258A 8D 1F            [24]  731 	mov	_handleUserConfigAction_blue_65536_53,r5
                                     732 ;	../Wireless_Manager/wireless.c:167: break;
                                     733 ;	../Wireless_Manager/wireless.c:168: default:
-      0025E3 80 01            [24]  734 	sjmp	00119$
-      0025E5                        735 00118$:
+      00258C 80 01            [24]  734 	sjmp	00119$
+      00258E                        735 00118$:
                                     736 ;	../Wireless_Manager/wireless.c:169: return;
                                     737 ;	../Wireless_Manager/wireless.c:170: }
-      0025E5 22               [24]  738 	ret
-      0025E6                        739 00119$:
+      00258E 22               [24]  738 	ret
+      00258F                        739 00119$:
                                     740 ;	../Wireless_Manager/wireless.c:172: set_runtime_data(MACRO_INDEX, VALUE, WIRELESS_VALUE_0);
-      0025E6 75 65 00         [24]  741 	mov	_set_runtime_data_PARM_2,#0x00
-      0025E9 75 66 00         [24]  742 	mov	_set_runtime_data_PARM_3,#0x00
-      0025EC 75 82 03         [24]  743 	mov	dpl,#0x03
-      0025EF C0 06            [24]  744 	push	ar6
-      0025F1 C0 05            [24]  745 	push	ar5
-      0025F3 C0 04            [24]  746 	push	ar4
-      0025F5 12 27 FE         [24]  747 	lcall	_set_runtime_data
-      0025F8 D0 04            [24]  748 	pop	ar4
-      0025FA D0 05            [24]  749 	pop	ar5
-      0025FC D0 06            [24]  750 	pop	ar6
+      00258F 75 65 00         [24]  741 	mov	_set_runtime_data_PARM_2,#0x00
+      002592 75 66 00         [24]  742 	mov	_set_runtime_data_PARM_3,#0x00
+      002595 75 82 03         [24]  743 	mov	dpl,#0x03
+      002598 C0 06            [24]  744 	push	ar6
+      00259A C0 05            [24]  745 	push	ar5
+      00259C C0 04            [24]  746 	push	ar4
+      00259E 12 27 A7         [24]  747 	lcall	_set_runtime_data
+      0025A1 D0 04            [24]  748 	pop	ar4
+      0025A3 D0 05            [24]  749 	pop	ar5
+      0025A5 D0 06            [24]  750 	pop	ar6
                                     751 ;	../Wireless_Manager/wireless.c:173: set_runtime_data(RED_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : red);
-      0025FE EE               [12]  752 	mov	a,r6
-      0025FF 60 06            [24]  753 	jz	00128$
-      002601 7B 00            [12]  754 	mov	r3,#0x00
-      002603 7F 00            [12]  755 	mov	r7,#0x00
-      002605 80 04            [24]  756 	sjmp	00129$
-      002607                        757 00128$:
-      002607 8D 03            [24]  758 	mov	ar3,r5
-      002609 7F 00            [12]  759 	mov	r7,#0x00
-      00260B                        760 00129$:
-      00260B 8B 66            [24]  761 	mov	_set_runtime_data_PARM_3,r3
-      00260D 75 65 00         [24]  762 	mov	_set_runtime_data_PARM_2,#0x00
-      002610 75 82 05         [24]  763 	mov	dpl,#0x05
-      002613 C0 06            [24]  764 	push	ar6
-      002615 C0 04            [24]  765 	push	ar4
-      002617 12 27 FE         [24]  766 	lcall	_set_runtime_data
-      00261A D0 04            [24]  767 	pop	ar4
-      00261C D0 06            [24]  768 	pop	ar6
+      0025A7 EE               [12]  752 	mov	a,r6
+      0025A8 60 06            [24]  753 	jz	00128$
+      0025AA 7B 00            [12]  754 	mov	r3,#0x00
+      0025AC 7F 00            [12]  755 	mov	r7,#0x00
+      0025AE 80 04            [24]  756 	sjmp	00129$
+      0025B0                        757 00128$:
+      0025B0 8D 03            [24]  758 	mov	ar3,r5
+      0025B2 7F 00            [12]  759 	mov	r7,#0x00
+      0025B4                        760 00129$:
+      0025B4 8B 66            [24]  761 	mov	_set_runtime_data_PARM_3,r3
+      0025B6 75 65 00         [24]  762 	mov	_set_runtime_data_PARM_2,#0x00
+      0025B9 75 82 05         [24]  763 	mov	dpl,#0x05
+      0025BC C0 06            [24]  764 	push	ar6
+      0025BE C0 04            [24]  765 	push	ar4
+      0025C0 12 27 A7         [24]  766 	lcall	_set_runtime_data
+      0025C3 D0 04            [24]  767 	pop	ar4
+      0025C5 D0 06            [24]  768 	pop	ar6
                                     769 ;	../Wireless_Manager/wireless.c:174: set_runtime_data(GREEN_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : green);
-      00261E EE               [12]  770 	mov	a,r6
-      00261F 60 06            [24]  771 	jz	00130$
-      002621 7D 00            [12]  772 	mov	r5,#0x00
-      002623 7F 00            [12]  773 	mov	r7,#0x00
-      002625 80 04            [24]  774 	sjmp	00131$
-      002627                        775 00130$:
-      002627 8C 05            [24]  776 	mov	ar5,r4
-      002629 7F 00            [12]  777 	mov	r7,#0x00
-      00262B                        778 00131$:
-      00262B 8D 66            [24]  779 	mov	_set_runtime_data_PARM_3,r5
-      00262D 75 65 00         [24]  780 	mov	_set_runtime_data_PARM_2,#0x00
-      002630 75 82 06         [24]  781 	mov	dpl,#0x06
-      002633 C0 06            [24]  782 	push	ar6
-      002635 12 27 FE         [24]  783 	lcall	_set_runtime_data
-      002638 D0 06            [24]  784 	pop	ar6
+      0025C7 EE               [12]  770 	mov	a,r6
+      0025C8 60 06            [24]  771 	jz	00130$
+      0025CA 7D 00            [12]  772 	mov	r5,#0x00
+      0025CC 7F 00            [12]  773 	mov	r7,#0x00
+      0025CE 80 04            [24]  774 	sjmp	00131$
+      0025D0                        775 00130$:
+      0025D0 8C 05            [24]  776 	mov	ar5,r4
+      0025D2 7F 00            [12]  777 	mov	r7,#0x00
+      0025D4                        778 00131$:
+      0025D4 8D 66            [24]  779 	mov	_set_runtime_data_PARM_3,r5
+      0025D6 75 65 00         [24]  780 	mov	_set_runtime_data_PARM_2,#0x00
+      0025D9 75 82 06         [24]  781 	mov	dpl,#0x06
+      0025DC C0 06            [24]  782 	push	ar6
+      0025DE 12 27 A7         [24]  783 	lcall	_set_runtime_data
+      0025E1 D0 06            [24]  784 	pop	ar6
                                     785 ;	../Wireless_Manager/wireless.c:175: set_runtime_data(BLUE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : blue);
-      00263A EE               [12]  786 	mov	a,r6
-      00263B 60 06            [24]  787 	jz	00132$
-      00263D 7E 00            [12]  788 	mov	r6,#0x00
-      00263F 7F 00            [12]  789 	mov	r7,#0x00
-      002641 80 04            [24]  790 	sjmp	00133$
-      002643                        791 00132$:
-      002643 AE 1F            [24]  792 	mov	r6,_handleUserConfigAction_blue_65536_53
-      002645 7F 00            [12]  793 	mov	r7,#0x00
-      002647                        794 00133$:
-      002647 8E 66            [24]  795 	mov	_set_runtime_data_PARM_3,r6
-      002649 75 65 00         [24]  796 	mov	_set_runtime_data_PARM_2,#0x00
-      00264C 75 82 07         [24]  797 	mov	dpl,#0x07
+      0025E3 EE               [12]  786 	mov	a,r6
+      0025E4 60 06            [24]  787 	jz	00132$
+      0025E6 7E 00            [12]  788 	mov	r6,#0x00
+      0025E8 7F 00            [12]  789 	mov	r7,#0x00
+      0025EA 80 04            [24]  790 	sjmp	00133$
+      0025EC                        791 00132$:
+      0025EC AE 1F            [24]  792 	mov	r6,_handleUserConfigAction_blue_65536_53
+      0025EE 7F 00            [12]  793 	mov	r7,#0x00
+      0025F0                        794 00133$:
+      0025F0 8E 66            [24]  795 	mov	_set_runtime_data_PARM_3,r6
+      0025F2 75 65 00         [24]  796 	mov	_set_runtime_data_PARM_2,#0x00
+      0025F5 75 82 07         [24]  797 	mov	dpl,#0x07
                                     798 ;	../Wireless_Manager/wireless.c:177: }
-      00264F 02 27 FE         [24]  799 	ljmp	_set_runtime_data
+      0025F8 02 27 A7         [24]  799 	ljmp	_set_runtime_data
                                     800 ;------------------------------------------------------------
                                     801 ;Allocation info for local variables in function 'getWirelessAction'
                                     802 ;------------------------------------------------------------
@@ -809,98 +809,98 @@
                                     809 ;	-----------------------------------------
                                     810 ;	 function getWirelessAction
                                     811 ;	-----------------------------------------
-      002652                        812 _getWirelessAction:
+      0025FB                        812 _getWirelessAction:
                                     813 ;	../Wireless_Manager/wireless.c:185: for(i = 0; i < PREAMBLE_BITS; i++){
-      002652 7F 00            [12]  814 	mov	r7,#0x00
-      002654                        815 00119$:
+      0025FB 7F 00            [12]  814 	mov	r7,#0x00
+      0025FD                        815 00119$:
                                     816 ;	../Wireless_Manager/wireless.c:186: dit_dah = detectDitDah();
-      002654 C0 07            [24]  817 	push	ar7
-      002656 12 26 BE         [24]  818 	lcall	_detectDitDah
-      002659 AE 82            [24]  819 	mov	r6,dpl
-      00265B D0 07            [24]  820 	pop	ar7
+      0025FD C0 07            [24]  817 	push	ar7
+      0025FF 12 26 67         [24]  818 	lcall	_detectDitDah
+      002602 AE 82            [24]  819 	mov	r6,dpl
+      002604 D0 07            [24]  820 	pop	ar7
                                     821 ;	../Wireless_Manager/wireless.c:188: if(dit_dah == BAD_WIRELESS){
-      00265D EE               [12]  822 	mov	a,r6
-      00265E 70 03            [24]  823 	jnz	00102$
+      002606 EE               [12]  822 	mov	a,r6
+      002607 70 03            [24]  823 	jnz	00102$
                                     824 ;	../Wireless_Manager/wireless.c:189: return dit_dah;
-      002660 8E 82            [24]  825 	mov	dpl,r6
-      002662 22               [24]  826 	ret
-      002663                        827 00102$:
+      002609 8E 82            [24]  825 	mov	dpl,r6
+      00260B 22               [24]  826 	ret
+      00260C                        827 00102$:
                                     828 ;	../Wireless_Manager/wireless.c:192: if(preamble & (0x0001 << i)){ //expects a Dit
-      002663 8F F0            [24]  829 	mov	b,r7
-      002665 05 F0            [12]  830 	inc	b
-      002667 7C 01            [12]  831 	mov	r4,#0x01
-      002669 7D 00            [12]  832 	mov	r5,#0x00
-      00266B 80 06            [24]  833 	sjmp	00169$
-      00266D                        834 00168$:
-      00266D EC               [12]  835 	mov	a,r4
-      00266E 2C               [12]  836 	add	a,r4
-      00266F FC               [12]  837 	mov	r4,a
-      002670 ED               [12]  838 	mov	a,r5
-      002671 33               [12]  839 	rlc	a
-      002672 FD               [12]  840 	mov	r5,a
-      002673                        841 00169$:
-      002673 D5 F0 F7         [24]  842 	djnz	b,00168$
-      002676 EC               [12]  843 	mov	a,r4
-      002677 54 57            [12]  844 	anl	a,#0x57
-      002679 70 05            [24]  845 	jnz	00170$
-      00267B ED               [12]  846 	mov	a,r5
-      00267C 54 05            [12]  847 	anl	a,#0x05
-      00267E 60 09            [24]  848 	jz	00108$
-      002680                        849 00170$:
+      00260C 8F F0            [24]  829 	mov	b,r7
+      00260E 05 F0            [12]  830 	inc	b
+      002610 7C 01            [12]  831 	mov	r4,#0x01
+      002612 7D 00            [12]  832 	mov	r5,#0x00
+      002614 80 06            [24]  833 	sjmp	00169$
+      002616                        834 00168$:
+      002616 EC               [12]  835 	mov	a,r4
+      002617 2C               [12]  836 	add	a,r4
+      002618 FC               [12]  837 	mov	r4,a
+      002619 ED               [12]  838 	mov	a,r5
+      00261A 33               [12]  839 	rlc	a
+      00261B FD               [12]  840 	mov	r5,a
+      00261C                        841 00169$:
+      00261C D5 F0 F7         [24]  842 	djnz	b,00168$
+      00261F EC               [12]  843 	mov	a,r4
+      002620 54 57            [12]  844 	anl	a,#0x57
+      002622 70 05            [24]  845 	jnz	00170$
+      002624 ED               [12]  846 	mov	a,r5
+      002625 54 05            [12]  847 	anl	a,#0x05
+      002627 60 09            [24]  848 	jz	00108$
+      002629                        849 00170$:
                                     850 ;	../Wireless_Manager/wireless.c:193: if(dit_dah != DIT){
-      002680 BE 01 02         [24]  851 	cjne	r6,#0x01,00171$
-      002683 80 0D            [24]  852 	sjmp	00120$
-      002685                        853 00171$:
+      002629 BE 01 02         [24]  851 	cjne	r6,#0x01,00171$
+      00262C 80 0D            [24]  852 	sjmp	00120$
+      00262E                        853 00171$:
                                     854 ;	../Wireless_Manager/wireless.c:194: return BAD_WIRELESS;
-      002685 75 82 00         [24]  855 	mov	dpl,#0x00
-      002688 22               [24]  856 	ret
-      002689                        857 00108$:
+      00262E 75 82 00         [24]  855 	mov	dpl,#0x00
+      002631 22               [24]  856 	ret
+      002632                        857 00108$:
                                     858 ;	../Wireless_Manager/wireless.c:197: if(dit_dah != DAH){
-      002689 BE 02 02         [24]  859 	cjne	r6,#0x02,00172$
-      00268C 80 04            [24]  860 	sjmp	00120$
-      00268E                        861 00172$:
+      002632 BE 02 02         [24]  859 	cjne	r6,#0x02,00172$
+      002635 80 04            [24]  860 	sjmp	00120$
+      002637                        861 00172$:
                                     862 ;	../Wireless_Manager/wireless.c:198: return BAD_WIRELESS;
-      00268E 75 82 00         [24]  863 	mov	dpl,#0x00
-      002691 22               [24]  864 	ret
-      002692                        865 00120$:
+      002637 75 82 00         [24]  863 	mov	dpl,#0x00
+      00263A 22               [24]  864 	ret
+      00263B                        865 00120$:
                                     866 ;	../Wireless_Manager/wireless.c:185: for(i = 0; i < PREAMBLE_BITS; i++){
-      002692 0F               [12]  867 	inc	r7
-      002693 BF 0C 00         [24]  868 	cjne	r7,#0x0c,00173$
-      002696                        869 00173$:
-      002696 40 BC            [24]  870 	jc	00119$
+      00263B 0F               [12]  867 	inc	r7
+      00263C BF 0C 00         [24]  868 	cjne	r7,#0x0c,00173$
+      00263F                        869 00173$:
+      00263F 40 BC            [24]  870 	jc	00119$
                                     871 ;	../Wireless_Manager/wireless.c:204: while(count--){
-      002698 7F 0D            [12]  872 	mov	r7,#0x0d
-      00269A                        873 00116$:
-      00269A 8F 06            [24]  874 	mov	ar6,r7
-      00269C 1F               [12]  875 	dec	r7
-      00269D 8F 05            [24]  876 	mov	ar5,r7
-      00269F EE               [12]  877 	mov	a,r6
-      0026A0 60 16            [24]  878 	jz	00118$
+      002641 7F 0D            [12]  872 	mov	r7,#0x0d
+      002643                        873 00116$:
+      002643 8F 06            [24]  874 	mov	ar6,r7
+      002645 1F               [12]  875 	dec	r7
+      002646 8F 05            [24]  876 	mov	ar5,r7
+      002648 EE               [12]  877 	mov	a,r6
+      002649 60 16            [24]  878 	jz	00118$
                                     879 ;	../Wireless_Manager/wireless.c:205: dit_dah = detectDitDah();
-      0026A2 C0 07            [24]  880 	push	ar7
-      0026A4 C0 05            [24]  881 	push	ar5
-      0026A6 12 26 BE         [24]  882 	lcall	_detectDitDah
-      0026A9 AE 82            [24]  883 	mov	r6,dpl
-      0026AB D0 05            [24]  884 	pop	ar5
-      0026AD D0 07            [24]  885 	pop	ar7
+      00264B C0 07            [24]  880 	push	ar7
+      00264D C0 05            [24]  881 	push	ar5
+      00264F 12 26 67         [24]  882 	lcall	_detectDitDah
+      002652 AE 82            [24]  883 	mov	r6,dpl
+      002654 D0 05            [24]  884 	pop	ar5
+      002656 D0 07            [24]  885 	pop	ar7
                                     886 ;	../Wireless_Manager/wireless.c:207: if(!dit_dah){
-      0026AF EE               [12]  887 	mov	a,r6
+      002658 EE               [12]  887 	mov	a,r6
                                     888 ;	../Wireless_Manager/wireless.c:208: return BAD_WIRELESS;
-      0026B0 70 03            [24]  889 	jnz	00114$
-      0026B2 F5 82            [12]  890 	mov	dpl,a
-      0026B4 22               [24]  891 	ret
-      0026B5                        892 00114$:
+      002659 70 03            [24]  889 	jnz	00114$
+      00265B F5 82            [12]  890 	mov	dpl,a
+      00265D 22               [24]  891 	ret
+      00265E                        892 00114$:
                                     893 ;	../Wireless_Manager/wireless.c:209: } else if(dit_dah == DAH){
-      0026B5 BE 02 E2         [24]  894 	cjne	r6,#0x02,00116$
+      00265E BE 02 E2         [24]  894 	cjne	r6,#0x02,00116$
                                     895 ;	../Wireless_Manager/wireless.c:210: break;
-      0026B8                        896 00118$:
+      002661                        896 00118$:
                                     897 ;	../Wireless_Manager/wireless.c:216: return count >> 1;
-      0026B8 ED               [12]  898 	mov	a,r5
-      0026B9 C3               [12]  899 	clr	c
-      0026BA 13               [12]  900 	rrc	a
-      0026BB F5 82            [12]  901 	mov	dpl,a
+      002661 ED               [12]  898 	mov	a,r5
+      002662 C3               [12]  899 	clr	c
+      002663 13               [12]  900 	rrc	a
+      002664 F5 82            [12]  901 	mov	dpl,a
                                     902 ;	../Wireless_Manager/wireless.c:217: }
-      0026BD 22               [24]  903 	ret
+      002666 22               [24]  903 	ret
                                     904 ;------------------------------------------------------------
                                     905 ;Allocation info for local variables in function 'detectDitDah'
                                     906 ;------------------------------------------------------------
@@ -911,81 +911,81 @@
                                     911 ;	-----------------------------------------
                                     912 ;	 function detectDitDah
                                     913 ;	-----------------------------------------
-      0026BE                        914 _detectDitDah:
+      002667                        914 _detectDitDah:
                                     915 ;	../Wireless_Manager/wireless.c:224: while(timeout--){
-      0026BE 7E B8            [12]  916 	mov	r6,#0xb8
-      0026C0 7F 0B            [12]  917 	mov	r7,#0x0b
-      0026C2                        918 00103$:
-      0026C2 8E 04            [24]  919 	mov	ar4,r6
-      0026C4 8F 05            [24]  920 	mov	ar5,r7
-      0026C6 1E               [12]  921 	dec	r6
-      0026C7 BE FF 01         [24]  922 	cjne	r6,#0xff,00154$
-      0026CA 1F               [12]  923 	dec	r7
-      0026CB                        924 00154$:
-      0026CB EC               [12]  925 	mov	a,r4
-      0026CC 4D               [12]  926 	orl	a,r5
-      0026CD 60 03            [24]  927 	jz	00105$
+      002667 7E B8            [12]  916 	mov	r6,#0xb8
+      002669 7F 0B            [12]  917 	mov	r7,#0x0b
+      00266B                        918 00103$:
+      00266B 8E 04            [24]  919 	mov	ar4,r6
+      00266D 8F 05            [24]  920 	mov	ar5,r7
+      00266F 1E               [12]  921 	dec	r6
+      002670 BE FF 01         [24]  922 	cjne	r6,#0xff,00154$
+      002673 1F               [12]  923 	dec	r7
+      002674                        924 00154$:
+      002674 EC               [12]  925 	mov	a,r4
+      002675 4D               [12]  926 	orl	a,r5
+      002676 60 03            [24]  927 	jz	00105$
                                     928 ;	../Wireless_Manager/wireless.c:225: if(P3_7){
-      0026CF 30 B7 F0         [24]  929 	jnb	_P3_7,00103$
+      002678 30 B7 F0         [24]  929 	jnb	_P3_7,00103$
                                     930 ;	../Wireless_Manager/wireless.c:226: break;
-      0026D2                        931 00105$:
+      00267B                        931 00105$:
                                     932 ;	../Wireless_Manager/wireless.c:231: if(!timeout){
-      0026D2 EE               [12]  933 	mov	a,r6
-      0026D3 4F               [12]  934 	orl	a,r7
+      00267B EE               [12]  933 	mov	a,r6
+      00267C 4F               [12]  934 	orl	a,r7
                                     935 ;	../Wireless_Manager/wireless.c:232: return BAD_WIRELESS;
-      0026D4 70 03            [24]  936 	jnz	00125$
-      0026D6 F5 82            [12]  937 	mov	dpl,a
+      00267D 70 03            [24]  936 	jnz	00125$
+      00267F F5 82            [12]  937 	mov	dpl,a
                                     938 ;	../Wireless_Manager/wireless.c:239: while(timeout--){
-      0026D8 22               [24]  939 	ret
-      0026D9                        940 00125$:
-      0026D9 7E 00            [12]  941 	mov	r6,#0x00
-      0026DB 7F 00            [12]  942 	mov	r7,#0x00
-      0026DD 7C B8            [12]  943 	mov	r4,#0xb8
-      0026DF 7D 0B            [12]  944 	mov	r5,#0x0b
-      0026E1                        945 00111$:
-      0026E1 8C 02            [24]  946 	mov	ar2,r4
-      0026E3 8D 03            [24]  947 	mov	ar3,r5
-      0026E5 1C               [12]  948 	dec	r4
-      0026E6 BC FF 01         [24]  949 	cjne	r4,#0xff,00158$
-      0026E9 1D               [12]  950 	dec	r5
-      0026EA                        951 00158$:
-      0026EA EA               [12]  952 	mov	a,r2
-      0026EB 4B               [12]  953 	orl	a,r3
-      0026EC 60 0A            [24]  954 	jz	00113$
+      002681 22               [24]  939 	ret
+      002682                        940 00125$:
+      002682 7E 00            [12]  941 	mov	r6,#0x00
+      002684 7F 00            [12]  942 	mov	r7,#0x00
+      002686 7C B8            [12]  943 	mov	r4,#0xb8
+      002688 7D 0B            [12]  944 	mov	r5,#0x0b
+      00268A                        945 00111$:
+      00268A 8C 02            [24]  946 	mov	ar2,r4
+      00268C 8D 03            [24]  947 	mov	ar3,r5
+      00268E 1C               [12]  948 	dec	r4
+      00268F BC FF 01         [24]  949 	cjne	r4,#0xff,00158$
+      002692 1D               [12]  950 	dec	r5
+      002693                        951 00158$:
+      002693 EA               [12]  952 	mov	a,r2
+      002694 4B               [12]  953 	orl	a,r3
+      002695 60 0A            [24]  954 	jz	00113$
                                     955 ;	../Wireless_Manager/wireless.c:240: if(P3_7){
-      0026EE 30 B7 07         [24]  956 	jnb	_P3_7,00113$
+      002697 30 B7 07         [24]  956 	jnb	_P3_7,00113$
                                     957 ;	../Wireless_Manager/wireless.c:241: count++;
-      0026F1 0E               [12]  958 	inc	r6
+      00269A 0E               [12]  958 	inc	r6
                                     959 ;	../Wireless_Manager/wireless.c:243: break;
-      0026F2 BE 00 EC         [24]  960 	cjne	r6,#0x00,00111$
-      0026F5 0F               [12]  961 	inc	r7
-      0026F6 80 E9            [24]  962 	sjmp	00111$
-      0026F8                        963 00113$:
+      00269B BE 00 EC         [24]  960 	cjne	r6,#0x00,00111$
+      00269E 0F               [12]  961 	inc	r7
+      00269F 80 E9            [24]  962 	sjmp	00111$
+      0026A1                        963 00113$:
                                     964 ;	../Wireless_Manager/wireless.c:248: if(!timeout){
-      0026F8 EC               [12]  965 	mov	a,r4
-      0026F9 4D               [12]  966 	orl	a,r5
+      0026A1 EC               [12]  965 	mov	a,r4
+      0026A2 4D               [12]  966 	orl	a,r5
                                     967 ;	../Wireless_Manager/wireless.c:249: return BAD_WIRELESS;
-      0026FA 70 03            [24]  968 	jnz	00115$
-      0026FC F5 82            [12]  969 	mov	dpl,a
-      0026FE 22               [24]  970 	ret
-      0026FF                        971 00115$:
+      0026A3 70 03            [24]  968 	jnz	00115$
+      0026A5 F5 82            [12]  969 	mov	dpl,a
+      0026A7 22               [24]  970 	ret
+      0026A8                        971 00115$:
                                     972 ;	../Wireless_Manager/wireless.c:255: return (count > DAH_COUNT) ? DAH : DIT;
-      0026FF C3               [12]  973 	clr	c
-      002700 74 E9            [12]  974 	mov	a,#0xe9
-      002702 9E               [12]  975 	subb	a,r6
-      002703 E4               [12]  976 	clr	a
-      002704 9F               [12]  977 	subb	a,r7
-      002705 50 06            [24]  978 	jnc	00118$
-      002707 7E 02            [12]  979 	mov	r6,#0x02
-      002709 7F 00            [12]  980 	mov	r7,#0x00
-      00270B 80 04            [24]  981 	sjmp	00119$
-      00270D                        982 00118$:
-      00270D 7E 01            [12]  983 	mov	r6,#0x01
-      00270F 7F 00            [12]  984 	mov	r7,#0x00
-      002711                        985 00119$:
-      002711 8E 82            [24]  986 	mov	dpl,r6
+      0026A8 C3               [12]  973 	clr	c
+      0026A9 74 E9            [12]  974 	mov	a,#0xe9
+      0026AB 9E               [12]  975 	subb	a,r6
+      0026AC E4               [12]  976 	clr	a
+      0026AD 9F               [12]  977 	subb	a,r7
+      0026AE 50 06            [24]  978 	jnc	00118$
+      0026B0 7E 02            [12]  979 	mov	r6,#0x02
+      0026B2 7F 00            [12]  980 	mov	r7,#0x00
+      0026B4 80 04            [24]  981 	sjmp	00119$
+      0026B6                        982 00118$:
+      0026B6 7E 01            [12]  983 	mov	r6,#0x01
+      0026B8 7F 00            [12]  984 	mov	r7,#0x00
+      0026BA                        985 00119$:
+      0026BA 8E 82            [24]  986 	mov	dpl,r6
                                     987 ;	../Wireless_Manager/wireless.c:256: }
-      002713 22               [24]  988 	ret
+      0026BC 22               [24]  988 	ret
                                     989 	.area CSEG    (CODE)
                                     990 	.area CONST   (CODE)
                                     991 	.area XINIT   (CODE)

@@ -357,6 +357,24 @@ void idlePage(){
 
 void fogLevelPage(uint8_t action){
 
+    switch (action)
+    {
+        case BUTTON_UP:
+            set_runtime_data(FOG_POWER_INDEX, INC, NULL);
+            changed = 0xFF;
+        break;
+        case BUTTON_DOWN:
+            set_runtime_data(FOG_POWER_INDEX, DEC, NULL);
+            changed = 0xFF;  
+        break;
+        case BUTTON_FUNCTION:
+            set_ui_state(INC, NULL);
+        return;
+        case BUTTON_FUN_UP:
+            set_ui_state(DEC, NULL);
+        return;
+    }
+
     if(Changed){
         Changed = 0x00;
         changed = 0xFF;
@@ -390,27 +408,29 @@ void fogLevelPage(uint8_t action){
         }
 
     }
+}
+
+void fogIntervalPage(uint8_t action){
 
     switch (action)
     {
+        case BUTTON_UP_BURST:
         case BUTTON_UP:
-            set_runtime_data(FOG_POWER_INDEX, INC, NULL);
+            set_runtime_data(FOG_INTERVAL_INDEX, INC, NULL);
             changed = 0xFF;
         break;
+        case BUTTON_DOWN_BURST:
         case BUTTON_DOWN:
-            set_runtime_data(FOG_POWER_INDEX, DEC, NULL);
+            set_runtime_data(FOG_INTERVAL_INDEX, DEC, NULL);
             changed = 0xFF;  
         break;
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
-        break;
+        return;
         case BUTTON_FUN_UP:
             set_ui_state(DEC, NULL);
-        break;
+        return;
     }
-}
-
-void fogIntervalPage(uint8_t action){
 
     if(Changed){
         Changed = 0x00;
@@ -430,28 +450,30 @@ void fogIntervalPage(uint8_t action){
 
     }
 
+
+}
+
+void fogDurationPage(uint8_t action){
+
     switch (action)
     {
         case BUTTON_UP_BURST:
         case BUTTON_UP:
-            set_runtime_data(FOG_INTERVAL_INDEX, INC, NULL);
+            set_runtime_data(FOG_DURATION_INDEX, INC, NULL);
             changed = 0xFF;
         break;
         case BUTTON_DOWN_BURST:
         case BUTTON_DOWN:
-            set_runtime_data(FOG_INTERVAL_INDEX, DEC, NULL);
+            set_runtime_data(FOG_DURATION_INDEX, DEC, NULL);
             changed = 0xFF;  
         break;
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
-        break;
+        return;
         case BUTTON_FUN_UP:
             set_ui_state(DEC, NULL);
-        break;
+        return;
     }
-}
-
-void fogDurationPage(uint8_t action){
 
     if(Changed){
         Changed = 0x00;
@@ -470,29 +492,29 @@ void fogDurationPage(uint8_t action){
         write_number(get_runtime_data(FOG_DURATION_INDEX), 4, LINE_1, NOT_SELECTED);
 
     }
+}
+
+void macroPage(uint8_t action){
 
     switch (action)
     {
         case BUTTON_UP_BURST:
         case BUTTON_UP:
-            set_runtime_data(FOG_DURATION_INDEX, INC, NULL);
+            set_runtime_data(MACRO_INDEX, INC, NULL);
             changed = 0xFF;
         break;
         case BUTTON_DOWN_BURST:
         case BUTTON_DOWN:
-            set_runtime_data(FOG_DURATION_INDEX, DEC, NULL);
+            set_runtime_data(MACRO_INDEX, DEC, NULL);
             changed = 0xFF;  
         break;
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
-        break;
+        return;
         case BUTTON_FUN_UP:
             set_ui_state(DEC, NULL);
-        break;
+        return;
     }
-}
-
-void macroPage(uint8_t action){
 
     if(Changed){
         Changed = 0x00;
@@ -510,29 +532,29 @@ void macroPage(uint8_t action){
         write_string(getString(get_runtime_data(MACRO_INDEX) + MACRO_STRING_OFFSET), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
 
     }
+}
+
+void macroSpeedPage(uint8_t action){
 
     switch (action)
     {
         case BUTTON_UP_BURST:
         case BUTTON_UP:
-            set_runtime_data(MACRO_INDEX, INC, NULL);
+            set_runtime_data(MACRO_SPEED_INDEX, INC, NULL);
             changed = 0xFF;
         break;
         case BUTTON_DOWN_BURST:
         case BUTTON_DOWN:
-            set_runtime_data(MACRO_INDEX, DEC, NULL);
+            set_runtime_data(MACRO_SPEED_INDEX, DEC, NULL);
             changed = 0xFF;  
         break;
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
-        break;
+        return;
         case BUTTON_FUN_UP:
             set_ui_state(DEC, NULL);
-        break;
+        return;
     }
-}
-
-void macroSpeedPage(uint8_t action){
 
     if(Changed){
         Changed = 0x00;
@@ -555,25 +577,6 @@ void macroSpeedPage(uint8_t action){
         }
     }
 
-    switch (action)
-    {
-        case BUTTON_UP_BURST:
-        case BUTTON_UP:
-            set_runtime_data(MACRO_SPEED_INDEX, INC, NULL);
-            changed = 0xFF;
-        break;
-        case BUTTON_DOWN_BURST:
-        case BUTTON_DOWN:
-            set_runtime_data(MACRO_SPEED_INDEX, DEC, NULL);
-            changed = 0xFF;  
-        break;
-        case BUTTON_FUNCTION:
-            set_ui_state(INC, NULL);
-        break;
-        case BUTTON_FUN_UP:
-            set_ui_state(DEC, NULL);
-        break;
-    }
 }
 
 void colorPage(uint8_t action){
@@ -593,6 +596,26 @@ void colorPage(uint8_t action){
         case MANUAL_STROBE_STATE:
             index = STROBE_INDEX;
             break;
+    }
+
+    switch (action)
+    {
+        case BUTTON_UP_BURST:
+        case BUTTON_UP:
+            set_runtime_data(index, INC, NULL);
+            changed = 0xFF;
+        break;
+        case BUTTON_DOWN_BURST:
+        case BUTTON_DOWN:
+            set_runtime_data(index, DEC, NULL);
+            changed = 0xFF;  
+        break;
+        case BUTTON_FUNCTION:
+            set_ui_state(INC, NULL);
+        return;
+        case BUTTON_FUN_UP:
+            set_ui_state(DEC, NULL);
+        return;
     }
 
     if(Changed){
@@ -615,26 +638,6 @@ void colorPage(uint8_t action){
             write_number(get_runtime_data(index), 6, LINE_1, NOT_SELECTED);
         }
     }
-
-    switch (action)
-    {
-        case BUTTON_UP_BURST:
-        case BUTTON_UP:
-            set_runtime_data(index, INC, NULL);
-            changed = 0xFF;
-        break;
-        case BUTTON_DOWN_BURST:
-        case BUTTON_DOWN:
-            set_runtime_data(index, DEC, NULL);
-            changed = 0xFF;  
-        break;
-        case BUTTON_FUNCTION:
-            set_ui_state(INC, NULL);
-        break;
-        case BUTTON_FUN_UP:
-            set_ui_state(DEC, NULL);
-        break;
-    }
 }
 
 void remotePage(uint8_t action){
@@ -652,6 +655,24 @@ void remotePage(uint8_t action){
         case MANUAL_REMOTE_ACTION_6_STATE:
             index = R6_INDEX;
             break;
+    }
+
+    switch (action)
+    {
+        case BUTTON_UP:
+            set_runtime_data(index, INC, NULL);
+            changed = 0xFF;
+        break;
+        case BUTTON_DOWN:
+            set_runtime_data(index, DEC, NULL);
+            changed = 0xFF;  
+        break;
+        case BUTTON_FUNCTION:
+            set_ui_state(INC, NULL);
+        return;
+        case BUTTON_FUN_UP:
+            set_ui_state(DEC, NULL);
+        return;
     }
 
     if(Changed){
@@ -679,47 +700,10 @@ void remotePage(uint8_t action){
         changed = 0x00;
         write_string(getString(get_runtime_data(index) + WIRELESS_ACTION_STRING_OFFSET), LINE_LENGTH, 4, LINE_1, NOT_SELECTED);  
     }
-
-    switch (action)
-    {
-        case BUTTON_UP:
-            set_runtime_data(index, INC, NULL);
-            changed = 0xFF;
-        break;
-        case BUTTON_DOWN:
-            set_runtime_data(index, DEC, NULL);
-            changed = 0xFF;  
-        break;
-        case BUTTON_FUNCTION:
-            set_ui_state(INC, NULL);
-        break;
-        case BUTTON_FUN_UP:
-            set_ui_state(DEC, NULL);
-        break;
-    }
 }
 
 void saveLoadPage(uint8_t action){
     static uint8_t slot = 0;
-
-    if(Changed){
-        Changed = 0x00;
-        changed = 0xFF;
-
-        exe_command(CLEAR_DISPLAY);
-
-        if(State == MANUAL_SAVE_SETTINGS_STATE){
-            write_string("Save Settings", sizeof("Save Settings"), 2, LINE_0, NOT_SELECTED);
-        } else {
-            write_string("Load Settings", sizeof("Load Settings"), 2, LINE_0, NOT_SELECTED);
-        }
-
-    }
-
-    if(changed){
-        changed = 0x00;
-        write_string(getString(slot % (SLOT_COUNT - 1)), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);  
-    }
 
     switch (action)
     {
@@ -743,11 +727,31 @@ void saveLoadPage(uint8_t action){
         break;
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
-        break;
+        return;
         case BUTTON_FUN_UP:
             set_ui_state(DEC, NULL);
-        break;
+        return;
     }
+
+    if(Changed){
+        Changed = 0x00;
+        changed = 0xFF;
+
+        exe_command(CLEAR_DISPLAY);
+
+        if(State == MANUAL_SAVE_SETTINGS_STATE){
+            write_string("Save Settings", sizeof("Save Settings"), 2, LINE_0, NOT_SELECTED);
+        } else {
+            write_string("Load Settings", sizeof("Load Settings"), 2, LINE_0, NOT_SELECTED);
+        }
+
+    }
+
+    if(changed){
+        changed = 0x00;
+        write_string(getString(slot % (SLOT_COUNT - 1)), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);  
+    }
+
 }
 
 void dmxAddressPage(uint8_t action){

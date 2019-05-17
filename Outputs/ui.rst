@@ -338,7 +338,7 @@
                                     338 ;slot                      Allocated with name '_saveLoadPage_slot_65536_134'
                                     339 ;action                    Allocated to registers r7 
                                     340 ;------------------------------------------------------------
-                                    341 ;	../UI_Manager/ui.c:703: static uint8_t slot = 0;
+                                    341 ;	../UI_Manager/ui.c:706: static uint8_t slot = 0;
       0000B4 75 16 00         [24]  342 	mov	_saveLoadPage_slot_65536_134,#0x00
                                     343 ;	../UI_Manager/ui.c:12: static volatile uint8_t State = WELCOME_STATE;
       0000B7 75 08 45         [24]  344 	mov	_State,#0x45
@@ -377,7 +377,7 @@
                            000001   377 	ar1 = 0x01
                            000000   378 	ar0 = 0x00
                                     379 ;	../UI_Manager/ui.c:18: uint8_t action = get_button_action();
-      0004EB 12 16 22         [24]  380 	lcall	_get_button_action
+      0004EB 12 15 CB         [24]  380 	lcall	_get_button_action
       0004EE AF 82            [24]  381 	mov	r7,dpl
                                     382 ;	../UI_Manager/ui.c:24: if(action == BUTTON_BURST || action == BUTTON_FUN_BURST){
       0004F0 E4               [12]  383 	clr	a
@@ -400,7 +400,7 @@
       000508                        400 00167$:
       000508 8D 82            [24]  401 	mov	dpl,r5
       00050A C0 07            [24]  402 	push	ar7
-      00050C 12 2C 83         [24]  403 	lcall	_power_pump
+      00050C 12 2C 2C         [24]  403 	lcall	_power_pump
       00050F D0 07            [24]  404 	pop	ar7
                                     405 ;	../UI_Manager/ui.c:26: bursting |= BURSTING;
       000511 AD 0B            [24]  406 	mov	r5,_tick_ui_bursting_65536_37
@@ -415,7 +415,7 @@
                                     415 ;	../UI_Manager/ui.c:28: power_pump(PUMP_OFF);
       000521 75 82 00         [24]  416 	mov	dpl,#0x00
       000524 C0 07            [24]  417 	push	ar7
-      000526 12 2C 83         [24]  418 	lcall	_power_pump
+      000526 12 2C 2C         [24]  418 	lcall	_power_pump
       000529 D0 07            [24]  419 	pop	ar7
                                     420 ;	../UI_Manager/ui.c:29: bursting &= ~BURSTING;
       00052B 53 0B 7F         [24]  421 	anl	_tick_ui_bursting_65536_37,#0x7f
@@ -425,7 +425,7 @@
                                     425 ;	../UI_Manager/ui.c:34: set_runtime_data(OP_MODE_INDEX, VALUE, (get_runtime_data(OP_MODE_INDEX) == MODE_MANUAL) ? MODE_DMX : MODE_MANUAL);
       000531 75 82 10         [24]  426 	mov	dpl,#0x10
       000534 C0 07            [24]  427 	push	ar7
-      000536 12 27 6A         [24]  428 	lcall	_get_runtime_data
+      000536 12 27 13         [24]  428 	lcall	_get_runtime_data
       000539 AE 82            [24]  429 	mov	r6,dpl
       00053B D0 07            [24]  430 	pop	ar7
       00053D BE 80 06         [24]  431 	cjne	r6,#0x80,00168$
@@ -440,7 +440,7 @@
       00054C 75 65 00         [24]  440 	mov	_set_runtime_data_PARM_2,#0x00
       00054F 75 82 10         [24]  441 	mov	dpl,#0x10
       000552 C0 07            [24]  442 	push	ar7
-      000554 12 27 FE         [24]  443 	lcall	_set_runtime_data
+      000554 12 27 A7         [24]  443 	lcall	_set_runtime_data
                                     444 ;	../UI_Manager/ui.c:36: State = IDLE_STATE;
       000557 75 08 00         [24]  445 	mov	_State,#0x00
                                     446 ;	../UI_Manager/ui.c:37: Changed = CHANGE_SCREEN_X;
@@ -448,7 +448,7 @@
                                     448 ;	../UI_Manager/ui.c:39: set_playing(RESET);
       00055D 75 69 02         [24]  449 	mov	_Playing,#0x02
                                     450 ;	../UI_Manager/ui.c:41: tick_fogger();
-      000560 12 28 DB         [24]  451 	lcall	_tick_fogger
+      000560 12 28 84         [24]  451 	lcall	_tick_fogger
       000563 D0 07            [24]  452 	pop	ar7
       000565                        453 00108$:
                                     454 ;	../UI_Manager/ui.c:46: if(action == BUTTON_TIMER){
@@ -465,7 +465,7 @@
       000575                        465 00111$:
                                     466 ;	../UI_Manager/ui.c:53: tick_fogger();
                                     467 ;	../UI_Manager/ui.c:55: return;
-      000575 02 28 DB         [24]  468 	ljmp	_tick_fogger
+      000575 02 28 84         [24]  468 	ljmp	_tick_fogger
       000578                        469 00113$:
                                     470 ;	../UI_Manager/ui.c:59: if(action == BUTTON_FUN_MAN){
       000578 BF 08 02         [24]  471 	cjne	r7,#0x08,00402$
@@ -475,19 +475,19 @@
       000580                        475 00403$:
                                     476 ;	../UI_Manager/ui.c:60: set_runtime_data(TANK_LIGHTS_INDEX, VALUE, ~get_runtime_data(TANK_LIGHTS_INDEX));
       000580 75 82 0F         [24]  477 	mov	dpl,#0x0f
-      000583 12 27 6A         [24]  478 	lcall	_get_runtime_data
+      000583 12 27 13         [24]  478 	lcall	_get_runtime_data
       000586 E5 82            [12]  479 	mov	a,dpl
       000588 F4               [12]  480 	cpl	a
       000589 F5 66            [12]  481 	mov	_set_runtime_data_PARM_3,a
       00058B 75 65 00         [24]  482 	mov	_set_runtime_data_PARM_2,#0x00
       00058E 75 82 0F         [24]  483 	mov	dpl,#0x0f
-      000591 12 27 FE         [24]  484 	lcall	_set_runtime_data
+      000591 12 27 A7         [24]  484 	lcall	_set_runtime_data
                                     485 ;	../UI_Manager/ui.c:62: exe_command(CLEAR_DISPLAY);
       000594 90 80 00         [24]  486 	mov	dptr,#0x8000
-      000597 12 1A B6         [24]  487 	lcall	_exe_command
+      000597 12 1A 5F         [24]  487 	lcall	_exe_command
                                     488 ;	../UI_Manager/ui.c:63: if(get_runtime_data(TANK_LIGHTS_INDEX)){
       00059A 75 82 0F         [24]  489 	mov	dpl,#0x0f
-      00059D 12 27 6A         [24]  490 	lcall	_get_runtime_data
+      00059D 12 27 13         [24]  490 	lcall	_get_runtime_data
       0005A0 E5 82            [12]  491 	mov	a,dpl
       0005A2 60 17            [24]  492 	jz	00115$
                                     493 ;	../UI_Manager/ui.c:64: write_string("Tank Lights Off", 15, 0, LINE_0, NOT_SELECTED);
@@ -495,9 +495,9 @@
       0005A7 75 22 00         [24]  495 	mov	_write_string_PARM_3,#0x00
       0005AA 75 23 00         [24]  496 	mov	_write_string_PARM_4,#0x00
       0005AD 75 24 00         [24]  497 	mov	_write_string_PARM_5,#0x00
-      0005B0 90 2E 47         [24]  498 	mov	dptr,#___str_0
+      0005B0 90 2D F0         [24]  498 	mov	dptr,#___str_0
       0005B3 75 F0 80         [24]  499 	mov	b,#0x80
-      0005B6 12 18 63         [24]  500 	lcall	_write_string
+      0005B6 12 18 0C         [24]  500 	lcall	_write_string
       0005B9 80 15            [24]  501 	sjmp	00116$
       0005BB                        502 00115$:
                                     503 ;	../UI_Manager/ui.c:66: write_string("Tank Lights On", 15, 0, LINE_0, NOT_SELECTED);
@@ -505,18 +505,18 @@
       0005BE 75 22 00         [24]  505 	mov	_write_string_PARM_3,#0x00
       0005C1 75 23 00         [24]  506 	mov	_write_string_PARM_4,#0x00
       0005C4 75 24 00         [24]  507 	mov	_write_string_PARM_5,#0x00
-      0005C7 90 2E 57         [24]  508 	mov	dptr,#___str_1
+      0005C7 90 2E 00         [24]  508 	mov	dptr,#___str_1
       0005CA 75 F0 80         [24]  509 	mov	b,#0x80
-      0005CD 12 18 63         [24]  510 	lcall	_write_string
+      0005CD 12 18 0C         [24]  510 	lcall	_write_string
       0005D0                        511 00116$:
                                     512 ;	../UI_Manager/ui.c:69: write_string("Fun+Man to Undo", 15, 0, LINE_1, NOT_SELECTED);
       0005D0 75 21 0F         [24]  513 	mov	_write_string_PARM_2,#0x0f
       0005D3 75 22 00         [24]  514 	mov	_write_string_PARM_3,#0x00
       0005D6 75 23 01         [24]  515 	mov	_write_string_PARM_4,#0x01
       0005D9 75 24 00         [24]  516 	mov	_write_string_PARM_5,#0x00
-      0005DC 90 2E 66         [24]  517 	mov	dptr,#___str_2
+      0005DC 90 2E 0F         [24]  517 	mov	dptr,#___str_2
       0005DF 75 F0 80         [24]  518 	mov	b,#0x80
-      0005E2 12 18 63         [24]  519 	lcall	_write_string
+      0005E2 12 18 0C         [24]  519 	lcall	_write_string
                                     520 ;	../UI_Manager/ui.c:73: while(delay--){ ;; }
       0005E5 75 0C B5         [24]  521 	mov	_tick_ui_delay_65536_37,#0xb5
       0005E8 75 0D D8         [24]  522 	mov	(_tick_ui_delay_65536_37 + 1),#0xd8
@@ -559,7 +559,7 @@
                                     559 ;	../UI_Manager/ui.c:85: exe_command(CLEAR_DISPLAY);
       000623 90 80 00         [24]  560 	mov	dptr,#0x8000
       000626 C0 06            [24]  561 	push	ar6
-      000628 12 1A B6         [24]  562 	lcall	_exe_command
+      000628 12 1A 5F         [24]  562 	lcall	_exe_command
       00062B D0 06            [24]  563 	pop	ar6
                                     564 ;	../UI_Manager/ui.c:87: write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2), LINE_LENGTH, 0, LINE_0, NOT_SELECTED);
       00062D 8E 04            [24]  565 	mov	ar4,r6
@@ -570,7 +570,7 @@
       000636 8C 82            [24]  570 	mov	dpl,r4
       000638 8D 83            [24]  571 	mov	dph,r5
       00063A C0 06            [24]  572 	push	ar6
-      00063C 12 2E 0D         [24]  573 	lcall	__modsint
+      00063C 12 2D B6         [24]  573 	lcall	__modsint
       00063F E5 82            [12]  574 	mov	a,dpl
       000641 FC               [12]  575 	mov	r4,a
       000642 2C               [12]  576 	add	a,r4
@@ -578,7 +578,7 @@
       000644 24 28            [12]  578 	add	a,#0x28
       000646 F5 82            [12]  579 	mov	dpl,a
       000648 C0 04            [24]  580 	push	ar4
-      00064A 12 14 19         [24]  581 	lcall	_getString
+      00064A 12 13 C2         [24]  581 	lcall	_getString
       00064D AA 82            [24]  582 	mov	r2,dpl
       00064F AB 83            [24]  583 	mov	r3,dph
       000651 AD F0            [24]  584 	mov	r5,b
@@ -589,13 +589,13 @@
       00065F 8A 82            [24]  589 	mov	dpl,r2
       000661 8B 83            [24]  590 	mov	dph,r3
       000663 8D F0            [24]  591 	mov	b,r5
-      000665 12 18 63         [24]  592 	lcall	_write_string
+      000665 12 18 0C         [24]  592 	lcall	_write_string
       000668 D0 04            [24]  593 	pop	ar4
                                     594 ;	../UI_Manager/ui.c:88: write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2 + 1), LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
       00066A 74 29            [12]  595 	mov	a,#0x29
       00066C 2C               [12]  596 	add	a,r4
       00066D F5 82            [12]  597 	mov	dpl,a
-      00066F 12 14 19         [24]  598 	lcall	_getString
+      00066F 12 13 C2         [24]  598 	lcall	_getString
       000672 AB 82            [24]  599 	mov	r3,dpl
       000674 AC 83            [24]  600 	mov	r4,dph
       000676 AD F0            [24]  601 	mov	r5,b
@@ -606,7 +606,7 @@
       000684 8B 82            [24]  606 	mov	dpl,r3
       000686 8C 83            [24]  607 	mov	dph,r4
       000688 8D F0            [24]  608 	mov	b,r5
-      00068A 12 18 63         [24]  609 	lcall	_write_string
+      00068A 12 18 0C         [24]  609 	lcall	_write_string
       00068D D0 06            [24]  610 	pop	ar6
                                     611 ;	../UI_Manager/ui.c:90: ss++;
       00068F EE               [12]  612 	mov	a,r6
@@ -744,23 +744,23 @@
       00075A BE 45 69         [24]  744 	cjne	r6,#0x45,00146$
                                     745 ;	../UI_Manager/ui.c:127: exe_command(CLEAR_DISPLAY);
       00075D 90 80 00         [24]  746 	mov	dptr,#0x8000
-      000760 12 1A B6         [24]  747 	lcall	_exe_command
+      000760 12 1A 5F         [24]  747 	lcall	_exe_command
                                     748 ;	../UI_Manager/ui.c:128: write_string("AtmosFEAR 221B", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
       000763 75 21 10         [24]  749 	mov	_write_string_PARM_2,#0x10
       000766 75 22 01         [24]  750 	mov	_write_string_PARM_3,#0x01
       000769 75 23 00         [24]  751 	mov	_write_string_PARM_4,#0x00
       00076C 75 24 00         [24]  752 	mov	_write_string_PARM_5,#0x00
-      00076F 90 2E 76         [24]  753 	mov	dptr,#___str_3
+      00076F 90 2E 1F         [24]  753 	mov	dptr,#___str_3
       000772 75 F0 80         [24]  754 	mov	b,#0x80
-      000775 12 18 63         [24]  755 	lcall	_write_string
+      000775 12 18 0C         [24]  755 	lcall	_write_string
                                     756 ;	../UI_Manager/ui.c:129: write_string("By Blizzard Pro", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
       000778 75 21 10         [24]  757 	mov	_write_string_PARM_2,#0x10
       00077B 75 22 00         [24]  758 	mov	_write_string_PARM_3,#0x00
       00077E 75 23 01         [24]  759 	mov	_write_string_PARM_4,#0x01
       000781 75 24 00         [24]  760 	mov	_write_string_PARM_5,#0x00
-      000784 90 2E 85         [24]  761 	mov	dptr,#___str_4
+      000784 90 2E 2E         [24]  761 	mov	dptr,#___str_4
       000787 75 F0 80         [24]  762 	mov	b,#0x80
-      00078A 12 18 63         [24]  763 	lcall	_write_string
+      00078A 12 18 0C         [24]  763 	lcall	_write_string
                                     764 ;	../UI_Manager/ui.c:131: Changed = CHANGE_SCREEN_X;
       00078D 75 09 FF         [24]  765 	mov	_Changed,#0xff
                                     766 ;	../UI_Manager/ui.c:132: State = IDLE_STATE;
@@ -779,55 +779,55 @@
       000799 8F 82            [24]  779 	mov	dpl,r7
                                     780 ;	../UI_Manager/ui.c:140: break;
                                     781 ;	../UI_Manager/ui.c:141: case MANUAL_FOG_DURATION_STATE:
-      00079B 02 0B F1         [24]  782 	ljmp	_fogIntervalPage
+      00079B 02 0B D7         [24]  782 	ljmp	_fogIntervalPage
       00079E                        783 00132$:
                                     784 ;	../UI_Manager/ui.c:142: fogDurationPage(action);
       00079E 8F 82            [24]  785 	mov	dpl,r7
                                     786 ;	../UI_Manager/ui.c:143: break;
                                     787 ;	../UI_Manager/ui.c:144: case MANUAL_COLOR_MACRO_STATE:
-      0007A0 02 0C A6         [24]  788 	ljmp	_fogDurationPage
+      0007A0 02 0C 86         [24]  788 	ljmp	_fogDurationPage
       0007A3                        789 00133$:
                                     790 ;	../UI_Manager/ui.c:145: macroPage(action);
       0007A3 8F 82            [24]  791 	mov	dpl,r7
                                     792 ;	../UI_Manager/ui.c:146: break;
                                     793 ;	../UI_Manager/ui.c:147: case MANUAL_MACRO_SPEED_STATE:
-      0007A5 02 0D 5B         [24]  794 	ljmp	_macroPage
+      0007A5 02 0D 35         [24]  794 	ljmp	_macroPage
       0007A8                        795 00134$:
                                     796 ;	../UI_Manager/ui.c:148: macroSpeedPage(action);
       0007A8 8F 82            [24]  797 	mov	dpl,r7
                                     798 ;	../UI_Manager/ui.c:149: break;
                                     799 ;	../UI_Manager/ui.c:153: case MANUAL_STROBE_STATE:
-      0007AA 02 0E 0D         [24]  800 	ljmp	_macroSpeedPage
+      0007AA 02 0D E1         [24]  800 	ljmp	_macroSpeedPage
       0007AD                        801 00138$:
                                     802 ;	../UI_Manager/ui.c:154: colorPage(action);
       0007AD 8F 82            [24]  803 	mov	dpl,r7
                                     804 ;	../UI_Manager/ui.c:155: break;
                                     805 ;	../UI_Manager/ui.c:158: case MANUAL_REMOTE_ACTION_6_STATE:
-      0007AF 02 0E EA         [24]  806 	ljmp	_colorPage
+      0007AF 02 0E AE         [24]  806 	ljmp	_colorPage
       0007B2                        807 00141$:
                                     808 ;	../UI_Manager/ui.c:159: remotePage(action);
       0007B2 8F 82            [24]  809 	mov	dpl,r7
                                     810 ;	../UI_Manager/ui.c:160: break;
                                     811 ;	../UI_Manager/ui.c:162: case MANUAL_SAVE_SETTINGS_STATE:
-      0007B4 02 10 10         [24]  812 	ljmp	_remotePage
+      0007B4 02 0F C4         [24]  812 	ljmp	_remotePage
       0007B7                        813 00143$:
                                     814 ;	../UI_Manager/ui.c:163: saveLoadPage(action);
       0007B7 8F 82            [24]  815 	mov	dpl,r7
                                     816 ;	../UI_Manager/ui.c:164: break;
                                     817 ;	../UI_Manager/ui.c:165: case DMX_ADDRESS_STATE:
-      0007B9 02 11 34         [24]  818 	ljmp	_saveLoadPage
+      0007B9 02 10 E2         [24]  818 	ljmp	_saveLoadPage
       0007BC                        819 00144$:
                                     820 ;	../UI_Manager/ui.c:166: dmxAddressPage(action);
       0007BC 8F 82            [24]  821 	mov	dpl,r7
                                     822 ;	../UI_Manager/ui.c:167: break;
                                     823 ;	../UI_Manager/ui.c:168: case DMX_CHANNEL_MODE_STATE:
-      0007BE 02 12 51         [24]  824 	ljmp	_dmxAddressPage
+      0007BE 02 11 FA         [24]  824 	ljmp	_dmxAddressPage
       0007C1                        825 00145$:
                                     826 ;	../UI_Manager/ui.c:169: dmxChannelPage(action);
       0007C1 8F 82            [24]  827 	mov	dpl,r7
                                     828 ;	../UI_Manager/ui.c:170: break;
                                     829 ;	../UI_Manager/ui.c:171: default: //IDLE state
-      0007C3 02 12 D5         [24]  830 	ljmp	_dmxChannelPage
+      0007C3 02 12 7E         [24]  830 	ljmp	_dmxChannelPage
       0007C6                        831 00146$:
                                     832 ;	../UI_Manager/ui.c:172: idlePage();
       0007C6 C0 07            [24]  833 	push	ar7
@@ -838,7 +838,7 @@
                                     838 ;	../UI_Manager/ui.c:175: set_ui_state(INC, NULL);
       0007D0 75 17 00         [24]  839 	mov	_set_ui_state_PARM_2,#0x00
       0007D3 75 82 01         [24]  840 	mov	dpl,#0x01
-      0007D6 02 13 77         [24]  841 	ljmp	_set_ui_state
+      0007D6 02 13 20         [24]  841 	ljmp	_set_ui_state
       0007D9                        842 00150$:
                                     843 ;	../UI_Manager/ui.c:176: } else if(action == BUTTON_FUN_UP){
       0007D9 BF 0C 09         [24]  844 	cjne	r7,#0x0c,00164$
@@ -847,7 +847,7 @@
       0007DF 75 82 02         [24]  847 	mov	dpl,#0x02
                                     848 ;	../UI_Manager/ui.c:180: }
                                     849 ;	../UI_Manager/ui.c:183: }
-      0007E2 02 13 77         [24]  850 	ljmp	_set_ui_state
+      0007E2 02 13 20         [24]  850 	ljmp	_set_ui_state
       0007E5                        851 00164$:
       0007E5 22               [24]  852 	ret
                                     853 ;------------------------------------------------------------
@@ -873,7 +873,7 @@
       0007ED                        873 00314$:
                                     874 ;	../UI_Manager/ui.c:195: exe_command(CLEAR_DISPLAY);
       0007ED 90 80 00         [24]  875 	mov	dptr,#0x8000
-      0007F0 12 1A B6         [24]  876 	lcall	_exe_command
+      0007F0 12 1A 5F         [24]  876 	lcall	_exe_command
                                     877 ;	../UI_Manager/ui.c:196: Changed = 0x00;
       0007F3 75 09 00         [24]  878 	mov	_Changed,#0x00
                                     879 ;	../UI_Manager/ui.c:197: changed = 0xFF;
@@ -892,17 +892,17 @@
       00080B 75 22 01         [24]  892 	mov	_write_string_PARM_3,#0x01
       00080E 75 23 00         [24]  893 	mov	_write_string_PARM_4,#0x00
       000811 75 24 00         [24]  894 	mov	_write_string_PARM_5,#0x00
-      000814 90 2E 95         [24]  895 	mov	dptr,#___str_5
+      000814 90 2E 3E         [24]  895 	mov	dptr,#___str_5
       000817 75 F0 80         [24]  896 	mov	b,#0x80
-      00081A 12 18 63         [24]  897 	lcall	_write_string
+      00081A 12 18 0C         [24]  897 	lcall	_write_string
                                     898 ;	../UI_Manager/ui.c:205: write_string("Burst to Refill", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
       00081D 75 21 10         [24]  899 	mov	_write_string_PARM_2,#0x10
       000820 75 22 00         [24]  900 	mov	_write_string_PARM_3,#0x00
       000823 75 23 01         [24]  901 	mov	_write_string_PARM_4,#0x01
       000826 75 24 00         [24]  902 	mov	_write_string_PARM_5,#0x00
-      000829 90 2E A4         [24]  903 	mov	dptr,#___str_6
+      000829 90 2E 4D         [24]  903 	mov	dptr,#___str_6
       00082C 75 F0 80         [24]  904 	mov	b,#0x80
-      00082F 12 18 63         [24]  905 	lcall	_write_string
+      00082F 12 18 0C         [24]  905 	lcall	_write_string
                                     906 ;	../UI_Manager/ui.c:207: empty = 0xFF;
       000832 75 12 FF         [24]  907 	mov	_idlePage_empty_65536_55,#0xff
                                     908 ;	../UI_Manager/ui.c:209: return;
@@ -924,7 +924,7 @@
       000846                        924 00107$:
                                     925 ;	../UI_Manager/ui.c:221: if(get_runtime_data(OP_MODE_INDEX)){ /* Manual Mode */
       000846 75 82 10         [24]  926 	mov	dpl,#0x10
-      000849 12 27 6A         [24]  927 	lcall	_get_runtime_data
+      000849 12 27 13         [24]  927 	lcall	_get_runtime_data
       00084C E5 82            [12]  928 	mov	a,dpl
       00084E 60 17            [24]  929 	jz	00113$
                                     930 ;	../UI_Manager/ui.c:222: write_string("Manual Mode", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
@@ -932,20 +932,20 @@
       000853 75 22 01         [24]  932 	mov	_write_string_PARM_3,#0x01
       000856 75 23 00         [24]  933 	mov	_write_string_PARM_4,#0x00
       000859 75 24 00         [24]  934 	mov	_write_string_PARM_5,#0x00
-      00085C 90 2E B4         [24]  935 	mov	dptr,#___str_7
+      00085C 90 2E 5D         [24]  935 	mov	dptr,#___str_7
       00085F 75 F0 80         [24]  936 	mov	b,#0x80
-      000862 12 18 63         [24]  937 	lcall	_write_string
+      000862 12 18 0C         [24]  937 	lcall	_write_string
       000865 80 66            [24]  938 	sjmp	00116$
       000867                        939 00113$:
                                     940 ;	../UI_Manager/ui.c:225: write_number(get_dmx_address(), 4, LINE_1, NOT_SELECTED);
-      000867 12 28 CA         [24]  941 	lcall	_get_dmx_address
+      000867 12 28 73         [24]  941 	lcall	_get_dmx_address
       00086A 75 25 04         [24]  942 	mov	_write_number_PARM_2,#0x04
       00086D 75 26 01         [24]  943 	mov	_write_number_PARM_3,#0x01
       000870 75 27 00         [24]  944 	mov	_write_number_PARM_4,#0x00
-      000873 12 19 27         [24]  945 	lcall	_write_number
+      000873 12 18 D0         [24]  945 	lcall	_write_number
                                     946 ;	../UI_Manager/ui.c:226: switch (get_runtime_data(MODE_INDEX))
       000876 75 82 0E         [24]  947 	mov	dpl,#0x0e
-      000879 12 27 6A         [24]  948 	lcall	_get_runtime_data
+      000879 12 27 13         [24]  948 	lcall	_get_runtime_data
       00087C AF 82            [24]  949 	mov	r7,dpl
       00087E BF 01 02         [24]  950 	cjne	r7,#0x01,00321$
       000881 80 05            [24]  951 	sjmp	00108$
@@ -978,23 +978,23 @@
       00089A 8E 27            [24]  978 	mov	_write_number_PARM_4,r6
       00089C 8F 82            [24]  979 	mov	dpl,r7
       00089E 8E 83            [24]  980 	mov	dph,r6
-      0008A0 12 19 27         [24]  981 	lcall	_write_number
+      0008A0 12 18 D0         [24]  981 	lcall	_write_number
                                     982 ;	../UI_Manager/ui.c:240: write_string("Addr", sizeof("Addr") - 1, 0, LINE_1, NOT_SELECTED);
       0008A3 75 21 04         [24]  983 	mov	_write_string_PARM_2,#0x04
       0008A6 75 22 00         [24]  984 	mov	_write_string_PARM_3,#0x00
       0008A9 75 23 01         [24]  985 	mov	_write_string_PARM_4,#0x01
       0008AC 75 24 00         [24]  986 	mov	_write_string_PARM_5,#0x00
-      0008AF 90 2E C0         [24]  987 	mov	dptr,#___str_8
+      0008AF 90 2E 69         [24]  987 	mov	dptr,#___str_8
       0008B2 75 F0 80         [24]  988 	mov	b,#0x80
-      0008B5 12 18 63         [24]  989 	lcall	_write_string
+      0008B5 12 18 0C         [24]  989 	lcall	_write_string
                                     990 ;	../UI_Manager/ui.c:241: write_string("Mode", sizeof("Mode") - 1, 9, LINE_1, NOT_SELECTED);
       0008B8 75 21 04         [24]  991 	mov	_write_string_PARM_2,#0x04
       0008BB 75 22 09         [24]  992 	mov	_write_string_PARM_3,#0x09
       0008BE 75 23 01         [24]  993 	mov	_write_string_PARM_4,#0x01
       0008C1 75 24 00         [24]  994 	mov	_write_string_PARM_5,#0x00
-      0008C4 90 2E C5         [24]  995 	mov	dptr,#___str_9
+      0008C4 90 2E 6E         [24]  995 	mov	dptr,#___str_9
       0008C7 75 F0 80         [24]  996 	mov	b,#0x80
-      0008CA 12 18 63         [24]  997 	lcall	_write_string
+      0008CA 12 18 0C         [24]  997 	lcall	_write_string
       0008CD                        998 00116$:
                                     999 ;	../UI_Manager/ui.c:249: tock++;
       0008CD 05 13            [12] 1000 	inc	_idlePage_tock_65536_55
@@ -1020,7 +1020,7 @@
       0008E9 75 2B 0E         [24] 1020 	mov	_write_char_PARM_2,#0x0e
       0008EC 75 2C 00         [24] 1021 	mov	_write_char_PARM_3,#0x00
       0008EF 75 82 80         [24] 1022 	mov	dpl,#0x80
-      0008F2 12 1A 81         [24] 1023 	lcall	_write_char
+      0008F2 12 1A 2A         [24] 1023 	lcall	_write_char
                                    1024 ;	../UI_Manager/ui.c:259: iconChange &= ~PLAY_CHANGE;
       0008F5 53 14 DF         [24] 1025 	anl	_idlePage_iconChange_65536_55,#0xdf
       0008F8 80 24            [24] 1026 	sjmp	00128$
@@ -1032,7 +1032,7 @@
       0008FF 75 2B 0E         [24] 1032 	mov	_write_char_PARM_2,#0x0e
       000902 75 2C 00         [24] 1033 	mov	_write_char_PARM_3,#0x00
       000905 75 82 80         [24] 1034 	mov	dpl,#0x80
-      000908 12 1A 81         [24] 1035 	lcall	_write_char
+      000908 12 1A 2A         [24] 1035 	lcall	_write_char
       00090B 80 11            [24] 1036 	sjmp	00128$
       00090D                       1037 00124$:
                                    1038 ;	../UI_Manager/ui.c:265: } else if(tock == 0x08 + 55){
@@ -1042,7 +1042,7 @@
       000912 75 2B 0E         [24] 1042 	mov	_write_char_PARM_2,#0x0e
       000915 75 2C 00         [24] 1043 	mov	_write_char_PARM_3,#0x00
       000918 75 82 04         [24] 1044 	mov	dpl,#0x04
-      00091B 12 1A 81         [24] 1045 	lcall	_write_char
+      00091B 12 1A 2A         [24] 1045 	lcall	_write_char
       00091E                       1046 00128$:
                                    1047 ;	../UI_Manager/ui.c:269: iconChange |= PAUSE_CHANGE;
       00091E AE 14            [24] 1048 	mov	r6,_idlePage_iconChange_65536_55
@@ -1067,7 +1067,7 @@
       00093C 75 2B 0E         [24] 1067 	mov	_write_char_PARM_2,#0x0e
       00093F 75 2C 00         [24] 1068 	mov	_write_char_PARM_3,#0x00
       000942 75 82 04         [24] 1069 	mov	dpl,#0x04
-      000945 12 1A 81         [24] 1070 	lcall	_write_char
+      000945 12 1A 2A         [24] 1070 	lcall	_write_char
                                    1071 ;	../UI_Manager/ui.c:277: iconChange |= PLAY_CHANGE;
       000948 AE 14            [24] 1072 	mov	r6,_idlePage_iconChange_65536_55
       00094A 7F 00            [12] 1073 	mov	r7,#0x00
@@ -1089,7 +1089,7 @@
       000961 75 2B 0F         [24] 1089 	mov	_write_char_PARM_2,#0x0f
       000964 75 2C 00         [24] 1090 	mov	_write_char_PARM_3,#0x00
       000967 75 82 60         [24] 1091 	mov	dpl,#0x60
-      00096A 12 1A 81         [24] 1092 	lcall	_write_char
+      00096A 12 1A 2A         [24] 1092 	lcall	_write_char
                                    1093 ;	../UI_Manager/ui.c:287: iconChange &= ~HEATED_CHANGE;
       00096D 53 14 FE         [24] 1094 	anl	_idlePage_iconChange_65536_55,#0xfe
       000970 80 38            [24] 1095 	sjmp	00145$
@@ -1104,7 +1104,7 @@
       00097B 75 2B 0F         [24] 1104 	mov	_write_char_PARM_2,#0x0f
       00097E 75 2C 00         [24] 1105 	mov	_write_char_PARM_3,#0x00
       000981 75 82 04         [24] 1106 	mov	dpl,#0x04
-      000984 12 1A 81         [24] 1107 	lcall	_write_char
+      000984 12 1A 2A         [24] 1107 	lcall	_write_char
                                    1108 ;	../UI_Manager/ui.c:293: iconChange &= ~HEATING_CHANGE;
       000987 53 14 FD         [24] 1109 	anl	_idlePage_iconChange_65536_55,#0xfd
       00098A 80 15            [24] 1110 	sjmp	00142$
@@ -1113,7 +1113,7 @@
       00098C 75 2B 0F         [24] 1113 	mov	_write_char_PARM_2,#0x0f
       00098F 75 2C 00         [24] 1114 	mov	_write_char_PARM_3,#0x00
       000992 75 82 A0         [24] 1115 	mov	dpl,#0xa0
-      000995 12 1A 81         [24] 1116 	lcall	_write_char
+      000995 12 1A 2A         [24] 1116 	lcall	_write_char
                                    1117 ;	../UI_Manager/ui.c:296: iconChange |= HEATING_CHANGE;
       000998 AE 14            [24] 1118 	mov	r6,_idlePage_iconChange_65536_55
       00099A 7F 00            [12] 1119 	mov	r7,#0x00
@@ -1128,7 +1128,7 @@
       0009AA                       1128 00145$:
                                    1129 ;	../UI_Manager/ui.c:304: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
       0009AA 75 82 10         [24] 1130 	mov	dpl,#0x10
-      0009AD 12 27 6A         [24] 1131 	lcall	_get_runtime_data
+      0009AD 12 27 13         [24] 1131 	lcall	_get_runtime_data
       0009B0 E5 82            [12] 1132 	mov	a,dpl
       0009B2 60 03            [24] 1133 	jz	00339$
       0009B4 02 0A 45         [24] 1134 	ljmp	00163$
@@ -1144,9 +1144,9 @@
       0009C3 75 22 01         [24] 1144 	mov	_write_string_PARM_3,#0x01
       0009C6 75 23 00         [24] 1145 	mov	_write_string_PARM_4,#0x00
       0009C9 75 24 00         [24] 1146 	mov	_write_string_PARM_5,#0x00
-      0009CC 90 2E CA         [24] 1147 	mov	dptr,#___str_10
+      0009CC 90 2E 73         [24] 1147 	mov	dptr,#___str_10
       0009CF 75 F0 80         [24] 1148 	mov	b,#0x80
-      0009D2 12 18 63         [24] 1149 	lcall	_write_string
+      0009D2 12 18 0C         [24] 1149 	lcall	_write_string
                                    1150 ;	../UI_Manager/ui.c:310: changed |= NO_DMX_CHANGE;
       0009D5 AE 0A            [24] 1151 	mov	r6,_changed
       0009D7 7F 00            [12] 1152 	mov	r7,#0x00
@@ -1164,9 +1164,9 @@
       0009EB 75 22 01         [24] 1164 	mov	_write_string_PARM_3,#0x01
       0009EE 75 23 00         [24] 1165 	mov	_write_string_PARM_4,#0x00
       0009F1 75 24 00         [24] 1166 	mov	_write_string_PARM_5,#0x00
-      0009F4 90 2E D1         [24] 1167 	mov	dptr,#___str_11
+      0009F4 90 2E 7A         [24] 1167 	mov	dptr,#___str_11
       0009F7 75 F0 80         [24] 1168 	mov	b,#0x80
-      0009FA 12 18 63         [24] 1169 	lcall	_write_string
+      0009FA 12 18 0C         [24] 1169 	lcall	_write_string
                                    1170 ;	../UI_Manager/ui.c:316: changed |= DMX_OK_CHANGE;
       0009FD AE 0A            [24] 1171 	mov	r6,_changed
       0009FF 7F 00            [12] 1172 	mov	r7,#0x00
@@ -1193,7 +1193,7 @@
       000A1B 8D 82            [24] 1193 	mov	dpl,r5
       000A1D 8E 83            [24] 1194 	mov	dph,r6
       000A1F C0 07            [24] 1195 	push	ar7
-      000A21 12 19 27         [24] 1196 	lcall	_write_number
+      000A21 12 18 D0         [24] 1196 	lcall	_write_number
       000A24 D0 07            [24] 1197 	pop	ar7
                                    1198 ;	../UI_Manager/ui.c:327: write_char((get_interval_or_duration() == INTERVAL) ? CHAR_I : CHAR_D, 11, LINE_0);
       000A26 E5 68            [12] 1199 	mov	a,_Interval_Or_Duration
@@ -1209,7 +1209,7 @@
       000A35 75 2B 0B         [24] 1209 	mov	_write_char_PARM_2,#0x0b
       000A38 75 2C 00         [24] 1210 	mov	_write_char_PARM_3,#0x00
       000A3B C0 07            [24] 1211 	push	ar7
-      000A3D 12 1A 81         [24] 1212 	lcall	_write_char
+      000A3D 12 1A 2A         [24] 1212 	lcall	_write_char
       000A40 D0 07            [24] 1213 	pop	ar7
                                    1214 ;	../UI_Manager/ui.c:329: timer = temp;
       000A42 8F 10            [24] 1215 	mov	_idlePage_timer_65536_55,r7
@@ -1230,10 +1230,10 @@
       000A53 F5 22            [12] 1230 	mov	_write_string_PARM_3,a
       000A55 75 23 01         [24] 1231 	mov	_write_string_PARM_4,#0x01
       000A58 F5 24            [12] 1232 	mov	_write_string_PARM_5,a
-      000A5A 90 2E D8         [24] 1233 	mov	dptr,#___str_12
+      000A5A 90 2E 81         [24] 1233 	mov	dptr,#___str_12
       000A5D 75 F0 80         [24] 1234 	mov	b,#0x80
       000A60 C0 07            [24] 1235 	push	ar7
-      000A62 12 18 63         [24] 1236 	lcall	_write_string
+      000A62 12 18 0C         [24] 1236 	lcall	_write_string
       000A65 D0 07            [24] 1237 	pop	ar7
       000A67 80 19            [24] 1238 	sjmp	00157$
       000A69                       1239 00156$:
@@ -1242,10 +1242,10 @@
       000A6C 75 22 00         [24] 1242 	mov	_write_string_PARM_3,#0x00
       000A6F 75 23 01         [24] 1243 	mov	_write_string_PARM_4,#0x01
       000A72 75 24 00         [24] 1244 	mov	_write_string_PARM_5,#0x00
-      000A75 90 2E E1         [24] 1245 	mov	dptr,#___str_13
+      000A75 90 2E 8A         [24] 1245 	mov	dptr,#___str_13
       000A78 75 F0 80         [24] 1246 	mov	b,#0x80
       000A7B C0 07            [24] 1247 	push	ar7
-      000A7D 12 18 63         [24] 1248 	lcall	_write_string
+      000A7D 12 18 0C         [24] 1248 	lcall	_write_string
       000A80 D0 07            [24] 1249 	pop	ar7
       000A82                       1250 00157$:
                                    1251 ;	../UI_Manager/ui.c:343: intervalOrDuration = temp;
@@ -1268,7 +1268,7 @@
       000A97 8D 82            [24] 1268 	mov	dpl,r5
       000A99 8E 83            [24] 1269 	mov	dph,r6
       000A9B C0 07            [24] 1270 	push	ar7
-      000A9D 12 19 27         [24] 1271 	lcall	_write_number
+      000A9D 12 18 D0         [24] 1271 	lcall	_write_number
       000AA0 D0 07            [24] 1272 	pop	ar7
                                    1273 ;	../UI_Manager/ui.c:352: timer = temp;
       000AA2 8F 10            [24] 1274 	mov	_idlePage_timer_65536_55,r7
@@ -1285,2196 +1285,2152 @@
                                    1285 ;	-----------------------------------------
       000AA5                       1286 _fogLevelPage:
       000AA5 AF 82            [24] 1287 	mov	r7,dpl
-                                   1288 ;	../UI_Manager/ui.c:360: if(Changed){
-      000AA7 E5 09            [12] 1289 	mov	a,_Changed
-      000AA9 60 25            [24] 1290 	jz	00102$
-                                   1291 ;	../UI_Manager/ui.c:361: Changed = 0x00;
-      000AAB 75 09 00         [24] 1292 	mov	_Changed,#0x00
-                                   1293 ;	../UI_Manager/ui.c:362: changed = 0xFF;
-      000AAE 75 0A FF         [24] 1294 	mov	_changed,#0xff
-                                   1295 ;	../UI_Manager/ui.c:364: exe_command(CLEAR_DISPLAY);
-      000AB1 90 80 00         [24] 1296 	mov	dptr,#0x8000
-      000AB4 C0 07            [24] 1297 	push	ar7
-      000AB6 12 1A B6         [24] 1298 	lcall	_exe_command
-                                   1299 ;	../UI_Manager/ui.c:366: write_string("Fog Level", sizeof("Fog Level"), 3, LINE_0, NOT_SELECTED);
-      000AB9 75 21 0A         [24] 1300 	mov	_write_string_PARM_2,#0x0a
-      000ABC 75 22 03         [24] 1301 	mov	_write_string_PARM_3,#0x03
-      000ABF 75 23 00         [24] 1302 	mov	_write_string_PARM_4,#0x00
-      000AC2 75 24 00         [24] 1303 	mov	_write_string_PARM_5,#0x00
-      000AC5 90 2E EA         [24] 1304 	mov	dptr,#___str_14
-      000AC8 75 F0 80         [24] 1305 	mov	b,#0x80
-      000ACB 12 18 63         [24] 1306 	lcall	_write_string
-      000ACE D0 07            [24] 1307 	pop	ar7
-      000AD0                       1308 00102$:
-                                   1309 ;	../UI_Manager/ui.c:370: if(changed){
-      000AD0 E5 0A            [12] 1310 	mov	a,_changed
-      000AD2 70 03            [24] 1311 	jnz	00149$
-      000AD4 02 0B AA         [24] 1312 	ljmp	00108$
-      000AD7                       1313 00149$:
-                                   1314 ;	../UI_Manager/ui.c:371: changed = 0x00;
-      000AD7 75 0A 00         [24] 1315 	mov	_changed,#0x00
-                                   1316 ;	../UI_Manager/ui.c:373: switch (get_runtime_data(FOG_POWER_INDEX))
-      000ADA 75 82 00         [24] 1317 	mov	dpl,#0x00
-      000ADD C0 07            [24] 1318 	push	ar7
-      000ADF 12 27 6A         [24] 1319 	lcall	_get_runtime_data
-      000AE2 AE 82            [24] 1320 	mov	r6,dpl
-      000AE4 D0 07            [24] 1321 	pop	ar7
-      000AE6 BE 02 02         [24] 1322 	cjne	r6,#0x02,00150$
-      000AE9 80 37            [24] 1323 	sjmp	00104$
-      000AEB                       1324 00150$:
-      000AEB BE 04 73         [24] 1325 	cjne	r6,#0x04,00105$
-                                   1326 ;	../UI_Manager/ui.c:376: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_LOW), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000AEE 75 82 02         [24] 1327 	mov	dpl,#0x02
-      000AF1 C0 07            [24] 1328 	push	ar7
-      000AF3 12 14 19         [24] 1329 	lcall	_getString
-      000AF6 AC 82            [24] 1330 	mov	r4,dpl
-      000AF8 AD 83            [24] 1331 	mov	r5,dph
-      000AFA AE F0            [24] 1332 	mov	r6,b
-      000AFC 75 21 10         [24] 1333 	mov	_write_string_PARM_2,#0x10
-      000AFF 75 22 03         [24] 1334 	mov	_write_string_PARM_3,#0x03
-      000B02 75 23 01         [24] 1335 	mov	_write_string_PARM_4,#0x01
-      000B05 75 24 00         [24] 1336 	mov	_write_string_PARM_5,#0x00
-      000B08 8C 82            [24] 1337 	mov	dpl,r4
-      000B0A 8D 83            [24] 1338 	mov	dph,r5
-      000B0C 8E F0            [24] 1339 	mov	b,r6
-      000B0E 12 18 63         [24] 1340 	lcall	_write_string
-                                   1341 ;	../UI_Manager/ui.c:377: write_char(CHAR_LVL_1, 12, LINE_1);
-      000B11 75 2B 0C         [24] 1342 	mov	_write_char_PARM_2,#0x0c
-      000B14 75 2C 01         [24] 1343 	mov	_write_char_PARM_3,#0x01
-      000B17 75 82 40         [24] 1344 	mov	dpl,#0x40
-      000B1A 12 1A 81         [24] 1345 	lcall	_write_char
-      000B1D D0 07            [24] 1346 	pop	ar7
-                                   1347 ;	../UI_Manager/ui.c:378: break;
-      000B1F 02 0B AA         [24] 1348 	ljmp	00108$
-                                   1349 ;	../UI_Manager/ui.c:379: case FOG_MED:
-      000B22                       1350 00104$:
-                                   1351 ;	../UI_Manager/ui.c:380: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_MEDIUM), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000B22 75 82 01         [24] 1352 	mov	dpl,#0x01
-      000B25 C0 07            [24] 1353 	push	ar7
-      000B27 12 14 19         [24] 1354 	lcall	_getString
-      000B2A AC 82            [24] 1355 	mov	r4,dpl
-      000B2C AD 83            [24] 1356 	mov	r5,dph
-      000B2E AE F0            [24] 1357 	mov	r6,b
-      000B30 75 21 10         [24] 1358 	mov	_write_string_PARM_2,#0x10
-      000B33 75 22 03         [24] 1359 	mov	_write_string_PARM_3,#0x03
-      000B36 75 23 01         [24] 1360 	mov	_write_string_PARM_4,#0x01
-      000B39 75 24 00         [24] 1361 	mov	_write_string_PARM_5,#0x00
-      000B3C 8C 82            [24] 1362 	mov	dpl,r4
-      000B3E 8D 83            [24] 1363 	mov	dph,r5
-      000B40 8E F0            [24] 1364 	mov	b,r6
-      000B42 12 18 63         [24] 1365 	lcall	_write_string
-                                   1366 ;	../UI_Manager/ui.c:381: write_char(CHAR_LVL_1, 12, LINE_1);
-      000B45 75 2B 0C         [24] 1367 	mov	_write_char_PARM_2,#0x0c
-      000B48 75 2C 01         [24] 1368 	mov	_write_char_PARM_3,#0x01
-      000B4B 75 82 40         [24] 1369 	mov	dpl,#0x40
-      000B4E 12 1A 81         [24] 1370 	lcall	_write_char
-                                   1371 ;	../UI_Manager/ui.c:382: write_char(CHAR_LVL_2, 13, LINE_1);
-      000B51 75 2B 0D         [24] 1372 	mov	_write_char_PARM_2,#0x0d
-      000B54 75 2C 01         [24] 1373 	mov	_write_char_PARM_3,#0x01
-      000B57 75 82 C0         [24] 1374 	mov	dpl,#0xc0
-      000B5A 12 1A 81         [24] 1375 	lcall	_write_char
-      000B5D D0 07            [24] 1376 	pop	ar7
-                                   1377 ;	../UI_Manager/ui.c:383: break;
-                                   1378 ;	../UI_Manager/ui.c:384: default:
-      000B5F 80 49            [24] 1379 	sjmp	00108$
-      000B61                       1380 00105$:
-                                   1381 ;	../UI_Manager/ui.c:385: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_HIGH), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000B61 75 82 00         [24] 1382 	mov	dpl,#0x00
-      000B64 C0 07            [24] 1383 	push	ar7
-      000B66 12 14 19         [24] 1384 	lcall	_getString
-      000B69 AC 82            [24] 1385 	mov	r4,dpl
-      000B6B AD 83            [24] 1386 	mov	r5,dph
-      000B6D AE F0            [24] 1387 	mov	r6,b
-      000B6F 75 21 10         [24] 1388 	mov	_write_string_PARM_2,#0x10
-      000B72 75 22 03         [24] 1389 	mov	_write_string_PARM_3,#0x03
-      000B75 75 23 01         [24] 1390 	mov	_write_string_PARM_4,#0x01
-      000B78 75 24 00         [24] 1391 	mov	_write_string_PARM_5,#0x00
-      000B7B 8C 82            [24] 1392 	mov	dpl,r4
-      000B7D 8D 83            [24] 1393 	mov	dph,r5
-      000B7F 8E F0            [24] 1394 	mov	b,r6
-      000B81 12 18 63         [24] 1395 	lcall	_write_string
-                                   1396 ;	../UI_Manager/ui.c:386: write_char(CHAR_LVL_1, 12, LINE_1);
-      000B84 75 2B 0C         [24] 1397 	mov	_write_char_PARM_2,#0x0c
-      000B87 75 2C 01         [24] 1398 	mov	_write_char_PARM_3,#0x01
-      000B8A 75 82 40         [24] 1399 	mov	dpl,#0x40
-      000B8D 12 1A 81         [24] 1400 	lcall	_write_char
-                                   1401 ;	../UI_Manager/ui.c:387: write_char(CHAR_LVL_2, 13, LINE_1);
-      000B90 75 2B 0D         [24] 1402 	mov	_write_char_PARM_2,#0x0d
-      000B93 75 2C 01         [24] 1403 	mov	_write_char_PARM_3,#0x01
-      000B96 75 82 C0         [24] 1404 	mov	dpl,#0xc0
-      000B99 12 1A 81         [24] 1405 	lcall	_write_char
-                                   1406 ;	../UI_Manager/ui.c:388: write_char(CHAR_LVL_3, 14, LINE_1);
-      000B9C 75 2B 0E         [24] 1407 	mov	_write_char_PARM_2,#0x0e
-      000B9F 75 2C 01         [24] 1408 	mov	_write_char_PARM_3,#0x01
-      000BA2 75 82 20         [24] 1409 	mov	dpl,#0x20
-      000BA5 12 1A 81         [24] 1410 	lcall	_write_char
-      000BA8 D0 07            [24] 1411 	pop	ar7
-                                   1412 ;	../UI_Manager/ui.c:390: }
-      000BAA                       1413 00108$:
-                                   1414 ;	../UI_Manager/ui.c:394: switch (action)
-      000BAA BF 02 02         [24] 1415 	cjne	r7,#0x02,00153$
-      000BAD 80 2F            [24] 1416 	sjmp	00111$
-      000BAF                       1417 00153$:
-      000BAF BF 03 02         [24] 1418 	cjne	r7,#0x03,00154$
-      000BB2 80 0A            [24] 1419 	sjmp	00109$
-      000BB4                       1420 00154$:
-      000BB4 BF 0A 02         [24] 1421 	cjne	r7,#0x0a,00155$
-      000BB7 80 15            [24] 1422 	sjmp	00110$
-      000BB9                       1423 00155$:
-                                   1424 ;	../UI_Manager/ui.c:396: case BUTTON_UP:
-      000BB9 BF 0C 34         [24] 1425 	cjne	r7,#0x0c,00114$
-      000BBC 80 29            [24] 1426 	sjmp	00112$
-      000BBE                       1427 00109$:
-                                   1428 ;	../UI_Manager/ui.c:397: set_runtime_data(FOG_POWER_INDEX, INC, NULL);
-      000BBE 75 65 01         [24] 1429 	mov	_set_runtime_data_PARM_2,#0x01
-      000BC1 75 66 00         [24] 1430 	mov	_set_runtime_data_PARM_3,#0x00
-      000BC4 75 82 00         [24] 1431 	mov	dpl,#0x00
-      000BC7 12 27 FE         [24] 1432 	lcall	_set_runtime_data
-                                   1433 ;	../UI_Manager/ui.c:398: changed = 0xFF;
-      000BCA 75 0A FF         [24] 1434 	mov	_changed,#0xff
-                                   1435 ;	../UI_Manager/ui.c:399: break;
-                                   1436 ;	../UI_Manager/ui.c:400: case BUTTON_DOWN:
-      000BCD 22               [24] 1437 	ret
-      000BCE                       1438 00110$:
-                                   1439 ;	../UI_Manager/ui.c:401: set_runtime_data(FOG_POWER_INDEX, DEC, NULL);
-      000BCE 75 65 02         [24] 1440 	mov	_set_runtime_data_PARM_2,#0x02
-      000BD1 75 66 00         [24] 1441 	mov	_set_runtime_data_PARM_3,#0x00
-      000BD4 75 82 00         [24] 1442 	mov	dpl,#0x00
-      000BD7 12 27 FE         [24] 1443 	lcall	_set_runtime_data
-                                   1444 ;	../UI_Manager/ui.c:402: changed = 0xFF;  
-      000BDA 75 0A FF         [24] 1445 	mov	_changed,#0xff
-                                   1446 ;	../UI_Manager/ui.c:403: break;
-                                   1447 ;	../UI_Manager/ui.c:404: case BUTTON_FUNCTION:
-      000BDD 22               [24] 1448 	ret
-      000BDE                       1449 00111$:
-                                   1450 ;	../UI_Manager/ui.c:405: set_ui_state(INC, NULL);
-      000BDE 75 17 00         [24] 1451 	mov	_set_ui_state_PARM_2,#0x00
-      000BE1 75 82 01         [24] 1452 	mov	dpl,#0x01
-                                   1453 ;	../UI_Manager/ui.c:406: break;
-                                   1454 ;	../UI_Manager/ui.c:407: case BUTTON_FUN_UP:
-      000BE4 02 13 77         [24] 1455 	ljmp	_set_ui_state
-      000BE7                       1456 00112$:
-                                   1457 ;	../UI_Manager/ui.c:408: set_ui_state(DEC, NULL);
-      000BE7 75 17 00         [24] 1458 	mov	_set_ui_state_PARM_2,#0x00
-      000BEA 75 82 02         [24] 1459 	mov	dpl,#0x02
-                                   1460 ;	../UI_Manager/ui.c:410: }
-                                   1461 ;	../UI_Manager/ui.c:411: }
-      000BED 02 13 77         [24] 1462 	ljmp	_set_ui_state
-      000BF0                       1463 00114$:
-      000BF0 22               [24] 1464 	ret
-                                   1465 ;------------------------------------------------------------
-                                   1466 ;Allocation info for local variables in function 'fogIntervalPage'
-                                   1467 ;------------------------------------------------------------
-                                   1468 ;action                    Allocated to registers r7 
-                                   1469 ;------------------------------------------------------------
-                                   1470 ;	../UI_Manager/ui.c:413: void fogIntervalPage(uint8_t action){
-                                   1471 ;	-----------------------------------------
-                                   1472 ;	 function fogIntervalPage
-                                   1473 ;	-----------------------------------------
-      000BF1                       1474 _fogIntervalPage:
-      000BF1 AF 82            [24] 1475 	mov	r7,dpl
-                                   1476 ;	../UI_Manager/ui.c:415: if(Changed){
-      000BF3 E5 09            [12] 1477 	mov	a,_Changed
-      000BF5 60 3A            [24] 1478 	jz	00102$
-                                   1479 ;	../UI_Manager/ui.c:416: Changed = 0x00;
-      000BF7 75 09 00         [24] 1480 	mov	_Changed,#0x00
-                                   1481 ;	../UI_Manager/ui.c:417: changed = 0xFF;
-      000BFA 75 0A FF         [24] 1482 	mov	_changed,#0xff
-                                   1483 ;	../UI_Manager/ui.c:419: exe_command(CLEAR_DISPLAY);
-      000BFD 90 80 00         [24] 1484 	mov	dptr,#0x8000
-      000C00 C0 07            [24] 1485 	push	ar7
-      000C02 12 1A B6         [24] 1486 	lcall	_exe_command
-                                   1487 ;	../UI_Manager/ui.c:421: write_string("Fog Interval", sizeof("Fog Interval"), 2, LINE_0, NOT_SELECTED);
-      000C05 75 21 0D         [24] 1488 	mov	_write_string_PARM_2,#0x0d
-      000C08 75 22 02         [24] 1489 	mov	_write_string_PARM_3,#0x02
-      000C0B 75 23 00         [24] 1490 	mov	_write_string_PARM_4,#0x00
-      000C0E 75 24 00         [24] 1491 	mov	_write_string_PARM_5,#0x00
-      000C11 90 2E F4         [24] 1492 	mov	dptr,#___str_15
-      000C14 75 F0 80         [24] 1493 	mov	b,#0x80
-      000C17 12 18 63         [24] 1494 	lcall	_write_string
-                                   1495 ;	../UI_Manager/ui.c:422: write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
-      000C1A 75 21 08         [24] 1496 	mov	_write_string_PARM_2,#0x08
-      000C1D 75 22 08         [24] 1497 	mov	_write_string_PARM_3,#0x08
-      000C20 75 23 01         [24] 1498 	mov	_write_string_PARM_4,#0x01
-      000C23 75 24 00         [24] 1499 	mov	_write_string_PARM_5,#0x00
-      000C26 90 2F 01         [24] 1500 	mov	dptr,#___str_16
-      000C29 75 F0 80         [24] 1501 	mov	b,#0x80
-      000C2C 12 18 63         [24] 1502 	lcall	_write_string
-      000C2F D0 07            [24] 1503 	pop	ar7
-      000C31                       1504 00102$:
-                                   1505 ;	../UI_Manager/ui.c:426: if(changed){
-      000C31 E5 0A            [12] 1506 	mov	a,_changed
-      000C33 60 20            [24] 1507 	jz	00104$
-                                   1508 ;	../UI_Manager/ui.c:427: changed = 0x00;
-      000C35 75 0A 00         [24] 1509 	mov	_changed,#0x00
-                                   1510 ;	../UI_Manager/ui.c:429: write_number(get_runtime_data(FOG_INTERVAL_INDEX), 4, LINE_1, NOT_SELECTED);
-      000C38 75 82 02         [24] 1511 	mov	dpl,#0x02
-      000C3B C0 07            [24] 1512 	push	ar7
-      000C3D 12 27 6A         [24] 1513 	lcall	_get_runtime_data
-      000C40 AE 82            [24] 1514 	mov	r6,dpl
-      000C42 7D 00            [12] 1515 	mov	r5,#0x00
-      000C44 75 25 04         [24] 1516 	mov	_write_number_PARM_2,#0x04
-      000C47 75 26 01         [24] 1517 	mov	_write_number_PARM_3,#0x01
-                                   1518 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
-      000C4A 8D 27            [24] 1519 	mov	_write_number_PARM_4,r5
-      000C4C 8E 82            [24] 1520 	mov	dpl,r6
-      000C4E 8D 83            [24] 1521 	mov	dph,r5
-      000C50 12 19 27         [24] 1522 	lcall	_write_number
-      000C53 D0 07            [24] 1523 	pop	ar7
-      000C55                       1524 00104$:
-                                   1525 ;	../UI_Manager/ui.c:433: switch (action)
-      000C55 BF 02 02         [24] 1526 	cjne	r7,#0x02,00148$
-      000C58 80 39            [24] 1527 	sjmp	00109$
-      000C5A                       1528 00148$:
-      000C5A BF 03 02         [24] 1529 	cjne	r7,#0x03,00149$
-      000C5D 80 14            [24] 1530 	sjmp	00106$
-      000C5F                       1531 00149$:
-      000C5F BF 0A 02         [24] 1532 	cjne	r7,#0x0a,00150$
-      000C62 80 1F            [24] 1533 	sjmp	00108$
-      000C64                       1534 00150$:
-      000C64 BF 0C 02         [24] 1535 	cjne	r7,#0x0c,00151$
-      000C67 80 33            [24] 1536 	sjmp	00110$
-      000C69                       1537 00151$:
-      000C69 BF 1F 02         [24] 1538 	cjne	r7,#0x1f,00152$
-      000C6C 80 05            [24] 1539 	sjmp	00106$
-      000C6E                       1540 00152$:
-                                   1541 ;	../UI_Manager/ui.c:436: case BUTTON_UP:
-      000C6E BF 65 34         [24] 1542 	cjne	r7,#0x65,00112$
-      000C71 80 10            [24] 1543 	sjmp	00108$
-      000C73                       1544 00106$:
-                                   1545 ;	../UI_Manager/ui.c:437: set_runtime_data(FOG_INTERVAL_INDEX, INC, NULL);
-      000C73 75 65 01         [24] 1546 	mov	_set_runtime_data_PARM_2,#0x01
-      000C76 75 66 00         [24] 1547 	mov	_set_runtime_data_PARM_3,#0x00
-      000C79 75 82 02         [24] 1548 	mov	dpl,#0x02
-      000C7C 12 27 FE         [24] 1549 	lcall	_set_runtime_data
-                                   1550 ;	../UI_Manager/ui.c:438: changed = 0xFF;
-      000C7F 75 0A FF         [24] 1551 	mov	_changed,#0xff
-                                   1552 ;	../UI_Manager/ui.c:439: break;
-                                   1553 ;	../UI_Manager/ui.c:441: case BUTTON_DOWN:
-      000C82 22               [24] 1554 	ret
-      000C83                       1555 00108$:
-                                   1556 ;	../UI_Manager/ui.c:442: set_runtime_data(FOG_INTERVAL_INDEX, DEC, NULL);
-      000C83 75 65 02         [24] 1557 	mov	_set_runtime_data_PARM_2,#0x02
-      000C86 75 66 00         [24] 1558 	mov	_set_runtime_data_PARM_3,#0x00
-      000C89 75 82 02         [24] 1559 	mov	dpl,#0x02
-      000C8C 12 27 FE         [24] 1560 	lcall	_set_runtime_data
-                                   1561 ;	../UI_Manager/ui.c:443: changed = 0xFF;  
-      000C8F 75 0A FF         [24] 1562 	mov	_changed,#0xff
-                                   1563 ;	../UI_Manager/ui.c:444: break;
-                                   1564 ;	../UI_Manager/ui.c:445: case BUTTON_FUNCTION:
-      000C92 22               [24] 1565 	ret
-      000C93                       1566 00109$:
-                                   1567 ;	../UI_Manager/ui.c:446: set_ui_state(INC, NULL);
-      000C93 75 17 00         [24] 1568 	mov	_set_ui_state_PARM_2,#0x00
-      000C96 75 82 01         [24] 1569 	mov	dpl,#0x01
-                                   1570 ;	../UI_Manager/ui.c:447: break;
-                                   1571 ;	../UI_Manager/ui.c:448: case BUTTON_FUN_UP:
-      000C99 02 13 77         [24] 1572 	ljmp	_set_ui_state
-      000C9C                       1573 00110$:
-                                   1574 ;	../UI_Manager/ui.c:449: set_ui_state(DEC, NULL);
-      000C9C 75 17 00         [24] 1575 	mov	_set_ui_state_PARM_2,#0x00
-      000C9F 75 82 02         [24] 1576 	mov	dpl,#0x02
-                                   1577 ;	../UI_Manager/ui.c:451: }
-                                   1578 ;	../UI_Manager/ui.c:452: }
-      000CA2 02 13 77         [24] 1579 	ljmp	_set_ui_state
-      000CA5                       1580 00112$:
-      000CA5 22               [24] 1581 	ret
-                                   1582 ;------------------------------------------------------------
-                                   1583 ;Allocation info for local variables in function 'fogDurationPage'
-                                   1584 ;------------------------------------------------------------
-                                   1585 ;action                    Allocated to registers r7 
-                                   1586 ;------------------------------------------------------------
-                                   1587 ;	../UI_Manager/ui.c:454: void fogDurationPage(uint8_t action){
-                                   1588 ;	-----------------------------------------
-                                   1589 ;	 function fogDurationPage
-                                   1590 ;	-----------------------------------------
-      000CA6                       1591 _fogDurationPage:
-      000CA6 AF 82            [24] 1592 	mov	r7,dpl
-                                   1593 ;	../UI_Manager/ui.c:456: if(Changed){
-      000CA8 E5 09            [12] 1594 	mov	a,_Changed
-      000CAA 60 3A            [24] 1595 	jz	00102$
-                                   1596 ;	../UI_Manager/ui.c:457: Changed = 0x00;
-      000CAC 75 09 00         [24] 1597 	mov	_Changed,#0x00
-                                   1598 ;	../UI_Manager/ui.c:458: changed = 0xFF;
-      000CAF 75 0A FF         [24] 1599 	mov	_changed,#0xff
-                                   1600 ;	../UI_Manager/ui.c:460: exe_command(CLEAR_DISPLAY);
-      000CB2 90 80 00         [24] 1601 	mov	dptr,#0x8000
-      000CB5 C0 07            [24] 1602 	push	ar7
-      000CB7 12 1A B6         [24] 1603 	lcall	_exe_command
-                                   1604 ;	../UI_Manager/ui.c:462: write_string("Fog Duration", sizeof("Fog Duration"), 2, LINE_0, NOT_SELECTED);
-      000CBA 75 21 0D         [24] 1605 	mov	_write_string_PARM_2,#0x0d
-      000CBD 75 22 02         [24] 1606 	mov	_write_string_PARM_3,#0x02
-      000CC0 75 23 00         [24] 1607 	mov	_write_string_PARM_4,#0x00
-      000CC3 75 24 00         [24] 1608 	mov	_write_string_PARM_5,#0x00
-      000CC6 90 2F 09         [24] 1609 	mov	dptr,#___str_17
-      000CC9 75 F0 80         [24] 1610 	mov	b,#0x80
-      000CCC 12 18 63         [24] 1611 	lcall	_write_string
-                                   1612 ;	../UI_Manager/ui.c:463: write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
-      000CCF 75 21 08         [24] 1613 	mov	_write_string_PARM_2,#0x08
-      000CD2 75 22 08         [24] 1614 	mov	_write_string_PARM_3,#0x08
-      000CD5 75 23 01         [24] 1615 	mov	_write_string_PARM_4,#0x01
-      000CD8 75 24 00         [24] 1616 	mov	_write_string_PARM_5,#0x00
-      000CDB 90 2F 01         [24] 1617 	mov	dptr,#___str_16
-      000CDE 75 F0 80         [24] 1618 	mov	b,#0x80
-      000CE1 12 18 63         [24] 1619 	lcall	_write_string
-      000CE4 D0 07            [24] 1620 	pop	ar7
-      000CE6                       1621 00102$:
-                                   1622 ;	../UI_Manager/ui.c:467: if(changed){
-      000CE6 E5 0A            [12] 1623 	mov	a,_changed
-      000CE8 60 20            [24] 1624 	jz	00104$
-                                   1625 ;	../UI_Manager/ui.c:468: changed = 0x00;
-      000CEA 75 0A 00         [24] 1626 	mov	_changed,#0x00
-                                   1627 ;	../UI_Manager/ui.c:470: write_number(get_runtime_data(FOG_DURATION_INDEX), 4, LINE_1, NOT_SELECTED);
-      000CED 75 82 01         [24] 1628 	mov	dpl,#0x01
-      000CF0 C0 07            [24] 1629 	push	ar7
-      000CF2 12 27 6A         [24] 1630 	lcall	_get_runtime_data
-      000CF5 AE 82            [24] 1631 	mov	r6,dpl
-      000CF7 7D 00            [12] 1632 	mov	r5,#0x00
-      000CF9 75 25 04         [24] 1633 	mov	_write_number_PARM_2,#0x04
-      000CFC 75 26 01         [24] 1634 	mov	_write_number_PARM_3,#0x01
-                                   1635 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
-      000CFF 8D 27            [24] 1636 	mov	_write_number_PARM_4,r5
-      000D01 8E 82            [24] 1637 	mov	dpl,r6
-      000D03 8D 83            [24] 1638 	mov	dph,r5
-      000D05 12 19 27         [24] 1639 	lcall	_write_number
-      000D08 D0 07            [24] 1640 	pop	ar7
-      000D0A                       1641 00104$:
-                                   1642 ;	../UI_Manager/ui.c:474: switch (action)
-      000D0A BF 02 02         [24] 1643 	cjne	r7,#0x02,00148$
-      000D0D 80 39            [24] 1644 	sjmp	00109$
-      000D0F                       1645 00148$:
-      000D0F BF 03 02         [24] 1646 	cjne	r7,#0x03,00149$
-      000D12 80 14            [24] 1647 	sjmp	00106$
-      000D14                       1648 00149$:
-      000D14 BF 0A 02         [24] 1649 	cjne	r7,#0x0a,00150$
-      000D17 80 1F            [24] 1650 	sjmp	00108$
-      000D19                       1651 00150$:
-      000D19 BF 0C 02         [24] 1652 	cjne	r7,#0x0c,00151$
-      000D1C 80 33            [24] 1653 	sjmp	00110$
-      000D1E                       1654 00151$:
-      000D1E BF 1F 02         [24] 1655 	cjne	r7,#0x1f,00152$
-      000D21 80 05            [24] 1656 	sjmp	00106$
-      000D23                       1657 00152$:
-                                   1658 ;	../UI_Manager/ui.c:477: case BUTTON_UP:
-      000D23 BF 65 34         [24] 1659 	cjne	r7,#0x65,00112$
-      000D26 80 10            [24] 1660 	sjmp	00108$
-      000D28                       1661 00106$:
-                                   1662 ;	../UI_Manager/ui.c:478: set_runtime_data(FOG_DURATION_INDEX, INC, NULL);
-      000D28 75 65 01         [24] 1663 	mov	_set_runtime_data_PARM_2,#0x01
-      000D2B 75 66 00         [24] 1664 	mov	_set_runtime_data_PARM_3,#0x00
-      000D2E 75 82 01         [24] 1665 	mov	dpl,#0x01
-      000D31 12 27 FE         [24] 1666 	lcall	_set_runtime_data
-                                   1667 ;	../UI_Manager/ui.c:479: changed = 0xFF;
-      000D34 75 0A FF         [24] 1668 	mov	_changed,#0xff
-                                   1669 ;	../UI_Manager/ui.c:480: break;
-                                   1670 ;	../UI_Manager/ui.c:482: case BUTTON_DOWN:
-      000D37 22               [24] 1671 	ret
-      000D38                       1672 00108$:
-                                   1673 ;	../UI_Manager/ui.c:483: set_runtime_data(FOG_DURATION_INDEX, DEC, NULL);
-      000D38 75 65 02         [24] 1674 	mov	_set_runtime_data_PARM_2,#0x02
-      000D3B 75 66 00         [24] 1675 	mov	_set_runtime_data_PARM_3,#0x00
-      000D3E 75 82 01         [24] 1676 	mov	dpl,#0x01
-      000D41 12 27 FE         [24] 1677 	lcall	_set_runtime_data
-                                   1678 ;	../UI_Manager/ui.c:484: changed = 0xFF;  
-      000D44 75 0A FF         [24] 1679 	mov	_changed,#0xff
-                                   1680 ;	../UI_Manager/ui.c:485: break;
-                                   1681 ;	../UI_Manager/ui.c:486: case BUTTON_FUNCTION:
-      000D47 22               [24] 1682 	ret
-      000D48                       1683 00109$:
-                                   1684 ;	../UI_Manager/ui.c:487: set_ui_state(INC, NULL);
-      000D48 75 17 00         [24] 1685 	mov	_set_ui_state_PARM_2,#0x00
-      000D4B 75 82 01         [24] 1686 	mov	dpl,#0x01
-                                   1687 ;	../UI_Manager/ui.c:488: break;
-                                   1688 ;	../UI_Manager/ui.c:489: case BUTTON_FUN_UP:
-      000D4E 02 13 77         [24] 1689 	ljmp	_set_ui_state
-      000D51                       1690 00110$:
-                                   1691 ;	../UI_Manager/ui.c:490: set_ui_state(DEC, NULL);
-      000D51 75 17 00         [24] 1692 	mov	_set_ui_state_PARM_2,#0x00
-      000D54 75 82 02         [24] 1693 	mov	dpl,#0x02
-                                   1694 ;	../UI_Manager/ui.c:492: }
-                                   1695 ;	../UI_Manager/ui.c:493: }
-      000D57 02 13 77         [24] 1696 	ljmp	_set_ui_state
-      000D5A                       1697 00112$:
-      000D5A 22               [24] 1698 	ret
-                                   1699 ;------------------------------------------------------------
-                                   1700 ;Allocation info for local variables in function 'macroPage'
-                                   1701 ;------------------------------------------------------------
-                                   1702 ;action                    Allocated to registers r7 
-                                   1703 ;------------------------------------------------------------
-                                   1704 ;	../UI_Manager/ui.c:495: void macroPage(uint8_t action){
-                                   1705 ;	-----------------------------------------
-                                   1706 ;	 function macroPage
-                                   1707 ;	-----------------------------------------
-      000D5B                       1708 _macroPage:
-      000D5B AF 82            [24] 1709 	mov	r7,dpl
-                                   1710 ;	../UI_Manager/ui.c:497: if(Changed){
-      000D5D E5 09            [12] 1711 	mov	a,_Changed
-      000D5F 60 25            [24] 1712 	jz	00102$
-                                   1713 ;	../UI_Manager/ui.c:498: Changed = 0x00;
-      000D61 75 09 00         [24] 1714 	mov	_Changed,#0x00
-                                   1715 ;	../UI_Manager/ui.c:499: changed = 0xFF;
-      000D64 75 0A FF         [24] 1716 	mov	_changed,#0xff
-                                   1717 ;	../UI_Manager/ui.c:501: exe_command(CLEAR_DISPLAY);
-      000D67 90 80 00         [24] 1718 	mov	dptr,#0x8000
-      000D6A C0 07            [24] 1719 	push	ar7
-      000D6C 12 1A B6         [24] 1720 	lcall	_exe_command
-                                   1721 ;	../UI_Manager/ui.c:503: write_string("Macros", sizeof("Macros"), 6, LINE_0, NOT_SELECTED);
-      000D6F 75 21 07         [24] 1722 	mov	_write_string_PARM_2,#0x07
-      000D72 75 22 06         [24] 1723 	mov	_write_string_PARM_3,#0x06
-      000D75 75 23 00         [24] 1724 	mov	_write_string_PARM_4,#0x00
-      000D78 75 24 00         [24] 1725 	mov	_write_string_PARM_5,#0x00
-      000D7B 90 2F 16         [24] 1726 	mov	dptr,#___str_18
-      000D7E 75 F0 80         [24] 1727 	mov	b,#0x80
-      000D81 12 18 63         [24] 1728 	lcall	_write_string
-      000D84 D0 07            [24] 1729 	pop	ar7
-      000D86                       1730 00102$:
-                                   1731 ;	../UI_Manager/ui.c:507: if(changed){
-      000D86 E5 0A            [12] 1732 	mov	a,_changed
-      000D88 60 32            [24] 1733 	jz	00104$
-                                   1734 ;	../UI_Manager/ui.c:508: changed = 0x00;
-      000D8A 75 0A 00         [24] 1735 	mov	_changed,#0x00
-                                   1736 ;	../UI_Manager/ui.c:510: write_string(getString(get_runtime_data(MACRO_INDEX) + MACRO_STRING_OFFSET), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000D8D 75 82 03         [24] 1737 	mov	dpl,#0x03
-      000D90 C0 07            [24] 1738 	push	ar7
-      000D92 12 27 6A         [24] 1739 	lcall	_get_runtime_data
-      000D95 AE 82            [24] 1740 	mov	r6,dpl
-      000D97 74 14            [12] 1741 	mov	a,#0x14
-      000D99 2E               [12] 1742 	add	a,r6
-      000D9A F5 82            [12] 1743 	mov	dpl,a
-      000D9C 12 14 19         [24] 1744 	lcall	_getString
-      000D9F AC 82            [24] 1745 	mov	r4,dpl
-      000DA1 AD 83            [24] 1746 	mov	r5,dph
-      000DA3 AE F0            [24] 1747 	mov	r6,b
-      000DA5 75 21 10         [24] 1748 	mov	_write_string_PARM_2,#0x10
-      000DA8 75 22 03         [24] 1749 	mov	_write_string_PARM_3,#0x03
-      000DAB 75 23 01         [24] 1750 	mov	_write_string_PARM_4,#0x01
-      000DAE 75 24 00         [24] 1751 	mov	_write_string_PARM_5,#0x00
-      000DB1 8C 82            [24] 1752 	mov	dpl,r4
-      000DB3 8D 83            [24] 1753 	mov	dph,r5
-      000DB5 8E F0            [24] 1754 	mov	b,r6
-      000DB7 12 18 63         [24] 1755 	lcall	_write_string
-      000DBA D0 07            [24] 1756 	pop	ar7
-      000DBC                       1757 00104$:
-                                   1758 ;	../UI_Manager/ui.c:514: switch (action)
-      000DBC BF 02 02         [24] 1759 	cjne	r7,#0x02,00148$
-      000DBF 80 39            [24] 1760 	sjmp	00109$
-      000DC1                       1761 00148$:
-      000DC1 BF 03 02         [24] 1762 	cjne	r7,#0x03,00149$
-      000DC4 80 14            [24] 1763 	sjmp	00106$
-      000DC6                       1764 00149$:
-      000DC6 BF 0A 02         [24] 1765 	cjne	r7,#0x0a,00150$
-      000DC9 80 1F            [24] 1766 	sjmp	00108$
-      000DCB                       1767 00150$:
-      000DCB BF 0C 02         [24] 1768 	cjne	r7,#0x0c,00151$
-      000DCE 80 33            [24] 1769 	sjmp	00110$
-      000DD0                       1770 00151$:
-      000DD0 BF 1F 02         [24] 1771 	cjne	r7,#0x1f,00152$
-      000DD3 80 05            [24] 1772 	sjmp	00106$
-      000DD5                       1773 00152$:
-                                   1774 ;	../UI_Manager/ui.c:517: case BUTTON_UP:
-      000DD5 BF 65 34         [24] 1775 	cjne	r7,#0x65,00112$
-      000DD8 80 10            [24] 1776 	sjmp	00108$
-      000DDA                       1777 00106$:
-                                   1778 ;	../UI_Manager/ui.c:518: set_runtime_data(MACRO_INDEX, INC, NULL);
-      000DDA 75 65 01         [24] 1779 	mov	_set_runtime_data_PARM_2,#0x01
-      000DDD 75 66 00         [24] 1780 	mov	_set_runtime_data_PARM_3,#0x00
-      000DE0 75 82 03         [24] 1781 	mov	dpl,#0x03
-      000DE3 12 27 FE         [24] 1782 	lcall	_set_runtime_data
-                                   1783 ;	../UI_Manager/ui.c:519: changed = 0xFF;
-      000DE6 75 0A FF         [24] 1784 	mov	_changed,#0xff
-                                   1785 ;	../UI_Manager/ui.c:520: break;
-                                   1786 ;	../UI_Manager/ui.c:522: case BUTTON_DOWN:
-      000DE9 22               [24] 1787 	ret
-      000DEA                       1788 00108$:
-                                   1789 ;	../UI_Manager/ui.c:523: set_runtime_data(MACRO_INDEX, DEC, NULL);
-      000DEA 75 65 02         [24] 1790 	mov	_set_runtime_data_PARM_2,#0x02
-      000DED 75 66 00         [24] 1791 	mov	_set_runtime_data_PARM_3,#0x00
-      000DF0 75 82 03         [24] 1792 	mov	dpl,#0x03
-      000DF3 12 27 FE         [24] 1793 	lcall	_set_runtime_data
-                                   1794 ;	../UI_Manager/ui.c:524: changed = 0xFF;  
-      000DF6 75 0A FF         [24] 1795 	mov	_changed,#0xff
-                                   1796 ;	../UI_Manager/ui.c:525: break;
-                                   1797 ;	../UI_Manager/ui.c:526: case BUTTON_FUNCTION:
-      000DF9 22               [24] 1798 	ret
-      000DFA                       1799 00109$:
-                                   1800 ;	../UI_Manager/ui.c:527: set_ui_state(INC, NULL);
-      000DFA 75 17 00         [24] 1801 	mov	_set_ui_state_PARM_2,#0x00
-      000DFD 75 82 01         [24] 1802 	mov	dpl,#0x01
-                                   1803 ;	../UI_Manager/ui.c:528: break;
-                                   1804 ;	../UI_Manager/ui.c:529: case BUTTON_FUN_UP:
-      000E00 02 13 77         [24] 1805 	ljmp	_set_ui_state
-      000E03                       1806 00110$:
-                                   1807 ;	../UI_Manager/ui.c:530: set_ui_state(DEC, NULL);
-      000E03 75 17 00         [24] 1808 	mov	_set_ui_state_PARM_2,#0x00
-      000E06 75 82 02         [24] 1809 	mov	dpl,#0x02
-                                   1810 ;	../UI_Manager/ui.c:532: }
-                                   1811 ;	../UI_Manager/ui.c:533: }
-      000E09 02 13 77         [24] 1812 	ljmp	_set_ui_state
-      000E0C                       1813 00112$:
-      000E0C 22               [24] 1814 	ret
-                                   1815 ;------------------------------------------------------------
-                                   1816 ;Allocation info for local variables in function 'macroSpeedPage'
-                                   1817 ;------------------------------------------------------------
-                                   1818 ;action                    Allocated to registers r7 
-                                   1819 ;------------------------------------------------------------
-                                   1820 ;	../UI_Manager/ui.c:535: void macroSpeedPage(uint8_t action){
-                                   1821 ;	-----------------------------------------
-                                   1822 ;	 function macroSpeedPage
-                                   1823 ;	-----------------------------------------
-      000E0D                       1824 _macroSpeedPage:
-      000E0D AF 82            [24] 1825 	mov	r7,dpl
-                                   1826 ;	../UI_Manager/ui.c:537: if(Changed){
-      000E0F E5 09            [12] 1827 	mov	a,_Changed
-      000E11 60 25            [24] 1828 	jz	00102$
-                                   1829 ;	../UI_Manager/ui.c:538: Changed = 0x00;
-      000E13 75 09 00         [24] 1830 	mov	_Changed,#0x00
-                                   1831 ;	../UI_Manager/ui.c:539: changed = 0xFF;
-      000E16 75 0A FF         [24] 1832 	mov	_changed,#0xff
-                                   1833 ;	../UI_Manager/ui.c:541: exe_command(CLEAR_DISPLAY);
-      000E19 90 80 00         [24] 1834 	mov	dptr,#0x8000
-      000E1C C0 07            [24] 1835 	push	ar7
-      000E1E 12 1A B6         [24] 1836 	lcall	_exe_command
-                                   1837 ;	../UI_Manager/ui.c:543: write_string("Macro Speed", sizeof("Macro Speed"), 3, LINE_0, NOT_SELECTED);
-      000E21 75 21 0C         [24] 1838 	mov	_write_string_PARM_2,#0x0c
-      000E24 75 22 03         [24] 1839 	mov	_write_string_PARM_3,#0x03
-      000E27 75 23 00         [24] 1840 	mov	_write_string_PARM_4,#0x00
-      000E2A 75 24 00         [24] 1841 	mov	_write_string_PARM_5,#0x00
-      000E2D 90 2F 1D         [24] 1842 	mov	dptr,#___str_19
-      000E30 75 F0 80         [24] 1843 	mov	b,#0x80
-      000E33 12 18 63         [24] 1844 	lcall	_write_string
-      000E36 D0 07            [24] 1845 	pop	ar7
-      000E38                       1846 00102$:
-                                   1847 ;	../UI_Manager/ui.c:547: if(changed){
-      000E38 E5 0A            [12] 1848 	mov	a,_changed
-      000E3A 60 5D            [24] 1849 	jz	00107$
-                                   1850 ;	../UI_Manager/ui.c:548: changed = 0x00;
-      000E3C 75 0A 00         [24] 1851 	mov	_changed,#0x00
-                                   1852 ;	../UI_Manager/ui.c:550: if(get_runtime_data(MACRO_SPEED_INDEX) == 0){
-      000E3F 75 82 04         [24] 1853 	mov	dpl,#0x04
-      000E42 C0 07            [24] 1854 	push	ar7
-      000E44 12 27 6A         [24] 1855 	lcall	_get_runtime_data
-      000E47 E5 82            [12] 1856 	mov	a,dpl
-      000E49 D0 07            [24] 1857 	pop	ar7
-                                   1858 ;	../UI_Manager/ui.c:551: write_string("Off", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000E4B 70 1A            [24] 1859 	jnz	00104$
-      000E4D 75 21 10         [24] 1860 	mov	_write_string_PARM_2,#0x10
-      000E50 75 22 03         [24] 1861 	mov	_write_string_PARM_3,#0x03
-      000E53 75 23 01         [24] 1862 	mov	_write_string_PARM_4,#0x01
-      000E56 F5 24            [12] 1863 	mov	_write_string_PARM_5,a
-      000E58 90 2F 29         [24] 1864 	mov	dptr,#___str_20
-      000E5B 75 F0 80         [24] 1865 	mov	b,#0x80
-      000E5E C0 07            [24] 1866 	push	ar7
-      000E60 12 18 63         [24] 1867 	lcall	_write_string
-      000E63 D0 07            [24] 1868 	pop	ar7
-      000E65 80 32            [24] 1869 	sjmp	00107$
-      000E67                       1870 00104$:
-                                   1871 ;	../UI_Manager/ui.c:553: write_string("", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-      000E67 75 21 10         [24] 1872 	mov	_write_string_PARM_2,#0x10
-      000E6A 75 22 03         [24] 1873 	mov	_write_string_PARM_3,#0x03
-      000E6D 75 23 01         [24] 1874 	mov	_write_string_PARM_4,#0x01
-      000E70 75 24 00         [24] 1875 	mov	_write_string_PARM_5,#0x00
-      000E73 90 2F 2D         [24] 1876 	mov	dptr,#___str_21
-      000E76 75 F0 80         [24] 1877 	mov	b,#0x80
-      000E79 C0 07            [24] 1878 	push	ar7
-      000E7B 12 18 63         [24] 1879 	lcall	_write_string
-                                   1880 ;	../UI_Manager/ui.c:554: write_number(get_runtime_data(MACRO_SPEED_INDEX), 6, LINE_1, NOT_SELECTED);
-      000E7E 75 82 04         [24] 1881 	mov	dpl,#0x04
-      000E81 12 27 6A         [24] 1882 	lcall	_get_runtime_data
-      000E84 AE 82            [24] 1883 	mov	r6,dpl
-      000E86 7D 00            [12] 1884 	mov	r5,#0x00
-      000E88 75 25 06         [24] 1885 	mov	_write_number_PARM_2,#0x06
-      000E8B 75 26 01         [24] 1886 	mov	_write_number_PARM_3,#0x01
-                                   1887 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
-      000E8E 8D 27            [24] 1888 	mov	_write_number_PARM_4,r5
-      000E90 8E 82            [24] 1889 	mov	dpl,r6
-      000E92 8D 83            [24] 1890 	mov	dph,r5
-      000E94 12 19 27         [24] 1891 	lcall	_write_number
-      000E97 D0 07            [24] 1892 	pop	ar7
-      000E99                       1893 00107$:
-                                   1894 ;	../UI_Manager/ui.c:558: switch (action)
-      000E99 BF 02 02         [24] 1895 	cjne	r7,#0x02,00156$
-      000E9C 80 39            [24] 1896 	sjmp	00112$
-      000E9E                       1897 00156$:
-      000E9E BF 03 02         [24] 1898 	cjne	r7,#0x03,00157$
-      000EA1 80 14            [24] 1899 	sjmp	00109$
-      000EA3                       1900 00157$:
-      000EA3 BF 0A 02         [24] 1901 	cjne	r7,#0x0a,00158$
-      000EA6 80 1F            [24] 1902 	sjmp	00111$
-      000EA8                       1903 00158$:
-      000EA8 BF 0C 02         [24] 1904 	cjne	r7,#0x0c,00159$
-      000EAB 80 33            [24] 1905 	sjmp	00113$
-      000EAD                       1906 00159$:
-      000EAD BF 1F 02         [24] 1907 	cjne	r7,#0x1f,00160$
-      000EB0 80 05            [24] 1908 	sjmp	00109$
-      000EB2                       1909 00160$:
-                                   1910 ;	../UI_Manager/ui.c:561: case BUTTON_UP:
-      000EB2 BF 65 34         [24] 1911 	cjne	r7,#0x65,00115$
-      000EB5 80 10            [24] 1912 	sjmp	00111$
-      000EB7                       1913 00109$:
-                                   1914 ;	../UI_Manager/ui.c:562: set_runtime_data(MACRO_SPEED_INDEX, INC, NULL);
-      000EB7 75 65 01         [24] 1915 	mov	_set_runtime_data_PARM_2,#0x01
-      000EBA 75 66 00         [24] 1916 	mov	_set_runtime_data_PARM_3,#0x00
-      000EBD 75 82 04         [24] 1917 	mov	dpl,#0x04
-      000EC0 12 27 FE         [24] 1918 	lcall	_set_runtime_data
-                                   1919 ;	../UI_Manager/ui.c:563: changed = 0xFF;
-      000EC3 75 0A FF         [24] 1920 	mov	_changed,#0xff
-                                   1921 ;	../UI_Manager/ui.c:564: break;
-                                   1922 ;	../UI_Manager/ui.c:566: case BUTTON_DOWN:
-      000EC6 22               [24] 1923 	ret
-      000EC7                       1924 00111$:
-                                   1925 ;	../UI_Manager/ui.c:567: set_runtime_data(MACRO_SPEED_INDEX, DEC, NULL);
-      000EC7 75 65 02         [24] 1926 	mov	_set_runtime_data_PARM_2,#0x02
-      000ECA 75 66 00         [24] 1927 	mov	_set_runtime_data_PARM_3,#0x00
-      000ECD 75 82 04         [24] 1928 	mov	dpl,#0x04
-      000ED0 12 27 FE         [24] 1929 	lcall	_set_runtime_data
-                                   1930 ;	../UI_Manager/ui.c:568: changed = 0xFF;  
-      000ED3 75 0A FF         [24] 1931 	mov	_changed,#0xff
-                                   1932 ;	../UI_Manager/ui.c:569: break;
-                                   1933 ;	../UI_Manager/ui.c:570: case BUTTON_FUNCTION:
-      000ED6 22               [24] 1934 	ret
-      000ED7                       1935 00112$:
-                                   1936 ;	../UI_Manager/ui.c:571: set_ui_state(INC, NULL);
-      000ED7 75 17 00         [24] 1937 	mov	_set_ui_state_PARM_2,#0x00
-      000EDA 75 82 01         [24] 1938 	mov	dpl,#0x01
-                                   1939 ;	../UI_Manager/ui.c:572: break;
-                                   1940 ;	../UI_Manager/ui.c:573: case BUTTON_FUN_UP:
-      000EDD 02 13 77         [24] 1941 	ljmp	_set_ui_state
-      000EE0                       1942 00113$:
-                                   1943 ;	../UI_Manager/ui.c:574: set_ui_state(DEC, NULL);
-      000EE0 75 17 00         [24] 1944 	mov	_set_ui_state_PARM_2,#0x00
-      000EE3 75 82 02         [24] 1945 	mov	dpl,#0x02
-                                   1946 ;	../UI_Manager/ui.c:576: }
-                                   1947 ;	../UI_Manager/ui.c:577: }
-      000EE6 02 13 77         [24] 1948 	ljmp	_set_ui_state
-      000EE9                       1949 00115$:
-      000EE9 22               [24] 1950 	ret
-                                   1951 ;------------------------------------------------------------
-                                   1952 ;Allocation info for local variables in function 'colorPage'
-                                   1953 ;------------------------------------------------------------
-                                   1954 ;action                    Allocated to registers r7 
-                                   1955 ;index                     Allocated to registers r6 
-                                   1956 ;------------------------------------------------------------
-                                   1957 ;	../UI_Manager/ui.c:579: void colorPage(uint8_t action){
-                                   1958 ;	-----------------------------------------
-                                   1959 ;	 function colorPage
-                                   1960 ;	-----------------------------------------
-      000EEA                       1961 _colorPage:
-      000EEA AF 82            [24] 1962 	mov	r7,dpl
-                                   1963 ;	../UI_Manager/ui.c:580: uint8_t index = 0;
-      000EEC 7E 00            [12] 1964 	mov	r6,#0x00
-                                   1965 ;	../UI_Manager/ui.c:582: switch (State)
-      000EEE AD 08            [24] 1966 	mov	r5,_State
-      000EF0 BD 06 02         [24] 1967 	cjne	r5,#0x06,00174$
-      000EF3 80 0F            [24] 1968 	sjmp	00101$
-      000EF5                       1969 00174$:
-      000EF5 BD 07 02         [24] 1970 	cjne	r5,#0x07,00175$
-      000EF8 80 12            [24] 1971 	sjmp	00103$
-      000EFA                       1972 00175$:
-      000EFA BD 08 02         [24] 1973 	cjne	r5,#0x08,00176$
-      000EFD 80 09            [24] 1974 	sjmp	00102$
-      000EFF                       1975 00176$:
-                                   1976 ;	../UI_Manager/ui.c:584: case MANUAL_RED_STATE:
-      000EFF BD 09 10         [24] 1977 	cjne	r5,#0x09,00105$
-      000F02 80 0C            [24] 1978 	sjmp	00104$
-      000F04                       1979 00101$:
-                                   1980 ;	../UI_Manager/ui.c:585: index = RED_INDEX;
-      000F04 7E 05            [12] 1981 	mov	r6,#0x05
-                                   1982 ;	../UI_Manager/ui.c:586: break;
-                                   1983 ;	../UI_Manager/ui.c:587: case MANUAL_GREEN_STATE:
-      000F06 80 0A            [24] 1984 	sjmp	00105$
-      000F08                       1985 00102$:
-                                   1986 ;	../UI_Manager/ui.c:588: index = GREEN_INDEX;
-      000F08 7E 06            [12] 1987 	mov	r6,#0x06
-                                   1988 ;	../UI_Manager/ui.c:589: break;
-                                   1989 ;	../UI_Manager/ui.c:590: case MANUAL_BLUE_STATE:
-      000F0A 80 06            [24] 1990 	sjmp	00105$
-      000F0C                       1991 00103$:
-                                   1992 ;	../UI_Manager/ui.c:591: index = BLUE_INDEX;
-      000F0C 7E 07            [12] 1993 	mov	r6,#0x07
-                                   1994 ;	../UI_Manager/ui.c:592: break;
-                                   1995 ;	../UI_Manager/ui.c:593: case MANUAL_STROBE_STATE:
-      000F0E 80 02            [24] 1996 	sjmp	00105$
-      000F10                       1997 00104$:
-                                   1998 ;	../UI_Manager/ui.c:594: index = STROBE_INDEX;
-      000F10 7E 08            [12] 1999 	mov	r6,#0x08
-                                   2000 ;	../UI_Manager/ui.c:596: }
-      000F12                       2001 00105$:
-                                   2002 ;	../UI_Manager/ui.c:598: if(Changed){
-      000F12 E5 09            [12] 2003 	mov	a,_Changed
-      000F14 60 39            [24] 2004 	jz	00107$
-                                   2005 ;	../UI_Manager/ui.c:599: Changed = 0x00;
-      000F16 75 09 00         [24] 2006 	mov	_Changed,#0x00
-                                   2007 ;	../UI_Manager/ui.c:600: changed = 0xFF;
-      000F19 75 0A FF         [24] 2008 	mov	_changed,#0xff
-                                   2009 ;	../UI_Manager/ui.c:602: exe_command(CLEAR_DISPLAY);
-      000F1C 90 80 00         [24] 2010 	mov	dptr,#0x8000
-      000F1F C0 07            [24] 2011 	push	ar7
-      000F21 C0 06            [24] 2012 	push	ar6
-      000F23 12 1A B6         [24] 2013 	lcall	_exe_command
-                                   2014 ;	../UI_Manager/ui.c:604: write_string(getString(COLOR_STRING_OFFSET + State), LINE_LENGTH, 3, LINE_0, NOT_SELECTED);
-      000F26 AD 08            [24] 2015 	mov	r5,_State
-      000F28 74 C8            [12] 2016 	mov	a,#0xc8
-      000F2A 2D               [12] 2017 	add	a,r5
-      000F2B F5 82            [12] 2018 	mov	dpl,a
-      000F2D 12 14 19         [24] 2019 	lcall	_getString
-      000F30 AB 82            [24] 2020 	mov	r3,dpl
-      000F32 AC 83            [24] 2021 	mov	r4,dph
-      000F34 AD F0            [24] 2022 	mov	r5,b
-      000F36 75 21 10         [24] 2023 	mov	_write_string_PARM_2,#0x10
-      000F39 75 22 03         [24] 2024 	mov	_write_string_PARM_3,#0x03
-      000F3C 75 23 00         [24] 2025 	mov	_write_string_PARM_4,#0x00
-      000F3F 75 24 00         [24] 2026 	mov	_write_string_PARM_5,#0x00
-      000F42 8B 82            [24] 2027 	mov	dpl,r3
-      000F44 8C 83            [24] 2028 	mov	dph,r4
-      000F46 8D F0            [24] 2029 	mov	b,r5
-      000F48 12 18 63         [24] 2030 	lcall	_write_string
-      000F4B D0 06            [24] 2031 	pop	ar6
-      000F4D D0 07            [24] 2032 	pop	ar7
-      000F4F                       2033 00107$:
-                                   2034 ;	../UI_Manager/ui.c:608: if(changed){
-      000F4F E5 0A            [12] 2035 	mov	a,_changed
-      000F51 60 6E            [24] 2036 	jz	00112$
-                                   2037 ;	../UI_Manager/ui.c:609: changed = 0x00;
-      000F53 75 0A 00         [24] 2038 	mov	_changed,#0x00
-                                   2039 ;	../UI_Manager/ui.c:611: if(get_runtime_data(get_runtime_data(index)) == 0){
-      000F56 8E 82            [24] 2040 	mov	dpl,r6
-      000F58 C0 07            [24] 2041 	push	ar7
-      000F5A C0 06            [24] 2042 	push	ar6
-      000F5C 12 27 6A         [24] 2043 	lcall	_get_runtime_data
-      000F5F 12 27 6A         [24] 2044 	lcall	_get_runtime_data
-      000F62 E5 82            [12] 2045 	mov	a,dpl
-      000F64 D0 06            [24] 2046 	pop	ar6
-      000F66 D0 07            [24] 2047 	pop	ar7
-                                   2048 ;	../UI_Manager/ui.c:612: write_string("Off", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
-      000F68 70 1E            [24] 2049 	jnz	00109$
-      000F6A 75 21 10         [24] 2050 	mov	_write_string_PARM_2,#0x10
-      000F6D 75 22 06         [24] 2051 	mov	_write_string_PARM_3,#0x06
-      000F70 75 23 01         [24] 2052 	mov	_write_string_PARM_4,#0x01
-      000F73 F5 24            [12] 2053 	mov	_write_string_PARM_5,a
-      000F75 90 2F 29         [24] 2054 	mov	dptr,#___str_20
-      000F78 75 F0 80         [24] 2055 	mov	b,#0x80
-      000F7B C0 07            [24] 2056 	push	ar7
-      000F7D C0 06            [24] 2057 	push	ar6
-      000F7F 12 18 63         [24] 2058 	lcall	_write_string
-      000F82 D0 06            [24] 2059 	pop	ar6
-      000F84 D0 07            [24] 2060 	pop	ar7
-      000F86 80 39            [24] 2061 	sjmp	00112$
-      000F88                       2062 00109$:
-                                   2063 ;	../UI_Manager/ui.c:614: write_string("", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
-      000F88 75 21 10         [24] 2064 	mov	_write_string_PARM_2,#0x10
-      000F8B 75 22 00         [24] 2065 	mov	_write_string_PARM_3,#0x00
-      000F8E 75 23 01         [24] 2066 	mov	_write_string_PARM_4,#0x01
-      000F91 75 24 00         [24] 2067 	mov	_write_string_PARM_5,#0x00
-      000F94 90 2F 2D         [24] 2068 	mov	dptr,#___str_21
-      000F97 75 F0 80         [24] 2069 	mov	b,#0x80
-      000F9A C0 07            [24] 2070 	push	ar7
-      000F9C C0 06            [24] 2071 	push	ar6
-      000F9E 12 18 63         [24] 2072 	lcall	_write_string
-      000FA1 D0 06            [24] 2073 	pop	ar6
-                                   2074 ;	../UI_Manager/ui.c:615: write_number(get_runtime_data(index), 6, LINE_1, NOT_SELECTED);
-      000FA3 8E 82            [24] 2075 	mov	dpl,r6
-      000FA5 C0 06            [24] 2076 	push	ar6
-      000FA7 12 27 6A         [24] 2077 	lcall	_get_runtime_data
-      000FAA AD 82            [24] 2078 	mov	r5,dpl
-      000FAC 7C 00            [12] 2079 	mov	r4,#0x00
-      000FAE 75 25 06         [24] 2080 	mov	_write_number_PARM_2,#0x06
-      000FB1 75 26 01         [24] 2081 	mov	_write_number_PARM_3,#0x01
-                                   2082 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
-      000FB4 8C 27            [24] 2083 	mov	_write_number_PARM_4,r4
-      000FB6 8D 82            [24] 2084 	mov	dpl,r5
-      000FB8 8C 83            [24] 2085 	mov	dph,r4
-      000FBA 12 19 27         [24] 2086 	lcall	_write_number
-      000FBD D0 06            [24] 2087 	pop	ar6
-      000FBF D0 07            [24] 2088 	pop	ar7
-      000FC1                       2089 00112$:
-                                   2090 ;	../UI_Manager/ui.c:619: switch (action)
-      000FC1 BF 02 02         [24] 2091 	cjne	r7,#0x02,00181$
-      000FC4 80 37            [24] 2092 	sjmp	00117$
-      000FC6                       2093 00181$:
-      000FC6 BF 03 02         [24] 2094 	cjne	r7,#0x03,00182$
-      000FC9 80 14            [24] 2095 	sjmp	00114$
-      000FCB                       2096 00182$:
-      000FCB BF 0A 02         [24] 2097 	cjne	r7,#0x0a,00183$
-      000FCE 80 1E            [24] 2098 	sjmp	00116$
-      000FD0                       2099 00183$:
-      000FD0 BF 0C 02         [24] 2100 	cjne	r7,#0x0c,00184$
-      000FD3 80 31            [24] 2101 	sjmp	00118$
-      000FD5                       2102 00184$:
-      000FD5 BF 1F 02         [24] 2103 	cjne	r7,#0x1f,00185$
-      000FD8 80 05            [24] 2104 	sjmp	00114$
-      000FDA                       2105 00185$:
-                                   2106 ;	../UI_Manager/ui.c:622: case BUTTON_UP:
-      000FDA BF 65 32         [24] 2107 	cjne	r7,#0x65,00120$
-      000FDD 80 0F            [24] 2108 	sjmp	00116$
-      000FDF                       2109 00114$:
-                                   2110 ;	../UI_Manager/ui.c:623: set_runtime_data(index, INC, NULL);
-      000FDF 75 65 01         [24] 2111 	mov	_set_runtime_data_PARM_2,#0x01
-      000FE2 75 66 00         [24] 2112 	mov	_set_runtime_data_PARM_3,#0x00
-      000FE5 8E 82            [24] 2113 	mov	dpl,r6
-      000FE7 12 27 FE         [24] 2114 	lcall	_set_runtime_data
-                                   2115 ;	../UI_Manager/ui.c:624: changed = 0xFF;
-      000FEA 75 0A FF         [24] 2116 	mov	_changed,#0xff
-                                   2117 ;	../UI_Manager/ui.c:625: break;
-                                   2118 ;	../UI_Manager/ui.c:627: case BUTTON_DOWN:
-      000FED 22               [24] 2119 	ret
-      000FEE                       2120 00116$:
-                                   2121 ;	../UI_Manager/ui.c:628: set_runtime_data(index, DEC, NULL);
-      000FEE 75 65 02         [24] 2122 	mov	_set_runtime_data_PARM_2,#0x02
-      000FF1 75 66 00         [24] 2123 	mov	_set_runtime_data_PARM_3,#0x00
-      000FF4 8E 82            [24] 2124 	mov	dpl,r6
-      000FF6 12 27 FE         [24] 2125 	lcall	_set_runtime_data
-                                   2126 ;	../UI_Manager/ui.c:629: changed = 0xFF;  
-      000FF9 75 0A FF         [24] 2127 	mov	_changed,#0xff
-                                   2128 ;	../UI_Manager/ui.c:630: break;
-                                   2129 ;	../UI_Manager/ui.c:631: case BUTTON_FUNCTION:
-      000FFC 22               [24] 2130 	ret
-      000FFD                       2131 00117$:
-                                   2132 ;	../UI_Manager/ui.c:632: set_ui_state(INC, NULL);
-      000FFD 75 17 00         [24] 2133 	mov	_set_ui_state_PARM_2,#0x00
-      001000 75 82 01         [24] 2134 	mov	dpl,#0x01
-                                   2135 ;	../UI_Manager/ui.c:633: break;
-                                   2136 ;	../UI_Manager/ui.c:634: case BUTTON_FUN_UP:
-      001003 02 13 77         [24] 2137 	ljmp	_set_ui_state
-      001006                       2138 00118$:
-                                   2139 ;	../UI_Manager/ui.c:635: set_ui_state(DEC, NULL);
-      001006 75 17 00         [24] 2140 	mov	_set_ui_state_PARM_2,#0x00
-      001009 75 82 02         [24] 2141 	mov	dpl,#0x02
-                                   2142 ;	../UI_Manager/ui.c:637: }
-                                   2143 ;	../UI_Manager/ui.c:638: }
-      00100C 02 13 77         [24] 2144 	ljmp	_set_ui_state
-      00100F                       2145 00120$:
-      00100F 22               [24] 2146 	ret
-                                   2147 ;------------------------------------------------------------
-                                   2148 ;Allocation info for local variables in function 'remotePage'
-                                   2149 ;------------------------------------------------------------
-                                   2150 ;action                    Allocated to registers r7 
-                                   2151 ;remoteNumber              Allocated to registers r6 
-                                   2152 ;index                     Allocated to registers r5 
-                                   2153 ;------------------------------------------------------------
-                                   2154 ;	../UI_Manager/ui.c:640: void remotePage(uint8_t action){
-                                   2155 ;	-----------------------------------------
-                                   2156 ;	 function remotePage
-                                   2157 ;	-----------------------------------------
-      001010                       2158 _remotePage:
-      001010 AF 82            [24] 2159 	mov	r7,dpl
-                                   2160 ;	../UI_Manager/ui.c:641: uint8_t remoteNumber = MANUAL_REMOTE_ACTION_6_STATE - State + 4;
-      001012 AE 08            [24] 2161 	mov	r6,_State
-      001014 74 10            [12] 2162 	mov	a,#0x10
-      001016 C3               [12] 2163 	clr	c
-      001017 9E               [12] 2164 	subb	a,r6
-      001018 FE               [12] 2165 	mov	r6,a
-                                   2166 ;	../UI_Manager/ui.c:642: uint8_t index = 0;
-      001019 7D 00            [12] 2167 	mov	r5,#0x00
-                                   2168 ;	../UI_Manager/ui.c:644: switch (State)
-      00101B AC 08            [24] 2169 	mov	r4,_State
-      00101D BC 0A 02         [24] 2170 	cjne	r4,#0x0a,00168$
-      001020 80 0A            [24] 2171 	sjmp	00101$
-      001022                       2172 00168$:
-      001022 BC 0B 02         [24] 2173 	cjne	r4,#0x0b,00169$
-      001025 80 09            [24] 2174 	sjmp	00102$
-      001027                       2175 00169$:
-                                   2176 ;	../UI_Manager/ui.c:646: case MANUAL_REMOTE_ACTION_4_STATE:
-      001027 BC 0C 0C         [24] 2177 	cjne	r4,#0x0c,00104$
-      00102A 80 08            [24] 2178 	sjmp	00103$
-      00102C                       2179 00101$:
-                                   2180 ;	../UI_Manager/ui.c:647: index = R4_INDEX;
-      00102C 7D 09            [12] 2181 	mov	r5,#0x09
-                                   2182 ;	../UI_Manager/ui.c:648: break;
-                                   2183 ;	../UI_Manager/ui.c:649: case MANUAL_REMOTE_ACTION_5_STATE:
-      00102E 80 06            [24] 2184 	sjmp	00104$
-      001030                       2185 00102$:
-                                   2186 ;	../UI_Manager/ui.c:650: index = R5_INDEX;
-      001030 7D 0A            [12] 2187 	mov	r5,#0x0a
-                                   2188 ;	../UI_Manager/ui.c:651: break;
-                                   2189 ;	../UI_Manager/ui.c:652: case MANUAL_REMOTE_ACTION_6_STATE:
-      001032 80 02            [24] 2190 	sjmp	00104$
-      001034                       2191 00103$:
-                                   2192 ;	../UI_Manager/ui.c:653: index = R6_INDEX;
-      001034 7D 0B            [12] 2193 	mov	r5,#0x0b
-                                   2194 ;	../UI_Manager/ui.c:655: }
-      001036                       2195 00104$:
-                                   2196 ;	../UI_Manager/ui.c:657: if(Changed){
-      001036 E5 09            [12] 2197 	mov	a,_Changed
-      001038 60 7C            [24] 2198 	jz	00110$
-                                   2199 ;	../UI_Manager/ui.c:658: Changed = 0x00;
-      00103A 75 09 00         [24] 2200 	mov	_Changed,#0x00
-                                   2201 ;	../UI_Manager/ui.c:659: changed = 0xFF;
-      00103D 75 0A FF         [24] 2202 	mov	_changed,#0xff
-                                   2203 ;	../UI_Manager/ui.c:661: exe_command(CLEAR_DISPLAY);
-      001040 90 80 00         [24] 2204 	mov	dptr,#0x8000
-      001043 C0 07            [24] 2205 	push	ar7
-      001045 C0 06            [24] 2206 	push	ar6
-      001047 C0 05            [24] 2207 	push	ar5
-      001049 12 1A B6         [24] 2208 	lcall	_exe_command
-                                   2209 ;	../UI_Manager/ui.c:663: write_string("Remote X Action", sizeof("Remote X Action"), 1, LINE_0, NOT_SELECTED);
-      00104C 75 21 10         [24] 2210 	mov	_write_string_PARM_2,#0x10
-      00104F 75 22 01         [24] 2211 	mov	_write_string_PARM_3,#0x01
-      001052 75 23 00         [24] 2212 	mov	_write_string_PARM_4,#0x00
-      001055 75 24 00         [24] 2213 	mov	_write_string_PARM_5,#0x00
-      001058 90 2F 2E         [24] 2214 	mov	dptr,#___str_22
-      00105B 75 F0 80         [24] 2215 	mov	b,#0x80
-      00105E 12 18 63         [24] 2216 	lcall	_write_string
-      001061 D0 05            [24] 2217 	pop	ar5
-      001063 D0 06            [24] 2218 	pop	ar6
-      001065 D0 07            [24] 2219 	pop	ar7
-                                   2220 ;	../UI_Manager/ui.c:664: switch (remoteNumber)
-      001067 BE 04 02         [24] 2221 	cjne	r6,#0x04,00172$
-      00106A 80 0A            [24] 2222 	sjmp	00105$
-      00106C                       2223 00172$:
-      00106C BE 05 02         [24] 2224 	cjne	r6,#0x05,00173$
-      00106F 80 1B            [24] 2225 	sjmp	00106$
-      001071                       2226 00173$:
-                                   2227 ;	../UI_Manager/ui.c:666: case 4:
-      001071 BE 06 42         [24] 2228 	cjne	r6,#0x06,00110$
-      001074 80 2C            [24] 2229 	sjmp	00107$
-      001076                       2230 00105$:
-                                   2231 ;	../UI_Manager/ui.c:667: write_char(CHAR_4, 8, LINE_0);
-      001076 75 2B 08         [24] 2232 	mov	_write_char_PARM_2,#0x08
-      001079 75 2C 00         [24] 2233 	mov	_write_char_PARM_3,#0x00
-      00107C 75 82 2C         [24] 2234 	mov	dpl,#0x2c
-      00107F C0 07            [24] 2235 	push	ar7
-      001081 C0 05            [24] 2236 	push	ar5
-      001083 12 1A 81         [24] 2237 	lcall	_write_char
-      001086 D0 05            [24] 2238 	pop	ar5
-      001088 D0 07            [24] 2239 	pop	ar7
-                                   2240 ;	../UI_Manager/ui.c:668: break;
-                                   2241 ;	../UI_Manager/ui.c:669: case 5:
-      00108A 80 2A            [24] 2242 	sjmp	00110$
-      00108C                       2243 00106$:
-                                   2244 ;	../UI_Manager/ui.c:670: write_char(CHAR_5, 8, LINE_0);
-      00108C 75 2B 08         [24] 2245 	mov	_write_char_PARM_2,#0x08
-      00108F 75 2C 00         [24] 2246 	mov	_write_char_PARM_3,#0x00
-      001092 75 82 AC         [24] 2247 	mov	dpl,#0xac
-      001095 C0 07            [24] 2248 	push	ar7
-      001097 C0 05            [24] 2249 	push	ar5
-      001099 12 1A 81         [24] 2250 	lcall	_write_char
-      00109C D0 05            [24] 2251 	pop	ar5
-      00109E D0 07            [24] 2252 	pop	ar7
-                                   2253 ;	../UI_Manager/ui.c:671: break;
-                                   2254 ;	../UI_Manager/ui.c:672: case 6:
-      0010A0 80 14            [24] 2255 	sjmp	00110$
-      0010A2                       2256 00107$:
-                                   2257 ;	../UI_Manager/ui.c:673: write_char(CHAR_6, 8, LINE_0);
-      0010A2 75 2B 08         [24] 2258 	mov	_write_char_PARM_2,#0x08
-      0010A5 75 2C 00         [24] 2259 	mov	_write_char_PARM_3,#0x00
-      0010A8 75 82 6C         [24] 2260 	mov	dpl,#0x6c
-      0010AB C0 07            [24] 2261 	push	ar7
-      0010AD C0 05            [24] 2262 	push	ar5
-      0010AF 12 1A 81         [24] 2263 	lcall	_write_char
-      0010B2 D0 05            [24] 2264 	pop	ar5
-      0010B4 D0 07            [24] 2265 	pop	ar7
-                                   2266 ;	../UI_Manager/ui.c:675: }
-      0010B6                       2267 00110$:
-                                   2268 ;	../UI_Manager/ui.c:678: if(changed){
-      0010B6 E5 0A            [12] 2269 	mov	a,_changed
-      0010B8 60 35            [24] 2270 	jz	00112$
-                                   2271 ;	../UI_Manager/ui.c:679: changed = 0x00;
-      0010BA 75 0A 00         [24] 2272 	mov	_changed,#0x00
-                                   2273 ;	../UI_Manager/ui.c:680: write_string(getString(get_runtime_data(index) + WIRELESS_ACTION_STRING_OFFSET), LINE_LENGTH, 4, LINE_1, NOT_SELECTED);  
-      0010BD 8D 82            [24] 2274 	mov	dpl,r5
-      0010BF C0 07            [24] 2275 	push	ar7
-      0010C1 C0 05            [24] 2276 	push	ar5
-      0010C3 12 27 6A         [24] 2277 	lcall	_get_runtime_data
-      0010C6 AE 82            [24] 2278 	mov	r6,dpl
-      0010C8 74 3C            [12] 2279 	mov	a,#0x3c
-      0010CA 2E               [12] 2280 	add	a,r6
-      0010CB F5 82            [12] 2281 	mov	dpl,a
-      0010CD 12 14 19         [24] 2282 	lcall	_getString
-      0010D0 AB 82            [24] 2283 	mov	r3,dpl
-      0010D2 AC 83            [24] 2284 	mov	r4,dph
-      0010D4 AE F0            [24] 2285 	mov	r6,b
-      0010D6 75 21 10         [24] 2286 	mov	_write_string_PARM_2,#0x10
-      0010D9 75 22 04         [24] 2287 	mov	_write_string_PARM_3,#0x04
-      0010DC 75 23 01         [24] 2288 	mov	_write_string_PARM_4,#0x01
-      0010DF 75 24 00         [24] 2289 	mov	_write_string_PARM_5,#0x00
-      0010E2 8B 82            [24] 2290 	mov	dpl,r3
-      0010E4 8C 83            [24] 2291 	mov	dph,r4
-      0010E6 8E F0            [24] 2292 	mov	b,r6
-      0010E8 12 18 63         [24] 2293 	lcall	_write_string
-      0010EB D0 05            [24] 2294 	pop	ar5
-      0010ED D0 07            [24] 2295 	pop	ar7
-      0010EF                       2296 00112$:
-                                   2297 ;	../UI_Manager/ui.c:683: switch (action)
-      0010EF BF 02 02         [24] 2298 	cjne	r7,#0x02,00176$
-      0010F2 80 2D            [24] 2299 	sjmp	00115$
-      0010F4                       2300 00176$:
-      0010F4 BF 03 02         [24] 2301 	cjne	r7,#0x03,00177$
-      0010F7 80 0A            [24] 2302 	sjmp	00113$
-      0010F9                       2303 00177$:
-      0010F9 BF 0A 02         [24] 2304 	cjne	r7,#0x0a,00178$
-      0010FC 80 14            [24] 2305 	sjmp	00114$
-      0010FE                       2306 00178$:
-                                   2307 ;	../UI_Manager/ui.c:685: case BUTTON_UP:
-      0010FE BF 0C 32         [24] 2308 	cjne	r7,#0x0c,00118$
-      001101 80 27            [24] 2309 	sjmp	00116$
-      001103                       2310 00113$:
-                                   2311 ;	../UI_Manager/ui.c:686: set_runtime_data(index, INC, NULL);
-      001103 75 65 01         [24] 2312 	mov	_set_runtime_data_PARM_2,#0x01
-      001106 75 66 00         [24] 2313 	mov	_set_runtime_data_PARM_3,#0x00
-      001109 8D 82            [24] 2314 	mov	dpl,r5
-      00110B 12 27 FE         [24] 2315 	lcall	_set_runtime_data
-                                   2316 ;	../UI_Manager/ui.c:687: changed = 0xFF;
-      00110E 75 0A FF         [24] 2317 	mov	_changed,#0xff
-                                   2318 ;	../UI_Manager/ui.c:688: break;
-                                   2319 ;	../UI_Manager/ui.c:689: case BUTTON_DOWN:
-      001111 22               [24] 2320 	ret
-      001112                       2321 00114$:
-                                   2322 ;	../UI_Manager/ui.c:690: set_runtime_data(index, DEC, NULL);
-      001112 75 65 02         [24] 2323 	mov	_set_runtime_data_PARM_2,#0x02
-      001115 75 66 00         [24] 2324 	mov	_set_runtime_data_PARM_3,#0x00
-      001118 8D 82            [24] 2325 	mov	dpl,r5
-      00111A 12 27 FE         [24] 2326 	lcall	_set_runtime_data
-                                   2327 ;	../UI_Manager/ui.c:691: changed = 0xFF;  
-      00111D 75 0A FF         [24] 2328 	mov	_changed,#0xff
-                                   2329 ;	../UI_Manager/ui.c:692: break;
-                                   2330 ;	../UI_Manager/ui.c:693: case BUTTON_FUNCTION:
-      001120 22               [24] 2331 	ret
-      001121                       2332 00115$:
-                                   2333 ;	../UI_Manager/ui.c:694: set_ui_state(INC, NULL);
-      001121 75 17 00         [24] 2334 	mov	_set_ui_state_PARM_2,#0x00
-      001124 75 82 01         [24] 2335 	mov	dpl,#0x01
-                                   2336 ;	../UI_Manager/ui.c:695: break;
-                                   2337 ;	../UI_Manager/ui.c:696: case BUTTON_FUN_UP:
-      001127 02 13 77         [24] 2338 	ljmp	_set_ui_state
-      00112A                       2339 00116$:
-                                   2340 ;	../UI_Manager/ui.c:697: set_ui_state(DEC, NULL);
-      00112A 75 17 00         [24] 2341 	mov	_set_ui_state_PARM_2,#0x00
-      00112D 75 82 02         [24] 2342 	mov	dpl,#0x02
-                                   2343 ;	../UI_Manager/ui.c:699: }
-                                   2344 ;	../UI_Manager/ui.c:700: }
-      001130 02 13 77         [24] 2345 	ljmp	_set_ui_state
-      001133                       2346 00118$:
-      001133 22               [24] 2347 	ret
-                                   2348 ;------------------------------------------------------------
-                                   2349 ;Allocation info for local variables in function 'saveLoadPage'
-                                   2350 ;------------------------------------------------------------
-                                   2351 ;slot                      Allocated with name '_saveLoadPage_slot_65536_134'
-                                   2352 ;action                    Allocated to registers r7 
-                                   2353 ;------------------------------------------------------------
-                                   2354 ;	../UI_Manager/ui.c:702: void saveLoadPage(uint8_t action){
-                                   2355 ;	-----------------------------------------
-                                   2356 ;	 function saveLoadPage
-                                   2357 ;	-----------------------------------------
-      001134                       2358 _saveLoadPage:
-      001134 AF 82            [24] 2359 	mov	r7,dpl
-                                   2360 ;	../UI_Manager/ui.c:705: if(Changed){
-      001136 E5 09            [12] 2361 	mov	a,_Changed
-      001138 60 49            [24] 2362 	jz	00105$
-                                   2363 ;	../UI_Manager/ui.c:706: Changed = 0x00;
-      00113A 75 09 00         [24] 2364 	mov	_Changed,#0x00
-                                   2365 ;	../UI_Manager/ui.c:707: changed = 0xFF;
-      00113D 75 0A FF         [24] 2366 	mov	_changed,#0xff
-                                   2367 ;	../UI_Manager/ui.c:709: exe_command(CLEAR_DISPLAY);
-      001140 90 80 00         [24] 2368 	mov	dptr,#0x8000
-      001143 C0 07            [24] 2369 	push	ar7
-      001145 12 1A B6         [24] 2370 	lcall	_exe_command
-      001148 D0 07            [24] 2371 	pop	ar7
-                                   2372 ;	../UI_Manager/ui.c:711: if(State == MANUAL_SAVE_SETTINGS_STATE){
-      00114A 74 0D            [12] 2373 	mov	a,#0x0d
-      00114C B5 08 1B         [24] 2374 	cjne	a,_State,00102$
-                                   2375 ;	../UI_Manager/ui.c:712: write_string("Save Settings", sizeof("Save Settings"), 2, LINE_0, NOT_SELECTED);
-      00114F 75 21 0E         [24] 2376 	mov	_write_string_PARM_2,#0x0e
-      001152 75 22 02         [24] 2377 	mov	_write_string_PARM_3,#0x02
-      001155 75 23 00         [24] 2378 	mov	_write_string_PARM_4,#0x00
-      001158 75 24 00         [24] 2379 	mov	_write_string_PARM_5,#0x00
-      00115B 90 2F 3E         [24] 2380 	mov	dptr,#___str_23
-      00115E 75 F0 80         [24] 2381 	mov	b,#0x80
-      001161 C0 07            [24] 2382 	push	ar7
-      001163 12 18 63         [24] 2383 	lcall	_write_string
-      001166 D0 07            [24] 2384 	pop	ar7
-      001168 80 19            [24] 2385 	sjmp	00105$
-      00116A                       2386 00102$:
-                                   2387 ;	../UI_Manager/ui.c:714: write_string("Load Settings", sizeof("Load Settings"), 2, LINE_0, NOT_SELECTED);
-      00116A 75 21 0E         [24] 2388 	mov	_write_string_PARM_2,#0x0e
-      00116D 75 22 02         [24] 2389 	mov	_write_string_PARM_3,#0x02
-      001170 75 23 00         [24] 2390 	mov	_write_string_PARM_4,#0x00
-      001173 75 24 00         [24] 2391 	mov	_write_string_PARM_5,#0x00
-      001176 90 2F 4C         [24] 2392 	mov	dptr,#___str_24
-      001179 75 F0 80         [24] 2393 	mov	b,#0x80
-      00117C C0 07            [24] 2394 	push	ar7
-      00117E 12 18 63         [24] 2395 	lcall	_write_string
-      001181 D0 07            [24] 2396 	pop	ar7
-      001183                       2397 00105$:
-                                   2398 ;	../UI_Manager/ui.c:719: if(changed){
-      001183 E5 0A            [12] 2399 	mov	a,_changed
-      001185 60 2E            [24] 2400 	jz	00107$
-                                   2401 ;	../UI_Manager/ui.c:720: changed = 0x00;
-      001187 75 0A 00         [24] 2402 	mov	_changed,#0x00
-                                   2403 ;	../UI_Manager/ui.c:721: write_string(getString(slot % (SLOT_COUNT - 1)), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);  
-      00118A 75 F0 03         [24] 2404 	mov	b,#0x03
-      00118D E5 16            [12] 2405 	mov	a,_saveLoadPage_slot_65536_134
-      00118F 84               [48] 2406 	div	ab
-      001190 85 F0 82         [24] 2407 	mov	dpl,b
-      001193 C0 07            [24] 2408 	push	ar7
-      001195 12 14 19         [24] 2409 	lcall	_getString
-      001198 AC 82            [24] 2410 	mov	r4,dpl
-      00119A AD 83            [24] 2411 	mov	r5,dph
-      00119C AE F0            [24] 2412 	mov	r6,b
-      00119E 75 21 10         [24] 2413 	mov	_write_string_PARM_2,#0x10
-      0011A1 75 22 06         [24] 2414 	mov	_write_string_PARM_3,#0x06
-      0011A4 75 23 01         [24] 2415 	mov	_write_string_PARM_4,#0x01
-      0011A7 75 24 00         [24] 2416 	mov	_write_string_PARM_5,#0x00
-      0011AA 8C 82            [24] 2417 	mov	dpl,r4
-      0011AC 8D 83            [24] 2418 	mov	dph,r5
-      0011AE 8E F0            [24] 2419 	mov	b,r6
-      0011B0 12 18 63         [24] 2420 	lcall	_write_string
-      0011B3 D0 07            [24] 2421 	pop	ar7
-      0011B5                       2422 00107$:
-                                   2423 ;	../UI_Manager/ui.c:724: switch (action)
-      0011B5 BF 02 03         [24] 2424 	cjne	r7,#0x02,00165$
-      0011B8 02 12 3F         [24] 2425 	ljmp	00114$
-      0011BB                       2426 00165$:
-      0011BB BF 03 02         [24] 2427 	cjne	r7,#0x03,00166$
-      0011BE 80 73            [24] 2428 	sjmp	00112$
-      0011C0                       2429 00166$:
-      0011C0 BF 0A 02         [24] 2430 	cjne	r7,#0x0a,00167$
-      0011C3 80 74            [24] 2431 	sjmp	00113$
-      0011C5                       2432 00167$:
-      0011C5 BF 0C 03         [24] 2433 	cjne	r7,#0x0c,00168$
-      0011C8 02 12 48         [24] 2434 	ljmp	00115$
-      0011CB                       2435 00168$:
-      0011CB BF 1E 02         [24] 2436 	cjne	r7,#0x1e,00169$
-      0011CE 80 01            [24] 2437 	sjmp	00170$
-      0011D0                       2438 00169$:
-      0011D0 22               [24] 2439 	ret
-      0011D1                       2440 00170$:
-                                   2441 ;	../UI_Manager/ui.c:727: save_load_settings(slot % (SLOT_COUNT - 1), (State == MANUAL_SAVE_SETTINGS_STATE) ? SAVE : LOAD);
-      0011D1 75 F0 03         [24] 2442 	mov	b,#0x03
-      0011D4 E5 16            [12] 2443 	mov	a,_saveLoadPage_slot_65536_134
-      0011D6 84               [48] 2444 	div	ab
-      0011D7 AF F0            [24] 2445 	mov	r7,b
-      0011D9 74 0D            [12] 2446 	mov	a,#0x0d
-      0011DB B5 08 06         [24] 2447 	cjne	a,_State,00119$
-      0011DE 7D 01            [12] 2448 	mov	r5,#0x01
-      0011E0 7E 00            [12] 2449 	mov	r6,#0x00
-      0011E2 80 04            [24] 2450 	sjmp	00120$
-      0011E4                       2451 00119$:
-      0011E4 7D 00            [12] 2452 	mov	r5,#0x00
-      0011E6 7E 00            [12] 2453 	mov	r6,#0x00
-      0011E8                       2454 00120$:
-      0011E8 8D 72            [24] 2455 	mov	_save_load_settings_PARM_2,r5
-      0011EA 8F 82            [24] 2456 	mov	dpl,r7
-      0011EC 12 27 14         [24] 2457 	lcall	_save_load_settings
-                                   2458 ;	../UI_Manager/ui.c:728: write_string("", LINE_LENGTH, 0, LINE_1, NOT_SELECTED); 
-      0011EF 75 21 10         [24] 2459 	mov	_write_string_PARM_2,#0x10
-      0011F2 75 22 00         [24] 2460 	mov	_write_string_PARM_3,#0x00
-      0011F5 75 23 01         [24] 2461 	mov	_write_string_PARM_4,#0x01
-      0011F8 75 24 00         [24] 2462 	mov	_write_string_PARM_5,#0x00
-      0011FB 90 2F 2D         [24] 2463 	mov	dptr,#___str_21
-      0011FE 75 F0 80         [24] 2464 	mov	b,#0x80
-      001201 12 18 63         [24] 2465 	lcall	_write_string
-                                   2466 ;	../UI_Manager/ui.c:730: if(State == MANUAL_SAVE_SETTINGS_STATE){
-      001204 74 0D            [12] 2467 	mov	a,#0x0d
-      001206 B5 08 15         [24] 2468 	cjne	a,_State,00110$
-                                   2469 ;	../UI_Manager/ui.c:731: write_string("Saved!", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
-      001209 75 21 10         [24] 2470 	mov	_write_string_PARM_2,#0x10
-      00120C 75 22 06         [24] 2471 	mov	_write_string_PARM_3,#0x06
-      00120F 75 23 01         [24] 2472 	mov	_write_string_PARM_4,#0x01
-      001212 75 24 00         [24] 2473 	mov	_write_string_PARM_5,#0x00
-      001215 90 2F 5A         [24] 2474 	mov	dptr,#___str_25
-      001218 75 F0 80         [24] 2475 	mov	b,#0x80
-      00121B 02 18 63         [24] 2476 	ljmp	_write_string
-      00121E                       2477 00110$:
-                                   2478 ;	../UI_Manager/ui.c:733: write_string("Loaded!", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
-      00121E 75 21 10         [24] 2479 	mov	_write_string_PARM_2,#0x10
-      001221 75 22 06         [24] 2480 	mov	_write_string_PARM_3,#0x06
-      001224 75 23 01         [24] 2481 	mov	_write_string_PARM_4,#0x01
-      001227 75 24 00         [24] 2482 	mov	_write_string_PARM_5,#0x00
-      00122A 90 2F 61         [24] 2483 	mov	dptr,#___str_26
-      00122D 75 F0 80         [24] 2484 	mov	b,#0x80
-                                   2485 ;	../UI_Manager/ui.c:735: break;
-                                   2486 ;	../UI_Manager/ui.c:736: case BUTTON_UP:
-      001230 02 18 63         [24] 2487 	ljmp	_write_string
-      001233                       2488 00112$:
-                                   2489 ;	../UI_Manager/ui.c:737: slot++;
-      001233 05 16            [12] 2490 	inc	_saveLoadPage_slot_65536_134
-                                   2491 ;	../UI_Manager/ui.c:738: changed = 0xFF;
-      001235 75 0A FF         [24] 2492 	mov	_changed,#0xff
-                                   2493 ;	../UI_Manager/ui.c:739: break;
-                                   2494 ;	../UI_Manager/ui.c:740: case BUTTON_DOWN:
-      001238 22               [24] 2495 	ret
-      001239                       2496 00113$:
-                                   2497 ;	../UI_Manager/ui.c:741: slot--;
-      001239 15 16            [12] 2498 	dec	_saveLoadPage_slot_65536_134
-                                   2499 ;	../UI_Manager/ui.c:742: changed = 0xFF;  
-      00123B 75 0A FF         [24] 2500 	mov	_changed,#0xff
-                                   2501 ;	../UI_Manager/ui.c:743: break;
-                                   2502 ;	../UI_Manager/ui.c:744: case BUTTON_FUNCTION:
-      00123E 22               [24] 2503 	ret
-      00123F                       2504 00114$:
-                                   2505 ;	../UI_Manager/ui.c:745: set_ui_state(INC, NULL);
-      00123F 75 17 00         [24] 2506 	mov	_set_ui_state_PARM_2,#0x00
-      001242 75 82 01         [24] 2507 	mov	dpl,#0x01
-                                   2508 ;	../UI_Manager/ui.c:746: break;
-                                   2509 ;	../UI_Manager/ui.c:747: case BUTTON_FUN_UP:
-      001245 02 13 77         [24] 2510 	ljmp	_set_ui_state
-      001248                       2511 00115$:
-                                   2512 ;	../UI_Manager/ui.c:748: set_ui_state(DEC, NULL);
-      001248 75 17 00         [24] 2513 	mov	_set_ui_state_PARM_2,#0x00
-      00124B 75 82 02         [24] 2514 	mov	dpl,#0x02
-                                   2515 ;	../UI_Manager/ui.c:750: }
-                                   2516 ;	../UI_Manager/ui.c:751: }
-      00124E 02 13 77         [24] 2517 	ljmp	_set_ui_state
-                                   2518 ;------------------------------------------------------------
-                                   2519 ;Allocation info for local variables in function 'dmxAddressPage'
-                                   2520 ;------------------------------------------------------------
-                                   2521 ;action                    Allocated to registers r7 
-                                   2522 ;------------------------------------------------------------
-                                   2523 ;	../UI_Manager/ui.c:753: void dmxAddressPage(uint8_t action){
-                                   2524 ;	-----------------------------------------
-                                   2525 ;	 function dmxAddressPage
-                                   2526 ;	-----------------------------------------
-      001251                       2527 _dmxAddressPage:
-      001251 AF 82            [24] 2528 	mov	r7,dpl
-                                   2529 ;	../UI_Manager/ui.c:755: switch (action)
-      001253 BF 02 02         [24] 2530 	cjne	r7,#0x02,00146$
-      001256 80 2F            [24] 2531 	sjmp	00105$
-      001258                       2532 00146$:
-      001258 BF 03 02         [24] 2533 	cjne	r7,#0x03,00147$
-      00125B 80 14            [24] 2534 	sjmp	00102$
-      00125D                       2535 00147$:
-      00125D BF 0A 02         [24] 2536 	cjne	r7,#0x0a,00148$
-      001260 80 1A            [24] 2537 	sjmp	00104$
-      001262                       2538 00148$:
-      001262 BF 0C 02         [24] 2539 	cjne	r7,#0x0c,00149$
-      001265 80 29            [24] 2540 	sjmp	00106$
-      001267                       2541 00149$:
-      001267 BF 1F 02         [24] 2542 	cjne	r7,#0x1f,00150$
-      00126A 80 05            [24] 2543 	sjmp	00102$
-      00126C                       2544 00150$:
-                                   2545 ;	../UI_Manager/ui.c:758: case BUTTON_UP:
-      00126C BF 65 2A         [24] 2546 	cjne	r7,#0x65,00107$
-      00126F 80 0B            [24] 2547 	sjmp	00104$
-      001271                       2548 00102$:
-                                   2549 ;	../UI_Manager/ui.c:759: set_dmx_address(INC);
-      001271 75 82 01         [24] 2550 	mov	dpl,#0x01
-      001274 12 28 77         [24] 2551 	lcall	_set_dmx_address
-                                   2552 ;	../UI_Manager/ui.c:760: changed = 0xFF;
-      001277 75 0A FF         [24] 2553 	mov	_changed,#0xff
-                                   2554 ;	../UI_Manager/ui.c:761: break;
-                                   2555 ;	../UI_Manager/ui.c:763: case BUTTON_DOWN:
-      00127A 80 1D            [24] 2556 	sjmp	00107$
-      00127C                       2557 00104$:
-                                   2558 ;	../UI_Manager/ui.c:764: set_dmx_address(DEC);
-      00127C 75 82 02         [24] 2559 	mov	dpl,#0x02
-      00127F 12 28 77         [24] 2560 	lcall	_set_dmx_address
-                                   2561 ;	../UI_Manager/ui.c:765: changed = 0xFF;  
-      001282 75 0A FF         [24] 2562 	mov	_changed,#0xff
-                                   2563 ;	../UI_Manager/ui.c:766: break;
-                                   2564 ;	../UI_Manager/ui.c:767: case BUTTON_FUNCTION:
-      001285 80 12            [24] 2565 	sjmp	00107$
-      001287                       2566 00105$:
-                                   2567 ;	../UI_Manager/ui.c:768: set_ui_state(INC, NULL);
-      001287 75 17 00         [24] 2568 	mov	_set_ui_state_PARM_2,#0x00
-      00128A 75 82 01         [24] 2569 	mov	dpl,#0x01
-                                   2570 ;	../UI_Manager/ui.c:769: return;
-                                   2571 ;	../UI_Manager/ui.c:770: case BUTTON_FUN_UP:
-      00128D 02 13 77         [24] 2572 	ljmp	_set_ui_state
-      001290                       2573 00106$:
-                                   2574 ;	../UI_Manager/ui.c:771: set_ui_state(DEC, NULL);
-      001290 75 17 00         [24] 2575 	mov	_set_ui_state_PARM_2,#0x00
-      001293 75 82 02         [24] 2576 	mov	dpl,#0x02
-                                   2577 ;	../UI_Manager/ui.c:772: return;
-                                   2578 ;	../UI_Manager/ui.c:773: }
-      001296 02 13 77         [24] 2579 	ljmp	_set_ui_state
-      001299                       2580 00107$:
-                                   2581 ;	../UI_Manager/ui.c:775: if(Changed){
-      001299 E5 09            [12] 2582 	mov	a,_Changed
-      00129B 60 21            [24] 2583 	jz	00109$
-                                   2584 ;	../UI_Manager/ui.c:776: Changed = 0x00;
-      00129D 75 09 00         [24] 2585 	mov	_Changed,#0x00
-                                   2586 ;	../UI_Manager/ui.c:777: changed = 0xFF;
-      0012A0 75 0A FF         [24] 2587 	mov	_changed,#0xff
-                                   2588 ;	../UI_Manager/ui.c:779: exe_command(CLEAR_DISPLAY);
-      0012A3 90 80 00         [24] 2589 	mov	dptr,#0x8000
-      0012A6 12 1A B6         [24] 2590 	lcall	_exe_command
-                                   2591 ;	../UI_Manager/ui.c:781: write_string("DMX Address", sizeof("DMX Address"), 2, LINE_0, NOT_SELECTED);
-      0012A9 75 21 0C         [24] 2592 	mov	_write_string_PARM_2,#0x0c
-      0012AC 75 22 02         [24] 2593 	mov	_write_string_PARM_3,#0x02
-      0012AF 75 23 00         [24] 2594 	mov	_write_string_PARM_4,#0x00
-      0012B2 75 24 00         [24] 2595 	mov	_write_string_PARM_5,#0x00
-      0012B5 90 2F 69         [24] 2596 	mov	dptr,#___str_27
-      0012B8 75 F0 80         [24] 2597 	mov	b,#0x80
-      0012BB 12 18 63         [24] 2598 	lcall	_write_string
-      0012BE                       2599 00109$:
-                                   2600 ;	../UI_Manager/ui.c:784: if(changed){
-      0012BE E5 0A            [12] 2601 	mov	a,_changed
-      0012C0 60 12            [24] 2602 	jz	00112$
-                                   2603 ;	../UI_Manager/ui.c:785: changed = 0x00;
-      0012C2 75 0A 00         [24] 2604 	mov	_changed,#0x00
-                                   2605 ;	../UI_Manager/ui.c:787: write_number(get_dmx_address(), 4, LINE_1, NOT_SELECTED);
-      0012C5 12 28 CA         [24] 2606 	lcall	_get_dmx_address
-      0012C8 75 25 04         [24] 2607 	mov	_write_number_PARM_2,#0x04
-      0012CB 75 26 01         [24] 2608 	mov	_write_number_PARM_3,#0x01
-      0012CE 75 27 00         [24] 2609 	mov	_write_number_PARM_4,#0x00
-                                   2610 ;	../UI_Manager/ui.c:790: }
-      0012D1 02 19 27         [24] 2611 	ljmp	_write_number
-      0012D4                       2612 00112$:
-      0012D4 22               [24] 2613 	ret
-                                   2614 ;------------------------------------------------------------
-                                   2615 ;Allocation info for local variables in function 'dmxChannelPage'
-                                   2616 ;------------------------------------------------------------
-                                   2617 ;action                    Allocated to registers r7 
-                                   2618 ;------------------------------------------------------------
-                                   2619 ;	../UI_Manager/ui.c:792: void dmxChannelPage(uint8_t action){
-                                   2620 ;	-----------------------------------------
-                                   2621 ;	 function dmxChannelPage
-                                   2622 ;	-----------------------------------------
-      0012D5                       2623 _dmxChannelPage:
-      0012D5 AF 82            [24] 2624 	mov	r7,dpl
-                                   2625 ;	../UI_Manager/ui.c:794: switch (action)
-      0012D7 BF 02 02         [24] 2626 	cjne	r7,#0x02,00136$
-      0012DA 80 31            [24] 2627 	sjmp	00103$
-      0012DC                       2628 00136$:
-      0012DC BF 03 02         [24] 2629 	cjne	r7,#0x03,00137$
-      0012DF 80 0A            [24] 2630 	sjmp	00101$
-      0012E1                       2631 00137$:
-      0012E1 BF 0A 02         [24] 2632 	cjne	r7,#0x0a,00138$
-      0012E4 80 16            [24] 2633 	sjmp	00102$
-      0012E6                       2634 00138$:
-                                   2635 ;	../UI_Manager/ui.c:796: case BUTTON_UP:
-      0012E6 BF 0C 36         [24] 2636 	cjne	r7,#0x0c,00105$
-      0012E9 80 2B            [24] 2637 	sjmp	00104$
-      0012EB                       2638 00101$:
-                                   2639 ;	../UI_Manager/ui.c:797: set_runtime_data(MODE_INDEX, INC, NULL);
-      0012EB 75 65 01         [24] 2640 	mov	_set_runtime_data_PARM_2,#0x01
-      0012EE 75 66 00         [24] 2641 	mov	_set_runtime_data_PARM_3,#0x00
-      0012F1 75 82 0E         [24] 2642 	mov	dpl,#0x0e
-      0012F4 12 27 FE         [24] 2643 	lcall	_set_runtime_data
-                                   2644 ;	../UI_Manager/ui.c:798: changed = 0xFF;
-      0012F7 75 0A FF         [24] 2645 	mov	_changed,#0xff
-                                   2646 ;	../UI_Manager/ui.c:799: break;
-                                   2647 ;	../UI_Manager/ui.c:800: case BUTTON_DOWN:
-      0012FA 80 23            [24] 2648 	sjmp	00105$
-      0012FC                       2649 00102$:
-                                   2650 ;	../UI_Manager/ui.c:801: set_runtime_data(MODE_INDEX, DEC, NULL);
-      0012FC 75 65 02         [24] 2651 	mov	_set_runtime_data_PARM_2,#0x02
-      0012FF 75 66 00         [24] 2652 	mov	_set_runtime_data_PARM_3,#0x00
-      001302 75 82 0E         [24] 2653 	mov	dpl,#0x0e
-      001305 12 27 FE         [24] 2654 	lcall	_set_runtime_data
-                                   2655 ;	../UI_Manager/ui.c:802: changed = 0xFF;  
-      001308 75 0A FF         [24] 2656 	mov	_changed,#0xff
-                                   2657 ;	../UI_Manager/ui.c:803: break;
-                                   2658 ;	../UI_Manager/ui.c:804: case BUTTON_FUNCTION:
-      00130B 80 12            [24] 2659 	sjmp	00105$
-      00130D                       2660 00103$:
-                                   2661 ;	../UI_Manager/ui.c:805: set_ui_state(INC, NULL);
-      00130D 75 17 00         [24] 2662 	mov	_set_ui_state_PARM_2,#0x00
-      001310 75 82 01         [24] 2663 	mov	dpl,#0x01
-                                   2664 ;	../UI_Manager/ui.c:806: return;
-                                   2665 ;	../UI_Manager/ui.c:807: case BUTTON_FUN_UP:
-      001313 02 13 77         [24] 2666 	ljmp	_set_ui_state
-      001316                       2667 00104$:
-                                   2668 ;	../UI_Manager/ui.c:808: set_ui_state(DEC, NULL);
-      001316 75 17 00         [24] 2669 	mov	_set_ui_state_PARM_2,#0x00
-      001319 75 82 02         [24] 2670 	mov	dpl,#0x02
-                                   2671 ;	../UI_Manager/ui.c:809: return;
-                                   2672 ;	../UI_Manager/ui.c:810: }
-      00131C 02 13 77         [24] 2673 	ljmp	_set_ui_state
-      00131F                       2674 00105$:
-                                   2675 ;	../UI_Manager/ui.c:812: if(Changed){
-      00131F E5 09            [12] 2676 	mov	a,_Changed
-      001321 60 21            [24] 2677 	jz	00107$
-                                   2678 ;	../UI_Manager/ui.c:813: Changed = 0x00;
-      001323 75 09 00         [24] 2679 	mov	_Changed,#0x00
-                                   2680 ;	../UI_Manager/ui.c:814: changed = 0xFF;
-      001326 75 0A FF         [24] 2681 	mov	_changed,#0xff
-                                   2682 ;	../UI_Manager/ui.c:816: exe_command(CLEAR_DISPLAY);
-      001329 90 80 00         [24] 2683 	mov	dptr,#0x8000
-      00132C 12 1A B6         [24] 2684 	lcall	_exe_command
-                                   2685 ;	../UI_Manager/ui.c:818: write_string("DMX Channel Mode", sizeof("DMX Channel Mode"), 0, LINE_0, NOT_SELECTED);
-      00132F 75 21 11         [24] 2686 	mov	_write_string_PARM_2,#0x11
-      001332 75 22 00         [24] 2687 	mov	_write_string_PARM_3,#0x00
-      001335 75 23 00         [24] 2688 	mov	_write_string_PARM_4,#0x00
-      001338 75 24 00         [24] 2689 	mov	_write_string_PARM_5,#0x00
-      00133B 90 2F 75         [24] 2690 	mov	dptr,#___str_28
-      00133E 75 F0 80         [24] 2691 	mov	b,#0x80
-      001341 12 18 63         [24] 2692 	lcall	_write_string
-      001344                       2693 00107$:
-                                   2694 ;	../UI_Manager/ui.c:821: if(changed){
-      001344 E5 0A            [12] 2695 	mov	a,_changed
-      001346 60 2E            [24] 2696 	jz	00110$
-                                   2697 ;	../UI_Manager/ui.c:822: changed = 0x00;
-      001348 75 0A 00         [24] 2698 	mov	_changed,#0x00
-                                   2699 ;	../UI_Manager/ui.c:824: write_string(getString(get_runtime_data(MODE_INDEX) + DMX_STRING_OFFSET), LINE_LENGTH, 1, LINE_1, NOT_SELECTED);
-      00134B 75 82 0E         [24] 2700 	mov	dpl,#0x0e
-      00134E 12 27 6A         [24] 2701 	lcall	_get_runtime_data
-      001351 AF 82            [24] 2702 	mov	r7,dpl
-      001353 74 64            [12] 2703 	mov	a,#0x64
-      001355 2F               [12] 2704 	add	a,r7
-      001356 F5 82            [12] 2705 	mov	dpl,a
-      001358 12 14 19         [24] 2706 	lcall	_getString
-      00135B AD 82            [24] 2707 	mov	r5,dpl
-      00135D AE 83            [24] 2708 	mov	r6,dph
-      00135F AF F0            [24] 2709 	mov	r7,b
-      001361 75 21 10         [24] 2710 	mov	_write_string_PARM_2,#0x10
-      001364 75 22 01         [24] 2711 	mov	_write_string_PARM_3,#0x01
-      001367 75 23 01         [24] 2712 	mov	_write_string_PARM_4,#0x01
-      00136A 75 24 00         [24] 2713 	mov	_write_string_PARM_5,#0x00
-      00136D 8D 82            [24] 2714 	mov	dpl,r5
-      00136F 8E 83            [24] 2715 	mov	dph,r6
-      001371 8F F0            [24] 2716 	mov	b,r7
-                                   2717 ;	../UI_Manager/ui.c:827: }
-      001373 02 18 63         [24] 2718 	ljmp	_write_string
-      001376                       2719 00110$:
-      001376 22               [24] 2720 	ret
-                                   2721 ;------------------------------------------------------------
-                                   2722 ;Allocation info for local variables in function 'set_ui_state'
-                                   2723 ;------------------------------------------------------------
-                                   2724 ;state                     Allocated with name '_set_ui_state_PARM_2'
-                                   2725 ;inc                       Allocated to registers r7 
-                                   2726 ;------------------------------------------------------------
-                                   2727 ;	../UI_Manager/ui.c:829: void set_ui_state(uint8_t inc, uint8_t state){
-                                   2728 ;	-----------------------------------------
-                                   2729 ;	 function set_ui_state
-                                   2730 ;	-----------------------------------------
-      001377                       2731 _set_ui_state:
-      001377 AF 82            [24] 2732 	mov	r7,dpl
-                                   2733 ;	../UI_Manager/ui.c:830: Changed = CHANGE_SCREEN_X;
-      001379 75 09 FF         [24] 2734 	mov	_Changed,#0xff
-                                   2735 ;	../UI_Manager/ui.c:832: switch (inc)
-      00137C BF 01 02         [24] 2736 	cjne	r7,#0x01,00193$
-      00137F 80 08            [24] 2737 	sjmp	00101$
-      001381                       2738 00193$:
-      001381 BF 02 02         [24] 2739 	cjne	r7,#0x02,00194$
-      001384 80 3D            [24] 2740 	sjmp	00115$
-      001386                       2741 00194$:
-      001386 02 13 FC         [24] 2742 	ljmp	00129$
-                                   2743 ;	../UI_Manager/ui.c:834: case INC:
-      001389                       2744 00101$:
-                                   2745 ;	../UI_Manager/ui.c:835: state = State;
-      001389 85 08 17         [24] 2746 	mov	_set_ui_state_PARM_2,_State
-                                   2747 ;	../UI_Manager/ui.c:836: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
-      00138C 75 82 10         [24] 2748 	mov	dpl,#0x10
-      00138F 12 27 6A         [24] 2749 	lcall	_get_runtime_data
-      001392 E5 82            [12] 2750 	mov	a,dpl
-      001394 70 17            [24] 2751 	jnz	00113$
-                                   2752 ;	../UI_Manager/ui.c:837: if(state == IDLE_STATE){
-      001396 E5 17            [12] 2753 	mov	a,_set_ui_state_PARM_2
-      001398 70 06            [24] 2754 	jnz	00105$
-                                   2755 ;	../UI_Manager/ui.c:838: state = DMX_STATE_LOW;
-      00139A 75 17 14         [24] 2756 	mov	_set_ui_state_PARM_2,#0x14
-      00139D 02 14 11         [24] 2757 	ljmp	00134$
-      0013A0                       2758 00105$:
-                                   2759 ;	../UI_Manager/ui.c:839: } else if(++state > DMX_STATE_HIGH){
-      0013A0 05 17            [12] 2760 	inc	_set_ui_state_PARM_2
-      0013A2 E5 17            [12] 2761 	mov	a,_set_ui_state_PARM_2
-      0013A4 24 EA            [12] 2762 	add	a,#0xff - 0x15
-      0013A6 50 69            [24] 2763 	jnc	00134$
-                                   2764 ;	../UI_Manager/ui.c:840: state = IDLE_STATE;
-      0013A8 75 17 00         [24] 2765 	mov	_set_ui_state_PARM_2,#0x00
-      0013AB 80 64            [24] 2766 	sjmp	00134$
-      0013AD                       2767 00113$:
-                                   2768 ;	../UI_Manager/ui.c:843: if(state == IDLE_STATE){
-      0013AD E5 17            [12] 2769 	mov	a,_set_ui_state_PARM_2
-      0013AF 70 05            [24] 2770 	jnz	00110$
-                                   2771 ;	../UI_Manager/ui.c:844: state = IDLE_STATE + 1; 
-      0013B1 75 17 01         [24] 2772 	mov	_set_ui_state_PARM_2,#0x01
-      0013B4 80 5B            [24] 2773 	sjmp	00134$
-      0013B6                       2774 00110$:
-                                   2775 ;	../UI_Manager/ui.c:845: } else if(++state > MANUAL_STATE_HIGH){
-      0013B6 05 17            [12] 2776 	inc	_set_ui_state_PARM_2
-      0013B8 E5 17            [12] 2777 	mov	a,_set_ui_state_PARM_2
-      0013BA 24 F1            [12] 2778 	add	a,#0xff - 0x0e
-      0013BC 50 53            [24] 2779 	jnc	00134$
-                                   2780 ;	../UI_Manager/ui.c:846: State = IDLE_STATE;
-      0013BE 75 08 00         [24] 2781 	mov	_State,#0x00
-                                   2782 ;	../UI_Manager/ui.c:849: break;
-                                   2783 ;	../UI_Manager/ui.c:850: case DEC:
-      0013C1 80 4E            [24] 2784 	sjmp	00134$
-      0013C3                       2785 00115$:
-                                   2786 ;	../UI_Manager/ui.c:851: state = State;
-      0013C3 85 08 17         [24] 2787 	mov	_set_ui_state_PARM_2,_State
-                                   2788 ;	../UI_Manager/ui.c:852: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
-      0013C6 75 82 10         [24] 2789 	mov	dpl,#0x10
-      0013C9 12 27 6A         [24] 2790 	lcall	_get_runtime_data
-      0013CC E5 82            [12] 2791 	mov	a,dpl
-      0013CE 70 16            [24] 2792 	jnz	00127$
-                                   2793 ;	../UI_Manager/ui.c:853: if(state == IDLE_STATE){
-      0013D0 E5 17            [12] 2794 	mov	a,_set_ui_state_PARM_2
-      0013D2 70 05            [24] 2795 	jnz	00119$
-                                   2796 ;	../UI_Manager/ui.c:854: state = DMX_STATE_HIGH;
-      0013D4 75 17 15         [24] 2797 	mov	_set_ui_state_PARM_2,#0x15
-      0013D7 80 38            [24] 2798 	sjmp	00134$
-      0013D9                       2799 00119$:
-                                   2800 ;	../UI_Manager/ui.c:855: } else if(--State < DMX_STATE_LOW){
-      0013D9 15 08            [12] 2801 	dec	_State
-      0013DB 74 EC            [12] 2802 	mov	a,#0x100 - 0x14
-      0013DD 25 08            [12] 2803 	add	a,_State
-      0013DF 40 30            [24] 2804 	jc	00134$
-                                   2805 ;	../UI_Manager/ui.c:856: State = IDLE_STATE;
-      0013E1 75 08 00         [24] 2806 	mov	_State,#0x00
-      0013E4 80 2B            [24] 2807 	sjmp	00134$
-      0013E6                       2808 00127$:
-                                   2809 ;	../UI_Manager/ui.c:859: if(state == IDLE_STATE){
-      0013E6 E5 17            [12] 2810 	mov	a,_set_ui_state_PARM_2
-      0013E8 70 05            [24] 2811 	jnz	00124$
-                                   2812 ;	../UI_Manager/ui.c:860: state = MANUAL_STATE_HIGH; 
-      0013EA 75 17 0E         [24] 2813 	mov	_set_ui_state_PARM_2,#0x0e
-      0013ED 80 22            [24] 2814 	sjmp	00134$
-      0013EF                       2815 00124$:
-                                   2816 ;	../UI_Manager/ui.c:861: } else if(--State < DMX_STATE_HIGH){
-      0013EF 15 08            [12] 2817 	dec	_State
-      0013F1 74 EB            [12] 2818 	mov	a,#0x100 - 0x15
-      0013F3 25 08            [12] 2819 	add	a,_State
-      0013F5 40 1A            [24] 2820 	jc	00134$
-                                   2821 ;	../UI_Manager/ui.c:862: State = IDLE_STATE;
-      0013F7 75 08 00         [24] 2822 	mov	_State,#0x00
-                                   2823 ;	../UI_Manager/ui.c:865: break;
-                                   2824 ;	../UI_Manager/ui.c:866: default: 
-      0013FA 80 15            [24] 2825 	sjmp	00134$
-      0013FC                       2826 00129$:
-                                   2827 ;	../UI_Manager/ui.c:867: if(state <= MANUAL_STATE_HIGH || (state >= DMX_STATE_LOW && state <= DMX_STATE_HIGH)){
-      0013FC E5 17            [12] 2828 	mov	a,_set_ui_state_PARM_2
-      0013FE 24 F1            [12] 2829 	add	a,#0xff - 0x0e
-      001400 50 0C            [24] 2830 	jnc	00130$
-      001402 74 EC            [12] 2831 	mov	a,#0x100 - 0x14
-      001404 25 17            [12] 2832 	add	a,_set_ui_state_PARM_2
-      001406 50 09            [24] 2833 	jnc	00134$
-      001408 E5 17            [12] 2834 	mov	a,_set_ui_state_PARM_2
-      00140A 24 EA            [12] 2835 	add	a,#0xff - 0x15
-      00140C 40 03            [24] 2836 	jc	00134$
-      00140E                       2837 00130$:
-                                   2838 ;	../UI_Manager/ui.c:868: state = IDLE_STATE;
-      00140E 75 17 00         [24] 2839 	mov	_set_ui_state_PARM_2,#0x00
-                                   2840 ;	../UI_Manager/ui.c:871: }
-      001411                       2841 00134$:
-                                   2842 ;	../UI_Manager/ui.c:873: State = state;
-      001411 85 17 08         [24] 2843 	mov	_State,_set_ui_state_PARM_2
-                                   2844 ;	../UI_Manager/ui.c:874: }
-      001414 22               [24] 2845 	ret
-                                   2846 ;------------------------------------------------------------
-                                   2847 ;Allocation info for local variables in function 'get_ui_state'
-                                   2848 ;------------------------------------------------------------
-                                   2849 ;	../UI_Manager/ui.c:876: uint8_t get_ui_state(){
-                                   2850 ;	-----------------------------------------
-                                   2851 ;	 function get_ui_state
-                                   2852 ;	-----------------------------------------
-      001415                       2853 _get_ui_state:
-                                   2854 ;	../UI_Manager/ui.c:877: return State;
-      001415 85 08 82         [24] 2855 	mov	dpl,_State
-                                   2856 ;	../UI_Manager/ui.c:878: }
-      001418 22               [24] 2857 	ret
-                                   2858 ;------------------------------------------------------------
-                                   2859 ;Allocation info for local variables in function 'getString'
-                                   2860 ;------------------------------------------------------------
-                                   2861 ;index                     Allocated to registers r7 
-                                   2862 ;------------------------------------------------------------
-                                   2863 ;	../UI_Manager/ui.c:880: char* getString(uint8_t index){
-                                   2864 ;	-----------------------------------------
-                                   2865 ;	 function getString
-                                   2866 ;	-----------------------------------------
-      001419                       2867 _getString:
-      001419 AF 82            [24] 2868 	mov	r7,dpl
-                                   2869 ;	../UI_Manager/ui.c:881: switch (index)
-      00141B 8F 06            [24] 2870 	mov	ar6,r7
-      00141D BE 00 03         [24] 2871 	cjne	r6,#0x00,00299$
-      001420 02 15 18         [24] 2872 	ljmp	00103$
-      001423                       2873 00299$:
-      001423 BE 01 03         [24] 2874 	cjne	r6,#0x01,00300$
-      001426 02 15 11         [24] 2875 	ljmp	00102$
-      001429                       2876 00300$:
-      001429 BF 02 03         [24] 2877 	cjne	r7,#0x02,00301$
-      00142C 02 15 0A         [24] 2878 	ljmp	00101$
-      00142F                       2879 00301$:
-      00142F BF 14 03         [24] 2880 	cjne	r7,#0x14,00302$
-      001432 02 15 1F         [24] 2881 	ljmp	00104$
-      001435                       2882 00302$:
-      001435 BF 15 03         [24] 2883 	cjne	r7,#0x15,00303$
-      001438 02 15 26         [24] 2884 	ljmp	00105$
-      00143B                       2885 00303$:
-      00143B BF 16 03         [24] 2886 	cjne	r7,#0x16,00304$
-      00143E 02 15 2D         [24] 2887 	ljmp	00106$
-      001441                       2888 00304$:
-      001441 BF 17 03         [24] 2889 	cjne	r7,#0x17,00305$
-      001444 02 15 34         [24] 2890 	ljmp	00107$
-      001447                       2891 00305$:
-      001447 BF 18 03         [24] 2892 	cjne	r7,#0x18,00306$
-      00144A 02 15 42         [24] 2893 	ljmp	00109$
-      00144D                       2894 00306$:
-      00144D BF 19 03         [24] 2895 	cjne	r7,#0x19,00307$
-      001450 02 15 49         [24] 2896 	ljmp	00110$
-      001453                       2897 00307$:
-      001453 BF 1A 03         [24] 2898 	cjne	r7,#0x1a,00308$
-      001456 02 15 3B         [24] 2899 	ljmp	00108$
-      001459                       2900 00308$:
-      001459 BF 28 03         [24] 2901 	cjne	r7,#0x28,00309$
-      00145C 02 15 F1         [24] 2902 	ljmp	00134$
-      00145F                       2903 00309$:
-      00145F BF 29 03         [24] 2904 	cjne	r7,#0x29,00310$
-      001462 02 15 F8         [24] 2905 	ljmp	00135$
-      001465                       2906 00310$:
-      001465 BF 2A 03         [24] 2907 	cjne	r7,#0x2a,00311$
-      001468 02 15 FF         [24] 2908 	ljmp	00136$
-      00146B                       2909 00311$:
-      00146B BF 2B 03         [24] 2910 	cjne	r7,#0x2b,00312$
-      00146E 02 16 06         [24] 2911 	ljmp	00137$
-      001471                       2912 00312$:
-      001471 BF 2C 03         [24] 2913 	cjne	r7,#0x2c,00313$
-      001474 02 16 0D         [24] 2914 	ljmp	00138$
-      001477                       2915 00313$:
-      001477 BF 2D 03         [24] 2916 	cjne	r7,#0x2d,00314$
-      00147A 02 16 14         [24] 2917 	ljmp	00139$
-      00147D                       2918 00314$:
-      00147D BF 3C 03         [24] 2919 	cjne	r7,#0x3c,00315$
-      001480 02 15 6C         [24] 2920 	ljmp	00115$
-      001483                       2921 00315$:
-      001483 BF 3D 03         [24] 2922 	cjne	r7,#0x3d,00316$
-      001486 02 15 73         [24] 2923 	ljmp	00116$
-      001489                       2924 00316$:
-      001489 BF 3E 03         [24] 2925 	cjne	r7,#0x3e,00317$
-      00148C 02 15 7A         [24] 2926 	ljmp	00117$
-      00148F                       2927 00317$:
-      00148F BF 3F 03         [24] 2928 	cjne	r7,#0x3f,00318$
-      001492 02 15 81         [24] 2929 	ljmp	00118$
-      001495                       2930 00318$:
-      001495 BF 40 03         [24] 2931 	cjne	r7,#0x40,00319$
-      001498 02 15 88         [24] 2932 	ljmp	00119$
-      00149B                       2933 00319$:
-      00149B BF 41 03         [24] 2934 	cjne	r7,#0x41,00320$
-      00149E 02 15 8F         [24] 2935 	ljmp	00120$
-      0014A1                       2936 00320$:
-      0014A1 BF 42 03         [24] 2937 	cjne	r7,#0x42,00321$
-      0014A4 02 15 96         [24] 2938 	ljmp	00121$
-      0014A7                       2939 00321$:
-      0014A7 BF 43 03         [24] 2940 	cjne	r7,#0x43,00322$
-      0014AA 02 15 9D         [24] 2941 	ljmp	00122$
-      0014AD                       2942 00322$:
-      0014AD BF 44 03         [24] 2943 	cjne	r7,#0x44,00323$
-      0014B0 02 15 A4         [24] 2944 	ljmp	00123$
-      0014B3                       2945 00323$:
-      0014B3 BF 45 03         [24] 2946 	cjne	r7,#0x45,00324$
-      0014B6 02 15 AB         [24] 2947 	ljmp	00124$
-      0014B9                       2948 00324$:
-      0014B9 BF 46 03         [24] 2949 	cjne	r7,#0x46,00325$
-      0014BC 02 15 B2         [24] 2950 	ljmp	00125$
-      0014BF                       2951 00325$:
-      0014BF BF 47 03         [24] 2952 	cjne	r7,#0x47,00326$
-      0014C2 02 15 B9         [24] 2953 	ljmp	00126$
-      0014C5                       2954 00326$:
-      0014C5 BF 48 03         [24] 2955 	cjne	r7,#0x48,00327$
-      0014C8 02 15 C0         [24] 2956 	ljmp	00127$
-      0014CB                       2957 00327$:
-      0014CB BF 50 03         [24] 2958 	cjne	r7,#0x50,00328$
-      0014CE 02 15 C7         [24] 2959 	ljmp	00128$
-      0014D1                       2960 00328$:
-      0014D1 BF 51 03         [24] 2961 	cjne	r7,#0x51,00329$
-      0014D4 02 15 CE         [24] 2962 	ljmp	00129$
-      0014D7                       2963 00329$:
-      0014D7 BF 52 03         [24] 2964 	cjne	r7,#0x52,00330$
-      0014DA 02 15 D5         [24] 2965 	ljmp	00130$
-      0014DD                       2966 00330$:
-      0014DD BF 64 03         [24] 2967 	cjne	r7,#0x64,00331$
-      0014E0 02 15 DC         [24] 2968 	ljmp	00131$
-      0014E3                       2969 00331$:
-      0014E3 BF 65 03         [24] 2970 	cjne	r7,#0x65,00332$
-      0014E6 02 15 E3         [24] 2971 	ljmp	00132$
-      0014E9                       2972 00332$:
-      0014E9 BF 66 03         [24] 2973 	cjne	r7,#0x66,00333$
-      0014EC 02 15 EA         [24] 2974 	ljmp	00133$
-      0014EF                       2975 00333$:
-      0014EF BF CE 03         [24] 2976 	cjne	r7,#0xce,00334$
-      0014F2 02 15 50         [24] 2977 	ljmp	00111$
-      0014F5                       2978 00334$:
-      0014F5 BF CF 03         [24] 2979 	cjne	r7,#0xcf,00335$
-      0014F8 02 15 5E         [24] 2980 	ljmp	00113$
-      0014FB                       2981 00335$:
-      0014FB BF D0 03         [24] 2982 	cjne	r7,#0xd0,00336$
-      0014FE 02 15 57         [24] 2983 	ljmp	00112$
-      001501                       2984 00336$:
-      001501 BF D1 03         [24] 2985 	cjne	r7,#0xd1,00337$
-      001504 02 15 65         [24] 2986 	ljmp	00114$
-      001507                       2987 00337$:
-      001507 02 16 1B         [24] 2988 	ljmp	00140$
-                                   2989 ;	../UI_Manager/ui.c:883: case POWER_STRING_OFFSET + OPTION_FOG_LOW:
-      00150A                       2990 00101$:
-                                   2991 ;	../UI_Manager/ui.c:884: return "Wimpy";
-      00150A 90 2F 86         [24] 2992 	mov	dptr,#___str_29
-      00150D 75 F0 80         [24] 2993 	mov	b,#0x80
-      001510 22               [24] 2994 	ret
-                                   2995 ;	../UI_Manager/ui.c:885: case POWER_STRING_OFFSET + OPTION_FOG_MEDIUM:
-      001511                       2996 00102$:
-                                   2997 ;	../UI_Manager/ui.c:886: return "Mild";
-      001511 90 2F 8C         [24] 2998 	mov	dptr,#___str_30
-      001514 75 F0 80         [24] 2999 	mov	b,#0x80
-      001517 22               [24] 3000 	ret
-                                   3001 ;	../UI_Manager/ui.c:887: case POWER_STRING_OFFSET + OPTION_FOG_HIGH:
-      001518                       3002 00103$:
-                                   3003 ;	../UI_Manager/ui.c:888: return "Blazin";
-      001518 90 2F 91         [24] 3004 	mov	dptr,#___str_31
-      00151B 75 F0 80         [24] 3005 	mov	b,#0x80
-      00151E 22               [24] 3006 	ret
-                                   3007 ;	../UI_Manager/ui.c:890: case MACRO_STRING_OFFSET + OPTION_MACRO_NONE:
-      00151F                       3008 00104$:
-                                   3009 ;	../UI_Manager/ui.c:891: return "Off";
-      00151F 90 2F 29         [24] 3010 	mov	dptr,#___str_20
-      001522 75 F0 80         [24] 3011 	mov	b,#0x80
-      001525 22               [24] 3012 	ret
-                                   3013 ;	../UI_Manager/ui.c:892: case MACRO_STRING_OFFSET + OPTION_MACRO_RAINBOW_DMX:
-      001526                       3014 00105$:
-                                   3015 ;	../UI_Manager/ui.c:893: return "Rainbow";
-      001526 90 2F 98         [24] 3016 	mov	dptr,#___str_32
-      001529 75 F0 80         [24] 3017 	mov	b,#0x80
-      00152C 22               [24] 3018 	ret
-                                   3019 ;	../UI_Manager/ui.c:894: case MACRO_STRING_OFFSET + OPTION_MACRO_FIRE_DMX:
-      00152D                       3020 00106$:
-                                   3021 ;	../UI_Manager/ui.c:895: return "Fire";
-      00152D 90 2F A0         [24] 3022 	mov	dptr,#___str_33
-      001530 75 F0 80         [24] 3023 	mov	b,#0x80
-      001533 22               [24] 3024 	ret
-                                   3025 ;	../UI_Manager/ui.c:896: case MACRO_STRING_OFFSET + OPTION_MACRO_WATER_DMX:
-      001534                       3026 00107$:
-                                   3027 ;	../UI_Manager/ui.c:897: return "Water";
-      001534 90 2F A5         [24] 3028 	mov	dptr,#___str_34
-      001537 75 F0 80         [24] 3029 	mov	b,#0x80
-      00153A 22               [24] 3030 	ret
-                                   3031 ;	../UI_Manager/ui.c:898: case MACRO_STRING_OFFSET + OPTION_MACRO_STORM_DMX:
-      00153B                       3032 00108$:
-                                   3033 ;	../UI_Manager/ui.c:899: return "Storm";
-      00153B 90 2F AB         [24] 3034 	mov	dptr,#___str_35
-      00153E 75 F0 80         [24] 3035 	mov	b,#0x80
-      001541 22               [24] 3036 	ret
-                                   3037 ;	../UI_Manager/ui.c:900: case MACRO_STRING_OFFSET + OPTION_MACRO_ACID_DMX:
-      001542                       3038 00109$:
-                                   3039 ;	../UI_Manager/ui.c:901: return "Acid";
-      001542 90 2F B1         [24] 3040 	mov	dptr,#___str_36
-      001545 75 F0 80         [24] 3041 	mov	b,#0x80
-      001548 22               [24] 3042 	ret
-                                   3043 ;	../UI_Manager/ui.c:902: case MACRO_STRING_OFFSET + OPTION_MACRO_ETHER_DMX:
-      001549                       3044 00110$:
-                                   3045 ;	../UI_Manager/ui.c:903: return "Ether";
-      001549 90 2F B6         [24] 3046 	mov	dptr,#___str_37
-      00154C 75 F0 80         [24] 3047 	mov	b,#0x80
-      00154F 22               [24] 3048 	ret
-                                   3049 ;	../UI_Manager/ui.c:905: case COLOR_STRING_OFFSET + MANUAL_RED_STATE:
-      001550                       3050 00111$:
-                                   3051 ;	../UI_Manager/ui.c:906: return "Red Level";
-      001550 90 2F BC         [24] 3052 	mov	dptr,#___str_38
-      001553 75 F0 80         [24] 3053 	mov	b,#0x80
-      001556 22               [24] 3054 	ret
-                                   3055 ;	../UI_Manager/ui.c:907: case COLOR_STRING_OFFSET + MANUAL_GREEN_STATE:
-      001557                       3056 00112$:
-                                   3057 ;	../UI_Manager/ui.c:908: return "Green Level";
-      001557 90 2F C6         [24] 3058 	mov	dptr,#___str_39
-      00155A 75 F0 80         [24] 3059 	mov	b,#0x80
-      00155D 22               [24] 3060 	ret
-                                   3061 ;	../UI_Manager/ui.c:909: case COLOR_STRING_OFFSET + MANUAL_BLUE_STATE:
-      00155E                       3062 00113$:
-                                   3063 ;	../UI_Manager/ui.c:910: return "Blue Level";
-      00155E 90 2F D2         [24] 3064 	mov	dptr,#___str_40
-      001561 75 F0 80         [24] 3065 	mov	b,#0x80
-      001564 22               [24] 3066 	ret
-                                   3067 ;	../UI_Manager/ui.c:911: case COLOR_STRING_OFFSET + MANUAL_STROBE_STATE:
-      001565                       3068 00114$:
-                                   3069 ;	../UI_Manager/ui.c:912: return "Strobe Level";
-      001565 90 2F DD         [24] 3070 	mov	dptr,#___str_41
-      001568 75 F0 80         [24] 3071 	mov	b,#0x80
-      00156B 22               [24] 3072 	ret
-                                   3073 ;	../UI_Manager/ui.c:914: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACITON_NONE:
-      00156C                       3074 00115$:
-                                   3075 ;	../UI_Manager/ui.c:915: return "No Action";
-      00156C 90 2F EA         [24] 3076 	mov	dptr,#___str_42
-      00156F 75 F0 80         [24] 3077 	mov	b,#0x80
-      001572 22               [24] 3078 	ret
-                                   3079 ;	../UI_Manager/ui.c:916: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CHOOSE_MACRO:
-      001573                       3080 00116$:
-                                   3081 ;	../UI_Manager/ui.c:917: return "Choose Macro";
-      001573 90 2F F4         [24] 3082 	mov	dptr,#___str_43
-      001576 75 F0 80         [24] 3083 	mov	b,#0x80
-      001579 22               [24] 3084 	ret
-                                   3085 ;	../UI_Manager/ui.c:918: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_RED:
-      00157A                       3086 00117$:
-                                   3087 ;	../UI_Manager/ui.c:919: return "Red";
-      00157A 90 30 01         [24] 3088 	mov	dptr,#___str_44
-      00157D 75 F0 80         [24] 3089 	mov	b,#0x80
-      001580 22               [24] 3090 	ret
-                                   3091 ;	../UI_Manager/ui.c:920: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_YELLOW:
-      001581                       3092 00118$:
-                                   3093 ;	../UI_Manager/ui.c:921: return "Yellow";
-      001581 90 30 05         [24] 3094 	mov	dptr,#___str_45
-      001584 75 F0 80         [24] 3095 	mov	b,#0x80
-      001587 22               [24] 3096 	ret
-                                   3097 ;	../UI_Manager/ui.c:922: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_GREEN:
-      001588                       3098 00119$:
-                                   3099 ;	../UI_Manager/ui.c:923: return "Green";
-      001588 90 30 0C         [24] 3100 	mov	dptr,#___str_46
-      00158B 75 F0 80         [24] 3101 	mov	b,#0x80
-      00158E 22               [24] 3102 	ret
-                                   3103 ;	../UI_Manager/ui.c:924: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CYAN:
-      00158F                       3104 00120$:
-                                   3105 ;	../UI_Manager/ui.c:925: return "Cyan";
-      00158F 90 30 12         [24] 3106 	mov	dptr,#___str_47
-      001592 75 F0 80         [24] 3107 	mov	b,#0x80
-      001595 22               [24] 3108 	ret
-                                   3109 ;	../UI_Manager/ui.c:926: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLUE:
-      001596                       3110 00121$:
-                                   3111 ;	../UI_Manager/ui.c:927: return "Blue";
-      001596 90 30 17         [24] 3112 	mov	dptr,#___str_48
-      001599 75 F0 80         [24] 3113 	mov	b,#0x80
-      00159C 22               [24] 3114 	ret
-                                   3115 ;	../UI_Manager/ui.c:928: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_MAGENTA:
-      00159D                       3116 00122$:
-                                   3117 ;	../UI_Manager/ui.c:929: return "Magenta";
-      00159D 90 30 1C         [24] 3118 	mov	dptr,#___str_49
-      0015A0 75 F0 80         [24] 3119 	mov	b,#0x80
-      0015A3 22               [24] 3120 	ret
-                                   3121 ;	../UI_Manager/ui.c:930: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_SLOW:
-      0015A4                       3122 00123$:
-                                   3123 ;	../UI_Manager/ui.c:931: return "Strobe Slow";
-      0015A4 90 30 24         [24] 3124 	mov	dptr,#___str_50
-      0015A7 75 F0 80         [24] 3125 	mov	b,#0x80
-      0015AA 22               [24] 3126 	ret
-                                   3127 ;	../UI_Manager/ui.c:932: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_MEDIUM:
-      0015AB                       3128 00124$:
-                                   3129 ;	../UI_Manager/ui.c:933: return "Strobe Medium";
-      0015AB 90 30 30         [24] 3130 	mov	dptr,#___str_51
-      0015AE 75 F0 80         [24] 3131 	mov	b,#0x80
-      0015B1 22               [24] 3132 	ret
-                                   3133 ;	../UI_Manager/ui.c:934: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_FAST:
-      0015B2                       3134 00125$:
-                                   3135 ;	../UI_Manager/ui.c:935: return "Strobe Fast";
-      0015B2 90 30 3E         [24] 3136 	mov	dptr,#___str_52
-      0015B5 75 F0 80         [24] 3137 	mov	b,#0x80
-      0015B8 22               [24] 3138 	ret
-                                   3139 ;	../UI_Manager/ui.c:936: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLACKOUT:
-      0015B9                       3140 00126$:
-                                   3141 ;	../UI_Manager/ui.c:937: return "Blackout";
-      0015B9 90 30 4A         [24] 3142 	mov	dptr,#___str_53
-      0015BC 75 F0 80         [24] 3143 	mov	b,#0x80
-      0015BF 22               [24] 3144 	ret
-                                   3145 ;	../UI_Manager/ui.c:938: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_WHITEOUT:
-      0015C0                       3146 00127$:
-                                   3147 ;	../UI_Manager/ui.c:939: return "Whiteout";         
-      0015C0 90 30 53         [24] 3148 	mov	dptr,#___str_54
-      0015C3 75 F0 80         [24] 3149 	mov	b,#0x80
-      0015C6 22               [24] 3150 	ret
-                                   3151 ;	../UI_Manager/ui.c:941: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_1: 
-      0015C7                       3152 00128$:
-                                   3153 ;	../UI_Manager/ui.c:942: return "Slot 1";   
-      0015C7 90 30 5C         [24] 3154 	mov	dptr,#___str_55
-      0015CA 75 F0 80         [24] 3155 	mov	b,#0x80
-      0015CD 22               [24] 3156 	ret
-                                   3157 ;	../UI_Manager/ui.c:943: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_2: 
-      0015CE                       3158 00129$:
-                                   3159 ;	../UI_Manager/ui.c:944: return "Slot 2";   
-      0015CE 90 30 63         [24] 3160 	mov	dptr,#___str_56
-      0015D1 75 F0 80         [24] 3161 	mov	b,#0x80
-      0015D4 22               [24] 3162 	ret
-                                   3163 ;	../UI_Manager/ui.c:945: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_3: 
-      0015D5                       3164 00130$:
-                                   3165 ;	../UI_Manager/ui.c:946: return "Slot 3"; 
-      0015D5 90 30 6A         [24] 3166 	mov	dptr,#___str_57
-      0015D8 75 F0 80         [24] 3167 	mov	b,#0x80
-                                   3168 ;	../UI_Manager/ui.c:948: case DMX_STRING_OFFSET + OPTION_DMX_MODE_9: 
-      0015DB 22               [24] 3169 	ret
-      0015DC                       3170 00131$:
-                                   3171 ;	../UI_Manager/ui.c:949: return "10 All";     
-      0015DC 90 30 71         [24] 3172 	mov	dptr,#___str_58
-      0015DF 75 F0 80         [24] 3173 	mov	b,#0x80
-                                   3174 ;	../UI_Manager/ui.c:950: case DMX_STRING_OFFSET + OPTION_DMX_MODE_3: 
-      0015E2 22               [24] 3175 	ret
-      0015E3                       3176 00132$:
-                                   3177 ;	../UI_Manager/ui.c:951: return "3 Fog + Macro";   
-      0015E3 90 30 78         [24] 3178 	mov	dptr,#___str_59
-      0015E6 75 F0 80         [24] 3179 	mov	b,#0x80
-                                   3180 ;	../UI_Manager/ui.c:952: case DMX_STRING_OFFSET + OPTION_DMX_MODE_1: 
-      0015E9 22               [24] 3181 	ret
-      0015EA                       3182 00133$:
-                                   3183 ;	../UI_Manager/ui.c:953: return "1 Fog";    
-      0015EA 90 30 86         [24] 3184 	mov	dptr,#___str_60
-      0015ED 75 F0 80         [24] 3185 	mov	b,#0x80
-                                   3186 ;	../UI_Manager/ui.c:955: case SECRET_STRING_OFFSET + 0:
-      0015F0 22               [24] 3187 	ret
-      0015F1                       3188 00134$:
-                                   3189 ;	../UI_Manager/ui.c:956: return "0x486F6C6D6573";
-      0015F1 90 30 8C         [24] 3190 	mov	dptr,#___str_61
-      0015F4 75 F0 80         [24] 3191 	mov	b,#0x80
-                                   3192 ;	../UI_Manager/ui.c:957: case SECRET_STRING_OFFSET + 1:
-      0015F7 22               [24] 3193 	ret
-      0015F8                       3194 00135$:
-                                   3195 ;	../UI_Manager/ui.c:958: return "& 576174736F6E";
-      0015F8 90 30 9B         [24] 3196 	mov	dptr,#___str_62
-      0015FB 75 F0 80         [24] 3197 	mov	b,#0x80
-                                   3198 ;	../UI_Manager/ui.c:959: case SECRET_STRING_OFFSET + 2:
-      0015FE 22               [24] 3199 	ret
-      0015FF                       3200 00136$:
-                                   3201 ;	../UI_Manager/ui.c:960: return "626F74684F776E41";
-      0015FF 90 30 AA         [24] 3202 	mov	dptr,#___str_63
-      001602 75 F0 80         [24] 3203 	mov	b,#0x80
-                                   3204 ;	../UI_Manager/ui.c:961: case SECRET_STRING_OFFSET + 3:
-      001605 22               [24] 3205 	ret
-      001606                       3206 00137$:
-                                   3207 ;	../UI_Manager/ui.c:962: return "536E6F7762616C6C";
-      001606 90 30 BB         [24] 3208 	mov	dptr,#___str_64
-      001609 75 F0 80         [24] 3209 	mov	b,#0x80
-                                   3210 ;	../UI_Manager/ui.c:963: case SECRET_STRING_OFFSET + 4:
-      00160C 22               [24] 3211 	ret
-      00160D                       3212 00138$:
-                                   3213 ;	../UI_Manager/ui.c:964: return "4D6F726961727479";
-      00160D 90 30 CC         [24] 3214 	mov	dptr,#___str_65
-      001610 75 F0 80         [24] 3215 	mov	b,#0x80
-                                   3216 ;	../UI_Manager/ui.c:965: case SECRET_STRING_OFFSET + 5:
-      001613 22               [24] 3217 	ret
-      001614                       3218 00139$:
-                                   3219 ;	../UI_Manager/ui.c:966: return "646F65734E6F74 ;";
-      001614 90 30 DD         [24] 3220 	mov	dptr,#___str_66
-      001617 75 F0 80         [24] 3221 	mov	b,#0x80
-                                   3222 ;	../UI_Manager/ui.c:967: }
-      00161A 22               [24] 3223 	ret
-      00161B                       3224 00140$:
-                                   3225 ;	../UI_Manager/ui.c:969: return 0;
-      00161B 90 00 00         [24] 3226 	mov	dptr,#0x0000
-      00161E 75 F0 00         [24] 3227 	mov	b,#0x00
-                                   3228 ;	../UI_Manager/ui.c:970: }
-      001621 22               [24] 3229 	ret
-                                   3230 	.area CSEG    (CODE)
-                                   3231 	.area CONST   (CODE)
-      002E47                       3232 ___str_0:
-      002E47 54 61 6E 6B 20 4C 69  3233 	.ascii "Tank Lights Off"
+                                   1288 ;	../UI_Manager/ui.c:360: switch (action)
+      000AA7 BF 02 02         [24] 1289 	cjne	r7,#0x02,00148$
+      000AAA 80 31            [24] 1290 	sjmp	00103$
+      000AAC                       1291 00148$:
+      000AAC BF 03 02         [24] 1292 	cjne	r7,#0x03,00149$
+      000AAF 80 0A            [24] 1293 	sjmp	00101$
+      000AB1                       1294 00149$:
+      000AB1 BF 0A 02         [24] 1295 	cjne	r7,#0x0a,00150$
+      000AB4 80 16            [24] 1296 	sjmp	00102$
+      000AB6                       1297 00150$:
+                                   1298 ;	../UI_Manager/ui.c:362: case BUTTON_UP:
+      000AB6 BF 0C 36         [24] 1299 	cjne	r7,#0x0c,00105$
+      000AB9 80 2B            [24] 1300 	sjmp	00104$
+      000ABB                       1301 00101$:
+                                   1302 ;	../UI_Manager/ui.c:363: set_runtime_data(FOG_POWER_INDEX, INC, NULL);
+      000ABB 75 65 01         [24] 1303 	mov	_set_runtime_data_PARM_2,#0x01
+      000ABE 75 66 00         [24] 1304 	mov	_set_runtime_data_PARM_3,#0x00
+      000AC1 75 82 00         [24] 1305 	mov	dpl,#0x00
+      000AC4 12 27 A7         [24] 1306 	lcall	_set_runtime_data
+                                   1307 ;	../UI_Manager/ui.c:364: changed = 0xFF;
+      000AC7 75 0A FF         [24] 1308 	mov	_changed,#0xff
+                                   1309 ;	../UI_Manager/ui.c:365: break;
+                                   1310 ;	../UI_Manager/ui.c:366: case BUTTON_DOWN:
+      000ACA 80 23            [24] 1311 	sjmp	00105$
+      000ACC                       1312 00102$:
+                                   1313 ;	../UI_Manager/ui.c:367: set_runtime_data(FOG_POWER_INDEX, DEC, NULL);
+      000ACC 75 65 02         [24] 1314 	mov	_set_runtime_data_PARM_2,#0x02
+      000ACF 75 66 00         [24] 1315 	mov	_set_runtime_data_PARM_3,#0x00
+      000AD2 75 82 00         [24] 1316 	mov	dpl,#0x00
+      000AD5 12 27 A7         [24] 1317 	lcall	_set_runtime_data
+                                   1318 ;	../UI_Manager/ui.c:368: changed = 0xFF;  
+      000AD8 75 0A FF         [24] 1319 	mov	_changed,#0xff
+                                   1320 ;	../UI_Manager/ui.c:369: break;
+                                   1321 ;	../UI_Manager/ui.c:370: case BUTTON_FUNCTION:
+      000ADB 80 12            [24] 1322 	sjmp	00105$
+      000ADD                       1323 00103$:
+                                   1324 ;	../UI_Manager/ui.c:371: set_ui_state(INC, NULL);
+      000ADD 75 17 00         [24] 1325 	mov	_set_ui_state_PARM_2,#0x00
+      000AE0 75 82 01         [24] 1326 	mov	dpl,#0x01
+                                   1327 ;	../UI_Manager/ui.c:372: return;
+      000AE3 02 13 20         [24] 1328 	ljmp	_set_ui_state
+                                   1329 ;	../UI_Manager/ui.c:373: case BUTTON_FUN_UP:
+      000AE6                       1330 00104$:
+                                   1331 ;	../UI_Manager/ui.c:374: set_ui_state(DEC, NULL);
+      000AE6 75 17 00         [24] 1332 	mov	_set_ui_state_PARM_2,#0x00
+      000AE9 75 82 02         [24] 1333 	mov	dpl,#0x02
+                                   1334 ;	../UI_Manager/ui.c:375: return;
+      000AEC 02 13 20         [24] 1335 	ljmp	_set_ui_state
+                                   1336 ;	../UI_Manager/ui.c:376: }
+      000AEF                       1337 00105$:
+                                   1338 ;	../UI_Manager/ui.c:378: if(Changed){
+      000AEF E5 09            [12] 1339 	mov	a,_Changed
+      000AF1 60 21            [24] 1340 	jz	00107$
+                                   1341 ;	../UI_Manager/ui.c:379: Changed = 0x00;
+      000AF3 75 09 00         [24] 1342 	mov	_Changed,#0x00
+                                   1343 ;	../UI_Manager/ui.c:380: changed = 0xFF;
+      000AF6 75 0A FF         [24] 1344 	mov	_changed,#0xff
+                                   1345 ;	../UI_Manager/ui.c:382: exe_command(CLEAR_DISPLAY);
+      000AF9 90 80 00         [24] 1346 	mov	dptr,#0x8000
+      000AFC 12 1A 5F         [24] 1347 	lcall	_exe_command
+                                   1348 ;	../UI_Manager/ui.c:384: write_string("Fog Level", sizeof("Fog Level"), 3, LINE_0, NOT_SELECTED);
+      000AFF 75 21 0A         [24] 1349 	mov	_write_string_PARM_2,#0x0a
+      000B02 75 22 03         [24] 1350 	mov	_write_string_PARM_3,#0x03
+      000B05 75 23 00         [24] 1351 	mov	_write_string_PARM_4,#0x00
+      000B08 75 24 00         [24] 1352 	mov	_write_string_PARM_5,#0x00
+      000B0B 90 2E 93         [24] 1353 	mov	dptr,#___str_14
+      000B0E 75 F0 80         [24] 1354 	mov	b,#0x80
+      000B11 12 18 0C         [24] 1355 	lcall	_write_string
+      000B14                       1356 00107$:
+                                   1357 ;	../UI_Manager/ui.c:388: if(changed){
+      000B14 E5 0A            [12] 1358 	mov	a,_changed
+      000B16 70 01            [24] 1359 	jnz	00153$
+      000B18 22               [24] 1360 	ret
+      000B19                       1361 00153$:
+                                   1362 ;	../UI_Manager/ui.c:389: changed = 0x00;
+      000B19 75 0A 00         [24] 1363 	mov	_changed,#0x00
+                                   1364 ;	../UI_Manager/ui.c:391: switch (get_runtime_data(FOG_POWER_INDEX))
+      000B1C 75 82 00         [24] 1365 	mov	dpl,#0x00
+      000B1F 12 27 13         [24] 1366 	lcall	_get_runtime_data
+      000B22 AF 82            [24] 1367 	mov	r7,dpl
+      000B24 BF 02 02         [24] 1368 	cjne	r7,#0x02,00154$
+      000B27 80 30            [24] 1369 	sjmp	00109$
+      000B29                       1370 00154$:
+      000B29 BF 04 66         [24] 1371 	cjne	r7,#0x04,00110$
+                                   1372 ;	../UI_Manager/ui.c:394: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_LOW), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000B2C 75 82 02         [24] 1373 	mov	dpl,#0x02
+      000B2F 12 13 C2         [24] 1374 	lcall	_getString
+      000B32 AD 82            [24] 1375 	mov	r5,dpl
+      000B34 AE 83            [24] 1376 	mov	r6,dph
+      000B36 AF F0            [24] 1377 	mov	r7,b
+      000B38 75 21 10         [24] 1378 	mov	_write_string_PARM_2,#0x10
+      000B3B 75 22 03         [24] 1379 	mov	_write_string_PARM_3,#0x03
+      000B3E 75 23 01         [24] 1380 	mov	_write_string_PARM_4,#0x01
+      000B41 75 24 00         [24] 1381 	mov	_write_string_PARM_5,#0x00
+      000B44 8D 82            [24] 1382 	mov	dpl,r5
+      000B46 8E 83            [24] 1383 	mov	dph,r6
+      000B48 8F F0            [24] 1384 	mov	b,r7
+      000B4A 12 18 0C         [24] 1385 	lcall	_write_string
+                                   1386 ;	../UI_Manager/ui.c:395: write_char(CHAR_LVL_1, 12, LINE_1);
+      000B4D 75 2B 0C         [24] 1387 	mov	_write_char_PARM_2,#0x0c
+      000B50 75 2C 01         [24] 1388 	mov	_write_char_PARM_3,#0x01
+      000B53 75 82 40         [24] 1389 	mov	dpl,#0x40
+                                   1390 ;	../UI_Manager/ui.c:396: break;
+      000B56 02 1A 2A         [24] 1391 	ljmp	_write_char
+                                   1392 ;	../UI_Manager/ui.c:397: case FOG_MED:
+      000B59                       1393 00109$:
+                                   1394 ;	../UI_Manager/ui.c:398: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_MEDIUM), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000B59 75 82 01         [24] 1395 	mov	dpl,#0x01
+      000B5C 12 13 C2         [24] 1396 	lcall	_getString
+      000B5F AD 82            [24] 1397 	mov	r5,dpl
+      000B61 AE 83            [24] 1398 	mov	r6,dph
+      000B63 AF F0            [24] 1399 	mov	r7,b
+      000B65 75 21 10         [24] 1400 	mov	_write_string_PARM_2,#0x10
+      000B68 75 22 03         [24] 1401 	mov	_write_string_PARM_3,#0x03
+      000B6B 75 23 01         [24] 1402 	mov	_write_string_PARM_4,#0x01
+      000B6E 75 24 00         [24] 1403 	mov	_write_string_PARM_5,#0x00
+      000B71 8D 82            [24] 1404 	mov	dpl,r5
+      000B73 8E 83            [24] 1405 	mov	dph,r6
+      000B75 8F F0            [24] 1406 	mov	b,r7
+      000B77 12 18 0C         [24] 1407 	lcall	_write_string
+                                   1408 ;	../UI_Manager/ui.c:399: write_char(CHAR_LVL_1, 12, LINE_1);
+      000B7A 75 2B 0C         [24] 1409 	mov	_write_char_PARM_2,#0x0c
+      000B7D 75 2C 01         [24] 1410 	mov	_write_char_PARM_3,#0x01
+      000B80 75 82 40         [24] 1411 	mov	dpl,#0x40
+      000B83 12 1A 2A         [24] 1412 	lcall	_write_char
+                                   1413 ;	../UI_Manager/ui.c:400: write_char(CHAR_LVL_2, 13, LINE_1);
+      000B86 75 2B 0D         [24] 1414 	mov	_write_char_PARM_2,#0x0d
+      000B89 75 2C 01         [24] 1415 	mov	_write_char_PARM_3,#0x01
+      000B8C 75 82 C0         [24] 1416 	mov	dpl,#0xc0
+                                   1417 ;	../UI_Manager/ui.c:401: break;
+                                   1418 ;	../UI_Manager/ui.c:402: default:
+      000B8F 02 1A 2A         [24] 1419 	ljmp	_write_char
+      000B92                       1420 00110$:
+                                   1421 ;	../UI_Manager/ui.c:403: write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_HIGH), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000B92 75 82 00         [24] 1422 	mov	dpl,#0x00
+      000B95 12 13 C2         [24] 1423 	lcall	_getString
+      000B98 AD 82            [24] 1424 	mov	r5,dpl
+      000B9A AE 83            [24] 1425 	mov	r6,dph
+      000B9C AF F0            [24] 1426 	mov	r7,b
+      000B9E 75 21 10         [24] 1427 	mov	_write_string_PARM_2,#0x10
+      000BA1 75 22 03         [24] 1428 	mov	_write_string_PARM_3,#0x03
+      000BA4 75 23 01         [24] 1429 	mov	_write_string_PARM_4,#0x01
+      000BA7 75 24 00         [24] 1430 	mov	_write_string_PARM_5,#0x00
+      000BAA 8D 82            [24] 1431 	mov	dpl,r5
+      000BAC 8E 83            [24] 1432 	mov	dph,r6
+      000BAE 8F F0            [24] 1433 	mov	b,r7
+      000BB0 12 18 0C         [24] 1434 	lcall	_write_string
+                                   1435 ;	../UI_Manager/ui.c:404: write_char(CHAR_LVL_1, 12, LINE_1);
+      000BB3 75 2B 0C         [24] 1436 	mov	_write_char_PARM_2,#0x0c
+      000BB6 75 2C 01         [24] 1437 	mov	_write_char_PARM_3,#0x01
+      000BB9 75 82 40         [24] 1438 	mov	dpl,#0x40
+      000BBC 12 1A 2A         [24] 1439 	lcall	_write_char
+                                   1440 ;	../UI_Manager/ui.c:405: write_char(CHAR_LVL_2, 13, LINE_1);
+      000BBF 75 2B 0D         [24] 1441 	mov	_write_char_PARM_2,#0x0d
+      000BC2 75 2C 01         [24] 1442 	mov	_write_char_PARM_3,#0x01
+      000BC5 75 82 C0         [24] 1443 	mov	dpl,#0xc0
+      000BC8 12 1A 2A         [24] 1444 	lcall	_write_char
+                                   1445 ;	../UI_Manager/ui.c:406: write_char(CHAR_LVL_3, 14, LINE_1);
+      000BCB 75 2B 0E         [24] 1446 	mov	_write_char_PARM_2,#0x0e
+      000BCE 75 2C 01         [24] 1447 	mov	_write_char_PARM_3,#0x01
+      000BD1 75 82 20         [24] 1448 	mov	dpl,#0x20
+                                   1449 ;	../UI_Manager/ui.c:408: }
+                                   1450 ;	../UI_Manager/ui.c:411: }
+      000BD4 02 1A 2A         [24] 1451 	ljmp	_write_char
+                                   1452 ;------------------------------------------------------------
+                                   1453 ;Allocation info for local variables in function 'fogIntervalPage'
+                                   1454 ;------------------------------------------------------------
+                                   1455 ;action                    Allocated to registers r7 
+                                   1456 ;------------------------------------------------------------
+                                   1457 ;	../UI_Manager/ui.c:413: void fogIntervalPage(uint8_t action){
+                                   1458 ;	-----------------------------------------
+                                   1459 ;	 function fogIntervalPage
+                                   1460 ;	-----------------------------------------
+      000BD7                       1461 _fogIntervalPage:
+      000BD7 AF 82            [24] 1462 	mov	r7,dpl
+                                   1463 ;	../UI_Manager/ui.c:415: switch (action)
+      000BD9 BF 02 02         [24] 1464 	cjne	r7,#0x02,00146$
+      000BDC 80 3B            [24] 1465 	sjmp	00105$
+      000BDE                       1466 00146$:
+      000BDE BF 03 02         [24] 1467 	cjne	r7,#0x03,00147$
+      000BE1 80 14            [24] 1468 	sjmp	00102$
+      000BE3                       1469 00147$:
+      000BE3 BF 0A 02         [24] 1470 	cjne	r7,#0x0a,00148$
+      000BE6 80 20            [24] 1471 	sjmp	00104$
+      000BE8                       1472 00148$:
+      000BE8 BF 0C 02         [24] 1473 	cjne	r7,#0x0c,00149$
+      000BEB 80 35            [24] 1474 	sjmp	00106$
+      000BED                       1475 00149$:
+      000BED BF 1F 02         [24] 1476 	cjne	r7,#0x1f,00150$
+      000BF0 80 05            [24] 1477 	sjmp	00102$
+      000BF2                       1478 00150$:
+                                   1479 ;	../UI_Manager/ui.c:418: case BUTTON_UP:
+      000BF2 BF 65 36         [24] 1480 	cjne	r7,#0x65,00107$
+      000BF5 80 11            [24] 1481 	sjmp	00104$
+      000BF7                       1482 00102$:
+                                   1483 ;	../UI_Manager/ui.c:419: set_runtime_data(FOG_INTERVAL_INDEX, INC, NULL);
+      000BF7 75 65 01         [24] 1484 	mov	_set_runtime_data_PARM_2,#0x01
+      000BFA 75 66 00         [24] 1485 	mov	_set_runtime_data_PARM_3,#0x00
+      000BFD 75 82 02         [24] 1486 	mov	dpl,#0x02
+      000C00 12 27 A7         [24] 1487 	lcall	_set_runtime_data
+                                   1488 ;	../UI_Manager/ui.c:420: changed = 0xFF;
+      000C03 75 0A FF         [24] 1489 	mov	_changed,#0xff
+                                   1490 ;	../UI_Manager/ui.c:421: break;
+                                   1491 ;	../UI_Manager/ui.c:423: case BUTTON_DOWN:
+      000C06 80 23            [24] 1492 	sjmp	00107$
+      000C08                       1493 00104$:
+                                   1494 ;	../UI_Manager/ui.c:424: set_runtime_data(FOG_INTERVAL_INDEX, DEC, NULL);
+      000C08 75 65 02         [24] 1495 	mov	_set_runtime_data_PARM_2,#0x02
+      000C0B 75 66 00         [24] 1496 	mov	_set_runtime_data_PARM_3,#0x00
+      000C0E 75 82 02         [24] 1497 	mov	dpl,#0x02
+      000C11 12 27 A7         [24] 1498 	lcall	_set_runtime_data
+                                   1499 ;	../UI_Manager/ui.c:425: changed = 0xFF;  
+      000C14 75 0A FF         [24] 1500 	mov	_changed,#0xff
+                                   1501 ;	../UI_Manager/ui.c:426: break;
+                                   1502 ;	../UI_Manager/ui.c:427: case BUTTON_FUNCTION:
+      000C17 80 12            [24] 1503 	sjmp	00107$
+      000C19                       1504 00105$:
+                                   1505 ;	../UI_Manager/ui.c:428: set_ui_state(INC, NULL);
+      000C19 75 17 00         [24] 1506 	mov	_set_ui_state_PARM_2,#0x00
+      000C1C 75 82 01         [24] 1507 	mov	dpl,#0x01
+                                   1508 ;	../UI_Manager/ui.c:429: return;
+                                   1509 ;	../UI_Manager/ui.c:430: case BUTTON_FUN_UP:
+      000C1F 02 13 20         [24] 1510 	ljmp	_set_ui_state
+      000C22                       1511 00106$:
+                                   1512 ;	../UI_Manager/ui.c:431: set_ui_state(DEC, NULL);
+      000C22 75 17 00         [24] 1513 	mov	_set_ui_state_PARM_2,#0x00
+      000C25 75 82 02         [24] 1514 	mov	dpl,#0x02
+                                   1515 ;	../UI_Manager/ui.c:432: return;
+                                   1516 ;	../UI_Manager/ui.c:433: }
+      000C28 02 13 20         [24] 1517 	ljmp	_set_ui_state
+      000C2B                       1518 00107$:
+                                   1519 ;	../UI_Manager/ui.c:435: if(Changed){
+      000C2B E5 09            [12] 1520 	mov	a,_Changed
+      000C2D 60 36            [24] 1521 	jz	00109$
+                                   1522 ;	../UI_Manager/ui.c:436: Changed = 0x00;
+      000C2F 75 09 00         [24] 1523 	mov	_Changed,#0x00
+                                   1524 ;	../UI_Manager/ui.c:437: changed = 0xFF;
+      000C32 75 0A FF         [24] 1525 	mov	_changed,#0xff
+                                   1526 ;	../UI_Manager/ui.c:439: exe_command(CLEAR_DISPLAY);
+      000C35 90 80 00         [24] 1527 	mov	dptr,#0x8000
+      000C38 12 1A 5F         [24] 1528 	lcall	_exe_command
+                                   1529 ;	../UI_Manager/ui.c:441: write_string("Fog Interval", sizeof("Fog Interval"), 2, LINE_0, NOT_SELECTED);
+      000C3B 75 21 0D         [24] 1530 	mov	_write_string_PARM_2,#0x0d
+      000C3E 75 22 02         [24] 1531 	mov	_write_string_PARM_3,#0x02
+      000C41 75 23 00         [24] 1532 	mov	_write_string_PARM_4,#0x00
+      000C44 75 24 00         [24] 1533 	mov	_write_string_PARM_5,#0x00
+      000C47 90 2E 9D         [24] 1534 	mov	dptr,#___str_15
+      000C4A 75 F0 80         [24] 1535 	mov	b,#0x80
+      000C4D 12 18 0C         [24] 1536 	lcall	_write_string
+                                   1537 ;	../UI_Manager/ui.c:442: write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
+      000C50 75 21 08         [24] 1538 	mov	_write_string_PARM_2,#0x08
+      000C53 75 22 08         [24] 1539 	mov	_write_string_PARM_3,#0x08
+      000C56 75 23 01         [24] 1540 	mov	_write_string_PARM_4,#0x01
+      000C59 75 24 00         [24] 1541 	mov	_write_string_PARM_5,#0x00
+      000C5C 90 2E AA         [24] 1542 	mov	dptr,#___str_16
+      000C5F 75 F0 80         [24] 1543 	mov	b,#0x80
+      000C62 12 18 0C         [24] 1544 	lcall	_write_string
+      000C65                       1545 00109$:
+                                   1546 ;	../UI_Manager/ui.c:446: if(changed){
+      000C65 E5 0A            [12] 1547 	mov	a,_changed
+      000C67 60 1C            [24] 1548 	jz	00112$
+                                   1549 ;	../UI_Manager/ui.c:447: changed = 0x00;
+      000C69 75 0A 00         [24] 1550 	mov	_changed,#0x00
+                                   1551 ;	../UI_Manager/ui.c:449: write_number(get_runtime_data(FOG_INTERVAL_INDEX), 4, LINE_1, NOT_SELECTED);
+      000C6C 75 82 02         [24] 1552 	mov	dpl,#0x02
+      000C6F 12 27 13         [24] 1553 	lcall	_get_runtime_data
+      000C72 AF 82            [24] 1554 	mov	r7,dpl
+      000C74 7E 00            [12] 1555 	mov	r6,#0x00
+      000C76 75 25 04         [24] 1556 	mov	_write_number_PARM_2,#0x04
+      000C79 75 26 01         [24] 1557 	mov	_write_number_PARM_3,#0x01
+                                   1558 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
+      000C7C 8E 27            [24] 1559 	mov	_write_number_PARM_4,r6
+      000C7E 8F 82            [24] 1560 	mov	dpl,r7
+      000C80 8E 83            [24] 1561 	mov	dph,r6
+                                   1562 ;	../UI_Manager/ui.c:454: }
+      000C82 02 18 D0         [24] 1563 	ljmp	_write_number
+      000C85                       1564 00112$:
+      000C85 22               [24] 1565 	ret
+                                   1566 ;------------------------------------------------------------
+                                   1567 ;Allocation info for local variables in function 'fogDurationPage'
+                                   1568 ;------------------------------------------------------------
+                                   1569 ;action                    Allocated to registers r7 
+                                   1570 ;------------------------------------------------------------
+                                   1571 ;	../UI_Manager/ui.c:456: void fogDurationPage(uint8_t action){
+                                   1572 ;	-----------------------------------------
+                                   1573 ;	 function fogDurationPage
+                                   1574 ;	-----------------------------------------
+      000C86                       1575 _fogDurationPage:
+      000C86 AF 82            [24] 1576 	mov	r7,dpl
+                                   1577 ;	../UI_Manager/ui.c:458: switch (action)
+      000C88 BF 02 02         [24] 1578 	cjne	r7,#0x02,00146$
+      000C8B 80 3B            [24] 1579 	sjmp	00105$
+      000C8D                       1580 00146$:
+      000C8D BF 03 02         [24] 1581 	cjne	r7,#0x03,00147$
+      000C90 80 14            [24] 1582 	sjmp	00102$
+      000C92                       1583 00147$:
+      000C92 BF 0A 02         [24] 1584 	cjne	r7,#0x0a,00148$
+      000C95 80 20            [24] 1585 	sjmp	00104$
+      000C97                       1586 00148$:
+      000C97 BF 0C 02         [24] 1587 	cjne	r7,#0x0c,00149$
+      000C9A 80 35            [24] 1588 	sjmp	00106$
+      000C9C                       1589 00149$:
+      000C9C BF 1F 02         [24] 1590 	cjne	r7,#0x1f,00150$
+      000C9F 80 05            [24] 1591 	sjmp	00102$
+      000CA1                       1592 00150$:
+                                   1593 ;	../UI_Manager/ui.c:461: case BUTTON_UP:
+      000CA1 BF 65 36         [24] 1594 	cjne	r7,#0x65,00107$
+      000CA4 80 11            [24] 1595 	sjmp	00104$
+      000CA6                       1596 00102$:
+                                   1597 ;	../UI_Manager/ui.c:462: set_runtime_data(FOG_DURATION_INDEX, INC, NULL);
+      000CA6 75 65 01         [24] 1598 	mov	_set_runtime_data_PARM_2,#0x01
+      000CA9 75 66 00         [24] 1599 	mov	_set_runtime_data_PARM_3,#0x00
+      000CAC 75 82 01         [24] 1600 	mov	dpl,#0x01
+      000CAF 12 27 A7         [24] 1601 	lcall	_set_runtime_data
+                                   1602 ;	../UI_Manager/ui.c:463: changed = 0xFF;
+      000CB2 75 0A FF         [24] 1603 	mov	_changed,#0xff
+                                   1604 ;	../UI_Manager/ui.c:464: break;
+                                   1605 ;	../UI_Manager/ui.c:466: case BUTTON_DOWN:
+      000CB5 80 23            [24] 1606 	sjmp	00107$
+      000CB7                       1607 00104$:
+                                   1608 ;	../UI_Manager/ui.c:467: set_runtime_data(FOG_DURATION_INDEX, DEC, NULL);
+      000CB7 75 65 02         [24] 1609 	mov	_set_runtime_data_PARM_2,#0x02
+      000CBA 75 66 00         [24] 1610 	mov	_set_runtime_data_PARM_3,#0x00
+      000CBD 75 82 01         [24] 1611 	mov	dpl,#0x01
+      000CC0 12 27 A7         [24] 1612 	lcall	_set_runtime_data
+                                   1613 ;	../UI_Manager/ui.c:468: changed = 0xFF;  
+      000CC3 75 0A FF         [24] 1614 	mov	_changed,#0xff
+                                   1615 ;	../UI_Manager/ui.c:469: break;
+                                   1616 ;	../UI_Manager/ui.c:470: case BUTTON_FUNCTION:
+      000CC6 80 12            [24] 1617 	sjmp	00107$
+      000CC8                       1618 00105$:
+                                   1619 ;	../UI_Manager/ui.c:471: set_ui_state(INC, NULL);
+      000CC8 75 17 00         [24] 1620 	mov	_set_ui_state_PARM_2,#0x00
+      000CCB 75 82 01         [24] 1621 	mov	dpl,#0x01
+                                   1622 ;	../UI_Manager/ui.c:472: return;
+                                   1623 ;	../UI_Manager/ui.c:473: case BUTTON_FUN_UP:
+      000CCE 02 13 20         [24] 1624 	ljmp	_set_ui_state
+      000CD1                       1625 00106$:
+                                   1626 ;	../UI_Manager/ui.c:474: set_ui_state(DEC, NULL);
+      000CD1 75 17 00         [24] 1627 	mov	_set_ui_state_PARM_2,#0x00
+      000CD4 75 82 02         [24] 1628 	mov	dpl,#0x02
+                                   1629 ;	../UI_Manager/ui.c:475: return;
+                                   1630 ;	../UI_Manager/ui.c:476: }
+      000CD7 02 13 20         [24] 1631 	ljmp	_set_ui_state
+      000CDA                       1632 00107$:
+                                   1633 ;	../UI_Manager/ui.c:478: if(Changed){
+      000CDA E5 09            [12] 1634 	mov	a,_Changed
+      000CDC 60 36            [24] 1635 	jz	00109$
+                                   1636 ;	../UI_Manager/ui.c:479: Changed = 0x00;
+      000CDE 75 09 00         [24] 1637 	mov	_Changed,#0x00
+                                   1638 ;	../UI_Manager/ui.c:480: changed = 0xFF;
+      000CE1 75 0A FF         [24] 1639 	mov	_changed,#0xff
+                                   1640 ;	../UI_Manager/ui.c:482: exe_command(CLEAR_DISPLAY);
+      000CE4 90 80 00         [24] 1641 	mov	dptr,#0x8000
+      000CE7 12 1A 5F         [24] 1642 	lcall	_exe_command
+                                   1643 ;	../UI_Manager/ui.c:484: write_string("Fog Duration", sizeof("Fog Duration"), 2, LINE_0, NOT_SELECTED);
+      000CEA 75 21 0D         [24] 1644 	mov	_write_string_PARM_2,#0x0d
+      000CED 75 22 02         [24] 1645 	mov	_write_string_PARM_3,#0x02
+      000CF0 75 23 00         [24] 1646 	mov	_write_string_PARM_4,#0x00
+      000CF3 75 24 00         [24] 1647 	mov	_write_string_PARM_5,#0x00
+      000CF6 90 2E B2         [24] 1648 	mov	dptr,#___str_17
+      000CF9 75 F0 80         [24] 1649 	mov	b,#0x80
+      000CFC 12 18 0C         [24] 1650 	lcall	_write_string
+                                   1651 ;	../UI_Manager/ui.c:485: write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
+      000CFF 75 21 08         [24] 1652 	mov	_write_string_PARM_2,#0x08
+      000D02 75 22 08         [24] 1653 	mov	_write_string_PARM_3,#0x08
+      000D05 75 23 01         [24] 1654 	mov	_write_string_PARM_4,#0x01
+      000D08 75 24 00         [24] 1655 	mov	_write_string_PARM_5,#0x00
+      000D0B 90 2E AA         [24] 1656 	mov	dptr,#___str_16
+      000D0E 75 F0 80         [24] 1657 	mov	b,#0x80
+      000D11 12 18 0C         [24] 1658 	lcall	_write_string
+      000D14                       1659 00109$:
+                                   1660 ;	../UI_Manager/ui.c:489: if(changed){
+      000D14 E5 0A            [12] 1661 	mov	a,_changed
+      000D16 60 1C            [24] 1662 	jz	00112$
+                                   1663 ;	../UI_Manager/ui.c:490: changed = 0x00;
+      000D18 75 0A 00         [24] 1664 	mov	_changed,#0x00
+                                   1665 ;	../UI_Manager/ui.c:492: write_number(get_runtime_data(FOG_DURATION_INDEX), 4, LINE_1, NOT_SELECTED);
+      000D1B 75 82 01         [24] 1666 	mov	dpl,#0x01
+      000D1E 12 27 13         [24] 1667 	lcall	_get_runtime_data
+      000D21 AF 82            [24] 1668 	mov	r7,dpl
+      000D23 7E 00            [12] 1669 	mov	r6,#0x00
+      000D25 75 25 04         [24] 1670 	mov	_write_number_PARM_2,#0x04
+      000D28 75 26 01         [24] 1671 	mov	_write_number_PARM_3,#0x01
+                                   1672 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
+      000D2B 8E 27            [24] 1673 	mov	_write_number_PARM_4,r6
+      000D2D 8F 82            [24] 1674 	mov	dpl,r7
+      000D2F 8E 83            [24] 1675 	mov	dph,r6
+                                   1676 ;	../UI_Manager/ui.c:495: }
+      000D31 02 18 D0         [24] 1677 	ljmp	_write_number
+      000D34                       1678 00112$:
+      000D34 22               [24] 1679 	ret
+                                   1680 ;------------------------------------------------------------
+                                   1681 ;Allocation info for local variables in function 'macroPage'
+                                   1682 ;------------------------------------------------------------
+                                   1683 ;action                    Allocated to registers r7 
+                                   1684 ;------------------------------------------------------------
+                                   1685 ;	../UI_Manager/ui.c:497: void macroPage(uint8_t action){
+                                   1686 ;	-----------------------------------------
+                                   1687 ;	 function macroPage
+                                   1688 ;	-----------------------------------------
+      000D35                       1689 _macroPage:
+      000D35 AF 82            [24] 1690 	mov	r7,dpl
+                                   1691 ;	../UI_Manager/ui.c:499: switch (action)
+      000D37 BF 02 02         [24] 1692 	cjne	r7,#0x02,00146$
+      000D3A 80 3B            [24] 1693 	sjmp	00105$
+      000D3C                       1694 00146$:
+      000D3C BF 03 02         [24] 1695 	cjne	r7,#0x03,00147$
+      000D3F 80 14            [24] 1696 	sjmp	00102$
+      000D41                       1697 00147$:
+      000D41 BF 0A 02         [24] 1698 	cjne	r7,#0x0a,00148$
+      000D44 80 20            [24] 1699 	sjmp	00104$
+      000D46                       1700 00148$:
+      000D46 BF 0C 02         [24] 1701 	cjne	r7,#0x0c,00149$
+      000D49 80 35            [24] 1702 	sjmp	00106$
+      000D4B                       1703 00149$:
+      000D4B BF 1F 02         [24] 1704 	cjne	r7,#0x1f,00150$
+      000D4E 80 05            [24] 1705 	sjmp	00102$
+      000D50                       1706 00150$:
+                                   1707 ;	../UI_Manager/ui.c:502: case BUTTON_UP:
+      000D50 BF 65 36         [24] 1708 	cjne	r7,#0x65,00107$
+      000D53 80 11            [24] 1709 	sjmp	00104$
+      000D55                       1710 00102$:
+                                   1711 ;	../UI_Manager/ui.c:503: set_runtime_data(MACRO_INDEX, INC, NULL);
+      000D55 75 65 01         [24] 1712 	mov	_set_runtime_data_PARM_2,#0x01
+      000D58 75 66 00         [24] 1713 	mov	_set_runtime_data_PARM_3,#0x00
+      000D5B 75 82 03         [24] 1714 	mov	dpl,#0x03
+      000D5E 12 27 A7         [24] 1715 	lcall	_set_runtime_data
+                                   1716 ;	../UI_Manager/ui.c:504: changed = 0xFF;
+      000D61 75 0A FF         [24] 1717 	mov	_changed,#0xff
+                                   1718 ;	../UI_Manager/ui.c:505: break;
+                                   1719 ;	../UI_Manager/ui.c:507: case BUTTON_DOWN:
+      000D64 80 23            [24] 1720 	sjmp	00107$
+      000D66                       1721 00104$:
+                                   1722 ;	../UI_Manager/ui.c:508: set_runtime_data(MACRO_INDEX, DEC, NULL);
+      000D66 75 65 02         [24] 1723 	mov	_set_runtime_data_PARM_2,#0x02
+      000D69 75 66 00         [24] 1724 	mov	_set_runtime_data_PARM_3,#0x00
+      000D6C 75 82 03         [24] 1725 	mov	dpl,#0x03
+      000D6F 12 27 A7         [24] 1726 	lcall	_set_runtime_data
+                                   1727 ;	../UI_Manager/ui.c:509: changed = 0xFF;  
+      000D72 75 0A FF         [24] 1728 	mov	_changed,#0xff
+                                   1729 ;	../UI_Manager/ui.c:510: break;
+                                   1730 ;	../UI_Manager/ui.c:511: case BUTTON_FUNCTION:
+      000D75 80 12            [24] 1731 	sjmp	00107$
+      000D77                       1732 00105$:
+                                   1733 ;	../UI_Manager/ui.c:512: set_ui_state(INC, NULL);
+      000D77 75 17 00         [24] 1734 	mov	_set_ui_state_PARM_2,#0x00
+      000D7A 75 82 01         [24] 1735 	mov	dpl,#0x01
+                                   1736 ;	../UI_Manager/ui.c:513: return;
+                                   1737 ;	../UI_Manager/ui.c:514: case BUTTON_FUN_UP:
+      000D7D 02 13 20         [24] 1738 	ljmp	_set_ui_state
+      000D80                       1739 00106$:
+                                   1740 ;	../UI_Manager/ui.c:515: set_ui_state(DEC, NULL);
+      000D80 75 17 00         [24] 1741 	mov	_set_ui_state_PARM_2,#0x00
+      000D83 75 82 02         [24] 1742 	mov	dpl,#0x02
+                                   1743 ;	../UI_Manager/ui.c:516: return;
+                                   1744 ;	../UI_Manager/ui.c:517: }
+      000D86 02 13 20         [24] 1745 	ljmp	_set_ui_state
+      000D89                       1746 00107$:
+                                   1747 ;	../UI_Manager/ui.c:519: if(Changed){
+      000D89 E5 09            [12] 1748 	mov	a,_Changed
+      000D8B 60 21            [24] 1749 	jz	00109$
+                                   1750 ;	../UI_Manager/ui.c:520: Changed = 0x00;
+      000D8D 75 09 00         [24] 1751 	mov	_Changed,#0x00
+                                   1752 ;	../UI_Manager/ui.c:521: changed = 0xFF;
+      000D90 75 0A FF         [24] 1753 	mov	_changed,#0xff
+                                   1754 ;	../UI_Manager/ui.c:523: exe_command(CLEAR_DISPLAY);
+      000D93 90 80 00         [24] 1755 	mov	dptr,#0x8000
+      000D96 12 1A 5F         [24] 1756 	lcall	_exe_command
+                                   1757 ;	../UI_Manager/ui.c:525: write_string("Macros", sizeof("Macros"), 6, LINE_0, NOT_SELECTED);
+      000D99 75 21 07         [24] 1758 	mov	_write_string_PARM_2,#0x07
+      000D9C 75 22 06         [24] 1759 	mov	_write_string_PARM_3,#0x06
+      000D9F 75 23 00         [24] 1760 	mov	_write_string_PARM_4,#0x00
+      000DA2 75 24 00         [24] 1761 	mov	_write_string_PARM_5,#0x00
+      000DA5 90 2E BF         [24] 1762 	mov	dptr,#___str_18
+      000DA8 75 F0 80         [24] 1763 	mov	b,#0x80
+      000DAB 12 18 0C         [24] 1764 	lcall	_write_string
+      000DAE                       1765 00109$:
+                                   1766 ;	../UI_Manager/ui.c:529: if(changed){
+      000DAE E5 0A            [12] 1767 	mov	a,_changed
+      000DB0 60 2E            [24] 1768 	jz	00112$
+                                   1769 ;	../UI_Manager/ui.c:530: changed = 0x00;
+      000DB2 75 0A 00         [24] 1770 	mov	_changed,#0x00
+                                   1771 ;	../UI_Manager/ui.c:532: write_string(getString(get_runtime_data(MACRO_INDEX) + MACRO_STRING_OFFSET), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000DB5 75 82 03         [24] 1772 	mov	dpl,#0x03
+      000DB8 12 27 13         [24] 1773 	lcall	_get_runtime_data
+      000DBB AF 82            [24] 1774 	mov	r7,dpl
+      000DBD 74 14            [12] 1775 	mov	a,#0x14
+      000DBF 2F               [12] 1776 	add	a,r7
+      000DC0 F5 82            [12] 1777 	mov	dpl,a
+      000DC2 12 13 C2         [24] 1778 	lcall	_getString
+      000DC5 AD 82            [24] 1779 	mov	r5,dpl
+      000DC7 AE 83            [24] 1780 	mov	r6,dph
+      000DC9 AF F0            [24] 1781 	mov	r7,b
+      000DCB 75 21 10         [24] 1782 	mov	_write_string_PARM_2,#0x10
+      000DCE 75 22 03         [24] 1783 	mov	_write_string_PARM_3,#0x03
+      000DD1 75 23 01         [24] 1784 	mov	_write_string_PARM_4,#0x01
+      000DD4 75 24 00         [24] 1785 	mov	_write_string_PARM_5,#0x00
+      000DD7 8D 82            [24] 1786 	mov	dpl,r5
+      000DD9 8E 83            [24] 1787 	mov	dph,r6
+      000DDB 8F F0            [24] 1788 	mov	b,r7
+                                   1789 ;	../UI_Manager/ui.c:535: }
+      000DDD 02 18 0C         [24] 1790 	ljmp	_write_string
+      000DE0                       1791 00112$:
+      000DE0 22               [24] 1792 	ret
+                                   1793 ;------------------------------------------------------------
+                                   1794 ;Allocation info for local variables in function 'macroSpeedPage'
+                                   1795 ;------------------------------------------------------------
+                                   1796 ;action                    Allocated to registers r7 
+                                   1797 ;------------------------------------------------------------
+                                   1798 ;	../UI_Manager/ui.c:537: void macroSpeedPage(uint8_t action){
+                                   1799 ;	-----------------------------------------
+                                   1800 ;	 function macroSpeedPage
+                                   1801 ;	-----------------------------------------
+      000DE1                       1802 _macroSpeedPage:
+      000DE1 AF 82            [24] 1803 	mov	r7,dpl
+                                   1804 ;	../UI_Manager/ui.c:539: switch (action)
+      000DE3 BF 02 02         [24] 1805 	cjne	r7,#0x02,00153$
+      000DE6 80 3B            [24] 1806 	sjmp	00105$
+      000DE8                       1807 00153$:
+      000DE8 BF 03 02         [24] 1808 	cjne	r7,#0x03,00154$
+      000DEB 80 14            [24] 1809 	sjmp	00102$
+      000DED                       1810 00154$:
+      000DED BF 0A 02         [24] 1811 	cjne	r7,#0x0a,00155$
+      000DF0 80 20            [24] 1812 	sjmp	00104$
+      000DF2                       1813 00155$:
+      000DF2 BF 0C 02         [24] 1814 	cjne	r7,#0x0c,00156$
+      000DF5 80 35            [24] 1815 	sjmp	00106$
+      000DF7                       1816 00156$:
+      000DF7 BF 1F 02         [24] 1817 	cjne	r7,#0x1f,00157$
+      000DFA 80 05            [24] 1818 	sjmp	00102$
+      000DFC                       1819 00157$:
+                                   1820 ;	../UI_Manager/ui.c:542: case BUTTON_UP:
+      000DFC BF 65 36         [24] 1821 	cjne	r7,#0x65,00107$
+      000DFF 80 11            [24] 1822 	sjmp	00104$
+      000E01                       1823 00102$:
+                                   1824 ;	../UI_Manager/ui.c:543: set_runtime_data(MACRO_SPEED_INDEX, INC, NULL);
+      000E01 75 65 01         [24] 1825 	mov	_set_runtime_data_PARM_2,#0x01
+      000E04 75 66 00         [24] 1826 	mov	_set_runtime_data_PARM_3,#0x00
+      000E07 75 82 04         [24] 1827 	mov	dpl,#0x04
+      000E0A 12 27 A7         [24] 1828 	lcall	_set_runtime_data
+                                   1829 ;	../UI_Manager/ui.c:544: changed = 0xFF;
+      000E0D 75 0A FF         [24] 1830 	mov	_changed,#0xff
+                                   1831 ;	../UI_Manager/ui.c:545: break;
+                                   1832 ;	../UI_Manager/ui.c:547: case BUTTON_DOWN:
+      000E10 80 23            [24] 1833 	sjmp	00107$
+      000E12                       1834 00104$:
+                                   1835 ;	../UI_Manager/ui.c:548: set_runtime_data(MACRO_SPEED_INDEX, DEC, NULL);
+      000E12 75 65 02         [24] 1836 	mov	_set_runtime_data_PARM_2,#0x02
+      000E15 75 66 00         [24] 1837 	mov	_set_runtime_data_PARM_3,#0x00
+      000E18 75 82 04         [24] 1838 	mov	dpl,#0x04
+      000E1B 12 27 A7         [24] 1839 	lcall	_set_runtime_data
+                                   1840 ;	../UI_Manager/ui.c:549: changed = 0xFF;  
+      000E1E 75 0A FF         [24] 1841 	mov	_changed,#0xff
+                                   1842 ;	../UI_Manager/ui.c:550: break;
+                                   1843 ;	../UI_Manager/ui.c:551: case BUTTON_FUNCTION:
+      000E21 80 12            [24] 1844 	sjmp	00107$
+      000E23                       1845 00105$:
+                                   1846 ;	../UI_Manager/ui.c:552: set_ui_state(INC, NULL);
+      000E23 75 17 00         [24] 1847 	mov	_set_ui_state_PARM_2,#0x00
+      000E26 75 82 01         [24] 1848 	mov	dpl,#0x01
+                                   1849 ;	../UI_Manager/ui.c:553: return;
+      000E29 02 13 20         [24] 1850 	ljmp	_set_ui_state
+                                   1851 ;	../UI_Manager/ui.c:554: case BUTTON_FUN_UP:
+      000E2C                       1852 00106$:
+                                   1853 ;	../UI_Manager/ui.c:555: set_ui_state(DEC, NULL);
+      000E2C 75 17 00         [24] 1854 	mov	_set_ui_state_PARM_2,#0x00
+      000E2F 75 82 02         [24] 1855 	mov	dpl,#0x02
+                                   1856 ;	../UI_Manager/ui.c:556: return;
+      000E32 02 13 20         [24] 1857 	ljmp	_set_ui_state
+                                   1858 ;	../UI_Manager/ui.c:557: }
+      000E35                       1859 00107$:
+                                   1860 ;	../UI_Manager/ui.c:559: if(Changed){
+      000E35 E5 09            [12] 1861 	mov	a,_Changed
+      000E37 60 21            [24] 1862 	jz	00109$
+                                   1863 ;	../UI_Manager/ui.c:560: Changed = 0x00;
+      000E39 75 09 00         [24] 1864 	mov	_Changed,#0x00
+                                   1865 ;	../UI_Manager/ui.c:561: changed = 0xFF;
+      000E3C 75 0A FF         [24] 1866 	mov	_changed,#0xff
+                                   1867 ;	../UI_Manager/ui.c:563: exe_command(CLEAR_DISPLAY);
+      000E3F 90 80 00         [24] 1868 	mov	dptr,#0x8000
+      000E42 12 1A 5F         [24] 1869 	lcall	_exe_command
+                                   1870 ;	../UI_Manager/ui.c:565: write_string("Macro Speed", sizeof("Macro Speed"), 3, LINE_0, NOT_SELECTED);
+      000E45 75 21 0C         [24] 1871 	mov	_write_string_PARM_2,#0x0c
+      000E48 75 22 03         [24] 1872 	mov	_write_string_PARM_3,#0x03
+      000E4B 75 23 00         [24] 1873 	mov	_write_string_PARM_4,#0x00
+      000E4E 75 24 00         [24] 1874 	mov	_write_string_PARM_5,#0x00
+      000E51 90 2E C6         [24] 1875 	mov	dptr,#___str_19
+      000E54 75 F0 80         [24] 1876 	mov	b,#0x80
+      000E57 12 18 0C         [24] 1877 	lcall	_write_string
+      000E5A                       1878 00109$:
+                                   1879 ;	../UI_Manager/ui.c:569: if(changed){
+      000E5A E5 0A            [12] 1880 	mov	a,_changed
+      000E5C 60 4F            [24] 1881 	jz	00115$
+                                   1882 ;	../UI_Manager/ui.c:570: changed = 0x00;
+      000E5E 75 0A 00         [24] 1883 	mov	_changed,#0x00
+                                   1884 ;	../UI_Manager/ui.c:572: if(get_runtime_data(MACRO_SPEED_INDEX) == 0){
+      000E61 75 82 04         [24] 1885 	mov	dpl,#0x04
+      000E64 12 27 13         [24] 1886 	lcall	_get_runtime_data
+      000E67 E5 82            [12] 1887 	mov	a,dpl
+                                   1888 ;	../UI_Manager/ui.c:573: write_string("Off", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000E69 70 14            [24] 1889 	jnz	00111$
+      000E6B 75 21 10         [24] 1890 	mov	_write_string_PARM_2,#0x10
+      000E6E 75 22 03         [24] 1891 	mov	_write_string_PARM_3,#0x03
+      000E71 75 23 01         [24] 1892 	mov	_write_string_PARM_4,#0x01
+      000E74 F5 24            [12] 1893 	mov	_write_string_PARM_5,a
+      000E76 90 2E D2         [24] 1894 	mov	dptr,#___str_20
+      000E79 75 F0 80         [24] 1895 	mov	b,#0x80
+      000E7C 02 18 0C         [24] 1896 	ljmp	_write_string
+      000E7F                       1897 00111$:
+                                   1898 ;	../UI_Manager/ui.c:575: write_string("", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+      000E7F 75 21 10         [24] 1899 	mov	_write_string_PARM_2,#0x10
+      000E82 75 22 03         [24] 1900 	mov	_write_string_PARM_3,#0x03
+      000E85 75 23 01         [24] 1901 	mov	_write_string_PARM_4,#0x01
+      000E88 75 24 00         [24] 1902 	mov	_write_string_PARM_5,#0x00
+      000E8B 90 2E D6         [24] 1903 	mov	dptr,#___str_21
+      000E8E 75 F0 80         [24] 1904 	mov	b,#0x80
+      000E91 12 18 0C         [24] 1905 	lcall	_write_string
+                                   1906 ;	../UI_Manager/ui.c:576: write_number(get_runtime_data(MACRO_SPEED_INDEX), 6, LINE_1, NOT_SELECTED);
+      000E94 75 82 04         [24] 1907 	mov	dpl,#0x04
+      000E97 12 27 13         [24] 1908 	lcall	_get_runtime_data
+      000E9A AF 82            [24] 1909 	mov	r7,dpl
+      000E9C 7E 00            [12] 1910 	mov	r6,#0x00
+      000E9E 75 25 06         [24] 1911 	mov	_write_number_PARM_2,#0x06
+      000EA1 75 26 01         [24] 1912 	mov	_write_number_PARM_3,#0x01
+                                   1913 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
+      000EA4 8E 27            [24] 1914 	mov	_write_number_PARM_4,r6
+      000EA6 8F 82            [24] 1915 	mov	dpl,r7
+      000EA8 8E 83            [24] 1916 	mov	dph,r6
+                                   1917 ;	../UI_Manager/ui.c:580: }
+      000EAA 02 18 D0         [24] 1918 	ljmp	_write_number
+      000EAD                       1919 00115$:
+      000EAD 22               [24] 1920 	ret
+                                   1921 ;------------------------------------------------------------
+                                   1922 ;Allocation info for local variables in function 'colorPage'
+                                   1923 ;------------------------------------------------------------
+                                   1924 ;action                    Allocated to registers r7 
+                                   1925 ;index                     Allocated to registers r6 
+                                   1926 ;------------------------------------------------------------
+                                   1927 ;	../UI_Manager/ui.c:582: void colorPage(uint8_t action){
+                                   1928 ;	-----------------------------------------
+                                   1929 ;	 function colorPage
+                                   1930 ;	-----------------------------------------
+      000EAE                       1931 _colorPage:
+      000EAE AF 82            [24] 1932 	mov	r7,dpl
+                                   1933 ;	../UI_Manager/ui.c:583: uint8_t index = 0;
+      000EB0 7E 00            [12] 1934 	mov	r6,#0x00
+                                   1935 ;	../UI_Manager/ui.c:585: switch (State)
+      000EB2 AD 08            [24] 1936 	mov	r5,_State
+      000EB4 BD 06 02         [24] 1937 	cjne	r5,#0x06,00174$
+      000EB7 80 0F            [24] 1938 	sjmp	00101$
+      000EB9                       1939 00174$:
+      000EB9 BD 07 02         [24] 1940 	cjne	r5,#0x07,00175$
+      000EBC 80 12            [24] 1941 	sjmp	00103$
+      000EBE                       1942 00175$:
+      000EBE BD 08 02         [24] 1943 	cjne	r5,#0x08,00176$
+      000EC1 80 09            [24] 1944 	sjmp	00102$
+      000EC3                       1945 00176$:
+                                   1946 ;	../UI_Manager/ui.c:587: case MANUAL_RED_STATE:
+      000EC3 BD 09 10         [24] 1947 	cjne	r5,#0x09,00105$
+      000EC6 80 0C            [24] 1948 	sjmp	00104$
+      000EC8                       1949 00101$:
+                                   1950 ;	../UI_Manager/ui.c:588: index = RED_INDEX;
+      000EC8 7E 05            [12] 1951 	mov	r6,#0x05
+                                   1952 ;	../UI_Manager/ui.c:589: break;
+                                   1953 ;	../UI_Manager/ui.c:590: case MANUAL_GREEN_STATE:
+      000ECA 80 0A            [24] 1954 	sjmp	00105$
+      000ECC                       1955 00102$:
+                                   1956 ;	../UI_Manager/ui.c:591: index = GREEN_INDEX;
+      000ECC 7E 06            [12] 1957 	mov	r6,#0x06
+                                   1958 ;	../UI_Manager/ui.c:592: break;
+                                   1959 ;	../UI_Manager/ui.c:593: case MANUAL_BLUE_STATE:
+      000ECE 80 06            [24] 1960 	sjmp	00105$
+      000ED0                       1961 00103$:
+                                   1962 ;	../UI_Manager/ui.c:594: index = BLUE_INDEX;
+      000ED0 7E 07            [12] 1963 	mov	r6,#0x07
+                                   1964 ;	../UI_Manager/ui.c:595: break;
+                                   1965 ;	../UI_Manager/ui.c:596: case MANUAL_STROBE_STATE:
+      000ED2 80 02            [24] 1966 	sjmp	00105$
+      000ED4                       1967 00104$:
+                                   1968 ;	../UI_Manager/ui.c:597: index = STROBE_INDEX;
+      000ED4 7E 08            [12] 1969 	mov	r6,#0x08
+                                   1970 ;	../UI_Manager/ui.c:599: }
+      000ED6                       1971 00105$:
+                                   1972 ;	../UI_Manager/ui.c:601: switch (action)
+      000ED6 BF 02 02         [24] 1973 	cjne	r7,#0x02,00178$
+      000ED9 80 41            [24] 1974 	sjmp	00110$
+      000EDB                       1975 00178$:
+      000EDB BF 03 02         [24] 1976 	cjne	r7,#0x03,00179$
+      000EDE 80 14            [24] 1977 	sjmp	00107$
+      000EE0                       1978 00179$:
+      000EE0 BF 0A 02         [24] 1979 	cjne	r7,#0x0a,00180$
+      000EE3 80 23            [24] 1980 	sjmp	00109$
+      000EE5                       1981 00180$:
+      000EE5 BF 0C 02         [24] 1982 	cjne	r7,#0x0c,00181$
+      000EE8 80 3B            [24] 1983 	sjmp	00111$
+      000EEA                       1984 00181$:
+      000EEA BF 1F 02         [24] 1985 	cjne	r7,#0x1f,00182$
+      000EED 80 05            [24] 1986 	sjmp	00107$
+      000EEF                       1987 00182$:
+                                   1988 ;	../UI_Manager/ui.c:604: case BUTTON_UP:
+      000EEF BF 65 3C         [24] 1989 	cjne	r7,#0x65,00112$
+      000EF2 80 14            [24] 1990 	sjmp	00109$
+      000EF4                       1991 00107$:
+                                   1992 ;	../UI_Manager/ui.c:605: set_runtime_data(index, INC, NULL);
+      000EF4 75 65 01         [24] 1993 	mov	_set_runtime_data_PARM_2,#0x01
+      000EF7 75 66 00         [24] 1994 	mov	_set_runtime_data_PARM_3,#0x00
+      000EFA 8E 82            [24] 1995 	mov	dpl,r6
+      000EFC C0 06            [24] 1996 	push	ar6
+      000EFE 12 27 A7         [24] 1997 	lcall	_set_runtime_data
+      000F01 D0 06            [24] 1998 	pop	ar6
+                                   1999 ;	../UI_Manager/ui.c:606: changed = 0xFF;
+      000F03 75 0A FF         [24] 2000 	mov	_changed,#0xff
+                                   2001 ;	../UI_Manager/ui.c:607: break;
+                                   2002 ;	../UI_Manager/ui.c:609: case BUTTON_DOWN:
+      000F06 80 26            [24] 2003 	sjmp	00112$
+      000F08                       2004 00109$:
+                                   2005 ;	../UI_Manager/ui.c:610: set_runtime_data(index, DEC, NULL);
+      000F08 75 65 02         [24] 2006 	mov	_set_runtime_data_PARM_2,#0x02
+      000F0B 75 66 00         [24] 2007 	mov	_set_runtime_data_PARM_3,#0x00
+      000F0E 8E 82            [24] 2008 	mov	dpl,r6
+      000F10 C0 06            [24] 2009 	push	ar6
+      000F12 12 27 A7         [24] 2010 	lcall	_set_runtime_data
+      000F15 D0 06            [24] 2011 	pop	ar6
+                                   2012 ;	../UI_Manager/ui.c:611: changed = 0xFF;  
+      000F17 75 0A FF         [24] 2013 	mov	_changed,#0xff
+                                   2014 ;	../UI_Manager/ui.c:612: break;
+                                   2015 ;	../UI_Manager/ui.c:613: case BUTTON_FUNCTION:
+      000F1A 80 12            [24] 2016 	sjmp	00112$
+      000F1C                       2017 00110$:
+                                   2018 ;	../UI_Manager/ui.c:614: set_ui_state(INC, NULL);
+      000F1C 75 17 00         [24] 2019 	mov	_set_ui_state_PARM_2,#0x00
+      000F1F 75 82 01         [24] 2020 	mov	dpl,#0x01
+                                   2021 ;	../UI_Manager/ui.c:615: return;
+      000F22 02 13 20         [24] 2022 	ljmp	_set_ui_state
+                                   2023 ;	../UI_Manager/ui.c:616: case BUTTON_FUN_UP:
+      000F25                       2024 00111$:
+                                   2025 ;	../UI_Manager/ui.c:617: set_ui_state(DEC, NULL);
+      000F25 75 17 00         [24] 2026 	mov	_set_ui_state_PARM_2,#0x00
+      000F28 75 82 02         [24] 2027 	mov	dpl,#0x02
+                                   2028 ;	../UI_Manager/ui.c:618: return;
+      000F2B 02 13 20         [24] 2029 	ljmp	_set_ui_state
+                                   2030 ;	../UI_Manager/ui.c:619: }
+      000F2E                       2031 00112$:
+                                   2032 ;	../UI_Manager/ui.c:621: if(Changed){
+      000F2E E5 09            [12] 2033 	mov	a,_Changed
+      000F30 60 35            [24] 2034 	jz	00114$
+                                   2035 ;	../UI_Manager/ui.c:622: Changed = 0x00;
+      000F32 75 09 00         [24] 2036 	mov	_Changed,#0x00
+                                   2037 ;	../UI_Manager/ui.c:623: changed = 0xFF;
+      000F35 75 0A FF         [24] 2038 	mov	_changed,#0xff
+                                   2039 ;	../UI_Manager/ui.c:625: exe_command(CLEAR_DISPLAY);
+      000F38 90 80 00         [24] 2040 	mov	dptr,#0x8000
+      000F3B C0 06            [24] 2041 	push	ar6
+      000F3D 12 1A 5F         [24] 2042 	lcall	_exe_command
+                                   2043 ;	../UI_Manager/ui.c:627: write_string(getString(COLOR_STRING_OFFSET + State), LINE_LENGTH, 3, LINE_0, NOT_SELECTED);
+      000F40 AF 08            [24] 2044 	mov	r7,_State
+      000F42 74 C8            [12] 2045 	mov	a,#0xc8
+      000F44 2F               [12] 2046 	add	a,r7
+      000F45 F5 82            [12] 2047 	mov	dpl,a
+      000F47 12 13 C2         [24] 2048 	lcall	_getString
+      000F4A AC 82            [24] 2049 	mov	r4,dpl
+      000F4C AD 83            [24] 2050 	mov	r5,dph
+      000F4E AF F0            [24] 2051 	mov	r7,b
+      000F50 75 21 10         [24] 2052 	mov	_write_string_PARM_2,#0x10
+      000F53 75 22 03         [24] 2053 	mov	_write_string_PARM_3,#0x03
+      000F56 75 23 00         [24] 2054 	mov	_write_string_PARM_4,#0x00
+      000F59 75 24 00         [24] 2055 	mov	_write_string_PARM_5,#0x00
+      000F5C 8C 82            [24] 2056 	mov	dpl,r4
+      000F5E 8D 83            [24] 2057 	mov	dph,r5
+      000F60 8F F0            [24] 2058 	mov	b,r7
+      000F62 12 18 0C         [24] 2059 	lcall	_write_string
+      000F65 D0 06            [24] 2060 	pop	ar6
+      000F67                       2061 00114$:
+                                   2062 ;	../UI_Manager/ui.c:631: if(changed){
+      000F67 E5 0A            [12] 2063 	mov	a,_changed
+      000F69 60 58            [24] 2064 	jz	00120$
+                                   2065 ;	../UI_Manager/ui.c:632: changed = 0x00;
+      000F6B 75 0A 00         [24] 2066 	mov	_changed,#0x00
+                                   2067 ;	../UI_Manager/ui.c:634: if(get_runtime_data(get_runtime_data(index)) == 0){
+      000F6E 8E 82            [24] 2068 	mov	dpl,r6
+      000F70 C0 06            [24] 2069 	push	ar6
+      000F72 12 27 13         [24] 2070 	lcall	_get_runtime_data
+      000F75 12 27 13         [24] 2071 	lcall	_get_runtime_data
+      000F78 E5 82            [12] 2072 	mov	a,dpl
+      000F7A D0 06            [24] 2073 	pop	ar6
+                                   2074 ;	../UI_Manager/ui.c:635: write_string("Off", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
+      000F7C 70 14            [24] 2075 	jnz	00116$
+      000F7E 75 21 10         [24] 2076 	mov	_write_string_PARM_2,#0x10
+      000F81 75 22 06         [24] 2077 	mov	_write_string_PARM_3,#0x06
+      000F84 75 23 01         [24] 2078 	mov	_write_string_PARM_4,#0x01
+      000F87 F5 24            [12] 2079 	mov	_write_string_PARM_5,a
+      000F89 90 2E D2         [24] 2080 	mov	dptr,#___str_20
+      000F8C 75 F0 80         [24] 2081 	mov	b,#0x80
+      000F8F 02 18 0C         [24] 2082 	ljmp	_write_string
+      000F92                       2083 00116$:
+                                   2084 ;	../UI_Manager/ui.c:637: write_string("", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
+      000F92 75 21 10         [24] 2085 	mov	_write_string_PARM_2,#0x10
+      000F95 75 22 00         [24] 2086 	mov	_write_string_PARM_3,#0x00
+      000F98 75 23 01         [24] 2087 	mov	_write_string_PARM_4,#0x01
+      000F9B 75 24 00         [24] 2088 	mov	_write_string_PARM_5,#0x00
+      000F9E 90 2E D6         [24] 2089 	mov	dptr,#___str_21
+      000FA1 75 F0 80         [24] 2090 	mov	b,#0x80
+      000FA4 C0 06            [24] 2091 	push	ar6
+      000FA6 12 18 0C         [24] 2092 	lcall	_write_string
+      000FA9 D0 06            [24] 2093 	pop	ar6
+                                   2094 ;	../UI_Manager/ui.c:638: write_number(get_runtime_data(index), 6, LINE_1, NOT_SELECTED);
+      000FAB 8E 82            [24] 2095 	mov	dpl,r6
+      000FAD 12 27 13         [24] 2096 	lcall	_get_runtime_data
+      000FB0 AF 82            [24] 2097 	mov	r7,dpl
+      000FB2 7E 00            [12] 2098 	mov	r6,#0x00
+      000FB4 75 25 06         [24] 2099 	mov	_write_number_PARM_2,#0x06
+      000FB7 75 26 01         [24] 2100 	mov	_write_number_PARM_3,#0x01
+                                   2101 ;	1-genFromRTrack replaced	mov	_write_number_PARM_4,#0x00
+      000FBA 8E 27            [24] 2102 	mov	_write_number_PARM_4,r6
+      000FBC 8F 82            [24] 2103 	mov	dpl,r7
+      000FBE 8E 83            [24] 2104 	mov	dph,r6
+                                   2105 ;	../UI_Manager/ui.c:641: }
+      000FC0 02 18 D0         [24] 2106 	ljmp	_write_number
+      000FC3                       2107 00120$:
+      000FC3 22               [24] 2108 	ret
+                                   2109 ;------------------------------------------------------------
+                                   2110 ;Allocation info for local variables in function 'remotePage'
+                                   2111 ;------------------------------------------------------------
+                                   2112 ;action                    Allocated to registers r7 
+                                   2113 ;remoteNumber              Allocated to registers r6 
+                                   2114 ;index                     Allocated to registers r5 
+                                   2115 ;------------------------------------------------------------
+                                   2116 ;	../UI_Manager/ui.c:643: void remotePage(uint8_t action){
+                                   2117 ;	-----------------------------------------
+                                   2118 ;	 function remotePage
+                                   2119 ;	-----------------------------------------
+      000FC4                       2120 _remotePage:
+      000FC4 AF 82            [24] 2121 	mov	r7,dpl
+                                   2122 ;	../UI_Manager/ui.c:644: uint8_t remoteNumber = MANUAL_REMOTE_ACTION_6_STATE - State + 4;
+      000FC6 AE 08            [24] 2123 	mov	r6,_State
+      000FC8 74 10            [12] 2124 	mov	a,#0x10
+      000FCA C3               [12] 2125 	clr	c
+      000FCB 9E               [12] 2126 	subb	a,r6
+      000FCC FE               [12] 2127 	mov	r6,a
+                                   2128 ;	../UI_Manager/ui.c:645: uint8_t index = 0;
+      000FCD 7D 00            [12] 2129 	mov	r5,#0x00
+                                   2130 ;	../UI_Manager/ui.c:647: switch (State)
+      000FCF AC 08            [24] 2131 	mov	r4,_State
+      000FD1 BC 0A 02         [24] 2132 	cjne	r4,#0x0a,00168$
+      000FD4 80 0A            [24] 2133 	sjmp	00101$
+      000FD6                       2134 00168$:
+      000FD6 BC 0B 02         [24] 2135 	cjne	r4,#0x0b,00169$
+      000FD9 80 09            [24] 2136 	sjmp	00102$
+      000FDB                       2137 00169$:
+                                   2138 ;	../UI_Manager/ui.c:649: case MANUAL_REMOTE_ACTION_4_STATE:
+      000FDB BC 0C 0C         [24] 2139 	cjne	r4,#0x0c,00104$
+      000FDE 80 08            [24] 2140 	sjmp	00103$
+      000FE0                       2141 00101$:
+                                   2142 ;	../UI_Manager/ui.c:650: index = R4_INDEX;
+      000FE0 7D 09            [12] 2143 	mov	r5,#0x09
+                                   2144 ;	../UI_Manager/ui.c:651: break;
+                                   2145 ;	../UI_Manager/ui.c:652: case MANUAL_REMOTE_ACTION_5_STATE:
+      000FE2 80 06            [24] 2146 	sjmp	00104$
+      000FE4                       2147 00102$:
+                                   2148 ;	../UI_Manager/ui.c:653: index = R5_INDEX;
+      000FE4 7D 0A            [12] 2149 	mov	r5,#0x0a
+                                   2150 ;	../UI_Manager/ui.c:654: break;
+                                   2151 ;	../UI_Manager/ui.c:655: case MANUAL_REMOTE_ACTION_6_STATE:
+      000FE6 80 02            [24] 2152 	sjmp	00104$
+      000FE8                       2153 00103$:
+                                   2154 ;	../UI_Manager/ui.c:656: index = R6_INDEX;
+      000FE8 7D 0B            [12] 2155 	mov	r5,#0x0b
+                                   2156 ;	../UI_Manager/ui.c:658: }
+      000FEA                       2157 00104$:
+                                   2158 ;	../UI_Manager/ui.c:660: switch (action)
+      000FEA BF 02 02         [24] 2159 	cjne	r7,#0x02,00171$
+      000FED 80 3F            [24] 2160 	sjmp	00107$
+      000FEF                       2161 00171$:
+      000FEF BF 03 02         [24] 2162 	cjne	r7,#0x03,00172$
+      000FF2 80 0A            [24] 2163 	sjmp	00105$
+      000FF4                       2164 00172$:
+      000FF4 BF 0A 02         [24] 2165 	cjne	r7,#0x0a,00173$
+      000FF7 80 1D            [24] 2166 	sjmp	00106$
+      000FF9                       2167 00173$:
+                                   2168 ;	../UI_Manager/ui.c:662: case BUTTON_UP:
+      000FF9 BF 0C 44         [24] 2169 	cjne	r7,#0x0c,00109$
+      000FFC 80 39            [24] 2170 	sjmp	00108$
+      000FFE                       2171 00105$:
+                                   2172 ;	../UI_Manager/ui.c:663: set_runtime_data(index, INC, NULL);
+      000FFE 75 65 01         [24] 2173 	mov	_set_runtime_data_PARM_2,#0x01
+      001001 75 66 00         [24] 2174 	mov	_set_runtime_data_PARM_3,#0x00
+      001004 8D 82            [24] 2175 	mov	dpl,r5
+      001006 C0 06            [24] 2176 	push	ar6
+      001008 C0 05            [24] 2177 	push	ar5
+      00100A 12 27 A7         [24] 2178 	lcall	_set_runtime_data
+      00100D D0 05            [24] 2179 	pop	ar5
+      00100F D0 06            [24] 2180 	pop	ar6
+                                   2181 ;	../UI_Manager/ui.c:664: changed = 0xFF;
+      001011 75 0A FF         [24] 2182 	mov	_changed,#0xff
+                                   2183 ;	../UI_Manager/ui.c:665: break;
+                                   2184 ;	../UI_Manager/ui.c:666: case BUTTON_DOWN:
+      001014 80 2A            [24] 2185 	sjmp	00109$
+      001016                       2186 00106$:
+                                   2187 ;	../UI_Manager/ui.c:667: set_runtime_data(index, DEC, NULL);
+      001016 75 65 02         [24] 2188 	mov	_set_runtime_data_PARM_2,#0x02
+      001019 75 66 00         [24] 2189 	mov	_set_runtime_data_PARM_3,#0x00
+      00101C 8D 82            [24] 2190 	mov	dpl,r5
+      00101E C0 06            [24] 2191 	push	ar6
+      001020 C0 05            [24] 2192 	push	ar5
+      001022 12 27 A7         [24] 2193 	lcall	_set_runtime_data
+      001025 D0 05            [24] 2194 	pop	ar5
+      001027 D0 06            [24] 2195 	pop	ar6
+                                   2196 ;	../UI_Manager/ui.c:668: changed = 0xFF;  
+      001029 75 0A FF         [24] 2197 	mov	_changed,#0xff
+                                   2198 ;	../UI_Manager/ui.c:669: break;
+                                   2199 ;	../UI_Manager/ui.c:670: case BUTTON_FUNCTION:
+      00102C 80 12            [24] 2200 	sjmp	00109$
+      00102E                       2201 00107$:
+                                   2202 ;	../UI_Manager/ui.c:671: set_ui_state(INC, NULL);
+      00102E 75 17 00         [24] 2203 	mov	_set_ui_state_PARM_2,#0x00
+      001031 75 82 01         [24] 2204 	mov	dpl,#0x01
+                                   2205 ;	../UI_Manager/ui.c:672: return;
+      001034 02 13 20         [24] 2206 	ljmp	_set_ui_state
+                                   2207 ;	../UI_Manager/ui.c:673: case BUTTON_FUN_UP:
+      001037                       2208 00108$:
+                                   2209 ;	../UI_Manager/ui.c:674: set_ui_state(DEC, NULL);
+      001037 75 17 00         [24] 2210 	mov	_set_ui_state_PARM_2,#0x00
+      00103A 75 82 02         [24] 2211 	mov	dpl,#0x02
+                                   2212 ;	../UI_Manager/ui.c:675: return;
+      00103D 02 13 20         [24] 2213 	ljmp	_set_ui_state
+                                   2214 ;	../UI_Manager/ui.c:676: }
+      001040                       2215 00109$:
+                                   2216 ;	../UI_Manager/ui.c:678: if(Changed){
+      001040 E5 09            [12] 2217 	mov	a,_Changed
+      001042 60 6C            [24] 2218 	jz	00115$
+                                   2219 ;	../UI_Manager/ui.c:679: Changed = 0x00;
+      001044 75 09 00         [24] 2220 	mov	_Changed,#0x00
+                                   2221 ;	../UI_Manager/ui.c:680: changed = 0xFF;
+      001047 75 0A FF         [24] 2222 	mov	_changed,#0xff
+                                   2223 ;	../UI_Manager/ui.c:682: exe_command(CLEAR_DISPLAY);
+      00104A 90 80 00         [24] 2224 	mov	dptr,#0x8000
+      00104D C0 06            [24] 2225 	push	ar6
+      00104F C0 05            [24] 2226 	push	ar5
+      001051 12 1A 5F         [24] 2227 	lcall	_exe_command
+                                   2228 ;	../UI_Manager/ui.c:684: write_string("Remote X Action", sizeof("Remote X Action"), 1, LINE_0, NOT_SELECTED);
+      001054 75 21 10         [24] 2229 	mov	_write_string_PARM_2,#0x10
+      001057 75 22 01         [24] 2230 	mov	_write_string_PARM_3,#0x01
+      00105A 75 23 00         [24] 2231 	mov	_write_string_PARM_4,#0x00
+      00105D 75 24 00         [24] 2232 	mov	_write_string_PARM_5,#0x00
+      001060 90 2E D7         [24] 2233 	mov	dptr,#___str_22
+      001063 75 F0 80         [24] 2234 	mov	b,#0x80
+      001066 12 18 0C         [24] 2235 	lcall	_write_string
+      001069 D0 05            [24] 2236 	pop	ar5
+      00106B D0 06            [24] 2237 	pop	ar6
+                                   2238 ;	../UI_Manager/ui.c:685: switch (remoteNumber)
+      00106D BE 04 02         [24] 2239 	cjne	r6,#0x04,00176$
+      001070 80 0A            [24] 2240 	sjmp	00110$
+      001072                       2241 00176$:
+      001072 BE 05 02         [24] 2242 	cjne	r6,#0x05,00177$
+      001075 80 17            [24] 2243 	sjmp	00111$
+      001077                       2244 00177$:
+                                   2245 ;	../UI_Manager/ui.c:687: case 4:
+      001077 BE 06 36         [24] 2246 	cjne	r6,#0x06,00115$
+      00107A 80 24            [24] 2247 	sjmp	00112$
+      00107C                       2248 00110$:
+                                   2249 ;	../UI_Manager/ui.c:688: write_char(CHAR_4, 8, LINE_0);
+      00107C 75 2B 08         [24] 2250 	mov	_write_char_PARM_2,#0x08
+      00107F 75 2C 00         [24] 2251 	mov	_write_char_PARM_3,#0x00
+      001082 75 82 2C         [24] 2252 	mov	dpl,#0x2c
+      001085 C0 05            [24] 2253 	push	ar5
+      001087 12 1A 2A         [24] 2254 	lcall	_write_char
+      00108A D0 05            [24] 2255 	pop	ar5
+                                   2256 ;	../UI_Manager/ui.c:689: break;
+                                   2257 ;	../UI_Manager/ui.c:690: case 5:
+      00108C 80 22            [24] 2258 	sjmp	00115$
+      00108E                       2259 00111$:
+                                   2260 ;	../UI_Manager/ui.c:691: write_char(CHAR_5, 8, LINE_0);
+      00108E 75 2B 08         [24] 2261 	mov	_write_char_PARM_2,#0x08
+      001091 75 2C 00         [24] 2262 	mov	_write_char_PARM_3,#0x00
+      001094 75 82 AC         [24] 2263 	mov	dpl,#0xac
+      001097 C0 05            [24] 2264 	push	ar5
+      001099 12 1A 2A         [24] 2265 	lcall	_write_char
+      00109C D0 05            [24] 2266 	pop	ar5
+                                   2267 ;	../UI_Manager/ui.c:692: break;
+                                   2268 ;	../UI_Manager/ui.c:693: case 6:
+      00109E 80 10            [24] 2269 	sjmp	00115$
+      0010A0                       2270 00112$:
+                                   2271 ;	../UI_Manager/ui.c:694: write_char(CHAR_6, 8, LINE_0);
+      0010A0 75 2B 08         [24] 2272 	mov	_write_char_PARM_2,#0x08
+      0010A3 75 2C 00         [24] 2273 	mov	_write_char_PARM_3,#0x00
+      0010A6 75 82 6C         [24] 2274 	mov	dpl,#0x6c
+      0010A9 C0 05            [24] 2275 	push	ar5
+      0010AB 12 1A 2A         [24] 2276 	lcall	_write_char
+      0010AE D0 05            [24] 2277 	pop	ar5
+                                   2278 ;	../UI_Manager/ui.c:696: }
+      0010B0                       2279 00115$:
+                                   2280 ;	../UI_Manager/ui.c:699: if(changed){
+      0010B0 E5 0A            [12] 2281 	mov	a,_changed
+      0010B2 60 2D            [24] 2282 	jz	00118$
+                                   2283 ;	../UI_Manager/ui.c:700: changed = 0x00;
+      0010B4 75 0A 00         [24] 2284 	mov	_changed,#0x00
+                                   2285 ;	../UI_Manager/ui.c:701: write_string(getString(get_runtime_data(index) + WIRELESS_ACTION_STRING_OFFSET), LINE_LENGTH, 4, LINE_1, NOT_SELECTED);  
+      0010B7 8D 82            [24] 2286 	mov	dpl,r5
+      0010B9 12 27 13         [24] 2287 	lcall	_get_runtime_data
+      0010BC AF 82            [24] 2288 	mov	r7,dpl
+      0010BE 74 3C            [12] 2289 	mov	a,#0x3c
+      0010C0 2F               [12] 2290 	add	a,r7
+      0010C1 F5 82            [12] 2291 	mov	dpl,a
+      0010C3 12 13 C2         [24] 2292 	lcall	_getString
+      0010C6 AD 82            [24] 2293 	mov	r5,dpl
+      0010C8 AE 83            [24] 2294 	mov	r6,dph
+      0010CA AF F0            [24] 2295 	mov	r7,b
+      0010CC 75 21 10         [24] 2296 	mov	_write_string_PARM_2,#0x10
+      0010CF 75 22 04         [24] 2297 	mov	_write_string_PARM_3,#0x04
+      0010D2 75 23 01         [24] 2298 	mov	_write_string_PARM_4,#0x01
+      0010D5 75 24 00         [24] 2299 	mov	_write_string_PARM_5,#0x00
+      0010D8 8D 82            [24] 2300 	mov	dpl,r5
+      0010DA 8E 83            [24] 2301 	mov	dph,r6
+      0010DC 8F F0            [24] 2302 	mov	b,r7
+                                   2303 ;	../UI_Manager/ui.c:703: }
+      0010DE 02 18 0C         [24] 2304 	ljmp	_write_string
+      0010E1                       2305 00118$:
+      0010E1 22               [24] 2306 	ret
+                                   2307 ;------------------------------------------------------------
+                                   2308 ;Allocation info for local variables in function 'saveLoadPage'
+                                   2309 ;------------------------------------------------------------
+                                   2310 ;slot                      Allocated with name '_saveLoadPage_slot_65536_134'
+                                   2311 ;action                    Allocated to registers r7 
+                                   2312 ;------------------------------------------------------------
+                                   2313 ;	../UI_Manager/ui.c:705: void saveLoadPage(uint8_t action){
+                                   2314 ;	-----------------------------------------
+                                   2315 ;	 function saveLoadPage
+                                   2316 ;	-----------------------------------------
+      0010E2                       2317 _saveLoadPage:
+      0010E2 AF 82            [24] 2318 	mov	r7,dpl
+                                   2319 ;	../UI_Manager/ui.c:708: switch (action)
+      0010E4 BF 02 03         [24] 2320 	cjne	r7,#0x02,00161$
+      0010E7 02 11 78         [24] 2321 	ljmp	00107$
+      0010EA                       2322 00161$:
+      0010EA BF 03 03         [24] 2323 	cjne	r7,#0x03,00162$
+      0010ED 02 11 6A         [24] 2324 	ljmp	00105$
+      0010F0                       2325 00162$:
+      0010F0 BF 0A 03         [24] 2326 	cjne	r7,#0x0a,00163$
+      0010F3 02 11 71         [24] 2327 	ljmp	00106$
+      0010F6                       2328 00163$:
+      0010F6 BF 0C 03         [24] 2329 	cjne	r7,#0x0c,00164$
+      0010F9 02 11 81         [24] 2330 	ljmp	00108$
+      0010FC                       2331 00164$:
+      0010FC BF 1E 02         [24] 2332 	cjne	r7,#0x1e,00165$
+      0010FF 80 03            [24] 2333 	sjmp	00166$
+      001101                       2334 00165$:
+      001101 02 11 8A         [24] 2335 	ljmp	00109$
+      001104                       2336 00166$:
+                                   2337 ;	../UI_Manager/ui.c:711: save_load_settings(slot % (SLOT_COUNT - 1), (State == MANUAL_SAVE_SETTINGS_STATE) ? SAVE : LOAD);
+      001104 75 F0 03         [24] 2338 	mov	b,#0x03
+      001107 E5 16            [12] 2339 	mov	a,_saveLoadPage_slot_65536_134
+      001109 84               [48] 2340 	div	ab
+      00110A AF F0            [24] 2341 	mov	r7,b
+      00110C 74 0D            [12] 2342 	mov	a,#0x0d
+      00110E B5 08 06         [24] 2343 	cjne	a,_State,00119$
+      001111 7D 01            [12] 2344 	mov	r5,#0x01
+      001113 7E 00            [12] 2345 	mov	r6,#0x00
+      001115 80 04            [24] 2346 	sjmp	00120$
+      001117                       2347 00119$:
+      001117 7D 00            [12] 2348 	mov	r5,#0x00
+      001119 7E 00            [12] 2349 	mov	r6,#0x00
+      00111B                       2350 00120$:
+      00111B 8D 72            [24] 2351 	mov	_save_load_settings_PARM_2,r5
+      00111D 8F 82            [24] 2352 	mov	dpl,r7
+      00111F 12 26 BD         [24] 2353 	lcall	_save_load_settings
+                                   2354 ;	../UI_Manager/ui.c:712: write_string("", LINE_LENGTH, 0, LINE_1, NOT_SELECTED); 
+      001122 75 21 10         [24] 2355 	mov	_write_string_PARM_2,#0x10
+      001125 75 22 00         [24] 2356 	mov	_write_string_PARM_3,#0x00
+      001128 75 23 01         [24] 2357 	mov	_write_string_PARM_4,#0x01
+      00112B 75 24 00         [24] 2358 	mov	_write_string_PARM_5,#0x00
+      00112E 90 2E D6         [24] 2359 	mov	dptr,#___str_21
+      001131 75 F0 80         [24] 2360 	mov	b,#0x80
+      001134 12 18 0C         [24] 2361 	lcall	_write_string
+                                   2362 ;	../UI_Manager/ui.c:714: if(State == MANUAL_SAVE_SETTINGS_STATE){
+      001137 74 0D            [12] 2363 	mov	a,#0x0d
+      001139 B5 08 17         [24] 2364 	cjne	a,_State,00103$
+                                   2365 ;	../UI_Manager/ui.c:715: write_string("Saved!", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
+      00113C 75 21 10         [24] 2366 	mov	_write_string_PARM_2,#0x10
+      00113F 75 22 06         [24] 2367 	mov	_write_string_PARM_3,#0x06
+      001142 75 23 01         [24] 2368 	mov	_write_string_PARM_4,#0x01
+      001145 75 24 00         [24] 2369 	mov	_write_string_PARM_5,#0x00
+      001148 90 2E E7         [24] 2370 	mov	dptr,#___str_23
+      00114B 75 F0 80         [24] 2371 	mov	b,#0x80
+      00114E 12 18 0C         [24] 2372 	lcall	_write_string
+      001151 80 37            [24] 2373 	sjmp	00109$
+      001153                       2374 00103$:
+                                   2375 ;	../UI_Manager/ui.c:717: write_string("Loaded!", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
+      001153 75 21 10         [24] 2376 	mov	_write_string_PARM_2,#0x10
+      001156 75 22 06         [24] 2377 	mov	_write_string_PARM_3,#0x06
+      001159 75 23 01         [24] 2378 	mov	_write_string_PARM_4,#0x01
+      00115C 75 24 00         [24] 2379 	mov	_write_string_PARM_5,#0x00
+      00115F 90 2E EE         [24] 2380 	mov	dptr,#___str_24
+      001162 75 F0 80         [24] 2381 	mov	b,#0x80
+      001165 12 18 0C         [24] 2382 	lcall	_write_string
+                                   2383 ;	../UI_Manager/ui.c:719: break;
+                                   2384 ;	../UI_Manager/ui.c:720: case BUTTON_UP:
+      001168 80 20            [24] 2385 	sjmp	00109$
+      00116A                       2386 00105$:
+                                   2387 ;	../UI_Manager/ui.c:721: slot++;
+      00116A 05 16            [12] 2388 	inc	_saveLoadPage_slot_65536_134
+                                   2389 ;	../UI_Manager/ui.c:722: changed = 0xFF;
+      00116C 75 0A FF         [24] 2390 	mov	_changed,#0xff
+                                   2391 ;	../UI_Manager/ui.c:723: break;
+                                   2392 ;	../UI_Manager/ui.c:724: case BUTTON_DOWN:
+      00116F 80 19            [24] 2393 	sjmp	00109$
+      001171                       2394 00106$:
+                                   2395 ;	../UI_Manager/ui.c:725: slot--;
+      001171 15 16            [12] 2396 	dec	_saveLoadPage_slot_65536_134
+                                   2397 ;	../UI_Manager/ui.c:726: changed = 0xFF;  
+      001173 75 0A FF         [24] 2398 	mov	_changed,#0xff
+                                   2399 ;	../UI_Manager/ui.c:727: break;
+                                   2400 ;	../UI_Manager/ui.c:728: case BUTTON_FUNCTION:
+      001176 80 12            [24] 2401 	sjmp	00109$
+      001178                       2402 00107$:
+                                   2403 ;	../UI_Manager/ui.c:729: set_ui_state(INC, NULL);
+      001178 75 17 00         [24] 2404 	mov	_set_ui_state_PARM_2,#0x00
+      00117B 75 82 01         [24] 2405 	mov	dpl,#0x01
+                                   2406 ;	../UI_Manager/ui.c:730: return;
+      00117E 02 13 20         [24] 2407 	ljmp	_set_ui_state
+                                   2408 ;	../UI_Manager/ui.c:731: case BUTTON_FUN_UP:
+      001181                       2409 00108$:
+                                   2410 ;	../UI_Manager/ui.c:732: set_ui_state(DEC, NULL);
+      001181 75 17 00         [24] 2411 	mov	_set_ui_state_PARM_2,#0x00
+      001184 75 82 02         [24] 2412 	mov	dpl,#0x02
+                                   2413 ;	../UI_Manager/ui.c:733: return;
+      001187 02 13 20         [24] 2414 	ljmp	_set_ui_state
+                                   2415 ;	../UI_Manager/ui.c:734: }
+      00118A                       2416 00109$:
+                                   2417 ;	../UI_Manager/ui.c:736: if(Changed){
+      00118A E5 09            [12] 2418 	mov	a,_Changed
+      00118C 60 3D            [24] 2419 	jz	00114$
+                                   2420 ;	../UI_Manager/ui.c:737: Changed = 0x00;
+      00118E 75 09 00         [24] 2421 	mov	_Changed,#0x00
+                                   2422 ;	../UI_Manager/ui.c:738: changed = 0xFF;
+      001191 75 0A FF         [24] 2423 	mov	_changed,#0xff
+                                   2424 ;	../UI_Manager/ui.c:740: exe_command(CLEAR_DISPLAY);
+      001194 90 80 00         [24] 2425 	mov	dptr,#0x8000
+      001197 12 1A 5F         [24] 2426 	lcall	_exe_command
+                                   2427 ;	../UI_Manager/ui.c:742: if(State == MANUAL_SAVE_SETTINGS_STATE){
+      00119A 74 0D            [12] 2428 	mov	a,#0x0d
+      00119C B5 08 17         [24] 2429 	cjne	a,_State,00111$
+                                   2430 ;	../UI_Manager/ui.c:743: write_string("Save Settings", sizeof("Save Settings"), 2, LINE_0, NOT_SELECTED);
+      00119F 75 21 0E         [24] 2431 	mov	_write_string_PARM_2,#0x0e
+      0011A2 75 22 02         [24] 2432 	mov	_write_string_PARM_3,#0x02
+      0011A5 75 23 00         [24] 2433 	mov	_write_string_PARM_4,#0x00
+      0011A8 75 24 00         [24] 2434 	mov	_write_string_PARM_5,#0x00
+      0011AB 90 2E F6         [24] 2435 	mov	dptr,#___str_25
+      0011AE 75 F0 80         [24] 2436 	mov	b,#0x80
+      0011B1 12 18 0C         [24] 2437 	lcall	_write_string
+      0011B4 80 15            [24] 2438 	sjmp	00114$
+      0011B6                       2439 00111$:
+                                   2440 ;	../UI_Manager/ui.c:745: write_string("Load Settings", sizeof("Load Settings"), 2, LINE_0, NOT_SELECTED);
+      0011B6 75 21 0E         [24] 2441 	mov	_write_string_PARM_2,#0x0e
+      0011B9 75 22 02         [24] 2442 	mov	_write_string_PARM_3,#0x02
+      0011BC 75 23 00         [24] 2443 	mov	_write_string_PARM_4,#0x00
+      0011BF 75 24 00         [24] 2444 	mov	_write_string_PARM_5,#0x00
+      0011C2 90 2F 04         [24] 2445 	mov	dptr,#___str_26
+      0011C5 75 F0 80         [24] 2446 	mov	b,#0x80
+      0011C8 12 18 0C         [24] 2447 	lcall	_write_string
+      0011CB                       2448 00114$:
+                                   2449 ;	../UI_Manager/ui.c:750: if(changed){
+      0011CB E5 0A            [12] 2450 	mov	a,_changed
+      0011CD 60 2A            [24] 2451 	jz	00117$
+                                   2452 ;	../UI_Manager/ui.c:751: changed = 0x00;
+      0011CF 75 0A 00         [24] 2453 	mov	_changed,#0x00
+                                   2454 ;	../UI_Manager/ui.c:752: write_string(getString(slot % (SLOT_COUNT - 1)), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);  
+      0011D2 75 F0 03         [24] 2455 	mov	b,#0x03
+      0011D5 E5 16            [12] 2456 	mov	a,_saveLoadPage_slot_65536_134
+      0011D7 84               [48] 2457 	div	ab
+      0011D8 85 F0 82         [24] 2458 	mov	dpl,b
+      0011DB 12 13 C2         [24] 2459 	lcall	_getString
+      0011DE AD 82            [24] 2460 	mov	r5,dpl
+      0011E0 AE 83            [24] 2461 	mov	r6,dph
+      0011E2 AF F0            [24] 2462 	mov	r7,b
+      0011E4 75 21 10         [24] 2463 	mov	_write_string_PARM_2,#0x10
+      0011E7 75 22 06         [24] 2464 	mov	_write_string_PARM_3,#0x06
+      0011EA 75 23 01         [24] 2465 	mov	_write_string_PARM_4,#0x01
+      0011ED 75 24 00         [24] 2466 	mov	_write_string_PARM_5,#0x00
+      0011F0 8D 82            [24] 2467 	mov	dpl,r5
+      0011F2 8E 83            [24] 2468 	mov	dph,r6
+      0011F4 8F F0            [24] 2469 	mov	b,r7
+                                   2470 ;	../UI_Manager/ui.c:755: }
+      0011F6 02 18 0C         [24] 2471 	ljmp	_write_string
+      0011F9                       2472 00117$:
+      0011F9 22               [24] 2473 	ret
+                                   2474 ;------------------------------------------------------------
+                                   2475 ;Allocation info for local variables in function 'dmxAddressPage'
+                                   2476 ;------------------------------------------------------------
+                                   2477 ;action                    Allocated to registers r7 
+                                   2478 ;------------------------------------------------------------
+                                   2479 ;	../UI_Manager/ui.c:757: void dmxAddressPage(uint8_t action){
+                                   2480 ;	-----------------------------------------
+                                   2481 ;	 function dmxAddressPage
+                                   2482 ;	-----------------------------------------
+      0011FA                       2483 _dmxAddressPage:
+      0011FA AF 82            [24] 2484 	mov	r7,dpl
+                                   2485 ;	../UI_Manager/ui.c:759: switch (action)
+      0011FC BF 02 02         [24] 2486 	cjne	r7,#0x02,00146$
+      0011FF 80 2F            [24] 2487 	sjmp	00105$
+      001201                       2488 00146$:
+      001201 BF 03 02         [24] 2489 	cjne	r7,#0x03,00147$
+      001204 80 14            [24] 2490 	sjmp	00102$
+      001206                       2491 00147$:
+      001206 BF 0A 02         [24] 2492 	cjne	r7,#0x0a,00148$
+      001209 80 1A            [24] 2493 	sjmp	00104$
+      00120B                       2494 00148$:
+      00120B BF 0C 02         [24] 2495 	cjne	r7,#0x0c,00149$
+      00120E 80 29            [24] 2496 	sjmp	00106$
+      001210                       2497 00149$:
+      001210 BF 1F 02         [24] 2498 	cjne	r7,#0x1f,00150$
+      001213 80 05            [24] 2499 	sjmp	00102$
+      001215                       2500 00150$:
+                                   2501 ;	../UI_Manager/ui.c:762: case BUTTON_UP:
+      001215 BF 65 2A         [24] 2502 	cjne	r7,#0x65,00107$
+      001218 80 0B            [24] 2503 	sjmp	00104$
+      00121A                       2504 00102$:
+                                   2505 ;	../UI_Manager/ui.c:763: set_dmx_address(INC);
+      00121A 75 82 01         [24] 2506 	mov	dpl,#0x01
+      00121D 12 28 20         [24] 2507 	lcall	_set_dmx_address
+                                   2508 ;	../UI_Manager/ui.c:764: changed = 0xFF;
+      001220 75 0A FF         [24] 2509 	mov	_changed,#0xff
+                                   2510 ;	../UI_Manager/ui.c:765: break;
+                                   2511 ;	../UI_Manager/ui.c:767: case BUTTON_DOWN:
+      001223 80 1D            [24] 2512 	sjmp	00107$
+      001225                       2513 00104$:
+                                   2514 ;	../UI_Manager/ui.c:768: set_dmx_address(DEC);
+      001225 75 82 02         [24] 2515 	mov	dpl,#0x02
+      001228 12 28 20         [24] 2516 	lcall	_set_dmx_address
+                                   2517 ;	../UI_Manager/ui.c:769: changed = 0xFF;  
+      00122B 75 0A FF         [24] 2518 	mov	_changed,#0xff
+                                   2519 ;	../UI_Manager/ui.c:770: break;
+                                   2520 ;	../UI_Manager/ui.c:771: case BUTTON_FUNCTION:
+      00122E 80 12            [24] 2521 	sjmp	00107$
+      001230                       2522 00105$:
+                                   2523 ;	../UI_Manager/ui.c:772: set_ui_state(INC, NULL);
+      001230 75 17 00         [24] 2524 	mov	_set_ui_state_PARM_2,#0x00
+      001233 75 82 01         [24] 2525 	mov	dpl,#0x01
+                                   2526 ;	../UI_Manager/ui.c:773: return;
+                                   2527 ;	../UI_Manager/ui.c:774: case BUTTON_FUN_UP:
+      001236 02 13 20         [24] 2528 	ljmp	_set_ui_state
+      001239                       2529 00106$:
+                                   2530 ;	../UI_Manager/ui.c:775: set_ui_state(DEC, NULL);
+      001239 75 17 00         [24] 2531 	mov	_set_ui_state_PARM_2,#0x00
+      00123C 75 82 02         [24] 2532 	mov	dpl,#0x02
+                                   2533 ;	../UI_Manager/ui.c:776: return;
+                                   2534 ;	../UI_Manager/ui.c:777: }
+      00123F 02 13 20         [24] 2535 	ljmp	_set_ui_state
+      001242                       2536 00107$:
+                                   2537 ;	../UI_Manager/ui.c:779: if(Changed){
+      001242 E5 09            [12] 2538 	mov	a,_Changed
+      001244 60 21            [24] 2539 	jz	00109$
+                                   2540 ;	../UI_Manager/ui.c:780: Changed = 0x00;
+      001246 75 09 00         [24] 2541 	mov	_Changed,#0x00
+                                   2542 ;	../UI_Manager/ui.c:781: changed = 0xFF;
+      001249 75 0A FF         [24] 2543 	mov	_changed,#0xff
+                                   2544 ;	../UI_Manager/ui.c:783: exe_command(CLEAR_DISPLAY);
+      00124C 90 80 00         [24] 2545 	mov	dptr,#0x8000
+      00124F 12 1A 5F         [24] 2546 	lcall	_exe_command
+                                   2547 ;	../UI_Manager/ui.c:785: write_string("DMX Address", sizeof("DMX Address"), 2, LINE_0, NOT_SELECTED);
+      001252 75 21 0C         [24] 2548 	mov	_write_string_PARM_2,#0x0c
+      001255 75 22 02         [24] 2549 	mov	_write_string_PARM_3,#0x02
+      001258 75 23 00         [24] 2550 	mov	_write_string_PARM_4,#0x00
+      00125B 75 24 00         [24] 2551 	mov	_write_string_PARM_5,#0x00
+      00125E 90 2F 12         [24] 2552 	mov	dptr,#___str_27
+      001261 75 F0 80         [24] 2553 	mov	b,#0x80
+      001264 12 18 0C         [24] 2554 	lcall	_write_string
+      001267                       2555 00109$:
+                                   2556 ;	../UI_Manager/ui.c:788: if(changed){
+      001267 E5 0A            [12] 2557 	mov	a,_changed
+      001269 60 12            [24] 2558 	jz	00112$
+                                   2559 ;	../UI_Manager/ui.c:789: changed = 0x00;
+      00126B 75 0A 00         [24] 2560 	mov	_changed,#0x00
+                                   2561 ;	../UI_Manager/ui.c:791: write_number(get_dmx_address(), 4, LINE_1, NOT_SELECTED);
+      00126E 12 28 73         [24] 2562 	lcall	_get_dmx_address
+      001271 75 25 04         [24] 2563 	mov	_write_number_PARM_2,#0x04
+      001274 75 26 01         [24] 2564 	mov	_write_number_PARM_3,#0x01
+      001277 75 27 00         [24] 2565 	mov	_write_number_PARM_4,#0x00
+                                   2566 ;	../UI_Manager/ui.c:794: }
+      00127A 02 18 D0         [24] 2567 	ljmp	_write_number
+      00127D                       2568 00112$:
+      00127D 22               [24] 2569 	ret
+                                   2570 ;------------------------------------------------------------
+                                   2571 ;Allocation info for local variables in function 'dmxChannelPage'
+                                   2572 ;------------------------------------------------------------
+                                   2573 ;action                    Allocated to registers r7 
+                                   2574 ;------------------------------------------------------------
+                                   2575 ;	../UI_Manager/ui.c:796: void dmxChannelPage(uint8_t action){
+                                   2576 ;	-----------------------------------------
+                                   2577 ;	 function dmxChannelPage
+                                   2578 ;	-----------------------------------------
+      00127E                       2579 _dmxChannelPage:
+      00127E AF 82            [24] 2580 	mov	r7,dpl
+                                   2581 ;	../UI_Manager/ui.c:798: switch (action)
+      001280 BF 02 02         [24] 2582 	cjne	r7,#0x02,00136$
+      001283 80 31            [24] 2583 	sjmp	00103$
+      001285                       2584 00136$:
+      001285 BF 03 02         [24] 2585 	cjne	r7,#0x03,00137$
+      001288 80 0A            [24] 2586 	sjmp	00101$
+      00128A                       2587 00137$:
+      00128A BF 0A 02         [24] 2588 	cjne	r7,#0x0a,00138$
+      00128D 80 16            [24] 2589 	sjmp	00102$
+      00128F                       2590 00138$:
+                                   2591 ;	../UI_Manager/ui.c:800: case BUTTON_UP:
+      00128F BF 0C 36         [24] 2592 	cjne	r7,#0x0c,00105$
+      001292 80 2B            [24] 2593 	sjmp	00104$
+      001294                       2594 00101$:
+                                   2595 ;	../UI_Manager/ui.c:801: set_runtime_data(MODE_INDEX, INC, NULL);
+      001294 75 65 01         [24] 2596 	mov	_set_runtime_data_PARM_2,#0x01
+      001297 75 66 00         [24] 2597 	mov	_set_runtime_data_PARM_3,#0x00
+      00129A 75 82 0E         [24] 2598 	mov	dpl,#0x0e
+      00129D 12 27 A7         [24] 2599 	lcall	_set_runtime_data
+                                   2600 ;	../UI_Manager/ui.c:802: changed = 0xFF;
+      0012A0 75 0A FF         [24] 2601 	mov	_changed,#0xff
+                                   2602 ;	../UI_Manager/ui.c:803: break;
+                                   2603 ;	../UI_Manager/ui.c:804: case BUTTON_DOWN:
+      0012A3 80 23            [24] 2604 	sjmp	00105$
+      0012A5                       2605 00102$:
+                                   2606 ;	../UI_Manager/ui.c:805: set_runtime_data(MODE_INDEX, DEC, NULL);
+      0012A5 75 65 02         [24] 2607 	mov	_set_runtime_data_PARM_2,#0x02
+      0012A8 75 66 00         [24] 2608 	mov	_set_runtime_data_PARM_3,#0x00
+      0012AB 75 82 0E         [24] 2609 	mov	dpl,#0x0e
+      0012AE 12 27 A7         [24] 2610 	lcall	_set_runtime_data
+                                   2611 ;	../UI_Manager/ui.c:806: changed = 0xFF;  
+      0012B1 75 0A FF         [24] 2612 	mov	_changed,#0xff
+                                   2613 ;	../UI_Manager/ui.c:807: break;
+                                   2614 ;	../UI_Manager/ui.c:808: case BUTTON_FUNCTION:
+      0012B4 80 12            [24] 2615 	sjmp	00105$
+      0012B6                       2616 00103$:
+                                   2617 ;	../UI_Manager/ui.c:809: set_ui_state(INC, NULL);
+      0012B6 75 17 00         [24] 2618 	mov	_set_ui_state_PARM_2,#0x00
+      0012B9 75 82 01         [24] 2619 	mov	dpl,#0x01
+                                   2620 ;	../UI_Manager/ui.c:810: return;
+                                   2621 ;	../UI_Manager/ui.c:811: case BUTTON_FUN_UP:
+      0012BC 02 13 20         [24] 2622 	ljmp	_set_ui_state
+      0012BF                       2623 00104$:
+                                   2624 ;	../UI_Manager/ui.c:812: set_ui_state(DEC, NULL);
+      0012BF 75 17 00         [24] 2625 	mov	_set_ui_state_PARM_2,#0x00
+      0012C2 75 82 02         [24] 2626 	mov	dpl,#0x02
+                                   2627 ;	../UI_Manager/ui.c:813: return;
+                                   2628 ;	../UI_Manager/ui.c:814: }
+      0012C5 02 13 20         [24] 2629 	ljmp	_set_ui_state
+      0012C8                       2630 00105$:
+                                   2631 ;	../UI_Manager/ui.c:816: if(Changed){
+      0012C8 E5 09            [12] 2632 	mov	a,_Changed
+      0012CA 60 21            [24] 2633 	jz	00107$
+                                   2634 ;	../UI_Manager/ui.c:817: Changed = 0x00;
+      0012CC 75 09 00         [24] 2635 	mov	_Changed,#0x00
+                                   2636 ;	../UI_Manager/ui.c:818: changed = 0xFF;
+      0012CF 75 0A FF         [24] 2637 	mov	_changed,#0xff
+                                   2638 ;	../UI_Manager/ui.c:820: exe_command(CLEAR_DISPLAY);
+      0012D2 90 80 00         [24] 2639 	mov	dptr,#0x8000
+      0012D5 12 1A 5F         [24] 2640 	lcall	_exe_command
+                                   2641 ;	../UI_Manager/ui.c:822: write_string("DMX Channel Mode", sizeof("DMX Channel Mode"), 0, LINE_0, NOT_SELECTED);
+      0012D8 75 21 11         [24] 2642 	mov	_write_string_PARM_2,#0x11
+      0012DB 75 22 00         [24] 2643 	mov	_write_string_PARM_3,#0x00
+      0012DE 75 23 00         [24] 2644 	mov	_write_string_PARM_4,#0x00
+      0012E1 75 24 00         [24] 2645 	mov	_write_string_PARM_5,#0x00
+      0012E4 90 2F 1E         [24] 2646 	mov	dptr,#___str_28
+      0012E7 75 F0 80         [24] 2647 	mov	b,#0x80
+      0012EA 12 18 0C         [24] 2648 	lcall	_write_string
+      0012ED                       2649 00107$:
+                                   2650 ;	../UI_Manager/ui.c:825: if(changed){
+      0012ED E5 0A            [12] 2651 	mov	a,_changed
+      0012EF 60 2E            [24] 2652 	jz	00110$
+                                   2653 ;	../UI_Manager/ui.c:826: changed = 0x00;
+      0012F1 75 0A 00         [24] 2654 	mov	_changed,#0x00
+                                   2655 ;	../UI_Manager/ui.c:828: write_string(getString(get_runtime_data(MODE_INDEX) + DMX_STRING_OFFSET), LINE_LENGTH, 1, LINE_1, NOT_SELECTED);
+      0012F4 75 82 0E         [24] 2656 	mov	dpl,#0x0e
+      0012F7 12 27 13         [24] 2657 	lcall	_get_runtime_data
+      0012FA AF 82            [24] 2658 	mov	r7,dpl
+      0012FC 74 64            [12] 2659 	mov	a,#0x64
+      0012FE 2F               [12] 2660 	add	a,r7
+      0012FF F5 82            [12] 2661 	mov	dpl,a
+      001301 12 13 C2         [24] 2662 	lcall	_getString
+      001304 AD 82            [24] 2663 	mov	r5,dpl
+      001306 AE 83            [24] 2664 	mov	r6,dph
+      001308 AF F0            [24] 2665 	mov	r7,b
+      00130A 75 21 10         [24] 2666 	mov	_write_string_PARM_2,#0x10
+      00130D 75 22 01         [24] 2667 	mov	_write_string_PARM_3,#0x01
+      001310 75 23 01         [24] 2668 	mov	_write_string_PARM_4,#0x01
+      001313 75 24 00         [24] 2669 	mov	_write_string_PARM_5,#0x00
+      001316 8D 82            [24] 2670 	mov	dpl,r5
+      001318 8E 83            [24] 2671 	mov	dph,r6
+      00131A 8F F0            [24] 2672 	mov	b,r7
+                                   2673 ;	../UI_Manager/ui.c:831: }
+      00131C 02 18 0C         [24] 2674 	ljmp	_write_string
+      00131F                       2675 00110$:
+      00131F 22               [24] 2676 	ret
+                                   2677 ;------------------------------------------------------------
+                                   2678 ;Allocation info for local variables in function 'set_ui_state'
+                                   2679 ;------------------------------------------------------------
+                                   2680 ;state                     Allocated with name '_set_ui_state_PARM_2'
+                                   2681 ;inc                       Allocated to registers r7 
+                                   2682 ;------------------------------------------------------------
+                                   2683 ;	../UI_Manager/ui.c:833: void set_ui_state(uint8_t inc, uint8_t state){
+                                   2684 ;	-----------------------------------------
+                                   2685 ;	 function set_ui_state
+                                   2686 ;	-----------------------------------------
+      001320                       2687 _set_ui_state:
+      001320 AF 82            [24] 2688 	mov	r7,dpl
+                                   2689 ;	../UI_Manager/ui.c:834: Changed = CHANGE_SCREEN_X;
+      001322 75 09 FF         [24] 2690 	mov	_Changed,#0xff
+                                   2691 ;	../UI_Manager/ui.c:836: switch (inc)
+      001325 BF 01 02         [24] 2692 	cjne	r7,#0x01,00193$
+      001328 80 08            [24] 2693 	sjmp	00101$
+      00132A                       2694 00193$:
+      00132A BF 02 02         [24] 2695 	cjne	r7,#0x02,00194$
+      00132D 80 3D            [24] 2696 	sjmp	00115$
+      00132F                       2697 00194$:
+      00132F 02 13 A5         [24] 2698 	ljmp	00129$
+                                   2699 ;	../UI_Manager/ui.c:838: case INC:
+      001332                       2700 00101$:
+                                   2701 ;	../UI_Manager/ui.c:839: state = State;
+      001332 85 08 17         [24] 2702 	mov	_set_ui_state_PARM_2,_State
+                                   2703 ;	../UI_Manager/ui.c:840: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
+      001335 75 82 10         [24] 2704 	mov	dpl,#0x10
+      001338 12 27 13         [24] 2705 	lcall	_get_runtime_data
+      00133B E5 82            [12] 2706 	mov	a,dpl
+      00133D 70 17            [24] 2707 	jnz	00113$
+                                   2708 ;	../UI_Manager/ui.c:841: if(state == IDLE_STATE){
+      00133F E5 17            [12] 2709 	mov	a,_set_ui_state_PARM_2
+      001341 70 06            [24] 2710 	jnz	00105$
+                                   2711 ;	../UI_Manager/ui.c:842: state = DMX_STATE_LOW;
+      001343 75 17 14         [24] 2712 	mov	_set_ui_state_PARM_2,#0x14
+      001346 02 13 BA         [24] 2713 	ljmp	00134$
+      001349                       2714 00105$:
+                                   2715 ;	../UI_Manager/ui.c:843: } else if(++state > DMX_STATE_HIGH){
+      001349 05 17            [12] 2716 	inc	_set_ui_state_PARM_2
+      00134B E5 17            [12] 2717 	mov	a,_set_ui_state_PARM_2
+      00134D 24 EA            [12] 2718 	add	a,#0xff - 0x15
+      00134F 50 69            [24] 2719 	jnc	00134$
+                                   2720 ;	../UI_Manager/ui.c:844: state = IDLE_STATE;
+      001351 75 17 00         [24] 2721 	mov	_set_ui_state_PARM_2,#0x00
+      001354 80 64            [24] 2722 	sjmp	00134$
+      001356                       2723 00113$:
+                                   2724 ;	../UI_Manager/ui.c:847: if(state == IDLE_STATE){
+      001356 E5 17            [12] 2725 	mov	a,_set_ui_state_PARM_2
+      001358 70 05            [24] 2726 	jnz	00110$
+                                   2727 ;	../UI_Manager/ui.c:848: state = IDLE_STATE + 1; 
+      00135A 75 17 01         [24] 2728 	mov	_set_ui_state_PARM_2,#0x01
+      00135D 80 5B            [24] 2729 	sjmp	00134$
+      00135F                       2730 00110$:
+                                   2731 ;	../UI_Manager/ui.c:849: } else if(++state > MANUAL_STATE_HIGH){
+      00135F 05 17            [12] 2732 	inc	_set_ui_state_PARM_2
+      001361 E5 17            [12] 2733 	mov	a,_set_ui_state_PARM_2
+      001363 24 F1            [12] 2734 	add	a,#0xff - 0x0e
+      001365 50 53            [24] 2735 	jnc	00134$
+                                   2736 ;	../UI_Manager/ui.c:850: State = IDLE_STATE;
+      001367 75 08 00         [24] 2737 	mov	_State,#0x00
+                                   2738 ;	../UI_Manager/ui.c:853: break;
+                                   2739 ;	../UI_Manager/ui.c:854: case DEC:
+      00136A 80 4E            [24] 2740 	sjmp	00134$
+      00136C                       2741 00115$:
+                                   2742 ;	../UI_Manager/ui.c:855: state = State;
+      00136C 85 08 17         [24] 2743 	mov	_set_ui_state_PARM_2,_State
+                                   2744 ;	../UI_Manager/ui.c:856: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
+      00136F 75 82 10         [24] 2745 	mov	dpl,#0x10
+      001372 12 27 13         [24] 2746 	lcall	_get_runtime_data
+      001375 E5 82            [12] 2747 	mov	a,dpl
+      001377 70 16            [24] 2748 	jnz	00127$
+                                   2749 ;	../UI_Manager/ui.c:857: if(state == IDLE_STATE){
+      001379 E5 17            [12] 2750 	mov	a,_set_ui_state_PARM_2
+      00137B 70 05            [24] 2751 	jnz	00119$
+                                   2752 ;	../UI_Manager/ui.c:858: state = DMX_STATE_HIGH;
+      00137D 75 17 15         [24] 2753 	mov	_set_ui_state_PARM_2,#0x15
+      001380 80 38            [24] 2754 	sjmp	00134$
+      001382                       2755 00119$:
+                                   2756 ;	../UI_Manager/ui.c:859: } else if(--State < DMX_STATE_LOW){
+      001382 15 08            [12] 2757 	dec	_State
+      001384 74 EC            [12] 2758 	mov	a,#0x100 - 0x14
+      001386 25 08            [12] 2759 	add	a,_State
+      001388 40 30            [24] 2760 	jc	00134$
+                                   2761 ;	../UI_Manager/ui.c:860: State = IDLE_STATE;
+      00138A 75 08 00         [24] 2762 	mov	_State,#0x00
+      00138D 80 2B            [24] 2763 	sjmp	00134$
+      00138F                       2764 00127$:
+                                   2765 ;	../UI_Manager/ui.c:863: if(state == IDLE_STATE){
+      00138F E5 17            [12] 2766 	mov	a,_set_ui_state_PARM_2
+      001391 70 05            [24] 2767 	jnz	00124$
+                                   2768 ;	../UI_Manager/ui.c:864: state = MANUAL_STATE_HIGH; 
+      001393 75 17 0E         [24] 2769 	mov	_set_ui_state_PARM_2,#0x0e
+      001396 80 22            [24] 2770 	sjmp	00134$
+      001398                       2771 00124$:
+                                   2772 ;	../UI_Manager/ui.c:865: } else if(--State < DMX_STATE_HIGH){
+      001398 15 08            [12] 2773 	dec	_State
+      00139A 74 EB            [12] 2774 	mov	a,#0x100 - 0x15
+      00139C 25 08            [12] 2775 	add	a,_State
+      00139E 40 1A            [24] 2776 	jc	00134$
+                                   2777 ;	../UI_Manager/ui.c:866: State = IDLE_STATE;
+      0013A0 75 08 00         [24] 2778 	mov	_State,#0x00
+                                   2779 ;	../UI_Manager/ui.c:869: break;
+                                   2780 ;	../UI_Manager/ui.c:870: default: 
+      0013A3 80 15            [24] 2781 	sjmp	00134$
+      0013A5                       2782 00129$:
+                                   2783 ;	../UI_Manager/ui.c:871: if(state <= MANUAL_STATE_HIGH || (state >= DMX_STATE_LOW && state <= DMX_STATE_HIGH)){
+      0013A5 E5 17            [12] 2784 	mov	a,_set_ui_state_PARM_2
+      0013A7 24 F1            [12] 2785 	add	a,#0xff - 0x0e
+      0013A9 50 0C            [24] 2786 	jnc	00130$
+      0013AB 74 EC            [12] 2787 	mov	a,#0x100 - 0x14
+      0013AD 25 17            [12] 2788 	add	a,_set_ui_state_PARM_2
+      0013AF 50 09            [24] 2789 	jnc	00134$
+      0013B1 E5 17            [12] 2790 	mov	a,_set_ui_state_PARM_2
+      0013B3 24 EA            [12] 2791 	add	a,#0xff - 0x15
+      0013B5 40 03            [24] 2792 	jc	00134$
+      0013B7                       2793 00130$:
+                                   2794 ;	../UI_Manager/ui.c:872: state = IDLE_STATE;
+      0013B7 75 17 00         [24] 2795 	mov	_set_ui_state_PARM_2,#0x00
+                                   2796 ;	../UI_Manager/ui.c:875: }
+      0013BA                       2797 00134$:
+                                   2798 ;	../UI_Manager/ui.c:877: State = state;
+      0013BA 85 17 08         [24] 2799 	mov	_State,_set_ui_state_PARM_2
+                                   2800 ;	../UI_Manager/ui.c:878: }
+      0013BD 22               [24] 2801 	ret
+                                   2802 ;------------------------------------------------------------
+                                   2803 ;Allocation info for local variables in function 'get_ui_state'
+                                   2804 ;------------------------------------------------------------
+                                   2805 ;	../UI_Manager/ui.c:880: uint8_t get_ui_state(){
+                                   2806 ;	-----------------------------------------
+                                   2807 ;	 function get_ui_state
+                                   2808 ;	-----------------------------------------
+      0013BE                       2809 _get_ui_state:
+                                   2810 ;	../UI_Manager/ui.c:881: return State;
+      0013BE 85 08 82         [24] 2811 	mov	dpl,_State
+                                   2812 ;	../UI_Manager/ui.c:882: }
+      0013C1 22               [24] 2813 	ret
+                                   2814 ;------------------------------------------------------------
+                                   2815 ;Allocation info for local variables in function 'getString'
+                                   2816 ;------------------------------------------------------------
+                                   2817 ;index                     Allocated to registers r7 
+                                   2818 ;------------------------------------------------------------
+                                   2819 ;	../UI_Manager/ui.c:884: char* getString(uint8_t index){
+                                   2820 ;	-----------------------------------------
+                                   2821 ;	 function getString
+                                   2822 ;	-----------------------------------------
+      0013C2                       2823 _getString:
+      0013C2 AF 82            [24] 2824 	mov	r7,dpl
+                                   2825 ;	../UI_Manager/ui.c:885: switch (index)
+      0013C4 8F 06            [24] 2826 	mov	ar6,r7
+      0013C6 BE 00 03         [24] 2827 	cjne	r6,#0x00,00299$
+      0013C9 02 14 C1         [24] 2828 	ljmp	00103$
+      0013CC                       2829 00299$:
+      0013CC BE 01 03         [24] 2830 	cjne	r6,#0x01,00300$
+      0013CF 02 14 BA         [24] 2831 	ljmp	00102$
+      0013D2                       2832 00300$:
+      0013D2 BF 02 03         [24] 2833 	cjne	r7,#0x02,00301$
+      0013D5 02 14 B3         [24] 2834 	ljmp	00101$
+      0013D8                       2835 00301$:
+      0013D8 BF 14 03         [24] 2836 	cjne	r7,#0x14,00302$
+      0013DB 02 14 C8         [24] 2837 	ljmp	00104$
+      0013DE                       2838 00302$:
+      0013DE BF 15 03         [24] 2839 	cjne	r7,#0x15,00303$
+      0013E1 02 14 CF         [24] 2840 	ljmp	00105$
+      0013E4                       2841 00303$:
+      0013E4 BF 16 03         [24] 2842 	cjne	r7,#0x16,00304$
+      0013E7 02 14 D6         [24] 2843 	ljmp	00106$
+      0013EA                       2844 00304$:
+      0013EA BF 17 03         [24] 2845 	cjne	r7,#0x17,00305$
+      0013ED 02 14 DD         [24] 2846 	ljmp	00107$
+      0013F0                       2847 00305$:
+      0013F0 BF 18 03         [24] 2848 	cjne	r7,#0x18,00306$
+      0013F3 02 14 EB         [24] 2849 	ljmp	00109$
+      0013F6                       2850 00306$:
+      0013F6 BF 19 03         [24] 2851 	cjne	r7,#0x19,00307$
+      0013F9 02 14 F2         [24] 2852 	ljmp	00110$
+      0013FC                       2853 00307$:
+      0013FC BF 1A 03         [24] 2854 	cjne	r7,#0x1a,00308$
+      0013FF 02 14 E4         [24] 2855 	ljmp	00108$
+      001402                       2856 00308$:
+      001402 BF 28 03         [24] 2857 	cjne	r7,#0x28,00309$
+      001405 02 15 9A         [24] 2858 	ljmp	00134$
+      001408                       2859 00309$:
+      001408 BF 29 03         [24] 2860 	cjne	r7,#0x29,00310$
+      00140B 02 15 A1         [24] 2861 	ljmp	00135$
+      00140E                       2862 00310$:
+      00140E BF 2A 03         [24] 2863 	cjne	r7,#0x2a,00311$
+      001411 02 15 A8         [24] 2864 	ljmp	00136$
+      001414                       2865 00311$:
+      001414 BF 2B 03         [24] 2866 	cjne	r7,#0x2b,00312$
+      001417 02 15 AF         [24] 2867 	ljmp	00137$
+      00141A                       2868 00312$:
+      00141A BF 2C 03         [24] 2869 	cjne	r7,#0x2c,00313$
+      00141D 02 15 B6         [24] 2870 	ljmp	00138$
+      001420                       2871 00313$:
+      001420 BF 2D 03         [24] 2872 	cjne	r7,#0x2d,00314$
+      001423 02 15 BD         [24] 2873 	ljmp	00139$
+      001426                       2874 00314$:
+      001426 BF 3C 03         [24] 2875 	cjne	r7,#0x3c,00315$
+      001429 02 15 15         [24] 2876 	ljmp	00115$
+      00142C                       2877 00315$:
+      00142C BF 3D 03         [24] 2878 	cjne	r7,#0x3d,00316$
+      00142F 02 15 1C         [24] 2879 	ljmp	00116$
+      001432                       2880 00316$:
+      001432 BF 3E 03         [24] 2881 	cjne	r7,#0x3e,00317$
+      001435 02 15 23         [24] 2882 	ljmp	00117$
+      001438                       2883 00317$:
+      001438 BF 3F 03         [24] 2884 	cjne	r7,#0x3f,00318$
+      00143B 02 15 2A         [24] 2885 	ljmp	00118$
+      00143E                       2886 00318$:
+      00143E BF 40 03         [24] 2887 	cjne	r7,#0x40,00319$
+      001441 02 15 31         [24] 2888 	ljmp	00119$
+      001444                       2889 00319$:
+      001444 BF 41 03         [24] 2890 	cjne	r7,#0x41,00320$
+      001447 02 15 38         [24] 2891 	ljmp	00120$
+      00144A                       2892 00320$:
+      00144A BF 42 03         [24] 2893 	cjne	r7,#0x42,00321$
+      00144D 02 15 3F         [24] 2894 	ljmp	00121$
+      001450                       2895 00321$:
+      001450 BF 43 03         [24] 2896 	cjne	r7,#0x43,00322$
+      001453 02 15 46         [24] 2897 	ljmp	00122$
+      001456                       2898 00322$:
+      001456 BF 44 03         [24] 2899 	cjne	r7,#0x44,00323$
+      001459 02 15 4D         [24] 2900 	ljmp	00123$
+      00145C                       2901 00323$:
+      00145C BF 45 03         [24] 2902 	cjne	r7,#0x45,00324$
+      00145F 02 15 54         [24] 2903 	ljmp	00124$
+      001462                       2904 00324$:
+      001462 BF 46 03         [24] 2905 	cjne	r7,#0x46,00325$
+      001465 02 15 5B         [24] 2906 	ljmp	00125$
+      001468                       2907 00325$:
+      001468 BF 47 03         [24] 2908 	cjne	r7,#0x47,00326$
+      00146B 02 15 62         [24] 2909 	ljmp	00126$
+      00146E                       2910 00326$:
+      00146E BF 48 03         [24] 2911 	cjne	r7,#0x48,00327$
+      001471 02 15 69         [24] 2912 	ljmp	00127$
+      001474                       2913 00327$:
+      001474 BF 50 03         [24] 2914 	cjne	r7,#0x50,00328$
+      001477 02 15 70         [24] 2915 	ljmp	00128$
+      00147A                       2916 00328$:
+      00147A BF 51 03         [24] 2917 	cjne	r7,#0x51,00329$
+      00147D 02 15 77         [24] 2918 	ljmp	00129$
+      001480                       2919 00329$:
+      001480 BF 52 03         [24] 2920 	cjne	r7,#0x52,00330$
+      001483 02 15 7E         [24] 2921 	ljmp	00130$
+      001486                       2922 00330$:
+      001486 BF 64 03         [24] 2923 	cjne	r7,#0x64,00331$
+      001489 02 15 85         [24] 2924 	ljmp	00131$
+      00148C                       2925 00331$:
+      00148C BF 65 03         [24] 2926 	cjne	r7,#0x65,00332$
+      00148F 02 15 8C         [24] 2927 	ljmp	00132$
+      001492                       2928 00332$:
+      001492 BF 66 03         [24] 2929 	cjne	r7,#0x66,00333$
+      001495 02 15 93         [24] 2930 	ljmp	00133$
+      001498                       2931 00333$:
+      001498 BF CE 03         [24] 2932 	cjne	r7,#0xce,00334$
+      00149B 02 14 F9         [24] 2933 	ljmp	00111$
+      00149E                       2934 00334$:
+      00149E BF CF 03         [24] 2935 	cjne	r7,#0xcf,00335$
+      0014A1 02 15 07         [24] 2936 	ljmp	00113$
+      0014A4                       2937 00335$:
+      0014A4 BF D0 03         [24] 2938 	cjne	r7,#0xd0,00336$
+      0014A7 02 15 00         [24] 2939 	ljmp	00112$
+      0014AA                       2940 00336$:
+      0014AA BF D1 03         [24] 2941 	cjne	r7,#0xd1,00337$
+      0014AD 02 15 0E         [24] 2942 	ljmp	00114$
+      0014B0                       2943 00337$:
+      0014B0 02 15 C4         [24] 2944 	ljmp	00140$
+                                   2945 ;	../UI_Manager/ui.c:887: case POWER_STRING_OFFSET + OPTION_FOG_LOW:
+      0014B3                       2946 00101$:
+                                   2947 ;	../UI_Manager/ui.c:888: return "Wimpy";
+      0014B3 90 2F 2F         [24] 2948 	mov	dptr,#___str_29
+      0014B6 75 F0 80         [24] 2949 	mov	b,#0x80
+      0014B9 22               [24] 2950 	ret
+                                   2951 ;	../UI_Manager/ui.c:889: case POWER_STRING_OFFSET + OPTION_FOG_MEDIUM:
+      0014BA                       2952 00102$:
+                                   2953 ;	../UI_Manager/ui.c:890: return "Mild";
+      0014BA 90 2F 35         [24] 2954 	mov	dptr,#___str_30
+      0014BD 75 F0 80         [24] 2955 	mov	b,#0x80
+      0014C0 22               [24] 2956 	ret
+                                   2957 ;	../UI_Manager/ui.c:891: case POWER_STRING_OFFSET + OPTION_FOG_HIGH:
+      0014C1                       2958 00103$:
+                                   2959 ;	../UI_Manager/ui.c:892: return "Blazin";
+      0014C1 90 2F 3A         [24] 2960 	mov	dptr,#___str_31
+      0014C4 75 F0 80         [24] 2961 	mov	b,#0x80
+      0014C7 22               [24] 2962 	ret
+                                   2963 ;	../UI_Manager/ui.c:894: case MACRO_STRING_OFFSET + OPTION_MACRO_NONE:
+      0014C8                       2964 00104$:
+                                   2965 ;	../UI_Manager/ui.c:895: return "Off";
+      0014C8 90 2E D2         [24] 2966 	mov	dptr,#___str_20
+      0014CB 75 F0 80         [24] 2967 	mov	b,#0x80
+      0014CE 22               [24] 2968 	ret
+                                   2969 ;	../UI_Manager/ui.c:896: case MACRO_STRING_OFFSET + OPTION_MACRO_RAINBOW_DMX:
+      0014CF                       2970 00105$:
+                                   2971 ;	../UI_Manager/ui.c:897: return "Rainbow";
+      0014CF 90 2F 41         [24] 2972 	mov	dptr,#___str_32
+      0014D2 75 F0 80         [24] 2973 	mov	b,#0x80
+      0014D5 22               [24] 2974 	ret
+                                   2975 ;	../UI_Manager/ui.c:898: case MACRO_STRING_OFFSET + OPTION_MACRO_FIRE_DMX:
+      0014D6                       2976 00106$:
+                                   2977 ;	../UI_Manager/ui.c:899: return "Fire";
+      0014D6 90 2F 49         [24] 2978 	mov	dptr,#___str_33
+      0014D9 75 F0 80         [24] 2979 	mov	b,#0x80
+      0014DC 22               [24] 2980 	ret
+                                   2981 ;	../UI_Manager/ui.c:900: case MACRO_STRING_OFFSET + OPTION_MACRO_WATER_DMX:
+      0014DD                       2982 00107$:
+                                   2983 ;	../UI_Manager/ui.c:901: return "Water";
+      0014DD 90 2F 4E         [24] 2984 	mov	dptr,#___str_34
+      0014E0 75 F0 80         [24] 2985 	mov	b,#0x80
+      0014E3 22               [24] 2986 	ret
+                                   2987 ;	../UI_Manager/ui.c:902: case MACRO_STRING_OFFSET + OPTION_MACRO_STORM_DMX:
+      0014E4                       2988 00108$:
+                                   2989 ;	../UI_Manager/ui.c:903: return "Storm";
+      0014E4 90 2F 54         [24] 2990 	mov	dptr,#___str_35
+      0014E7 75 F0 80         [24] 2991 	mov	b,#0x80
+      0014EA 22               [24] 2992 	ret
+                                   2993 ;	../UI_Manager/ui.c:904: case MACRO_STRING_OFFSET + OPTION_MACRO_ACID_DMX:
+      0014EB                       2994 00109$:
+                                   2995 ;	../UI_Manager/ui.c:905: return "Acid";
+      0014EB 90 2F 5A         [24] 2996 	mov	dptr,#___str_36
+      0014EE 75 F0 80         [24] 2997 	mov	b,#0x80
+      0014F1 22               [24] 2998 	ret
+                                   2999 ;	../UI_Manager/ui.c:906: case MACRO_STRING_OFFSET + OPTION_MACRO_ETHER_DMX:
+      0014F2                       3000 00110$:
+                                   3001 ;	../UI_Manager/ui.c:907: return "Ether";
+      0014F2 90 2F 5F         [24] 3002 	mov	dptr,#___str_37
+      0014F5 75 F0 80         [24] 3003 	mov	b,#0x80
+      0014F8 22               [24] 3004 	ret
+                                   3005 ;	../UI_Manager/ui.c:909: case COLOR_STRING_OFFSET + MANUAL_RED_STATE:
+      0014F9                       3006 00111$:
+                                   3007 ;	../UI_Manager/ui.c:910: return "Red Level";
+      0014F9 90 2F 65         [24] 3008 	mov	dptr,#___str_38
+      0014FC 75 F0 80         [24] 3009 	mov	b,#0x80
+      0014FF 22               [24] 3010 	ret
+                                   3011 ;	../UI_Manager/ui.c:911: case COLOR_STRING_OFFSET + MANUAL_GREEN_STATE:
+      001500                       3012 00112$:
+                                   3013 ;	../UI_Manager/ui.c:912: return "Green Level";
+      001500 90 2F 6F         [24] 3014 	mov	dptr,#___str_39
+      001503 75 F0 80         [24] 3015 	mov	b,#0x80
+      001506 22               [24] 3016 	ret
+                                   3017 ;	../UI_Manager/ui.c:913: case COLOR_STRING_OFFSET + MANUAL_BLUE_STATE:
+      001507                       3018 00113$:
+                                   3019 ;	../UI_Manager/ui.c:914: return "Blue Level";
+      001507 90 2F 7B         [24] 3020 	mov	dptr,#___str_40
+      00150A 75 F0 80         [24] 3021 	mov	b,#0x80
+      00150D 22               [24] 3022 	ret
+                                   3023 ;	../UI_Manager/ui.c:915: case COLOR_STRING_OFFSET + MANUAL_STROBE_STATE:
+      00150E                       3024 00114$:
+                                   3025 ;	../UI_Manager/ui.c:916: return "Strobe Level";
+      00150E 90 2F 86         [24] 3026 	mov	dptr,#___str_41
+      001511 75 F0 80         [24] 3027 	mov	b,#0x80
+      001514 22               [24] 3028 	ret
+                                   3029 ;	../UI_Manager/ui.c:918: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACITON_NONE:
+      001515                       3030 00115$:
+                                   3031 ;	../UI_Manager/ui.c:919: return "No Action";
+      001515 90 2F 93         [24] 3032 	mov	dptr,#___str_42
+      001518 75 F0 80         [24] 3033 	mov	b,#0x80
+      00151B 22               [24] 3034 	ret
+                                   3035 ;	../UI_Manager/ui.c:920: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CHOOSE_MACRO:
+      00151C                       3036 00116$:
+                                   3037 ;	../UI_Manager/ui.c:921: return "Choose Macro";
+      00151C 90 2F 9D         [24] 3038 	mov	dptr,#___str_43
+      00151F 75 F0 80         [24] 3039 	mov	b,#0x80
+      001522 22               [24] 3040 	ret
+                                   3041 ;	../UI_Manager/ui.c:922: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_RED:
+      001523                       3042 00117$:
+                                   3043 ;	../UI_Manager/ui.c:923: return "Red";
+      001523 90 2F AA         [24] 3044 	mov	dptr,#___str_44
+      001526 75 F0 80         [24] 3045 	mov	b,#0x80
+      001529 22               [24] 3046 	ret
+                                   3047 ;	../UI_Manager/ui.c:924: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_YELLOW:
+      00152A                       3048 00118$:
+                                   3049 ;	../UI_Manager/ui.c:925: return "Yellow";
+      00152A 90 2F AE         [24] 3050 	mov	dptr,#___str_45
+      00152D 75 F0 80         [24] 3051 	mov	b,#0x80
+      001530 22               [24] 3052 	ret
+                                   3053 ;	../UI_Manager/ui.c:926: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_GREEN:
+      001531                       3054 00119$:
+                                   3055 ;	../UI_Manager/ui.c:927: return "Green";
+      001531 90 2F B5         [24] 3056 	mov	dptr,#___str_46
+      001534 75 F0 80         [24] 3057 	mov	b,#0x80
+      001537 22               [24] 3058 	ret
+                                   3059 ;	../UI_Manager/ui.c:928: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CYAN:
+      001538                       3060 00120$:
+                                   3061 ;	../UI_Manager/ui.c:929: return "Cyan";
+      001538 90 2F BB         [24] 3062 	mov	dptr,#___str_47
+      00153B 75 F0 80         [24] 3063 	mov	b,#0x80
+      00153E 22               [24] 3064 	ret
+                                   3065 ;	../UI_Manager/ui.c:930: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLUE:
+      00153F                       3066 00121$:
+                                   3067 ;	../UI_Manager/ui.c:931: return "Blue";
+      00153F 90 2F C0         [24] 3068 	mov	dptr,#___str_48
+      001542 75 F0 80         [24] 3069 	mov	b,#0x80
+      001545 22               [24] 3070 	ret
+                                   3071 ;	../UI_Manager/ui.c:932: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_MAGENTA:
+      001546                       3072 00122$:
+                                   3073 ;	../UI_Manager/ui.c:933: return "Magenta";
+      001546 90 2F C5         [24] 3074 	mov	dptr,#___str_49
+      001549 75 F0 80         [24] 3075 	mov	b,#0x80
+      00154C 22               [24] 3076 	ret
+                                   3077 ;	../UI_Manager/ui.c:934: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_SLOW:
+      00154D                       3078 00123$:
+                                   3079 ;	../UI_Manager/ui.c:935: return "Strobe Slow";
+      00154D 90 2F CD         [24] 3080 	mov	dptr,#___str_50
+      001550 75 F0 80         [24] 3081 	mov	b,#0x80
+      001553 22               [24] 3082 	ret
+                                   3083 ;	../UI_Manager/ui.c:936: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_MEDIUM:
+      001554                       3084 00124$:
+                                   3085 ;	../UI_Manager/ui.c:937: return "Strobe Medium";
+      001554 90 2F D9         [24] 3086 	mov	dptr,#___str_51
+      001557 75 F0 80         [24] 3087 	mov	b,#0x80
+      00155A 22               [24] 3088 	ret
+                                   3089 ;	../UI_Manager/ui.c:938: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_FAST:
+      00155B                       3090 00125$:
+                                   3091 ;	../UI_Manager/ui.c:939: return "Strobe Fast";
+      00155B 90 2F E7         [24] 3092 	mov	dptr,#___str_52
+      00155E 75 F0 80         [24] 3093 	mov	b,#0x80
+      001561 22               [24] 3094 	ret
+                                   3095 ;	../UI_Manager/ui.c:940: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLACKOUT:
+      001562                       3096 00126$:
+                                   3097 ;	../UI_Manager/ui.c:941: return "Blackout";
+      001562 90 2F F3         [24] 3098 	mov	dptr,#___str_53
+      001565 75 F0 80         [24] 3099 	mov	b,#0x80
+      001568 22               [24] 3100 	ret
+                                   3101 ;	../UI_Manager/ui.c:942: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_WHITEOUT:
+      001569                       3102 00127$:
+                                   3103 ;	../UI_Manager/ui.c:943: return "Whiteout";         
+      001569 90 2F FC         [24] 3104 	mov	dptr,#___str_54
+      00156C 75 F0 80         [24] 3105 	mov	b,#0x80
+      00156F 22               [24] 3106 	ret
+                                   3107 ;	../UI_Manager/ui.c:945: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_1: 
+      001570                       3108 00128$:
+                                   3109 ;	../UI_Manager/ui.c:946: return "Slot 1";   
+      001570 90 30 05         [24] 3110 	mov	dptr,#___str_55
+      001573 75 F0 80         [24] 3111 	mov	b,#0x80
+      001576 22               [24] 3112 	ret
+                                   3113 ;	../UI_Manager/ui.c:947: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_2: 
+      001577                       3114 00129$:
+                                   3115 ;	../UI_Manager/ui.c:948: return "Slot 2";   
+      001577 90 30 0C         [24] 3116 	mov	dptr,#___str_56
+      00157A 75 F0 80         [24] 3117 	mov	b,#0x80
+      00157D 22               [24] 3118 	ret
+                                   3119 ;	../UI_Manager/ui.c:949: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_3: 
+      00157E                       3120 00130$:
+                                   3121 ;	../UI_Manager/ui.c:950: return "Slot 3"; 
+      00157E 90 30 13         [24] 3122 	mov	dptr,#___str_57
+      001581 75 F0 80         [24] 3123 	mov	b,#0x80
+                                   3124 ;	../UI_Manager/ui.c:952: case DMX_STRING_OFFSET + OPTION_DMX_MODE_9: 
+      001584 22               [24] 3125 	ret
+      001585                       3126 00131$:
+                                   3127 ;	../UI_Manager/ui.c:953: return "10 All";     
+      001585 90 30 1A         [24] 3128 	mov	dptr,#___str_58
+      001588 75 F0 80         [24] 3129 	mov	b,#0x80
+                                   3130 ;	../UI_Manager/ui.c:954: case DMX_STRING_OFFSET + OPTION_DMX_MODE_3: 
+      00158B 22               [24] 3131 	ret
+      00158C                       3132 00132$:
+                                   3133 ;	../UI_Manager/ui.c:955: return "3 Fog + Macro";   
+      00158C 90 30 21         [24] 3134 	mov	dptr,#___str_59
+      00158F 75 F0 80         [24] 3135 	mov	b,#0x80
+                                   3136 ;	../UI_Manager/ui.c:956: case DMX_STRING_OFFSET + OPTION_DMX_MODE_1: 
+      001592 22               [24] 3137 	ret
+      001593                       3138 00133$:
+                                   3139 ;	../UI_Manager/ui.c:957: return "1 Fog";    
+      001593 90 30 2F         [24] 3140 	mov	dptr,#___str_60
+      001596 75 F0 80         [24] 3141 	mov	b,#0x80
+                                   3142 ;	../UI_Manager/ui.c:959: case SECRET_STRING_OFFSET + 0:
+      001599 22               [24] 3143 	ret
+      00159A                       3144 00134$:
+                                   3145 ;	../UI_Manager/ui.c:960: return "0x486F6C6D6573";
+      00159A 90 30 35         [24] 3146 	mov	dptr,#___str_61
+      00159D 75 F0 80         [24] 3147 	mov	b,#0x80
+                                   3148 ;	../UI_Manager/ui.c:961: case SECRET_STRING_OFFSET + 1:
+      0015A0 22               [24] 3149 	ret
+      0015A1                       3150 00135$:
+                                   3151 ;	../UI_Manager/ui.c:962: return "& 576174736F6E";
+      0015A1 90 30 44         [24] 3152 	mov	dptr,#___str_62
+      0015A4 75 F0 80         [24] 3153 	mov	b,#0x80
+                                   3154 ;	../UI_Manager/ui.c:963: case SECRET_STRING_OFFSET + 2:
+      0015A7 22               [24] 3155 	ret
+      0015A8                       3156 00136$:
+                                   3157 ;	../UI_Manager/ui.c:964: return "626F74684F776E41";
+      0015A8 90 30 53         [24] 3158 	mov	dptr,#___str_63
+      0015AB 75 F0 80         [24] 3159 	mov	b,#0x80
+                                   3160 ;	../UI_Manager/ui.c:965: case SECRET_STRING_OFFSET + 3:
+      0015AE 22               [24] 3161 	ret
+      0015AF                       3162 00137$:
+                                   3163 ;	../UI_Manager/ui.c:966: return "536E6F7762616C6C";
+      0015AF 90 30 64         [24] 3164 	mov	dptr,#___str_64
+      0015B2 75 F0 80         [24] 3165 	mov	b,#0x80
+                                   3166 ;	../UI_Manager/ui.c:967: case SECRET_STRING_OFFSET + 4:
+      0015B5 22               [24] 3167 	ret
+      0015B6                       3168 00138$:
+                                   3169 ;	../UI_Manager/ui.c:968: return "4D6F726961727479";
+      0015B6 90 30 75         [24] 3170 	mov	dptr,#___str_65
+      0015B9 75 F0 80         [24] 3171 	mov	b,#0x80
+                                   3172 ;	../UI_Manager/ui.c:969: case SECRET_STRING_OFFSET + 5:
+      0015BC 22               [24] 3173 	ret
+      0015BD                       3174 00139$:
+                                   3175 ;	../UI_Manager/ui.c:970: return "646F65734E6F74 ;";
+      0015BD 90 30 86         [24] 3176 	mov	dptr,#___str_66
+      0015C0 75 F0 80         [24] 3177 	mov	b,#0x80
+                                   3178 ;	../UI_Manager/ui.c:971: }
+      0015C3 22               [24] 3179 	ret
+      0015C4                       3180 00140$:
+                                   3181 ;	../UI_Manager/ui.c:973: return 0;
+      0015C4 90 00 00         [24] 3182 	mov	dptr,#0x0000
+      0015C7 75 F0 00         [24] 3183 	mov	b,#0x00
+                                   3184 ;	../UI_Manager/ui.c:974: }
+      0015CA 22               [24] 3185 	ret
+                                   3186 	.area CSEG    (CODE)
+                                   3187 	.area CONST   (CODE)
+      002DF0                       3188 ___str_0:
+      002DF0 54 61 6E 6B 20 4C 69  3189 	.ascii "Tank Lights Off"
              67 68 74 73 20 4F 66
              66
-      002E56 00                    3234 	.db 0x00
-      002E57                       3235 ___str_1:
-      002E57 54 61 6E 6B 20 4C 69  3236 	.ascii "Tank Lights On"
+      002DFF 00                    3190 	.db 0x00
+      002E00                       3191 ___str_1:
+      002E00 54 61 6E 6B 20 4C 69  3192 	.ascii "Tank Lights On"
              67 68 74 73 20 4F 6E
-      002E65 00                    3237 	.db 0x00
-      002E66                       3238 ___str_2:
-      002E66 46 75 6E 2B 4D 61 6E  3239 	.ascii "Fun+Man to Undo"
+      002E0E 00                    3193 	.db 0x00
+      002E0F                       3194 ___str_2:
+      002E0F 46 75 6E 2B 4D 61 6E  3195 	.ascii "Fun+Man to Undo"
              20 74 6F 20 55 6E 64
              6F
-      002E75 00                    3240 	.db 0x00
-      002E76                       3241 ___str_3:
-      002E76 41 74 6D 6F 73 46 45  3242 	.ascii "AtmosFEAR 221B"
+      002E1E 00                    3196 	.db 0x00
+      002E1F                       3197 ___str_3:
+      002E1F 41 74 6D 6F 73 46 45  3198 	.ascii "AtmosFEAR 221B"
              41 52 20 32 32 31 42
-      002E84 00                    3243 	.db 0x00
-      002E85                       3244 ___str_4:
-      002E85 42 79 20 42 6C 69 7A  3245 	.ascii "By Blizzard Pro"
+      002E2D 00                    3199 	.db 0x00
+      002E2E                       3200 ___str_4:
+      002E2E 42 79 20 42 6C 69 7A  3201 	.ascii "By Blizzard Pro"
              7A 61 72 64 20 50 72
              6F
-      002E94 00                    3246 	.db 0x00
-      002E95                       3247 ___str_5:
-      002E95 50 43 20 4C 6F 61 64  3248 	.ascii "PC Load Letter"
+      002E3D 00                    3202 	.db 0x00
+      002E3E                       3203 ___str_5:
+      002E3E 50 43 20 4C 6F 61 64  3204 	.ascii "PC Load Letter"
              20 4C 65 74 74 65 72
-      002EA3 00                    3249 	.db 0x00
-      002EA4                       3250 ___str_6:
-      002EA4 42 75 72 73 74 20 74  3251 	.ascii "Burst to Refill"
+      002E4C 00                    3205 	.db 0x00
+      002E4D                       3206 ___str_6:
+      002E4D 42 75 72 73 74 20 74  3207 	.ascii "Burst to Refill"
              6F 20 52 65 66 69 6C
              6C
-      002EB3 00                    3252 	.db 0x00
-      002EB4                       3253 ___str_7:
-      002EB4 4D 61 6E 75 61 6C 20  3254 	.ascii "Manual Mode"
+      002E5C 00                    3208 	.db 0x00
+      002E5D                       3209 ___str_7:
+      002E5D 4D 61 6E 75 61 6C 20  3210 	.ascii "Manual Mode"
              4D 6F 64 65
-      002EBF 00                    3255 	.db 0x00
-      002EC0                       3256 ___str_8:
-      002EC0 41 64 64 72           3257 	.ascii "Addr"
-      002EC4 00                    3258 	.db 0x00
-      002EC5                       3259 ___str_9:
-      002EC5 4D 6F 64 65           3260 	.ascii "Mode"
-      002EC9 00                    3261 	.db 0x00
-      002ECA                       3262 ___str_10:
-      002ECA 44 4D 58 20 4F 6B     3263 	.ascii "DMX Ok"
-      002ED0 00                    3264 	.db 0x00
-      002ED1                       3265 ___str_11:
-      002ED1 4E 6F 20 44 4D 58     3266 	.ascii "No DMX"
-      002ED7 00                    3267 	.db 0x00
-      002ED8                       3268 ___str_12:
-      002ED8 49 6E 74 65 72 76 61  3269 	.ascii "Interval"
+      002E68 00                    3211 	.db 0x00
+      002E69                       3212 ___str_8:
+      002E69 41 64 64 72           3213 	.ascii "Addr"
+      002E6D 00                    3214 	.db 0x00
+      002E6E                       3215 ___str_9:
+      002E6E 4D 6F 64 65           3216 	.ascii "Mode"
+      002E72 00                    3217 	.db 0x00
+      002E73                       3218 ___str_10:
+      002E73 44 4D 58 20 4F 6B     3219 	.ascii "DMX Ok"
+      002E79 00                    3220 	.db 0x00
+      002E7A                       3221 ___str_11:
+      002E7A 4E 6F 20 44 4D 58     3222 	.ascii "No DMX"
+      002E80 00                    3223 	.db 0x00
+      002E81                       3224 ___str_12:
+      002E81 49 6E 74 65 72 76 61  3225 	.ascii "Interval"
              6C
-      002EE0 00                    3270 	.db 0x00
-      002EE1                       3271 ___str_13:
-      002EE1 44 75 72 61 74 69 6F  3272 	.ascii "Duration"
+      002E89 00                    3226 	.db 0x00
+      002E8A                       3227 ___str_13:
+      002E8A 44 75 72 61 74 69 6F  3228 	.ascii "Duration"
              6E
-      002EE9 00                    3273 	.db 0x00
-      002EEA                       3274 ___str_14:
-      002EEA 46 6F 67 20 4C 65 76  3275 	.ascii "Fog Level"
+      002E92 00                    3229 	.db 0x00
+      002E93                       3230 ___str_14:
+      002E93 46 6F 67 20 4C 65 76  3231 	.ascii "Fog Level"
              65 6C
-      002EF3 00                    3276 	.db 0x00
-      002EF4                       3277 ___str_15:
-      002EF4 46 6F 67 20 49 6E 74  3278 	.ascii "Fog Interval"
+      002E9C 00                    3232 	.db 0x00
+      002E9D                       3233 ___str_15:
+      002E9D 46 6F 67 20 49 6E 74  3234 	.ascii "Fog Interval"
              65 72 76 61 6C
-      002F00 00                    3279 	.db 0x00
-      002F01                       3280 ___str_16:
-      002F01 53 65 63 6F 6E 64 73  3281 	.ascii "Seconds"
-      002F08 00                    3282 	.db 0x00
-      002F09                       3283 ___str_17:
-      002F09 46 6F 67 20 44 75 72  3284 	.ascii "Fog Duration"
+      002EA9 00                    3235 	.db 0x00
+      002EAA                       3236 ___str_16:
+      002EAA 53 65 63 6F 6E 64 73  3237 	.ascii "Seconds"
+      002EB1 00                    3238 	.db 0x00
+      002EB2                       3239 ___str_17:
+      002EB2 46 6F 67 20 44 75 72  3240 	.ascii "Fog Duration"
              61 74 69 6F 6E
-      002F15 00                    3285 	.db 0x00
-      002F16                       3286 ___str_18:
-      002F16 4D 61 63 72 6F 73     3287 	.ascii "Macros"
-      002F1C 00                    3288 	.db 0x00
-      002F1D                       3289 ___str_19:
-      002F1D 4D 61 63 72 6F 20 53  3290 	.ascii "Macro Speed"
+      002EBE 00                    3241 	.db 0x00
+      002EBF                       3242 ___str_18:
+      002EBF 4D 61 63 72 6F 73     3243 	.ascii "Macros"
+      002EC5 00                    3244 	.db 0x00
+      002EC6                       3245 ___str_19:
+      002EC6 4D 61 63 72 6F 20 53  3246 	.ascii "Macro Speed"
              70 65 65 64
-      002F28 00                    3291 	.db 0x00
-      002F29                       3292 ___str_20:
-      002F29 4F 66 66              3293 	.ascii "Off"
-      002F2C 00                    3294 	.db 0x00
-      002F2D                       3295 ___str_21:
-      002F2D 00                    3296 	.db 0x00
-      002F2E                       3297 ___str_22:
-      002F2E 52 65 6D 6F 74 65 20  3298 	.ascii "Remote X Action"
+      002ED1 00                    3247 	.db 0x00
+      002ED2                       3248 ___str_20:
+      002ED2 4F 66 66              3249 	.ascii "Off"
+      002ED5 00                    3250 	.db 0x00
+      002ED6                       3251 ___str_21:
+      002ED6 00                    3252 	.db 0x00
+      002ED7                       3253 ___str_22:
+      002ED7 52 65 6D 6F 74 65 20  3254 	.ascii "Remote X Action"
              58 20 41 63 74 69 6F
              6E
-      002F3D 00                    3299 	.db 0x00
-      002F3E                       3300 ___str_23:
-      002F3E 53 61 76 65 20 53 65  3301 	.ascii "Save Settings"
+      002EE6 00                    3255 	.db 0x00
+      002EE7                       3256 ___str_23:
+      002EE7 53 61 76 65 64 21     3257 	.ascii "Saved!"
+      002EED 00                    3258 	.db 0x00
+      002EEE                       3259 ___str_24:
+      002EEE 4C 6F 61 64 65 64 21  3260 	.ascii "Loaded!"
+      002EF5 00                    3261 	.db 0x00
+      002EF6                       3262 ___str_25:
+      002EF6 53 61 76 65 20 53 65  3263 	.ascii "Save Settings"
              74 74 69 6E 67 73
-      002F4B 00                    3302 	.db 0x00
-      002F4C                       3303 ___str_24:
-      002F4C 4C 6F 61 64 20 53 65  3304 	.ascii "Load Settings"
+      002F03 00                    3264 	.db 0x00
+      002F04                       3265 ___str_26:
+      002F04 4C 6F 61 64 20 53 65  3266 	.ascii "Load Settings"
              74 74 69 6E 67 73
-      002F59 00                    3305 	.db 0x00
-      002F5A                       3306 ___str_25:
-      002F5A 53 61 76 65 64 21     3307 	.ascii "Saved!"
-      002F60 00                    3308 	.db 0x00
-      002F61                       3309 ___str_26:
-      002F61 4C 6F 61 64 65 64 21  3310 	.ascii "Loaded!"
-      002F68 00                    3311 	.db 0x00
-      002F69                       3312 ___str_27:
-      002F69 44 4D 58 20 41 64 64  3313 	.ascii "DMX Address"
+      002F11 00                    3267 	.db 0x00
+      002F12                       3268 ___str_27:
+      002F12 44 4D 58 20 41 64 64  3269 	.ascii "DMX Address"
              72 65 73 73
-      002F74 00                    3314 	.db 0x00
-      002F75                       3315 ___str_28:
-      002F75 44 4D 58 20 43 68 61  3316 	.ascii "DMX Channel Mode"
+      002F1D 00                    3270 	.db 0x00
+      002F1E                       3271 ___str_28:
+      002F1E 44 4D 58 20 43 68 61  3272 	.ascii "DMX Channel Mode"
              6E 6E 65 6C 20 4D 6F
              64 65
-      002F85 00                    3317 	.db 0x00
-      002F86                       3318 ___str_29:
-      002F86 57 69 6D 70 79        3319 	.ascii "Wimpy"
-      002F8B 00                    3320 	.db 0x00
-      002F8C                       3321 ___str_30:
-      002F8C 4D 69 6C 64           3322 	.ascii "Mild"
-      002F90 00                    3323 	.db 0x00
-      002F91                       3324 ___str_31:
-      002F91 42 6C 61 7A 69 6E     3325 	.ascii "Blazin"
-      002F97 00                    3326 	.db 0x00
-      002F98                       3327 ___str_32:
-      002F98 52 61 69 6E 62 6F 77  3328 	.ascii "Rainbow"
-      002F9F 00                    3329 	.db 0x00
-      002FA0                       3330 ___str_33:
-      002FA0 46 69 72 65           3331 	.ascii "Fire"
-      002FA4 00                    3332 	.db 0x00
-      002FA5                       3333 ___str_34:
-      002FA5 57 61 74 65 72        3334 	.ascii "Water"
-      002FAA 00                    3335 	.db 0x00
-      002FAB                       3336 ___str_35:
-      002FAB 53 74 6F 72 6D        3337 	.ascii "Storm"
-      002FB0 00                    3338 	.db 0x00
-      002FB1                       3339 ___str_36:
-      002FB1 41 63 69 64           3340 	.ascii "Acid"
-      002FB5 00                    3341 	.db 0x00
-      002FB6                       3342 ___str_37:
-      002FB6 45 74 68 65 72        3343 	.ascii "Ether"
-      002FBB 00                    3344 	.db 0x00
-      002FBC                       3345 ___str_38:
-      002FBC 52 65 64 20 4C 65 76  3346 	.ascii "Red Level"
+      002F2E 00                    3273 	.db 0x00
+      002F2F                       3274 ___str_29:
+      002F2F 57 69 6D 70 79        3275 	.ascii "Wimpy"
+      002F34 00                    3276 	.db 0x00
+      002F35                       3277 ___str_30:
+      002F35 4D 69 6C 64           3278 	.ascii "Mild"
+      002F39 00                    3279 	.db 0x00
+      002F3A                       3280 ___str_31:
+      002F3A 42 6C 61 7A 69 6E     3281 	.ascii "Blazin"
+      002F40 00                    3282 	.db 0x00
+      002F41                       3283 ___str_32:
+      002F41 52 61 69 6E 62 6F 77  3284 	.ascii "Rainbow"
+      002F48 00                    3285 	.db 0x00
+      002F49                       3286 ___str_33:
+      002F49 46 69 72 65           3287 	.ascii "Fire"
+      002F4D 00                    3288 	.db 0x00
+      002F4E                       3289 ___str_34:
+      002F4E 57 61 74 65 72        3290 	.ascii "Water"
+      002F53 00                    3291 	.db 0x00
+      002F54                       3292 ___str_35:
+      002F54 53 74 6F 72 6D        3293 	.ascii "Storm"
+      002F59 00                    3294 	.db 0x00
+      002F5A                       3295 ___str_36:
+      002F5A 41 63 69 64           3296 	.ascii "Acid"
+      002F5E 00                    3297 	.db 0x00
+      002F5F                       3298 ___str_37:
+      002F5F 45 74 68 65 72        3299 	.ascii "Ether"
+      002F64 00                    3300 	.db 0x00
+      002F65                       3301 ___str_38:
+      002F65 52 65 64 20 4C 65 76  3302 	.ascii "Red Level"
              65 6C
-      002FC5 00                    3347 	.db 0x00
-      002FC6                       3348 ___str_39:
-      002FC6 47 72 65 65 6E 20 4C  3349 	.ascii "Green Level"
+      002F6E 00                    3303 	.db 0x00
+      002F6F                       3304 ___str_39:
+      002F6F 47 72 65 65 6E 20 4C  3305 	.ascii "Green Level"
              65 76 65 6C
-      002FD1 00                    3350 	.db 0x00
-      002FD2                       3351 ___str_40:
-      002FD2 42 6C 75 65 20 4C 65  3352 	.ascii "Blue Level"
+      002F7A 00                    3306 	.db 0x00
+      002F7B                       3307 ___str_40:
+      002F7B 42 6C 75 65 20 4C 65  3308 	.ascii "Blue Level"
              76 65 6C
-      002FDC 00                    3353 	.db 0x00
-      002FDD                       3354 ___str_41:
-      002FDD 53 74 72 6F 62 65 20  3355 	.ascii "Strobe Level"
+      002F85 00                    3309 	.db 0x00
+      002F86                       3310 ___str_41:
+      002F86 53 74 72 6F 62 65 20  3311 	.ascii "Strobe Level"
              4C 65 76 65 6C
-      002FE9 00                    3356 	.db 0x00
-      002FEA                       3357 ___str_42:
-      002FEA 4E 6F 20 41 63 74 69  3358 	.ascii "No Action"
+      002F92 00                    3312 	.db 0x00
+      002F93                       3313 ___str_42:
+      002F93 4E 6F 20 41 63 74 69  3314 	.ascii "No Action"
              6F 6E
-      002FF3 00                    3359 	.db 0x00
-      002FF4                       3360 ___str_43:
-      002FF4 43 68 6F 6F 73 65 20  3361 	.ascii "Choose Macro"
+      002F9C 00                    3315 	.db 0x00
+      002F9D                       3316 ___str_43:
+      002F9D 43 68 6F 6F 73 65 20  3317 	.ascii "Choose Macro"
              4D 61 63 72 6F
-      003000 00                    3362 	.db 0x00
-      003001                       3363 ___str_44:
-      003001 52 65 64              3364 	.ascii "Red"
-      003004 00                    3365 	.db 0x00
-      003005                       3366 ___str_45:
-      003005 59 65 6C 6C 6F 77     3367 	.ascii "Yellow"
-      00300B 00                    3368 	.db 0x00
-      00300C                       3369 ___str_46:
-      00300C 47 72 65 65 6E        3370 	.ascii "Green"
-      003011 00                    3371 	.db 0x00
-      003012                       3372 ___str_47:
-      003012 43 79 61 6E           3373 	.ascii "Cyan"
-      003016 00                    3374 	.db 0x00
-      003017                       3375 ___str_48:
-      003017 42 6C 75 65           3376 	.ascii "Blue"
-      00301B 00                    3377 	.db 0x00
-      00301C                       3378 ___str_49:
-      00301C 4D 61 67 65 6E 74 61  3379 	.ascii "Magenta"
-      003023 00                    3380 	.db 0x00
-      003024                       3381 ___str_50:
-      003024 53 74 72 6F 62 65 20  3382 	.ascii "Strobe Slow"
+      002FA9 00                    3318 	.db 0x00
+      002FAA                       3319 ___str_44:
+      002FAA 52 65 64              3320 	.ascii "Red"
+      002FAD 00                    3321 	.db 0x00
+      002FAE                       3322 ___str_45:
+      002FAE 59 65 6C 6C 6F 77     3323 	.ascii "Yellow"
+      002FB4 00                    3324 	.db 0x00
+      002FB5                       3325 ___str_46:
+      002FB5 47 72 65 65 6E        3326 	.ascii "Green"
+      002FBA 00                    3327 	.db 0x00
+      002FBB                       3328 ___str_47:
+      002FBB 43 79 61 6E           3329 	.ascii "Cyan"
+      002FBF 00                    3330 	.db 0x00
+      002FC0                       3331 ___str_48:
+      002FC0 42 6C 75 65           3332 	.ascii "Blue"
+      002FC4 00                    3333 	.db 0x00
+      002FC5                       3334 ___str_49:
+      002FC5 4D 61 67 65 6E 74 61  3335 	.ascii "Magenta"
+      002FCC 00                    3336 	.db 0x00
+      002FCD                       3337 ___str_50:
+      002FCD 53 74 72 6F 62 65 20  3338 	.ascii "Strobe Slow"
              53 6C 6F 77
-      00302F 00                    3383 	.db 0x00
-      003030                       3384 ___str_51:
-      003030 53 74 72 6F 62 65 20  3385 	.ascii "Strobe Medium"
+      002FD8 00                    3339 	.db 0x00
+      002FD9                       3340 ___str_51:
+      002FD9 53 74 72 6F 62 65 20  3341 	.ascii "Strobe Medium"
              4D 65 64 69 75 6D
-      00303D 00                    3386 	.db 0x00
-      00303E                       3387 ___str_52:
-      00303E 53 74 72 6F 62 65 20  3388 	.ascii "Strobe Fast"
+      002FE6 00                    3342 	.db 0x00
+      002FE7                       3343 ___str_52:
+      002FE7 53 74 72 6F 62 65 20  3344 	.ascii "Strobe Fast"
              46 61 73 74
-      003049 00                    3389 	.db 0x00
-      00304A                       3390 ___str_53:
-      00304A 42 6C 61 63 6B 6F 75  3391 	.ascii "Blackout"
+      002FF2 00                    3345 	.db 0x00
+      002FF3                       3346 ___str_53:
+      002FF3 42 6C 61 63 6B 6F 75  3347 	.ascii "Blackout"
              74
-      003052 00                    3392 	.db 0x00
-      003053                       3393 ___str_54:
-      003053 57 68 69 74 65 6F 75  3394 	.ascii "Whiteout"
+      002FFB 00                    3348 	.db 0x00
+      002FFC                       3349 ___str_54:
+      002FFC 57 68 69 74 65 6F 75  3350 	.ascii "Whiteout"
              74
-      00305B 00                    3395 	.db 0x00
-      00305C                       3396 ___str_55:
-      00305C 53 6C 6F 74 20 31     3397 	.ascii "Slot 1"
-      003062 00                    3398 	.db 0x00
-      003063                       3399 ___str_56:
-      003063 53 6C 6F 74 20 32     3400 	.ascii "Slot 2"
-      003069 00                    3401 	.db 0x00
-      00306A                       3402 ___str_57:
-      00306A 53 6C 6F 74 20 33     3403 	.ascii "Slot 3"
-      003070 00                    3404 	.db 0x00
-      003071                       3405 ___str_58:
-      003071 31 30 20 41 6C 6C     3406 	.ascii "10 All"
-      003077 00                    3407 	.db 0x00
-      003078                       3408 ___str_59:
-      003078 33 20 46 6F 67 20 2B  3409 	.ascii "3 Fog + Macro"
+      003004 00                    3351 	.db 0x00
+      003005                       3352 ___str_55:
+      003005 53 6C 6F 74 20 31     3353 	.ascii "Slot 1"
+      00300B 00                    3354 	.db 0x00
+      00300C                       3355 ___str_56:
+      00300C 53 6C 6F 74 20 32     3356 	.ascii "Slot 2"
+      003012 00                    3357 	.db 0x00
+      003013                       3358 ___str_57:
+      003013 53 6C 6F 74 20 33     3359 	.ascii "Slot 3"
+      003019 00                    3360 	.db 0x00
+      00301A                       3361 ___str_58:
+      00301A 31 30 20 41 6C 6C     3362 	.ascii "10 All"
+      003020 00                    3363 	.db 0x00
+      003021                       3364 ___str_59:
+      003021 33 20 46 6F 67 20 2B  3365 	.ascii "3 Fog + Macro"
              20 4D 61 63 72 6F
-      003085 00                    3410 	.db 0x00
-      003086                       3411 ___str_60:
-      003086 31 20 46 6F 67        3412 	.ascii "1 Fog"
-      00308B 00                    3413 	.db 0x00
-      00308C                       3414 ___str_61:
-      00308C 30 78 34 38 36 46 36  3415 	.ascii "0x486F6C6D6573"
+      00302E 00                    3366 	.db 0x00
+      00302F                       3367 ___str_60:
+      00302F 31 20 46 6F 67        3368 	.ascii "1 Fog"
+      003034 00                    3369 	.db 0x00
+      003035                       3370 ___str_61:
+      003035 30 78 34 38 36 46 36  3371 	.ascii "0x486F6C6D6573"
              43 36 44 36 35 37 33
-      00309A 00                    3416 	.db 0x00
-      00309B                       3417 ___str_62:
-      00309B 26 20 35 37 36 31 37  3418 	.ascii "& 576174736F6E"
+      003043 00                    3372 	.db 0x00
+      003044                       3373 ___str_62:
+      003044 26 20 35 37 36 31 37  3374 	.ascii "& 576174736F6E"
              34 37 33 36 46 36 45
-      0030A9 00                    3419 	.db 0x00
-      0030AA                       3420 ___str_63:
-      0030AA 36 32 36 46 37 34 36  3421 	.ascii "626F74684F776E41"
+      003052 00                    3375 	.db 0x00
+      003053                       3376 ___str_63:
+      003053 36 32 36 46 37 34 36  3377 	.ascii "626F74684F776E41"
              38 34 46 37 37 36 45
              34 31
-      0030BA 00                    3422 	.db 0x00
-      0030BB                       3423 ___str_64:
-      0030BB 35 33 36 45 36 46 37  3424 	.ascii "536E6F7762616C6C"
+      003063 00                    3378 	.db 0x00
+      003064                       3379 ___str_64:
+      003064 35 33 36 45 36 46 37  3380 	.ascii "536E6F7762616C6C"
              37 36 32 36 31 36 43
              36 43
-      0030CB 00                    3425 	.db 0x00
-      0030CC                       3426 ___str_65:
-      0030CC 34 44 36 46 37 32 36  3427 	.ascii "4D6F726961727479"
+      003074 00                    3381 	.db 0x00
+      003075                       3382 ___str_65:
+      003075 34 44 36 46 37 32 36  3383 	.ascii "4D6F726961727479"
              39 36 31 37 32 37 34
              37 39
-      0030DC 00                    3428 	.db 0x00
-      0030DD                       3429 ___str_66:
-      0030DD 36 34 36 46 36 35 37  3430 	.ascii "646F65734E6F74 ;"
+      003085 00                    3384 	.db 0x00
+      003086                       3385 ___str_66:
+      003086 36 34 36 46 36 35 37  3386 	.ascii "646F65734E6F74 ;"
              33 34 45 36 46 37 34
              20 3B
-      0030ED 00                    3431 	.db 0x00
-                                   3432 	.area XINIT   (CODE)
-                                   3433 	.area CABS    (ABS,CODE)
+      003096 00                    3387 	.db 0x00
+                                   3388 	.area XINIT   (CODE)
+                                   3389 	.area CABS    (ABS,CODE)

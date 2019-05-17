@@ -166,7 +166,7 @@ uint8_t get_button_action(){
     if(level <= BUTTON_MAN_BURST_UPPER && level > BUTTON_MAN_BURST_LOWER){
         if(lastAction == BUTTON_MAN_BURST){ 
             if(pressOK < PRESS_HOLD_COUNT){
-                if(++pressOK >= PRESS_HOLD_COUNT + (34 * 5)){
+                if(++pressOK >= PRESS_HOLD_COUNT){
                     retVal = BUTTON_MAN_BURST;
                 } 
             }

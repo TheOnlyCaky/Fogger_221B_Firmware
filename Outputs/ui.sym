@@ -318,9 +318,9 @@ Symbol Table
  18 ___str_21                                                      0000E6 R
  18 ___str_22                                                      0000E7 R
  18 ___str_23                                                      0000F7 R
- 18 ___str_24                                                      000105 R
- 18 ___str_25                                                      000113 R
- 18 ___str_26                                                      00011A R
+ 18 ___str_24                                                      0000FE R
+ 18 ___str_25                                                      000106 R
+ 18 ___str_26                                                      000114 R
  18 ___str_27                                                      000122 R
  18 ___str_28                                                      00012E R
  18 ___str_29                                                      00013F R
@@ -376,18 +376,18 @@ Symbol Table
     __modsint                                                      ****** GX
     __modsint_PARM_2                                               ****** GX
   5 _changed                                                       000002 R
- 17 _colorPage                                                     0009FF GR
- 17 _dmxAddressPage                                                000D66 GR
- 17 _dmxChannelPage                                                000DEA GR
+ 17 _colorPage                                                     0009C3 GR
+ 17 _dmxAddressPage                                                000D0F GR
+ 17 _dmxChannelPage                                                000D93 GR
     _exe_command                                                   ****** GX
- 17 _fogDurationPage                                               0007BB GR
- 17 _fogIntervalPage                                               000706 GR
+ 17 _fogDurationPage                                               00079B GR
+ 17 _fogIntervalPage                                               0006EC GR
  17 _fogLevelPage                                                  0005BA GR
- 17 _getString                                                     000F2E GR
+ 17 _getString                                                     000ED7 GR
     _get_button_action                                             ****** GX
     _get_dmx_address                                               ****** GX
     _get_runtime_data                                              ****** GX
- 17 _get_ui_state                                                  000F2A GR
+ 17 _get_ui_state                                                  000ED3 GR
  17 _idlePage                                                      0002FB GR
   5 _idlePage_empty_65536_55                                       00000A R
   5 _idlePage_iconChange_65536_55                                  00000C R
@@ -395,11 +395,11 @@ Symbol Table
   5 _idlePage_playing_65536_55                                     00000D R
   5 _idlePage_timer_65536_55                                       000008 R
   5 _idlePage_tock_65536_55                                        00000B R
- 17 _macroPage                                                     000870 GR
- 17 _macroSpeedPage                                                000922 GR
+ 17 _macroPage                                                     00084A GR
+ 17 _macroSpeedPage                                                0008F6 GR
     _power_pump                                                    ****** GX
- 17 _remotePage                                                    000B25 GR
- 17 _saveLoadPage                                                  000C49 GR
+ 17 _remotePage                                                    000AD9 GR
+ 17 _saveLoadPage                                                  000BF7 GR
   5 _saveLoadPage_slot_65536_134                                   00000E R
     _save_load_settings                                            ****** GX
     _save_load_settings_PARM_2                                     ****** GX
@@ -407,7 +407,7 @@ Symbol Table
     _set_runtime_data                                              ****** GX
     _set_runtime_data_PARM_2                                       ****** GX
     _set_runtime_data_PARM_3                                       ****** GX
- 17 _set_ui_state                                                  000E8C GR
+ 17 _set_ui_state                                                  000E35 GR
   5 _set_ui_state_PARM_2                                           00000F GR
     _tick_fogger                                                   ****** GX
  17 _tick_ui                                                       000000 GR
@@ -658,7 +658,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size     1E   flags   20
   16 GSFINAL                                    size      0   flags   20
-  17 CSEG                                       size   1137   flags   20
+  17 CSEG                                       size   10E0   flags   20
   18 CONST                                      size    2A7   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

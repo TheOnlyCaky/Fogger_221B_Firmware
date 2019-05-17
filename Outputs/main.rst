@@ -263,13 +263,13 @@
       000000 02 00 49         [24]  263 	ljmp	__sdcc_gsinit_startup
       000003 32               [24]  264 	reti
       000004                        265 	.ds	7
-      00000B 02 24 0F         [24]  266 	ljmp	_wirelessBreakDetectISR
+      00000B 02 23 B8         [24]  266 	ljmp	_wirelessBreakDetectISR
       00000E                        267 	.ds	5
       000013 32               [24]  268 	reti
       000014                        269 	.ds	7
       00001B 32               [24]  270 	reti
       00001C                        271 	.ds	7
-      000023 02 1D 56         [24]  272 	ljmp	_dmxReceiveByteISR
+      000023 02 1C FF         [24]  272 	ljmp	_dmxReceiveByteISR
       000026                        273 	.ds	5
       00002B 32               [24]  274 	reti
       00002C                        275 	.ds	7
@@ -277,7 +277,7 @@
       000034                        277 	.ds	7
       00003B 32               [24]  278 	reti
       00003C                        279 	.ds	7
-      000043 02 1D D2         [24]  280 	ljmp	_dmxBreakDetectedISR
+      000043 02 1D 7B         [24]  280 	ljmp	_dmxBreakDetectedISR
                                     281 ;--------------------------------------------------------
                                     282 ; global & static initialisations
                                     283 ;--------------------------------------------------------
@@ -340,7 +340,7 @@
                                     340 ;	../main.c:40: save_load_settings(SLOT_0, LOAD);
       000123 75 72 00         [24]  341 	mov	_save_load_settings_PARM_2,#0x00
       000126 75 82 00         [24]  342 	mov	dpl,#0x00
-      000129 12 27 14         [24]  343 	lcall	_save_load_settings
+      000129 12 26 BD         [24]  343 	lcall	_save_load_settings
                                     344 ;	../main.c:43: P1_OPT = ADC0E | ADC3E; //enable adc input
       00012C 75 D9 09         [24]  345 	mov	_P1_OPT,#0x09
                                     346 ;	../main.c:46: P3_4 = 1; //turn fogger off
@@ -350,7 +350,7 @@
                                     350 ;	assignBit
       000131 D2 B3            [12]  351 	setb	_P3_3
                                     352 ;	../main.c:50: tick_fogger();
-      000133 12 28 DB         [24]  353 	lcall	_tick_fogger
+      000133 12 28 84         [24]  353 	lcall	_tick_fogger
                                     354 ;	../main.c:54: SCK = 0;
                                     355 ;	assignBit
       000136 C2 93            [12]  356 	clr	_SCK
@@ -362,211 +362,211 @@
       00013A C2 92            [12]  362 	clr	_RCK
                                     363 ;	../main.c:58: exe_command(FUNCTION_SET);
       00013C 90 3C 00         [24]  364 	mov	dptr,#0x3c00
-      00013F 12 1A B6         [24]  365 	lcall	_exe_command
+      00013F 12 1A 5F         [24]  365 	lcall	_exe_command
                                     366 ;	../main.c:59: exe_command(ENTRY_MODE_SET);
       000142 90 1E 00         [24]  367 	mov	dptr,#0x1e00
-      000145 12 1A B6         [24]  368 	lcall	_exe_command
+      000145 12 1A 5F         [24]  368 	lcall	_exe_command
                                     369 ;	../main.c:60: exe_command(CLEAR_DISPLAY);
       000148 90 80 00         [24]  370 	mov	dptr,#0x8000
-      00014B 12 1A B6         [24]  371 	lcall	_exe_command
+      00014B 12 1A 5F         [24]  371 	lcall	_exe_command
                                     372 ;	../main.c:61: exe_command(DISPLAY_ON);
       00014E 90 30 00         [24]  373 	mov	dptr,#0x3000
-      000151 12 1A B6         [24]  374 	lcall	_exe_command
+      000151 12 1A 5F         [24]  374 	lcall	_exe_command
                                     375 ;	../main.c:64: exe_command(CGRAM_ADDRESS_SET); //selector
       000154 90 02 00         [24]  376 	mov	dptr,#0x0200
-      000157 12 1A B6         [24]  377 	lcall	_exe_command
+      000157 12 1A 5F         [24]  377 	lcall	_exe_command
                                     378 ;	../main.c:67: exe_command(0x0080);
       00015A 90 00 80         [24]  379 	mov	dptr,#0x0080
-      00015D 12 1A B6         [24]  380 	lcall	_exe_command
+      00015D 12 1A 5F         [24]  380 	lcall	_exe_command
                                     381 ;	../main.c:68: exe_command(0x0080);
       000160 90 00 80         [24]  382 	mov	dptr,#0x0080
-      000163 12 1A B6         [24]  383 	lcall	_exe_command
+      000163 12 1A 5F         [24]  383 	lcall	_exe_command
                                     384 ;	../main.c:69: exe_command(0x7080);
       000166 90 70 80         [24]  385 	mov	dptr,#0x7080
-      000169 12 1A B6         [24]  386 	lcall	_exe_command
+      000169 12 1A 5F         [24]  386 	lcall	_exe_command
                                     387 ;	../main.c:70: exe_command(0x5080);
       00016C 90 50 80         [24]  388 	mov	dptr,#0x5080
-      00016F 12 1A B6         [24]  389 	lcall	_exe_command
+      00016F 12 1A 5F         [24]  389 	lcall	_exe_command
                                     390 ;	../main.c:71: exe_command(0x5080);
       000172 90 50 80         [24]  391 	mov	dptr,#0x5080
-      000175 12 1A B6         [24]  392 	lcall	_exe_command
+      000175 12 1A 5F         [24]  392 	lcall	_exe_command
                                     393 ;	../main.c:72: exe_command(0x7080);
       000178 90 70 80         [24]  394 	mov	dptr,#0x7080
-      00017B 12 1A B6         [24]  395 	lcall	_exe_command
+      00017B 12 1A 5F         [24]  395 	lcall	_exe_command
                                     396 ;	../main.c:73: exe_command(0x0080);
       00017E 90 00 80         [24]  397 	mov	dptr,#0x0080
-      000181 12 1A B6         [24]  398 	lcall	_exe_command
+      000181 12 1A 5F         [24]  398 	lcall	_exe_command
                                     399 ;	../main.c:74: exe_command(0x0080);
       000184 90 00 80         [24]  400 	mov	dptr,#0x0080
-      000187 12 1A B6         [24]  401 	lcall	_exe_command
+      000187 12 1A 5F         [24]  401 	lcall	_exe_command
                                     402 ;	../main.c:77: exe_command(0x0080);
       00018A 90 00 80         [24]  403 	mov	dptr,#0x0080
-      00018D 12 1A B6         [24]  404 	lcall	_exe_command
+      00018D 12 1A 5F         [24]  404 	lcall	_exe_command
                                     405 ;	../main.c:78: exe_command(0x1080);
       000190 90 10 80         [24]  406 	mov	dptr,#0x1080
-      000193 12 1A B6         [24]  407 	lcall	_exe_command
+      000193 12 1A 5F         [24]  407 	lcall	_exe_command
                                     408 ;	../main.c:79: exe_command(0x3080);
       000196 90 30 80         [24]  409 	mov	dptr,#0x3080
-      000199 12 1A B6         [24]  410 	lcall	_exe_command
+      000199 12 1A 5F         [24]  410 	lcall	_exe_command
                                     411 ;	../main.c:80: exe_command(0x7080);
       00019C 90 70 80         [24]  412 	mov	dptr,#0x7080
-      00019F 12 1A B6         [24]  413 	lcall	_exe_command
+      00019F 12 1A 5F         [24]  413 	lcall	_exe_command
                                     414 ;	../main.c:81: exe_command(0x3080);
       0001A2 90 30 80         [24]  415 	mov	dptr,#0x3080
-      0001A5 12 1A B6         [24]  416 	lcall	_exe_command
+      0001A5 12 1A 5F         [24]  416 	lcall	_exe_command
                                     417 ;	../main.c:82: exe_command(0x1080);
       0001A8 90 10 80         [24]  418 	mov	dptr,#0x1080
-      0001AB 12 1A B6         [24]  419 	lcall	_exe_command
+      0001AB 12 1A 5F         [24]  419 	lcall	_exe_command
                                     420 ;	../main.c:83: exe_command(0x0080);
       0001AE 90 00 80         [24]  421 	mov	dptr,#0x0080
-      0001B1 12 1A B6         [24]  422 	lcall	_exe_command
+      0001B1 12 1A 5F         [24]  422 	lcall	_exe_command
                                     423 ;	../main.c:84: exe_command(0xF880);
       0001B4 90 F8 80         [24]  424 	mov	dptr,#0xf880
-      0001B7 12 1A B6         [24]  425 	lcall	_exe_command
+      0001B7 12 1A 5F         [24]  425 	lcall	_exe_command
                                     426 ;	../main.c:87: exe_command(0x0080);
       0001BA 90 00 80         [24]  427 	mov	dptr,#0x0080
-      0001BD 12 1A B6         [24]  428 	lcall	_exe_command
+      0001BD 12 1A 5F         [24]  428 	lcall	_exe_command
                                     429 ;	../main.c:88: exe_command(0x0080);
       0001C0 90 00 80         [24]  430 	mov	dptr,#0x0080
-      0001C3 12 1A B6         [24]  431 	lcall	_exe_command
+      0001C3 12 1A 5F         [24]  431 	lcall	_exe_command
                                     432 ;	../main.c:89: exe_command(0x0080);
       0001C6 90 00 80         [24]  433 	mov	dptr,#0x0080
-      0001C9 12 1A B6         [24]  434 	lcall	_exe_command
+      0001C9 12 1A 5F         [24]  434 	lcall	_exe_command
                                     435 ;	../main.c:90: exe_command(0x0080);
       0001CC 90 00 80         [24]  436 	mov	dptr,#0x0080
-      0001CF 12 1A B6         [24]  437 	lcall	_exe_command
+      0001CF 12 1A 5F         [24]  437 	lcall	_exe_command
                                     438 ;	../main.c:91: exe_command(0x0080);
       0001D2 90 00 80         [24]  439 	mov	dptr,#0x0080
-      0001D5 12 1A B6         [24]  440 	lcall	_exe_command
+      0001D5 12 1A 5F         [24]  440 	lcall	_exe_command
                                     441 ;	../main.c:92: exe_command(0x0080);
       0001D8 90 00 80         [24]  442 	mov	dptr,#0x0080
-      0001DB 12 1A B6         [24]  443 	lcall	_exe_command
+      0001DB 12 1A 5F         [24]  443 	lcall	_exe_command
                                     444 ;	../main.c:93: exe_command(0xF880);
       0001DE 90 F8 80         [24]  445 	mov	dptr,#0xf880
-      0001E1 12 1A B6         [24]  446 	lcall	_exe_command
+      0001E1 12 1A 5F         [24]  446 	lcall	_exe_command
                                     447 ;	../main.c:94: exe_command(0xF880);
       0001E4 90 F8 80         [24]  448 	mov	dptr,#0xf880
-      0001E7 12 1A B6         [24]  449 	lcall	_exe_command
+      0001E7 12 1A 5F         [24]  449 	lcall	_exe_command
                                     450 ;	../main.c:97: exe_command(0x0080);
       0001EA 90 00 80         [24]  451 	mov	dptr,#0x0080
-      0001ED 12 1A B6         [24]  452 	lcall	_exe_command
+      0001ED 12 1A 5F         [24]  452 	lcall	_exe_command
                                     453 ;	../main.c:98: exe_command(0x0080);
       0001F0 90 00 80         [24]  454 	mov	dptr,#0x0080
-      0001F3 12 1A B6         [24]  455 	lcall	_exe_command
+      0001F3 12 1A 5F         [24]  455 	lcall	_exe_command
                                     456 ;	../main.c:99: exe_command(0x0080);
       0001F6 90 00 80         [24]  457 	mov	dptr,#0x0080
-      0001F9 12 1A B6         [24]  458 	lcall	_exe_command
+      0001F9 12 1A 5F         [24]  458 	lcall	_exe_command
                                     459 ;	../main.c:100: exe_command(0x0080);
       0001FC 90 00 80         [24]  460 	mov	dptr,#0x0080
-      0001FF 12 1A B6         [24]  461 	lcall	_exe_command
+      0001FF 12 1A 5F         [24]  461 	lcall	_exe_command
                                     462 ;	../main.c:101: exe_command(0xF880);
       000202 90 F8 80         [24]  463 	mov	dptr,#0xf880
-      000205 12 1A B6         [24]  464 	lcall	_exe_command
+      000205 12 1A 5F         [24]  464 	lcall	_exe_command
                                     465 ;	../main.c:102: exe_command(0xF880);
       000208 90 F8 80         [24]  466 	mov	dptr,#0xf880
-      00020B 12 1A B6         [24]  467 	lcall	_exe_command
+      00020B 12 1A 5F         [24]  467 	lcall	_exe_command
                                     468 ;	../main.c:103: exe_command(0xF880);
       00020E 90 F8 80         [24]  469 	mov	dptr,#0xf880
-      000211 12 1A B6         [24]  470 	lcall	_exe_command
+      000211 12 1A 5F         [24]  470 	lcall	_exe_command
                                     471 ;	../main.c:104: exe_command(0xF880);
       000214 90 F8 80         [24]  472 	mov	dptr,#0xf880
-      000217 12 1A B6         [24]  473 	lcall	_exe_command
+      000217 12 1A 5F         [24]  473 	lcall	_exe_command
                                     474 ;	../main.c:107: exe_command(0x0080);
       00021A 90 00 80         [24]  475 	mov	dptr,#0x0080
-      00021D 12 1A B6         [24]  476 	lcall	_exe_command
+      00021D 12 1A 5F         [24]  476 	lcall	_exe_command
                                     477 ;	../main.c:108: exe_command(0xF880);
       000220 90 F8 80         [24]  478 	mov	dptr,#0xf880
-      000223 12 1A B6         [24]  479 	lcall	_exe_command
+      000223 12 1A 5F         [24]  479 	lcall	_exe_command
                                     480 ;	../main.c:109: exe_command(0xF880);
       000226 90 F8 80         [24]  481 	mov	dptr,#0xf880
-      000229 12 1A B6         [24]  482 	lcall	_exe_command
+      000229 12 1A 5F         [24]  482 	lcall	_exe_command
                                     483 ;	../main.c:110: exe_command(0xF880);
       00022C 90 F8 80         [24]  484 	mov	dptr,#0xf880
-      00022F 12 1A B6         [24]  485 	lcall	_exe_command
+      00022F 12 1A 5F         [24]  485 	lcall	_exe_command
                                     486 ;	../main.c:111: exe_command(0xF880);
       000232 90 F8 80         [24]  487 	mov	dptr,#0xf880
-      000235 12 1A B6         [24]  488 	lcall	_exe_command
+      000235 12 1A 5F         [24]  488 	lcall	_exe_command
                                     489 ;	../main.c:112: exe_command(0xF880);
       000238 90 F8 80         [24]  490 	mov	dptr,#0xf880
-      00023B 12 1A B6         [24]  491 	lcall	_exe_command
+      00023B 12 1A 5F         [24]  491 	lcall	_exe_command
                                     492 ;	../main.c:113: exe_command(0xF880);
       00023E 90 F8 80         [24]  493 	mov	dptr,#0xf880
-      000241 12 1A B6         [24]  494 	lcall	_exe_command
+      000241 12 1A 5F         [24]  494 	lcall	_exe_command
                                     495 ;	../main.c:114: exe_command(0xF880);
       000244 90 F8 80         [24]  496 	mov	dptr,#0xf880
-      000247 12 1A B6         [24]  497 	lcall	_exe_command
+      000247 12 1A 5F         [24]  497 	lcall	_exe_command
                                     498 ;	../main.c:117: exe_command(0x2080);
       00024A 90 20 80         [24]  499 	mov	dptr,#0x2080
-      00024D 12 1A B6         [24]  500 	lcall	_exe_command
+      00024D 12 1A 5F         [24]  500 	lcall	_exe_command
                                     501 ;	../main.c:118: exe_command(0x7080);
       000250 90 70 80         [24]  502 	mov	dptr,#0x7080
-      000253 12 1A B6         [24]  503 	lcall	_exe_command
+      000253 12 1A 5F         [24]  503 	lcall	_exe_command
                                     504 ;	../main.c:119: exe_command(0x0080);
       000256 90 00 80         [24]  505 	mov	dptr,#0x0080
-      000259 12 1A B6         [24]  506 	lcall	_exe_command
+      000259 12 1A 5F         [24]  506 	lcall	_exe_command
                                     507 ;	../main.c:120: exe_command(0x5080);
       00025C 90 50 80         [24]  508 	mov	dptr,#0x5080
-      00025F 12 1A B6         [24]  509 	lcall	_exe_command
+      00025F 12 1A 5F         [24]  509 	lcall	_exe_command
                                     510 ;	../main.c:121: exe_command(0x7080);
       000262 90 70 80         [24]  511 	mov	dptr,#0x7080
-      000265 12 1A B6         [24]  512 	lcall	_exe_command
+      000265 12 1A 5F         [24]  512 	lcall	_exe_command
                                     513 ;	../main.c:122: exe_command(0x5080);
       000268 90 50 80         [24]  514 	mov	dptr,#0x5080
-      00026B 12 1A B6         [24]  515 	lcall	_exe_command
+      00026B 12 1A 5F         [24]  515 	lcall	_exe_command
                                     516 ;	../main.c:123: exe_command(0x0080);
       00026E 90 00 80         [24]  517 	mov	dptr,#0x0080
-      000271 12 1A B6         [24]  518 	lcall	_exe_command
+      000271 12 1A 5F         [24]  518 	lcall	_exe_command
                                     519 ;	../main.c:124: exe_command(0xF880);
       000274 90 F8 80         [24]  520 	mov	dptr,#0xf880
-      000277 12 1A B6         [24]  521 	lcall	_exe_command
+      000277 12 1A 5F         [24]  521 	lcall	_exe_command
                                     522 ;	../main.c:127: exe_command(0xF880);
       00027A 90 F8 80         [24]  523 	mov	dptr,#0xf880
-      00027D 12 1A B6         [24]  524 	lcall	_exe_command
+      00027D 12 1A 5F         [24]  524 	lcall	_exe_command
                                     525 ;	../main.c:128: exe_command(0x0080);
       000280 90 00 80         [24]  526 	mov	dptr,#0x0080
-      000283 12 1A B6         [24]  527 	lcall	_exe_command
+      000283 12 1A 5F         [24]  527 	lcall	_exe_command
                                     528 ;	../main.c:129: exe_command(0x0080);
       000286 90 00 80         [24]  529 	mov	dptr,#0x0080
-      000289 12 1A B6         [24]  530 	lcall	_exe_command
+      000289 12 1A 5F         [24]  530 	lcall	_exe_command
                                     531 ;	../main.c:130: exe_command(0x5080);
       00028C 90 50 80         [24]  532 	mov	dptr,#0x5080
-      00028F 12 1A B6         [24]  533 	lcall	_exe_command
+      00028F 12 1A 5F         [24]  533 	lcall	_exe_command
                                     534 ;	../main.c:131: exe_command(0x7080);
       000292 90 70 80         [24]  535 	mov	dptr,#0x7080
-      000295 12 1A B6         [24]  536 	lcall	_exe_command
+      000295 12 1A 5F         [24]  536 	lcall	_exe_command
                                     537 ;	../main.c:132: exe_command(0x5080);
       000298 90 50 80         [24]  538 	mov	dptr,#0x5080
-      00029B 12 1A B6         [24]  539 	lcall	_exe_command
+      00029B 12 1A 5F         [24]  539 	lcall	_exe_command
                                     540 ;	../main.c:133: exe_command(0x0080);
       00029E 90 00 80         [24]  541 	mov	dptr,#0x0080
-      0002A1 12 1A B6         [24]  542 	lcall	_exe_command
+      0002A1 12 1A 5F         [24]  542 	lcall	_exe_command
                                     543 ;	../main.c:134: exe_command(0x0080);
       0002A4 90 00 80         [24]  544 	mov	dptr,#0x0080
-      0002A7 12 1A B6         [24]  545 	lcall	_exe_command
+      0002A7 12 1A 5F         [24]  545 	lcall	_exe_command
                                     546 ;	../main.c:137: exe_command(0x0080);
       0002AA 90 00 80         [24]  547 	mov	dptr,#0x0080
-      0002AD 12 1A B6         [24]  548 	lcall	_exe_command
+      0002AD 12 1A 5F         [24]  548 	lcall	_exe_command
                                     549 ;	../main.c:138: exe_command(0xC080);
       0002B0 90 C0 80         [24]  550 	mov	dptr,#0xc080
-      0002B3 12 1A B6         [24]  551 	lcall	_exe_command
+      0002B3 12 1A 5F         [24]  551 	lcall	_exe_command
                                     552 ;	../main.c:139: exe_command(0xD880);
       0002B6 90 D8 80         [24]  553 	mov	dptr,#0xd880
-      0002B9 12 1A B6         [24]  554 	lcall	_exe_command
+      0002B9 12 1A 5F         [24]  554 	lcall	_exe_command
                                     555 ;	../main.c:140: exe_command(0x0080);
       0002BC 90 00 80         [24]  556 	mov	dptr,#0x0080
-      0002BF 12 1A B6         [24]  557 	lcall	_exe_command
+      0002BF 12 1A 5F         [24]  557 	lcall	_exe_command
                                     558 ;	../main.c:141: exe_command(0x0080);
       0002C2 90 00 80         [24]  559 	mov	dptr,#0x0080
-      0002C5 12 1A B6         [24]  560 	lcall	_exe_command
+      0002C5 12 1A 5F         [24]  560 	lcall	_exe_command
                                     561 ;	../main.c:142: exe_command(0x8880); 
       0002C8 90 88 80         [24]  562 	mov	dptr,#0x8880
-      0002CB 12 1A B6         [24]  563 	lcall	_exe_command
+      0002CB 12 1A 5F         [24]  563 	lcall	_exe_command
                                     564 ;	../main.c:143: exe_command(0x7080);
       0002CE 90 70 80         [24]  565 	mov	dptr,#0x7080
-      0002D1 12 1A B6         [24]  566 	lcall	_exe_command
+      0002D1 12 1A 5F         [24]  566 	lcall	_exe_command
                                     567 ;	../main.c:144: exe_command(0x0080);
       0002D4 90 00 80         [24]  568 	mov	dptr,#0x0080
-      0002D7 12 1A B6         [24]  569 	lcall	_exe_command
+      0002D7 12 1A 5F         [24]  569 	lcall	_exe_command
                                     570 ;	../main.c:150: tick_ui();
       0002DA 12 04 EB         [24]  571 	lcall	_tick_ui
                                     572 ;	../main.c:153: CKCON |= 0x08; //timer0
@@ -579,7 +579,7 @@
                                     579 ;	assignBit
       0002E7 D2 A9            [12]  580 	setb	_ET0
                                     581 ;	../main.c:158: blackout();
-      0002E9 12 23 C8         [24]  582 	lcall	_blackout
+      0002E9 12 23 71         [24]  582 	lcall	_blackout
                                     583 ;	../main.c:159: PWM_EA1 = 0x48;
       0002EC 75 D3 48         [24]  584 	mov	_PWM_EA1,#0x48
                                     585 ;	../main.c:160: PWM_EA2 = 0x02;
@@ -661,7 +661,7 @@
       000345 C0 06            [24]  661 	push	ar6
       000347 C0 05            [24]  662 	push	ar5
       000349 C0 04            [24]  663 	push	ar4
-      00034B 12 2C CA         [24]  664 	lcall	_power_heater
+      00034B 12 2C 73         [24]  664 	lcall	_power_heater
       00034E D0 04            [24]  665 	pop	ar4
       000350 D0 05            [24]  666 	pop	ar5
       000352 D0 06            [24]  667 	pop	ar6
@@ -682,7 +682,7 @@
       000369 C0 06            [24]  682 	push	ar6
       00036B C0 05            [24]  683 	push	ar5
       00036D C0 04            [24]  684 	push	ar4
-      00036F 12 2D 04         [24]  685 	lcall	__modulong
+      00036F 12 2C AD         [24]  685 	lcall	__modulong
       000372 A8 82            [24]  686 	mov	r0,dpl
       000374 A9 83            [24]  687 	mov	r1,dph
       000376 AA F0            [24]  688 	mov	r2,b
@@ -700,7 +700,7 @@
       000389 C0 06            [24]  700 	push	ar6
       00038B C0 05            [24]  701 	push	ar5
       00038D C0 04            [24]  702 	push	ar4
-      00038F 12 28 DB         [24]  703 	lcall	_tick_fogger
+      00038F 12 28 84         [24]  703 	lcall	_tick_fogger
       000392 D0 04            [24]  704 	pop	ar4
       000394 D0 05            [24]  705 	pop	ar5
       000396 D0 06            [24]  706 	pop	ar6
@@ -720,7 +720,7 @@
       0003AD C0 06            [24]  720 	push	ar6
       0003AF C0 05            [24]  721 	push	ar5
       0003B1 C0 04            [24]  722 	push	ar4
-      0003B3 12 2D 04         [24]  723 	lcall	__modulong
+      0003B3 12 2C AD         [24]  723 	lcall	__modulong
       0003B6 A8 82            [24]  724 	mov	r0,dpl
       0003B8 A9 83            [24]  725 	mov	r1,dph
       0003BA AA F0            [24]  726 	mov	r2,b
@@ -738,7 +738,7 @@
       0003CD C0 06            [24]  738 	push	ar6
       0003CF C0 05            [24]  739 	push	ar5
       0003D1 C0 04            [24]  740 	push	ar4
-      0003D3 12 24 6B         [24]  741 	lcall	_tick_wireless
+      0003D3 12 24 14         [24]  741 	lcall	_tick_wireless
       0003D6 D0 04            [24]  742 	pop	ar4
       0003D8 D0 05            [24]  743 	pop	ar5
       0003DA D0 06            [24]  744 	pop	ar6
@@ -758,7 +758,7 @@
       0003F1 C0 06            [24]  758 	push	ar6
       0003F3 C0 05            [24]  759 	push	ar5
       0003F5 C0 04            [24]  760 	push	ar4
-      0003F7 12 2D 04         [24]  761 	lcall	__modulong
+      0003F7 12 2C AD         [24]  761 	lcall	__modulong
       0003FA A8 82            [24]  762 	mov	r0,dpl
       0003FC A9 83            [24]  763 	mov	r1,dph
       0003FE AA F0            [24]  764 	mov	r2,b
@@ -803,7 +803,7 @@
       000440 C0 06            [24]  803 	push	ar6
       000442 C0 05            [24]  804 	push	ar5
       000444 C0 04            [24]  805 	push	ar4
-      000446 12 1D FF         [24]  806 	lcall	_tick_led
+      000446 12 1D A8         [24]  806 	lcall	_tick_led
       000449 D0 04            [24]  807 	pop	ar4
       00044B D0 05            [24]  808 	pop	ar5
       00044D D0 06            [24]  809 	pop	ar6

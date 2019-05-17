@@ -286,7 +286,7 @@
                                     286 ;	-----------------------------------------
                                     287 ;	 function save_load_settings
                                     288 ;	-----------------------------------------
-      002714                        289 _save_load_settings:
+      0026BD                        289 _save_load_settings:
                            000007   290 	ar7 = 0x07
                            000006   291 	ar6 = 0x06
                            000005   292 	ar5 = 0x05
@@ -296,80 +296,80 @@
                            000001   296 	ar1 = 0x01
                            000000   297 	ar0 = 0x00
                                     298 ;	../Storage_Manager/storage.c:33: slot = slot * CONFIG_COUNT;
-      002714 E5 82            [12]  299 	mov	a,dpl
-      002716 C4               [12]  300 	swap	a
-      002717 54 F0            [12]  301 	anl	a,#0xf0
-      002719 FF               [12]  302 	mov	r7,a
+      0026BD E5 82            [12]  299 	mov	a,dpl
+      0026BF C4               [12]  300 	swap	a
+      0026C0 54 F0            [12]  301 	anl	a,#0xf0
+      0026C2 FF               [12]  302 	mov	r7,a
                                     303 ;	../Storage_Manager/storage.c:35: if(save == LOAD){
-      00271A E5 72            [12]  304 	mov	a,_save_load_settings_PARM_2
-      00271C 70 03            [24]  305 	jnz	00115$
+      0026C3 E5 72            [12]  304 	mov	a,_save_load_settings_PARM_2
+      0026C5 70 03            [24]  305 	jnz	00115$
                                     306 ;	../Storage_Manager/storage.c:36: IAPEN = IAP_Read; //read
-      00271E 75 E4 A0         [24]  307 	mov	_IAPEN,#0xa0
+      0026C7 75 E4 A0         [24]  307 	mov	_IAPEN,#0xa0
                                     308 ;	../Storage_Manager/storage.c:39: for(i = 0; i < CONFIG_COUNT; i++){
-      002721                        309 00115$:
-      002721 74 01            [12]  310 	mov	a,#0x01
-      002723 B5 72 04         [24]  311 	cjne	a,_save_load_settings_PARM_2,00140$
-      002726 74 01            [12]  312 	mov	a,#0x01
-      002728 80 01            [24]  313 	sjmp	00141$
-      00272A                        314 00140$:
-      00272A E4               [12]  315 	clr	a
-      00272B                        316 00141$:
-      00272B FE               [12]  317 	mov	r6,a
-      00272C 7D 00            [12]  318 	mov	r5,#0x00
-      00272E                        319 00109$:
+      0026CA                        309 00115$:
+      0026CA 74 01            [12]  310 	mov	a,#0x01
+      0026CC B5 72 04         [24]  311 	cjne	a,_save_load_settings_PARM_2,00140$
+      0026CF 74 01            [12]  312 	mov	a,#0x01
+      0026D1 80 01            [24]  313 	sjmp	00141$
+      0026D3                        314 00140$:
+      0026D3 E4               [12]  315 	clr	a
+      0026D4                        316 00141$:
+      0026D4 FE               [12]  317 	mov	r6,a
+      0026D5 7D 00            [12]  318 	mov	r5,#0x00
+      0026D7                        319 00109$:
                                     320 ;	../Storage_Manager/storage.c:40: if(save == SAVE){
-      00272E EE               [12]  321 	mov	a,r6
-      00272F 60 14            [24]  322 	jz	00104$
+      0026D7 EE               [12]  321 	mov	a,r6
+      0026D8 60 14            [24]  322 	jz	00104$
                                     323 ;	../Storage_Manager/storage.c:41: IAP_AUX[i + slot] = Runtime_Data[i];
-      002731 EF               [12]  324 	mov	a,r7
-      002732 2D               [12]  325 	add	a,r5
-      002733 24 00            [12]  326 	add	a,#_IAP_AUX
-      002735 F5 82            [12]  327 	mov	dpl,a
-      002737 E4               [12]  328 	clr	a
-      002738 34 01            [12]  329 	addc	a,#(_IAP_AUX >> 8)
-      00273A F5 83            [12]  330 	mov	dph,a
-      00273C ED               [12]  331 	mov	a,r5
-      00273D 24 55            [12]  332 	add	a,#_Runtime_Data
-      00273F F9               [12]  333 	mov	r1,a
-      002740 E7               [12]  334 	mov	a,@r1
-      002741 FC               [12]  335 	mov	r4,a
-      002742 F0               [24]  336 	movx	@dptr,a
-      002743 80 12            [24]  337 	sjmp	00110$
-      002745                        338 00104$:
+      0026DA EF               [12]  324 	mov	a,r7
+      0026DB 2D               [12]  325 	add	a,r5
+      0026DC 24 00            [12]  326 	add	a,#_IAP_AUX
+      0026DE F5 82            [12]  327 	mov	dpl,a
+      0026E0 E4               [12]  328 	clr	a
+      0026E1 34 01            [12]  329 	addc	a,#(_IAP_AUX >> 8)
+      0026E3 F5 83            [12]  330 	mov	dph,a
+      0026E5 ED               [12]  331 	mov	a,r5
+      0026E6 24 55            [12]  332 	add	a,#_Runtime_Data
+      0026E8 F9               [12]  333 	mov	r1,a
+      0026E9 E7               [12]  334 	mov	a,@r1
+      0026EA FC               [12]  335 	mov	r4,a
+      0026EB F0               [24]  336 	movx	@dptr,a
+      0026EC 80 12            [24]  337 	sjmp	00110$
+      0026EE                        338 00104$:
                                     339 ;	../Storage_Manager/storage.c:43: Runtime_Data[i] = IAP_AUX[i + slot];
-      002745 ED               [12]  340 	mov	a,r5
-      002746 24 55            [12]  341 	add	a,#_Runtime_Data
-      002748 F9               [12]  342 	mov	r1,a
-      002749 EF               [12]  343 	mov	a,r7
-      00274A 2D               [12]  344 	add	a,r5
-      00274B 24 00            [12]  345 	add	a,#_IAP_AUX
-      00274D F5 82            [12]  346 	mov	dpl,a
-      00274F E4               [12]  347 	clr	a
-      002750 34 01            [12]  348 	addc	a,#(_IAP_AUX >> 8)
-      002752 F5 83            [12]  349 	mov	dph,a
-      002754 E0               [24]  350 	movx	a,@dptr
-      002755 FC               [12]  351 	mov	r4,a
-      002756 F7               [12]  352 	mov	@r1,a
-      002757                        353 00110$:
+      0026EE ED               [12]  340 	mov	a,r5
+      0026EF 24 55            [12]  341 	add	a,#_Runtime_Data
+      0026F1 F9               [12]  342 	mov	r1,a
+      0026F2 EF               [12]  343 	mov	a,r7
+      0026F3 2D               [12]  344 	add	a,r5
+      0026F4 24 00            [12]  345 	add	a,#_IAP_AUX
+      0026F6 F5 82            [12]  346 	mov	dpl,a
+      0026F8 E4               [12]  347 	clr	a
+      0026F9 34 01            [12]  348 	addc	a,#(_IAP_AUX >> 8)
+      0026FB F5 83            [12]  349 	mov	dph,a
+      0026FD E0               [24]  350 	movx	a,@dptr
+      0026FE FC               [12]  351 	mov	r4,a
+      0026FF F7               [12]  352 	mov	@r1,a
+      002700                        353 00110$:
                                     354 ;	../Storage_Manager/storage.c:39: for(i = 0; i < CONFIG_COUNT; i++){
-      002757 0D               [12]  355 	inc	r5
-      002758 BD 10 00         [24]  356 	cjne	r5,#0x10,00143$
-      00275B                        357 00143$:
-      00275B 40 D1            [24]  358 	jc	00109$
+      002700 0D               [12]  355 	inc	r5
+      002701 BD 10 00         [24]  356 	cjne	r5,#0x10,00143$
+      002704                        357 00143$:
+      002704 40 D1            [24]  358 	jc	00109$
                                     359 ;	../Storage_Manager/storage.c:47: if(save == SAVE){
-      00275D EE               [12]  360 	mov	a,r6
-      00275E 60 09            [24]  361 	jz	00111$
+      002706 EE               [12]  360 	mov	a,r6
+      002707 60 09            [24]  361 	jz	00111$
                                     362 ;	../Storage_Manager/storage.c:48: IAPEN = IAP_Erase; //have to erase before write...
-      002760 75 E4 90         [24]  363 	mov	_IAPEN,#0x90
+      002709 75 E4 90         [24]  363 	mov	_IAPEN,#0x90
                                     364 ;	../Storage_Manager/storage.c:49: IAPEN = IAP_Write;  
-      002763 75 E4 C0         [24]  365 	mov	_IAPEN,#0xc0
+      00270C 75 E4 C0         [24]  365 	mov	_IAPEN,#0xc0
                                     366 ;	../Storage_Manager/storage.c:50: Nop(); //datasheet recommend no operation following write
-      002766 00               [12]  367 	nop 
-      002767 00               [12]  368 	nop 
-      002768 00               [12]  369 	nop 
-      002769                        370 00111$:
+      00270F 00               [12]  367 	nop 
+      002710 00               [12]  368 	nop 
+      002711 00               [12]  369 	nop 
+      002712                        370 00111$:
                                     371 ;	../Storage_Manager/storage.c:52: }
-      002769 22               [24]  372 	ret
+      002712 22               [24]  372 	ret
                                     373 ;------------------------------------------------------------
                                     374 ;Allocation info for local variables in function 'get_runtime_data'
                                     375 ;------------------------------------------------------------
@@ -380,131 +380,131 @@
                                     380 ;	-----------------------------------------
                                     381 ;	 function get_runtime_data
                                     382 ;	-----------------------------------------
-      00276A                        383 _get_runtime_data:
-      00276A AF 82            [24]  384 	mov	r7,dpl
+      002713                        383 _get_runtime_data:
+      002713 AF 82            [24]  384 	mov	r7,dpl
                                     385 ;	../Storage_Manager/storage.c:57: if(index == OP_MODE_INDEX){
-      00276C BF 10 07         [24]  386 	cjne	r7,#0x10,00102$
+      002715 BF 10 07         [24]  386 	cjne	r7,#0x10,00102$
                                     387 ;	../Storage_Manager/storage.c:58: return Runtime_Data[FOG_POWER_INDEX] & OP_MODE_BIT;
-      00276F 74 80            [12]  388 	mov	a,#0x80
-      002771 55 55            [12]  389 	anl	a,_Runtime_Data
-      002773 F5 82            [12]  390 	mov	dpl,a
-      002775 22               [24]  391 	ret
-      002776                        392 00102$:
+      002718 74 80            [12]  388 	mov	a,#0x80
+      00271A 55 55            [12]  389 	anl	a,_Runtime_Data
+      00271C F5 82            [12]  390 	mov	dpl,a
+      00271E 22               [24]  391 	ret
+      00271F                        392 00102$:
                                     393 ;	../Storage_Manager/storage.c:61: value = Runtime_Data[index];
-      002776 EF               [12]  394 	mov	a,r7
-      002777 24 55            [12]  395 	add	a,#_Runtime_Data
-      002779 F9               [12]  396 	mov	r1,a
-      00277A 87 06            [24]  397 	mov	ar6,@r1
+      00271F EF               [12]  394 	mov	a,r7
+      002720 24 55            [12]  395 	add	a,#_Runtime_Data
+      002722 F9               [12]  396 	mov	r1,a
+      002723 87 06            [24]  397 	mov	ar6,@r1
                                     398 ;	../Storage_Manager/storage.c:63: switch (index)
-      00277C EF               [12]  399 	mov	a,r7
-      00277D 24 F1            [12]  400 	add	a,#0xff - 0x0e
-      00277F 50 03            [24]  401 	jnc	00130$
-      002781 02 27 FB         [24]  402 	ljmp	00113$
-      002784                        403 00130$:
-      002784 EF               [12]  404 	mov	a,r7
-      002785 24 0A            [12]  405 	add	a,#(00131$-3-.)
-      002787 83               [24]  406 	movc	a,@a+pc
-      002788 F5 82            [12]  407 	mov	dpl,a
-      00278A EF               [12]  408 	mov	a,r7
-      00278B 24 13            [12]  409 	add	a,#(00132$-3-.)
-      00278D 83               [24]  410 	movc	a,@a+pc
-      00278E F5 83            [12]  411 	mov	dph,a
-      002790 E4               [12]  412 	clr	a
-      002791 73               [24]  413 	jmp	@a+dptr
-      002792                        414 00131$:
-      002792 B0                     415 	.db	00103$
-      002793 C3                     416 	.db	00105$
-      002794 C3                     417 	.db	00105$
-      002795 CB                     418 	.db	00108$
-      002796 FB                     419 	.db	00113$
-      002797 FB                     420 	.db	00113$
-      002798 FB                     421 	.db	00113$
-      002799 FB                     422 	.db	00113$
-      00279A FB                     423 	.db	00113$
-      00279B DB                     424 	.db	00111$
-      00279C DB                     425 	.db	00111$
-      00279D DB                     426 	.db	00111$
-      00279E FB                     427 	.db	00113$
-      00279F FB                     428 	.db	00113$
-      0027A0 EB                     429 	.db	00112$
-      0027A1                        430 00132$:
-      0027A1 27                     431 	.db	00103$>>8
-      0027A2 27                     432 	.db	00105$>>8
-      0027A3 27                     433 	.db	00105$>>8
-      0027A4 27                     434 	.db	00108$>>8
-      0027A5 27                     435 	.db	00113$>>8
-      0027A6 27                     436 	.db	00113$>>8
-      0027A7 27                     437 	.db	00113$>>8
-      0027A8 27                     438 	.db	00113$>>8
-      0027A9 27                     439 	.db	00113$>>8
-      0027AA 27                     440 	.db	00111$>>8
-      0027AB 27                     441 	.db	00111$>>8
-      0027AC 27                     442 	.db	00111$>>8
-      0027AD 27                     443 	.db	00113$>>8
-      0027AE 27                     444 	.db	00113$>>8
-      0027AF 27                     445 	.db	00112$>>8
+      002725 EF               [12]  399 	mov	a,r7
+      002726 24 F1            [12]  400 	add	a,#0xff - 0x0e
+      002728 50 03            [24]  401 	jnc	00130$
+      00272A 02 27 A4         [24]  402 	ljmp	00113$
+      00272D                        403 00130$:
+      00272D EF               [12]  404 	mov	a,r7
+      00272E 24 0A            [12]  405 	add	a,#(00131$-3-.)
+      002730 83               [24]  406 	movc	a,@a+pc
+      002731 F5 82            [12]  407 	mov	dpl,a
+      002733 EF               [12]  408 	mov	a,r7
+      002734 24 13            [12]  409 	add	a,#(00132$-3-.)
+      002736 83               [24]  410 	movc	a,@a+pc
+      002737 F5 83            [12]  411 	mov	dph,a
+      002739 E4               [12]  412 	clr	a
+      00273A 73               [24]  413 	jmp	@a+dptr
+      00273B                        414 00131$:
+      00273B 59                     415 	.db	00103$
+      00273C 6C                     416 	.db	00105$
+      00273D 6C                     417 	.db	00105$
+      00273E 74                     418 	.db	00108$
+      00273F A4                     419 	.db	00113$
+      002740 A4                     420 	.db	00113$
+      002741 A4                     421 	.db	00113$
+      002742 A4                     422 	.db	00113$
+      002743 A4                     423 	.db	00113$
+      002744 84                     424 	.db	00111$
+      002745 84                     425 	.db	00111$
+      002746 84                     426 	.db	00111$
+      002747 A4                     427 	.db	00113$
+      002748 A4                     428 	.db	00113$
+      002749 94                     429 	.db	00112$
+      00274A                        430 00132$:
+      00274A 27                     431 	.db	00103$>>8
+      00274B 27                     432 	.db	00105$>>8
+      00274C 27                     433 	.db	00105$>>8
+      00274D 27                     434 	.db	00108$>>8
+      00274E 27                     435 	.db	00113$>>8
+      00274F 27                     436 	.db	00113$>>8
+      002750 27                     437 	.db	00113$>>8
+      002751 27                     438 	.db	00113$>>8
+      002752 27                     439 	.db	00113$>>8
+      002753 27                     440 	.db	00111$>>8
+      002754 27                     441 	.db	00111$>>8
+      002755 27                     442 	.db	00111$>>8
+      002756 27                     443 	.db	00113$>>8
+      002757 27                     444 	.db	00113$>>8
+      002758 27                     445 	.db	00112$>>8
                                     446 ;	../Storage_Manager/storage.c:65: case FOG_POWER_INDEX:
-      0027B0                        447 00103$:
+      002759                        447 00103$:
                                     448 ;	../Storage_Manager/storage.c:66: return (value & ~OP_MODE_BIT) % FOG_OPTIONS;
-      0027B0 8E 05            [24]  449 	mov	ar5,r6
-      0027B2 7F 00            [12]  450 	mov	r7,#0x00
-      0027B4 74 7F            [12]  451 	mov	a,#0x7f
-      0027B6 5D               [12]  452 	anl	a,r5
-      0027B7 F5 82            [12]  453 	mov	dpl,a
-      0027B9 8F 83            [24]  454 	mov	dph,r7
-      0027BB 75 72 03         [24]  455 	mov	__modsint_PARM_2,#0x03
+      002759 8E 05            [24]  449 	mov	ar5,r6
+      00275B 7F 00            [12]  450 	mov	r7,#0x00
+      00275D 74 7F            [12]  451 	mov	a,#0x7f
+      00275F 5D               [12]  452 	anl	a,r5
+      002760 F5 82            [12]  453 	mov	dpl,a
+      002762 8F 83            [24]  454 	mov	dph,r7
+      002764 75 72 03         [24]  455 	mov	__modsint_PARM_2,#0x03
                                     456 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-      0027BE 8F 73            [24]  457 	mov	(__modsint_PARM_2 + 1),r7
+      002767 8F 73            [24]  457 	mov	(__modsint_PARM_2 + 1),r7
                                     458 ;	../Storage_Manager/storage.c:68: case FOG_INTERVAL_INDEX:
-      0027C0 02 2E 0D         [24]  459 	ljmp	__modsint
-      0027C3                        460 00105$:
+      002769 02 2D B6         [24]  459 	ljmp	__modsint
+      00276C                        460 00105$:
                                     461 ;	../Storage_Manager/storage.c:69: if(value == 0){ value = 1; } //we dont want a 0 duration or interval
-      0027C3 EE               [12]  462 	mov	a,r6
-      0027C4 70 02            [24]  463 	jnz	00107$
-      0027C6 7E 01            [12]  464 	mov	r6,#0x01
-      0027C8                        465 00107$:
+      00276C EE               [12]  462 	mov	a,r6
+      00276D 70 02            [24]  463 	jnz	00107$
+      00276F 7E 01            [12]  464 	mov	r6,#0x01
+      002771                        465 00107$:
                                     466 ;	../Storage_Manager/storage.c:70: return value;
-      0027C8 8E 82            [24]  467 	mov	dpl,r6
+      002771 8E 82            [24]  467 	mov	dpl,r6
                                     468 ;	../Storage_Manager/storage.c:71: case MACRO_INDEX:
-      0027CA 22               [24]  469 	ret
-      0027CB                        470 00108$:
+      002773 22               [24]  469 	ret
+      002774                        470 00108$:
                                     471 ;	../Storage_Manager/storage.c:72: return value % MACRO_OPTIONS;
-      0027CB 8E 05            [24]  472 	mov	ar5,r6
-      0027CD 7F 00            [12]  473 	mov	r7,#0x00
-      0027CF 75 72 07         [24]  474 	mov	__modsint_PARM_2,#0x07
+      002774 8E 05            [24]  472 	mov	ar5,r6
+      002776 7F 00            [12]  473 	mov	r7,#0x00
+      002778 75 72 07         [24]  474 	mov	__modsint_PARM_2,#0x07
                                     475 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-      0027D2 8F 73            [24]  476 	mov	(__modsint_PARM_2 + 1),r7
-      0027D4 8D 82            [24]  477 	mov	dpl,r5
-      0027D6 8F 83            [24]  478 	mov	dph,r7
+      00277B 8F 73            [24]  476 	mov	(__modsint_PARM_2 + 1),r7
+      00277D 8D 82            [24]  477 	mov	dpl,r5
+      00277F 8F 83            [24]  478 	mov	dph,r7
                                     479 ;	../Storage_Manager/storage.c:75: case R6_INDEX:
-      0027D8 02 2E 0D         [24]  480 	ljmp	__modsint
-      0027DB                        481 00111$:
+      002781 02 2D B6         [24]  480 	ljmp	__modsint
+      002784                        481 00111$:
                                     482 ;	../Storage_Manager/storage.c:76: return value % WIRELESS_ACTION_OPTIONS;
-      0027DB 8E 05            [24]  483 	mov	ar5,r6
-      0027DD 7F 00            [12]  484 	mov	r7,#0x00
-      0027DF 75 72 0D         [24]  485 	mov	__modsint_PARM_2,#0x0d
+      002784 8E 05            [24]  483 	mov	ar5,r6
+      002786 7F 00            [12]  484 	mov	r7,#0x00
+      002788 75 72 0D         [24]  485 	mov	__modsint_PARM_2,#0x0d
                                     486 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-      0027E2 8F 73            [24]  487 	mov	(__modsint_PARM_2 + 1),r7
-      0027E4 8D 82            [24]  488 	mov	dpl,r5
-      0027E6 8F 83            [24]  489 	mov	dph,r7
+      00278B 8F 73            [24]  487 	mov	(__modsint_PARM_2 + 1),r7
+      00278D 8D 82            [24]  488 	mov	dpl,r5
+      00278F 8F 83            [24]  489 	mov	dph,r7
                                     490 ;	../Storage_Manager/storage.c:77: case MODE_INDEX:
-      0027E8 02 2E 0D         [24]  491 	ljmp	__modsint
-      0027EB                        492 00112$:
+      002791 02 2D B6         [24]  491 	ljmp	__modsint
+      002794                        492 00112$:
                                     493 ;	../Storage_Manager/storage.c:78: return value % DMX_OPTIONS;
-      0027EB 8E 05            [24]  494 	mov	ar5,r6
-      0027ED 7F 00            [12]  495 	mov	r7,#0x00
-      0027EF 75 72 03         [24]  496 	mov	__modsint_PARM_2,#0x03
+      002794 8E 05            [24]  494 	mov	ar5,r6
+      002796 7F 00            [12]  495 	mov	r7,#0x00
+      002798 75 72 03         [24]  496 	mov	__modsint_PARM_2,#0x03
                                     497 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-      0027F2 8F 73            [24]  498 	mov	(__modsint_PARM_2 + 1),r7
-      0027F4 8D 82            [24]  499 	mov	dpl,r5
-      0027F6 8F 83            [24]  500 	mov	dph,r7
+      00279B 8F 73            [24]  498 	mov	(__modsint_PARM_2 + 1),r7
+      00279D 8D 82            [24]  499 	mov	dpl,r5
+      00279F 8F 83            [24]  500 	mov	dph,r7
                                     501 ;	../Storage_Manager/storage.c:80: }
-      0027F8 02 2E 0D         [24]  502 	ljmp	__modsint
-      0027FB                        503 00113$:
+      0027A1 02 2D B6         [24]  502 	ljmp	__modsint
+      0027A4                        503 00113$:
                                     504 ;	../Storage_Manager/storage.c:82: return value;
-      0027FB 8E 82            [24]  505 	mov	dpl,r6
+      0027A4 8E 82            [24]  505 	mov	dpl,r6
                                     506 ;	../Storage_Manager/storage.c:83: }
-      0027FD 22               [24]  507 	ret
+      0027A6 22               [24]  507 	ret
                                     508 ;------------------------------------------------------------
                                     509 ;Allocation info for local variables in function 'set_runtime_data'
                                     510 ;------------------------------------------------------------
@@ -517,107 +517,107 @@
                                     517 ;	-----------------------------------------
                                     518 ;	 function set_runtime_data
                                     519 ;	-----------------------------------------
-      0027FE                        520 _set_runtime_data:
-      0027FE AF 82            [24]  521 	mov	r7,dpl
+      0027A7                        520 _set_runtime_data:
+      0027A7 AF 82            [24]  521 	mov	r7,dpl
                                     522 ;	../Storage_Manager/storage.c:86: uint8_t opMode = Runtime_Data[FOG_POWER_INDEX] & OP_MODE_BIT;
-      002800 74 80            [12]  523 	mov	a,#0x80
-      002802 55 55            [12]  524 	anl	a,_Runtime_Data
-      002804 FE               [12]  525 	mov	r6,a
+      0027A9 74 80            [12]  523 	mov	a,#0x80
+      0027AB 55 55            [12]  524 	anl	a,_Runtime_Data
+      0027AD FE               [12]  525 	mov	r6,a
                                     526 ;	../Storage_Manager/storage.c:93: switch(inc){
-      002805 74 01            [12]  527 	mov	a,#0x01
-      002807 B5 65 02         [24]  528 	cjne	a,_set_runtime_data_PARM_2,00142$
-      00280A 80 07            [24]  529 	sjmp	00101$
-      00280C                        530 00142$:
-      00280C 74 02            [12]  531 	mov	a,#0x02
+      0027AE 74 01            [12]  527 	mov	a,#0x01
+      0027B0 B5 65 02         [24]  528 	cjne	a,_set_runtime_data_PARM_2,00142$
+      0027B3 80 07            [24]  529 	sjmp	00101$
+      0027B5                        530 00142$:
+      0027B5 74 02            [12]  531 	mov	a,#0x02
                                     532 ;	../Storage_Manager/storage.c:94: case INC:
-      00280E B5 65 16         [24]  533 	cjne	a,_set_runtime_data_PARM_2,00103$
-      002811 80 0A            [24]  534 	sjmp	00102$
-      002813                        535 00101$:
+      0027B7 B5 65 16         [24]  533 	cjne	a,_set_runtime_data_PARM_2,00103$
+      0027BA 80 0A            [24]  534 	sjmp	00102$
+      0027BC                        535 00101$:
                                     536 ;	../Storage_Manager/storage.c:95: Runtime_Data[index]++;
-      002813 EF               [12]  537 	mov	a,r7
-      002814 24 55            [12]  538 	add	a,#_Runtime_Data
-      002816 F9               [12]  539 	mov	r1,a
-      002817 E7               [12]  540 	mov	a,@r1
-      002818 FD               [12]  541 	mov	r5,a
-      002819 04               [12]  542 	inc	a
-      00281A F7               [12]  543 	mov	@r1,a
+      0027BC EF               [12]  537 	mov	a,r7
+      0027BD 24 55            [12]  538 	add	a,#_Runtime_Data
+      0027BF F9               [12]  539 	mov	r1,a
+      0027C0 E7               [12]  540 	mov	a,@r1
+      0027C1 FD               [12]  541 	mov	r5,a
+      0027C2 04               [12]  542 	inc	a
+      0027C3 F7               [12]  543 	mov	@r1,a
                                     544 ;	../Storage_Manager/storage.c:96: break;
                                     545 ;	../Storage_Manager/storage.c:97: case DEC:
-      00281B 80 2A            [24]  546 	sjmp	00110$
-      00281D                        547 00102$:
+      0027C4 80 2A            [24]  546 	sjmp	00110$
+      0027C6                        547 00102$:
                                     548 ;	../Storage_Manager/storage.c:98: Runtime_Data[index]--;
-      00281D EF               [12]  549 	mov	a,r7
-      00281E 24 55            [12]  550 	add	a,#_Runtime_Data
-      002820 F9               [12]  551 	mov	r1,a
-      002821 E7               [12]  552 	mov	a,@r1
-      002822 FD               [12]  553 	mov	r5,a
-      002823 14               [12]  554 	dec	a
-      002824 F7               [12]  555 	mov	@r1,a
+      0027C6 EF               [12]  549 	mov	a,r7
+      0027C7 24 55            [12]  550 	add	a,#_Runtime_Data
+      0027C9 F9               [12]  551 	mov	r1,a
+      0027CA E7               [12]  552 	mov	a,@r1
+      0027CB FD               [12]  553 	mov	r5,a
+      0027CC 14               [12]  554 	dec	a
+      0027CD F7               [12]  555 	mov	@r1,a
                                     556 ;	../Storage_Manager/storage.c:99: break;
                                     557 ;	../Storage_Manager/storage.c:100: default:
-      002825 80 20            [24]  558 	sjmp	00110$
-      002827                        559 00103$:
+      0027CE 80 20            [24]  558 	sjmp	00110$
+      0027D0                        559 00103$:
                                     560 ;	../Storage_Manager/storage.c:101: if(index == OP_MODE_INDEX){
-      002827 BF 10 17         [24]  561 	cjne	r7,#0x10,00108$
+      0027D0 BF 10 17         [24]  561 	cjne	r7,#0x10,00108$
                                     562 ;	../Storage_Manager/storage.c:102: if(value) { 
-      00282A E5 66            [12]  563 	mov	a,_set_runtime_data_PARM_3
-      00282C 60 0B            [24]  564 	jz	00105$
+      0027D3 E5 66            [12]  563 	mov	a,_set_runtime_data_PARM_3
+      0027D5 60 0B            [24]  564 	jz	00105$
                                     565 ;	../Storage_Manager/storage.c:103: Runtime_Data[FOG_POWER_INDEX] |= OP_MODE_BIT;
-      00282E AC 55            [24]  566 	mov	r4,_Runtime_Data
-      002830 7D 00            [12]  567 	mov	r5,#0x00
-      002832 43 04 80         [24]  568 	orl	ar4,#0x80
-      002835 8C 55            [24]  569 	mov	_Runtime_Data,r4
-      002837 80 0E            [24]  570 	sjmp	00110$
-      002839                        571 00105$:
+      0027D7 AC 55            [24]  566 	mov	r4,_Runtime_Data
+      0027D9 7D 00            [12]  567 	mov	r5,#0x00
+      0027DB 43 04 80         [24]  568 	orl	ar4,#0x80
+      0027DE 8C 55            [24]  569 	mov	_Runtime_Data,r4
+      0027E0 80 0E            [24]  570 	sjmp	00110$
+      0027E2                        571 00105$:
                                     572 ;	../Storage_Manager/storage.c:105: Runtime_Data[FOG_POWER_INDEX] &= ~OP_MODE_BIT;
-      002839 74 7F            [12]  573 	mov	a,#0x7f
-      00283B 55 55            [12]  574 	anl	a,_Runtime_Data
-      00283D F5 55            [12]  575 	mov	_Runtime_Data,a
-      00283F 80 06            [24]  576 	sjmp	00110$
-      002841                        577 00108$:
+      0027E2 74 7F            [12]  573 	mov	a,#0x7f
+      0027E4 55 55            [12]  574 	anl	a,_Runtime_Data
+      0027E6 F5 55            [12]  575 	mov	_Runtime_Data,a
+      0027E8 80 06            [24]  576 	sjmp	00110$
+      0027EA                        577 00108$:
                                     578 ;	../Storage_Manager/storage.c:108: Runtime_Data[index] = value;
-      002841 EF               [12]  579 	mov	a,r7
-      002842 24 55            [12]  580 	add	a,#_Runtime_Data
-      002844 F8               [12]  581 	mov	r0,a
-      002845 A6 66            [24]  582 	mov	@r0,_set_runtime_data_PARM_3
+      0027EA EF               [12]  579 	mov	a,r7
+      0027EB 24 55            [12]  580 	add	a,#_Runtime_Data
+      0027ED F8               [12]  581 	mov	r0,a
+      0027EE A6 66            [24]  582 	mov	@r0,_set_runtime_data_PARM_3
                                     583 ;	../Storage_Manager/storage.c:111: }
-      002847                        584 00110$:
+      0027F0                        584 00110$:
                                     585 ;	../Storage_Manager/storage.c:113: if(index == FOG_POWER_INDEX){
-      002847 EF               [12]  586 	mov	a,r7
-      002848 70 24            [24]  587 	jnz	00115$
+      0027F0 EF               [12]  586 	mov	a,r7
+      0027F1 70 24            [24]  587 	jnz	00115$
                                     588 ;	../Storage_Manager/storage.c:114: if(opMode){
-      00284A EE               [12]  589 	mov	a,r6
-      00284B 60 13            [24]  590 	jz	00112$
+      0027F3 EE               [12]  589 	mov	a,r6
+      0027F4 60 13            [24]  590 	jz	00112$
                                     591 ;	../Storage_Manager/storage.c:115: Runtime_Data[index] |= OP_MODE_BIT;
-      00284D EF               [12]  592 	mov	a,r7
-      00284E 24 55            [12]  593 	add	a,#_Runtime_Data
-      002850 F9               [12]  594 	mov	r1,a
-      002851 EF               [12]  595 	mov	a,r7
-      002852 24 55            [12]  596 	add	a,#_Runtime_Data
-      002854 F8               [12]  597 	mov	r0,a
-      002855 86 06            [24]  598 	mov	ar6,@r0
-      002857 7D 00            [12]  599 	mov	r5,#0x00
-      002859 43 06 80         [24]  600 	orl	ar6,#0x80
-      00285C A7 06            [24]  601 	mov	@r1,ar6
-      00285E 80 0E            [24]  602 	sjmp	00115$
-      002860                        603 00112$:
+      0027F6 EF               [12]  592 	mov	a,r7
+      0027F7 24 55            [12]  593 	add	a,#_Runtime_Data
+      0027F9 F9               [12]  594 	mov	r1,a
+      0027FA EF               [12]  595 	mov	a,r7
+      0027FB 24 55            [12]  596 	add	a,#_Runtime_Data
+      0027FD F8               [12]  597 	mov	r0,a
+      0027FE 86 06            [24]  598 	mov	ar6,@r0
+      002800 7D 00            [12]  599 	mov	r5,#0x00
+      002802 43 06 80         [24]  600 	orl	ar6,#0x80
+      002805 A7 06            [24]  601 	mov	@r1,ar6
+      002807 80 0E            [24]  602 	sjmp	00115$
+      002809                        603 00112$:
                                     604 ;	../Storage_Manager/storage.c:117: Runtime_Data[index] &= ~OP_MODE_BIT;
-      002860 EF               [12]  605 	mov	a,r7
-      002861 24 55            [12]  606 	add	a,#_Runtime_Data
-      002863 F9               [12]  607 	mov	r1,a
-      002864 EF               [12]  608 	mov	a,r7
-      002865 24 55            [12]  609 	add	a,#_Runtime_Data
-      002867 F8               [12]  610 	mov	r0,a
-      002868 86 07            [24]  611 	mov	ar7,@r0
-      00286A 74 7F            [12]  612 	mov	a,#0x7f
-      00286C 5F               [12]  613 	anl	a,r7
-      00286D F7               [12]  614 	mov	@r1,a
-      00286E                        615 00115$:
+      002809 EF               [12]  605 	mov	a,r7
+      00280A 24 55            [12]  606 	add	a,#_Runtime_Data
+      00280C F9               [12]  607 	mov	r1,a
+      00280D EF               [12]  608 	mov	a,r7
+      00280E 24 55            [12]  609 	add	a,#_Runtime_Data
+      002810 F8               [12]  610 	mov	r0,a
+      002811 86 07            [24]  611 	mov	ar7,@r0
+      002813 74 7F            [12]  612 	mov	a,#0x7f
+      002815 5F               [12]  613 	anl	a,r7
+      002816 F7               [12]  614 	mov	@r1,a
+      002817                        615 00115$:
                                     616 ;	../Storage_Manager/storage.c:121: save_load_settings(SLOT_0, SAVE);
-      00286E 75 72 01         [24]  617 	mov	_save_load_settings_PARM_2,#0x01
-      002871 75 82 00         [24]  618 	mov	dpl,#0x00
+      002817 75 72 01         [24]  617 	mov	_save_load_settings_PARM_2,#0x01
+      00281A 75 82 00         [24]  618 	mov	dpl,#0x00
                                     619 ;	../Storage_Manager/storage.c:122: }
-      002874 02 27 14         [24]  620 	ljmp	_save_load_settings
+      00281D 02 26 BD         [24]  620 	ljmp	_save_load_settings
                                     621 ;------------------------------------------------------------
                                     622 ;Allocation info for local variables in function 'set_dmx_address'
                                     623 ;------------------------------------------------------------
@@ -628,64 +628,64 @@
                                     628 ;	-----------------------------------------
                                     629 ;	 function set_dmx_address
                                     630 ;	-----------------------------------------
-      002877                        631 _set_dmx_address:
-      002877 AF 82            [24]  632 	mov	r7,dpl
+      002820                        631 _set_dmx_address:
+      002820 AF 82            [24]  632 	mov	r7,dpl
                                     633 ;	../Storage_Manager/storage.c:125: uint16_t addr = get_dmx_address();
-      002879 C0 07            [24]  634 	push	ar7
-      00287B 12 28 CA         [24]  635 	lcall	_get_dmx_address
-      00287E AD 82            [24]  636 	mov	r5,dpl
-      002880 AE 83            [24]  637 	mov	r6,dph
-      002882 D0 07            [24]  638 	pop	ar7
+      002822 C0 07            [24]  634 	push	ar7
+      002824 12 28 73         [24]  635 	lcall	_get_dmx_address
+      002827 AD 82            [24]  636 	mov	r5,dpl
+      002829 AE 83            [24]  637 	mov	r6,dph
+      00282B D0 07            [24]  638 	pop	ar7
                                     639 ;	../Storage_Manager/storage.c:127: if(inc == INC){
-      002884 BF 01 12         [24]  640 	cjne	r7,#0x01,00108$
+      00282D BF 01 12         [24]  640 	cjne	r7,#0x01,00108$
                                     641 ;	../Storage_Manager/storage.c:128: if(addr >= DMX_MAX_ADDRESS){
-      002887 74 FE            [12]  642 	mov	a,#0x100 - 0x02
-      002889 2E               [12]  643 	add	a,r6
-      00288A 50 06            [24]  644 	jnc	00102$
+      002830 74 FE            [12]  642 	mov	a,#0x100 - 0x02
+      002832 2E               [12]  643 	add	a,r6
+      002833 50 06            [24]  644 	jnc	00102$
                                     645 ;	../Storage_Manager/storage.c:129: addr = 1;
-      00288C 7D 01            [12]  646 	mov	r5,#0x01
-      00288E 7E 00            [12]  647 	mov	r6,#0x00
-      002890 80 1A            [24]  648 	sjmp	00109$
-      002892                        649 00102$:
+      002835 7D 01            [12]  646 	mov	r5,#0x01
+      002837 7E 00            [12]  647 	mov	r6,#0x00
+      002839 80 1A            [24]  648 	sjmp	00109$
+      00283B                        649 00102$:
                                     650 ;	../Storage_Manager/storage.c:131: addr++;
-      002892 0D               [12]  651 	inc	r5
-      002893 BD 00 16         [24]  652 	cjne	r5,#0x00,00109$
-      002896 0E               [12]  653 	inc	r6
-      002897 80 13            [24]  654 	sjmp	00109$
-      002899                        655 00108$:
+      00283B 0D               [12]  651 	inc	r5
+      00283C BD 00 16         [24]  652 	cjne	r5,#0x00,00109$
+      00283F 0E               [12]  653 	inc	r6
+      002840 80 13            [24]  654 	sjmp	00109$
+      002842                        655 00108$:
                                     656 ;	../Storage_Manager/storage.c:134: if(addr <= 1){
-      002899 C3               [12]  657 	clr	c
-      00289A 74 01            [12]  658 	mov	a,#0x01
-      00289C 9D               [12]  659 	subb	a,r5
-      00289D E4               [12]  660 	clr	a
-      00289E 9E               [12]  661 	subb	a,r6
-      00289F 40 06            [24]  662 	jc	00105$
+      002842 C3               [12]  657 	clr	c
+      002843 74 01            [12]  658 	mov	a,#0x01
+      002845 9D               [12]  659 	subb	a,r5
+      002846 E4               [12]  660 	clr	a
+      002847 9E               [12]  661 	subb	a,r6
+      002848 40 06            [24]  662 	jc	00105$
                                     663 ;	../Storage_Manager/storage.c:135: addr = DMX_MAX_ADDRESS;
-      0028A1 7D 00            [12]  664 	mov	r5,#0x00
-      0028A3 7E 02            [12]  665 	mov	r6,#0x02
-      0028A5 80 05            [24]  666 	sjmp	00109$
-      0028A7                        667 00105$:
+      00284A 7D 00            [12]  664 	mov	r5,#0x00
+      00284C 7E 02            [12]  665 	mov	r6,#0x02
+      00284E 80 05            [24]  666 	sjmp	00109$
+      002850                        667 00105$:
                                     668 ;	../Storage_Manager/storage.c:137: addr--;
-      0028A7 1D               [12]  669 	dec	r5
-      0028A8 BD FF 01         [24]  670 	cjne	r5,#0xff,00129$
-      0028AB 1E               [12]  671 	dec	r6
-      0028AC                        672 00129$:
-      0028AC                        673 00109$:
+      002850 1D               [12]  669 	dec	r5
+      002851 BD FF 01         [24]  670 	cjne	r5,#0xff,00129$
+      002854 1E               [12]  671 	dec	r6
+      002855                        672 00129$:
+      002855                        673 00109$:
                                     674 ;	../Storage_Manager/storage.c:141: set_runtime_data(ADDR_L_INDEX, VALUE, (uint8_t) addr);
-      0028AC 8D 66            [24]  675 	mov	_set_runtime_data_PARM_3,r5
-      0028AE 75 65 00         [24]  676 	mov	_set_runtime_data_PARM_2,#0x00
-      0028B1 75 82 0D         [24]  677 	mov	dpl,#0x0d
-      0028B4 C0 06            [24]  678 	push	ar6
-      0028B6 C0 05            [24]  679 	push	ar5
-      0028B8 12 27 FE         [24]  680 	lcall	_set_runtime_data
-      0028BB D0 05            [24]  681 	pop	ar5
-      0028BD D0 06            [24]  682 	pop	ar6
+      002855 8D 66            [24]  675 	mov	_set_runtime_data_PARM_3,r5
+      002857 75 65 00         [24]  676 	mov	_set_runtime_data_PARM_2,#0x00
+      00285A 75 82 0D         [24]  677 	mov	dpl,#0x0d
+      00285D C0 06            [24]  678 	push	ar6
+      00285F C0 05            [24]  679 	push	ar5
+      002861 12 27 A7         [24]  680 	lcall	_set_runtime_data
+      002864 D0 05            [24]  681 	pop	ar5
+      002866 D0 06            [24]  682 	pop	ar6
                                     683 ;	../Storage_Manager/storage.c:142: set_runtime_data(ADDR_H_INDEX, VALUE, (uint8_t) (addr >> 8));
-      0028BF 8E 66            [24]  684 	mov	_set_runtime_data_PARM_3,r6
-      0028C1 75 65 00         [24]  685 	mov	_set_runtime_data_PARM_2,#0x00
-      0028C4 75 82 0C         [24]  686 	mov	dpl,#0x0c
+      002868 8E 66            [24]  684 	mov	_set_runtime_data_PARM_3,r6
+      00286A 75 65 00         [24]  685 	mov	_set_runtime_data_PARM_2,#0x00
+      00286D 75 82 0C         [24]  686 	mov	dpl,#0x0c
                                     687 ;	../Storage_Manager/storage.c:144: }
-      0028C7 02 27 FE         [24]  688 	ljmp	_set_runtime_data
+      002870 02 27 A7         [24]  688 	ljmp	_set_runtime_data
                                     689 ;------------------------------------------------------------
                                     690 ;Allocation info for local variables in function 'get_dmx_address'
                                     691 ;------------------------------------------------------------
@@ -695,22 +695,22 @@
                                     695 ;	-----------------------------------------
                                     696 ;	 function get_dmx_address
                                     697 ;	-----------------------------------------
-      0028CA                        698 _get_dmx_address:
+      002873                        698 _get_dmx_address:
                                     699 ;	../Storage_Manager/storage.c:149: address |= (Runtime_Data[ADDR_H_INDEX] << 8);
-      0028CA AF 61            [24]  700 	mov	r7,(_Runtime_Data + 0x000c)
-      0028CC 7E 00            [12]  701 	mov	r6,#0x00
+      002873 AF 61            [24]  700 	mov	r7,(_Runtime_Data + 0x000c)
+      002875 7E 00            [12]  701 	mov	r6,#0x00
                                     702 ;	../Storage_Manager/storage.c:150: address |= Runtime_Data[ADDR_L_INDEX];
-      0028CE AC 62            [24]  703 	mov	r4,(_Runtime_Data + 0x000d)
-      0028D0 7D 00            [12]  704 	mov	r5,#0x00
-      0028D2 EC               [12]  705 	mov	a,r4
-      0028D3 4E               [12]  706 	orl	a,r6
-      0028D4 F5 82            [12]  707 	mov	dpl,a
-      0028D6 ED               [12]  708 	mov	a,r5
-      0028D7 4F               [12]  709 	orl	a,r7
-      0028D8 F5 83            [12]  710 	mov	dph,a
+      002877 AC 62            [24]  703 	mov	r4,(_Runtime_Data + 0x000d)
+      002879 7D 00            [12]  704 	mov	r5,#0x00
+      00287B EC               [12]  705 	mov	a,r4
+      00287C 4E               [12]  706 	orl	a,r6
+      00287D F5 82            [12]  707 	mov	dpl,a
+      00287F ED               [12]  708 	mov	a,r5
+      002880 4F               [12]  709 	orl	a,r7
+      002881 F5 83            [12]  710 	mov	dph,a
                                     711 ;	../Storage_Manager/storage.c:152: return address;
                                     712 ;	../Storage_Manager/storage.c:153: }
-      0028DA 22               [24]  713 	ret
+      002883 22               [24]  713 	ret
                                     714 	.area CSEG    (CODE)
                                     715 	.area CONST   (CODE)
                                     716 	.area CABS    (ABS,CODE)
