@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "dmx.h": "c",
+        "storage.h": "c",
+        "fogger.h": "c"
+    }
+}

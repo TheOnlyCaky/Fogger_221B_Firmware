@@ -1,0 +1,4 @@
+"STARTUP.obj",
+".\MAIN.obj" 
+TO "PWM6037" 
+RAMSIZE(256) 

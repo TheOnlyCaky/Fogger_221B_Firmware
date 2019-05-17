@@ -1,0 +1,782 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.0 #10562 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module storage
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _save_load_settings_PARM_2
+                                     12 	.globl _Init_Data
+                                     13 	.globl _CPRL2
+                                     14 	.globl _CT2
+                                     15 	.globl _TR2
+                                     16 	.globl _EXEN2
+                                     17 	.globl _TCLK
+                                     18 	.globl _RCLK
+                                     19 	.globl _REN
+                                     20 	.globl _SM2
+                                     21 	.globl _SM1
+                                     22 	.globl _SM0
+                                     23 	.globl _RCK
+                                     24 	.globl _SER
+                                     25 	.globl _SCK
+                                     26 	.globl _RI
+                                     27 	.globl _ES
+                                     28 	.globl _ET0
+                                     29 	.globl _EA
+                                     30 	.globl _P3_7
+                                     31 	.globl _P3_6
+                                     32 	.globl _P3_5
+                                     33 	.globl _P3_4
+                                     34 	.globl _P3_3
+                                     35 	.globl _P3_2
+                                     36 	.globl _P3_1
+                                     37 	.globl _P3_0
+                                     38 	.globl _P2_7
+                                     39 	.globl _P2_6
+                                     40 	.globl _P2_5
+                                     41 	.globl _P2_4
+                                     42 	.globl _P2_3
+                                     43 	.globl _P2_2
+                                     44 	.globl _P2_1
+                                     45 	.globl _P2_0
+                                     46 	.globl _P1_7
+                                     47 	.globl _P1_6
+                                     48 	.globl _P1_5
+                                     49 	.globl _P1_4
+                                     50 	.globl _P1_3
+                                     51 	.globl _P1_2
+                                     52 	.globl _P1_1
+                                     53 	.globl _P1_0
+                                     54 	.globl _P0_7
+                                     55 	.globl _P0_6
+                                     56 	.globl _P0_5
+                                     57 	.globl _P0_4
+                                     58 	.globl _P0_3
+                                     59 	.globl _P0_2
+                                     60 	.globl _P0_1
+                                     61 	.globl _P0_0
+                                     62 	.globl _IAP_ADRH
+                                     63 	.globl _IAP_ADRL
+                                     64 	.globl _IAPEN
+                                     65 	.globl _TH0
+                                     66 	.globl _TL0
+                                     67 	.globl _CKCON
+                                     68 	.globl _TMOD
+                                     69 	.globl _TCON
+                                     70 	.globl _PWMDATA17L
+                                     71 	.globl _PWMDATA17H
+                                     72 	.globl _PWMDATA14L
+                                     73 	.globl _PWMDATA14H
+                                     74 	.globl _PWMDATA11L
+                                     75 	.globl _PWMDATA11H
+                                     76 	.globl _PWM_EA2
+                                     77 	.globl _PWM_EA1
+                                     78 	.globl _SBUF
+                                     79 	.globl _TL3
+                                     80 	.globl _TH3
+                                     81 	.globl _T2CON
+                                     82 	.globl _RCAP2H
+                                     83 	.globl _RCAP2L
+                                     84 	.globl _SCON
+                                     85 	.globl _P1_OPT
+                                     86 	.globl _ADCVAL2
+                                     87 	.globl _ADCVAL1
+                                     88 	.globl _ADCSEL
+                                     89 	.globl _EXIF
+                                     90 	.globl _EIE
+                                     91 	.globl _IE
+                                     92 	.globl _P3
+                                     93 	.globl _P2
+                                     94 	.globl _P1
+                                     95 	.globl _P0
+                                     96 	.globl _PCLKSEL
+                                     97 	.globl _CHIPCON
+                                     98 	.globl _IAP_AUX
+                                     99 	.globl _set_runtime_data_PARM_3
+                                    100 	.globl _set_runtime_data_PARM_2
+                                    101 	.globl _save_load_settings
+                                    102 	.globl _get_runtime_data
+                                    103 	.globl _set_runtime_data
+                                    104 	.globl _set_dmx_address
+                                    105 	.globl _get_dmx_address
+                                    106 ;--------------------------------------------------------
+                                    107 ; special function registers
+                                    108 ;--------------------------------------------------------
+                                    109 	.area RSEG    (ABS,DATA)
+      000000                        110 	.org 0x0000
+                           0000BF   111 _CHIPCON	=	0x00bf
+                           0000B7   112 _PCLKSEL	=	0x00b7
+                           000080   113 _P0	=	0x0080
+                           000090   114 _P1	=	0x0090
+                           0000A0   115 _P2	=	0x00a0
+                           0000B0   116 _P3	=	0x00b0
+                           0000A8   117 _IE	=	0x00a8
+                           0000E8   118 _EIE	=	0x00e8
+                           000091   119 _EXIF	=	0x0091
+                           0000DA   120 _ADCSEL	=	0x00da
+                           0000DB   121 _ADCVAL1	=	0x00db
+                           0000DC   122 _ADCVAL2	=	0x00dc
+                           0000D9   123 _P1_OPT	=	0x00d9
+                           000098   124 _SCON	=	0x0098
+                           0000CA   125 _RCAP2L	=	0x00ca
+                           0000CB   126 _RCAP2H	=	0x00cb
+                           0000C8   127 _T2CON	=	0x00c8
+                           00009B   128 _TH3	=	0x009b
+                           00009A   129 _TL3	=	0x009a
+                           000099   130 _SBUF	=	0x0099
+                           0000D3   131 _PWM_EA1	=	0x00d3
+                           0000D4   132 _PWM_EA2	=	0x00d4
+                           0000BD   133 _PWMDATA11H	=	0x00bd
+                           0000BE   134 _PWMDATA11L	=	0x00be
+                           0000B5   135 _PWMDATA14H	=	0x00b5
+                           0000B6   136 _PWMDATA14L	=	0x00b6
+                           0000AD   137 _PWMDATA17H	=	0x00ad
+                           0000AE   138 _PWMDATA17L	=	0x00ae
+                           000088   139 _TCON	=	0x0088
+                           000089   140 _TMOD	=	0x0089
+                           00008E   141 _CKCON	=	0x008e
+                           00008A   142 _TL0	=	0x008a
+                           00008C   143 _TH0	=	0x008c
+                           0000E4   144 _IAPEN	=	0x00e4
+                           0000E5   145 _IAP_ADRL	=	0x00e5
+                           0000E6   146 _IAP_ADRH	=	0x00e6
+                                    147 ;--------------------------------------------------------
+                                    148 ; special function bits
+                                    149 ;--------------------------------------------------------
+                                    150 	.area RSEG    (ABS,DATA)
+      000000                        151 	.org 0x0000
+                           000080   152 _P0_0	=	0x0080
+                           000081   153 _P0_1	=	0x0081
+                           000082   154 _P0_2	=	0x0082
+                           000083   155 _P0_3	=	0x0083
+                           000084   156 _P0_4	=	0x0084
+                           000085   157 _P0_5	=	0x0085
+                           000086   158 _P0_6	=	0x0086
+                           000087   159 _P0_7	=	0x0087
+                           000090   160 _P1_0	=	0x0090
+                           000091   161 _P1_1	=	0x0091
+                           000092   162 _P1_2	=	0x0092
+                           000093   163 _P1_3	=	0x0093
+                           000094   164 _P1_4	=	0x0094
+                           000095   165 _P1_5	=	0x0095
+                           000096   166 _P1_6	=	0x0096
+                           000097   167 _P1_7	=	0x0097
+                           0000A0   168 _P2_0	=	0x00a0
+                           0000A1   169 _P2_1	=	0x00a1
+                           0000A2   170 _P2_2	=	0x00a2
+                           0000A3   171 _P2_3	=	0x00a3
+                           0000A4   172 _P2_4	=	0x00a4
+                           0000A5   173 _P2_5	=	0x00a5
+                           0000A6   174 _P2_6	=	0x00a6
+                           0000A7   175 _P2_7	=	0x00a7
+                           0000B0   176 _P3_0	=	0x00b0
+                           0000B1   177 _P3_1	=	0x00b1
+                           0000B2   178 _P3_2	=	0x00b2
+                           0000B3   179 _P3_3	=	0x00b3
+                           0000B4   180 _P3_4	=	0x00b4
+                           0000B5   181 _P3_5	=	0x00b5
+                           0000B6   182 _P3_6	=	0x00b6
+                           0000B7   183 _P3_7	=	0x00b7
+                           0000AF   184 _EA	=	0x00af
+                           0000A9   185 _ET0	=	0x00a9
+                           0000AC   186 _ES	=	0x00ac
+                           000098   187 _RI	=	0x0098
+                           000093   188 _SCK	=	0x0093
+                           000095   189 _SER	=	0x0095
+                           000092   190 _RCK	=	0x0092
+                           00009F   191 _SM0	=	0x009f
+                           00009E   192 _SM1	=	0x009e
+                           00009D   193 _SM2	=	0x009d
+                           00009C   194 _REN	=	0x009c
+                           0000CD   195 _RCLK	=	0x00cd
+                           0000CC   196 _TCLK	=	0x00cc
+                           0000CB   197 _EXEN2	=	0x00cb
+                           0000CA   198 _TR2	=	0x00ca
+                           0000C9   199 _CT2	=	0x00c9
+                           0000C8   200 _CPRL2	=	0x00c8
+                                    201 ;--------------------------------------------------------
+                                    202 ; overlayable register banks
+                                    203 ;--------------------------------------------------------
+                                    204 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        205 	.ds 8
+                                    206 ;--------------------------------------------------------
+                                    207 ; internal ram data
+                                    208 ;--------------------------------------------------------
+                                    209 	.area DSEG    (DATA)
+      000000                        210 _Runtime_Data:
+      000000                        211 	.ds 16
+      000010                        212 _set_runtime_data_PARM_2:
+      000010                        213 	.ds 1
+      000011                        214 _set_runtime_data_PARM_3:
+      000011                        215 	.ds 1
+                                    216 ;--------------------------------------------------------
+                                    217 ; overlayable items in internal ram 
+                                    218 ;--------------------------------------------------------
+                                    219 	.area	OSEG    (OVR,DATA)
+      000000                        220 _save_load_settings_PARM_2:
+      000000                        221 	.ds 1
+                                    222 	.area	OSEG    (OVR,DATA)
+                                    223 ;--------------------------------------------------------
+                                    224 ; indirectly addressable internal ram data
+                                    225 ;--------------------------------------------------------
+                                    226 	.area ISEG    (DATA)
+                                    227 ;--------------------------------------------------------
+                                    228 ; absolute internal ram data
+                                    229 ;--------------------------------------------------------
+                                    230 	.area IABS    (ABS,DATA)
+                                    231 	.area IABS    (ABS,DATA)
+                                    232 ;--------------------------------------------------------
+                                    233 ; bit data
+                                    234 ;--------------------------------------------------------
+                                    235 	.area BSEG    (BIT)
+                                    236 ;--------------------------------------------------------
+                                    237 ; paged external ram data
+                                    238 ;--------------------------------------------------------
+                                    239 	.area PSEG    (PAG,XDATA)
+                                    240 ;--------------------------------------------------------
+                                    241 ; external ram data
+                                    242 ;--------------------------------------------------------
+                                    243 	.area XSEG    (XDATA)
+                           000100   244 _IAP_AUX	=	0x0100
+                                    245 ;--------------------------------------------------------
+                                    246 ; absolute external ram data
+                                    247 ;--------------------------------------------------------
+                                    248 	.area XABS    (ABS,XDATA)
+                                    249 ;--------------------------------------------------------
+                                    250 ; external initialized ram data
+                                    251 ;--------------------------------------------------------
+                                    252 	.area HOME    (CODE)
+                                    253 	.area GSINIT0 (CODE)
+                                    254 	.area GSINIT1 (CODE)
+                                    255 	.area GSINIT2 (CODE)
+                                    256 	.area GSINIT3 (CODE)
+                                    257 	.area GSINIT4 (CODE)
+                                    258 	.area GSINIT5 (CODE)
+                                    259 	.area GSINIT  (CODE)
+                                    260 	.area GSFINAL (CODE)
+                                    261 	.area CSEG    (CODE)
+                                    262 ;--------------------------------------------------------
+                                    263 ; global & static initialisations
+                                    264 ;--------------------------------------------------------
+                                    265 	.area HOME    (CODE)
+                                    266 	.area GSINIT  (CODE)
+                                    267 	.area GSFINAL (CODE)
+                                    268 	.area GSINIT  (CODE)
+                                    269 ;--------------------------------------------------------
+                                    270 ; Home
+                                    271 ;--------------------------------------------------------
+                                    272 	.area HOME    (CODE)
+                                    273 	.area HOME    (CODE)
+                                    274 ;--------------------------------------------------------
+                                    275 ; code
+                                    276 ;--------------------------------------------------------
+                                    277 	.area CSEG    (CODE)
+                                    278 ;------------------------------------------------------------
+                                    279 ;Allocation info for local variables in function 'save_load_settings'
+                                    280 ;------------------------------------------------------------
+                                    281 ;save                      Allocated with name '_save_load_settings_PARM_2'
+                                    282 ;slot                      Allocated to registers r7 
+                                    283 ;i                         Allocated to registers r5 
+                                    284 ;------------------------------------------------------------
+                                    285 ;	../Storage_Manager/storage.c:30: void save_load_settings(uint8_t slot, uint8_t save){
+                                    286 ;	-----------------------------------------
+                                    287 ;	 function save_load_settings
+                                    288 ;	-----------------------------------------
+      000000                        289 _save_load_settings:
+                           000007   290 	ar7 = 0x07
+                           000006   291 	ar6 = 0x06
+                           000005   292 	ar5 = 0x05
+                           000004   293 	ar4 = 0x04
+                           000003   294 	ar3 = 0x03
+                           000002   295 	ar2 = 0x02
+                           000001   296 	ar1 = 0x01
+                           000000   297 	ar0 = 0x00
+                                    298 ;	../Storage_Manager/storage.c:33: slot = slot * CONFIG_COUNT;
+      000000 E5 82            [12]  299 	mov	a,dpl
+      000002 C4               [12]  300 	swap	a
+      000003 54 F0            [12]  301 	anl	a,#0xf0
+      000005 FF               [12]  302 	mov	r7,a
+                                    303 ;	../Storage_Manager/storage.c:35: if(save == LOAD){
+      000006 E5*00            [12]  304 	mov	a,_save_load_settings_PARM_2
+      000008 70 03            [24]  305 	jnz	00115$
+                                    306 ;	../Storage_Manager/storage.c:36: IAPEN = IAP_Read; //read
+      00000A 75 E4 A0         [24]  307 	mov	_IAPEN,#0xa0
+                                    308 ;	../Storage_Manager/storage.c:39: for(i = 0; i < CONFIG_COUNT; i++){
+      00000D                        309 00115$:
+      00000D 74 01            [12]  310 	mov	a,#0x01
+      00000F B5*00 04         [24]  311 	cjne	a,_save_load_settings_PARM_2,00140$
+      000012 74 01            [12]  312 	mov	a,#0x01
+      000014 80 01            [24]  313 	sjmp	00141$
+      000016                        314 00140$:
+      000016 E4               [12]  315 	clr	a
+      000017                        316 00141$:
+      000017 FE               [12]  317 	mov	r6,a
+      000018 7D 00            [12]  318 	mov	r5,#0x00
+      00001A                        319 00109$:
+                                    320 ;	../Storage_Manager/storage.c:40: if(save == SAVE){
+      00001A EE               [12]  321 	mov	a,r6
+      00001B 60 14            [24]  322 	jz	00104$
+                                    323 ;	../Storage_Manager/storage.c:41: IAP_AUX[i + slot] = Runtime_Data[i];
+      00001D EF               [12]  324 	mov	a,r7
+      00001E 2D               [12]  325 	add	a,r5
+      00001F 24 00            [12]  326 	add	a,#_IAP_AUX
+      000021 F5 82            [12]  327 	mov	dpl,a
+      000023 E4               [12]  328 	clr	a
+      000024 34 01            [12]  329 	addc	a,#(_IAP_AUX >> 8)
+      000026 F5 83            [12]  330 	mov	dph,a
+      000028 ED               [12]  331 	mov	a,r5
+      000029 24r00            [12]  332 	add	a,#_Runtime_Data
+      00002B F9               [12]  333 	mov	r1,a
+      00002C E7               [12]  334 	mov	a,@r1
+      00002D FC               [12]  335 	mov	r4,a
+      00002E F0               [24]  336 	movx	@dptr,a
+      00002F 80 12            [24]  337 	sjmp	00110$
+      000031                        338 00104$:
+                                    339 ;	../Storage_Manager/storage.c:43: Runtime_Data[i] = IAP_AUX[i + slot];
+      000031 ED               [12]  340 	mov	a,r5
+      000032 24r00            [12]  341 	add	a,#_Runtime_Data
+      000034 F9               [12]  342 	mov	r1,a
+      000035 EF               [12]  343 	mov	a,r7
+      000036 2D               [12]  344 	add	a,r5
+      000037 24 00            [12]  345 	add	a,#_IAP_AUX
+      000039 F5 82            [12]  346 	mov	dpl,a
+      00003B E4               [12]  347 	clr	a
+      00003C 34 01            [12]  348 	addc	a,#(_IAP_AUX >> 8)
+      00003E F5 83            [12]  349 	mov	dph,a
+      000040 E0               [24]  350 	movx	a,@dptr
+      000041 FC               [12]  351 	mov	r4,a
+      000042 F7               [12]  352 	mov	@r1,a
+      000043                        353 00110$:
+                                    354 ;	../Storage_Manager/storage.c:39: for(i = 0; i < CONFIG_COUNT; i++){
+      000043 0D               [12]  355 	inc	r5
+      000044 BD 10 00         [24]  356 	cjne	r5,#0x10,00143$
+      000047                        357 00143$:
+      000047 40 D1            [24]  358 	jc	00109$
+                                    359 ;	../Storage_Manager/storage.c:47: if(save == SAVE){
+      000049 EE               [12]  360 	mov	a,r6
+      00004A 60 09            [24]  361 	jz	00111$
+                                    362 ;	../Storage_Manager/storage.c:48: IAPEN = IAP_Erase; //have to erase before write...
+      00004C 75 E4 90         [24]  363 	mov	_IAPEN,#0x90
+                                    364 ;	../Storage_Manager/storage.c:49: IAPEN = IAP_Write;  
+      00004F 75 E4 C0         [24]  365 	mov	_IAPEN,#0xc0
+                                    366 ;	../Storage_Manager/storage.c:50: Nop(); //datasheet recommend no operation following write
+      000052 00               [12]  367 	nop 
+      000053 00               [12]  368 	nop 
+      000054 00               [12]  369 	nop 
+      000055                        370 00111$:
+                                    371 ;	../Storage_Manager/storage.c:52: }
+      000055 22               [24]  372 	ret
+                                    373 ;------------------------------------------------------------
+                                    374 ;Allocation info for local variables in function 'get_runtime_data'
+                                    375 ;------------------------------------------------------------
+                                    376 ;index                     Allocated to registers r7 
+                                    377 ;value                     Allocated to registers r6 
+                                    378 ;------------------------------------------------------------
+                                    379 ;	../Storage_Manager/storage.c:54: uint8_t get_runtime_data(uint8_t index){
+                                    380 ;	-----------------------------------------
+                                    381 ;	 function get_runtime_data
+                                    382 ;	-----------------------------------------
+      000056                        383 _get_runtime_data:
+      000056 AF 82            [24]  384 	mov	r7,dpl
+                                    385 ;	../Storage_Manager/storage.c:57: if(index == OP_MODE_INDEX){
+      000058 BF 10 07         [24]  386 	cjne	r7,#0x10,00102$
+                                    387 ;	../Storage_Manager/storage.c:58: return Runtime_Data[FOG_POWER_INDEX] & OP_MODE_BIT;
+      00005B 74 80            [12]  388 	mov	a,#0x80
+      00005D 55*00            [12]  389 	anl	a,_Runtime_Data
+      00005F F5 82            [12]  390 	mov	dpl,a
+      000061 22               [24]  391 	ret
+      000062                        392 00102$:
+                                    393 ;	../Storage_Manager/storage.c:61: value = Runtime_Data[index];
+      000062 EF               [12]  394 	mov	a,r7
+      000063 24r00            [12]  395 	add	a,#_Runtime_Data
+      000065 F9               [12]  396 	mov	r1,a
+      000066 87 06            [24]  397 	mov	ar6,@r1
+                                    398 ;	../Storage_Manager/storage.c:63: switch (index)
+      000068 EF               [12]  399 	mov	a,r7
+      000069 24 F1            [12]  400 	add	a,#0xff - 0x0e
+      00006B 50 03            [24]  401 	jnc	00130$
+      00006D 02r00rE7         [24]  402 	ljmp	00113$
+      000070                        403 00130$:
+      000070 EF               [12]  404 	mov	a,r7
+      000071 24 0A            [12]  405 	add	a,#(00131$-3-.)
+      000073 83               [24]  406 	movc	a,@a+pc
+      000074 F5 82            [12]  407 	mov	dpl,a
+      000076 EF               [12]  408 	mov	a,r7
+      000077 24 13            [12]  409 	add	a,#(00132$-3-.)
+      000079 83               [24]  410 	movc	a,@a+pc
+      00007A F5 83            [12]  411 	mov	dph,a
+      00007C E4               [12]  412 	clr	a
+      00007D 73               [24]  413 	jmp	@a+dptr
+      00007E                        414 00131$:
+      00007Er9C                     415 	.db	00103$
+      00007FrAF                     416 	.db	00105$
+      000080rAF                     417 	.db	00105$
+      000081rB7                     418 	.db	00108$
+      000082rE7                     419 	.db	00113$
+      000083rE7                     420 	.db	00113$
+      000084rE7                     421 	.db	00113$
+      000085rE7                     422 	.db	00113$
+      000086rE7                     423 	.db	00113$
+      000087rC7                     424 	.db	00111$
+      000088rC7                     425 	.db	00111$
+      000089rC7                     426 	.db	00111$
+      00008ArE7                     427 	.db	00113$
+      00008BrE7                     428 	.db	00113$
+      00008CrD7                     429 	.db	00112$
+      00008D                        430 00132$:
+      00008Ds00                     431 	.db	00103$>>8
+      00008Es00                     432 	.db	00105$>>8
+      00008Fs00                     433 	.db	00105$>>8
+      000090s00                     434 	.db	00108$>>8
+      000091s00                     435 	.db	00113$>>8
+      000092s00                     436 	.db	00113$>>8
+      000093s00                     437 	.db	00113$>>8
+      000094s00                     438 	.db	00113$>>8
+      000095s00                     439 	.db	00113$>>8
+      000096s00                     440 	.db	00111$>>8
+      000097s00                     441 	.db	00111$>>8
+      000098s00                     442 	.db	00111$>>8
+      000099s00                     443 	.db	00113$>>8
+      00009As00                     444 	.db	00113$>>8
+      00009Bs00                     445 	.db	00112$>>8
+                                    446 ;	../Storage_Manager/storage.c:65: case FOG_POWER_INDEX:
+      00009C                        447 00103$:
+                                    448 ;	../Storage_Manager/storage.c:66: return (value & ~OP_MODE_BIT) % FOG_OPTIONS;
+      00009C 8E 05            [24]  449 	mov	ar5,r6
+      00009E 7F 00            [12]  450 	mov	r7,#0x00
+      0000A0 74 7F            [12]  451 	mov	a,#0x7f
+      0000A2 5D               [12]  452 	anl	a,r5
+      0000A3 F5 82            [12]  453 	mov	dpl,a
+      0000A5 8F 83            [24]  454 	mov	dph,r7
+      0000A7 75*00 03         [24]  455 	mov	__modsint_PARM_2,#0x03
+                                    456 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
+      0000AA 8F*01            [24]  457 	mov	(__modsint_PARM_2 + 1),r7
+                                    458 ;	../Storage_Manager/storage.c:68: case FOG_INTERVAL_INDEX:
+      0000AC 02r00r00         [24]  459 	ljmp	__modsint
+      0000AF                        460 00105$:
+                                    461 ;	../Storage_Manager/storage.c:69: if(value == 0){ value = 1; } //we dont want a 0 duration or interval
+      0000AF EE               [12]  462 	mov	a,r6
+      0000B0 70 02            [24]  463 	jnz	00107$
+      0000B2 7E 01            [12]  464 	mov	r6,#0x01
+      0000B4                        465 00107$:
+                                    466 ;	../Storage_Manager/storage.c:70: return value;
+      0000B4 8E 82            [24]  467 	mov	dpl,r6
+                                    468 ;	../Storage_Manager/storage.c:71: case MACRO_INDEX:
+      0000B6 22               [24]  469 	ret
+      0000B7                        470 00108$:
+                                    471 ;	../Storage_Manager/storage.c:72: return value % MACRO_OPTIONS;
+      0000B7 8E 05            [24]  472 	mov	ar5,r6
+      0000B9 7F 00            [12]  473 	mov	r7,#0x00
+      0000BB 75*00 07         [24]  474 	mov	__modsint_PARM_2,#0x07
+                                    475 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
+      0000BE 8F*01            [24]  476 	mov	(__modsint_PARM_2 + 1),r7
+      0000C0 8D 82            [24]  477 	mov	dpl,r5
+      0000C2 8F 83            [24]  478 	mov	dph,r7
+                                    479 ;	../Storage_Manager/storage.c:75: case R6_INDEX:
+      0000C4 02r00r00         [24]  480 	ljmp	__modsint
+      0000C7                        481 00111$:
+                                    482 ;	../Storage_Manager/storage.c:76: return value % WIRELESS_ACTION_OPTIONS;
+      0000C7 8E 05            [24]  483 	mov	ar5,r6
+      0000C9 7F 00            [12]  484 	mov	r7,#0x00
+      0000CB 75*00 0D         [24]  485 	mov	__modsint_PARM_2,#0x0d
+                                    486 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
+      0000CE 8F*01            [24]  487 	mov	(__modsint_PARM_2 + 1),r7
+      0000D0 8D 82            [24]  488 	mov	dpl,r5
+      0000D2 8F 83            [24]  489 	mov	dph,r7
+                                    490 ;	../Storage_Manager/storage.c:77: case MODE_INDEX:
+      0000D4 02r00r00         [24]  491 	ljmp	__modsint
+      0000D7                        492 00112$:
+                                    493 ;	../Storage_Manager/storage.c:78: return value % DMX_OPTIONS;
+      0000D7 8E 05            [24]  494 	mov	ar5,r6
+      0000D9 7F 00            [12]  495 	mov	r7,#0x00
+      0000DB 75*00 03         [24]  496 	mov	__modsint_PARM_2,#0x03
+                                    497 ;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
+      0000DE 8F*01            [24]  498 	mov	(__modsint_PARM_2 + 1),r7
+      0000E0 8D 82            [24]  499 	mov	dpl,r5
+      0000E2 8F 83            [24]  500 	mov	dph,r7
+                                    501 ;	../Storage_Manager/storage.c:80: }
+      0000E4 02r00r00         [24]  502 	ljmp	__modsint
+      0000E7                        503 00113$:
+                                    504 ;	../Storage_Manager/storage.c:82: return value;
+      0000E7 8E 82            [24]  505 	mov	dpl,r6
+                                    506 ;	../Storage_Manager/storage.c:83: }
+      0000E9 22               [24]  507 	ret
+                                    508 ;------------------------------------------------------------
+                                    509 ;Allocation info for local variables in function 'set_runtime_data'
+                                    510 ;------------------------------------------------------------
+                                    511 ;inc                       Allocated with name '_set_runtime_data_PARM_2'
+                                    512 ;value                     Allocated with name '_set_runtime_data_PARM_3'
+                                    513 ;index                     Allocated to registers r7 
+                                    514 ;opMode                    Allocated to registers r6 
+                                    515 ;------------------------------------------------------------
+                                    516 ;	../Storage_Manager/storage.c:85: void set_runtime_data(uint8_t index, uint8_t inc, uint8_t value){
+                                    517 ;	-----------------------------------------
+                                    518 ;	 function set_runtime_data
+                                    519 ;	-----------------------------------------
+      0000EA                        520 _set_runtime_data:
+      0000EA AF 82            [24]  521 	mov	r7,dpl
+                                    522 ;	../Storage_Manager/storage.c:86: uint8_t opMode = Runtime_Data[FOG_POWER_INDEX] & OP_MODE_BIT;
+      0000EC 74 80            [12]  523 	mov	a,#0x80
+      0000EE 55*00            [12]  524 	anl	a,_Runtime_Data
+      0000F0 FE               [12]  525 	mov	r6,a
+                                    526 ;	../Storage_Manager/storage.c:93: switch(inc){
+      0000F1 74 01            [12]  527 	mov	a,#0x01
+      0000F3 B5*10 02         [24]  528 	cjne	a,_set_runtime_data_PARM_2,00142$
+      0000F6 80 07            [24]  529 	sjmp	00101$
+      0000F8                        530 00142$:
+      0000F8 74 02            [12]  531 	mov	a,#0x02
+                                    532 ;	../Storage_Manager/storage.c:94: case INC:
+      0000FA B5*10 16         [24]  533 	cjne	a,_set_runtime_data_PARM_2,00103$
+      0000FD 80 0A            [24]  534 	sjmp	00102$
+      0000FF                        535 00101$:
+                                    536 ;	../Storage_Manager/storage.c:95: Runtime_Data[index]++;
+      0000FF EF               [12]  537 	mov	a,r7
+      000100 24r00            [12]  538 	add	a,#_Runtime_Data
+      000102 F9               [12]  539 	mov	r1,a
+      000103 E7               [12]  540 	mov	a,@r1
+      000104 FD               [12]  541 	mov	r5,a
+      000105 04               [12]  542 	inc	a
+      000106 F7               [12]  543 	mov	@r1,a
+                                    544 ;	../Storage_Manager/storage.c:96: break;
+                                    545 ;	../Storage_Manager/storage.c:97: case DEC:
+      000107 80 2A            [24]  546 	sjmp	00110$
+      000109                        547 00102$:
+                                    548 ;	../Storage_Manager/storage.c:98: Runtime_Data[index]--;
+      000109 EF               [12]  549 	mov	a,r7
+      00010A 24r00            [12]  550 	add	a,#_Runtime_Data
+      00010C F9               [12]  551 	mov	r1,a
+      00010D E7               [12]  552 	mov	a,@r1
+      00010E FD               [12]  553 	mov	r5,a
+      00010F 14               [12]  554 	dec	a
+      000110 F7               [12]  555 	mov	@r1,a
+                                    556 ;	../Storage_Manager/storage.c:99: break;
+                                    557 ;	../Storage_Manager/storage.c:100: default:
+      000111 80 20            [24]  558 	sjmp	00110$
+      000113                        559 00103$:
+                                    560 ;	../Storage_Manager/storage.c:101: if(index == OP_MODE_INDEX){
+      000113 BF 10 17         [24]  561 	cjne	r7,#0x10,00108$
+                                    562 ;	../Storage_Manager/storage.c:102: if(value) { 
+      000116 E5*11            [12]  563 	mov	a,_set_runtime_data_PARM_3
+      000118 60 0B            [24]  564 	jz	00105$
+                                    565 ;	../Storage_Manager/storage.c:103: Runtime_Data[FOG_POWER_INDEX] |= OP_MODE_BIT;
+      00011A AC*00            [24]  566 	mov	r4,_Runtime_Data
+      00011C 7D 00            [12]  567 	mov	r5,#0x00
+      00011E 43 04 80         [24]  568 	orl	ar4,#0x80
+      000121 8C*00            [24]  569 	mov	_Runtime_Data,r4
+      000123 80 0E            [24]  570 	sjmp	00110$
+      000125                        571 00105$:
+                                    572 ;	../Storage_Manager/storage.c:105: Runtime_Data[FOG_POWER_INDEX] &= ~OP_MODE_BIT;
+      000125 74 7F            [12]  573 	mov	a,#0x7f
+      000127 55*00            [12]  574 	anl	a,_Runtime_Data
+      000129 F5*00            [12]  575 	mov	_Runtime_Data,a
+      00012B 80 06            [24]  576 	sjmp	00110$
+      00012D                        577 00108$:
+                                    578 ;	../Storage_Manager/storage.c:108: Runtime_Data[index] = value;
+      00012D EF               [12]  579 	mov	a,r7
+      00012E 24r00            [12]  580 	add	a,#_Runtime_Data
+      000130 F8               [12]  581 	mov	r0,a
+      000131 A6*11            [24]  582 	mov	@r0,_set_runtime_data_PARM_3
+                                    583 ;	../Storage_Manager/storage.c:111: }
+      000133                        584 00110$:
+                                    585 ;	../Storage_Manager/storage.c:113: if(index == FOG_POWER_INDEX){
+      000133 EF               [12]  586 	mov	a,r7
+      000134 70 24            [24]  587 	jnz	00115$
+                                    588 ;	../Storage_Manager/storage.c:114: if(opMode){
+      000136 EE               [12]  589 	mov	a,r6
+      000137 60 13            [24]  590 	jz	00112$
+                                    591 ;	../Storage_Manager/storage.c:115: Runtime_Data[index] |= OP_MODE_BIT;
+      000139 EF               [12]  592 	mov	a,r7
+      00013A 24r00            [12]  593 	add	a,#_Runtime_Data
+      00013C F9               [12]  594 	mov	r1,a
+      00013D EF               [12]  595 	mov	a,r7
+      00013E 24r00            [12]  596 	add	a,#_Runtime_Data
+      000140 F8               [12]  597 	mov	r0,a
+      000141 86 06            [24]  598 	mov	ar6,@r0
+      000143 7D 00            [12]  599 	mov	r5,#0x00
+      000145 43 06 80         [24]  600 	orl	ar6,#0x80
+      000148 A7 06            [24]  601 	mov	@r1,ar6
+      00014A 80 0E            [24]  602 	sjmp	00115$
+      00014C                        603 00112$:
+                                    604 ;	../Storage_Manager/storage.c:117: Runtime_Data[index] &= ~OP_MODE_BIT;
+      00014C EF               [12]  605 	mov	a,r7
+      00014D 24r00            [12]  606 	add	a,#_Runtime_Data
+      00014F F9               [12]  607 	mov	r1,a
+      000150 EF               [12]  608 	mov	a,r7
+      000151 24r00            [12]  609 	add	a,#_Runtime_Data
+      000153 F8               [12]  610 	mov	r0,a
+      000154 86 07            [24]  611 	mov	ar7,@r0
+      000156 74 7F            [12]  612 	mov	a,#0x7f
+      000158 5F               [12]  613 	anl	a,r7
+      000159 F7               [12]  614 	mov	@r1,a
+      00015A                        615 00115$:
+                                    616 ;	../Storage_Manager/storage.c:121: save_load_settings(SLOT_0, SAVE);
+      00015A 75*00 01         [24]  617 	mov	_save_load_settings_PARM_2,#0x01
+      00015D 75 82 00         [24]  618 	mov	dpl,#0x00
+                                    619 ;	../Storage_Manager/storage.c:122: }
+      000160 02r00r00         [24]  620 	ljmp	_save_load_settings
+                                    621 ;------------------------------------------------------------
+                                    622 ;Allocation info for local variables in function 'set_dmx_address'
+                                    623 ;------------------------------------------------------------
+                                    624 ;inc                       Allocated to registers r7 
+                                    625 ;addr                      Allocated to registers r5 r6 
+                                    626 ;------------------------------------------------------------
+                                    627 ;	../Storage_Manager/storage.c:124: void set_dmx_address(uint8_t inc){
+                                    628 ;	-----------------------------------------
+                                    629 ;	 function set_dmx_address
+                                    630 ;	-----------------------------------------
+      000163                        631 _set_dmx_address:
+      000163 AF 82            [24]  632 	mov	r7,dpl
+                                    633 ;	../Storage_Manager/storage.c:125: uint16_t addr = get_dmx_address();
+      000165 C0 07            [24]  634 	push	ar7
+      000167 12r01rB6         [24]  635 	lcall	_get_dmx_address
+      00016A AD 82            [24]  636 	mov	r5,dpl
+      00016C AE 83            [24]  637 	mov	r6,dph
+      00016E D0 07            [24]  638 	pop	ar7
+                                    639 ;	../Storage_Manager/storage.c:127: if(inc == INC){
+      000170 BF 01 12         [24]  640 	cjne	r7,#0x01,00108$
+                                    641 ;	../Storage_Manager/storage.c:128: if(addr >= DMX_MAX_ADDRESS){
+      000173 74 FE            [12]  642 	mov	a,#0x100 - 0x02
+      000175 2E               [12]  643 	add	a,r6
+      000176 50 06            [24]  644 	jnc	00102$
+                                    645 ;	../Storage_Manager/storage.c:129: addr = 1;
+      000178 7D 01            [12]  646 	mov	r5,#0x01
+      00017A 7E 00            [12]  647 	mov	r6,#0x00
+      00017C 80 1A            [24]  648 	sjmp	00109$
+      00017E                        649 00102$:
+                                    650 ;	../Storage_Manager/storage.c:131: addr++;
+      00017E 0D               [12]  651 	inc	r5
+      00017F BD 00 16         [24]  652 	cjne	r5,#0x00,00109$
+      000182 0E               [12]  653 	inc	r6
+      000183 80 13            [24]  654 	sjmp	00109$
+      000185                        655 00108$:
+                                    656 ;	../Storage_Manager/storage.c:134: if(addr <= 1){
+      000185 C3               [12]  657 	clr	c
+      000186 74 01            [12]  658 	mov	a,#0x01
+      000188 9D               [12]  659 	subb	a,r5
+      000189 E4               [12]  660 	clr	a
+      00018A 9E               [12]  661 	subb	a,r6
+      00018B 40 06            [24]  662 	jc	00105$
+                                    663 ;	../Storage_Manager/storage.c:135: addr = DMX_MAX_ADDRESS;
+      00018D 7D 00            [12]  664 	mov	r5,#0x00
+      00018F 7E 02            [12]  665 	mov	r6,#0x02
+      000191 80 05            [24]  666 	sjmp	00109$
+      000193                        667 00105$:
+                                    668 ;	../Storage_Manager/storage.c:137: addr--;
+      000193 1D               [12]  669 	dec	r5
+      000194 BD FF 01         [24]  670 	cjne	r5,#0xff,00129$
+      000197 1E               [12]  671 	dec	r6
+      000198                        672 00129$:
+      000198                        673 00109$:
+                                    674 ;	../Storage_Manager/storage.c:141: set_runtime_data(ADDR_L_INDEX, VALUE, (uint8_t) addr);
+      000198 8D*11            [24]  675 	mov	_set_runtime_data_PARM_3,r5
+      00019A 75*10 00         [24]  676 	mov	_set_runtime_data_PARM_2,#0x00
+      00019D 75 82 0D         [24]  677 	mov	dpl,#0x0d
+      0001A0 C0 06            [24]  678 	push	ar6
+      0001A2 C0 05            [24]  679 	push	ar5
+      0001A4 12r00rEA         [24]  680 	lcall	_set_runtime_data
+      0001A7 D0 05            [24]  681 	pop	ar5
+      0001A9 D0 06            [24]  682 	pop	ar6
+                                    683 ;	../Storage_Manager/storage.c:142: set_runtime_data(ADDR_H_INDEX, VALUE, (uint8_t) (addr >> 8));
+      0001AB 8E*11            [24]  684 	mov	_set_runtime_data_PARM_3,r6
+      0001AD 75*10 00         [24]  685 	mov	_set_runtime_data_PARM_2,#0x00
+      0001B0 75 82 0C         [24]  686 	mov	dpl,#0x0c
+                                    687 ;	../Storage_Manager/storage.c:144: }
+      0001B3 02r00rEA         [24]  688 	ljmp	_set_runtime_data
+                                    689 ;------------------------------------------------------------
+                                    690 ;Allocation info for local variables in function 'get_dmx_address'
+                                    691 ;------------------------------------------------------------
+                                    692 ;address                   Allocated to registers 
+                                    693 ;------------------------------------------------------------
+                                    694 ;	../Storage_Manager/storage.c:146: uint16_t get_dmx_address(){
+                                    695 ;	-----------------------------------------
+                                    696 ;	 function get_dmx_address
+                                    697 ;	-----------------------------------------
+      0001B6                        698 _get_dmx_address:
+                                    699 ;	../Storage_Manager/storage.c:149: address |= (Runtime_Data[ADDR_H_INDEX] << 8);
+      0001B6 AF*0C            [24]  700 	mov	r7,(_Runtime_Data + 0x000c)
+      0001B8 7E 00            [12]  701 	mov	r6,#0x00
+                                    702 ;	../Storage_Manager/storage.c:150: address |= Runtime_Data[ADDR_L_INDEX];
+      0001BA AC*0D            [24]  703 	mov	r4,(_Runtime_Data + 0x000d)
+      0001BC 7D 00            [12]  704 	mov	r5,#0x00
+      0001BE EC               [12]  705 	mov	a,r4
+      0001BF 4E               [12]  706 	orl	a,r6
+      0001C0 F5 82            [12]  707 	mov	dpl,a
+      0001C2 ED               [12]  708 	mov	a,r5
+      0001C3 4F               [12]  709 	orl	a,r7
+      0001C4 F5 83            [12]  710 	mov	dph,a
+                                    711 ;	../Storage_Manager/storage.c:152: return address;
+                                    712 ;	../Storage_Manager/storage.c:153: }
+      0001C6 22               [24]  713 	ret
+                                    714 	.area CSEG    (CODE)
+                                    715 	.area CONST   (CODE)
+                                    716 	.area CABS    (ABS,CODE)
+      003FC0                        717 	.org 0x3FC0
+      003FC0                        718 _Init_Data:
+      003FC0 80                     719 	.db #0x80	; 128
+      003FC1 06                     720 	.db #0x06	; 6
+      003FC2 09                     721 	.db #0x09	; 9
+      003FC3 00                     722 	.db #0x00	; 0
+      003FC4 00                     723 	.db #0x00	; 0
+      003FC5 00                     724 	.db #0x00	; 0
+      003FC6 00                     725 	.db #0x00	; 0
+      003FC7 00                     726 	.db #0x00	; 0
+      003FC8 00                     727 	.db #0x00	; 0
+      003FC9 0B                     728 	.db #0x0b	; 11
+      003FCA 0C                     729 	.db #0x0c	; 12
+      003FCB 0A                     730 	.db #0x0a	; 10
+      003FCC 00                     731 	.db #0x00	; 0
+      003FCD 01                     732 	.db #0x01	; 1
+      003FCE 00                     733 	.db #0x00	; 0
+      003FCF 00                     734 	.db #0x00	; 0
+      003FD0 80                     735 	.db #0x80	; 128
+      003FD1 06                     736 	.db #0x06	; 6
+      003FD2 09                     737 	.db #0x09	; 9
+      003FD3 00                     738 	.db #0x00	; 0
+      003FD4 00                     739 	.db #0x00	; 0
+      003FD5 00                     740 	.db #0x00	; 0
+      003FD6 00                     741 	.db #0x00	; 0
+      003FD7 00                     742 	.db #0x00	; 0
+      003FD8 00                     743 	.db #0x00	; 0
+      003FD9 0B                     744 	.db #0x0b	; 11
+      003FDA 0C                     745 	.db #0x0c	; 12
+      003FDB 0A                     746 	.db #0x0a	; 10
+      003FDC 00                     747 	.db #0x00	; 0
+      003FDD 01                     748 	.db #0x01	; 1
+      003FDE 00                     749 	.db #0x00	; 0
+      003FDF 00                     750 	.db #0x00	; 0
+      003FE0 80                     751 	.db #0x80	; 128
+      003FE1 06                     752 	.db #0x06	; 6
+      003FE2 09                     753 	.db #0x09	; 9
+      003FE3 00                     754 	.db #0x00	; 0
+      003FE4 00                     755 	.db #0x00	; 0
+      003FE5 00                     756 	.db #0x00	; 0
+      003FE6 00                     757 	.db #0x00	; 0
+      003FE7 00                     758 	.db #0x00	; 0
+      003FE8 00                     759 	.db #0x00	; 0
+      003FE9 0B                     760 	.db #0x0b	; 11
+      003FEA 0C                     761 	.db #0x0c	; 12
+      003FEB 0A                     762 	.db #0x0a	; 10
+      003FEC 00                     763 	.db #0x00	; 0
+      003FED 01                     764 	.db #0x01	; 1
+      003FEE 00                     765 	.db #0x00	; 0
+      003FEF 00                     766 	.db #0x00	; 0
+      003FF0 80                     767 	.db #0x80	; 128
+      003FF1 06                     768 	.db #0x06	; 6
+      003FF2 09                     769 	.db #0x09	; 9
+      003FF3 00                     770 	.db #0x00	; 0
+      003FF4 00                     771 	.db #0x00	; 0
+      003FF5 00                     772 	.db #0x00	; 0
+      003FF6 00                     773 	.db #0x00	; 0
+      003FF7 00                     774 	.db #0x00	; 0
+      003FF8 00                     775 	.db #0x00	; 0
+      003FF9 0B                     776 	.db #0x0b	; 11
+      003FFA 0C                     777 	.db #0x0c	; 12
+      003FFB 0A                     778 	.db #0x0a	; 10
+      003FFC 00                     779 	.db #0x00	; 0
+      003FFD 01                     780 	.db #0x01	; 1
+      003FFE 00                     781 	.db #0x00	; 0
+      003FFF 00                     782 	.db #0x00	; 0

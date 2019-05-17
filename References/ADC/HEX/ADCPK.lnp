@@ -1,0 +1,4 @@
+"..\HEX\STARTUP.obj",
+"..\HEX\MAIN.obj" 
+TO "..\HEX\ADCPK" 
+PRINT(".\ADCPK.m51") RAMSIZE(256) 

@@ -1,0 +1,21 @@
+<html>
+<body>
+<pre>
+<h1>µVision3 Build Log</h1>
+<h2>Project:</h2>
+D:\project\UART Code\±Ð¾Çª©\STK6037\PWM\Keil\PWM6037.uv2
+Project File Date:  06/23/2009
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling MAIN.C...
+..\MAIN.C(21): error C202: 'P1_OPT': undefined identifier
+..\MAIN.C(22): error C202: 'PWM0D': undefined identifier
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling MAIN.C...
+linking...
+Program Size: data=9.0 xdata=0 code=28
+"PWM6037" - 0 Error(s), 0 Warning(s).

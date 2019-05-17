@@ -1,0 +1,78 @@
+C51 COMPILER V7.08   MAIN                                                                  10/20/2010 10:24:33 PAGE 1   
+
+
+C51 COMPILER V7.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN ..\HEX\MAIN.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\MAIN.C BROWSE DEBUG OBJECTEXTEND OBJECT(..\HEX\MAIN.obj)
+
+line level    source
+
+   1          #include "INC\STK6037.H"
+   2          
+   3          WORD      ADCOne;                               //存放第一組的ADC 資料
+   4          WORD      ADCTwo;                               //存放第二組的ADC 資料
+   5          
+   6          void SYS_Delay_mS(BYTE bMilliSec)
+   7          {
+   8   1          WORD i;
+   9   1      
+  10   1          while(1)
+  11   1          {
+  12   2              for(i = 0; i < 360; i++);
+  13   2      
+  14   2              bMilliSec--;
+  15   2      
+  16   2              if(bMilliSec == 0)  break;
+  17   2          }
+  18   1      }
+  19          void SYS_Delay_10uS(void)
+  20          {
+  21   1          WORD i;
+  22   1              for(i = 0; i < 5; i++){};
+  23   1      }
+  24          void main(void)
+  25          {
+  26   1              SYS_Delay_mS(1000);   
+  27   1              IE      = 0;                        // Disable Interrupt
+  28   1          CHIPCON = (bVAL_EnXRAM);                     // Enable STK601X's XDATA, CPU double clock rate    
+  29   1        
+  30   1              P1OPT = bVAL_SADC3|bVAL_SADC0;          // 將P1OPT切換至ADC的Chanel
+  31   1              ADCSEL = 0;                                                     // Disable ADC的設定
+  32   1          EIE = 0;                                                    // Disable ADC的中斷
+  33   1              EA      = 1;                                            // 開啟所有中斷
+  34   1          while(1)
+  35   1          {   
+  36   2                      ADCSEL =bVAL_ENADC|bVAL_SADC3;          // Enable ADC並開起ADC Chanel 3
+  37   2                      SYS_Delay_10uS();                                       // 延遲持間 約12~16 Clcok時間讓ADC啟動
+  38   2                      while((ADCSEL&bVAL_Ready)==0) {};       // 判斷ADC 是否轉換完成
+  39   2                      ADCOne = (ADCVAL1<<8);                          // 資料存至 ADCOne
+  40   2                      ADCOne = ADCOne|ADCVAL2;                        //
+  41   2                      ADCSEL = ADCSEL &(~bVAL_ENADC);         // Disable ADC 
+  42   2      
+  43   2                      P1 = 0xff;
+  44   2                      ADCSEL =bVAL_ENADC|bVAL_SADC0;          // Enable ADC並開起ADC Chanel 0
+  45   2                      SYS_Delay_10uS();                                       // 延遲持間 約12~16 Clcok時間讓ADC啟動
+  46   2                      while((ADCSEL&bVAL_Ready)==0) {};       // 判斷ADC 是否轉換完成
+  47   2                      ADCTwo = (ADCVAL1<<8);                          // 資料存至 ADCTwo
+  48   2                      ADCTwo= ADCTwo|ADCVAL2;                         //
+  49   2                      ADCSEL = ADCSEL &(~bVAL_ENADC);         // Disable ADC
+  50   2                      
+  51   2              }
+  52   1      }
+  53          
+
+
+C51 COMPILER V7.08   MAIN                                                                  10/20/2010 10:24:33 PAGE 2   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    111    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

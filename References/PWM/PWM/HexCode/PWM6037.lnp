@@ -1,0 +1,4 @@
+"..\HexCode\STARTUP.obj",
+"..\HexCode\MAIN.obj" 
+TO "..\HexCode\PWM6037" 
+PRINT(".\PWM6037.m51") RAMSIZE(256) 

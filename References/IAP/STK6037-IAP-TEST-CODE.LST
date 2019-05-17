@@ -1,0 +1,97 @@
+C51 COMPILER V7.06   STK6037_IAP_TEST_CODE                                                 09/25/2010 14:02:24 PAGE 1   
+
+
+C51 COMPILER V7.06, COMPILATION OF MODULE STK6037_IAP_TEST_CODE
+OBJECT MODULE PLACED IN STK6037-IAP-TEST-CODE.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE STK6037-IAP-TEST-CODE.C BROWSE DEBUG OBJECTEXTEND
+
+stmt level    source
+
+   1          #include"stk6037.h"
+   2          
+   3          
+   4          sfr   IAPEN      = 0xE4;                        // /* IAP Enable */
+   5          sfr   IAP_ADRL   = 0xE5;                        // /* IAP ADDR */
+   6          sfr   IAP_ADRH   = 0xE6;                        // /* IAP ADDR */
+   7          
+   8          
+   9          #define page15  0x3e00          // 0x3E00 ~ 0x3FFF
+  10          #define page14  0x3C00          // 0x3C00 ~ 0x3DFF
+  11          #define page13  0x3A00          // 0x3A00 ~ 0x3BFF
+  12          #define page12  0x3800          // 0x3800 ~ 0x39FF
+  13          #define page11  0x3600          // 0x3600 ~ 0x37FF
+  14          #define page10  0x3400          // 0x3400 ~ 0x35FF
+  15          #define page9   0x3200          // 0x3200 ~ 0x33FF
+  16          #define page8   0x3000          // 0x3000 ~ 0x31FF
+  17          #define page7   0x2E00          // 0x2E00 ~ 0x2FFF
+  18          #define page6   0x2C00          // 0x2C00 ~ 0x2DFF
+  19          #define page5   0x2A00          // 0x2A00 ~ 0x2BFF
+  20          #define page4   0x2800          // 0x2800 ~ 0x29FF
+  21          #define page3   0x2600          // 0x2600 ~ 0x27FF
+  22          #define page2   0x2400          // 0x2400 ~ 0x25FF
+  23          #define page1   0x2200          // 0x2200 ~ 0x23FF
+  24          #define page0   0x2000          // 0x2000 ~ 0x21FF
+  25          
+  26          #define IAP_Erase       0x90                    
+  27          #define IAP_Read        0xa0                    
+  28          #define IAP_Write       0xc0
+  29          
+  30          #define uchar unsigned char
+  31          #define uint unsigned int
+  32          
+  33          uchar   xdata   IAP_AUX[64] _at_ 0x100;
+  34          
+  35          //char xdata LED_Data[50] _at_ 0x8000;
+  36          
+  37          void main(void)
+  38          {
+  39   1              uint     IAP_page = page0;
+  40   1              uchar    temp;
+  41   1      
+  42   1              for( temp=0;temp<64;temp++ )
+  43   1              {
+  44   2                      IAP_AUX[temp] = temp;
+  45   2              }
+  46   1      
+  47   1                      
+  48   1              P1 = 25;
+  49   1      
+  50   1              IAP_page = page0;
+  51   1      
+  52   1              IAP_ADRH = IAP_page>>8; 
+  53   1          IAP_ADRL = IAP_page;
+  54   1          IAPEN = IAP_Erase;  
+  55   1      
+C51 COMPILER V7.06   STK6037_IAP_TEST_CODE                                                 09/25/2010 14:02:24 PAGE 2   
+
+  56   1              IAP_ADRH = IAP_page>>8; 
+  57   1          IAP_ADRL = IAP_page;        
+  58   1          IAPEN = IAP_Write;          
+  59   1              
+  60   1              IAP_page = page1;
+  61   1      
+  62   1              IAP_ADRH = IAP_page>>8; 
+  63   1          IAP_ADRL = IAP_page;
+  64   1          IAPEN = IAP_Erase;  
+  65   1      
+  66   1              IAP_ADRH = IAP_page>>8; 
+  67   1          IAP_ADRL = IAP_page;        
+  68   1          IAPEN = IAP_Write; 
+  69   1      
+  70   1              while(1){};
+  71   1      }
+  72          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     61    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
