@@ -38,7 +38,7 @@ void tick_led(uint32_t tick){
                         if(dimmer > 10){
                             play_macro(tick, dmx_to_macro(value), dimmer - 5);
                         } else {
-                            play_macro(0, dmx_to_macro(value), 0);
+                            play_macro(1, dmx_to_macro(value), 0xFF);
                         }
                     }
                 } else { /* No macro being played */
@@ -58,7 +58,7 @@ void tick_led(uint32_t tick){
                         set_leds(get_dmx_value(DMX_M11_RED_INDEX),
                                 get_dmx_value(DMX_M11_GREEN_INDEX),
                                 get_dmx_value(DMX_M11_BLUE_INDEX));
-                                
+
                     } else {
                         blackout();
                     }
@@ -76,7 +76,7 @@ void tick_led(uint32_t tick){
                         if(dimmer > 10){
                             play_macro(tick, dmx_to_macro(value), dimmer - 5);
                         } else {
-                            play_macro(0, dmx_to_macro(value), 0);
+                            play_macro(1, dmx_to_macro(value), 0xFF);
                         }
                     }
                 } else {

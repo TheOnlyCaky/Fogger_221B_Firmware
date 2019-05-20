@@ -1290,8 +1290,8 @@
                                    1290 ;	../UI_Manager/Display_Manager/display.c:230: case ';':
       000465 22               [24] 1291 	ret
       000466                       1292 00165$:
-                                   1293 ;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_7;
-      000466 75 82 60         [24] 1294 	mov	dpl,#0x60
+                                   1293 ;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_8;
+      000466 75 82 E0         [24] 1294 	mov	dpl,#0xe0
                                    1295 ;	../UI_Manager/Display_Manager/display.c:232: }
       000469 22               [24] 1296 	ret
       00046A                       1297 00166$:

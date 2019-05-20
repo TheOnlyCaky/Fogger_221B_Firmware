@@ -228,7 +228,7 @@ uint8_t charToCode(char c){
         case '&':
             return CHAR_AND;
         case ';':
-            return CHAR_STAR_7;
+            return CHAR_STAR_8;
     }
 
     return CHAR_NULL;

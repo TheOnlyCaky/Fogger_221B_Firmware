@@ -304,9 +304,8 @@ Hexadecimal [24-Bits]
 Symbol Table
 
     _get_runtime_data                                              ****** GX
-    _get_ui_state                                                  ****** GX
- 17 _power_heater                                                  0003EF GR
- 17 _power_pump                                                    0003A8 GR
+ 17 _power_heater                                                  0003CF GR
+ 17 _power_pump                                                    000388 GR
  17 _tick_fogger                                                   000000 GR
   5 _tick_fogger_duration_65536_36                                 000007 R
   5 _tick_fogger_fullCount_65536_36                                000005 R
@@ -358,12 +357,12 @@ Symbol Table
     ea                                                          =  0000AF L
     es                                                          =  0000AC L
     et0                                                         =  0000A9 L
+    et1                                                         =  0000AB L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 7.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    et1                                                         =  0000AB L
     et2                                                         =  0000AD L
     ex0                                                         =  0000A8 L
     ex1                                                         =  0000AA L
@@ -418,12 +417,12 @@ Symbol Table
     p2.3                                                        =  0000A3 L
     p2.4                                                        =  0000A4 L
     p2.5                                                        =  0000A5 L
+    p2.6                                                        =  0000A6 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 8.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    p2.6                                                        =  0000A6 L
     p2.7                                                        =  0000A7 L
     p3                                                          =  0000B0 L
     p3.0                                                        =  0000B0 L
@@ -478,12 +477,12 @@ Symbol Table
     t2con.1                                                     =  0000C9 L
     t2con.2                                                     =  0000CA L
     t2con.3                                                     =  0000CB L
+    t2con.4                                                     =  0000CC L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
-    t2con.4                                                     =  0000CC L
     t2con.5                                                     =  0000CD L
     t2con.6                                                     =  0000CE L
     t2con.7                                                     =  0000CF L
@@ -543,7 +542,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size     12   flags   20
   16 GSFINAL                                    size      0   flags   20
-  17 CSEG                                       size    400   flags   20
+  17 CSEG                                       size    3E0   flags   20
   18 CONST                                      size      0   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

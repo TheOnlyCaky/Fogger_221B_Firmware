@@ -1290,8 +1290,8 @@ _charToCode:
 ;	../UI_Manager/Display_Manager/display.c:230: case ';':
 	ret
 00165$:
-;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_7;
-	mov	dpl,#0x60
+;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_8;
+	mov	dpl,#0xe0
 ;	../UI_Manager/Display_Manager/display.c:232: }
 	ret
 00166$:

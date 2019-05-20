@@ -200,8 +200,8 @@ uint8_t get_button_action(){
     //fun burst
     if(level <= BUTTON_FUN_BURST_UPPER && level > BUTTON_FUN_BURST_LOWER){
         if(lastAction == BUTTON_FUN_BURST){ 
-            if(pressOK < PRESS_OK_COUNT){
-                if(++pressOK >= PRESS_OK_COUNT){
+            if(pressOK < PRESS_HOLD_COUNT){
+                if(++pressOK >= PRESS_HOLD_COUNT){
                     retVal = BUTTON_FUN_BURST;
                 } 
             } else {

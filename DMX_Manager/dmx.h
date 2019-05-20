@@ -24,7 +24,7 @@
 #define BAUD_TIMER_LOW 0xFD
 
 /* Globals */
-#define MAX_CHANNEL_MODE 9
+#define MAX_CHANNEL_MODE 11
 #define DMX_MAX_ADDRESS 512
 
 /* Mode indexes*/

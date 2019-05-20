@@ -112,6 +112,7 @@ void tick_ui(void){
 
         ss++;
 
+        bursting &= BURSTING;
         bursting |= (ss & ~BURSTING);
 
         delay = FIB_31;
@@ -255,7 +256,7 @@ void idlePage(){
                     temp = 1;
                     break;
                 default:
-                    temp = 10;
+                    temp = 11;
                     break;
             }
             write_number(temp, 12, LINE_1, NOT_SELECTED);
@@ -379,7 +380,7 @@ void idlePage(){
 
         if(timer != temp){
 
-            write_number(temp, NUMBER_END_INDEX, LINE_1, NOT_SELECTED);
+            write_number(temp, NUMBER_END_INDEX-1, LINE_1, NOT_SELECTED);
 
             timer = temp;
         }
@@ -987,9 +988,9 @@ char* getString(uint8_t index){
         case DMX_STRING_OFFSET + OPTION_DMX_MODE_11: 
             return "11 All";     
         case DMX_STRING_OFFSET + OPTION_DMX_MODE_3: 
-            return "3 Fog + Macro";   
+            return " 3 Fog + Macro";   
         case DMX_STRING_OFFSET + OPTION_DMX_MODE_1: 
-            return "1 Fog";    
+            return " 1 Fog";    
 
         case SECRET_STRING_OFFSET + 0:
             return "0x486F6C6D6573";

@@ -366,44 +366,44 @@ Symbol Table
  18 ___str_60                                                      000249 R
  18 ___str_61                                                      000250 R
  18 ___str_62                                                      000257 R
- 18 ___str_63                                                      000265 R
- 18 ___str_64                                                      00026B R
- 18 ___str_65                                                      00027A R
- 18 ___str_66                                                      000289 R
- 18 ___str_67                                                      00029A R
- 18 ___str_68                                                      0002AB R
- 18 ___str_69                                                      0002BC R
+ 18 ___str_63                                                      000266 R
+ 18 ___str_64                                                      00026D R
+ 18 ___str_65                                                      00027C R
+ 18 ___str_66                                                      00028B R
+ 18 ___str_67                                                      00029C R
+ 18 ___str_68                                                      0002AD R
+ 18 ___str_69                                                      0002BE R
  18 ___str_7                                                       000064 R
  18 ___str_8                                                       000074 R
  18 ___str_9                                                       000083 R
     __modsint                                                      ****** GX
     __modsint_PARM_2                                               ****** GX
   5 _changed                                                       000002 R
- 17 _colorPage                                                     000A83 GR
- 17 _dmxAddressPage                                                000DD1 GR
- 17 _dmxChannelPage                                                000E55 GR
+ 17 _colorPage                                                     000A86 GR
+ 17 _dmxAddressPage                                                000DD4 GR
+ 17 _dmxChannelPage                                                000E58 GR
     _exe_command                                                   ****** GX
- 17 _fogDurationPage                                               00085B GR
- 17 _fogIntervalPage                                               0007AC GR
- 17 _fogLevelPage                                                  000672 GR
- 17 _getString                                                     000F8B GR
+ 17 _fogDurationPage                                               00085E GR
+ 17 _fogIntervalPage                                               0007AF GR
+ 17 _fogLevelPage                                                  000675 GR
+ 17 _getString                                                     000F8E GR
     _get_button_action                                             ****** GX
     _get_dmx_address                                               ****** GX
     _get_runtime_data                                              ****** GX
- 17 _get_ui_state                                                  000F87 GR
- 17 _idlePage                                                      00038C GR
+ 17 _get_ui_state                                                  000F8A GR
+ 17 _idlePage                                                      00038F GR
   5 _idlePage_empty_65536_59                                       00000A R
   5 _idlePage_iconChange_65536_59                                  00000C R
   5 _idlePage_intervalOrDuration_65536_59                          000009 R
   5 _idlePage_playing_65536_59                                     00000D R
   5 _idlePage_timer_65536_59                                       000008 R
   5 _idlePage_tock_65536_59                                        00000B R
- 17 _macroPage                                                     00090A GR
- 17 _macroSpeedPage                                                0009B6 GR
+ 17 _macroPage                                                     00090D GR
+ 17 _macroSpeedPage                                                0009B9 GR
     _power_heater                                                  ****** GX
     _power_pump                                                    ****** GX
- 17 _remotePage                                                    000B96 GR
- 17 _saveLoadPage                                                  000CB5 GR
+ 17 _remotePage                                                    000B99 GR
+ 17 _saveLoadPage                                                  000CB8 GR
   5 _saveLoadPage_slot_65536_141                                   00000E R
     _save_load_settings                                            ****** GX
     _save_load_settings_PARM_2                                     ****** GX
@@ -411,7 +411,7 @@ Symbol Table
     _set_runtime_data                                              ****** GX
     _set_runtime_data_PARM_2                                       ****** GX
     _set_runtime_data_PARM_3                                       ****** GX
- 17 _set_ui_state                                                  000EF7 GR
+ 17 _set_ui_state                                                  000EFA GR
   5 _set_ui_state_PARM_2                                           00000F GR
     _tick_fogger                                                   ****** GX
  17 _tick_ui                                                       000000 GR
@@ -663,8 +663,8 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size     1E   flags   20
   16 GSFINAL                                    size      0   flags   20
-  17 CSEG                                       size   1194   flags   20
-  18 CONST                                      size    2CD   flags   20
+  17 CSEG                                       size   1197   flags   20
+  18 CONST                                      size    2CF   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28
 

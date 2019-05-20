@@ -44,15 +44,12 @@ void tick_fogger(){
     }
 
     /* 0 = on 1 = off*/
-    if(get_ui_state() != WELCOME_STATE){
-        if(Heat_Flag & HEAT_DISABLE_FLAG){
-            P3_4 = 1;
-            P3_3 = 1;
-        } else {
-            P3_4 = (Heat_Flag & HOT_FLAG) ? 1 : 0;
-            P3_3 = (Heat_Flag & HOT_FLAG) ? 1 : 0;
-        }
-
+    if(Heat_Flag & HEAT_DISABLE_FLAG){
+        P3_4 = 1;
+        P3_3 = 1;
+    } else {
+        P3_4 = (Heat_Flag & HOT_FLAG) ? 1 : 0;
+        P3_3 = (Heat_Flag & HOT_FLAG) ? 1 : 0;
     }
 
     /* Fluid Feedback */
@@ -105,6 +102,8 @@ void tick_fogger(){
     if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
         if(has_dmx()){
             Playing = PLAY;
+            power = FOG_HIGH;
+            power_heater(HEATER_ENABLE);
 
             if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
             {
@@ -141,17 +140,13 @@ void tick_fogger(){
 
                 value = get_dmx_value(DMX_M11_HEATER_ENABLE_INDEX);
 
-                if(value >= DMX_HEATER_OFF && get_heater_enabled()){
+                if(value >= DMX_HEATER_OFF){
                     power_heater(HEATER_DISABLE);
-                } else if(value < DMX_HEATER_OFF && !get_heater_enabled()){
-                    power_heater(HEATER_ENABLE);
                 }
 
             //end mode 1
             } else {
             //start mode 1 + 3
-
-                power = FOG_HIGH;
 
                 value = get_dmx_value(DMX_M1_FOG_INDEX);
 

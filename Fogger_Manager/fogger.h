@@ -82,7 +82,7 @@ extern uint8_t Playing;
 
 extern uint8_t Heat_Flag;
 #define get_heated() (Heat_Flag & HEATED)
-#define get_heater_enabled() (!(Heat_Flag & HEAT_DISABLE_FLAG))
+#define get_heater_enabled() ((Heat_Flag & HEAT_DISABLE_FLAG) == 0x00)
 
 extern uint8_t Fluid_Level;
 #define get_fog_fluid_level() (Fluid_Level) 

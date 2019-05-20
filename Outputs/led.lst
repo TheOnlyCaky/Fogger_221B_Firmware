@@ -459,12 +459,12 @@
       000090 EF               [12]  459 	mov	a,r7
       000091 02r02r7B         [24]  460 	ljmp	_play_macro
       000094                        461 00103$:
-                                    462 ;	../LED_Manager/led.c:41: play_macro(0, dmx_to_macro(value), 0);
+                                    462 ;	../LED_Manager/led.c:41: play_macro(1, dmx_to_macro(value), 0xFF);
       000094 8B 82            [24]  463 	mov	dpl,r3
       000096 12r02r36         [24]  464 	lcall	_dmx_to_macro
       000099 85 82*09         [24]  465 	mov	_play_macro_PARM_2,dpl
-      00009C 75*0A 00         [24]  466 	mov	_play_macro_PARM_3,#0x00
-      00009F 90 00 00         [24]  467 	mov	dptr,#(0x00&0x00ff)
+      00009C 75*0A FF         [24]  466 	mov	_play_macro_PARM_3,#0xff
+      00009F 90 00 01         [24]  467 	mov	dptr,#(0x01&0x00ff)
       0000A2 E4               [12]  468 	clr	a
       0000A3 F5 F0            [12]  469 	mov	b,a
       0000A5 02r02r7B         [24]  470 	ljmp	_play_macro
@@ -580,12 +580,12 @@
       00014A EF               [12]  580 	mov	a,r7
       00014B 02r02r7B         [24]  581 	ljmp	_play_macro
       00014E                        582 00121$:
-                                    583 ;	../LED_Manager/led.c:79: play_macro(0, dmx_to_macro(value), 0);
+                                    583 ;	../LED_Manager/led.c:79: play_macro(1, dmx_to_macro(value), 0xFF);
       00014E 8B 82            [24]  584 	mov	dpl,r3
       000150 12r02r36         [24]  585 	lcall	_dmx_to_macro
       000153 85 82*09         [24]  586 	mov	_play_macro_PARM_2,dpl
-      000156 75*0A 00         [24]  587 	mov	_play_macro_PARM_3,#0x00
-      000159 90 00 00         [24]  588 	mov	dptr,#(0x00&0x00ff)
+      000156 75*0A FF         [24]  587 	mov	_play_macro_PARM_3,#0xff
+      000159 90 00 01         [24]  588 	mov	dptr,#(0x01&0x00ff)
       00015C E4               [12]  589 	clr	a
       00015D F5 F0            [12]  590 	mov	b,a
       00015F 02r02r7B         [24]  591 	ljmp	_play_macro

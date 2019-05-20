@@ -45,6 +45,7 @@ void main(void)
     /* Fogger */
     P3_4 = 1; //turn fogger off
     P3_3 = 1;
+    power_heater(HEATER_DISABLE);
 
     /* Initializes everything */
     tick_fogger();
@@ -192,7 +193,8 @@ void main(void)
     //programming hard to do
     P2_3 = 0;
 
-    power_heater(HEATER_DISABLE);
+    //Kick off heater
+    power_heater(HEATER_ENABLE);
 
     /* Main Loop - pretty simple it just ticks each of the subsystems forever*/
 	while(1){

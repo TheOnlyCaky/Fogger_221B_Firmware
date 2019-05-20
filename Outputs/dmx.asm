@@ -217,7 +217,7 @@ bits:
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
 _DMX::
-	.ds 9
+	.ds 11
 _Has_DMX::
 	.ds 1
 _Index:
@@ -343,7 +343,7 @@ _dmxReceiveByteISR:
 	mov	a,(_Index + 1)
 	subb	a,r7
 	jc	00102$
-	mov	a,#0x09
+	mov	a,#0x0b
 	add	a,r6
 	mov	r4,a
 	clr	a

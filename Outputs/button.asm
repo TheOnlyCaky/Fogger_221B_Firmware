@@ -721,13 +721,13 @@ _get_button_action:
 ;	../UI_Manager/Button_Manager/button.c:202: if(lastAction == BUTTON_FUN_BURST){ 
 	mov	a,#0x06
 	cjne	a,_get_button_action_lastAction_65536_3,00220$
-;	../UI_Manager/Button_Manager/button.c:203: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x08
+;	../UI_Manager/Button_Manager/button.c:203: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
 	jc	00217$
-;	../UI_Manager/Button_Manager/button.c:204: if(++pressOK >= PRESS_OK_COUNT){
+;	../UI_Manager/Button_Manager/button.c:204: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x08
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
 	jnc	00221$
 ;	../UI_Manager/Button_Manager/button.c:205: retVal = BUTTON_FUN_BURST;

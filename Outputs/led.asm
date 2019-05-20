@@ -459,12 +459,12 @@ _tick_led:
 	mov	a,r7
 	ljmp	_play_macro
 00103$:
-;	../LED_Manager/led.c:41: play_macro(0, dmx_to_macro(value), 0);
+;	../LED_Manager/led.c:41: play_macro(1, dmx_to_macro(value), 0xFF);
 	mov	dpl,r3
 	lcall	_dmx_to_macro
 	mov	_play_macro_PARM_2,dpl
-	mov	_play_macro_PARM_3,#0x00
-	mov	dptr,#(0x00&0x00ff)
+	mov	_play_macro_PARM_3,#0xff
+	mov	dptr,#(0x01&0x00ff)
 	clr	a
 	mov	b,a
 	ljmp	_play_macro
@@ -580,12 +580,12 @@ _tick_led:
 	mov	a,r7
 	ljmp	_play_macro
 00121$:
-;	../LED_Manager/led.c:79: play_macro(0, dmx_to_macro(value), 0);
+;	../LED_Manager/led.c:79: play_macro(1, dmx_to_macro(value), 0xFF);
 	mov	dpl,r3
 	lcall	_dmx_to_macro
 	mov	_play_macro_PARM_2,dpl
-	mov	_play_macro_PARM_3,#0x00
-	mov	dptr,#(0x00&0x00ff)
+	mov	_play_macro_PARM_3,#0xff
+	mov	dptr,#(0x01&0x00ff)
 	clr	a
 	mov	b,a
 	ljmp	_play_macro
