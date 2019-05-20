@@ -20,23 +20,30 @@
 /* All the lighting magic happens here baby! */
 void tick_led(uint32_t tick){
     static uint8_t on = 0;
+    uint8_t dimmer;
     uint8_t value;
     uint8_t strobe;
 
     if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
         switch(get_runtime_data(MODE_INDEX)){
-            case OPTION_DMX_MODE_9:
-                value = get_dmx_value(DMX_M9_MACRO_INDEX);
+            case OPTION_DMX_MODE_11:
+                value = get_dmx_value(DMX_M11_MACRO_INDEX);
 
                 if(value >= DMX_MACRO_NONE){
                     if(value < DMX_MACRO_COLOR_WHEEL){ /* Color wheel Macro */
                         color_wheel((value - DMX_MACRO_NONE) << 1);
                     } else { /* Other Macros */
-                        play_macro(tick, dmx_to_macro(value), get_dmx_value(DMX_M9_MACRO_SPEED_INDEX));
+                        dimmer = get_dmx_value(DMX_M11_MACRO_SPEED_INDEX);
+
+                        if(dimmer > 10){
+                            play_macro(tick, dmx_to_macro(value), dimmer - 5);
+                        } else {
+                            play_macro(0, dmx_to_macro(value), 0);
+                        }
                     }
                 } else { /* No macro being played */
 
-                    strobe = get_dmx_value(DMX_M9_STROBE_INDEX);
+                    strobe = get_dmx_value(DMX_M11_STROBE_INDEX);
 
                     if(strobe){
                         if(!(tick % (STROBE_FREQ - (strobe << 1)))){
@@ -47,9 +54,11 @@ void tick_led(uint32_t tick){
                     }
 
                     if(on){
-                        PWMDATA11H = get_dmx_value(DMX_M9_RED_INDEX);
-                        PWMDATA17H = get_dmx_value(DMX_M9_GREEN_INDEX);
-                        PWMDATA14H = get_dmx_value(DMX_M9_BLUE_INDEX);
+
+                        set_leds(get_dmx_value(DMX_M11_RED_INDEX),
+                                get_dmx_value(DMX_M11_GREEN_INDEX),
+                                get_dmx_value(DMX_M11_BLUE_INDEX));
+                                
                     } else {
                         blackout();
                     }
@@ -62,7 +71,13 @@ void tick_led(uint32_t tick){
                     if(value < DMX_MACRO_COLOR_WHEEL){
                         color_wheel((value - DMX_MACRO_NONE) << 1);
                     } else {
-                        play_macro(tick, dmx_to_macro(value), get_dmx_value(DMX_M3_MACRO_SPEED_INDEX));
+                        dimmer = get_dmx_value(DMX_M3_MACRO_SPEED_INDEX);
+
+                        if(dimmer > 10){
+                            play_macro(tick, dmx_to_macro(value), dimmer - 5);
+                        } else {
+                            play_macro(0, dmx_to_macro(value), 0);
+                        }
                     }
                 } else {
                     blackout();
@@ -88,9 +103,7 @@ void tick_led(uint32_t tick){
             }
 
             if(on){
-                PWMDATA11H = get_runtime_data(RED_INDEX);
-                PWMDATA17H = get_runtime_data(GREEN_INDEX);
-                PWMDATA14H = get_runtime_data(BLUE_INDEX);
+                set_leds(get_runtime_data(RED_INDEX), get_runtime_data(GREEN_INDEX), get_runtime_data(BLUE_INDEX));
             } else {
                 blackout();
             }
@@ -158,9 +171,7 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
                     }
                 }
 
-                PWMDATA11H = primaryCount;
-                PWMDATA17H = (uint8_t) (rng % (primaryCount >> 2));
-                PWMDATA14H = (!(rng % 13)) ? PWMDATA17H > 1 : 0;
+                set_leds(primaryCount, (uint8_t) (rng % (primaryCount >> 2)), (!(rng % 13)) ? PWMDATA17H > 1 : 0);
 
             }
             break;
@@ -211,17 +222,11 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
                 }
 
                 if(macro == OPTION_MACRO_WATER_DMX){ //water
-                    PWMDATA11H = secondaryCount;
-                    PWMDATA17H = secondaryCount;
-                    PWMDATA14H = primaryCount;
+                    set_leds(secondaryCount, secondaryCount, primaryCount);
                 } else if(macro == OPTION_MACRO_ACID_DMX){ //acid
-                    PWMDATA11H = secondaryCount;
-                    PWMDATA17H = primaryCount;
-                    PWMDATA14H = 0;
+                    set_leds(secondaryCount, primaryCount, 0);
                 } else if(macro == OPTION_MACRO_ETHER_DMX){ //ether
-                    PWMDATA11H = primaryCount;
-                    PWMDATA17H = secondaryCount;
-                    PWMDATA14H = primaryCount;
+                    set_leds(primaryCount, secondaryCount, primaryCount);
                 }
 
             }
@@ -243,9 +248,8 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
                     }
                 }
 
-                PWMDATA11H = primaryCount;
-                PWMDATA17H = primaryCount;
-                PWMDATA14H = primaryCount;
+                set_leds(primaryCount, primaryCount, primaryCount);
+
             }
             break;
         case OPTION_MACRO_WHITE: //w
@@ -255,9 +259,7 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
             if(tock < 32){
                 rng = SH_0;
                 if(rng & (SH_B >> tock)){
-                    PWMDATA11H = 0; //Aqua - Adam
-                    PWMDATA17H = 255;
-                    PWMDATA14H = 255;
+                    whiteout(); //White - Worth
                 } else {
                     blackout();
                 }   
@@ -288,32 +290,22 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
 void color_wheel(uint8_t color){
 
     if(color < 85){
-        PWMDATA11H = color * 3;
-        PWMDATA17H = 255 - color * 3;
-        PWMDATA14H = 0; 
+        set_leds(color * 3, 255 - color * 3, 0);
     } else if(color < 170){
         color -= 85;
-        PWMDATA11H = 255 - color * 3;
-        PWMDATA17H = 0;
-        PWMDATA14H = color * 3; 
+        set_leds(255 - color * 3, 0, color * 3);
     } else {
         color -= 170;
-        PWMDATA11H = 0;
-        PWMDATA17H = color * 3;
-        PWMDATA14H = 255 - color * 3;     
+        set_leds(0, color * 3, 255 - color * 3);
     }
 }
 
 void whiteout(){
-    PWMDATA11H = 255;
-    PWMDATA17H = 255;
-    PWMDATA14H = 255;
+    set_leds(0xFF, 0xFF, 0xFF);
 }
 
 void blackout(){
-    PWMDATA11H = 0;
-    PWMDATA17H = 0;
-    PWMDATA14H = 0;
+    set_leds(0,0,0);
 }
 
 //fibbonnacci series as a rng!
@@ -325,4 +317,24 @@ uint32_t rngU32(){
     past = present - past;
 
     return present;
+}
+
+void set_leds(uint8_t red, uint8_t green, uint8_t blue){
+    uint8_t dimmer = 0xFF;
+
+    if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
+        if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11){
+            dimmer = get_dmx_value(DMX_M11_DIMMER_INDEX);
+        }
+    }
+
+    if(dimmer == 0xFF){
+        PWMDATA11H = red;
+        PWMDATA17H = green;
+        PWMDATA14H = blue;
+    } else {
+        PWMDATA11H = ((uint8_t)((((uint16_t) red) * ((uint16_t)dimmer)) >> 8));
+        PWMDATA17H = ((uint8_t)((((uint16_t) green) * ((uint16_t)dimmer)) >> 8));
+        PWMDATA14H = ((uint8_t)((((uint16_t) blue) * ((uint16_t)dimmer)) >> 8));
+    }
 }

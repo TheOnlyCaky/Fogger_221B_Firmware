@@ -38,4 +38,6 @@ void blackout(void);
 
 uint32_t rngU32(void);
 
+void set_leds(uint8_t red, uint8_t green, uint8_t blue);
+
 #endif

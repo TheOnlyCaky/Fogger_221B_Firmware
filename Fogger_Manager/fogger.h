@@ -41,7 +41,7 @@
 #define PUMP_FLAG 0x01
 #define HOT_FLAG 0x02
 #define COLD_FLAG 0x04
-#define HEAT_DISABLE_FLAG 0x80
+#define HEAT_DISABLE_FLAG 0x10
 
 #define HEATING 0
 #define HEATED 0x80
@@ -82,6 +82,7 @@ extern uint8_t Playing;
 
 extern uint8_t Heat_Flag;
 #define get_heated() (Heat_Flag & HEATED)
+#define get_heater_enabled() (!(Heat_Flag & HEAT_DISABLE_FLAG))
 
 extern uint8_t Fluid_Level;
 #define get_fog_fluid_level() (Fluid_Level) 

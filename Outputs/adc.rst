@@ -202,10 +202,10 @@
                                     202 ; overlayable items in internal ram 
                                     203 ;--------------------------------------------------------
                                     204 	.area	OSEG    (OVR,DATA)
-      000072                        205 _get_adc_value_index_65536_2:
-      000072                        206 	.ds 1
-      000073                        207 _get_adc_value_level_65536_3:
-      000073                        208 	.ds 4
+      000074                        205 _get_adc_value_index_65536_2:
+      000074                        206 	.ds 1
+      000075                        207 _get_adc_value_level_65536_3:
+      000075                        208 	.ds 4
                                     209 ;--------------------------------------------------------
                                     210 ; indirectly addressable internal ram data
                                     211 ;--------------------------------------------------------
@@ -283,18 +283,18 @@
                            000002   283 	ar2 = 0x02
                            000001   284 	ar1 = 0x01
                            000000   285 	ar0 = 0x00
-      000454 85 82 72         [24]  286 	mov	_get_adc_value_index_65536_2,dpl
+      000454 85 82 74         [24]  286 	mov	_get_adc_value_index_65536_2,dpl
                                     287 ;	../ADC_Manager/adc.c:13: uint32_t level = 0;
                                     288 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
       000457 E4               [12]  289 	clr	a
-      000458 F5 73            [12]  290 	mov	_get_adc_value_level_65536_3,a
-      00045A F5 74            [12]  291 	mov	(_get_adc_value_level_65536_3 + 1),a
-      00045C F5 75            [12]  292 	mov	(_get_adc_value_level_65536_3 + 2),a
-      00045E F5 76            [12]  293 	mov	(_get_adc_value_level_65536_3 + 3),a
+      000458 F5 75            [12]  290 	mov	_get_adc_value_level_65536_3,a
+      00045A F5 76            [12]  291 	mov	(_get_adc_value_level_65536_3 + 1),a
+      00045C F5 77            [12]  292 	mov	(_get_adc_value_level_65536_3 + 2),a
+      00045E F5 78            [12]  293 	mov	(_get_adc_value_level_65536_3 + 3),a
       000460 FA               [12]  294 	mov	r2,a
       000461                        295 00112$:
                                     296 ;	../ADC_Manager/adc.c:20: if(index){
-      000461 E5 72            [12]  297 	mov	a,_get_adc_value_index_65536_2
+      000461 E5 74            [12]  297 	mov	a,_get_adc_value_index_65536_2
       000463 60 07            [24]  298 	jz	00102$
                                     299 ;	../ADC_Manager/adc.c:21: P1_7 = 1;
                                     300 ;	assignBit
@@ -350,25 +350,25 @@
       00049D FD               [12]  350 	mov	r5,a
       00049E FE               [12]  351 	mov	r6,a
       00049F EF               [12]  352 	mov	a,r7
-      0004A0 25 73            [12]  353 	add	a,_get_adc_value_level_65536_3
-      0004A2 F5 73            [12]  354 	mov	_get_adc_value_level_65536_3,a
+      0004A0 25 75            [12]  353 	add	a,_get_adc_value_level_65536_3
+      0004A2 F5 75            [12]  354 	mov	_get_adc_value_level_65536_3,a
       0004A4 EC               [12]  355 	mov	a,r4
-      0004A5 35 74            [12]  356 	addc	a,(_get_adc_value_level_65536_3 + 1)
-      0004A7 F5 74            [12]  357 	mov	(_get_adc_value_level_65536_3 + 1),a
+      0004A5 35 76            [12]  356 	addc	a,(_get_adc_value_level_65536_3 + 1)
+      0004A7 F5 76            [12]  357 	mov	(_get_adc_value_level_65536_3 + 1),a
       0004A9 ED               [12]  358 	mov	a,r5
-      0004AA 35 75            [12]  359 	addc	a,(_get_adc_value_level_65536_3 + 2)
-      0004AC F5 75            [12]  360 	mov	(_get_adc_value_level_65536_3 + 2),a
+      0004AA 35 77            [12]  359 	addc	a,(_get_adc_value_level_65536_3 + 2)
+      0004AC F5 77            [12]  360 	mov	(_get_adc_value_level_65536_3 + 2),a
       0004AE EE               [12]  361 	mov	a,r6
-      0004AF 35 76            [12]  362 	addc	a,(_get_adc_value_level_65536_3 + 3)
-      0004B1 F5 76            [12]  363 	mov	(_get_adc_value_level_65536_3 + 3),a
+      0004AF 35 78            [12]  362 	addc	a,(_get_adc_value_level_65536_3 + 3)
+      0004B1 F5 78            [12]  363 	mov	(_get_adc_value_level_65536_3 + 3),a
                                     364 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
       0004B3 0A               [12]  365 	inc	r2
       0004B4 BA 20 00         [24]  366 	cjne	r2,#0x20,00151$
       0004B7                        367 00151$:
       0004B7 40 A8            [24]  368 	jc	00112$
                                     369 ;	../ADC_Manager/adc.c:39: return (uint16_t)(level >> ADC_AVERAGE_SHIFT);
-      0004B9 AC 73            [24]  370 	mov	r4,_get_adc_value_level_65536_3
-      0004BB E5 74            [12]  371 	mov	a,(_get_adc_value_level_65536_3 + 1)
+      0004B9 AC 75            [24]  370 	mov	r4,_get_adc_value_level_65536_3
+      0004BB E5 76            [12]  371 	mov	a,(_get_adc_value_level_65536_3 + 1)
       0004BD C4               [12]  372 	swap	a
       0004BE 03               [12]  373 	rr	a
       0004BF CC               [12]  374 	xch	a,r4
@@ -382,14 +382,14 @@
       0004C9 6C               [12]  382 	xrl	a,r4
       0004CA CC               [12]  383 	xch	a,r4
       0004CB FD               [12]  384 	mov	r5,a
-      0004CC E5 75            [12]  385 	mov	a,(_get_adc_value_level_65536_3 + 2)
+      0004CC E5 77            [12]  385 	mov	a,(_get_adc_value_level_65536_3 + 2)
       0004CE C4               [12]  386 	swap	a
       0004CF 03               [12]  387 	rr	a
       0004D0 54 F8            [12]  388 	anl	a,#0xf8
       0004D2 4D               [12]  389 	orl	a,r5
       0004D3 FD               [12]  390 	mov	r5,a
-      0004D4 AE 75            [24]  391 	mov	r6,(_get_adc_value_level_65536_3 + 2)
-      0004D6 E5 76            [12]  392 	mov	a,(_get_adc_value_level_65536_3 + 3)
+      0004D4 AE 77            [24]  391 	mov	r6,(_get_adc_value_level_65536_3 + 2)
+      0004D6 E5 78            [12]  392 	mov	a,(_get_adc_value_level_65536_3 + 3)
       0004D8 C4               [12]  393 	swap	a
       0004D9 03               [12]  394 	rr	a
       0004DA CE               [12]  395 	xch	a,r6

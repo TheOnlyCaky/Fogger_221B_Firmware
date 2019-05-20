@@ -117,6 +117,7 @@ is located at address 0*/
 #define CHAR_LVL_3 CHAR_STAR_5
 #define CHAR_HEATING CHAR_STAR_6
 #define CHAR_HEATED CHAR_STAR_7
+#define CHAR_HEATER_OFF CHAR_STAR_1
 
 #define CG_STAR_1 0x0000
 #define CG_STAR_2 0x1000

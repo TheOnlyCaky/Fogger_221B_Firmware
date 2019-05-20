@@ -21,7 +21,7 @@ void tick_ui(void){
 
     /* Burst will start pump if up to heat regardless of tank level 
     Burst + Function will always run the pump */
-    if(action == BUTTON_BURST || action == BUTTON_FUN_BURST){
+    if(action == BUTTON_BURST || action == BUTTON_MAN_BURST){
         power_pump(action == (BUTTON_BURST) ? PUMP_OVERRIDE : PUMP_MASTER_OVERRIDE);
         bursting |= BURSTING;
     } else if(bursting & BURSTING){
@@ -43,7 +43,7 @@ void tick_ui(void){
     }
 
     /* Starts Timer */
-    if(action == BUTTON_TIMER){
+    if(action == BUTTON_TIMER_HOLD){
         if(get_playing() == PLAY){
             set_playing(RESET);
         } else {
@@ -77,8 +77,31 @@ void tick_ui(void){
         return;
     }
 
+    /* Turns off tank lights #hiddenishfeature */
+    if(action == BUTTON_BURST_UP){
+        
+        exe_command(CLEAR_DISPLAY);
+        if(get_heater_enabled()){
+            write_string("Heater Off", 15, 2, LINE_0, NOT_SELECTED);
+            power_heater(HEATER_DISABLE);
+        } else {
+            write_string("Heater On", 15, 2, LINE_0, NOT_SELECTED);
+            power_heater(HEATER_ENABLE);
+        }
+
+        write_string("Burst+Up to Undo", 16, 0, LINE_1, NOT_SELECTED);
+       
+        delay = FIB_29;
+
+        while(delay--){ ;; }
+
+        Changed = CHANGE_SCREEN_X;
+
+        return;
+    }
+
     /* Man + Burst */
-    if(action == BUTTON_MAN_BURST){
+    if(action == BUTTON_FUN_BURST){
 
         ss = bursting & ~BURSTING;
 
@@ -115,7 +138,7 @@ void tick_ui(void){
         action == BUTTON_DOWN ||
         action == BUTTON_DOWN_HOLD ||
         action == BUTTON_DOWN_BURST ||
-        action == BUTTON_FUN_UP ||
+        action == BUTTON_TIMER ||
         action == BUTTON_FUNCTION ||
         State == IDLE_STATE){
 
@@ -173,7 +196,7 @@ void tick_ui(void){
 
                 if(action == BUTTON_FUNCTION){
                     set_ui_state(INC, NULL);
-                } else if(action == BUTTON_FUN_UP){
+                } else if(action == BUTTON_TIMER){
                     set_ui_state(DEC, NULL);
                 }
             break;
@@ -281,22 +304,31 @@ void idlePage(){
         playing = PAUSE;
     }
 
-    if(get_heated()){
-        if(iconChange & HEATED_CHANGE){
-            write_char(CHAR_HEATED, HEAT_ICON_INDEX, LINE_0);
-            iconChange &= ~HEATED_CHANGE;
-        }
-    } else { //Blinking on Heated
-        if(!(tock)){
-            if(iconChange & HEATING_CHANGE){
-                write_char(CHAR_NULL, HEAT_ICON_INDEX, LINE_0);
-                iconChange &= ~HEATING_CHANGE;
-            } else {
-                write_char(CHAR_HEATING, HEAT_ICON_INDEX, LINE_0);
-                iconChange |= HEATING_CHANGE;
+    if(get_heater_enabled()){
+        if(get_heated()){
+            if(iconChange & HEATED_CHANGE){
+                write_char(CHAR_HEATED, HEAT_ICON_INDEX, LINE_0);
+                iconChange &= ~HEATED_CHANGE;
             }
+        } else { //Blinking on Heated
+            if(!(tock)){
+                if(iconChange & HEATING_CHANGE){
+                    write_char(CHAR_NULL, HEAT_ICON_INDEX, LINE_0);
+                    iconChange &= ~HEATING_CHANGE;
+                } else {
+                    write_char(CHAR_HEATING, HEAT_ICON_INDEX, LINE_0);
+                    iconChange |= HEATING_CHANGE;
+                }
+            }
+            iconChange |= HEATED_CHANGE;
         }
-        iconChange |= HEATED_CHANGE;
+        iconChange |= HEATER_CHANGE;
+    } else {
+        if(iconChange & HEATER_CHANGE){
+            write_char(CHAR_HEATER_OFF, HEAT_ICON_INDEX, LINE_0);
+            iconChange &= ~HEATER_CHANGE;
+        }
+        iconChange |= HEATER_CHANGE | HEATED_CHANGE;
     }
     
 
@@ -370,7 +402,7 @@ void fogLevelPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -390,16 +422,16 @@ void fogLevelPage(uint8_t action){
 
         switch (get_runtime_data(FOG_POWER_INDEX))
         {
-            case FOG_LO:
+            case OPTION_FOG_LOW:
                 write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_LOW), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
                 write_char(CHAR_LVL_1, 12, LINE_1);
                 break;
-            case FOG_MED:
+            case OPTION_FOG_MEDIUM:
                 write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_MEDIUM), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
                 write_char(CHAR_LVL_1, 12, LINE_1);
                 write_char(CHAR_LVL_2, 13, LINE_1);
                 break;
-            default:
+            case OPTION_FOG_HIGH:
                 write_string(getString(POWER_STRING_OFFSET + OPTION_FOG_HIGH), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
                 write_char(CHAR_LVL_1, 12, LINE_1);
                 write_char(CHAR_LVL_2, 13, LINE_1);
@@ -427,7 +459,7 @@ void fogIntervalPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -439,14 +471,14 @@ void fogIntervalPage(uint8_t action){
         exe_command(CLEAR_DISPLAY);
 
         write_string("Fog Interval", sizeof("Fog Interval"), 2, LINE_0, NOT_SELECTED);
-        write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
+        write_string("Seconds", sizeof("Seconds"), 7, LINE_1, NOT_SELECTED);
 
     }
 
     if(changed){
         changed = 0x00;
 
-        write_number(get_runtime_data(FOG_INTERVAL_INDEX), 4, LINE_1, NOT_SELECTED);
+        write_number(get_runtime_data(FOG_INTERVAL_INDEX), 1, LINE_1, NOT_SELECTED);
 
     }
 
@@ -470,7 +502,7 @@ void fogDurationPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -482,14 +514,14 @@ void fogDurationPage(uint8_t action){
         exe_command(CLEAR_DISPLAY);
 
         write_string("Fog Duration", sizeof("Fog Duration"), 2, LINE_0, NOT_SELECTED);
-        write_string("Seconds", sizeof("Seconds"), 8, LINE_1, NOT_SELECTED);
+        write_string("Seconds", sizeof("Seconds"), 7, LINE_1, NOT_SELECTED);
 
     }
 
     if(changed){
         changed = 0x00;
 
-        write_number(get_runtime_data(FOG_DURATION_INDEX), 4, LINE_1, NOT_SELECTED);
+        write_number(get_runtime_data(FOG_DURATION_INDEX), 1, LINE_1, NOT_SELECTED);
 
     }
 }
@@ -511,7 +543,7 @@ void macroPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -522,14 +554,14 @@ void macroPage(uint8_t action){
 
         exe_command(CLEAR_DISPLAY);
 
-        write_string("Macros", sizeof("Macros"), 6, LINE_0, NOT_SELECTED);
+        write_string("Macros", sizeof("Macros"), 4, LINE_0, NOT_SELECTED);
 
     }
 
     if(changed){
         changed = 0x00;
 
-        write_string(getString(get_runtime_data(MACRO_INDEX) + MACRO_STRING_OFFSET), LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+        write_string(getString(get_runtime_data(MACRO_INDEX) + MACRO_STRING_OFFSET), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
 
     }
 }
@@ -551,7 +583,7 @@ void macroSpeedPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -570,10 +602,10 @@ void macroSpeedPage(uint8_t action){
         changed = 0x00;
 
         if(get_runtime_data(MACRO_SPEED_INDEX) == 0){
-            write_string("Off", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
+            write_string("Off", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
         } else {
             write_string("", LINE_LENGTH, 3, LINE_1, NOT_SELECTED);
-            write_number(get_runtime_data(MACRO_SPEED_INDEX), 6, LINE_1, NOT_SELECTED);
+            write_number(get_runtime_data(MACRO_SPEED_INDEX), 5, LINE_1, NOT_SELECTED);
         }
     }
 
@@ -613,7 +645,7 @@ void colorPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -631,7 +663,7 @@ void colorPage(uint8_t action){
     if(changed){
         changed = 0x00;
 
-        if(get_runtime_data(get_runtime_data(index)) == 0){
+        if(get_runtime_data(index) == 0){
             write_string("Off", LINE_LENGTH, 6, LINE_1, NOT_SELECTED);
         } else {
             write_string("", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
@@ -641,19 +673,22 @@ void colorPage(uint8_t action){
 }
 
 void remotePage(uint8_t action){
-    uint8_t remoteNumber = MANUAL_REMOTE_ACTION_6_STATE - State + 4;
+    uint8_t remoteNumber = 0;
     uint8_t index = 0;
     
     switch (State)
     {
         case MANUAL_REMOTE_ACTION_4_STATE:
             index = R4_INDEX;
+            remoteNumber = 4;
             break;
         case MANUAL_REMOTE_ACTION_5_STATE:
             index = R5_INDEX;
+            remoteNumber = 5;
             break;
         case MANUAL_REMOTE_ACTION_6_STATE:
             index = R6_INDEX;
+            remoteNumber = 6;
             break;
     }
 
@@ -670,7 +705,7 @@ void remotePage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -698,7 +733,7 @@ void remotePage(uint8_t action){
 
     if(changed){
         changed = 0x00;
-        write_string(getString(get_runtime_data(index) + WIRELESS_ACTION_STRING_OFFSET), LINE_LENGTH, 4, LINE_1, NOT_SELECTED);  
+        write_string(getString(get_runtime_data(index) + WIRELESS_ACTION_STRING_OFFSET), LINE_LENGTH, 2, LINE_1, NOT_SELECTED);  
     }
 }
 
@@ -728,7 +763,7 @@ void saveLoadPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -749,7 +784,7 @@ void saveLoadPage(uint8_t action){
 
     if(changed){
         changed = 0x00;
-        write_string(getString(slot % (SLOT_COUNT - 1)), LINE_LENGTH, 6, LINE_1, NOT_SELECTED);  
+        write_string(getString((slot % (SLOT_COUNT - 1)) + SAVE_LOAD_STRING_OFFSET), LINE_LENGTH, 4, LINE_1, NOT_SELECTED);  
     }
 
 }
@@ -771,7 +806,7 @@ void dmxAddressPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -808,7 +843,7 @@ void dmxChannelPage(uint8_t action){
         case BUTTON_FUNCTION:
             set_ui_state(INC, NULL);
         return;
-        case BUTTON_FUN_UP:
+        case BUTTON_TIMER:
             set_ui_state(DEC, NULL);
         return;
     }
@@ -835,7 +870,7 @@ void set_ui_state(uint8_t inc, uint8_t state){
 
     switch (inc)
     {
-    case INC:
+    case DEC:
         state = State;
         if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
             if(state == IDLE_STATE){
@@ -843,27 +878,27 @@ void set_ui_state(uint8_t inc, uint8_t state){
             } else if(++state > DMX_STATE_HIGH){
                 state = IDLE_STATE;
             }
-        } else {
+        } else { //mode manual
             if(state == IDLE_STATE){
                 state = IDLE_STATE + 1; 
             } else if(++state > MANUAL_STATE_HIGH){
-                State = IDLE_STATE;
+                state = IDLE_STATE;
             }
         }
         break;
-    case DEC:
+    case INC:
         state = State;
         if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
             if(state == IDLE_STATE){
                 state = DMX_STATE_HIGH;
-            } else if(--State < DMX_STATE_LOW){
-                State = IDLE_STATE;
+            } else if(--state < DMX_STATE_LOW){
+                state = IDLE_STATE;
             }
         } else {
             if(state == IDLE_STATE){
                 state = MANUAL_STATE_HIGH; 
-            } else if(--State < DMX_STATE_HIGH){
-                State = IDLE_STATE;
+            } else {
+                state--;
             }
         }
         break;
@@ -949,8 +984,8 @@ char* getString(uint8_t index){
         case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_3: 
             return "Slot 3"; 
 
-        case DMX_STRING_OFFSET + OPTION_DMX_MODE_9: 
-            return "10 All";     
+        case DMX_STRING_OFFSET + OPTION_DMX_MODE_11: 
+            return "11 All";     
         case DMX_STRING_OFFSET + OPTION_DMX_MODE_3: 
             return "3 Fog + Macro";   
         case DMX_STRING_OFFSET + OPTION_DMX_MODE_1: 

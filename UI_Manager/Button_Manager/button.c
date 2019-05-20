@@ -26,6 +26,9 @@ uint8_t get_button_action(){
             case BUTTON_DOWN:
                 retVal = BUTTON_DOWN;
                 break;
+            case BUTTON_TIMER:
+                retVal = BUTTON_TIMER;
+                break;
             }
         }
         lastAction = BUTTON_NA;
@@ -85,27 +88,27 @@ uint8_t get_button_action(){
         lastAction = BUTTON_DOWN;
     }
 
-    //Timer
-    if(level <= BUTTON_FUN_UP_UPPER && level > BUTTON_FUN_UP_LOWER){
-        if(lastAction == BUTTON_FUN_UP){ 
-            if(pressOK < PRESS_OK_COUNT){
-                if(++pressOK >= PRESS_OK_COUNT){
-                    retVal = BUTTON_FUN_UP;
+    //Burst Up
+    if(level <= BUTTON_BURST_UP_UPPER && level > BUTTON_BURST_UP_LOWER){
+        if(lastAction == BUTTON_BURST_UP){ 
+            if(pressOK < PRESS_HOLD_COUNT){
+                if(++pressOK >= PRESS_HOLD_COUNT){
+                    retVal = BUTTON_BURST_UP;
                 } 
             }
         } else {
             pressOK = 0;
         }
         
-        lastAction = BUTTON_FUN_UP;
+        lastAction = BUTTON_BURST_UP;
     }
 
     //Timer
     if(level <= BUTTON_TIMER_UPPER && level > BUTTON_TIMER_LOWER){
         if(lastAction == BUTTON_TIMER){ 
-            if(pressOK < PRESS_OK_COUNT){
-                if(++pressOK >= PRESS_OK_COUNT){
-                    retVal = BUTTON_TIMER;
+            if(pressOK < PRESS_HOLD_COUNT){
+                if(++pressOK >= PRESS_HOLD_COUNT){
+                    retVal = BUTTON_TIMER_HOLD;
                 } 
             }
         } else {
@@ -150,8 +153,8 @@ uint8_t get_button_action(){
     //fun man
     if(level <= BUTTON_FUN_MAN_UPPER && level > BUTTON_FUN_MAN_LOWER){
         if(lastAction == BUTTON_FUN_MAN){ 
-            if(pressOK < PRESS_OK_COUNT){
-                if(++pressOK >= PRESS_OK_COUNT){
+            if(pressOK < PRESS_HOLD_COUNT){
+                if(++pressOK >= PRESS_HOLD_COUNT){
                     retVal = BUTTON_FUN_MAN;
                 } 
             }
@@ -169,6 +172,8 @@ uint8_t get_button_action(){
                 if(++pressOK >= PRESS_HOLD_COUNT){
                     retVal = BUTTON_MAN_BURST;
                 } 
+            } else {
+                retVal = BUTTON_MAN_BURST;
             }
         } else {
             pressOK = 0;

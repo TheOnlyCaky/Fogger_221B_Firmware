@@ -375,29 +375,29 @@
                                     375 ;	../main.c:64: exe_command(CGRAM_ADDRESS_SET); //selector
       000041 90 02 00         [24]  376 	mov	dptr,#0x0200
       000044 12r00r00         [24]  377 	lcall	_exe_command
-                                    378 ;	../main.c:67: exe_command(0x0080);
-      000047 90 00 80         [24]  379 	mov	dptr,#0x0080
+                                    378 ;	../main.c:67: exe_command(0x8880);
+      000047 90 88 80         [24]  379 	mov	dptr,#0x8880
       00004A 12r00r00         [24]  380 	lcall	_exe_command
-                                    381 ;	../main.c:68: exe_command(0x0080);
-      00004D 90 00 80         [24]  382 	mov	dptr,#0x0080
+                                    381 ;	../main.c:68: exe_command(0xF880);
+      00004D 90 F8 80         [24]  382 	mov	dptr,#0xf880
       000050 12r00r00         [24]  383 	lcall	_exe_command
-                                    384 ;	../main.c:69: exe_command(0x7080);
-      000053 90 70 80         [24]  385 	mov	dptr,#0x7080
+                                    384 ;	../main.c:69: exe_command(0x0080);
+      000053 90 00 80         [24]  385 	mov	dptr,#0x0080
       000056 12r00r00         [24]  386 	lcall	_exe_command
-                                    387 ;	../main.c:70: exe_command(0x5080);
-      000059 90 50 80         [24]  388 	mov	dptr,#0x5080
+                                    387 ;	../main.c:70: exe_command(0xF880);
+      000059 90 F8 80         [24]  388 	mov	dptr,#0xf880
       00005C 12r00r00         [24]  389 	lcall	_exe_command
-                                    390 ;	../main.c:71: exe_command(0x5080);
-      00005F 90 50 80         [24]  391 	mov	dptr,#0x5080
+                                    390 ;	../main.c:71: exe_command(0xA080);
+      00005F 90 A0 80         [24]  391 	mov	dptr,#0xa080
       000062 12r00r00         [24]  392 	lcall	_exe_command
-                                    393 ;	../main.c:72: exe_command(0x7080);
-      000065 90 70 80         [24]  394 	mov	dptr,#0x7080
+                                    393 ;	../main.c:72: exe_command(0x0080);
+      000065 90 00 80         [24]  394 	mov	dptr,#0x0080
       000068 12r00r00         [24]  395 	lcall	_exe_command
-                                    396 ;	../main.c:73: exe_command(0x0080);
-      00006B 90 00 80         [24]  397 	mov	dptr,#0x0080
+                                    396 ;	../main.c:73: exe_command(0xF880);
+      00006B 90 F8 80         [24]  397 	mov	dptr,#0xf880
       00006E 12r00r00         [24]  398 	lcall	_exe_command
-                                    399 ;	../main.c:74: exe_command(0x0080);
-      000071 90 00 80         [24]  400 	mov	dptr,#0x0080
+                                    399 ;	../main.c:74: exe_command(0xA080);
+      000071 90 A0 80         [24]  400 	mov	dptr,#0xa080
       000074 12r00r00         [24]  401 	lcall	_exe_command
                                     402 ;	../main.c:77: exe_command(0x0080);
       000077 90 00 80         [24]  403 	mov	dptr,#0x0080

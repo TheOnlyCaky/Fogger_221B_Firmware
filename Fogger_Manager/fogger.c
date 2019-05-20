@@ -34,9 +34,10 @@ void tick_fogger(){
     temperature = get_adc_value(ADC_TEMPERATURE);
 
     if(temperature < HEAT_LOW){ /* Turn on heater full blast */
-        Heat_Flag = COLD_FLAG;
+        Heat_Flag &= ~HEATED;
+        Heat_Flag &= ~HOT_FLAG;
     } else if(temperature > HEAT_HIGH){ /* Turn off Heater */
-        Heat_Flag = HOT_FLAG;
+        Heat_Flag |= HOT_FLAG;
         Heat_Flag |= HEATED;
     } else if(temperature > HEAT_OK){ /* Set Heated */
         Heat_Flag |= HEATED;
@@ -44,7 +45,7 @@ void tick_fogger(){
 
     /* 0 = on 1 = off*/
     if(get_ui_state() != WELCOME_STATE){
-        if(HEAT_HIGH & HEAT_DISABLE_FLAG){
+        if(Heat_Flag & HEAT_DISABLE_FLAG){
             P3_4 = 1;
             P3_3 = 1;
         } else {
@@ -105,9 +106,9 @@ void tick_fogger(){
         if(has_dmx()){
             Playing = PLAY;
 
-            if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_9)
+            if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
             {
-                value = get_dmx_value(DMX_M9_POWER_INDEX);
+                value = get_dmx_value(DMX_M11_POWER_INDEX);
 
                 if(value < DMX_FOG_OFF){
                     Playing = PAUSE;
@@ -123,7 +124,7 @@ void tick_fogger(){
                     power = value;
                 } 
 
-                value = get_dmx_value(DMX_M9_DURATION_INDEX);
+                value = get_dmx_value(DMX_M11_DURATION_INDEX);
 
                 if(value != duration){
                     duration = value;
@@ -131,11 +132,19 @@ void tick_fogger(){
                     Interval_Or_Duration = DURATION;
                 }
 
-                value = get_dmx_value(DMX_M9_INTERVAL_INDEX);
+                value = get_dmx_value(DMX_M11_INTERVAL_INDEX);
 
                 if(value != interval){
                     interval = value;
                     Playing = RESET;
+                }
+
+                value = get_dmx_value(DMX_M11_HEATER_ENABLE_INDEX);
+
+                if(value >= DMX_HEATER_OFF && get_heater_enabled()){
+                    power_heater(HEATER_DISABLE);
+                } else if(value < DMX_HEATER_OFF && !get_heater_enabled()){
+                    power_heater(HEATER_ENABLE);
                 }
 
             //end mode 1
@@ -150,22 +159,10 @@ void tick_fogger(){
                 if(value < DMX_FOG_OFF){
                     Playing = PAUSE;
 
-                } else if(value < DMX_FOG_3_8){
-                    if(duration != 3 || interval != 8){
-                        duration = 3;
-                        interval = 8;
-                        Playing = RESET;
-                    } 
                 } else if(value < DMX_FOG_3_13){
                     if(duration != 3 || interval != 13){
                         duration = 3;
                         interval = 13;
-                        Playing = RESET;
-                    } 
-                } else if(value < DMX_FOG_3_21){
-                    if(duration != 3 || interval != 21){
-                        duration = 3;
-                        interval = 21;
                         Playing = RESET;
                     } 
                 } else if(value < DMX_FOG_3_21){
@@ -222,10 +219,10 @@ void tick_fogger(){
                         interval = 55;
                         Playing = RESET;
                     } 
-                } else {
-                    if(duration !=  21|| interval != 89){
-                        duration = 21;
-                        interval = 89;
+                } else { //constant on
+                    if(duration !=  0 || interval != 0){
+                        duration = 0;
+                        interval = 0;
                         Playing = RESET;
                     }    
                 }
@@ -272,8 +269,7 @@ void tick_fogger(){
     if(Playing){
         tock++;
 
-        if(!get_runtime_data(OP_MODE_INDEX)
-            && get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_9
+        if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
             && (!duration || !interval)){
 
             if(!(tock % power)){

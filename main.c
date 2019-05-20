@@ -63,15 +63,15 @@ void main(void)
     /* Writes Special Chars */
     exe_command(CGRAM_ADDRESS_SET); //selector
 
-    //Cursor
+    //Heat Off
+    exe_command(0x8880);
+    exe_command(0xF880);
     exe_command(0x0080);
+    exe_command(0xF880);
+    exe_command(0xA080);
     exe_command(0x0080);
-    exe_command(0x7080);
-    exe_command(0x5080);
-    exe_command(0x5080);
-    exe_command(0x7080);
-    exe_command(0x0080);
-    exe_command(0x0080);
+    exe_command(0xF880);
+    exe_command(0xA080);
 
     //Play
     exe_command(0x0080);

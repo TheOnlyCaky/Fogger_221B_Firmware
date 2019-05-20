@@ -307,430 +307,446 @@ _get_button_action:
 	subb	a,#0xa2
 	mov	a,r7
 	subb	a,#0x03
-	jc	00108$
+	jc	00109$
 ;	../UI_Manager/Button_Manager/button.c:20: if(pressOK >= PRESS_OK_COUNT && pressOK < PRESS_HOLD_COUNT){
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00105$
-	mov	a,#0x100 - 0x22
+	jnc	00106$
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00105$
+	jc	00106$
 ;	../UI_Manager/Button_Manager/button.c:21: switch (lastAction)
+	mov	a,#0x01
+	cjne	a,_get_button_action_lastAction_65536_3,00474$
+	sjmp	00103$
+00474$:
 	mov	a,#0x03
-	cjne	a,_get_button_action_lastAction_65536_3,00468$
+	cjne	a,_get_button_action_lastAction_65536_3,00475$
 	sjmp	00101$
-00468$:
-	mov	a,#0x0a
+00475$:
+	mov	a,#0x0b
 ;	../UI_Manager/Button_Manager/button.c:23: case BUTTON_UP:
-	cjne	a,_get_button_action_lastAction_65536_3,00105$
+	cjne	a,_get_button_action_lastAction_65536_3,00106$
 	sjmp	00102$
 00101$:
 ;	../UI_Manager/Button_Manager/button.c:24: retVal = BUTTON_UP;
 	mov	r5,#0x03
 ;	../UI_Manager/Button_Manager/button.c:25: break;
 ;	../UI_Manager/Button_Manager/button.c:26: case BUTTON_DOWN:
-	sjmp	00105$
+	sjmp	00106$
 00102$:
 ;	../UI_Manager/Button_Manager/button.c:27: retVal = BUTTON_DOWN;
-	mov	r5,#0x0a
-;	../UI_Manager/Button_Manager/button.c:29: }
-00105$:
-;	../UI_Manager/Button_Manager/button.c:31: lastAction = BUTTON_NA;
+	mov	r5,#0x0b
+;	../UI_Manager/Button_Manager/button.c:28: break;
+;	../UI_Manager/Button_Manager/button.c:29: case BUTTON_TIMER:
+	sjmp	00106$
+00103$:
+;	../UI_Manager/Button_Manager/button.c:30: retVal = BUTTON_TIMER;
+	mov	r5,#0x01
+;	../UI_Manager/Button_Manager/button.c:32: }
+00106$:
+;	../UI_Manager/Button_Manager/button.c:34: lastAction = BUTTON_NA;
 	mov	_get_button_action_lastAction_65536_3,#0x00
-;	../UI_Manager/Button_Manager/button.c:32: pressOK = 0;
+;	../UI_Manager/Button_Manager/button.c:35: pressOK = 0;
 	mov	_get_button_action_pressOK_65536_3,#0x00
-00108$:
-;	../UI_Manager/Button_Manager/button.c:40: if(level <= BUTTON_FUNCTION_UPPER && level > BUTTON_FUNCTION_LOWER){ 
+00109$:
+;	../UI_Manager/Button_Manager/button.c:43: if(level <= BUTTON_FUNCTION_UPPER && level > BUTTON_FUNCTION_LOWER){ 
 	clr	c
 	mov	a,#0x7a
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jc	00117$
+	jc	00118$
 	mov	a,#0x66
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jnc	00117$
-;	../UI_Manager/Button_Manager/button.c:41: if(lastAction == BUTTON_FUNCTION){ 
+	jnc	00118$
+;	../UI_Manager/Button_Manager/button.c:44: if(lastAction == BUTTON_FUNCTION){ 
 	mov	a,#0x02
-	cjne	a,_get_button_action_lastAction_65536_3,00114$
-;	../UI_Manager/Button_Manager/button.c:42: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	cjne	a,_get_button_action_lastAction_65536_3,00115$
+;	../UI_Manager/Button_Manager/button.c:45: if(pressOK < PRESS_OK_COUNT){
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00115$
-;	../UI_Manager/Button_Manager/button.c:43: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00116$
+;	../UI_Manager/Button_Manager/button.c:46: if(++pressOK >= PRESS_OK_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00115$
-;	../UI_Manager/Button_Manager/button.c:44: retVal = BUTTON_FUNCTION;
+	jnc	00116$
+;	../UI_Manager/Button_Manager/button.c:47: retVal = BUTTON_FUNCTION;
 	mov	r5,#0x02
-	sjmp	00115$
-00114$:
-;	../UI_Manager/Button_Manager/button.c:48: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	sjmp	00116$
 00115$:
-;	../UI_Manager/Button_Manager/button.c:51: lastAction = BUTTON_FUNCTION;
+;	../UI_Manager/Button_Manager/button.c:51: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00116$:
+;	../UI_Manager/Button_Manager/button.c:54: lastAction = BUTTON_FUNCTION;
 	mov	_get_button_action_lastAction_65536_3,#0x02
-00117$:
-;	../UI_Manager/Button_Manager/button.c:55: if(level <= BUTTON_UP_UPPER && level > BUTTON_UP_LOWER){ 
+00118$:
+;	../UI_Manager/Button_Manager/button.c:58: if(level <= BUTTON_UP_UPPER && level > BUTTON_UP_LOWER){ 
 	clr	c
 	mov	a,#0x48
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jc	00128$
+	jc	00129$
 	mov	a,#0x2f
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jnc	00128$
-;	../UI_Manager/Button_Manager/button.c:56: if(lastAction == BUTTON_UP){ 
+	jnc	00129$
+;	../UI_Manager/Button_Manager/button.c:59: if(lastAction == BUTTON_UP){ 
 	mov	a,#0x03
-	cjne	a,_get_button_action_lastAction_65536_3,00125$
-;	../UI_Manager/Button_Manager/button.c:57: if(pressOK < PRESS_HOLD_COUNT){
-	mov	a,#0x100 - 0x22
+	cjne	a,_get_button_action_lastAction_65536_3,00126$
+;	../UI_Manager/Button_Manager/button.c:60: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00122$
-;	../UI_Manager/Button_Manager/button.c:58: if(++pressOK >= PRESS_HOLD_COUNT){
+	jc	00123$
+;	../UI_Manager/Button_Manager/button.c:61: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x22
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00126$
-;	../UI_Manager/Button_Manager/button.c:59: retVal = BUTTON_UP_HOLD;
+	jnc	00127$
+;	../UI_Manager/Button_Manager/button.c:62: retVal = BUTTON_UP_HOLD;
 	mov	r5,#0x1e
-	sjmp	00126$
-00122$:
-;	../UI_Manager/Button_Manager/button.c:62: retVal = BUTTON_UP_BURST;
+	sjmp	00127$
+00123$:
+;	../UI_Manager/Button_Manager/button.c:65: retVal = BUTTON_UP_BURST;
 	mov	r5,#0x1f
-	sjmp	00126$
-00125$:
-;	../UI_Manager/Button_Manager/button.c:65: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	sjmp	00127$
 00126$:
-;	../UI_Manager/Button_Manager/button.c:68: lastAction = BUTTON_UP;
+;	../UI_Manager/Button_Manager/button.c:68: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00127$:
+;	../UI_Manager/Button_Manager/button.c:71: lastAction = BUTTON_UP;
 	mov	_get_button_action_lastAction_65536_3,#0x03
-00128$:
-;	../UI_Manager/Button_Manager/button.c:72: if(level <= BUTTON_DOWN_UPPER && level > BUTTON_DOWN_LOWER){
+00129$:
+;	../UI_Manager/Button_Manager/button.c:75: if(level <= BUTTON_DOWN_UPPER && level > BUTTON_DOWN_LOWER){
 	clr	c
 	mov	a,#0xaa
 	subb	a,r6
 	clr	a
 	subb	a,r7
-	jc	00139$
+	jc	00140$
 	mov	a,#0x8c
 	subb	a,r6
 	clr	a
 	subb	a,r7
-	jnc	00139$
-;	../UI_Manager/Button_Manager/button.c:73: if(lastAction == BUTTON_DOWN){
-	mov	a,#0x0a
-	cjne	a,_get_button_action_lastAction_65536_3,00136$
-;	../UI_Manager/Button_Manager/button.c:74: if(pressOK < PRESS_HOLD_COUNT){
-	mov	a,#0x100 - 0x22
+	jnc	00140$
+;	../UI_Manager/Button_Manager/button.c:76: if(lastAction == BUTTON_DOWN){
+	mov	a,#0x0b
+	cjne	a,_get_button_action_lastAction_65536_3,00137$
+;	../UI_Manager/Button_Manager/button.c:77: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00133$
-;	../UI_Manager/Button_Manager/button.c:75: if(++pressOK >= PRESS_HOLD_COUNT){
+	jc	00134$
+;	../UI_Manager/Button_Manager/button.c:78: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x22
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00137$
-;	../UI_Manager/Button_Manager/button.c:76: retVal = BUTTON_DOWN_HOLD;
-	mov	r5,#0x64
-	sjmp	00137$
-00133$:
-;	../UI_Manager/Button_Manager/button.c:79: retVal = BUTTON_DOWN_BURST;
-	mov	r5,#0x65
-	sjmp	00137$
-00136$:
-;	../UI_Manager/Button_Manager/button.c:82: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	jnc	00138$
+;	../UI_Manager/Button_Manager/button.c:79: retVal = BUTTON_DOWN_HOLD;
+	mov	r5,#0x6e
+	sjmp	00138$
+00134$:
+;	../UI_Manager/Button_Manager/button.c:82: retVal = BUTTON_DOWN_BURST;
+	mov	r5,#0x6f
+	sjmp	00138$
 00137$:
-;	../UI_Manager/Button_Manager/button.c:85: lastAction = BUTTON_DOWN;
-	mov	_get_button_action_lastAction_65536_3,#0x0a
-00139$:
-;	../UI_Manager/Button_Manager/button.c:89: if(level <= BUTTON_FUN_UP_UPPER && level > BUTTON_FUN_UP_LOWER){
-	clr	c
-	mov	a,#0x01
-	subb	a,r6
-	clr	a
-	subb	a,r7
-	jc	00149$
-	mov	a,r6
-	orl	a,r7
-	jz	00149$
-;	../UI_Manager/Button_Manager/button.c:90: if(lastAction == BUTTON_FUN_UP){ 
-	mov	a,#0x0c
-	cjne	a,_get_button_action_lastAction_65536_3,00146$
-;	../UI_Manager/Button_Manager/button.c:91: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
-	add	a,_get_button_action_pressOK_65536_3
-	jc	00147$
-;	../UI_Manager/Button_Manager/button.c:92: if(++pressOK >= PRESS_OK_COUNT){
-	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
-	add	a,_get_button_action_pressOK_65536_3
-	jnc	00147$
-;	../UI_Manager/Button_Manager/button.c:93: retVal = BUTTON_FUN_UP;
-	mov	r5,#0x0c
-	sjmp	00147$
-00146$:
-;	../UI_Manager/Button_Manager/button.c:97: pressOK = 0;
+;	../UI_Manager/Button_Manager/button.c:85: pressOK = 0;
 	mov	_get_button_action_pressOK_65536_3,#0x00
+00138$:
+;	../UI_Manager/Button_Manager/button.c:88: lastAction = BUTTON_DOWN;
+	mov	_get_button_action_lastAction_65536_3,#0x0b
+00140$:
+;	../UI_Manager/Button_Manager/button.c:92: if(level <= BUTTON_BURST_UP_UPPER && level > BUTTON_BURST_UP_LOWER){
+	clr	c
+	mov	a,#0x76
+	subb	a,r6
+	mov	a,#0x02
+	subb	a,r7
+	jc	00150$
+	mov	a,#0x58
+	subb	a,r6
+	mov	a,#0x02
+	subb	a,r7
+	jnc	00150$
+;	../UI_Manager/Button_Manager/button.c:93: if(lastAction == BUTTON_BURST_UP){ 
+	mov	a,#0x07
+	cjne	a,_get_button_action_lastAction_65536_3,00147$
+;	../UI_Manager/Button_Manager/button.c:94: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
+	add	a,_get_button_action_pressOK_65536_3
+	jc	00148$
+;	../UI_Manager/Button_Manager/button.c:95: if(++pressOK >= PRESS_HOLD_COUNT){
+	inc	_get_button_action_pressOK_65536_3
+	mov	a,#0x100 - 0xe9
+	add	a,_get_button_action_pressOK_65536_3
+	jnc	00148$
+;	../UI_Manager/Button_Manager/button.c:96: retVal = BUTTON_BURST_UP;
+	mov	r5,#0x07
+	sjmp	00148$
 00147$:
-;	../UI_Manager/Button_Manager/button.c:100: lastAction = BUTTON_FUN_UP;
-	mov	_get_button_action_lastAction_65536_3,#0x0c
-00149$:
-;	../UI_Manager/Button_Manager/button.c:104: if(level <= BUTTON_TIMER_UPPER && level > BUTTON_TIMER_LOWER){
+;	../UI_Manager/Button_Manager/button.c:100: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00148$:
+;	../UI_Manager/Button_Manager/button.c:103: lastAction = BUTTON_BURST_UP;
+	mov	_get_button_action_lastAction_65536_3,#0x07
+00150$:
+;	../UI_Manager/Button_Manager/button.c:107: if(level <= BUTTON_TIMER_UPPER && level > BUTTON_TIMER_LOWER){
 	clr	c
 	mov	a,#0x98
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jc	00159$
+	jc	00160$
 	mov	a,#0x84
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jnc	00159$
-;	../UI_Manager/Button_Manager/button.c:105: if(lastAction == BUTTON_TIMER){ 
+	jnc	00160$
+;	../UI_Manager/Button_Manager/button.c:108: if(lastAction == BUTTON_TIMER){ 
 	mov	a,#0x01
-	cjne	a,_get_button_action_lastAction_65536_3,00156$
-;	../UI_Manager/Button_Manager/button.c:106: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	cjne	a,_get_button_action_lastAction_65536_3,00157$
+;	../UI_Manager/Button_Manager/button.c:109: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00157$
-;	../UI_Manager/Button_Manager/button.c:107: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00158$
+;	../UI_Manager/Button_Manager/button.c:110: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00157$
-;	../UI_Manager/Button_Manager/button.c:108: retVal = BUTTON_TIMER;
-	mov	r5,#0x01
-	sjmp	00157$
-00156$:
-;	../UI_Manager/Button_Manager/button.c:112: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	jnc	00158$
+;	../UI_Manager/Button_Manager/button.c:111: retVal = BUTTON_TIMER_HOLD;
+	mov	r5,#0xc8
+	sjmp	00158$
 00157$:
-;	../UI_Manager/Button_Manager/button.c:115: lastAction = BUTTON_TIMER;
+;	../UI_Manager/Button_Manager/button.c:115: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00158$:
+;	../UI_Manager/Button_Manager/button.c:118: lastAction = BUTTON_TIMER;
 	mov	_get_button_action_lastAction_65536_3,#0x01
-00159$:
-;	../UI_Manager/Button_Manager/button.c:119: if(level <= BUTTON_MANUAL_UPPER && level > BUTTON_MANUAL_LOWER){
+00160$:
+;	../UI_Manager/Button_Manager/button.c:122: if(level <= BUTTON_MANUAL_UPPER && level > BUTTON_MANUAL_LOWER){
 	clr	c
 	mov	a,#0x12
 	subb	a,r6
 	mov	a,#0x02
 	subb	a,r7
-	jc	00169$
+	jc	00170$
 	mov	a,#0xfe
 	subb	a,r6
 	mov	a,#0x01
 	subb	a,r7
-	jnc	00169$
-;	../UI_Manager/Button_Manager/button.c:120: if(lastAction == BUTTON_MANUAL){ 
-	mov	a,#0x07
-	cjne	a,_get_button_action_lastAction_65536_3,00166$
-;	../UI_Manager/Button_Manager/button.c:121: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	jnc	00170$
+;	../UI_Manager/Button_Manager/button.c:123: if(lastAction == BUTTON_MANUAL){ 
+	mov	a,#0x08
+	cjne	a,_get_button_action_lastAction_65536_3,00167$
+;	../UI_Manager/Button_Manager/button.c:124: if(pressOK < PRESS_OK_COUNT){
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00167$
-;	../UI_Manager/Button_Manager/button.c:122: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00168$
+;	../UI_Manager/Button_Manager/button.c:125: if(++pressOK >= PRESS_OK_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00167$
-;	../UI_Manager/Button_Manager/button.c:123: retVal = BUTTON_MANUAL;
-	mov	r5,#0x07
-	sjmp	00167$
-00166$:
-;	../UI_Manager/Button_Manager/button.c:127: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	jnc	00168$
+;	../UI_Manager/Button_Manager/button.c:126: retVal = BUTTON_MANUAL;
+	mov	r5,#0x08
+	sjmp	00168$
 00167$:
-;	../UI_Manager/Button_Manager/button.c:130: lastAction = BUTTON_MANUAL;
-	mov	_get_button_action_lastAction_65536_3,#0x07
-00169$:
-;	../UI_Manager/Button_Manager/button.c:134: if(level <= BUTTON_BURST_UPPER && level > BUTTON_BURST_LOWER){
+;	../UI_Manager/Button_Manager/button.c:130: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00168$:
+;	../UI_Manager/Button_Manager/button.c:133: lastAction = BUTTON_MANUAL;
+	mov	_get_button_action_lastAction_65536_3,#0x08
+00170$:
+;	../UI_Manager/Button_Manager/button.c:137: if(level <= BUTTON_BURST_UPPER && level > BUTTON_BURST_LOWER){
 	clr	c
 	mov	a,#0xc6
 	subb	a,r6
 	mov	a,#0x02
 	subb	a,r7
-	jc	00180$
+	jc	00181$
 	mov	a,#0xa8
 	subb	a,r6
 	mov	a,#0x02
 	subb	a,r7
-	jnc	00180$
-;	../UI_Manager/Button_Manager/button.c:135: if(lastAction == BUTTON_BURST){ 
+	jnc	00181$
+;	../UI_Manager/Button_Manager/button.c:138: if(lastAction == BUTTON_BURST){ 
 	mov	a,#0x05
-	cjne	a,_get_button_action_lastAction_65536_3,00177$
-;	../UI_Manager/Button_Manager/button.c:136: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	cjne	a,_get_button_action_lastAction_65536_3,00178$
+;	../UI_Manager/Button_Manager/button.c:139: if(pressOK < PRESS_OK_COUNT){
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00174$
-;	../UI_Manager/Button_Manager/button.c:137: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00175$
+;	../UI_Manager/Button_Manager/button.c:140: if(++pressOK >= PRESS_OK_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00178$
-;	../UI_Manager/Button_Manager/button.c:138: retVal = BUTTON_BURST;
-	mov	r5,#0x05
-	sjmp	00178$
-00174$:
+	jnc	00179$
 ;	../UI_Manager/Button_Manager/button.c:141: retVal = BUTTON_BURST;
 	mov	r5,#0x05
-	sjmp	00178$
-00177$:
-;	../UI_Manager/Button_Manager/button.c:144: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	sjmp	00179$
+00175$:
+;	../UI_Manager/Button_Manager/button.c:144: retVal = BUTTON_BURST;
+	mov	r5,#0x05
+	sjmp	00179$
 00178$:
-;	../UI_Manager/Button_Manager/button.c:147: lastAction = BUTTON_BURST;
+;	../UI_Manager/Button_Manager/button.c:147: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00179$:
+;	../UI_Manager/Button_Manager/button.c:150: lastAction = BUTTON_BURST;
 	mov	_get_button_action_lastAction_65536_3,#0x05
-00180$:
-;	../UI_Manager/Button_Manager/button.c:151: if(level <= BUTTON_FUN_MAN_UPPER && level > BUTTON_FUN_MAN_LOWER){
+00181$:
+;	../UI_Manager/Button_Manager/button.c:154: if(level <= BUTTON_FUN_MAN_UPPER && level > BUTTON_FUN_MAN_LOWER){
 	clr	c
 	mov	a,#0xea
 	subb	a,r6
 	mov	a,#0x01
 	subb	a,r7
-	jc	00190$
+	jc	00191$
 	mov	a,#0xcc
 	subb	a,r6
 	mov	a,#0x01
 	subb	a,r7
-	jnc	00190$
-;	../UI_Manager/Button_Manager/button.c:152: if(lastAction == BUTTON_FUN_MAN){ 
-	mov	a,#0x08
-	cjne	a,_get_button_action_lastAction_65536_3,00187$
-;	../UI_Manager/Button_Manager/button.c:153: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	jnc	00191$
+;	../UI_Manager/Button_Manager/button.c:155: if(lastAction == BUTTON_FUN_MAN){ 
+	mov	a,#0x09
+	cjne	a,_get_button_action_lastAction_65536_3,00188$
+;	../UI_Manager/Button_Manager/button.c:156: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00188$
-;	../UI_Manager/Button_Manager/button.c:154: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00189$
+;	../UI_Manager/Button_Manager/button.c:157: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00188$
-;	../UI_Manager/Button_Manager/button.c:155: retVal = BUTTON_FUN_MAN;
-	mov	r5,#0x08
-	sjmp	00188$
-00187$:
-;	../UI_Manager/Button_Manager/button.c:159: pressOK = 0;
-	mov	_get_button_action_pressOK_65536_3,#0x00
+	jnc	00189$
+;	../UI_Manager/Button_Manager/button.c:158: retVal = BUTTON_FUN_MAN;
+	mov	r5,#0x09
+	sjmp	00189$
 00188$:
-;	../UI_Manager/Button_Manager/button.c:162: lastAction = BUTTON_FUN_MAN;
-	mov	_get_button_action_lastAction_65536_3,#0x08
-00190$:
-;	../UI_Manager/Button_Manager/button.c:166: if(level <= BUTTON_MAN_BURST_UPPER && level > BUTTON_MAN_BURST_LOWER){
+;	../UI_Manager/Button_Manager/button.c:162: pressOK = 0;
+	mov	_get_button_action_pressOK_65536_3,#0x00
+00189$:
+;	../UI_Manager/Button_Manager/button.c:165: lastAction = BUTTON_FUN_MAN;
+	mov	_get_button_action_lastAction_65536_3,#0x09
+00191$:
+;	../UI_Manager/Button_Manager/button.c:169: if(level <= BUTTON_MAN_BURST_UPPER && level > BUTTON_MAN_BURST_LOWER){
 	clr	c
 	mov	a,#0xb8
 	subb	a,r6
 	mov	a,#0x01
 	subb	a,r7
-	jc	00200$
+	jc	00202$
 	mov	a,#0xa4
 	subb	a,r6
 	mov	a,#0x01
 	subb	a,r7
-	jnc	00200$
-;	../UI_Manager/Button_Manager/button.c:167: if(lastAction == BUTTON_MAN_BURST){ 
-	mov	a,#0x09
-	cjne	a,_get_button_action_lastAction_65536_3,00197$
-;	../UI_Manager/Button_Manager/button.c:168: if(pressOK < PRESS_HOLD_COUNT){
-	mov	a,#0x100 - 0x22
+	jnc	00202$
+;	../UI_Manager/Button_Manager/button.c:170: if(lastAction == BUTTON_MAN_BURST){ 
+	mov	a,#0x0a
+	cjne	a,_get_button_action_lastAction_65536_3,00199$
+;	../UI_Manager/Button_Manager/button.c:171: if(pressOK < PRESS_HOLD_COUNT){
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00198$
-;	../UI_Manager/Button_Manager/button.c:169: if(++pressOK >= PRESS_HOLD_COUNT + (34 * 5)){
+	jc	00196$
+;	../UI_Manager/Button_Manager/button.c:172: if(++pressOK >= PRESS_HOLD_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0xcc
+	mov	a,#0x100 - 0xe9
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00198$
-;	../UI_Manager/Button_Manager/button.c:170: retVal = BUTTON_MAN_BURST;
-	mov	r5,#0x09
-	sjmp	00198$
-00197$:
-;	../UI_Manager/Button_Manager/button.c:174: pressOK = 0;
+	jnc	00200$
+;	../UI_Manager/Button_Manager/button.c:173: retVal = BUTTON_MAN_BURST;
+	mov	r5,#0x0a
+	sjmp	00200$
+00196$:
+;	../UI_Manager/Button_Manager/button.c:176: retVal = BUTTON_MAN_BURST;
+	mov	r5,#0x0a
+	sjmp	00200$
+00199$:
+;	../UI_Manager/Button_Manager/button.c:179: pressOK = 0;
 	mov	_get_button_action_pressOK_65536_3,#0x00
-00198$:
-;	../UI_Manager/Button_Manager/button.c:177: lastAction = BUTTON_MAN_BURST;
-	mov	_get_button_action_lastAction_65536_3,#0x09
 00200$:
-;	../UI_Manager/Button_Manager/button.c:181: if(level <= BUTTON_FUN_TIME_UPPER && level > BUTTON_FUN_TIME_LOWER){
+;	../UI_Manager/Button_Manager/button.c:182: lastAction = BUTTON_MAN_BURST;
+	mov	_get_button_action_lastAction_65536_3,#0x0a
+00202$:
+;	../UI_Manager/Button_Manager/button.c:186: if(level <= BUTTON_FUN_TIME_UPPER && level > BUTTON_FUN_TIME_LOWER){
 	clr	c
 	mov	a,#0x2a
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jc	00210$
+	jc	00212$
 	mov	a,#0x16
 	subb	a,r6
 	mov	a,#0x03
 	subb	a,r7
-	jnc	00210$
-;	../UI_Manager/Button_Manager/button.c:182: if(lastAction == BUTTON_FUN_TIME){ 
+	jnc	00212$
+;	../UI_Manager/Button_Manager/button.c:187: if(lastAction == BUTTON_FUN_TIME){ 
 	mov	a,#0x04
-	cjne	a,_get_button_action_lastAction_65536_3,00207$
-;	../UI_Manager/Button_Manager/button.c:183: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	cjne	a,_get_button_action_lastAction_65536_3,00209$
+;	../UI_Manager/Button_Manager/button.c:188: if(pressOK < PRESS_OK_COUNT){
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00208$
-;	../UI_Manager/Button_Manager/button.c:184: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00210$
+;	../UI_Manager/Button_Manager/button.c:189: if(++pressOK >= PRESS_OK_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00208$
-;	../UI_Manager/Button_Manager/button.c:185: retVal = BUTTON_FUN_TIME;
+	jnc	00210$
+;	../UI_Manager/Button_Manager/button.c:190: retVal = BUTTON_FUN_TIME;
 	mov	r5,#0x04
-	sjmp	00208$
-00207$:
-;	../UI_Manager/Button_Manager/button.c:189: pressOK = 0;
+	sjmp	00210$
+00209$:
+;	../UI_Manager/Button_Manager/button.c:194: pressOK = 0;
 	mov	_get_button_action_pressOK_65536_3,#0x00
-00208$:
-;	../UI_Manager/Button_Manager/button.c:192: lastAction = BUTTON_FUN_TIME;
-	mov	_get_button_action_lastAction_65536_3,#0x04
 00210$:
-;	../UI_Manager/Button_Manager/button.c:196: if(level <= BUTTON_FUN_BURST_UPPER && level > BUTTON_FUN_BURST_LOWER){
+;	../UI_Manager/Button_Manager/button.c:197: lastAction = BUTTON_FUN_TIME;
+	mov	_get_button_action_lastAction_65536_3,#0x04
+00212$:
+;	../UI_Manager/Button_Manager/button.c:201: if(level <= BUTTON_FUN_BURST_UPPER && level > BUTTON_FUN_BURST_LOWER){
 	clr	c
 	mov	a,#0x8a
 	subb	a,r6
 	mov	a,#0x02
 	subb	a,r7
-	jc	00221$
+	jc	00223$
 	mov	a,#0x76
 	subb	a,r6
 	mov	a,#0x02
 	subb	a,r7
-	jnc	00221$
-;	../UI_Manager/Button_Manager/button.c:197: if(lastAction == BUTTON_FUN_BURST){ 
-	mov	a,#0x0b
-	cjne	a,_get_button_action_lastAction_65536_3,00218$
-;	../UI_Manager/Button_Manager/button.c:198: if(pressOK < PRESS_OK_COUNT){
-	mov	a,#0x100 - 0x03
+	jnc	00223$
+;	../UI_Manager/Button_Manager/button.c:202: if(lastAction == BUTTON_FUN_BURST){ 
+	mov	a,#0x06
+	cjne	a,_get_button_action_lastAction_65536_3,00220$
+;	../UI_Manager/Button_Manager/button.c:203: if(pressOK < PRESS_OK_COUNT){
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jc	00215$
-;	../UI_Manager/Button_Manager/button.c:199: if(++pressOK >= PRESS_OK_COUNT){
+	jc	00217$
+;	../UI_Manager/Button_Manager/button.c:204: if(++pressOK >= PRESS_OK_COUNT){
 	inc	_get_button_action_pressOK_65536_3
-	mov	a,#0x100 - 0x03
+	mov	a,#0x100 - 0x08
 	add	a,_get_button_action_pressOK_65536_3
-	jnc	00219$
-;	../UI_Manager/Button_Manager/button.c:200: retVal = BUTTON_FUN_BURST;
-	mov	r5,#0x0b
-	sjmp	00219$
-00215$:
-;	../UI_Manager/Button_Manager/button.c:203: retVal = BUTTON_FUN_BURST;
-	mov	r5,#0x0b
-	sjmp	00219$
-00218$:
-;	../UI_Manager/Button_Manager/button.c:206: pressOK = 0;
+	jnc	00221$
+;	../UI_Manager/Button_Manager/button.c:205: retVal = BUTTON_FUN_BURST;
+	mov	r5,#0x06
+	sjmp	00221$
+00217$:
+;	../UI_Manager/Button_Manager/button.c:208: retVal = BUTTON_FUN_BURST;
+	mov	r5,#0x06
+	sjmp	00221$
+00220$:
+;	../UI_Manager/Button_Manager/button.c:211: pressOK = 0;
 	mov	_get_button_action_pressOK_65536_3,#0x00
-00219$:
-;	../UI_Manager/Button_Manager/button.c:209: lastAction = BUTTON_FUN_BURST;
-	mov	_get_button_action_lastAction_65536_3,#0x0b
 00221$:
-;	../UI_Manager/Button_Manager/button.c:212: return retVal;
+;	../UI_Manager/Button_Manager/button.c:214: lastAction = BUTTON_FUN_BURST;
+	mov	_get_button_action_lastAction_65536_3,#0x06
+00223$:
+;	../UI_Manager/Button_Manager/button.c:217: return retVal;
 	mov	dpl,r5
-;	../UI_Manager/Button_Manager/button.c:213: }
+;	../UI_Manager/Button_Manager/button.c:218: }
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

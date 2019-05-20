@@ -33,35 +33,39 @@
 #define DMX_M3_MACRO_INDEX 1
 #define DMX_M3_MACRO_SPEED_INDEX 2
 
-#define DMX_M9_POWER_INDEX 0
-#define DMX_M9_DURATION_INDEX 1
-#define DMX_M9_INTERVAL_INDEX 2
-#define DMX_M9_RED_INDEX 3
-#define DMX_M9_GREEN_INDEX 4
-#define DMX_M9_BLUE_INDEX 5
-#define DMX_M9_STROBE_INDEX 6
-#define DMX_M9_MACRO_INDEX 7
-#define DMX_M9_MACRO_SPEED_INDEX 8
+#define DMX_M11_POWER_INDEX 0
+#define DMX_M11_DURATION_INDEX 1
+#define DMX_M11_INTERVAL_INDEX 2
+#define DMX_M11_DIMMER_INDEX 3
+#define DMX_M11_RED_INDEX 4
+#define DMX_M11_GREEN_INDEX 5
+#define DMX_M11_BLUE_INDEX 6
+#define DMX_M11_STROBE_INDEX 7
+#define DMX_M11_MACRO_INDEX 8
+#define DMX_M11_MACRO_SPEED_INDEX 9
+#define DMX_M11_HEATER_ENABLE_INDEX 10
 
 //all at high
 //Modes 1 + 3
 #define DMX_FOG_OFF 20
-#define DMX_FOG_3_8 40
-#define DMX_FOG_3_13 60
-#define DMX_FOG_3_21 80 
-#define DMX_FOG_3_34 100
-#define DMX_FOG_3_55 120
-#define DMX_FOG_8_21 140
-#define DMX_FOG_8_34 160
-#define DMX_FOG_8_55 180
-#define DMX_FOG_8_89 200
-#define DMX_FOG_8_144 220
-#define DMX_FOG_21_55 240
-#define DMC_FOG_21_89 255
+#define DMX_FOG_3_13 40
+#define DMX_FOG_3_21 60 
+#define DMX_FOG_3_34 80
+#define DMX_FOG_3_55 100
+#define DMX_FOG_8_21 120
+#define DMX_FOG_8_34 140
+#define DMX_FOG_8_55 160
+#define DMX_FOG_8_89 180
+#define DMX_FOG_8_144 200
+#define DMX_FOG_21_55 220
+#define DMX_FOG_21_89 240
+#define DMX_FOG_CONSTANT 255
 
 #define DMX_FOG_LOW 100
 #define DMX_FOG_MEDIUM 200
 #define DMX_FOG_HIGH 255
+
+#define DMX_HEATER_OFF 128
 
 //Macro Modes
 #define DMX_MACRO_NONE 20

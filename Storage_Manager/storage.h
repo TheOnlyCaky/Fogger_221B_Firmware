@@ -57,12 +57,12 @@ Cleared = DMX Mode
 #define WIRELESS_ACTION_OPTIONS 13
 
 /* Fog Options */
-#define OPTION_FOG_HIGH 0
+#define OPTION_FOG_HIGH 2
 #define OPTION_FOG_MEDIUM 1
-#define OPTION_FOG_LOW 2
+#define OPTION_FOG_LOW 0
 
 /* DMX Options */
-#define OPTION_DMX_MODE_9 0
+#define OPTION_DMX_MODE_11 0
 #define OPTION_DMX_MODE_3 1
 #define OPTION_DMX_MODE_1 2
 

@@ -375,29 +375,29 @@ _main:
 ;	../main.c:64: exe_command(CGRAM_ADDRESS_SET); //selector
 	mov	dptr,#0x0200
 	lcall	_exe_command
-;	../main.c:67: exe_command(0x0080);
+;	../main.c:67: exe_command(0x8880);
+	mov	dptr,#0x8880
+	lcall	_exe_command
+;	../main.c:68: exe_command(0xF880);
+	mov	dptr,#0xf880
+	lcall	_exe_command
+;	../main.c:69: exe_command(0x0080);
 	mov	dptr,#0x0080
 	lcall	_exe_command
-;	../main.c:68: exe_command(0x0080);
+;	../main.c:70: exe_command(0xF880);
+	mov	dptr,#0xf880
+	lcall	_exe_command
+;	../main.c:71: exe_command(0xA080);
+	mov	dptr,#0xa080
+	lcall	_exe_command
+;	../main.c:72: exe_command(0x0080);
 	mov	dptr,#0x0080
 	lcall	_exe_command
-;	../main.c:69: exe_command(0x7080);
-	mov	dptr,#0x7080
+;	../main.c:73: exe_command(0xF880);
+	mov	dptr,#0xf880
 	lcall	_exe_command
-;	../main.c:70: exe_command(0x5080);
-	mov	dptr,#0x5080
-	lcall	_exe_command
-;	../main.c:71: exe_command(0x5080);
-	mov	dptr,#0x5080
-	lcall	_exe_command
-;	../main.c:72: exe_command(0x7080);
-	mov	dptr,#0x7080
-	lcall	_exe_command
-;	../main.c:73: exe_command(0x0080);
-	mov	dptr,#0x0080
-	lcall	_exe_command
-;	../main.c:74: exe_command(0x0080);
-	mov	dptr,#0x0080
+;	../main.c:74: exe_command(0xA080);
+	mov	dptr,#0xa080
 	lcall	_exe_command
 ;	../main.c:77: exe_command(0x0080);
 	mov	dptr,#0x0080
