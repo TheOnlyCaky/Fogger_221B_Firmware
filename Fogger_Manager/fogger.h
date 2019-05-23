@@ -21,8 +21,8 @@
 
 /* ADC temp values */
 #define HEAT_HIGH 185
-#define HEAT_OK 175
-#define HEAT_LOW 160
+#define HEAT_OK 170
+#define HEAT_LOW 140
 
 #define HEATER_DISABLE 1
 #define HEATER_ENABLE 0

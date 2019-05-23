@@ -231,7 +231,7 @@ void tick_fogger(){
 
         /* This is important - it can be shifted 0, 1, or 2 bits*/
         /* which gets us to the 3 diffrent fog levels*/
-        value = 0x01 << value;
+        value = 0x01 << (2 - value);
 
         if(value != power){
             power = value;

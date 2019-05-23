@@ -215,6 +215,15 @@ void idlePage(){
     static uint8_t playing = PAUSE;
     uint8_t temp;
 
+    if(empty){
+        if(get_fog_fluid_level() == TANK_FULL){
+            empty = 0x00;
+            Changed = CHANGE_SCREEN_X;
+        }
+
+        return;
+    }
+
     if(Changed){
         exe_command(CLEAR_DISPLAY);
         Changed = 0x00;
@@ -223,21 +232,12 @@ void idlePage(){
         intervalOrDuration = 0x55; //guaranteed to not be interval or duration
 
         /* PC Load Letter */
-        if(get_fog_fluid_level() == TANK_EMPTY && get_heated()){
+        if(get_fog_fluid_level() == TANK_EMPTY && get_heated() == HEATED){
             //TODO PC load letter
             write_string("PC Load Letter", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
             write_string("Burst to Refill", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
 
             empty = 0xFF;
-
-            return;
-        }
-
-        if(empty){
-            if(get_fog_fluid_level() == TANK_FULL){
-                empty = 0x00;
-                Changed = CHANGE_SCREEN_X;
-            }
 
             return;
         }
