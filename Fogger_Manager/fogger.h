@@ -27,6 +27,9 @@
 #define HEATER_DISABLE 1
 #define HEATER_ENABLE 0
 
+#define MOVING_AVERAGE_SHIFT 2
+#define MOVING_AVERAGE (1 << 2)
+
 /* Refill Fluid Count */
 #define REFILL_FLUID_COUNT 34
 

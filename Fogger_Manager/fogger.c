@@ -19,7 +19,9 @@ void tick_fogger(){
     //heater and leds
     static uint8_t fullCount = 0;
     static uint8_t on = 0x00; //to toggle lights
-    uint16_t temperature;
+    static uint16_t temperature[MOVING_AVERAGE] = {0, 0, 0, 0};
+    static uint8_t tick = 0;
+    uint32_t runningAverage = 0;
 
     //timer and pump
     static uint8_t duration;
@@ -31,7 +33,17 @@ void tick_fogger(){
     /* Heater, Fluid and Light Section*/
 
     /* Heating Feedback Loop */
-    temperature = get_adc_value(ADC_TEMPERATURE);
+    temperature[tick++ % MOVING_AVERAGE] = get_adc_value(ADC_TEMPERATURE);
+
+    for(value = 0; value < MOVING_AVERAGE; value++){
+        if(!value){
+            runningAverage = temperature[value];
+        } else {
+            runningAverage *= temerature[value];
+        }
+    }
+
+    runningAverage = runningAverage >> MOVING_AVERAGE_SHIFT;
 
     if(temperature < HEAT_LOW){ /* Turn on heater full blast */
         Heat_Flag &= ~HEATED;
