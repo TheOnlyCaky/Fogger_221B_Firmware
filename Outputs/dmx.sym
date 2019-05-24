@@ -291,7 +291,7 @@ Symbol Table
     _TL3                                                        =  00009A G
     _TMOD                                                       =  000089 G
     _TR2                                                        =  0000CA G
- 17 _dmxBreakDetectedISR                                           00007C GR
+ 17 _dmxBreakDetectedISR                                           00008D GR
  17 _dmxReceiveByteISR                                             000000 GR
     _get_dmx_address                                               ****** GX
     a                                                           =  0000E0 L
@@ -537,7 +537,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size      8   flags   20
   16 GSFINAL                                    size      0   flags   20
-  17 CSEG                                       size     A9   flags   20
+  17 CSEG                                       size     BA   flags   20
   18 CONST                                      size      0   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

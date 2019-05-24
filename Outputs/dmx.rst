@@ -216,12 +216,12 @@
                                     216 ; internal ram data
                                     217 ;--------------------------------------------------------
                                     218 	.area DSEG    (DATA)
-      00002D                        219 _DMX::
-      00002D                        220 	.ds 11
-      000038                        221 _Has_DMX::
-      000038                        222 	.ds 1
-      000039                        223 _Index:
-      000039                        224 	.ds 2
+      000021                        219 _DMX::
+      000021                        220 	.ds 11
+      00002C                        221 _Has_DMX::
+      00002C                        222 	.ds 1
+      00002D                        223 _Index:
+      00002D                        224 	.ds 2
                                     225 ;--------------------------------------------------------
                                     226 ; overlayable items in internal ram 
                                     227 ;--------------------------------------------------------
@@ -272,11 +272,11 @@
                                     272 	.area GSFINAL (CODE)
                                     273 	.area GSINIT  (CODE)
                                     274 ;	../DMX_Manager/dmx.c:13: volatile uint8_t Has_DMX = 0;
-      0000C6 75 38 00         [24]  275 	mov	_Has_DMX,#0x00
+      0000C6 75 2C 00         [24]  275 	mov	_Has_DMX,#0x00
                                     276 ;	../DMX_Manager/dmx.c:14: static volatile uint16_t Index = 0;
       0000C9 E4               [12]  277 	clr	a
-      0000CA F5 39            [12]  278 	mov	_Index,a
-      0000CC F5 3A            [12]  279 	mov	(_Index + 1),a
+      0000CA F5 2D            [12]  278 	mov	_Index,a
+      0000CC F5 2E            [12]  279 	mov	(_Index + 1),a
                                     280 ;--------------------------------------------------------
                                     281 ; Home
                                     282 ;--------------------------------------------------------
@@ -290,150 +290,163 @@
                                     290 ;Allocation info for local variables in function 'dmxReceiveByteISR'
                                     291 ;------------------------------------------------------------
                                     292 ;address                   Allocated to registers r6 r7 
-                                    293 ;------------------------------------------------------------
-                                    294 ;	../DMX_Manager/dmx.c:21: void dmxReceiveByteISR(void) __interrupt (4){
-                                    295 ;	-----------------------------------------
-                                    296 ;	 function dmxReceiveByteISR
-                                    297 ;	-----------------------------------------
-      001DD0                        298 _dmxReceiveByteISR:
-                           000007   299 	ar7 = 0x07
-                           000006   300 	ar6 = 0x06
-                           000005   301 	ar5 = 0x05
-                           000004   302 	ar4 = 0x04
-                           000003   303 	ar3 = 0x03
-                           000002   304 	ar2 = 0x02
-                           000001   305 	ar1 = 0x01
-                           000000   306 	ar0 = 0x00
-      001DD0 C0 20            [24]  307 	push	bits
-      001DD2 C0 E0            [24]  308 	push	acc
-      001DD4 C0 F0            [24]  309 	push	b
-      001DD6 C0 82            [24]  310 	push	dpl
-      001DD8 C0 83            [24]  311 	push	dph
-      001DDA C0 07            [24]  312 	push	(0+7)
-      001DDC C0 06            [24]  313 	push	(0+6)
-      001DDE C0 05            [24]  314 	push	(0+5)
-      001DE0 C0 04            [24]  315 	push	(0+4)
-      001DE2 C0 03            [24]  316 	push	(0+3)
-      001DE4 C0 02            [24]  317 	push	(0+2)
-      001DE6 C0 01            [24]  318 	push	(0+1)
-      001DE8 C0 00            [24]  319 	push	(0+0)
-      001DEA C0 D0            [24]  320 	push	psw
-      001DEC 75 D0 00         [24]  321 	mov	psw,#0x00
-                                    322 ;	../DMX_Manager/dmx.c:22: uint16_t address = get_dmx_address();
-      001DEF 12 2A 28         [24]  323 	lcall	_get_dmx_address
-      001DF2 AE 82            [24]  324 	mov	r6,dpl
-      001DF4 AF 83            [24]  325 	mov	r7,dph
-                                    326 ;	../DMX_Manager/dmx.c:25: TH3 = BREAK_TIMER_RELOAD_HIGH;
-      001DF6 75 9B FC         [24]  327 	mov	_TH3,#0xfc
-                                    328 ;	../DMX_Manager/dmx.c:26: TL3 = BREAK_TIMER_RELOAD_LOW;
-      001DF9 75 9A D0         [24]  329 	mov	_TL3,#0xd0
-                                    330 ;	../DMX_Manager/dmx.c:27: Has_DMX = 0xFF;
-      001DFC 75 38 FF         [24]  331 	mov	_Has_DMX,#0xff
-                                    332 ;	../DMX_Manager/dmx.c:29: Index++;
-      001DFF 74 01            [12]  333 	mov	a,#0x01
-      001E01 25 39            [12]  334 	add	a,_Index
-      001E03 F5 39            [12]  335 	mov	_Index,a
-      001E05 E4               [12]  336 	clr	a
-      001E06 35 3A            [12]  337 	addc	a,(_Index + 1)
-      001E08 F5 3A            [12]  338 	mov	(_Index + 1),a
-                                    339 ;	../DMX_Manager/dmx.c:31: if(Index >= address && Index < address + MAX_CHANNEL_MODE){
-      001E0A C3               [12]  340 	clr	c
-      001E0B E5 39            [12]  341 	mov	a,_Index
-      001E0D 9E               [12]  342 	subb	a,r6
-      001E0E E5 3A            [12]  343 	mov	a,(_Index + 1)
-      001E10 9F               [12]  344 	subb	a,r7
-      001E11 40 1A            [24]  345 	jc	00102$
-      001E13 74 0B            [12]  346 	mov	a,#0x0b
-      001E15 2E               [12]  347 	add	a,r6
-      001E16 FC               [12]  348 	mov	r4,a
-      001E17 E4               [12]  349 	clr	a
-      001E18 3F               [12]  350 	addc	a,r7
-      001E19 FD               [12]  351 	mov	r5,a
-      001E1A C3               [12]  352 	clr	c
-      001E1B E5 39            [12]  353 	mov	a,_Index
-      001E1D 9C               [12]  354 	subb	a,r4
-      001E1E E5 3A            [12]  355 	mov	a,(_Index + 1)
-      001E20 9D               [12]  356 	subb	a,r5
-      001E21 50 0A            [24]  357 	jnc	00102$
-                                    358 ;	../DMX_Manager/dmx.c:32: DMX[Index - address] = SBUF; //sbuf is the UART0 buffer reg
-      001E23 E5 39            [12]  359 	mov	a,_Index
-      001E25 FD               [12]  360 	mov	r5,a
-      001E26 C3               [12]  361 	clr	c
-      001E27 9E               [12]  362 	subb	a,r6
-      001E28 24 2D            [12]  363 	add	a,#_DMX
-      001E2A F8               [12]  364 	mov	r0,a
-      001E2B A6 99            [24]  365 	mov	@r0,_SBUF
-      001E2D                        366 00102$:
-                                    367 ;	../DMX_Manager/dmx.c:36: RI = 0;
-                                    368 ;	assignBit
-      001E2D C2 98            [12]  369 	clr	_RI
-                                    370 ;	../DMX_Manager/dmx.c:37: }
-      001E2F D0 D0            [24]  371 	pop	psw
-      001E31 D0 00            [24]  372 	pop	(0+0)
-      001E33 D0 01            [24]  373 	pop	(0+1)
-      001E35 D0 02            [24]  374 	pop	(0+2)
-      001E37 D0 03            [24]  375 	pop	(0+3)
-      001E39 D0 04            [24]  376 	pop	(0+4)
-      001E3B D0 05            [24]  377 	pop	(0+5)
-      001E3D D0 06            [24]  378 	pop	(0+6)
-      001E3F D0 07            [24]  379 	pop	(0+7)
-      001E41 D0 83            [24]  380 	pop	dph
-      001E43 D0 82            [24]  381 	pop	dpl
-      001E45 D0 F0            [24]  382 	pop	b
-      001E47 D0 E0            [24]  383 	pop	acc
-      001E49 D0 20            [24]  384 	pop	bits
-      001E4B 32               [24]  385 	reti
-                                    386 ;------------------------------------------------------------
-                                    387 ;Allocation info for local variables in function 'dmxBreakDetectedISR'
-                                    388 ;------------------------------------------------------------
-                                    389 ;	../DMX_Manager/dmx.c:40: void dmxBreakDetectedISR(void) __interrupt (8){
-                                    390 ;	-----------------------------------------
-                                    391 ;	 function dmxBreakDetectedISR
-                                    392 ;	-----------------------------------------
-      001E4C                        393 _dmxBreakDetectedISR:
-      001E4C C0 E0            [24]  394 	push	acc
-                                    395 ;	../DMX_Manager/dmx.c:44: if(!Index){
-      001E4E E5 39            [12]  396 	mov	a,_Index
-      001E50 45 3A            [12]  397 	orl	a,(_Index + 1)
-                                    398 ;	../DMX_Manager/dmx.c:45: Has_DMX = 0x00;
-                                    399 ;	../DMX_Manager/dmx.c:46: DMX[0] = 0x00;
-                                    400 ;	../DMX_Manager/dmx.c:47: DMX[1] = 0x00;
-                                    401 ;	../DMX_Manager/dmx.c:48: DMX[2] = 0x00;
-      001E52 70 1A            [24]  402 	jnz	00102$
-      001E54 F5 38            [12]  403 	mov	_Has_DMX,a
-      001E56 F5 2D            [12]  404 	mov	_DMX,a
-      001E58 F5 2E            [12]  405 	mov	(_DMX + 0x0001),a
-      001E5A F5 2F            [12]  406 	mov	(_DMX + 0x0002),a
-                                    407 ;	../DMX_Manager/dmx.c:49: DMX[3] = 0x00;
-      001E5C 75 30 00         [24]  408 	mov	(_DMX + 0x0003),#0x00
-                                    409 ;	../DMX_Manager/dmx.c:50: DMX[4] = 0x00;
-      001E5F 75 31 00         [24]  410 	mov	(_DMX + 0x0004),#0x00
-                                    411 ;	../DMX_Manager/dmx.c:51: DMX[5] = 0x00;
-      001E62 75 32 00         [24]  412 	mov	(_DMX + 0x0005),#0x00
-                                    413 ;	../DMX_Manager/dmx.c:52: DMX[6] = 0x00;
-      001E65 75 33 00         [24]  414 	mov	(_DMX + 0x0006),#0x00
-                                    415 ;	../DMX_Manager/dmx.c:53: DMX[7] = 0x00;
-      001E68 75 34 00         [24]  416 	mov	(_DMX + 0x0007),#0x00
-                                    417 ;	../DMX_Manager/dmx.c:54: DMX[8] = 0x00;
-      001E6B 75 35 00         [24]  418 	mov	(_DMX + 0x0008),#0x00
-      001E6E                        419 00102$:
-                                    420 ;	../DMX_Manager/dmx.c:57: Index = 0;
-      001E6E E4               [12]  421 	clr	a
-      001E6F F5 39            [12]  422 	mov	_Index,a
-      001E71 F5 3A            [12]  423 	mov	(_Index + 1),a
-                                    424 ;	../DMX_Manager/dmx.c:60: EXIF &= ~EIE_Timer3_Flag;
-      001E73 53 91 EF         [24]  425 	anl	_EXIF,#0xef
-                                    426 ;	../DMX_Manager/dmx.c:61: }
-      001E76 D0 E0            [24]  427 	pop	acc
-      001E78 32               [24]  428 	reti
-                                    429 ;	eliminated unneeded mov psw,# (no regs used in bank)
-                                    430 ;	eliminated unneeded push/pop ar1
-                                    431 ;	eliminated unneeded push/pop ar0
-                                    432 ;	eliminated unneeded push/pop psw
-                                    433 ;	eliminated unneeded push/pop dpl
-                                    434 ;	eliminated unneeded push/pop dph
-                                    435 ;	eliminated unneeded push/pop b
-                                    436 	.area CSEG    (CODE)
-                                    437 	.area CONST   (CODE)
-                                    438 	.area XINIT   (CODE)
-                                    439 	.area CABS    (ABS,CODE)
+                                    293 ;value                     Allocated to registers r5 
+                                    294 ;------------------------------------------------------------
+                                    295 ;	../DMX_Manager/dmx.c:21: void dmxReceiveByteISR(void) __interrupt (4){
+                                    296 ;	-----------------------------------------
+                                    297 ;	 function dmxReceiveByteISR
+                                    298 ;	-----------------------------------------
+      00228E                        299 _dmxReceiveByteISR:
+                           000007   300 	ar7 = 0x07
+                           000006   301 	ar6 = 0x06
+                           000005   302 	ar5 = 0x05
+                           000004   303 	ar4 = 0x04
+                           000003   304 	ar3 = 0x03
+                           000002   305 	ar2 = 0x02
+                           000001   306 	ar1 = 0x01
+                           000000   307 	ar0 = 0x00
+      00228E C0 20            [24]  308 	push	bits
+      002290 C0 E0            [24]  309 	push	acc
+      002292 C0 F0            [24]  310 	push	b
+      002294 C0 82            [24]  311 	push	dpl
+      002296 C0 83            [24]  312 	push	dph
+      002298 C0 07            [24]  313 	push	(0+7)
+      00229A C0 06            [24]  314 	push	(0+6)
+      00229C C0 05            [24]  315 	push	(0+5)
+      00229E C0 04            [24]  316 	push	(0+4)
+      0022A0 C0 03            [24]  317 	push	(0+3)
+      0022A2 C0 02            [24]  318 	push	(0+2)
+      0022A4 C0 01            [24]  319 	push	(0+1)
+      0022A6 C0 00            [24]  320 	push	(0+0)
+      0022A8 C0 D0            [24]  321 	push	psw
+      0022AA 75 D0 00         [24]  322 	mov	psw,#0x00
+                                    323 ;	../DMX_Manager/dmx.c:22: uint16_t address = get_dmx_address();
+      0022AD 12 30 B3         [24]  324 	lcall	_get_dmx_address
+      0022B0 AE 82            [24]  325 	mov	r6,dpl
+      0022B2 AF 83            [24]  326 	mov	r7,dph
+                                    327 ;	../DMX_Manager/dmx.c:23: uint8_t value = SBUF;
+      0022B4 AD 99            [24]  328 	mov	r5,_SBUF
+                                    329 ;	../DMX_Manager/dmx.c:26: TH3 = BREAK_TIMER_RELOAD_HIGH;
+      0022B6 75 9B FC         [24]  330 	mov	_TH3,#0xfc
+                                    331 ;	../DMX_Manager/dmx.c:27: TL3 = BREAK_TIMER_RELOAD_LOW;
+      0022B9 75 9A EE         [24]  332 	mov	_TL3,#0xee
+                                    333 ;	../DMX_Manager/dmx.c:28: Has_DMX = 0xFF;
+      0022BC 75 2C FF         [24]  334 	mov	_Has_DMX,#0xff
+                                    335 ;	../DMX_Manager/dmx.c:31: if(!Index && value){
+      0022BF E5 2D            [12]  336 	mov	a,_Index
+      0022C1 45 2E            [12]  337 	orl	a,(_Index + 1)
+      0022C3 70 09            [24]  338 	jnz	00102$
+      0022C5 ED               [12]  339 	mov	a,r5
+      0022C6 60 06            [24]  340 	jz	00102$
+                                    341 ;	../DMX_Manager/dmx.c:32: Index = DMX_MAX_ADDRESS + 1; 
+      0022C8 75 2D 01         [24]  342 	mov	_Index,#0x01
+      0022CB 75 2E 02         [24]  343 	mov	(_Index + 1),#0x02
+      0022CE                        344 00102$:
+                                    345 ;	../DMX_Manager/dmx.c:35: if(Index >= address && Index < address + MAX_CHANNEL_MODE){
+      0022CE C3               [12]  346 	clr	c
+      0022CF E5 2D            [12]  347 	mov	a,_Index
+      0022D1 9E               [12]  348 	subb	a,r6
+      0022D2 E5 2E            [12]  349 	mov	a,(_Index + 1)
+      0022D4 9F               [12]  350 	subb	a,r7
+      0022D5 40 1A            [24]  351 	jc	00105$
+      0022D7 74 0B            [12]  352 	mov	a,#0x0b
+      0022D9 2E               [12]  353 	add	a,r6
+      0022DA FB               [12]  354 	mov	r3,a
+      0022DB E4               [12]  355 	clr	a
+      0022DC 3F               [12]  356 	addc	a,r7
+      0022DD FC               [12]  357 	mov	r4,a
+      0022DE C3               [12]  358 	clr	c
+      0022DF E5 2D            [12]  359 	mov	a,_Index
+      0022E1 9B               [12]  360 	subb	a,r3
+      0022E2 E5 2E            [12]  361 	mov	a,(_Index + 1)
+      0022E4 9C               [12]  362 	subb	a,r4
+      0022E5 50 0A            [24]  363 	jnc	00105$
+                                    364 ;	../DMX_Manager/dmx.c:36: DMX[Index - address] = value; //sbuf is the UART0 buffer reg
+      0022E7 E5 2D            [12]  365 	mov	a,_Index
+      0022E9 FC               [12]  366 	mov	r4,a
+      0022EA C3               [12]  367 	clr	c
+      0022EB 9E               [12]  368 	subb	a,r6
+      0022EC 24 21            [12]  369 	add	a,#_DMX
+      0022EE F8               [12]  370 	mov	r0,a
+      0022EF A6 05            [24]  371 	mov	@r0,ar5
+      0022F1                        372 00105$:
+                                    373 ;	../DMX_Manager/dmx.c:39: Index++;
+      0022F1 74 01            [12]  374 	mov	a,#0x01
+      0022F3 25 2D            [12]  375 	add	a,_Index
+      0022F5 F5 2D            [12]  376 	mov	_Index,a
+      0022F7 E4               [12]  377 	clr	a
+      0022F8 35 2E            [12]  378 	addc	a,(_Index + 1)
+      0022FA F5 2E            [12]  379 	mov	(_Index + 1),a
+                                    380 ;	../DMX_Manager/dmx.c:42: RI = 0;
+                                    381 ;	assignBit
+      0022FC C2 98            [12]  382 	clr	_RI
+                                    383 ;	../DMX_Manager/dmx.c:43: }
+      0022FE D0 D0            [24]  384 	pop	psw
+      002300 D0 00            [24]  385 	pop	(0+0)
+      002302 D0 01            [24]  386 	pop	(0+1)
+      002304 D0 02            [24]  387 	pop	(0+2)
+      002306 D0 03            [24]  388 	pop	(0+3)
+      002308 D0 04            [24]  389 	pop	(0+4)
+      00230A D0 05            [24]  390 	pop	(0+5)
+      00230C D0 06            [24]  391 	pop	(0+6)
+      00230E D0 07            [24]  392 	pop	(0+7)
+      002310 D0 83            [24]  393 	pop	dph
+      002312 D0 82            [24]  394 	pop	dpl
+      002314 D0 F0            [24]  395 	pop	b
+      002316 D0 E0            [24]  396 	pop	acc
+      002318 D0 20            [24]  397 	pop	bits
+      00231A 32               [24]  398 	reti
+                                    399 ;------------------------------------------------------------
+                                    400 ;Allocation info for local variables in function 'dmxBreakDetectedISR'
+                                    401 ;------------------------------------------------------------
+                                    402 ;	../DMX_Manager/dmx.c:46: void dmxBreakDetectedISR(void) __interrupt (8){
+                                    403 ;	-----------------------------------------
+                                    404 ;	 function dmxBreakDetectedISR
+                                    405 ;	-----------------------------------------
+      00231B                        406 _dmxBreakDetectedISR:
+      00231B C0 E0            [24]  407 	push	acc
+                                    408 ;	../DMX_Manager/dmx.c:50: if(!Index){
+      00231D E5 2D            [12]  409 	mov	a,_Index
+      00231F 45 2E            [12]  410 	orl	a,(_Index + 1)
+                                    411 ;	../DMX_Manager/dmx.c:51: Has_DMX = 0x00;
+                                    412 ;	../DMX_Manager/dmx.c:52: DMX[0] = 0x00;
+                                    413 ;	../DMX_Manager/dmx.c:53: DMX[1] = 0x00;
+                                    414 ;	../DMX_Manager/dmx.c:54: DMX[2] = 0x00;
+      002321 70 1A            [24]  415 	jnz	00102$
+      002323 F5 2C            [12]  416 	mov	_Has_DMX,a
+      002325 F5 21            [12]  417 	mov	_DMX,a
+      002327 F5 22            [12]  418 	mov	(_DMX + 0x0001),a
+      002329 F5 23            [12]  419 	mov	(_DMX + 0x0002),a
+                                    420 ;	../DMX_Manager/dmx.c:55: DMX[3] = 0x00;
+      00232B 75 24 00         [24]  421 	mov	(_DMX + 0x0003),#0x00
+                                    422 ;	../DMX_Manager/dmx.c:56: DMX[4] = 0x00;
+      00232E 75 25 00         [24]  423 	mov	(_DMX + 0x0004),#0x00
+                                    424 ;	../DMX_Manager/dmx.c:57: DMX[5] = 0x00;
+      002331 75 26 00         [24]  425 	mov	(_DMX + 0x0005),#0x00
+                                    426 ;	../DMX_Manager/dmx.c:58: DMX[6] = 0x00;
+      002334 75 27 00         [24]  427 	mov	(_DMX + 0x0006),#0x00
+                                    428 ;	../DMX_Manager/dmx.c:59: DMX[7] = 0x00;
+      002337 75 28 00         [24]  429 	mov	(_DMX + 0x0007),#0x00
+                                    430 ;	../DMX_Manager/dmx.c:60: DMX[8] = 0x00;
+      00233A 75 29 00         [24]  431 	mov	(_DMX + 0x0008),#0x00
+      00233D                        432 00102$:
+                                    433 ;	../DMX_Manager/dmx.c:63: Index = 0;
+      00233D E4               [12]  434 	clr	a
+      00233E F5 2D            [12]  435 	mov	_Index,a
+      002340 F5 2E            [12]  436 	mov	(_Index + 1),a
+                                    437 ;	../DMX_Manager/dmx.c:66: EXIF &= ~EIE_Timer3_Flag;
+      002342 53 91 EF         [24]  438 	anl	_EXIF,#0xef
+                                    439 ;	../DMX_Manager/dmx.c:67: }
+      002345 D0 E0            [24]  440 	pop	acc
+      002347 32               [24]  441 	reti
+                                    442 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                                    443 ;	eliminated unneeded push/pop ar1
+                                    444 ;	eliminated unneeded push/pop ar0
+                                    445 ;	eliminated unneeded push/pop psw
+                                    446 ;	eliminated unneeded push/pop dpl
+                                    447 ;	eliminated unneeded push/pop dph
+                                    448 ;	eliminated unneeded push/pop b
+                                    449 	.area CSEG    (CODE)
+                                    450 	.area CONST   (CODE)
+                                    451 	.area XINIT   (CODE)
+                                    452 	.area CABS    (ABS,CODE)

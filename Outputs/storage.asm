@@ -8,7 +8,6 @@
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _save_load_settings_PARM_2
 	.globl _Init_Data
 	.globl _CPRL2
 	.globl _CT2
@@ -96,8 +95,6 @@
 	.globl _PCLKSEL
 	.globl _CHIPCON
 	.globl _IAP_AUX
-	.globl _set_runtime_data_PARM_3
-	.globl _set_runtime_data_PARM_2
 	.globl _save_load_settings
 	.globl _get_runtime_data
 	.globl _set_runtime_data
@@ -209,17 +206,9 @@ _CPRL2	=	0x00c8
 	.area DSEG    (DATA)
 _Runtime_Data:
 	.ds 16
-_set_runtime_data_PARM_2:
-	.ds 1
-_set_runtime_data_PARM_3:
-	.ds 1
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
-_save_load_settings_PARM_2:
-	.ds 1
-	.area	OSEG    (OVR,DATA)
 ;--------------------------------------------------------
 ; indirectly addressable internal ram data
 ;--------------------------------------------------------
@@ -278,7 +267,7 @@ _IAP_AUX	=	0x0100
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'save_load_settings'
 ;------------------------------------------------------------
-;save                      Allocated with name '_save_load_settings_PARM_2'
+;save                      Allocated to stack - _bp -3
 ;slot                      Allocated to registers r7 
 ;i                         Allocated to registers r5 
 ;------------------------------------------------------------
@@ -295,25 +284,30 @@ _save_load_settings:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
+	push	_bp
+	mov	_bp,sp
 ;	../Storage_Manager/storage.c:33: slot = slot * CONFIG_COUNT;
 	mov	a,dpl
 	swap	a
 	anl	a,#0xf0
 	mov	r7,a
 ;	../Storage_Manager/storage.c:35: if(save == LOAD){
-	mov	a,_save_load_settings_PARM_2
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	mov	a,@r0
 	jnz	00115$
 ;	../Storage_Manager/storage.c:36: IAPEN = IAP_Read; //read
 	mov	_IAPEN,#0xa0
 ;	../Storage_Manager/storage.c:39: for(i = 0; i < CONFIG_COUNT; i++){
 00115$:
-	mov	a,#0x01
-	cjne	a,_save_load_settings_PARM_2,00140$
-	mov	a,#0x01
-	sjmp	00141$
-00140$:
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
 	clr	a
-00141$:
+	cjne	@r0,#0x01,00140$
+	inc	a
+00140$:
 	mov	r6,a
 	mov	r5,#0x00
 00109$:
@@ -324,15 +318,17 @@ _save_load_settings:
 	mov	a,r7
 	add	a,r5
 	add	a,#_IAP_AUX
-	mov	dpl,a
+	mov	r3,a
 	clr	a
 	addc	a,#(_IAP_AUX >> 8)
-	mov	dph,a
+	mov	r4,a
 	mov	a,r5
 	add	a,#_Runtime_Data
 	mov	r1,a
-	mov	a,@r1
-	mov	r4,a
+	mov	ar2,@r1
+	mov	dpl,r3
+	mov	dph,r4
+	mov	a,r2
 	movx	@dptr,a
 	sjmp	00110$
 00104$:
@@ -369,6 +365,7 @@ _save_load_settings:
 	nop 
 00111$:
 ;	../Storage_Manager/storage.c:52: }
+	pop	_bp
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_runtime_data'
@@ -452,11 +449,17 @@ _get_runtime_data:
 	anl	a,r5
 	mov	dpl,a
 	mov	dph,r7
-	mov	__modsint_PARM_2,#0x03
-;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-	mov	(__modsint_PARM_2 + 1),r7
+	mov	a,#0x03
+	push	acc
+	clr	a
+	push	acc
+	lcall	__modsint
+	mov	r5,dpl
+	dec	sp
+	dec	sp
+	mov	dpl,r5
 ;	../Storage_Manager/storage.c:68: case FOG_INTERVAL_INDEX:
-	ljmp	__modsint
+	ret
 00105$:
 ;	../Storage_Manager/storage.c:69: if(value == 0){ value = 1; } //we dont want a 0 duration or interval
 	mov	a,r6
@@ -471,35 +474,53 @@ _get_runtime_data:
 ;	../Storage_Manager/storage.c:72: return value % MACRO_OPTIONS;
 	mov	ar5,r6
 	mov	r7,#0x00
-	mov	__modsint_PARM_2,#0x07
-;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-	mov	(__modsint_PARM_2 + 1),r7
+	mov	a,#0x07
+	push	acc
+	clr	a
+	push	acc
 	mov	dpl,r5
 	mov	dph,r7
+	lcall	__modsint
+	mov	r5,dpl
+	dec	sp
+	dec	sp
+	mov	dpl,r5
 ;	../Storage_Manager/storage.c:75: case R6_INDEX:
-	ljmp	__modsint
+	ret
 00111$:
 ;	../Storage_Manager/storage.c:76: return value % WIRELESS_ACTION_OPTIONS;
 	mov	ar5,r6
 	mov	r7,#0x00
-	mov	__modsint_PARM_2,#0x0d
-;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-	mov	(__modsint_PARM_2 + 1),r7
+	mov	a,#0x0d
+	push	acc
+	clr	a
+	push	acc
 	mov	dpl,r5
 	mov	dph,r7
+	lcall	__modsint
+	mov	r5,dpl
+	dec	sp
+	dec	sp
+	mov	dpl,r5
 ;	../Storage_Manager/storage.c:77: case MODE_INDEX:
-	ljmp	__modsint
+	ret
 00112$:
 ;	../Storage_Manager/storage.c:78: return value % DMX_OPTIONS;
 	mov	ar5,r6
 	mov	r7,#0x00
-	mov	__modsint_PARM_2,#0x03
-;	1-genFromRTrack replaced	mov	(__modsint_PARM_2 + 1),#0x00
-	mov	(__modsint_PARM_2 + 1),r7
+	mov	a,#0x03
+	push	acc
+	clr	a
+	push	acc
 	mov	dpl,r5
 	mov	dph,r7
+	lcall	__modsint
+	mov	r5,dpl
+	dec	sp
+	dec	sp
+	mov	dpl,r5
 ;	../Storage_Manager/storage.c:80: }
-	ljmp	__modsint
+	ret
 00113$:
 ;	../Storage_Manager/storage.c:82: return value;
 	mov	dpl,r6
@@ -508,8 +529,8 @@ _get_runtime_data:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'set_runtime_data'
 ;------------------------------------------------------------
-;inc                       Allocated with name '_set_runtime_data_PARM_2'
-;value                     Allocated with name '_set_runtime_data_PARM_3'
+;inc                       Allocated to stack - _bp -3
+;value                     Allocated to stack - _bp -4
 ;index                     Allocated to registers r7 
 ;opMode                    Allocated to registers r6 
 ;------------------------------------------------------------
@@ -518,19 +539,25 @@ _get_runtime_data:
 ;	 function set_runtime_data
 ;	-----------------------------------------
 _set_runtime_data:
+	push	_bp
+	mov	_bp,sp
 	mov	r7,dpl
 ;	../Storage_Manager/storage.c:86: uint8_t opMode = Runtime_Data[FOG_POWER_INDEX] & OP_MODE_BIT;
 	mov	a,#0x80
 	anl	a,_Runtime_Data
 	mov	r6,a
 ;	../Storage_Manager/storage.c:93: switch(inc){
-	mov	a,#0x01
-	cjne	a,_set_runtime_data_PARM_2,00142$
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	cjne	@r0,#0x01,00142$
 	sjmp	00101$
 00142$:
-	mov	a,#0x02
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
 ;	../Storage_Manager/storage.c:94: case INC:
-	cjne	a,_set_runtime_data_PARM_2,00103$
+	cjne	@r0,#0x02,00103$
 	sjmp	00102$
 00101$:
 ;	../Storage_Manager/storage.c:95: Runtime_Data[index]++;
@@ -560,7 +587,10 @@ _set_runtime_data:
 ;	../Storage_Manager/storage.c:101: if(index == OP_MODE_INDEX){
 	cjne	r7,#0x10,00108$
 ;	../Storage_Manager/storage.c:102: if(value) { 
-	mov	a,_set_runtime_data_PARM_3
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r0,a
+	mov	a,@r0
 	jz	00105$
 ;	../Storage_Manager/storage.c:103: Runtime_Data[FOG_POWER_INDEX] |= OP_MODE_BIT;
 	mov	r4,_Runtime_Data
@@ -579,7 +609,11 @@ _set_runtime_data:
 	mov	a,r7
 	add	a,#_Runtime_Data
 	mov	r0,a
-	mov	@r0,_set_runtime_data_PARM_3
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r1,a
+	mov	a,@r1
+	mov	@r0,a
 ;	../Storage_Manager/storage.c:111: }
 00110$:
 ;	../Storage_Manager/storage.c:113: if(index == FOG_POWER_INDEX){
@@ -614,10 +648,14 @@ _set_runtime_data:
 	mov	@r1,a
 00115$:
 ;	../Storage_Manager/storage.c:121: save_load_settings(SLOT_0, SAVE);
-	mov	_save_load_settings_PARM_2,#0x01
+	mov	a,#0x01
+	push	acc
 	mov	dpl,#0x00
+	lcall	_save_load_settings
+	dec	sp
 ;	../Storage_Manager/storage.c:122: }
-	ljmp	_save_load_settings
+	pop	_bp
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'set_dmx_address'
 ;------------------------------------------------------------
@@ -672,20 +710,29 @@ _set_dmx_address:
 00129$:
 00109$:
 ;	../Storage_Manager/storage.c:141: set_runtime_data(ADDR_L_INDEX, VALUE, (uint8_t) addr);
-	mov	_set_runtime_data_PARM_3,r5
-	mov	_set_runtime_data_PARM_2,#0x00
-	mov	dpl,#0x0d
+	mov	ar7,r5
 	push	ar6
 	push	ar5
+	push	ar7
+	clr	a
+	push	acc
+	mov	dpl,#0x0d
 	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 	pop	ar5
 	pop	ar6
 ;	../Storage_Manager/storage.c:142: set_runtime_data(ADDR_H_INDEX, VALUE, (uint8_t) (addr >> 8));
-	mov	_set_runtime_data_PARM_3,r6
-	mov	_set_runtime_data_PARM_2,#0x00
+	mov	ar5,r6
+	push	ar5
+	clr	a
+	push	acc
 	mov	dpl,#0x0c
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 ;	../Storage_Manager/storage.c:144: }
-	ljmp	_set_runtime_data
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_dmx_address'
 ;------------------------------------------------------------
@@ -702,12 +749,12 @@ _get_dmx_address:
 ;	../Storage_Manager/storage.c:150: address |= Runtime_Data[ADDR_L_INDEX];
 	mov	r4,(_Runtime_Data + 0x000d)
 	mov	r5,#0x00
-	mov	a,r4
-	orl	a,r6
-	mov	dpl,a
-	mov	a,r5
-	orl	a,r7
-	mov	dph,a
+	mov	a,r6
+	orl	ar4,a
+	mov	a,r7
+	orl	ar5,a
+	mov	dpl,r4
+	mov	dph,r5
 ;	../Storage_Manager/storage.c:152: return address;
 ;	../Storage_Manager/storage.c:153: }
 	ret

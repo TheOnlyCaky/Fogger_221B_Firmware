@@ -338,9 +338,11 @@ _main:
 ;	../main.c:39: IAP_ADRL = (uint8_t) RUNTIME_DATA_FLASH_SAVE_PAGE;
 	mov	_IAP_ADRL,#0xc0
 ;	../main.c:40: save_load_settings(SLOT_0, LOAD);
-	mov	_save_load_settings_PARM_2,#0x00
+	clr	a
+	push	acc
 	mov	dpl,#0x00
 	lcall	_save_load_settings
+	dec	sp
 ;	../main.c:43: P1_OPT = ADC0E | ADC3E; //enable adc input
 	mov	_P1_OPT,#0x09
 ;	../main.c:46: P3_4 = 1; //turn fogger off
@@ -647,7 +649,7 @@ _main:
 ;	../main.c:184: TH3 = BREAK_TIMER_RELOAD_HIGH;
 	mov	_TH3,#0xfc
 ;	../main.c:185: TL3 = BREAK_TIMER_RELOAD_LOW;
-	mov	_TL3,#0xd0
+	mov	_TL3,#0xee
 ;	../main.c:188: EIE |= EIE_Timer3;
 	mov	r2,_EIE
 	orl	ar2,#0x01
@@ -672,24 +674,28 @@ _main:
 ;	../main.c:200: while(1){
 00111$:
 ;	../main.c:202: if(!(tick % FOGGER_FREQ)) { tick_fogger(); }
-	mov	__modulong_PARM_2,#0x90
-	clr	a
-	mov	(__modulong_PARM_2 + 1),a
-	mov	(__modulong_PARM_2 + 2),a
-	mov	(__modulong_PARM_2 + 3),a
-	mov	dpl,r4
-	mov	dph,r5
-	mov	b,r6
-	mov	a,r7
 	push	ar7
 	push	ar6
 	push	ar5
 	push	ar4
+	mov	a,#0x90
+	push	acc
+	clr	a
+	push	acc
+	push	acc
+	push	acc
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	mov	a,r7
 	lcall	__modulong
 	mov	r0,dpl
 	mov	r1,dph
 	mov	r2,b
 	mov	r3,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
 	pop	ar4
 	pop	ar5
 	pop	ar6
@@ -710,24 +716,28 @@ _main:
 	pop	ar7
 00105$:
 ;	../main.c:204: if(!(tick % WIRELESS_FREQ)) { tick_wireless(); }
-	mov	__modulong_PARM_2,#0x59
-	clr	a
-	mov	(__modulong_PARM_2 + 1),a
-	mov	(__modulong_PARM_2 + 2),a
-	mov	(__modulong_PARM_2 + 3),a
-	mov	dpl,r4
-	mov	dph,r5
-	mov	b,r6
-	mov	a,r7
 	push	ar7
 	push	ar6
 	push	ar5
 	push	ar4
+	mov	a,#0x59
+	push	acc
+	clr	a
+	push	acc
+	push	acc
+	push	acc
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	mov	a,r7
 	lcall	__modulong
 	mov	r0,dpl
 	mov	r1,dph
 	mov	r2,b
 	mov	r3,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
 	pop	ar4
 	pop	ar5
 	pop	ar6
@@ -748,24 +758,28 @@ _main:
 	pop	ar7
 00107$:
 ;	../main.c:206: if(!(tick % UI_FREQ)) { tick_ui(); }
-	mov	__modulong_PARM_2,#0x03
-	clr	a
-	mov	(__modulong_PARM_2 + 1),a
-	mov	(__modulong_PARM_2 + 2),a
-	mov	(__modulong_PARM_2 + 3),a
-	mov	dpl,r4
-	mov	dph,r5
-	mov	b,r6
-	mov	a,r7
 	push	ar7
 	push	ar6
 	push	ar5
 	push	ar4
+	mov	a,#0x03
+	push	acc
+	clr	a
+	push	acc
+	push	acc
+	push	acc
+	mov	dpl,r4
+	mov	dph,r5
+	mov	b,r6
+	mov	a,r7
 	lcall	__modulong
 	mov	r0,dpl
 	mov	r1,dph
 	mov	r2,b
 	mov	r3,a
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
 	pop	ar4
 	pop	ar5
 	pop	ar6

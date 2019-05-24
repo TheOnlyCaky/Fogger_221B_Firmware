@@ -93,15 +93,6 @@
 	.globl _P0
 	.globl _PCLKSEL
 	.globl _CHIPCON
-	.globl _write_char_PARM_3
-	.globl _write_char_PARM_2
-	.globl _write_number_PARM_4
-	.globl _write_number_PARM_3
-	.globl _write_number_PARM_2
-	.globl _write_string_PARM_5
-	.globl _write_string_PARM_4
-	.globl _write_string_PARM_3
-	.globl _write_string_PARM_2
 	.globl _write_string
 	.globl _write_number
 	.globl _write_char
@@ -213,32 +204,9 @@ _CPRL2	=	0x00c8
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
-_write_string_PARM_2:
-	.ds 1
-_write_string_PARM_3:
-	.ds 1
-_write_string_PARM_4:
-	.ds 1
-_write_string_PARM_5:
-	.ds 1
-_write_number_PARM_2:
-	.ds 1
-_write_number_PARM_3:
-	.ds 1
-_write_number_PARM_4:
-	.ds 1
-_write_number_chars_65536_18:
-	.ds 3
-_write_char_PARM_2:
-	.ds 1
-_write_char_PARM_3:
-	.ds 1
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
-	.area	OSEG    (OVR,DATA)
 ;--------------------------------------------------------
 ; indirectly addressable internal ram data
 ;--------------------------------------------------------
@@ -297,13 +265,14 @@ _write_char_PARM_3:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'write_string'
 ;------------------------------------------------------------
-;length                    Allocated with name '_write_string_PARM_2'
-;index                     Allocated with name '_write_string_PARM_3'
-;line                      Allocated with name '_write_string_PARM_4'
-;selected                  Allocated with name '_write_string_PARM_5'
-;string                    Allocated to registers r5 r6 r7 
+;length                    Allocated to stack - _bp -3
+;index                     Allocated to stack - _bp -4
+;line                      Allocated to stack - _bp -5
+;selected                  Allocated to stack - _bp -6
+;string                    Allocated to stack - _bp +1
 ;i                         Allocated to registers r3 
 ;done                      Allocated to registers r4 
+;sloc0                     Allocated to stack - _bp +6
 ;------------------------------------------------------------
 ;	../UI_Manager/Display_Manager/display.c:16: void write_string(char* string, uint8_t length, uint8_t index, uint8_t line, uint8_t selected){
 ;	-----------------------------------------
@@ -318,26 +287,34 @@ _write_string:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-	mov	r5,dpl
-	mov	r6,dph
-	mov	r7,b
+	push	_bp
+	mov	_bp,sp
+	push	dpl
+	push	dph
+	push	b
 ;	../UI_Manager/Display_Manager/display.c:17: uint8_t i, done = 0;
 	mov	r4,#0x00
 ;	../UI_Manager/Display_Manager/display.c:20: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-	mov	a,_write_string_PARM_4
+	mov	a,_bp
+	add	a,#0xfb
+	mov	r0,a
+	mov	a,@r0
 	jz	00115$
-	mov	r3,_write_string_PARM_3
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r0,a
+	mov	ar3,@r0
 	mov	a,#0x40
 	add	a,r3
 	mov	r3,a
 	sjmp	00116$
 00115$:
-	mov	r3,_write_string_PARM_3
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r0,a
+	mov	ar3,@r0
 00116$:
 	mov	dpl,r3
-	push	ar7
-	push	ar6
-	push	ar5
 	push	ar4
 	lcall	_flipByte
 	mov	r2,dpl
@@ -348,74 +325,71 @@ _write_string:
 	mov	dph,a
 	lcall	_exe_command
 	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
 ;	../UI_Manager/Display_Manager/display.c:22: length++; //null terminated
-	inc	_write_string_PARM_2
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	inc	@r0
 ;	../UI_Manager/Display_Manager/display.c:24: if(selected){
-	mov	a,_write_string_PARM_5
+	mov	a,_bp
+	add	a,#0xfa
+	mov	r0,a
+	mov	a,@r0
 	jz	00122$
 ;	../UI_Manager/Display_Manager/display.c:25: exe_command(WRITE_CURSOR);
 	mov	dptr,#0x0080
-	push	ar7
-	push	ar6
-	push	ar5
 	push	ar4
 	lcall	_exe_command
 	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
 00122$:
 	mov	r3,#0x00
 00111$:
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
 	clr	c
 	mov	a,r3
-	subb	a,_write_string_PARM_2
-	jc	00144$
-	ret
-00144$:
+	subb	a,@r0
+	jnc	00113$
 ;	../UI_Manager/Display_Manager/display.c:29: if(!done){
 	mov	a,r4
 	jnz	00107$
 ;	../UI_Manager/Display_Manager/display.c:30: if(string[i]){
+	push	ar4
+	mov	r0,_bp
+	inc	r0
 	mov	a,r3
-	add	a,r5
-	mov	r0,a
-	clr	a
-	addc	a,r6
-	mov	r1,a
-	mov	ar2,r7
-	mov	dpl,r0
-	mov	dph,r1
-	mov	b,r2
-	lcall	__gptrget
+	add	a,@r0
 	mov	r2,a
+	clr	a
+	inc	r0
+	addc	a,@r0
+	mov	r4,a
+	inc	r0
+	mov	ar7,@r0
+	mov	dpl,r2
+	mov	dph,r4
+	mov	b,r7
+	lcall	__gptrget
+	mov	r7,a
+	pop	ar4
+	mov	a,r7
 	jz	00104$
 ;	../UI_Manager/Display_Manager/display.c:31: exe_command(RAM_WRITE | (charToCode(string[i]) << 8));
-	mov	dpl,r2
-	push	ar7
-	push	ar6
-	push	ar5
+	mov	dpl,r7
 	push	ar4
 	push	ar3
 	lcall	_charToCode
-	mov	r2,dpl
-	mov	ar1,r2
-	mov	ar2,r1
-	mov	r1,#0x00
+	mov	r6,dpl
+	mov	r7,#0x00
 	mov	a,#0x80
-	orl	a,r1
+	orl	a,r7
 	mov	dpl,a
-	mov	dph,r2
+	mov	dph,r6
 	lcall	_exe_command
 	pop	ar3
 	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
 	sjmp	00112$
 00104$:
 ;	../UI_Manager/Display_Manager/display.c:33: done = 1;
@@ -424,46 +398,60 @@ _write_string:
 00107$:
 ;	../UI_Manager/Display_Manager/display.c:36: exe_command(RAM_WRITE | (CHAR_NULL << 8));
 	mov	dptr,#0x0480
-	push	ar7
-	push	ar6
-	push	ar5
 	push	ar4
 	push	ar3
 	lcall	_exe_command
 	pop	ar3
 	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
 00112$:
 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
 	inc	r3
+	sjmp	00111$
+00113$:
 ;	../UI_Manager/Display_Manager/display.c:39: }
-	ljmp	00111$
+	mov	sp,_bp
+	pop	_bp
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'write_number'
 ;------------------------------------------------------------
-;index                     Allocated with name '_write_number_PARM_2'
-;line                      Allocated with name '_write_number_PARM_3'
-;selected                  Allocated with name '_write_number_PARM_4'
+;index                     Allocated to stack - _bp -3
+;line                      Allocated to stack - _bp -4
+;selected                  Allocated to stack - _bp -5
 ;number                    Allocated to registers r6 r7 
 ;higherNumberPresent       Allocated to registers r5 
-;value                     Allocated to registers r3 r4 
-;chars                     Allocated with name '_write_number_chars_65536_18'
+;value                     Allocated to registers r2 r3 
+;chars                     Allocated to stack - _bp +1
 ;------------------------------------------------------------
 ;	../UI_Manager/Display_Manager/display.c:41: void write_number(uint16_t number, uint8_t index, uint8_t line, uint8_t selected){
 ;	-----------------------------------------
 ;	 function write_number
 ;	-----------------------------------------
 _write_number:
+	push	_bp
+	mov	_bp,sp
+	inc	sp
+	inc	sp
+	inc	sp
 	mov	r6,dpl
 	mov	r7,dph
 ;	../UI_Manager/Display_Manager/display.c:42: uint8_t higherNumberPresent = 0;
 	mov	r5,#0x00
 ;	../UI_Manager/Display_Manager/display.c:44: uint8_t chars[3] = {CHAR_NULL, CHAR_NULL, CHAR_0};
-	mov	_write_number_chars_65536_18,#0x04
-	mov	(_write_number_chars_65536_18 + 0x0001),#0x04
-	mov	(_write_number_chars_65536_18 + 0x0002),#0x0c
+	mov	r1,_bp
+	inc	r1
+	mov	@r1,#0x04
+	mov	a,r1
+	inc	a
+	mov	r0,a
+	mov	@r0,#0x04
+	mov	a,#0x02
+	add	a,r1
+	mov	r4,a
+	push	ar0
+	mov	r0,ar4
+	mov	@r0,#0x0c
+	pop	ar0
 ;	../UI_Manager/Display_Manager/display.c:46: if(number >= 1000) {number = 999;}
 	clr	c
 	mov	a,r6
@@ -475,40 +463,72 @@ _write_number:
 	mov	r7,#0x03
 00102$:
 ;	../UI_Manager/Display_Manager/display.c:48: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-	mov	a,_write_number_PARM_3
+	push	ar0
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r0,a
+	mov	a,@r0
+	pop	ar0
 	jz	00113$
-	mov	r4,_write_number_PARM_2
+	push	ar0
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	mov	ar3,@r0
+	pop	ar0
 	mov	a,#0x40
-	add	a,r4
-	mov	r4,a
+	add	a,r3
+	mov	r3,a
 	sjmp	00114$
 00113$:
-	mov	r4,_write_number_PARM_2
+	push	ar0
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	mov	ar3,@r0
+	pop	ar0
 00114$:
-	mov	dpl,r4
+	mov	dpl,r3
 	push	ar7
 	push	ar6
 	push	ar5
+	push	ar4
+	push	ar1
+	push	ar0
 	lcall	_flipByte
-	mov	r3,dpl
-	mov	r4,#0x00
-	mov	dpl,r4
+	mov	r2,dpl
+	mov	r3,#0x00
+	mov	dpl,r3
 	mov	a,#0x01
-	orl	a,r3
+	orl	a,r2
 	mov	dph,a
 	lcall	_exe_command
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar5
 	pop	ar6
 	pop	ar7
 ;	../UI_Manager/Display_Manager/display.c:51: if(selected){
-	mov	a,_write_number_PARM_4
+	push	ar0
+	mov	a,_bp
+	add	a,#0xfb
+	mov	r0,a
+	mov	a,@r0
+	pop	ar0
 	jz	00104$
 ;	../UI_Manager/Display_Manager/display.c:52: exe_command(WRITE_CURSOR);
 	mov	dptr,#0x0080
 	push	ar7
 	push	ar6
 	push	ar5
+	push	ar4
+	push	ar1
+	push	ar0
 	lcall	_exe_command
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar5
 	pop	ar6
 	pop	ar7
@@ -519,53 +539,82 @@ _write_number:
 	push	ar7
 	push	ar6
 	push	ar5
+	push	ar4
+	push	ar1
+	push	ar0
 	lcall	_exe_command
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar5
 	pop	ar6
 	pop	ar7
 00105$:
 ;	../UI_Manager/Display_Manager/display.c:58: value = number/100;
-	mov	__divuint_PARM_2,#0x64
-	mov	(__divuint_PARM_2 + 1),#0x00
-	mov	dpl,r6
-	mov	dph,r7
 	push	ar7
 	push	ar6
 	push	ar5
+	push	ar4
+	push	ar1
+	push	ar0
+	mov	a,#0x64
+	push	acc
+	clr	a
+	push	acc
+	mov	dpl,r6
+	mov	dph,r7
 	lcall	__divuint
-	mov	r3,dpl
-	mov	r4,dph
+	mov	r2,dpl
+	mov	r3,dph
+	dec	sp
+	dec	sp
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar5
 	pop	ar6
 	pop	ar7
 ;	../UI_Manager/Display_Manager/display.c:59: if(value){
-	mov	a,r3
-	orl	a,r4
+	mov	a,r2
+	orl	a,r3
 	jz	00107$
 ;	../UI_Manager/Display_Manager/display.c:60: chars[0] = charToCode(value + 0x30);
-	mov	ar2,r3
+	push	ar4
+	mov	ar4,r2
 	mov	a,#0x30
-	add	a,r2
+	add	a,r4
 	mov	dpl,a
 	push	ar7
 	push	ar6
 	push	ar4
 	push	ar3
+	push	ar2
+	push	ar1
+	push	ar0
 	lcall	_charToCode
 	mov	a,dpl
+	pop	ar0
+	pop	ar1
+	pop	ar2
 	pop	ar3
 	pop	ar4
-	mov	_write_number_chars_65536_18,a
+	mov	@r1,a
 ;	../UI_Manager/Display_Manager/display.c:61: higherNumberPresent = 1;
 	mov	r5,#0x01
 ;	../UI_Manager/Display_Manager/display.c:62: number -= value*100;
-	mov	__mulint_PARM_2,r3
-	mov	(__mulint_PARM_2 + 1),r4
-	mov	dptr,#0x0064
 	push	ar5
+	push	ar1
+	push	ar0
+	push	ar2
+	push	ar3
+	mov	dptr,#0x0064
 	lcall	__mulint
 	mov	r3,dpl
 	mov	r4,dph
+	dec	sp
+	dec	sp
+	pop	ar0
+	pop	ar1
 	pop	ar5
 	pop	ar6
 	pop	ar7
@@ -576,30 +625,43 @@ _write_number:
 	mov	a,r7
 	subb	a,r4
 	mov	r7,a
+;	../UI_Manager/Display_Manager/display.c:75: exe_command(RAM_WRITE | (chars[2] << 8));
+	pop	ar4
+;	../UI_Manager/Display_Manager/display.c:62: number -= value*100;
 00107$:
 ;	../UI_Manager/Display_Manager/display.c:65: value = number/10;
-	mov	__divuint_PARM_2,#0x0a
-	mov	(__divuint_PARM_2 + 1),#0x00
-	mov	dpl,r6
-	mov	dph,r7
 	push	ar7
 	push	ar6
 	push	ar5
+	push	ar4
+	push	ar1
+	push	ar0
+	mov	a,#0x0a
+	push	acc
+	clr	a
+	push	acc
+	mov	dpl,r6
+	mov	dph,r7
 	lcall	__divuint
-	mov	r3,dpl
-	mov	r4,dph
+	mov	r2,dpl
+	mov	r3,dph
+	dec	sp
+	dec	sp
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar5
 	pop	ar6
 	pop	ar7
 ;	../UI_Manager/Display_Manager/display.c:66: if(higherNumberPresent || value){
 	mov	a,r5
 	jnz	00108$
-	mov	a,r3
-	orl	a,r4
+	mov	a,r2
+	orl	a,r3
 	jz	00109$
 00108$:
 ;	../UI_Manager/Display_Manager/display.c:67: chars[1] = charToCode(value + 0x30);
-	mov	ar5,r3
+	mov	ar5,r2
 	mov	a,#0x30
 	add	a,r5
 	mov	dpl,a
@@ -607,23 +669,35 @@ _write_number:
 	push	ar6
 	push	ar4
 	push	ar3
+	push	ar2
+	push	ar1
+	push	ar0
 	lcall	_charToCode
 	mov	a,dpl
+	pop	ar0
+	pop	ar1
+	pop	ar2
 	pop	ar3
-	pop	ar4
-	mov	(_write_number_chars_65536_18 + 0x0001),a
+	mov	@r0,a
 ;	../UI_Manager/Display_Manager/display.c:68: number -= value*10;
-	mov	__mulint_PARM_2,r3
-	mov	(__mulint_PARM_2 + 1),r4
+	push	ar1
+	push	ar0
+	push	ar2
+	push	ar3
 	mov	dptr,#0x000a
 	lcall	__mulint
-	mov	r4,dpl
+	mov	r3,dpl
 	mov	r5,dph
+	dec	sp
+	dec	sp
+	pop	ar0
+	pop	ar1
+	pop	ar4
 	pop	ar6
 	pop	ar7
 	mov	a,r6
 	clr	c
-	subb	a,r4
+	subb	a,r3
 	mov	r6,a
 	mov	a,r7
 	subb	a,r5
@@ -633,39 +707,59 @@ _write_number:
 	mov	a,#0x30
 	add	a,r6
 	mov	dpl,a
+	push	ar4
+	push	ar1
+	push	ar0
 	lcall	_charToCode
 	mov	a,dpl
-	mov	(_write_number_chars_65536_18 + 0x0002),a
+	pop	ar0
+	pop	ar1
+	pop	ar4
+	push	ar0
+	mov	r0,ar4
+	mov	@r0,a
+	pop	ar0
 ;	../UI_Manager/Display_Manager/display.c:73: exe_command(RAM_WRITE | (chars[0] << 8));
-	mov	r7,_write_number_chars_65536_18
-	mov	r6,#0x00
+	mov	ar7,@r1
+	mov	ar6,r7
+	mov	r7,#0x00
 	mov	a,#0x80
-	orl	a,r6
+	orl	a,r7
 	mov	dpl,a
-	mov	dph,r7
+	mov	dph,r6
+	push	ar4
+	push	ar0
 	lcall	_exe_command
+	pop	ar0
 ;	../UI_Manager/Display_Manager/display.c:74: exe_command(RAM_WRITE | (chars[1] << 8));
-	mov	r7,(_write_number_chars_65536_18 + 0x0001)
-	mov	r6,#0x00
+	mov	ar7,@r0
+	mov	ar6,r7
+	mov	r7,#0x00
 	mov	a,#0x80
-	orl	a,r6
+	orl	a,r7
 	mov	dpl,a
-	mov	dph,r7
+	mov	dph,r6
 	lcall	_exe_command
+	pop	ar4
 ;	../UI_Manager/Display_Manager/display.c:75: exe_command(RAM_WRITE | (chars[2] << 8));
-	mov	r7,(_write_number_chars_65536_18 + 0x0002)
-	mov	r6,#0x00
+	mov	r0,ar4
+	mov	ar7,@r0
+	mov	ar6,r7
+	mov	r7,#0x00
 	mov	a,#0x80
-	orl	a,r6
+	orl	a,r7
 	mov	dpl,a
-	mov	dph,r7
+	mov	dph,r6
+	lcall	_exe_command
 ;	../UI_Manager/Display_Manager/display.c:77: }
-	ljmp	_exe_command
+	mov	sp,_bp
+	pop	_bp
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'write_char'
 ;------------------------------------------------------------
-;index                     Allocated with name '_write_char_PARM_2'
-;line                      Allocated with name '_write_char_PARM_3'
+;index                     Allocated to stack - _bp -3
+;line                      Allocated to stack - _bp -4
 ;command                   Allocated to registers r7 
 ;------------------------------------------------------------
 ;	../UI_Manager/Display_Manager/display.c:79: void write_char(uint8_t command, uint8_t index, uint8_t line){
@@ -673,17 +767,28 @@ _write_number:
 ;	 function write_char
 ;	-----------------------------------------
 _write_char:
+	push	_bp
+	mov	_bp,sp
 	mov	r7,dpl
 ;	../UI_Manager/Display_Manager/display.c:80: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-	mov	a,_write_char_PARM_3
+	mov	a,_bp
+	add	a,#0xfc
+	mov	r0,a
+	mov	a,@r0
 	jz	00103$
-	mov	r6,_write_char_PARM_2
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	mov	ar6,@r0
 	mov	a,#0x40
 	add	a,r6
 	mov	r6,a
 	sjmp	00104$
 00103$:
-	mov	r6,_write_char_PARM_2
+	mov	a,_bp
+	add	a,#0xfd
+	mov	r0,a
+	mov	ar6,@r0
 00104$:
 	mov	dpl,r6
 	push	ar7
@@ -703,8 +808,10 @@ _write_char:
 	orl	a,r7
 	mov	dpl,a
 	mov	dph,r6
+	lcall	_exe_command
 ;	../UI_Manager/Display_Manager/display.c:82: }
-	ljmp	_exe_command
+	pop	_bp
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'exe_command'
 ;------------------------------------------------------------
@@ -1377,6 +1484,7 @@ _flipByte:
 	mov	r5,#0x00
 00102$:
 ;	../UI_Manager/Display_Manager/display.c:259: temp |= (((line & (0x80 >> i)) ? 1 : 0) << i);
+	push	ar6
 	mov	b,r5
 	inc	b
 	mov	r3,#0x80
@@ -1395,12 +1503,13 @@ _flipByte:
 	mov	r3,a
 00122$:
 	djnz	b,00121$
-	mov	ar1,r7
-	mov	r2,#0x00
-	mov	a,r1
-	anl	ar3,a
+	mov	ar2,r7
+	mov	r6,#0x00
 	mov	a,r2
+	anl	ar3,a
+	mov	a,r6
 	anl	ar4,a
+	pop	ar6
 	mov	a,r3
 	orl	a,r4
 	jz	00106$
@@ -1420,9 +1529,11 @@ _flipByte:
 	add	a,acc
 00126$:
 	djnz	b,00124$
+	mov	r3,a
 	mov	ar4,r6
-	orl	a,r4
-	mov	r6,a
+	mov	a,r4
+	orl	ar3,a
+	mov	ar6,r3
 ;	../UI_Manager/Display_Manager/display.c:258: for(i = 0; i < 8; i++){
 	inc	r5
 	cjne	r5,#0x08,00127$

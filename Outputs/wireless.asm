@@ -227,12 +227,9 @@ _tick_wireless_lastAction_65536_45:
 	.ds 1
 _handleUserConfigAction_changed_65536_53:
 	.ds 2
-_handleUserConfigAction_blue_65536_53:
-	.ds 1
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
 ;--------------------------------------------------------
 ; indirectly addressable internal ram data
 ;--------------------------------------------------------
@@ -289,13 +286,13 @@ _handleUserConfigAction_blue_65536_53:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'handleUserConfigAction'
 ;------------------------------------------------------------
-;changed                   Allocated with name '_handleUserConfigAction_changed_65536_53'
 ;action                    Allocated to registers r7 
-;changedBit                Allocated to registers r1 r2 
+;changedBit                Allocated to registers r2 r3 
 ;off                       Allocated to registers r6 
-;red                       Allocated to registers r5 
-;green                     Allocated to registers r4 
-;blue                      Allocated with name '_handleUserConfigAction_blue_65536_53'
+;red                       Allocated to stack - _bp +1
+;green                     Allocated to stack - _bp +2
+;blue                      Allocated to stack - _bp +3
+;changed                   Allocated with name '_handleUserConfigAction_changed_65536_53'
 ;------------------------------------------------------------
 ;	../Wireless_Manager/wireless.c:106: static uint16_t changed = 0;    
 	clr	a
@@ -494,31 +491,43 @@ _tick_wireless:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'handleUserConfigAction'
 ;------------------------------------------------------------
-;changed                   Allocated with name '_handleUserConfigAction_changed_65536_53'
 ;action                    Allocated to registers r7 
-;changedBit                Allocated to registers r1 r2 
+;changedBit                Allocated to registers r2 r3 
 ;off                       Allocated to registers r6 
-;red                       Allocated to registers r5 
-;green                     Allocated to registers r4 
-;blue                      Allocated with name '_handleUserConfigAction_blue_65536_53'
+;red                       Allocated to stack - _bp +1
+;green                     Allocated to stack - _bp +2
+;blue                      Allocated to stack - _bp +3
+;changed                   Allocated with name '_handleUserConfigAction_changed_65536_53'
 ;------------------------------------------------------------
 ;	../Wireless_Manager/wireless.c:105: void handleUserConfigAction(uint8_t action){
 ;	-----------------------------------------
 ;	 function handleUserConfigAction
 ;	-----------------------------------------
 _handleUserConfigAction:
+	push	_bp
+	mov	_bp,sp
+	inc	sp
+	inc	sp
+	inc	sp
 	mov	r7,dpl
 ;	../Wireless_Manager/wireless.c:108: uint8_t off = 0x00;
 	mov	r6,#0x00
 ;	../Wireless_Manager/wireless.c:109: uint8_t red = 0, green = 0, blue = 0;
-	mov	r5,#0x00
-	mov	r4,#0x00
-;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0x00
-	mov	_handleUserConfigAction_blue_65536_53,r6
+	mov	r0,_bp
+	inc	r0
+	mov	@r0,#0x00
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	@r0,#0x00
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	@r0,#0x00
 ;	../Wireless_Manager/wireless.c:112: if(!action){ return; }
 	mov	a,r7
 	jnz	00102$
-	ret
+	ljmp	00120$
 00102$:
 ;	../Wireless_Manager/wireless.c:115: changedBit = 1 << (action-1);
 	mov	a,r7
@@ -526,53 +535,53 @@ _handleUserConfigAction:
 	mov	r2,a
 	mov	b,r2
 	inc	b
-	mov	r1,#0x01
-	mov	r2,#0x00
+	mov	r2,#0x01
+	mov	r3,#0x00
 	sjmp	00172$
 00171$:
-	mov	a,r1
-	add	a,r1
-	mov	r1,a
 	mov	a,r2
-	rlc	a
+	add	a,r2
 	mov	r2,a
+	mov	a,r3
+	rlc	a
+	mov	r3,a
 00172$:
 	djnz	b,00171$
 ;	../Wireless_Manager/wireless.c:117: if(changed & changedBit){
-	mov	a,r1
-	anl	a,_handleUserConfigAction_changed_65536_53
-	mov	r0,a
 	mov	a,r2
+	anl	a,_handleUserConfigAction_changed_65536_53
+	mov	r4,a
+	mov	a,r3
 	anl	a,(_handleUserConfigAction_changed_65536_53 + 1)
-	mov	r3,a
-	orl	a,r0
+	mov	r5,a
+	orl	a,r4
 	jz	00104$
 ;	../Wireless_Manager/wireless.c:118: off = 0xFF;
 	mov	r6,#0xff
 ;	../Wireless_Manager/wireless.c:119: changed &= ~changedBit;
-	mov	a,r1
-	cpl	a
-	mov	r0,a
 	mov	a,r2
 	cpl	a
-	mov	r3,a
-	mov	a,r0
-	anl	_handleUserConfigAction_changed_65536_53,a
+	mov	r4,a
 	mov	a,r3
+	cpl	a
+	mov	r5,a
+	mov	a,r4
+	anl	_handleUserConfigAction_changed_65536_53,a
+	mov	a,r5
 	anl	(_handleUserConfigAction_changed_65536_53 + 1),a
 	sjmp	00105$
 00104$:
 ;	../Wireless_Manager/wireless.c:121: changed |= changedBit;
-	mov	a,r1
-	orl	_handleUserConfigAction_changed_65536_53,a
 	mov	a,r2
+	orl	_handleUserConfigAction_changed_65536_53,a
+	mov	a,r3
 	orl	(_handleUserConfigAction_changed_65536_53 + 1),a
 00105$:
 ;	../Wireless_Manager/wireless.c:125: switch (action)
 	mov	a,r7
 	add	a,#0xff - 0x0c
 	jnc	00174$
-	ljmp	00118$
+	ljmp	00120$
 00174$:
 	mov	a,r7
 	add	a,#(00175$-3-.)
@@ -615,52 +624,80 @@ _handleUserConfigAction:
 ;	../Wireless_Manager/wireless.c:127: case OPTION_WIRELESS_ACTION_CHOOSE_MACRO:
 00106$:
 ;	../Wireless_Manager/wireless.c:128: set_runtime_data(MACRO_INDEX, INC, NULL);
-	mov	_set_runtime_data_PARM_2,#0x01
-	mov	_set_runtime_data_PARM_3,#0x00
+	clr	a
+	push	acc
+	inc	a
+	push	acc
 	mov	dpl,#0x03
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 ;	../Wireless_Manager/wireless.c:129: return;
-	ljmp	_set_runtime_data
+	ljmp	00120$
 ;	../Wireless_Manager/wireless.c:130: case OPTION_WIRELESS_ACTION_RED:
 00107$:
 ;	../Wireless_Manager/wireless.c:131: red = WIRELESS_VALUE_FULL;
-	mov	r5,#0xff
+	mov	r0,_bp
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:132: break;
 	ljmp	00119$
 ;	../Wireless_Manager/wireless.c:133: case OPTION_WIRELESS_ACTION_YELLOW:
 00108$:
 ;	../Wireless_Manager/wireless.c:134: red = WIRELESS_VALUE_FULL;
-	mov	r5,#0xff
+	mov	r0,_bp
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:135: green = WIRELESS_VALUE_FULL;
-	mov	r4,#0xff
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:136: break;
 	ljmp	00119$
 ;	../Wireless_Manager/wireless.c:137: case OPTION_WIRELESS_ACTION_GREEN:
 00109$:
 ;	../Wireless_Manager/wireless.c:138: green = WIRELESS_VALUE_FULL;
-	mov	r4,#0xff
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:139: break;
+	ljmp	00119$
 ;	../Wireless_Manager/wireless.c:140: case OPTION_WIRELESS_ACTION_CYAN:
-	sjmp	00119$
 00110$:
 ;	../Wireless_Manager/wireless.c:141: green = WIRELESS_VALUE_FULL;
-	mov	r4,#0xff
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:142: blue = WIRELESS_VALUE_FULL;
-;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0xff
-	mov	_handleUserConfigAction_blue_65536_53,r4
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:143: break;
+	ljmp	00119$
 ;	../Wireless_Manager/wireless.c:144: case OPTION_WIRELESS_ACTION_BLUE:
-	sjmp	00119$
 00111$:
 ;	../Wireless_Manager/wireless.c:145: blue = WIRELESS_VALUE_FULL;
-	mov	_handleUserConfigAction_blue_65536_53,#0xff
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:146: break;
+	ljmp	00119$
 ;	../Wireless_Manager/wireless.c:147: case OPTION_WIRELESS_ACTION_MAGENTA:
-	sjmp	00119$
 00112$:
 ;	../Wireless_Manager/wireless.c:148: blue = WIRELESS_VALUE_FULL;
-	mov	_handleUserConfigAction_blue_65536_53,#0xff
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:149: red = WIRELESS_VALUE_FULL;
-	mov	r5,#0xff
+	mov	r0,_bp
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:150: break;
 ;	../Wireless_Manager/wireless.c:151: case OPTION_WIRELESS_ACTION_STROBE_SLOW:
 	sjmp	00119$
@@ -668,52 +705,64 @@ _handleUserConfigAction:
 ;	../Wireless_Manager/wireless.c:152: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_SLOW);
 	mov	a,r6
 	jz	00122$
-	mov	r3,#0x00
+	mov	r5,#0x00
 	mov	r7,#0x00
 	sjmp	00123$
 00122$:
-	mov	r3,#0x01
+	mov	r5,#0x01
 	mov	r7,#0x00
 00123$:
-	mov	_set_runtime_data_PARM_3,r3
-	mov	_set_runtime_data_PARM_2,#0x00
+	push	ar5
+	clr	a
+	push	acc
 	mov	dpl,#0x08
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 ;	../Wireless_Manager/wireless.c:153: return;
-	ljmp	_set_runtime_data
+	ljmp	00120$
 ;	../Wireless_Manager/wireless.c:154: case OPTION_WIRELESS_ACTION_STROBE_MEDIUM:
 00114$:
 ;	../Wireless_Manager/wireless.c:155: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_MEDIUM);
 	mov	a,r6
 	jz	00124$
-	mov	r3,#0x00
+	mov	r5,#0x00
 	mov	r7,#0x00
 	sjmp	00125$
 00124$:
-	mov	r3,#0x79
+	mov	r5,#0x79
 	mov	r7,#0x00
 00125$:
-	mov	_set_runtime_data_PARM_3,r3
-	mov	_set_runtime_data_PARM_2,#0x00
+	push	ar5
+	clr	a
+	push	acc
 	mov	dpl,#0x08
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 ;	../Wireless_Manager/wireless.c:156: return;
-	ljmp	_set_runtime_data
+	ljmp	00120$
 ;	../Wireless_Manager/wireless.c:157: case OPTION_WIRELESS_ACTION_STROBE_FAST:
 00115$:
 ;	../Wireless_Manager/wireless.c:158: set_runtime_data(STROBE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : WIRELESS_VALUE_STROBE_FAST);
 	mov	a,r6
 	jz	00126$
-	mov	r3,#0x00
+	mov	r5,#0x00
 	mov	r7,#0x00
 	sjmp	00127$
 00126$:
-	mov	r3,#0xff
+	mov	r5,#0xff
 	mov	r7,#0x00
 00127$:
-	mov	_set_runtime_data_PARM_3,r3
-	mov	_set_runtime_data_PARM_2,#0x00
+	push	ar5
+	clr	a
+	push	acc
 	mov	dpl,#0x08
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 ;	../Wireless_Manager/wireless.c:159: return;
-	ljmp	_set_runtime_data
+	ljmp	00120$
 ;	../Wireless_Manager/wireless.c:160: case OPTION_WIRELESS_ACTION_BLACKOUT:
 00116$:
 ;	../Wireless_Manager/wireless.c:161: off = 0xFF;
@@ -723,48 +772,57 @@ _handleUserConfigAction:
 	sjmp	00119$
 00117$:
 ;	../Wireless_Manager/wireless.c:164: red = WIRELESS_VALUE_FULL;
-	mov	r5,#0xff
+	mov	r0,_bp
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:165: green = WIRELESS_VALUE_FULL;
-	mov	r4,#0xff
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:166: blue = WIRELESS_VALUE_FULL;
-;	1-genFromRTrack replaced	mov	_handleUserConfigAction_blue_65536_53,#0xff
-	mov	_handleUserConfigAction_blue_65536_53,r5
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	@r0,#0xff
 ;	../Wireless_Manager/wireless.c:167: break;
 ;	../Wireless_Manager/wireless.c:168: default:
 	sjmp	00119$
 00118$:
 ;	../Wireless_Manager/wireless.c:169: return;
 ;	../Wireless_Manager/wireless.c:170: }
-	ret
+	sjmp	00120$
 00119$:
 ;	../Wireless_Manager/wireless.c:172: set_runtime_data(MACRO_INDEX, VALUE, WIRELESS_VALUE_0);
-	mov	_set_runtime_data_PARM_2,#0x00
-	mov	_set_runtime_data_PARM_3,#0x00
-	mov	dpl,#0x03
 	push	ar6
-	push	ar5
-	push	ar4
+	clr	a
+	push	acc
+	push	acc
+	mov	dpl,#0x03
 	lcall	_set_runtime_data
-	pop	ar4
-	pop	ar5
+	dec	sp
+	dec	sp
 	pop	ar6
 ;	../Wireless_Manager/wireless.c:173: set_runtime_data(RED_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : red);
 	mov	a,r6
 	jz	00128$
-	mov	r3,#0x00
+	mov	r5,#0x00
 	mov	r7,#0x00
 	sjmp	00129$
 00128$:
-	mov	ar3,r5
+	mov	r0,_bp
+	inc	r0
+	mov	ar5,@r0
 	mov	r7,#0x00
 00129$:
-	mov	_set_runtime_data_PARM_3,r3
-	mov	_set_runtime_data_PARM_2,#0x00
-	mov	dpl,#0x05
 	push	ar6
-	push	ar4
+	push	ar5
+	clr	a
+	push	acc
+	mov	dpl,#0x05
 	lcall	_set_runtime_data
-	pop	ar4
+	dec	sp
+	dec	sp
 	pop	ar6
 ;	../Wireless_Manager/wireless.c:174: set_runtime_data(GREEN_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : green);
 	mov	a,r6
@@ -773,14 +831,20 @@ _handleUserConfigAction:
 	mov	r7,#0x00
 	sjmp	00131$
 00130$:
-	mov	ar5,r4
+	mov	r0,_bp
+	inc	r0
+	inc	r0
+	mov	ar5,@r0
 	mov	r7,#0x00
 00131$:
-	mov	_set_runtime_data_PARM_3,r5
-	mov	_set_runtime_data_PARM_2,#0x00
-	mov	dpl,#0x06
 	push	ar6
+	push	ar5
+	clr	a
+	push	acc
+	mov	dpl,#0x06
 	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
 	pop	ar6
 ;	../Wireless_Manager/wireless.c:175: set_runtime_data(BLUE_INDEX, VALUE, (off) ? WIRELESS_VALUE_0 : blue);
 	mov	a,r6
@@ -789,14 +853,24 @@ _handleUserConfigAction:
 	mov	r7,#0x00
 	sjmp	00133$
 00132$:
-	mov	r6,_handleUserConfigAction_blue_65536_53
+	mov	a,_bp
+	add	a,#0x03
+	mov	r0,a
+	mov	ar6,@r0
 	mov	r7,#0x00
 00133$:
-	mov	_set_runtime_data_PARM_3,r6
-	mov	_set_runtime_data_PARM_2,#0x00
+	push	ar6
+	clr	a
+	push	acc
 	mov	dpl,#0x07
+	lcall	_set_runtime_data
+	dec	sp
+	dec	sp
+00120$:
 ;	../Wireless_Manager/wireless.c:177: }
-	ljmp	_set_runtime_data
+	mov	sp,_bp
+	pop	_bp
+	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'getWirelessAction'
 ;------------------------------------------------------------

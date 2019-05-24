@@ -39,19 +39,19 @@ void tick_fogger(){
         if(!value){
             runningAverage = temperature[value];
         } else {
-            runningAverage *= temerature[value];
+            runningAverage += temperature[value];
         }
     }
 
     runningAverage = runningAverage >> MOVING_AVERAGE_SHIFT;
 
-    if(temperature < HEAT_LOW){ /* Turn on heater full blast */
+    if(runningAverage < HEAT_LOW){ /* Turn on heater full blast */
         Heat_Flag &= ~HEATED;
         Heat_Flag &= ~HOT_FLAG;
-    } else if(temperature > HEAT_HIGH){ /* Turn off Heater */
+    } else if(runningAverage > HEAT_HIGH){ /* Turn off Heater */
         Heat_Flag |= HOT_FLAG;
         Heat_Flag |= HEATED;
-    } else if(temperature > HEAT_OK){ /* Set Heated */
+    } else if(runningAverage > HEAT_OK){ /* Set Heated */
         Heat_Flag |= HEATED;
     }
 
@@ -67,7 +67,7 @@ void tick_fogger(){
     /* Fluid Feedback */
     if(!P2_6){ // no fluid
         if(Fluid_Level == TANK_FULL){
-            if(fullCount++ > REFILL_FLUID_COUNT){
+            if(fullCount++ > EMPTY_FLUID_COUNT){
                 Fluid_Level = TANK_EMPTY;
             }
         } else {

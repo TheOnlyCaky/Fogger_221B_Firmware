@@ -32,6 +32,7 @@
 
 /* Refill Fluid Count */
 #define REFILL_FLUID_COUNT 34
+#define EMPTY_FLUID_COUNT 13
 
 /* Pump Actions */
 #define PUMP_OFF 0 

@@ -93,1346 +93,1457 @@
                                      93 	.globl _P0
                                      94 	.globl _PCLKSEL
                                      95 	.globl _CHIPCON
-                                     96 	.globl _write_char_PARM_3
-                                     97 	.globl _write_char_PARM_2
-                                     98 	.globl _write_number_PARM_4
-                                     99 	.globl _write_number_PARM_3
-                                    100 	.globl _write_number_PARM_2
-                                    101 	.globl _write_string_PARM_5
-                                    102 	.globl _write_string_PARM_4
-                                    103 	.globl _write_string_PARM_3
-                                    104 	.globl _write_string_PARM_2
-                                    105 	.globl _write_string
-                                    106 	.globl _write_number
-                                    107 	.globl _write_char
-                                    108 	.globl _exe_command
-                                    109 	.globl _charToCode
-                                    110 	.globl _writeShiftReg
-                                    111 	.globl _flipByte
-                                    112 ;--------------------------------------------------------
-                                    113 ; special function registers
-                                    114 ;--------------------------------------------------------
-                                    115 	.area RSEG    (ABS,DATA)
-      000000                        116 	.org 0x0000
-                           0000BF   117 _CHIPCON	=	0x00bf
-                           0000B7   118 _PCLKSEL	=	0x00b7
-                           000080   119 _P0	=	0x0080
-                           000090   120 _P1	=	0x0090
-                           0000A0   121 _P2	=	0x00a0
-                           0000B0   122 _P3	=	0x00b0
-                           0000A8   123 _IE	=	0x00a8
-                           0000E8   124 _EIE	=	0x00e8
-                           000091   125 _EXIF	=	0x0091
-                           0000DA   126 _ADCSEL	=	0x00da
-                           0000DB   127 _ADCVAL1	=	0x00db
-                           0000DC   128 _ADCVAL2	=	0x00dc
-                           0000D9   129 _P1_OPT	=	0x00d9
-                           000098   130 _SCON	=	0x0098
-                           0000CA   131 _RCAP2L	=	0x00ca
-                           0000CB   132 _RCAP2H	=	0x00cb
-                           0000C8   133 _T2CON	=	0x00c8
-                           00009B   134 _TH3	=	0x009b
-                           00009A   135 _TL3	=	0x009a
-                           000099   136 _SBUF	=	0x0099
-                           0000D3   137 _PWM_EA1	=	0x00d3
-                           0000D4   138 _PWM_EA2	=	0x00d4
-                           0000BD   139 _PWMDATA11H	=	0x00bd
-                           0000BE   140 _PWMDATA11L	=	0x00be
-                           0000B5   141 _PWMDATA14H	=	0x00b5
-                           0000B6   142 _PWMDATA14L	=	0x00b6
-                           0000AD   143 _PWMDATA17H	=	0x00ad
-                           0000AE   144 _PWMDATA17L	=	0x00ae
-                           000088   145 _TCON	=	0x0088
-                           000089   146 _TMOD	=	0x0089
-                           00008E   147 _CKCON	=	0x008e
-                           00008A   148 _TL0	=	0x008a
-                           00008C   149 _TH0	=	0x008c
-                           0000E4   150 _IAPEN	=	0x00e4
-                           0000E5   151 _IAP_ADRL	=	0x00e5
-                           0000E6   152 _IAP_ADRH	=	0x00e6
-                                    153 ;--------------------------------------------------------
-                                    154 ; special function bits
-                                    155 ;--------------------------------------------------------
-                                    156 	.area RSEG    (ABS,DATA)
-      000000                        157 	.org 0x0000
-                           000080   158 _P0_0	=	0x0080
-                           000081   159 _P0_1	=	0x0081
-                           000082   160 _P0_2	=	0x0082
-                           000083   161 _P0_3	=	0x0083
-                           000084   162 _P0_4	=	0x0084
-                           000085   163 _P0_5	=	0x0085
-                           000086   164 _P0_6	=	0x0086
-                           000087   165 _P0_7	=	0x0087
-                           000090   166 _P1_0	=	0x0090
-                           000091   167 _P1_1	=	0x0091
-                           000092   168 _P1_2	=	0x0092
-                           000093   169 _P1_3	=	0x0093
-                           000094   170 _P1_4	=	0x0094
-                           000095   171 _P1_5	=	0x0095
-                           000096   172 _P1_6	=	0x0096
-                           000097   173 _P1_7	=	0x0097
-                           0000A0   174 _P2_0	=	0x00a0
-                           0000A1   175 _P2_1	=	0x00a1
-                           0000A2   176 _P2_2	=	0x00a2
-                           0000A3   177 _P2_3	=	0x00a3
-                           0000A4   178 _P2_4	=	0x00a4
-                           0000A5   179 _P2_5	=	0x00a5
-                           0000A6   180 _P2_6	=	0x00a6
-                           0000A7   181 _P2_7	=	0x00a7
-                           0000B0   182 _P3_0	=	0x00b0
-                           0000B1   183 _P3_1	=	0x00b1
-                           0000B2   184 _P3_2	=	0x00b2
-                           0000B3   185 _P3_3	=	0x00b3
-                           0000B4   186 _P3_4	=	0x00b4
-                           0000B5   187 _P3_5	=	0x00b5
-                           0000B6   188 _P3_6	=	0x00b6
-                           0000B7   189 _P3_7	=	0x00b7
-                           0000AF   190 _EA	=	0x00af
-                           0000A9   191 _ET0	=	0x00a9
-                           0000AC   192 _ES	=	0x00ac
-                           000098   193 _RI	=	0x0098
-                           000093   194 _SCK	=	0x0093
-                           000095   195 _SER	=	0x0095
-                           000092   196 _RCK	=	0x0092
-                           00009F   197 _SM0	=	0x009f
-                           00009E   198 _SM1	=	0x009e
-                           00009D   199 _SM2	=	0x009d
-                           00009C   200 _REN	=	0x009c
-                           0000CD   201 _RCLK	=	0x00cd
-                           0000CC   202 _TCLK	=	0x00cc
-                           0000CB   203 _EXEN2	=	0x00cb
-                           0000CA   204 _TR2	=	0x00ca
-                           0000C9   205 _CT2	=	0x00c9
-                           0000C8   206 _CPRL2	=	0x00c8
+                                     96 	.globl _write_string
+                                     97 	.globl _write_number
+                                     98 	.globl _write_char
+                                     99 	.globl _exe_command
+                                    100 	.globl _charToCode
+                                    101 	.globl _writeShiftReg
+                                    102 	.globl _flipByte
+                                    103 ;--------------------------------------------------------
+                                    104 ; special function registers
+                                    105 ;--------------------------------------------------------
+                                    106 	.area RSEG    (ABS,DATA)
+      000000                        107 	.org 0x0000
+                           0000BF   108 _CHIPCON	=	0x00bf
+                           0000B7   109 _PCLKSEL	=	0x00b7
+                           000080   110 _P0	=	0x0080
+                           000090   111 _P1	=	0x0090
+                           0000A0   112 _P2	=	0x00a0
+                           0000B0   113 _P3	=	0x00b0
+                           0000A8   114 _IE	=	0x00a8
+                           0000E8   115 _EIE	=	0x00e8
+                           000091   116 _EXIF	=	0x0091
+                           0000DA   117 _ADCSEL	=	0x00da
+                           0000DB   118 _ADCVAL1	=	0x00db
+                           0000DC   119 _ADCVAL2	=	0x00dc
+                           0000D9   120 _P1_OPT	=	0x00d9
+                           000098   121 _SCON	=	0x0098
+                           0000CA   122 _RCAP2L	=	0x00ca
+                           0000CB   123 _RCAP2H	=	0x00cb
+                           0000C8   124 _T2CON	=	0x00c8
+                           00009B   125 _TH3	=	0x009b
+                           00009A   126 _TL3	=	0x009a
+                           000099   127 _SBUF	=	0x0099
+                           0000D3   128 _PWM_EA1	=	0x00d3
+                           0000D4   129 _PWM_EA2	=	0x00d4
+                           0000BD   130 _PWMDATA11H	=	0x00bd
+                           0000BE   131 _PWMDATA11L	=	0x00be
+                           0000B5   132 _PWMDATA14H	=	0x00b5
+                           0000B6   133 _PWMDATA14L	=	0x00b6
+                           0000AD   134 _PWMDATA17H	=	0x00ad
+                           0000AE   135 _PWMDATA17L	=	0x00ae
+                           000088   136 _TCON	=	0x0088
+                           000089   137 _TMOD	=	0x0089
+                           00008E   138 _CKCON	=	0x008e
+                           00008A   139 _TL0	=	0x008a
+                           00008C   140 _TH0	=	0x008c
+                           0000E4   141 _IAPEN	=	0x00e4
+                           0000E5   142 _IAP_ADRL	=	0x00e5
+                           0000E6   143 _IAP_ADRH	=	0x00e6
+                                    144 ;--------------------------------------------------------
+                                    145 ; special function bits
+                                    146 ;--------------------------------------------------------
+                                    147 	.area RSEG    (ABS,DATA)
+      000000                        148 	.org 0x0000
+                           000080   149 _P0_0	=	0x0080
+                           000081   150 _P0_1	=	0x0081
+                           000082   151 _P0_2	=	0x0082
+                           000083   152 _P0_3	=	0x0083
+                           000084   153 _P0_4	=	0x0084
+                           000085   154 _P0_5	=	0x0085
+                           000086   155 _P0_6	=	0x0086
+                           000087   156 _P0_7	=	0x0087
+                           000090   157 _P1_0	=	0x0090
+                           000091   158 _P1_1	=	0x0091
+                           000092   159 _P1_2	=	0x0092
+                           000093   160 _P1_3	=	0x0093
+                           000094   161 _P1_4	=	0x0094
+                           000095   162 _P1_5	=	0x0095
+                           000096   163 _P1_6	=	0x0096
+                           000097   164 _P1_7	=	0x0097
+                           0000A0   165 _P2_0	=	0x00a0
+                           0000A1   166 _P2_1	=	0x00a1
+                           0000A2   167 _P2_2	=	0x00a2
+                           0000A3   168 _P2_3	=	0x00a3
+                           0000A4   169 _P2_4	=	0x00a4
+                           0000A5   170 _P2_5	=	0x00a5
+                           0000A6   171 _P2_6	=	0x00a6
+                           0000A7   172 _P2_7	=	0x00a7
+                           0000B0   173 _P3_0	=	0x00b0
+                           0000B1   174 _P3_1	=	0x00b1
+                           0000B2   175 _P3_2	=	0x00b2
+                           0000B3   176 _P3_3	=	0x00b3
+                           0000B4   177 _P3_4	=	0x00b4
+                           0000B5   178 _P3_5	=	0x00b5
+                           0000B6   179 _P3_6	=	0x00b6
+                           0000B7   180 _P3_7	=	0x00b7
+                           0000AF   181 _EA	=	0x00af
+                           0000A9   182 _ET0	=	0x00a9
+                           0000AC   183 _ES	=	0x00ac
+                           000098   184 _RI	=	0x0098
+                           000093   185 _SCK	=	0x0093
+                           000095   186 _SER	=	0x0095
+                           000092   187 _RCK	=	0x0092
+                           00009F   188 _SM0	=	0x009f
+                           00009E   189 _SM1	=	0x009e
+                           00009D   190 _SM2	=	0x009d
+                           00009C   191 _REN	=	0x009c
+                           0000CD   192 _RCLK	=	0x00cd
+                           0000CC   193 _TCLK	=	0x00cc
+                           0000CB   194 _EXEN2	=	0x00cb
+                           0000CA   195 _TR2	=	0x00ca
+                           0000C9   196 _CT2	=	0x00c9
+                           0000C8   197 _CPRL2	=	0x00c8
+                                    198 ;--------------------------------------------------------
+                                    199 ; overlayable register banks
+                                    200 ;--------------------------------------------------------
+                                    201 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        202 	.ds 8
+                                    203 ;--------------------------------------------------------
+                                    204 ; internal ram data
+                                    205 ;--------------------------------------------------------
+                                    206 	.area DSEG    (DATA)
                                     207 ;--------------------------------------------------------
-                                    208 ; overlayable register banks
+                                    208 ; overlayable items in internal ram 
                                     209 ;--------------------------------------------------------
-                                    210 	.area REG_BANK_0	(REL,OVR,DATA)
-      000000                        211 	.ds 8
+                                    210 ;--------------------------------------------------------
+                                    211 ; indirectly addressable internal ram data
                                     212 ;--------------------------------------------------------
-                                    213 ; internal ram data
+                                    213 	.area ISEG    (DATA)
                                     214 ;--------------------------------------------------------
-                                    215 	.area DSEG    (DATA)
-      000021                        216 _write_string_PARM_2:
-      000021                        217 	.ds 1
-      000022                        218 _write_string_PARM_3:
-      000022                        219 	.ds 1
-      000023                        220 _write_string_PARM_4:
-      000023                        221 	.ds 1
-      000024                        222 _write_string_PARM_5:
-      000024                        223 	.ds 1
-      000025                        224 _write_number_PARM_2:
-      000025                        225 	.ds 1
-      000026                        226 _write_number_PARM_3:
-      000026                        227 	.ds 1
-      000027                        228 _write_number_PARM_4:
-      000027                        229 	.ds 1
-      000028                        230 _write_number_chars_65536_18:
-      000028                        231 	.ds 3
-      00002B                        232 _write_char_PARM_2:
-      00002B                        233 	.ds 1
-      00002C                        234 _write_char_PARM_3:
-      00002C                        235 	.ds 1
-                                    236 ;--------------------------------------------------------
-                                    237 ; overlayable items in internal ram 
-                                    238 ;--------------------------------------------------------
-                                    239 	.area	OSEG    (OVR,DATA)
-                                    240 	.area	OSEG    (OVR,DATA)
-                                    241 	.area	OSEG    (OVR,DATA)
-                                    242 ;--------------------------------------------------------
-                                    243 ; indirectly addressable internal ram data
-                                    244 ;--------------------------------------------------------
-                                    245 	.area ISEG    (DATA)
-                                    246 ;--------------------------------------------------------
-                                    247 ; absolute internal ram data
-                                    248 ;--------------------------------------------------------
-                                    249 	.area IABS    (ABS,DATA)
-                                    250 	.area IABS    (ABS,DATA)
+                                    215 ; absolute internal ram data
+                                    216 ;--------------------------------------------------------
+                                    217 	.area IABS    (ABS,DATA)
+                                    218 	.area IABS    (ABS,DATA)
+                                    219 ;--------------------------------------------------------
+                                    220 ; bit data
+                                    221 ;--------------------------------------------------------
+                                    222 	.area BSEG    (BIT)
+                                    223 ;--------------------------------------------------------
+                                    224 ; paged external ram data
+                                    225 ;--------------------------------------------------------
+                                    226 	.area PSEG    (PAG,XDATA)
+                                    227 ;--------------------------------------------------------
+                                    228 ; external ram data
+                                    229 ;--------------------------------------------------------
+                                    230 	.area XSEG    (XDATA)
+                                    231 ;--------------------------------------------------------
+                                    232 ; absolute external ram data
+                                    233 ;--------------------------------------------------------
+                                    234 	.area XABS    (ABS,XDATA)
+                                    235 ;--------------------------------------------------------
+                                    236 ; external initialized ram data
+                                    237 ;--------------------------------------------------------
+                                    238 	.area XISEG   (XDATA)
+                                    239 	.area HOME    (CODE)
+                                    240 	.area GSINIT0 (CODE)
+                                    241 	.area GSINIT1 (CODE)
+                                    242 	.area GSINIT2 (CODE)
+                                    243 	.area GSINIT3 (CODE)
+                                    244 	.area GSINIT4 (CODE)
+                                    245 	.area GSINIT5 (CODE)
+                                    246 	.area GSINIT  (CODE)
+                                    247 	.area GSFINAL (CODE)
+                                    248 	.area CSEG    (CODE)
+                                    249 ;--------------------------------------------------------
+                                    250 ; global & static initialisations
                                     251 ;--------------------------------------------------------
-                                    252 ; bit data
-                                    253 ;--------------------------------------------------------
-                                    254 	.area BSEG    (BIT)
-                                    255 ;--------------------------------------------------------
-                                    256 ; paged external ram data
-                                    257 ;--------------------------------------------------------
-                                    258 	.area PSEG    (PAG,XDATA)
-                                    259 ;--------------------------------------------------------
-                                    260 ; external ram data
+                                    252 	.area HOME    (CODE)
+                                    253 	.area GSINIT  (CODE)
+                                    254 	.area GSFINAL (CODE)
+                                    255 	.area GSINIT  (CODE)
+                                    256 ;--------------------------------------------------------
+                                    257 ; Home
+                                    258 ;--------------------------------------------------------
+                                    259 	.area HOME    (CODE)
+                                    260 	.area HOME    (CODE)
                                     261 ;--------------------------------------------------------
-                                    262 	.area XSEG    (XDATA)
+                                    262 ; code
                                     263 ;--------------------------------------------------------
-                                    264 ; absolute external ram data
-                                    265 ;--------------------------------------------------------
-                                    266 	.area XABS    (ABS,XDATA)
-                                    267 ;--------------------------------------------------------
-                                    268 ; external initialized ram data
-                                    269 ;--------------------------------------------------------
-                                    270 	.area XISEG   (XDATA)
-                                    271 	.area HOME    (CODE)
-                                    272 	.area GSINIT0 (CODE)
-                                    273 	.area GSINIT1 (CODE)
-                                    274 	.area GSINIT2 (CODE)
-                                    275 	.area GSINIT3 (CODE)
-                                    276 	.area GSINIT4 (CODE)
-                                    277 	.area GSINIT5 (CODE)
-                                    278 	.area GSINIT  (CODE)
-                                    279 	.area GSFINAL (CODE)
-                                    280 	.area CSEG    (CODE)
-                                    281 ;--------------------------------------------------------
-                                    282 ; global & static initialisations
-                                    283 ;--------------------------------------------------------
-                                    284 	.area HOME    (CODE)
-                                    285 	.area GSINIT  (CODE)
-                                    286 	.area GSFINAL (CODE)
-                                    287 	.area GSINIT  (CODE)
-                                    288 ;--------------------------------------------------------
-                                    289 ; Home
-                                    290 ;--------------------------------------------------------
-                                    291 	.area HOME    (CODE)
-                                    292 	.area HOME    (CODE)
-                                    293 ;--------------------------------------------------------
-                                    294 ; code
-                                    295 ;--------------------------------------------------------
-                                    296 	.area CSEG    (CODE)
-                                    297 ;------------------------------------------------------------
-                                    298 ;Allocation info for local variables in function 'write_string'
-                                    299 ;------------------------------------------------------------
-                                    300 ;length                    Allocated with name '_write_string_PARM_2'
-                                    301 ;index                     Allocated with name '_write_string_PARM_3'
-                                    302 ;line                      Allocated with name '_write_string_PARM_4'
-                                    303 ;selected                  Allocated with name '_write_string_PARM_5'
-                                    304 ;string                    Allocated to registers r5 r6 r7 
-                                    305 ;i                         Allocated to registers r3 
-                                    306 ;done                      Allocated to registers r4 
-                                    307 ;------------------------------------------------------------
-                                    308 ;	../UI_Manager/Display_Manager/display.c:16: void write_string(char* string, uint8_t length, uint8_t index, uint8_t line, uint8_t selected){
-                                    309 ;	-----------------------------------------
-                                    310 ;	 function write_string
-                                    311 ;	-----------------------------------------
-      0018DD                        312 _write_string:
-                           000007   313 	ar7 = 0x07
-                           000006   314 	ar6 = 0x06
-                           000005   315 	ar5 = 0x05
-                           000004   316 	ar4 = 0x04
-                           000003   317 	ar3 = 0x03
-                           000002   318 	ar2 = 0x02
-                           000001   319 	ar1 = 0x01
-                           000000   320 	ar0 = 0x00
-      0018DD AD 82            [24]  321 	mov	r5,dpl
-      0018DF AE 83            [24]  322 	mov	r6,dph
-      0018E1 AF F0            [24]  323 	mov	r7,b
-                                    324 ;	../UI_Manager/Display_Manager/display.c:17: uint8_t i, done = 0;
-      0018E3 7C 00            [12]  325 	mov	r4,#0x00
-                                    326 ;	../UI_Manager/Display_Manager/display.c:20: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-      0018E5 E5 23            [12]  327 	mov	a,_write_string_PARM_4
-      0018E7 60 08            [24]  328 	jz	00115$
-      0018E9 AB 22            [24]  329 	mov	r3,_write_string_PARM_3
-      0018EB 74 40            [12]  330 	mov	a,#0x40
-      0018ED 2B               [12]  331 	add	a,r3
-      0018EE FB               [12]  332 	mov	r3,a
-      0018EF 80 02            [24]  333 	sjmp	00116$
-      0018F1                        334 00115$:
-      0018F1 AB 22            [24]  335 	mov	r3,_write_string_PARM_3
-      0018F3                        336 00116$:
-      0018F3 8B 82            [24]  337 	mov	dpl,r3
-      0018F5 C0 07            [24]  338 	push	ar7
-      0018F7 C0 06            [24]  339 	push	ar6
-      0018F9 C0 05            [24]  340 	push	ar5
-      0018FB C0 04            [24]  341 	push	ar4
-      0018FD 12 1D 7F         [24]  342 	lcall	_flipByte
-      001900 AA 82            [24]  343 	mov	r2,dpl
-      001902 7B 00            [12]  344 	mov	r3,#0x00
-      001904 8B 82            [24]  345 	mov	dpl,r3
-      001906 74 01            [12]  346 	mov	a,#0x01
-      001908 4A               [12]  347 	orl	a,r2
-      001909 F5 83            [12]  348 	mov	dph,a
-      00190B 12 1B 30         [24]  349 	lcall	_exe_command
-      00190E D0 04            [24]  350 	pop	ar4
-      001910 D0 05            [24]  351 	pop	ar5
-      001912 D0 06            [24]  352 	pop	ar6
-      001914 D0 07            [24]  353 	pop	ar7
-                                    354 ;	../UI_Manager/Display_Manager/display.c:22: length++; //null terminated
-      001916 05 21            [12]  355 	inc	_write_string_PARM_2
-                                    356 ;	../UI_Manager/Display_Manager/display.c:24: if(selected){
-      001918 E5 24            [12]  357 	mov	a,_write_string_PARM_5
-      00191A 60 16            [24]  358 	jz	00122$
-                                    359 ;	../UI_Manager/Display_Manager/display.c:25: exe_command(WRITE_CURSOR);
-      00191C 90 00 80         [24]  360 	mov	dptr,#0x0080
-      00191F C0 07            [24]  361 	push	ar7
-      001921 C0 06            [24]  362 	push	ar6
-      001923 C0 05            [24]  363 	push	ar5
-      001925 C0 04            [24]  364 	push	ar4
-      001927 12 1B 30         [24]  365 	lcall	_exe_command
-      00192A D0 04            [24]  366 	pop	ar4
-      00192C D0 05            [24]  367 	pop	ar5
-      00192E D0 06            [24]  368 	pop	ar6
-      001930 D0 07            [24]  369 	pop	ar7
-                                    370 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
-      001932                        371 00122$:
-      001932 7B 00            [12]  372 	mov	r3,#0x00
-      001934                        373 00111$:
-      001934 C3               [12]  374 	clr	c
-      001935 EB               [12]  375 	mov	a,r3
-      001936 95 21            [12]  376 	subb	a,_write_string_PARM_2
-      001938 40 01            [24]  377 	jc	00144$
-      00193A 22               [24]  378 	ret
-      00193B                        379 00144$:
-                                    380 ;	../UI_Manager/Display_Manager/display.c:29: if(!done){
-      00193B EC               [12]  381 	mov	a,r4
-      00193C 70 45            [24]  382 	jnz	00107$
-                                    383 ;	../UI_Manager/Display_Manager/display.c:30: if(string[i]){
-      00193E EB               [12]  384 	mov	a,r3
-      00193F 2D               [12]  385 	add	a,r5
-      001940 F8               [12]  386 	mov	r0,a
-      001941 E4               [12]  387 	clr	a
-      001942 3E               [12]  388 	addc	a,r6
-      001943 F9               [12]  389 	mov	r1,a
-      001944 8F 02            [24]  390 	mov	ar2,r7
-      001946 88 82            [24]  391 	mov	dpl,r0
-      001948 89 83            [24]  392 	mov	dph,r1
-      00194A 8A F0            [24]  393 	mov	b,r2
-      00194C 12 2F 2F         [24]  394 	lcall	__gptrget
-      00194F FA               [12]  395 	mov	r2,a
-      001950 60 2D            [24]  396 	jz	00104$
-                                    397 ;	../UI_Manager/Display_Manager/display.c:31: exe_command(RAM_WRITE | (charToCode(string[i]) << 8));
-      001952 8A 82            [24]  398 	mov	dpl,r2
-      001954 C0 07            [24]  399 	push	ar7
-      001956 C0 06            [24]  400 	push	ar6
-      001958 C0 05            [24]  401 	push	ar5
-      00195A C0 04            [24]  402 	push	ar4
-      00195C C0 03            [24]  403 	push	ar3
-      00195E 12 1B 76         [24]  404 	lcall	_charToCode
-      001961 AA 82            [24]  405 	mov	r2,dpl
-      001963 8A 01            [24]  406 	mov	ar1,r2
-      001965 89 02            [24]  407 	mov	ar2,r1
-      001967 79 00            [12]  408 	mov	r1,#0x00
-      001969 74 80            [12]  409 	mov	a,#0x80
-      00196B 49               [12]  410 	orl	a,r1
-      00196C F5 82            [12]  411 	mov	dpl,a
-      00196E 8A 83            [24]  412 	mov	dph,r2
-      001970 12 1B 30         [24]  413 	lcall	_exe_command
-      001973 D0 03            [24]  414 	pop	ar3
-      001975 D0 04            [24]  415 	pop	ar4
-      001977 D0 05            [24]  416 	pop	ar5
-      001979 D0 06            [24]  417 	pop	ar6
-      00197B D0 07            [24]  418 	pop	ar7
-      00197D 80 1E            [24]  419 	sjmp	00112$
-      00197F                        420 00104$:
-                                    421 ;	../UI_Manager/Display_Manager/display.c:33: done = 1;
-      00197F 7C 01            [12]  422 	mov	r4,#0x01
-      001981 80 1A            [24]  423 	sjmp	00112$
-      001983                        424 00107$:
-                                    425 ;	../UI_Manager/Display_Manager/display.c:36: exe_command(RAM_WRITE | (CHAR_NULL << 8));
-      001983 90 04 80         [24]  426 	mov	dptr,#0x0480
-      001986 C0 07            [24]  427 	push	ar7
-      001988 C0 06            [24]  428 	push	ar6
-      00198A C0 05            [24]  429 	push	ar5
-      00198C C0 04            [24]  430 	push	ar4
-      00198E C0 03            [24]  431 	push	ar3
-      001990 12 1B 30         [24]  432 	lcall	_exe_command
-      001993 D0 03            [24]  433 	pop	ar3
-      001995 D0 04            [24]  434 	pop	ar4
-      001997 D0 05            [24]  435 	pop	ar5
-      001999 D0 06            [24]  436 	pop	ar6
-      00199B D0 07            [24]  437 	pop	ar7
-      00199D                        438 00112$:
-                                    439 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
-      00199D 0B               [12]  440 	inc	r3
-                                    441 ;	../UI_Manager/Display_Manager/display.c:39: }
-      00199E 02 19 34         [24]  442 	ljmp	00111$
-                                    443 ;------------------------------------------------------------
-                                    444 ;Allocation info for local variables in function 'write_number'
-                                    445 ;------------------------------------------------------------
-                                    446 ;index                     Allocated with name '_write_number_PARM_2'
-                                    447 ;line                      Allocated with name '_write_number_PARM_3'
-                                    448 ;selected                  Allocated with name '_write_number_PARM_4'
-                                    449 ;number                    Allocated to registers r6 r7 
-                                    450 ;higherNumberPresent       Allocated to registers r5 
-                                    451 ;value                     Allocated to registers r3 r4 
-                                    452 ;chars                     Allocated with name '_write_number_chars_65536_18'
-                                    453 ;------------------------------------------------------------
-                                    454 ;	../UI_Manager/Display_Manager/display.c:41: void write_number(uint16_t number, uint8_t index, uint8_t line, uint8_t selected){
-                                    455 ;	-----------------------------------------
-                                    456 ;	 function write_number
-                                    457 ;	-----------------------------------------
-      0019A1                        458 _write_number:
-      0019A1 AE 82            [24]  459 	mov	r6,dpl
-      0019A3 AF 83            [24]  460 	mov	r7,dph
-                                    461 ;	../UI_Manager/Display_Manager/display.c:42: uint8_t higherNumberPresent = 0;
-      0019A5 7D 00            [12]  462 	mov	r5,#0x00
-                                    463 ;	../UI_Manager/Display_Manager/display.c:44: uint8_t chars[3] = {CHAR_NULL, CHAR_NULL, CHAR_0};
-      0019A7 75 28 04         [24]  464 	mov	_write_number_chars_65536_18,#0x04
-      0019AA 75 29 04         [24]  465 	mov	(_write_number_chars_65536_18 + 0x0001),#0x04
-      0019AD 75 2A 0C         [24]  466 	mov	(_write_number_chars_65536_18 + 0x0002),#0x0c
-                                    467 ;	../UI_Manager/Display_Manager/display.c:46: if(number >= 1000) {number = 999;}
-      0019B0 C3               [12]  468 	clr	c
-      0019B1 EE               [12]  469 	mov	a,r6
-      0019B2 94 E8            [12]  470 	subb	a,#0xe8
-      0019B4 EF               [12]  471 	mov	a,r7
-      0019B5 94 03            [12]  472 	subb	a,#0x03
-      0019B7 40 04            [24]  473 	jc	00102$
-      0019B9 7E E7            [12]  474 	mov	r6,#0xe7
-      0019BB 7F 03            [12]  475 	mov	r7,#0x03
-      0019BD                        476 00102$:
-                                    477 ;	../UI_Manager/Display_Manager/display.c:48: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-      0019BD E5 26            [12]  478 	mov	a,_write_number_PARM_3
-      0019BF 60 08            [24]  479 	jz	00113$
-      0019C1 AC 25            [24]  480 	mov	r4,_write_number_PARM_2
-      0019C3 74 40            [12]  481 	mov	a,#0x40
-      0019C5 2C               [12]  482 	add	a,r4
-      0019C6 FC               [12]  483 	mov	r4,a
-      0019C7 80 02            [24]  484 	sjmp	00114$
-      0019C9                        485 00113$:
-      0019C9 AC 25            [24]  486 	mov	r4,_write_number_PARM_2
-      0019CB                        487 00114$:
-      0019CB 8C 82            [24]  488 	mov	dpl,r4
-      0019CD C0 07            [24]  489 	push	ar7
-      0019CF C0 06            [24]  490 	push	ar6
-      0019D1 C0 05            [24]  491 	push	ar5
-      0019D3 12 1D 7F         [24]  492 	lcall	_flipByte
-      0019D6 AB 82            [24]  493 	mov	r3,dpl
-      0019D8 7C 00            [12]  494 	mov	r4,#0x00
-      0019DA 8C 82            [24]  495 	mov	dpl,r4
-      0019DC 74 01            [12]  496 	mov	a,#0x01
-      0019DE 4B               [12]  497 	orl	a,r3
-      0019DF F5 83            [12]  498 	mov	dph,a
-      0019E1 12 1B 30         [24]  499 	lcall	_exe_command
-      0019E4 D0 05            [24]  500 	pop	ar5
-      0019E6 D0 06            [24]  501 	pop	ar6
-      0019E8 D0 07            [24]  502 	pop	ar7
-                                    503 ;	../UI_Manager/Display_Manager/display.c:51: if(selected){
-      0019EA E5 27            [12]  504 	mov	a,_write_number_PARM_4
-      0019EC 60 14            [24]  505 	jz	00104$
-                                    506 ;	../UI_Manager/Display_Manager/display.c:52: exe_command(WRITE_CURSOR);
-      0019EE 90 00 80         [24]  507 	mov	dptr,#0x0080
-      0019F1 C0 07            [24]  508 	push	ar7
-      0019F3 C0 06            [24]  509 	push	ar6
-      0019F5 C0 05            [24]  510 	push	ar5
-      0019F7 12 1B 30         [24]  511 	lcall	_exe_command
-      0019FA D0 05            [24]  512 	pop	ar5
-      0019FC D0 06            [24]  513 	pop	ar6
-      0019FE D0 07            [24]  514 	pop	ar7
-      001A00 80 12            [24]  515 	sjmp	00105$
-      001A02                        516 00104$:
-                                    517 ;	../UI_Manager/Display_Manager/display.c:54: exe_command(RAM_WRITE | (CHAR_NULL << 8));
-      001A02 90 04 80         [24]  518 	mov	dptr,#0x0480
-      001A05 C0 07            [24]  519 	push	ar7
-      001A07 C0 06            [24]  520 	push	ar6
-      001A09 C0 05            [24]  521 	push	ar5
-      001A0B 12 1B 30         [24]  522 	lcall	_exe_command
-      001A0E D0 05            [24]  523 	pop	ar5
-      001A10 D0 06            [24]  524 	pop	ar6
-      001A12 D0 07            [24]  525 	pop	ar7
-      001A14                        526 00105$:
-                                    527 ;	../UI_Manager/Display_Manager/display.c:58: value = number/100;
-      001A14 75 76 64         [24]  528 	mov	__divuint_PARM_2,#0x64
-      001A17 75 77 00         [24]  529 	mov	(__divuint_PARM_2 + 1),#0x00
-      001A1A 8E 82            [24]  530 	mov	dpl,r6
-      001A1C 8F 83            [24]  531 	mov	dph,r7
-      001A1E C0 07            [24]  532 	push	ar7
-      001A20 C0 06            [24]  533 	push	ar6
-      001A22 C0 05            [24]  534 	push	ar5
-      001A24 12 2E 19         [24]  535 	lcall	__divuint
-      001A27 AB 82            [24]  536 	mov	r3,dpl
-      001A29 AC 83            [24]  537 	mov	r4,dph
-      001A2B D0 05            [24]  538 	pop	ar5
-      001A2D D0 06            [24]  539 	pop	ar6
-      001A2F D0 07            [24]  540 	pop	ar7
-                                    541 ;	../UI_Manager/Display_Manager/display.c:59: if(value){
-      001A31 EB               [12]  542 	mov	a,r3
-      001A32 4C               [12]  543 	orl	a,r4
-      001A33 60 39            [24]  544 	jz	00107$
-                                    545 ;	../UI_Manager/Display_Manager/display.c:60: chars[0] = charToCode(value + 0x30);
-      001A35 8B 02            [24]  546 	mov	ar2,r3
-      001A37 74 30            [12]  547 	mov	a,#0x30
-      001A39 2A               [12]  548 	add	a,r2
-      001A3A F5 82            [12]  549 	mov	dpl,a
-      001A3C C0 07            [24]  550 	push	ar7
-      001A3E C0 06            [24]  551 	push	ar6
-      001A40 C0 04            [24]  552 	push	ar4
-      001A42 C0 03            [24]  553 	push	ar3
-      001A44 12 1B 76         [24]  554 	lcall	_charToCode
-      001A47 E5 82            [12]  555 	mov	a,dpl
-      001A49 D0 03            [24]  556 	pop	ar3
-      001A4B D0 04            [24]  557 	pop	ar4
-      001A4D F5 28            [12]  558 	mov	_write_number_chars_65536_18,a
-                                    559 ;	../UI_Manager/Display_Manager/display.c:61: higherNumberPresent = 1;
-      001A4F 7D 01            [12]  560 	mov	r5,#0x01
-                                    561 ;	../UI_Manager/Display_Manager/display.c:62: number -= value*100;
-      001A51 8B 76            [24]  562 	mov	__mulint_PARM_2,r3
-      001A53 8C 77            [24]  563 	mov	(__mulint_PARM_2 + 1),r4
-      001A55 90 00 64         [24]  564 	mov	dptr,#0x0064
-      001A58 C0 05            [24]  565 	push	ar5
-      001A5A 12 2E C5         [24]  566 	lcall	__mulint
-      001A5D AB 82            [24]  567 	mov	r3,dpl
-      001A5F AC 83            [24]  568 	mov	r4,dph
-      001A61 D0 05            [24]  569 	pop	ar5
-      001A63 D0 06            [24]  570 	pop	ar6
-      001A65 D0 07            [24]  571 	pop	ar7
-      001A67 EE               [12]  572 	mov	a,r6
-      001A68 C3               [12]  573 	clr	c
-      001A69 9B               [12]  574 	subb	a,r3
-      001A6A FE               [12]  575 	mov	r6,a
-      001A6B EF               [12]  576 	mov	a,r7
-      001A6C 9C               [12]  577 	subb	a,r4
-      001A6D FF               [12]  578 	mov	r7,a
-      001A6E                        579 00107$:
-                                    580 ;	../UI_Manager/Display_Manager/display.c:65: value = number/10;
-      001A6E 75 76 0A         [24]  581 	mov	__divuint_PARM_2,#0x0a
-      001A71 75 77 00         [24]  582 	mov	(__divuint_PARM_2 + 1),#0x00
-      001A74 8E 82            [24]  583 	mov	dpl,r6
-      001A76 8F 83            [24]  584 	mov	dph,r7
-      001A78 C0 07            [24]  585 	push	ar7
-      001A7A C0 06            [24]  586 	push	ar6
-      001A7C C0 05            [24]  587 	push	ar5
-      001A7E 12 2E 19         [24]  588 	lcall	__divuint
-      001A81 AB 82            [24]  589 	mov	r3,dpl
-      001A83 AC 83            [24]  590 	mov	r4,dph
-      001A85 D0 05            [24]  591 	pop	ar5
-      001A87 D0 06            [24]  592 	pop	ar6
-      001A89 D0 07            [24]  593 	pop	ar7
-                                    594 ;	../UI_Manager/Display_Manager/display.c:66: if(higherNumberPresent || value){
-      001A8B ED               [12]  595 	mov	a,r5
-      001A8C 70 04            [24]  596 	jnz	00108$
-      001A8E EB               [12]  597 	mov	a,r3
-      001A8F 4C               [12]  598 	orl	a,r4
-      001A90 60 33            [24]  599 	jz	00109$
-      001A92                        600 00108$:
-                                    601 ;	../UI_Manager/Display_Manager/display.c:67: chars[1] = charToCode(value + 0x30);
-      001A92 8B 05            [24]  602 	mov	ar5,r3
-      001A94 74 30            [12]  603 	mov	a,#0x30
-      001A96 2D               [12]  604 	add	a,r5
-      001A97 F5 82            [12]  605 	mov	dpl,a
-      001A99 C0 07            [24]  606 	push	ar7
-      001A9B C0 06            [24]  607 	push	ar6
-      001A9D C0 04            [24]  608 	push	ar4
-      001A9F C0 03            [24]  609 	push	ar3
-      001AA1 12 1B 76         [24]  610 	lcall	_charToCode
-      001AA4 E5 82            [12]  611 	mov	a,dpl
-      001AA6 D0 03            [24]  612 	pop	ar3
-      001AA8 D0 04            [24]  613 	pop	ar4
-      001AAA F5 29            [12]  614 	mov	(_write_number_chars_65536_18 + 0x0001),a
-                                    615 ;	../UI_Manager/Display_Manager/display.c:68: number -= value*10;
-      001AAC 8B 76            [24]  616 	mov	__mulint_PARM_2,r3
-      001AAE 8C 77            [24]  617 	mov	(__mulint_PARM_2 + 1),r4
-      001AB0 90 00 0A         [24]  618 	mov	dptr,#0x000a
-      001AB3 12 2E C5         [24]  619 	lcall	__mulint
-      001AB6 AC 82            [24]  620 	mov	r4,dpl
-      001AB8 AD 83            [24]  621 	mov	r5,dph
-      001ABA D0 06            [24]  622 	pop	ar6
-      001ABC D0 07            [24]  623 	pop	ar7
-      001ABE EE               [12]  624 	mov	a,r6
-      001ABF C3               [12]  625 	clr	c
-      001AC0 9C               [12]  626 	subb	a,r4
-      001AC1 FE               [12]  627 	mov	r6,a
-      001AC2 EF               [12]  628 	mov	a,r7
-      001AC3 9D               [12]  629 	subb	a,r5
-      001AC4 FF               [12]  630 	mov	r7,a
-      001AC5                        631 00109$:
-                                    632 ;	../UI_Manager/Display_Manager/display.c:71: chars[2] = charToCode(number + 0x30);
-      001AC5 74 30            [12]  633 	mov	a,#0x30
-      001AC7 2E               [12]  634 	add	a,r6
-      001AC8 F5 82            [12]  635 	mov	dpl,a
-      001ACA 12 1B 76         [24]  636 	lcall	_charToCode
-      001ACD E5 82            [12]  637 	mov	a,dpl
-      001ACF F5 2A            [12]  638 	mov	(_write_number_chars_65536_18 + 0x0002),a
-                                    639 ;	../UI_Manager/Display_Manager/display.c:73: exe_command(RAM_WRITE | (chars[0] << 8));
-      001AD1 AF 28            [24]  640 	mov	r7,_write_number_chars_65536_18
-      001AD3 7E 00            [12]  641 	mov	r6,#0x00
-      001AD5 74 80            [12]  642 	mov	a,#0x80
-      001AD7 4E               [12]  643 	orl	a,r6
-      001AD8 F5 82            [12]  644 	mov	dpl,a
-      001ADA 8F 83            [24]  645 	mov	dph,r7
-      001ADC 12 1B 30         [24]  646 	lcall	_exe_command
-                                    647 ;	../UI_Manager/Display_Manager/display.c:74: exe_command(RAM_WRITE | (chars[1] << 8));
-      001ADF AF 29            [24]  648 	mov	r7,(_write_number_chars_65536_18 + 0x0001)
-      001AE1 7E 00            [12]  649 	mov	r6,#0x00
-      001AE3 74 80            [12]  650 	mov	a,#0x80
-      001AE5 4E               [12]  651 	orl	a,r6
-      001AE6 F5 82            [12]  652 	mov	dpl,a
-      001AE8 8F 83            [24]  653 	mov	dph,r7
-      001AEA 12 1B 30         [24]  654 	lcall	_exe_command
-                                    655 ;	../UI_Manager/Display_Manager/display.c:75: exe_command(RAM_WRITE | (chars[2] << 8));
-      001AED AF 2A            [24]  656 	mov	r7,(_write_number_chars_65536_18 + 0x0002)
-      001AEF 7E 00            [12]  657 	mov	r6,#0x00
-      001AF1 74 80            [12]  658 	mov	a,#0x80
-      001AF3 4E               [12]  659 	orl	a,r6
-      001AF4 F5 82            [12]  660 	mov	dpl,a
-      001AF6 8F 83            [24]  661 	mov	dph,r7
-                                    662 ;	../UI_Manager/Display_Manager/display.c:77: }
-      001AF8 02 1B 30         [24]  663 	ljmp	_exe_command
-                                    664 ;------------------------------------------------------------
-                                    665 ;Allocation info for local variables in function 'write_char'
-                                    666 ;------------------------------------------------------------
-                                    667 ;index                     Allocated with name '_write_char_PARM_2'
-                                    668 ;line                      Allocated with name '_write_char_PARM_3'
-                                    669 ;command                   Allocated to registers r7 
-                                    670 ;------------------------------------------------------------
-                                    671 ;	../UI_Manager/Display_Manager/display.c:79: void write_char(uint8_t command, uint8_t index, uint8_t line){
-                                    672 ;	-----------------------------------------
-                                    673 ;	 function write_char
-                                    674 ;	-----------------------------------------
-      001AFB                        675 _write_char:
-      001AFB AF 82            [24]  676 	mov	r7,dpl
-                                    677 ;	../UI_Manager/Display_Manager/display.c:80: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
-      001AFD E5 2C            [12]  678 	mov	a,_write_char_PARM_3
-      001AFF 60 08            [24]  679 	jz	00103$
-      001B01 AE 2B            [24]  680 	mov	r6,_write_char_PARM_2
-      001B03 74 40            [12]  681 	mov	a,#0x40
-      001B05 2E               [12]  682 	add	a,r6
-      001B06 FE               [12]  683 	mov	r6,a
-      001B07 80 02            [24]  684 	sjmp	00104$
-      001B09                        685 00103$:
-      001B09 AE 2B            [24]  686 	mov	r6,_write_char_PARM_2
-      001B0B                        687 00104$:
-      001B0B 8E 82            [24]  688 	mov	dpl,r6
-      001B0D C0 07            [24]  689 	push	ar7
-      001B0F 12 1D 7F         [24]  690 	lcall	_flipByte
-      001B12 AD 82            [24]  691 	mov	r5,dpl
-      001B14 7E 00            [12]  692 	mov	r6,#0x00
-      001B16 8E 82            [24]  693 	mov	dpl,r6
-      001B18 74 01            [12]  694 	mov	a,#0x01
-      001B1A 4D               [12]  695 	orl	a,r5
-      001B1B F5 83            [12]  696 	mov	dph,a
-      001B1D 12 1B 30         [24]  697 	lcall	_exe_command
-      001B20 D0 07            [24]  698 	pop	ar7
-                                    699 ;	../UI_Manager/Display_Manager/display.c:81: exe_command(RAM_WRITE | (command << 8));
-      001B22 8F 06            [24]  700 	mov	ar6,r7
-      001B24 7F 00            [12]  701 	mov	r7,#0x00
-      001B26 74 80            [12]  702 	mov	a,#0x80
-      001B28 4F               [12]  703 	orl	a,r7
-      001B29 F5 82            [12]  704 	mov	dpl,a
-      001B2B 8E 83            [24]  705 	mov	dph,r6
-                                    706 ;	../UI_Manager/Display_Manager/display.c:82: }
-      001B2D 02 1B 30         [24]  707 	ljmp	_exe_command
-                                    708 ;------------------------------------------------------------
-                                    709 ;Allocation info for local variables in function 'exe_command'
-                                    710 ;------------------------------------------------------------
-                                    711 ;command                   Allocated to registers r6 r7 
-                                    712 ;delay                     Allocated to registers r5 r6 
-                                    713 ;------------------------------------------------------------
-                                    714 ;	../UI_Manager/Display_Manager/display.c:86: void exe_command(uint16_t command){
-                                    715 ;	-----------------------------------------
-                                    716 ;	 function exe_command
-                                    717 ;	-----------------------------------------
-      001B30                        718 _exe_command:
-      001B30 AE 82            [24]  719 	mov	r6,dpl
-      001B32 AF 83            [24]  720 	mov	r7,dph
-                                    721 ;	../UI_Manager/Display_Manager/display.c:89: command |= (1 << EXE_BIT);
-      001B34 43 06 20         [24]  722 	orl	ar6,#0x20
-                                    723 ;	../UI_Manager/Display_Manager/display.c:90: writeShiftReg(command); //execute
-      001B37 8E 82            [24]  724 	mov	dpl,r6
-      001B39 8F 83            [24]  725 	mov	dph,r7
-      001B3B C0 07            [24]  726 	push	ar7
-      001B3D C0 06            [24]  727 	push	ar6
-      001B3F 12 1D 4B         [24]  728 	lcall	_writeShiftReg
-      001B42 D0 06            [24]  729 	pop	ar6
-      001B44 D0 07            [24]  730 	pop	ar7
-                                    731 ;	../UI_Manager/Display_Manager/display.c:91: command &= ~(1 << EXE_BIT);
-      001B46 53 06 DF         [24]  732 	anl	ar6,#0xdf
-                                    733 ;	../UI_Manager/Display_Manager/display.c:92: writeShiftReg(command); //end execution
-      001B49 8E 82            [24]  734 	mov	dpl,r6
-      001B4B 8F 83            [24]  735 	mov	dph,r7
-      001B4D C0 07            [24]  736 	push	ar7
-      001B4F C0 06            [24]  737 	push	ar6
-      001B51 12 1D 4B         [24]  738 	lcall	_writeShiftReg
-      001B54 D0 06            [24]  739 	pop	ar6
-      001B56 D0 07            [24]  740 	pop	ar7
-                                    741 ;	../UI_Manager/Display_Manager/display.c:95: while(delay-- && command == CLEAR_DISPLAY){;;}
-      001B58 E4               [12]  742 	clr	a
-      001B59 BE 00 04         [24]  743 	cjne	r6,#0x00,00118$
-      001B5C BF 80 01         [24]  744 	cjne	r7,#0x80,00118$
-      001B5F 04               [12]  745 	inc	a
-      001B60                        746 00118$:
-      001B60 FF               [12]  747 	mov	r7,a
-      001B61 7D 00            [12]  748 	mov	r5,#0x00
-      001B63 7E 03            [12]  749 	mov	r6,#0x03
-      001B65                        750 00102$:
-      001B65 8D 03            [24]  751 	mov	ar3,r5
-      001B67 8E 04            [24]  752 	mov	ar4,r6
-      001B69 1D               [12]  753 	dec	r5
-      001B6A BD FF 01         [24]  754 	cjne	r5,#0xff,00120$
-      001B6D 1E               [12]  755 	dec	r6
-      001B6E                        756 00120$:
-      001B6E EB               [12]  757 	mov	a,r3
-      001B6F 4C               [12]  758 	orl	a,r4
-      001B70 60 03            [24]  759 	jz	00105$
-      001B72 EF               [12]  760 	mov	a,r7
-      001B73 70 F0            [24]  761 	jnz	00102$
-      001B75                        762 00105$:
-                                    763 ;	../UI_Manager/Display_Manager/display.c:96: }
-      001B75 22               [24]  764 	ret
-                                    765 ;------------------------------------------------------------
-                                    766 ;Allocation info for local variables in function 'charToCode'
-                                    767 ;------------------------------------------------------------
-                                    768 ;c                         Allocated to registers r7 
-                                    769 ;------------------------------------------------------------
-                                    770 ;	../UI_Manager/Display_Manager/display.c:100: uint8_t charToCode(char c){
-                                    771 ;	-----------------------------------------
-                                    772 ;	 function charToCode
-                                    773 ;	-----------------------------------------
-      001B76                        774 _charToCode:
-      001B76 AF 82            [24]  775 	mov	r7,dpl
-                                    776 ;	../UI_Manager/Display_Manager/display.c:101: switch(c){
-      001B78 BF 26 00         [24]  777 	cjne	r7,#0x26,00177$
-      001B7B                        778 00177$:
-      001B7B 50 03            [24]  779 	jnc	00178$
-      001B7D 02 1D 47         [24]  780 	ljmp	00166$
-      001B80                        781 00178$:
-      001B80 EF               [12]  782 	mov	a,r7
-      001B81 24 85            [12]  783 	add	a,#0xff - 0x7a
-      001B83 50 03            [24]  784 	jnc	00179$
-      001B85 02 1D 47         [24]  785 	ljmp	00166$
-      001B88                        786 00179$:
-      001B88 EF               [12]  787 	mov	a,r7
-      001B89 24 DA            [12]  788 	add	a,#0xda
-      001B8B FF               [12]  789 	mov	r7,a
-      001B8C 24 0A            [12]  790 	add	a,#(00180$-3-.)
-      001B8E 83               [24]  791 	movc	a,@a+pc
-      001B8F F5 82            [12]  792 	mov	dpl,a
-      001B91 EF               [12]  793 	mov	a,r7
-      001B92 24 59            [12]  794 	add	a,#(00181$-3-.)
-      001B94 83               [24]  795 	movc	a,@a+pc
-      001B95 F5 83            [12]  796 	mov	dph,a
-      001B97 E4               [12]  797 	clr	a
-      001B98 73               [24]  798 	jmp	@a+dptr
-      001B99                        799 00180$:
-      001B99 3F                     800 	.db	00164$
-      001B9A 47                     801 	.db	00166$
-      001B9B 47                     802 	.db	00166$
-      001B9C 47                     803 	.db	00166$
-      001B9D 47                     804 	.db	00166$
-      001B9E 3B                     805 	.db	00163$
-      001B9F 47                     806 	.db	00166$
-      001BA0 47                     807 	.db	00166$
-      001BA1 47                     808 	.db	00166$
-      001BA2 47                     809 	.db	00166$
-      001BA3 13                     810 	.db	00153$
-      001BA4 17                     811 	.db	00154$
-      001BA5 1B                     812 	.db	00155$
-      001BA6 1F                     813 	.db	00156$
-      001BA7 23                     814 	.db	00157$
-      001BA8 27                     815 	.db	00158$
-      001BA9 2B                     816 	.db	00159$
-      001BAA 2F                     817 	.db	00160$
-      001BAB 33                     818 	.db	00161$
-      001BAC 37                     819 	.db	00162$
-      001BAD 47                     820 	.db	00166$
-      001BAE 43                     821 	.db	00165$
-      001BAF 47                     822 	.db	00166$
-      001BB0 47                     823 	.db	00166$
-      001BB1 47                     824 	.db	00166$
-      001BB2 47                     825 	.db	00166$
-      001BB3 47                     826 	.db	00166$
-      001BB4 43                     827 	.db	00101$
-      001BB5 4B                     828 	.db	00103$
-      001BB6 53                     829 	.db	00105$
-      001BB7 5B                     830 	.db	00107$
-      001BB8 63                     831 	.db	00109$
-      001BB9 6B                     832 	.db	00111$
-      001BBA 73                     833 	.db	00113$
-      001BBB 7B                     834 	.db	00115$
-      001BBC 83                     835 	.db	00117$
-      001BBD 8B                     836 	.db	00119$
-      001BBE 93                     837 	.db	00121$
-      001BBF 9B                     838 	.db	00123$
-      001BC0 A3                     839 	.db	00125$
-      001BC1 AB                     840 	.db	00127$
-      001BC2 B3                     841 	.db	00129$
-      001BC3 BB                     842 	.db	00131$
-      001BC4 C3                     843 	.db	00133$
-      001BC5 CB                     844 	.db	00135$
-      001BC6 D3                     845 	.db	00137$
-      001BC7 DB                     846 	.db	00139$
-      001BC8 E3                     847 	.db	00141$
-      001BC9 EB                     848 	.db	00143$
-      001BCA F3                     849 	.db	00145$
-      001BCB FB                     850 	.db	00147$
-      001BCC 03                     851 	.db	00149$
-      001BCD 0B                     852 	.db	00151$
-      001BCE 47                     853 	.db	00166$
-      001BCF 47                     854 	.db	00166$
-      001BD0 47                     855 	.db	00166$
-      001BD1 47                     856 	.db	00166$
-      001BD2 47                     857 	.db	00166$
-      001BD3 47                     858 	.db	00166$
-      001BD4 47                     859 	.db	00102$
-      001BD5 4F                     860 	.db	00104$
-      001BD6 57                     861 	.db	00106$
-      001BD7 5F                     862 	.db	00108$
-      001BD8 67                     863 	.db	00110$
-      001BD9 6F                     864 	.db	00112$
-      001BDA 77                     865 	.db	00114$
-      001BDB 7F                     866 	.db	00116$
-      001BDC 87                     867 	.db	00118$
-      001BDD 8F                     868 	.db	00120$
-      001BDE 97                     869 	.db	00122$
-      001BDF 9F                     870 	.db	00124$
-      001BE0 A7                     871 	.db	00126$
-      001BE1 AF                     872 	.db	00128$
-      001BE2 B7                     873 	.db	00130$
-      001BE3 BF                     874 	.db	00132$
-      001BE4 C7                     875 	.db	00134$
-      001BE5 CF                     876 	.db	00136$
-      001BE6 D7                     877 	.db	00138$
-      001BE7 DF                     878 	.db	00140$
-      001BE8 E7                     879 	.db	00142$
-      001BE9 EF                     880 	.db	00144$
-      001BEA F7                     881 	.db	00146$
-      001BEB FF                     882 	.db	00148$
-      001BEC 07                     883 	.db	00150$
-      001BED 0F                     884 	.db	00152$
-      001BEE                        885 00181$:
-      001BEE 1D                     886 	.db	00164$>>8
-      001BEF 1D                     887 	.db	00166$>>8
-      001BF0 1D                     888 	.db	00166$>>8
-      001BF1 1D                     889 	.db	00166$>>8
-      001BF2 1D                     890 	.db	00166$>>8
-      001BF3 1D                     891 	.db	00163$>>8
-      001BF4 1D                     892 	.db	00166$>>8
-      001BF5 1D                     893 	.db	00166$>>8
-      001BF6 1D                     894 	.db	00166$>>8
-      001BF7 1D                     895 	.db	00166$>>8
-      001BF8 1D                     896 	.db	00153$>>8
-      001BF9 1D                     897 	.db	00154$>>8
-      001BFA 1D                     898 	.db	00155$>>8
-      001BFB 1D                     899 	.db	00156$>>8
-      001BFC 1D                     900 	.db	00157$>>8
-      001BFD 1D                     901 	.db	00158$>>8
-      001BFE 1D                     902 	.db	00159$>>8
-      001BFF 1D                     903 	.db	00160$>>8
-      001C00 1D                     904 	.db	00161$>>8
-      001C01 1D                     905 	.db	00162$>>8
-      001C02 1D                     906 	.db	00166$>>8
-      001C03 1D                     907 	.db	00165$>>8
-      001C04 1D                     908 	.db	00166$>>8
-      001C05 1D                     909 	.db	00166$>>8
-      001C06 1D                     910 	.db	00166$>>8
-      001C07 1D                     911 	.db	00166$>>8
-      001C08 1D                     912 	.db	00166$>>8
-      001C09 1C                     913 	.db	00101$>>8
-      001C0A 1C                     914 	.db	00103$>>8
-      001C0B 1C                     915 	.db	00105$>>8
-      001C0C 1C                     916 	.db	00107$>>8
-      001C0D 1C                     917 	.db	00109$>>8
-      001C0E 1C                     918 	.db	00111$>>8
-      001C0F 1C                     919 	.db	00113$>>8
-      001C10 1C                     920 	.db	00115$>>8
-      001C11 1C                     921 	.db	00117$>>8
-      001C12 1C                     922 	.db	00119$>>8
-      001C13 1C                     923 	.db	00121$>>8
-      001C14 1C                     924 	.db	00123$>>8
-      001C15 1C                     925 	.db	00125$>>8
-      001C16 1C                     926 	.db	00127$>>8
-      001C17 1C                     927 	.db	00129$>>8
-      001C18 1C                     928 	.db	00131$>>8
-      001C19 1C                     929 	.db	00133$>>8
-      001C1A 1C                     930 	.db	00135$>>8
-      001C1B 1C                     931 	.db	00137$>>8
-      001C1C 1C                     932 	.db	00139$>>8
-      001C1D 1C                     933 	.db	00141$>>8
-      001C1E 1C                     934 	.db	00143$>>8
-      001C1F 1C                     935 	.db	00145$>>8
-      001C20 1C                     936 	.db	00147$>>8
-      001C21 1D                     937 	.db	00149$>>8
-      001C22 1D                     938 	.db	00151$>>8
-      001C23 1D                     939 	.db	00166$>>8
-      001C24 1D                     940 	.db	00166$>>8
-      001C25 1D                     941 	.db	00166$>>8
-      001C26 1D                     942 	.db	00166$>>8
-      001C27 1D                     943 	.db	00166$>>8
-      001C28 1D                     944 	.db	00166$>>8
-      001C29 1C                     945 	.db	00102$>>8
-      001C2A 1C                     946 	.db	00104$>>8
-      001C2B 1C                     947 	.db	00106$>>8
-      001C2C 1C                     948 	.db	00108$>>8
-      001C2D 1C                     949 	.db	00110$>>8
-      001C2E 1C                     950 	.db	00112$>>8
-      001C2F 1C                     951 	.db	00114$>>8
-      001C30 1C                     952 	.db	00116$>>8
-      001C31 1C                     953 	.db	00118$>>8
-      001C32 1C                     954 	.db	00120$>>8
-      001C33 1C                     955 	.db	00122$>>8
-      001C34 1C                     956 	.db	00124$>>8
-      001C35 1C                     957 	.db	00126$>>8
-      001C36 1C                     958 	.db	00128$>>8
-      001C37 1C                     959 	.db	00130$>>8
-      001C38 1C                     960 	.db	00132$>>8
-      001C39 1C                     961 	.db	00134$>>8
-      001C3A 1C                     962 	.db	00136$>>8
-      001C3B 1C                     963 	.db	00138$>>8
-      001C3C 1C                     964 	.db	00140$>>8
-      001C3D 1C                     965 	.db	00142$>>8
-      001C3E 1C                     966 	.db	00144$>>8
-      001C3F 1C                     967 	.db	00146$>>8
-      001C40 1C                     968 	.db	00148$>>8
-      001C41 1D                     969 	.db	00150$>>8
-      001C42 1D                     970 	.db	00152$>>8
-                                    971 ;	../UI_Manager/Display_Manager/display.c:102: case 'A':
-      001C43                        972 00101$:
-                                    973 ;	../UI_Manager/Display_Manager/display.c:103: return CHAR_A;
-      001C43 75 82 82         [24]  974 	mov	dpl,#0x82
-      001C46 22               [24]  975 	ret
-                                    976 ;	../UI_Manager/Display_Manager/display.c:104: case 'a':
-      001C47                        977 00102$:
-                                    978 ;	../UI_Manager/Display_Manager/display.c:105: return CHAR_a;
-      001C47 75 82 86         [24]  979 	mov	dpl,#0x86
-      001C4A 22               [24]  980 	ret
-                                    981 ;	../UI_Manager/Display_Manager/display.c:106: case 'B':
-      001C4B                        982 00103$:
-                                    983 ;	../UI_Manager/Display_Manager/display.c:107: return CHAR_B;
-      001C4B 75 82 42         [24]  984 	mov	dpl,#0x42
-      001C4E 22               [24]  985 	ret
-                                    986 ;	../UI_Manager/Display_Manager/display.c:108: case 'b':
-      001C4F                        987 00104$:
-                                    988 ;	../UI_Manager/Display_Manager/display.c:109: return CHAR_b;
-      001C4F 75 82 46         [24]  989 	mov	dpl,#0x46
-      001C52 22               [24]  990 	ret
-                                    991 ;	../UI_Manager/Display_Manager/display.c:110: case 'C':
-      001C53                        992 00105$:
-                                    993 ;	../UI_Manager/Display_Manager/display.c:111: return CHAR_C;
-      001C53 75 82 C2         [24]  994 	mov	dpl,#0xc2
-      001C56 22               [24]  995 	ret
-                                    996 ;	../UI_Manager/Display_Manager/display.c:112: case 'c':
-      001C57                        997 00106$:
-                                    998 ;	../UI_Manager/Display_Manager/display.c:113: return CHAR_c;
-      001C57 75 82 C6         [24]  999 	mov	dpl,#0xc6
-      001C5A 22               [24] 1000 	ret
-                                   1001 ;	../UI_Manager/Display_Manager/display.c:114: case 'D':
-      001C5B                       1002 00107$:
-                                   1003 ;	../UI_Manager/Display_Manager/display.c:115: return CHAR_D;
-      001C5B 75 82 22         [24] 1004 	mov	dpl,#0x22
-      001C5E 22               [24] 1005 	ret
-                                   1006 ;	../UI_Manager/Display_Manager/display.c:116: case 'd':
-      001C5F                       1007 00108$:
-                                   1008 ;	../UI_Manager/Display_Manager/display.c:117: return CHAR_d;
-      001C5F 75 82 26         [24] 1009 	mov	dpl,#0x26
-      001C62 22               [24] 1010 	ret
-                                   1011 ;	../UI_Manager/Display_Manager/display.c:118: case 'E':
-      001C63                       1012 00109$:
-                                   1013 ;	../UI_Manager/Display_Manager/display.c:119: return CHAR_E;
-      001C63 75 82 A2         [24] 1014 	mov	dpl,#0xa2
-      001C66 22               [24] 1015 	ret
-                                   1016 ;	../UI_Manager/Display_Manager/display.c:120: case 'e':
-      001C67                       1017 00110$:
-                                   1018 ;	../UI_Manager/Display_Manager/display.c:121: return CHAR_e;
-      001C67 75 82 A6         [24] 1019 	mov	dpl,#0xa6
-      001C6A 22               [24] 1020 	ret
-                                   1021 ;	../UI_Manager/Display_Manager/display.c:122: case 'F':
-      001C6B                       1022 00111$:
-                                   1023 ;	../UI_Manager/Display_Manager/display.c:123: return CHAR_F;
-      001C6B 75 82 62         [24] 1024 	mov	dpl,#0x62
-      001C6E 22               [24] 1025 	ret
-                                   1026 ;	../UI_Manager/Display_Manager/display.c:124: case 'f':
-      001C6F                       1027 00112$:
-                                   1028 ;	../UI_Manager/Display_Manager/display.c:125: return CHAR_f;
-      001C6F 75 82 66         [24] 1029 	mov	dpl,#0x66
-      001C72 22               [24] 1030 	ret
-                                   1031 ;	../UI_Manager/Display_Manager/display.c:126: case 'G':
-      001C73                       1032 00113$:
-                                   1033 ;	../UI_Manager/Display_Manager/display.c:127: return CHAR_G;
-      001C73 75 82 E2         [24] 1034 	mov	dpl,#0xe2
-      001C76 22               [24] 1035 	ret
-                                   1036 ;	../UI_Manager/Display_Manager/display.c:128: case 'g':
-      001C77                       1037 00114$:
-                                   1038 ;	../UI_Manager/Display_Manager/display.c:129: return CHAR_g;
-      001C77 75 82 E6         [24] 1039 	mov	dpl,#0xe6
-      001C7A 22               [24] 1040 	ret
-                                   1041 ;	../UI_Manager/Display_Manager/display.c:130: case 'H':
-      001C7B                       1042 00115$:
-                                   1043 ;	../UI_Manager/Display_Manager/display.c:131: return CHAR_H;
-      001C7B 75 82 12         [24] 1044 	mov	dpl,#0x12
-      001C7E 22               [24] 1045 	ret
-                                   1046 ;	../UI_Manager/Display_Manager/display.c:132: case 'h':
-      001C7F                       1047 00116$:
-                                   1048 ;	../UI_Manager/Display_Manager/display.c:133: return CHAR_h;
-      001C7F 75 82 16         [24] 1049 	mov	dpl,#0x16
-      001C82 22               [24] 1050 	ret
-                                   1051 ;	../UI_Manager/Display_Manager/display.c:134: case 'I':
-      001C83                       1052 00117$:
-                                   1053 ;	../UI_Manager/Display_Manager/display.c:135: return CHAR_I;
-      001C83 75 82 92         [24] 1054 	mov	dpl,#0x92
-      001C86 22               [24] 1055 	ret
-                                   1056 ;	../UI_Manager/Display_Manager/display.c:136: case 'i':
-      001C87                       1057 00118$:
-                                   1058 ;	../UI_Manager/Display_Manager/display.c:137: return CHAR_i;
-      001C87 75 82 96         [24] 1059 	mov	dpl,#0x96
-      001C8A 22               [24] 1060 	ret
-                                   1061 ;	../UI_Manager/Display_Manager/display.c:138: case 'J':
-      001C8B                       1062 00119$:
-                                   1063 ;	../UI_Manager/Display_Manager/display.c:139: return CHAR_J;
-      001C8B 75 82 52         [24] 1064 	mov	dpl,#0x52
-      001C8E 22               [24] 1065 	ret
-                                   1066 ;	../UI_Manager/Display_Manager/display.c:140: case 'j':
-      001C8F                       1067 00120$:
-                                   1068 ;	../UI_Manager/Display_Manager/display.c:141: return CHAR_j;
-      001C8F 75 82 56         [24] 1069 	mov	dpl,#0x56
-      001C92 22               [24] 1070 	ret
-                                   1071 ;	../UI_Manager/Display_Manager/display.c:142: case 'K':
-      001C93                       1072 00121$:
-                                   1073 ;	../UI_Manager/Display_Manager/display.c:143: return CHAR_K;
-      001C93 75 82 D2         [24] 1074 	mov	dpl,#0xd2
-      001C96 22               [24] 1075 	ret
-                                   1076 ;	../UI_Manager/Display_Manager/display.c:144: case 'k':
-      001C97                       1077 00122$:
-                                   1078 ;	../UI_Manager/Display_Manager/display.c:145: return CHAR_k;
-      001C97 75 82 D6         [24] 1079 	mov	dpl,#0xd6
-      001C9A 22               [24] 1080 	ret
-                                   1081 ;	../UI_Manager/Display_Manager/display.c:146: case 'L':
-      001C9B                       1082 00123$:
-                                   1083 ;	../UI_Manager/Display_Manager/display.c:147: return CHAR_L;
-      001C9B 75 82 32         [24] 1084 	mov	dpl,#0x32
-      001C9E 22               [24] 1085 	ret
-                                   1086 ;	../UI_Manager/Display_Manager/display.c:148: case 'l':
-      001C9F                       1087 00124$:
-                                   1088 ;	../UI_Manager/Display_Manager/display.c:149: return CHAR_l;
-      001C9F 75 82 36         [24] 1089 	mov	dpl,#0x36
-      001CA2 22               [24] 1090 	ret
-                                   1091 ;	../UI_Manager/Display_Manager/display.c:150: case 'M':
-      001CA3                       1092 00125$:
-                                   1093 ;	../UI_Manager/Display_Manager/display.c:151: return CHAR_M;
-      001CA3 75 82 B2         [24] 1094 	mov	dpl,#0xb2
-      001CA6 22               [24] 1095 	ret
-                                   1096 ;	../UI_Manager/Display_Manager/display.c:152: case 'm':
-      001CA7                       1097 00126$:
-                                   1098 ;	../UI_Manager/Display_Manager/display.c:153: return CHAR_m;
-      001CA7 75 82 B6         [24] 1099 	mov	dpl,#0xb6
-      001CAA 22               [24] 1100 	ret
-                                   1101 ;	../UI_Manager/Display_Manager/display.c:154: case 'N':
-      001CAB                       1102 00127$:
-                                   1103 ;	../UI_Manager/Display_Manager/display.c:155: return CHAR_N;
-      001CAB 75 82 72         [24] 1104 	mov	dpl,#0x72
-      001CAE 22               [24] 1105 	ret
-                                   1106 ;	../UI_Manager/Display_Manager/display.c:156: case 'n':
-      001CAF                       1107 00128$:
-                                   1108 ;	../UI_Manager/Display_Manager/display.c:157: return CHAR_n;
-      001CAF 75 82 76         [24] 1109 	mov	dpl,#0x76
-      001CB2 22               [24] 1110 	ret
-                                   1111 ;	../UI_Manager/Display_Manager/display.c:158: case 'O':
-      001CB3                       1112 00129$:
-                                   1113 ;	../UI_Manager/Display_Manager/display.c:159: return CHAR_O;
-      001CB3 75 82 F2         [24] 1114 	mov	dpl,#0xf2
-      001CB6 22               [24] 1115 	ret
-                                   1116 ;	../UI_Manager/Display_Manager/display.c:160: case 'o':
-      001CB7                       1117 00130$:
-                                   1118 ;	../UI_Manager/Display_Manager/display.c:161: return CHAR_o;
-      001CB7 75 82 F6         [24] 1119 	mov	dpl,#0xf6
-      001CBA 22               [24] 1120 	ret
-                                   1121 ;	../UI_Manager/Display_Manager/display.c:162: case 'P':
-      001CBB                       1122 00131$:
-                                   1123 ;	../UI_Manager/Display_Manager/display.c:163: return CHAR_P;
-      001CBB 75 82 0A         [24] 1124 	mov	dpl,#0x0a
-      001CBE 22               [24] 1125 	ret
-                                   1126 ;	../UI_Manager/Display_Manager/display.c:164: case 'p':
-      001CBF                       1127 00132$:
-                                   1128 ;	../UI_Manager/Display_Manager/display.c:165: return CHAR_p;
-      001CBF 75 82 0E         [24] 1129 	mov	dpl,#0x0e
-      001CC2 22               [24] 1130 	ret
-                                   1131 ;	../UI_Manager/Display_Manager/display.c:166: case 'Q':
-      001CC3                       1132 00133$:
-                                   1133 ;	../UI_Manager/Display_Manager/display.c:167: return CHAR_Q;
-      001CC3 75 82 8A         [24] 1134 	mov	dpl,#0x8a
-      001CC6 22               [24] 1135 	ret
-                                   1136 ;	../UI_Manager/Display_Manager/display.c:168: case 'q':
-      001CC7                       1137 00134$:
-                                   1138 ;	../UI_Manager/Display_Manager/display.c:169: return CHAR_q;
-      001CC7 75 82 8E         [24] 1139 	mov	dpl,#0x8e
-      001CCA 22               [24] 1140 	ret
-                                   1141 ;	../UI_Manager/Display_Manager/display.c:170: case 'R':
-      001CCB                       1142 00135$:
-                                   1143 ;	../UI_Manager/Display_Manager/display.c:171: return CHAR_R;
-      001CCB 75 82 4A         [24] 1144 	mov	dpl,#0x4a
-      001CCE 22               [24] 1145 	ret
-                                   1146 ;	../UI_Manager/Display_Manager/display.c:172: case 'r':
-      001CCF                       1147 00136$:
-                                   1148 ;	../UI_Manager/Display_Manager/display.c:173: return CHAR_r;
-      001CCF 75 82 4E         [24] 1149 	mov	dpl,#0x4e
-      001CD2 22               [24] 1150 	ret
-                                   1151 ;	../UI_Manager/Display_Manager/display.c:174: case 'S':
-      001CD3                       1152 00137$:
-                                   1153 ;	../UI_Manager/Display_Manager/display.c:175: return CHAR_S;
-      001CD3 75 82 CA         [24] 1154 	mov	dpl,#0xca
-      001CD6 22               [24] 1155 	ret
-                                   1156 ;	../UI_Manager/Display_Manager/display.c:176: case 's':
-      001CD7                       1157 00138$:
-                                   1158 ;	../UI_Manager/Display_Manager/display.c:177: return CHAR_s;
-      001CD7 75 82 CE         [24] 1159 	mov	dpl,#0xce
-      001CDA 22               [24] 1160 	ret
-                                   1161 ;	../UI_Manager/Display_Manager/display.c:178: case 'T':
-      001CDB                       1162 00139$:
-                                   1163 ;	../UI_Manager/Display_Manager/display.c:179: return CHAR_T;
-      001CDB 75 82 2A         [24] 1164 	mov	dpl,#0x2a
-      001CDE 22               [24] 1165 	ret
-                                   1166 ;	../UI_Manager/Display_Manager/display.c:180: case 't':
-      001CDF                       1167 00140$:
-                                   1168 ;	../UI_Manager/Display_Manager/display.c:181: return CHAR_t;
-      001CDF 75 82 2E         [24] 1169 	mov	dpl,#0x2e
-      001CE2 22               [24] 1170 	ret
-                                   1171 ;	../UI_Manager/Display_Manager/display.c:182: case 'U':
-      001CE3                       1172 00141$:
-                                   1173 ;	../UI_Manager/Display_Manager/display.c:183: return CHAR_U;
-      001CE3 75 82 AA         [24] 1174 	mov	dpl,#0xaa
-      001CE6 22               [24] 1175 	ret
-                                   1176 ;	../UI_Manager/Display_Manager/display.c:184: case 'u':
-      001CE7                       1177 00142$:
-                                   1178 ;	../UI_Manager/Display_Manager/display.c:185: return CHAR_u;
-      001CE7 75 82 AE         [24] 1179 	mov	dpl,#0xae
-      001CEA 22               [24] 1180 	ret
-                                   1181 ;	../UI_Manager/Display_Manager/display.c:186: case 'V':
-      001CEB                       1182 00143$:
-                                   1183 ;	../UI_Manager/Display_Manager/display.c:187: return CHAR_V;
-      001CEB 75 82 6A         [24] 1184 	mov	dpl,#0x6a
-      001CEE 22               [24] 1185 	ret
-                                   1186 ;	../UI_Manager/Display_Manager/display.c:188: case 'v':
-      001CEF                       1187 00144$:
-                                   1188 ;	../UI_Manager/Display_Manager/display.c:189: return CHAR_v;
-      001CEF 75 82 6E         [24] 1189 	mov	dpl,#0x6e
-      001CF2 22               [24] 1190 	ret
-                                   1191 ;	../UI_Manager/Display_Manager/display.c:190: case 'W':
-      001CF3                       1192 00145$:
-                                   1193 ;	../UI_Manager/Display_Manager/display.c:191: return CHAR_W;
-      001CF3 75 82 EA         [24] 1194 	mov	dpl,#0xea
-                                   1195 ;	../UI_Manager/Display_Manager/display.c:192: case 'w':
-      001CF6 22               [24] 1196 	ret
-      001CF7                       1197 00146$:
-                                   1198 ;	../UI_Manager/Display_Manager/display.c:193: return CHAR_w;
-      001CF7 75 82 EE         [24] 1199 	mov	dpl,#0xee
-                                   1200 ;	../UI_Manager/Display_Manager/display.c:194: case 'X':
-      001CFA 22               [24] 1201 	ret
-      001CFB                       1202 00147$:
-                                   1203 ;	../UI_Manager/Display_Manager/display.c:195: return CHAR_X;
-      001CFB 75 82 1A         [24] 1204 	mov	dpl,#0x1a
-                                   1205 ;	../UI_Manager/Display_Manager/display.c:196: case 'x':
-      001CFE 22               [24] 1206 	ret
-      001CFF                       1207 00148$:
-                                   1208 ;	../UI_Manager/Display_Manager/display.c:197: return CHAR_x;
-      001CFF 75 82 1E         [24] 1209 	mov	dpl,#0x1e
-                                   1210 ;	../UI_Manager/Display_Manager/display.c:198: case 'Y':
-      001D02 22               [24] 1211 	ret
-      001D03                       1212 00149$:
-                                   1213 ;	../UI_Manager/Display_Manager/display.c:199: return CHAR_Y;
-      001D03 75 82 9A         [24] 1214 	mov	dpl,#0x9a
-                                   1215 ;	../UI_Manager/Display_Manager/display.c:200: case 'y':
-      001D06 22               [24] 1216 	ret
-      001D07                       1217 00150$:
-                                   1218 ;	../UI_Manager/Display_Manager/display.c:201: return CHAR_y;
-      001D07 75 82 9E         [24] 1219 	mov	dpl,#0x9e
-                                   1220 ;	../UI_Manager/Display_Manager/display.c:202: case 'Z':
-      001D0A 22               [24] 1221 	ret
-      001D0B                       1222 00151$:
-                                   1223 ;	../UI_Manager/Display_Manager/display.c:203: return CHAR_Z;
-      001D0B 75 82 5A         [24] 1224 	mov	dpl,#0x5a
-                                   1225 ;	../UI_Manager/Display_Manager/display.c:204: case 'z':
-      001D0E 22               [24] 1226 	ret
-      001D0F                       1227 00152$:
-                                   1228 ;	../UI_Manager/Display_Manager/display.c:205: return CHAR_z;
-      001D0F 75 82 5E         [24] 1229 	mov	dpl,#0x5e
-                                   1230 ;	../UI_Manager/Display_Manager/display.c:206: case '0':
-      001D12 22               [24] 1231 	ret
-      001D13                       1232 00153$:
-                                   1233 ;	../UI_Manager/Display_Manager/display.c:207: return CHAR_0;
-      001D13 75 82 0C         [24] 1234 	mov	dpl,#0x0c
-                                   1235 ;	../UI_Manager/Display_Manager/display.c:208: case '1':
-      001D16 22               [24] 1236 	ret
-      001D17                       1237 00154$:
-                                   1238 ;	../UI_Manager/Display_Manager/display.c:209: return CHAR_1;
-      001D17 75 82 8C         [24] 1239 	mov	dpl,#0x8c
-                                   1240 ;	../UI_Manager/Display_Manager/display.c:210: case '2':
-      001D1A 22               [24] 1241 	ret
-      001D1B                       1242 00155$:
-                                   1243 ;	../UI_Manager/Display_Manager/display.c:211: return CHAR_2;
-      001D1B 75 82 4C         [24] 1244 	mov	dpl,#0x4c
-                                   1245 ;	../UI_Manager/Display_Manager/display.c:212: case '3':
-      001D1E 22               [24] 1246 	ret
-      001D1F                       1247 00156$:
-                                   1248 ;	../UI_Manager/Display_Manager/display.c:213: return CHAR_3;
-      001D1F 75 82 CC         [24] 1249 	mov	dpl,#0xcc
-                                   1250 ;	../UI_Manager/Display_Manager/display.c:214: case '4':
-      001D22 22               [24] 1251 	ret
-      001D23                       1252 00157$:
-                                   1253 ;	../UI_Manager/Display_Manager/display.c:215: return CHAR_4;
-      001D23 75 82 2C         [24] 1254 	mov	dpl,#0x2c
-                                   1255 ;	../UI_Manager/Display_Manager/display.c:216: case '5':
-      001D26 22               [24] 1256 	ret
-      001D27                       1257 00158$:
-                                   1258 ;	../UI_Manager/Display_Manager/display.c:217: return CHAR_5;
-      001D27 75 82 AC         [24] 1259 	mov	dpl,#0xac
-                                   1260 ;	../UI_Manager/Display_Manager/display.c:218: case '6':
-      001D2A 22               [24] 1261 	ret
-      001D2B                       1262 00159$:
-                                   1263 ;	../UI_Manager/Display_Manager/display.c:219: return CHAR_6;
-      001D2B 75 82 6C         [24] 1264 	mov	dpl,#0x6c
-                                   1265 ;	../UI_Manager/Display_Manager/display.c:220: case '7':
-      001D2E 22               [24] 1266 	ret
-      001D2F                       1267 00160$:
-                                   1268 ;	../UI_Manager/Display_Manager/display.c:221: return CHAR_7;
-      001D2F 75 82 EC         [24] 1269 	mov	dpl,#0xec
-                                   1270 ;	../UI_Manager/Display_Manager/display.c:222: case '8':
-      001D32 22               [24] 1271 	ret
-      001D33                       1272 00161$:
-                                   1273 ;	../UI_Manager/Display_Manager/display.c:223: return CHAR_8;
-      001D33 75 82 1C         [24] 1274 	mov	dpl,#0x1c
-                                   1275 ;	../UI_Manager/Display_Manager/display.c:224: case '9':
-      001D36 22               [24] 1276 	ret
-      001D37                       1277 00162$:
-                                   1278 ;	../UI_Manager/Display_Manager/display.c:225: return CHAR_9;
-      001D37 75 82 9C         [24] 1279 	mov	dpl,#0x9c
-                                   1280 ;	../UI_Manager/Display_Manager/display.c:226: case '+':
-      001D3A 22               [24] 1281 	ret
-      001D3B                       1282 00163$:
-                                   1283 ;	../UI_Manager/Display_Manager/display.c:227: return CHAR_PLUS;
-      001D3B 75 82 D4         [24] 1284 	mov	dpl,#0xd4
-                                   1285 ;	../UI_Manager/Display_Manager/display.c:228: case '&':
-      001D3E 22               [24] 1286 	ret
-      001D3F                       1287 00164$:
-                                   1288 ;	../UI_Manager/Display_Manager/display.c:229: return CHAR_AND;
-      001D3F 75 82 64         [24] 1289 	mov	dpl,#0x64
-                                   1290 ;	../UI_Manager/Display_Manager/display.c:230: case ';':
-      001D42 22               [24] 1291 	ret
-      001D43                       1292 00165$:
-                                   1293 ;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_8;
-      001D43 75 82 E0         [24] 1294 	mov	dpl,#0xe0
-                                   1295 ;	../UI_Manager/Display_Manager/display.c:232: }
-      001D46 22               [24] 1296 	ret
-      001D47                       1297 00166$:
-                                   1298 ;	../UI_Manager/Display_Manager/display.c:234: return CHAR_NULL;
-      001D47 75 82 04         [24] 1299 	mov	dpl,#0x04
-                                   1300 ;	../UI_Manager/Display_Manager/display.c:235: }
-      001D4A 22               [24] 1301 	ret
-                                   1302 ;------------------------------------------------------------
-                                   1303 ;Allocation info for local variables in function 'writeShiftReg'
-                                   1304 ;------------------------------------------------------------
-                                   1305 ;value                     Allocated to registers r6 r7 
-                                   1306 ;i                         Allocated to registers r5 
-                                   1307 ;------------------------------------------------------------
-                                   1308 ;	../UI_Manager/Display_Manager/display.c:240: void writeShiftReg(uint16_t value){
-                                   1309 ;	-----------------------------------------
-                                   1310 ;	 function writeShiftReg
-                                   1311 ;	-----------------------------------------
-      001D4B                       1312 _writeShiftReg:
-      001D4B AE 82            [24] 1313 	mov	r6,dpl
-      001D4D AF 83            [24] 1314 	mov	r7,dph
-                                   1315 ;	../UI_Manager/Display_Manager/display.c:243: for(i = 4; i < USEFUL_BITS+4; i++){
-      001D4F 7D 04            [12] 1316 	mov	r5,#0x04
-      001D51                       1317 00102$:
-                                   1318 ;	../UI_Manager/Display_Manager/display.c:244: SER = value & (1 << i);
-      001D51 8D F0            [24] 1319 	mov	b,r5
-      001D53 05 F0            [12] 1320 	inc	b
-      001D55 7B 01            [12] 1321 	mov	r3,#0x01
-      001D57 7C 00            [12] 1322 	mov	r4,#0x00
-      001D59 80 06            [24] 1323 	sjmp	00116$
-      001D5B                       1324 00115$:
-      001D5B EB               [12] 1325 	mov	a,r3
-      001D5C 2B               [12] 1326 	add	a,r3
-      001D5D FB               [12] 1327 	mov	r3,a
-      001D5E EC               [12] 1328 	mov	a,r4
-      001D5F 33               [12] 1329 	rlc	a
-      001D60 FC               [12] 1330 	mov	r4,a
-      001D61                       1331 00116$:
-      001D61 D5 F0 F7         [24] 1332 	djnz	b,00115$
-      001D64 EE               [12] 1333 	mov	a,r6
-      001D65 52 03            [12] 1334 	anl	ar3,a
-      001D67 EF               [12] 1335 	mov	a,r7
-      001D68 52 04            [12] 1336 	anl	ar4,a
-                                   1337 ;	assignBit
-      001D6A EB               [12] 1338 	mov	a,r3
-      001D6B 4C               [12] 1339 	orl	a,r4
-      001D6C 24 FF            [12] 1340 	add	a,#0xff
-      001D6E 92 95            [24] 1341 	mov	_SER,c
-                                   1342 ;	../UI_Manager/Display_Manager/display.c:247: SCK = 1;
-                                   1343 ;	assignBit
-      001D70 D2 93            [12] 1344 	setb	_SCK
-                                   1345 ;	../UI_Manager/Display_Manager/display.c:248: SCK = 0;
-                                   1346 ;	assignBit
-      001D72 C2 93            [12] 1347 	clr	_SCK
-                                   1348 ;	../UI_Manager/Display_Manager/display.c:243: for(i = 4; i < USEFUL_BITS+4; i++){
-      001D74 0D               [12] 1349 	inc	r5
-      001D75 BD 10 00         [24] 1350 	cjne	r5,#0x10,00117$
-      001D78                       1351 00117$:
-      001D78 40 D7            [24] 1352 	jc	00102$
-                                   1353 ;	../UI_Manager/Display_Manager/display.c:250: RCK = 1;
-                                   1354 ;	assignBit
-      001D7A D2 92            [12] 1355 	setb	_RCK
-                                   1356 ;	../UI_Manager/Display_Manager/display.c:251: RCK = 0;
-                                   1357 ;	assignBit
-      001D7C C2 92            [12] 1358 	clr	_RCK
-                                   1359 ;	../UI_Manager/Display_Manager/display.c:252: }
-      001D7E 22               [24] 1360 	ret
-                                   1361 ;------------------------------------------------------------
-                                   1362 ;Allocation info for local variables in function 'flipByte'
-                                   1363 ;------------------------------------------------------------
-                                   1364 ;line                      Allocated to registers r7 
-                                   1365 ;i                         Allocated to registers r5 
-                                   1366 ;temp                      Allocated to registers r6 
-                                   1367 ;------------------------------------------------------------
-                                   1368 ;	../UI_Manager/Display_Manager/display.c:255: uint8_t flipByte(uint8_t line){
-                                   1369 ;	-----------------------------------------
-                                   1370 ;	 function flipByte
-                                   1371 ;	-----------------------------------------
-      001D7F                       1372 _flipByte:
-      001D7F AF 82            [24] 1373 	mov	r7,dpl
-                                   1374 ;	../UI_Manager/Display_Manager/display.c:256: uint8_t i, temp = 0;
-      001D81 7E 00            [12] 1375 	mov	r6,#0x00
-                                   1376 ;	../UI_Manager/Display_Manager/display.c:258: for(i = 0; i < 8; i++){
-      001D83 7D 00            [12] 1377 	mov	r5,#0x00
-      001D85                       1378 00102$:
-                                   1379 ;	../UI_Manager/Display_Manager/display.c:259: temp |= (((line & (0x80 >> i)) ? 1 : 0) << i);
-      001D85 8D F0            [24] 1380 	mov	b,r5
-      001D87 05 F0            [12] 1381 	inc	b
-      001D89 7B 80            [12] 1382 	mov	r3,#0x80
-      001D8B E4               [12] 1383 	clr	a
-      001D8C FC               [12] 1384 	mov	r4,a
-      001D8D 33               [12] 1385 	rlc	a
-      001D8E 92 D2            [24] 1386 	mov	ov,c
-      001D90 80 08            [24] 1387 	sjmp	00122$
-      001D92                       1388 00121$:
-      001D92 A2 D2            [12] 1389 	mov	c,ov
-      001D94 EC               [12] 1390 	mov	a,r4
-      001D95 13               [12] 1391 	rrc	a
-      001D96 FC               [12] 1392 	mov	r4,a
-      001D97 EB               [12] 1393 	mov	a,r3
-      001D98 13               [12] 1394 	rrc	a
-      001D99 FB               [12] 1395 	mov	r3,a
-      001D9A                       1396 00122$:
-      001D9A D5 F0 F5         [24] 1397 	djnz	b,00121$
-      001D9D 8F 01            [24] 1398 	mov	ar1,r7
-      001D9F 7A 00            [12] 1399 	mov	r2,#0x00
-      001DA1 E9               [12] 1400 	mov	a,r1
-      001DA2 52 03            [12] 1401 	anl	ar3,a
-      001DA4 EA               [12] 1402 	mov	a,r2
-      001DA5 52 04            [12] 1403 	anl	ar4,a
-      001DA7 EB               [12] 1404 	mov	a,r3
-      001DA8 4C               [12] 1405 	orl	a,r4
-      001DA9 60 06            [24] 1406 	jz	00106$
-      001DAB 7B 01            [12] 1407 	mov	r3,#0x01
-      001DAD 7C 00            [12] 1408 	mov	r4,#0x00
-      001DAF 80 04            [24] 1409 	sjmp	00107$
-      001DB1                       1410 00106$:
-      001DB1 7B 00            [12] 1411 	mov	r3,#0x00
-      001DB3 7C 00            [12] 1412 	mov	r4,#0x00
-      001DB5                       1413 00107$:
-      001DB5 8D 04            [24] 1414 	mov	ar4,r5
-      001DB7 8C F0            [24] 1415 	mov	b,r4
-      001DB9 05 F0            [12] 1416 	inc	b
-      001DBB EB               [12] 1417 	mov	a,r3
-      001DBC 80 02            [24] 1418 	sjmp	00126$
-      001DBE                       1419 00124$:
-      001DBE 25 E0            [12] 1420 	add	a,acc
-      001DC0                       1421 00126$:
-      001DC0 D5 F0 FB         [24] 1422 	djnz	b,00124$
-      001DC3 8E 04            [24] 1423 	mov	ar4,r6
-      001DC5 4C               [12] 1424 	orl	a,r4
-      001DC6 FE               [12] 1425 	mov	r6,a
-                                   1426 ;	../UI_Manager/Display_Manager/display.c:258: for(i = 0; i < 8; i++){
-      001DC7 0D               [12] 1427 	inc	r5
-      001DC8 BD 08 00         [24] 1428 	cjne	r5,#0x08,00127$
-      001DCB                       1429 00127$:
-      001DCB 40 B8            [24] 1430 	jc	00102$
-                                   1431 ;	../UI_Manager/Display_Manager/display.c:262: return temp;
-      001DCD 8E 82            [24] 1432 	mov	dpl,r6
-                                   1433 ;	../UI_Manager/Display_Manager/display.c:263: }
-      001DCF 22               [24] 1434 	ret
-                                   1435 	.area CSEG    (CODE)
-                                   1436 	.area CONST   (CODE)
-                                   1437 	.area XINIT   (CODE)
-                                   1438 	.area CABS    (ABS,CODE)
+                                    264 	.area CSEG    (CODE)
+                                    265 ;------------------------------------------------------------
+                                    266 ;Allocation info for local variables in function 'write_string'
+                                    267 ;------------------------------------------------------------
+                                    268 ;length                    Allocated to stack - _bp -3
+                                    269 ;index                     Allocated to stack - _bp -4
+                                    270 ;line                      Allocated to stack - _bp -5
+                                    271 ;selected                  Allocated to stack - _bp -6
+                                    272 ;string                    Allocated to stack - _bp +1
+                                    273 ;i                         Allocated to registers r3 
+                                    274 ;done                      Allocated to registers r4 
+                                    275 ;sloc0                     Allocated to stack - _bp +6
+                                    276 ;------------------------------------------------------------
+                                    277 ;	../UI_Manager/Display_Manager/display.c:16: void write_string(char* string, uint8_t length, uint8_t index, uint8_t line, uint8_t selected){
+                                    278 ;	-----------------------------------------
+                                    279 ;	 function write_string
+                                    280 ;	-----------------------------------------
+      001CAB                        281 _write_string:
+                           000007   282 	ar7 = 0x07
+                           000006   283 	ar6 = 0x06
+                           000005   284 	ar5 = 0x05
+                           000004   285 	ar4 = 0x04
+                           000003   286 	ar3 = 0x03
+                           000002   287 	ar2 = 0x02
+                           000001   288 	ar1 = 0x01
+                           000000   289 	ar0 = 0x00
+      001CAB C0 1A            [24]  290 	push	_bp
+      001CAD 85 81 1A         [24]  291 	mov	_bp,sp
+      001CB0 C0 82            [24]  292 	push	dpl
+      001CB2 C0 83            [24]  293 	push	dph
+      001CB4 C0 F0            [24]  294 	push	b
+                                    295 ;	../UI_Manager/Display_Manager/display.c:17: uint8_t i, done = 0;
+      001CB6 7C 00            [12]  296 	mov	r4,#0x00
+                                    297 ;	../UI_Manager/Display_Manager/display.c:20: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
+      001CB8 E5 1A            [12]  298 	mov	a,_bp
+      001CBA 24 FB            [12]  299 	add	a,#0xfb
+      001CBC F8               [12]  300 	mov	r0,a
+      001CBD E6               [12]  301 	mov	a,@r0
+      001CBE 60 0D            [24]  302 	jz	00115$
+      001CC0 E5 1A            [12]  303 	mov	a,_bp
+      001CC2 24 FC            [12]  304 	add	a,#0xfc
+      001CC4 F8               [12]  305 	mov	r0,a
+      001CC5 86 03            [24]  306 	mov	ar3,@r0
+      001CC7 74 40            [12]  307 	mov	a,#0x40
+      001CC9 2B               [12]  308 	add	a,r3
+      001CCA FB               [12]  309 	mov	r3,a
+      001CCB 80 07            [24]  310 	sjmp	00116$
+      001CCD                        311 00115$:
+      001CCD E5 1A            [12]  312 	mov	a,_bp
+      001CCF 24 FC            [12]  313 	add	a,#0xfc
+      001CD1 F8               [12]  314 	mov	r0,a
+      001CD2 86 03            [24]  315 	mov	ar3,@r0
+      001CD4                        316 00116$:
+      001CD4 8B 82            [24]  317 	mov	dpl,r3
+      001CD6 C0 04            [24]  318 	push	ar4
+      001CD8 12 22 35         [24]  319 	lcall	_flipByte
+      001CDB AA 82            [24]  320 	mov	r2,dpl
+      001CDD 7B 00            [12]  321 	mov	r3,#0x00
+      001CDF 8B 82            [24]  322 	mov	dpl,r3
+      001CE1 74 01            [12]  323 	mov	a,#0x01
+      001CE3 4A               [12]  324 	orl	a,r2
+      001CE4 F5 83            [12]  325 	mov	dph,a
+      001CE6 12 1F E6         [24]  326 	lcall	_exe_command
+      001CE9 D0 04            [24]  327 	pop	ar4
+                                    328 ;	../UI_Manager/Display_Manager/display.c:22: length++; //null terminated
+      001CEB E5 1A            [12]  329 	mov	a,_bp
+      001CED 24 FD            [12]  330 	add	a,#0xfd
+      001CEF F8               [12]  331 	mov	r0,a
+      001CF0 06               [12]  332 	inc	@r0
+                                    333 ;	../UI_Manager/Display_Manager/display.c:24: if(selected){
+      001CF1 E5 1A            [12]  334 	mov	a,_bp
+      001CF3 24 FA            [12]  335 	add	a,#0xfa
+      001CF5 F8               [12]  336 	mov	r0,a
+      001CF6 E6               [12]  337 	mov	a,@r0
+      001CF7 60 0A            [24]  338 	jz	00122$
+                                    339 ;	../UI_Manager/Display_Manager/display.c:25: exe_command(WRITE_CURSOR);
+      001CF9 90 00 80         [24]  340 	mov	dptr,#0x0080
+      001CFC C0 04            [24]  341 	push	ar4
+      001CFE 12 1F E6         [24]  342 	lcall	_exe_command
+      001D01 D0 04            [24]  343 	pop	ar4
+                                    344 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
+      001D03                        345 00122$:
+      001D03 7B 00            [12]  346 	mov	r3,#0x00
+      001D05                        347 00111$:
+      001D05 E5 1A            [12]  348 	mov	a,_bp
+      001D07 24 FD            [12]  349 	add	a,#0xfd
+      001D09 F8               [12]  350 	mov	r0,a
+      001D0A C3               [12]  351 	clr	c
+      001D0B EB               [12]  352 	mov	a,r3
+      001D0C 96               [12]  353 	subb	a,@r0
+      001D0D 50 53            [24]  354 	jnc	00113$
+                                    355 ;	../UI_Manager/Display_Manager/display.c:29: if(!done){
+      001D0F EC               [12]  356 	mov	a,r4
+      001D10 70 3F            [24]  357 	jnz	00107$
+                                    358 ;	../UI_Manager/Display_Manager/display.c:30: if(string[i]){
+      001D12 C0 04            [24]  359 	push	ar4
+      001D14 A8 1A            [24]  360 	mov	r0,_bp
+      001D16 08               [12]  361 	inc	r0
+      001D17 EB               [12]  362 	mov	a,r3
+      001D18 26               [12]  363 	add	a,@r0
+      001D19 FA               [12]  364 	mov	r2,a
+      001D1A E4               [12]  365 	clr	a
+      001D1B 08               [12]  366 	inc	r0
+      001D1C 36               [12]  367 	addc	a,@r0
+      001D1D FC               [12]  368 	mov	r4,a
+      001D1E 08               [12]  369 	inc	r0
+      001D1F 86 07            [24]  370 	mov	ar7,@r0
+      001D21 8A 82            [24]  371 	mov	dpl,r2
+      001D23 8C 83            [24]  372 	mov	dph,r4
+      001D25 8F F0            [24]  373 	mov	b,r7
+      001D27 12 36 2C         [24]  374 	lcall	__gptrget
+      001D2A FF               [12]  375 	mov	r7,a
+      001D2B D0 04            [24]  376 	pop	ar4
+      001D2D EF               [12]  377 	mov	a,r7
+      001D2E 60 1D            [24]  378 	jz	00104$
+                                    379 ;	../UI_Manager/Display_Manager/display.c:31: exe_command(RAM_WRITE | (charToCode(string[i]) << 8));
+      001D30 8F 82            [24]  380 	mov	dpl,r7
+      001D32 C0 04            [24]  381 	push	ar4
+      001D34 C0 03            [24]  382 	push	ar3
+      001D36 12 20 2C         [24]  383 	lcall	_charToCode
+      001D39 AE 82            [24]  384 	mov	r6,dpl
+      001D3B 7F 00            [12]  385 	mov	r7,#0x00
+      001D3D 74 80            [12]  386 	mov	a,#0x80
+      001D3F 4F               [12]  387 	orl	a,r7
+      001D40 F5 82            [12]  388 	mov	dpl,a
+      001D42 8E 83            [24]  389 	mov	dph,r6
+      001D44 12 1F E6         [24]  390 	lcall	_exe_command
+      001D47 D0 03            [24]  391 	pop	ar3
+      001D49 D0 04            [24]  392 	pop	ar4
+      001D4B 80 12            [24]  393 	sjmp	00112$
+      001D4D                        394 00104$:
+                                    395 ;	../UI_Manager/Display_Manager/display.c:33: done = 1;
+      001D4D 7C 01            [12]  396 	mov	r4,#0x01
+      001D4F 80 0E            [24]  397 	sjmp	00112$
+      001D51                        398 00107$:
+                                    399 ;	../UI_Manager/Display_Manager/display.c:36: exe_command(RAM_WRITE | (CHAR_NULL << 8));
+      001D51 90 04 80         [24]  400 	mov	dptr,#0x0480
+      001D54 C0 04            [24]  401 	push	ar4
+      001D56 C0 03            [24]  402 	push	ar3
+      001D58 12 1F E6         [24]  403 	lcall	_exe_command
+      001D5B D0 03            [24]  404 	pop	ar3
+      001D5D D0 04            [24]  405 	pop	ar4
+      001D5F                        406 00112$:
+                                    407 ;	../UI_Manager/Display_Manager/display.c:28: for(i = 0; i < length; i++){
+      001D5F 0B               [12]  408 	inc	r3
+      001D60 80 A3            [24]  409 	sjmp	00111$
+      001D62                        410 00113$:
+                                    411 ;	../UI_Manager/Display_Manager/display.c:39: }
+      001D62 85 1A 81         [24]  412 	mov	sp,_bp
+      001D65 D0 1A            [24]  413 	pop	_bp
+      001D67 22               [24]  414 	ret
+                                    415 ;------------------------------------------------------------
+                                    416 ;Allocation info for local variables in function 'write_number'
+                                    417 ;------------------------------------------------------------
+                                    418 ;index                     Allocated to stack - _bp -3
+                                    419 ;line                      Allocated to stack - _bp -4
+                                    420 ;selected                  Allocated to stack - _bp -5
+                                    421 ;number                    Allocated to registers r6 r7 
+                                    422 ;higherNumberPresent       Allocated to registers r5 
+                                    423 ;value                     Allocated to registers r2 r3 
+                                    424 ;chars                     Allocated to stack - _bp +1
+                                    425 ;------------------------------------------------------------
+                                    426 ;	../UI_Manager/Display_Manager/display.c:41: void write_number(uint16_t number, uint8_t index, uint8_t line, uint8_t selected){
+                                    427 ;	-----------------------------------------
+                                    428 ;	 function write_number
+                                    429 ;	-----------------------------------------
+      001D68                        430 _write_number:
+      001D68 C0 1A            [24]  431 	push	_bp
+      001D6A 85 81 1A         [24]  432 	mov	_bp,sp
+      001D6D 05 81            [12]  433 	inc	sp
+      001D6F 05 81            [12]  434 	inc	sp
+      001D71 05 81            [12]  435 	inc	sp
+      001D73 AE 82            [24]  436 	mov	r6,dpl
+      001D75 AF 83            [24]  437 	mov	r7,dph
+                                    438 ;	../UI_Manager/Display_Manager/display.c:42: uint8_t higherNumberPresent = 0;
+      001D77 7D 00            [12]  439 	mov	r5,#0x00
+                                    440 ;	../UI_Manager/Display_Manager/display.c:44: uint8_t chars[3] = {CHAR_NULL, CHAR_NULL, CHAR_0};
+      001D79 A9 1A            [24]  441 	mov	r1,_bp
+      001D7B 09               [12]  442 	inc	r1
+      001D7C 77 04            [12]  443 	mov	@r1,#0x04
+      001D7E E9               [12]  444 	mov	a,r1
+      001D7F 04               [12]  445 	inc	a
+      001D80 F8               [12]  446 	mov	r0,a
+      001D81 76 04            [12]  447 	mov	@r0,#0x04
+      001D83 74 02            [12]  448 	mov	a,#0x02
+      001D85 29               [12]  449 	add	a,r1
+      001D86 FC               [12]  450 	mov	r4,a
+      001D87 C0 00            [24]  451 	push	ar0
+      001D89 A8 04            [24]  452 	mov	r0,ar4
+      001D8B 76 0C            [12]  453 	mov	@r0,#0x0c
+      001D8D D0 00            [24]  454 	pop	ar0
+                                    455 ;	../UI_Manager/Display_Manager/display.c:46: if(number >= 1000) {number = 999;}
+      001D8F C3               [12]  456 	clr	c
+      001D90 EE               [12]  457 	mov	a,r6
+      001D91 94 E8            [12]  458 	subb	a,#0xe8
+      001D93 EF               [12]  459 	mov	a,r7
+      001D94 94 03            [12]  460 	subb	a,#0x03
+      001D96 40 04            [24]  461 	jc	00102$
+      001D98 7E E7            [12]  462 	mov	r6,#0xe7
+      001D9A 7F 03            [12]  463 	mov	r7,#0x03
+      001D9C                        464 00102$:
+                                    465 ;	../UI_Manager/Display_Manager/display.c:48: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
+      001D9C C0 00            [24]  466 	push	ar0
+      001D9E E5 1A            [12]  467 	mov	a,_bp
+      001DA0 24 FC            [12]  468 	add	a,#0xfc
+      001DA2 F8               [12]  469 	mov	r0,a
+      001DA3 E6               [12]  470 	mov	a,@r0
+      001DA4 D0 00            [24]  471 	pop	ar0
+      001DA6 60 11            [24]  472 	jz	00113$
+      001DA8 C0 00            [24]  473 	push	ar0
+      001DAA E5 1A            [12]  474 	mov	a,_bp
+      001DAC 24 FD            [12]  475 	add	a,#0xfd
+      001DAE F8               [12]  476 	mov	r0,a
+      001DAF 86 03            [24]  477 	mov	ar3,@r0
+      001DB1 D0 00            [24]  478 	pop	ar0
+      001DB3 74 40            [12]  479 	mov	a,#0x40
+      001DB5 2B               [12]  480 	add	a,r3
+      001DB6 FB               [12]  481 	mov	r3,a
+      001DB7 80 0B            [24]  482 	sjmp	00114$
+      001DB9                        483 00113$:
+      001DB9 C0 00            [24]  484 	push	ar0
+      001DBB E5 1A            [12]  485 	mov	a,_bp
+      001DBD 24 FD            [12]  486 	add	a,#0xfd
+      001DBF F8               [12]  487 	mov	r0,a
+      001DC0 86 03            [24]  488 	mov	ar3,@r0
+      001DC2 D0 00            [24]  489 	pop	ar0
+      001DC4                        490 00114$:
+      001DC4 8B 82            [24]  491 	mov	dpl,r3
+      001DC6 C0 07            [24]  492 	push	ar7
+      001DC8 C0 06            [24]  493 	push	ar6
+      001DCA C0 05            [24]  494 	push	ar5
+      001DCC C0 04            [24]  495 	push	ar4
+      001DCE C0 01            [24]  496 	push	ar1
+      001DD0 C0 00            [24]  497 	push	ar0
+      001DD2 12 22 35         [24]  498 	lcall	_flipByte
+      001DD5 AA 82            [24]  499 	mov	r2,dpl
+      001DD7 7B 00            [12]  500 	mov	r3,#0x00
+      001DD9 8B 82            [24]  501 	mov	dpl,r3
+      001DDB 74 01            [12]  502 	mov	a,#0x01
+      001DDD 4A               [12]  503 	orl	a,r2
+      001DDE F5 83            [12]  504 	mov	dph,a
+      001DE0 12 1F E6         [24]  505 	lcall	_exe_command
+      001DE3 D0 00            [24]  506 	pop	ar0
+      001DE5 D0 01            [24]  507 	pop	ar1
+      001DE7 D0 04            [24]  508 	pop	ar4
+      001DE9 D0 05            [24]  509 	pop	ar5
+      001DEB D0 06            [24]  510 	pop	ar6
+      001DED D0 07            [24]  511 	pop	ar7
+                                    512 ;	../UI_Manager/Display_Manager/display.c:51: if(selected){
+      001DEF C0 00            [24]  513 	push	ar0
+      001DF1 E5 1A            [12]  514 	mov	a,_bp
+      001DF3 24 FB            [12]  515 	add	a,#0xfb
+      001DF5 F8               [12]  516 	mov	r0,a
+      001DF6 E6               [12]  517 	mov	a,@r0
+      001DF7 D0 00            [24]  518 	pop	ar0
+      001DF9 60 20            [24]  519 	jz	00104$
+                                    520 ;	../UI_Manager/Display_Manager/display.c:52: exe_command(WRITE_CURSOR);
+      001DFB 90 00 80         [24]  521 	mov	dptr,#0x0080
+      001DFE C0 07            [24]  522 	push	ar7
+      001E00 C0 06            [24]  523 	push	ar6
+      001E02 C0 05            [24]  524 	push	ar5
+      001E04 C0 04            [24]  525 	push	ar4
+      001E06 C0 01            [24]  526 	push	ar1
+      001E08 C0 00            [24]  527 	push	ar0
+      001E0A 12 1F E6         [24]  528 	lcall	_exe_command
+      001E0D D0 00            [24]  529 	pop	ar0
+      001E0F D0 01            [24]  530 	pop	ar1
+      001E11 D0 04            [24]  531 	pop	ar4
+      001E13 D0 05            [24]  532 	pop	ar5
+      001E15 D0 06            [24]  533 	pop	ar6
+      001E17 D0 07            [24]  534 	pop	ar7
+      001E19 80 1E            [24]  535 	sjmp	00105$
+      001E1B                        536 00104$:
+                                    537 ;	../UI_Manager/Display_Manager/display.c:54: exe_command(RAM_WRITE | (CHAR_NULL << 8));
+      001E1B 90 04 80         [24]  538 	mov	dptr,#0x0480
+      001E1E C0 07            [24]  539 	push	ar7
+      001E20 C0 06            [24]  540 	push	ar6
+      001E22 C0 05            [24]  541 	push	ar5
+      001E24 C0 04            [24]  542 	push	ar4
+      001E26 C0 01            [24]  543 	push	ar1
+      001E28 C0 00            [24]  544 	push	ar0
+      001E2A 12 1F E6         [24]  545 	lcall	_exe_command
+      001E2D D0 00            [24]  546 	pop	ar0
+      001E2F D0 01            [24]  547 	pop	ar1
+      001E31 D0 04            [24]  548 	pop	ar4
+      001E33 D0 05            [24]  549 	pop	ar5
+      001E35 D0 06            [24]  550 	pop	ar6
+      001E37 D0 07            [24]  551 	pop	ar7
+      001E39                        552 00105$:
+                                    553 ;	../UI_Manager/Display_Manager/display.c:58: value = number/100;
+      001E39 C0 07            [24]  554 	push	ar7
+      001E3B C0 06            [24]  555 	push	ar6
+      001E3D C0 05            [24]  556 	push	ar5
+      001E3F C0 04            [24]  557 	push	ar4
+      001E41 C0 01            [24]  558 	push	ar1
+      001E43 C0 00            [24]  559 	push	ar0
+      001E45 74 64            [12]  560 	mov	a,#0x64
+      001E47 C0 E0            [24]  561 	push	acc
+      001E49 E4               [12]  562 	clr	a
+      001E4A C0 E0            [24]  563 	push	acc
+      001E4C 8E 82            [24]  564 	mov	dpl,r6
+      001E4E 8F 83            [24]  565 	mov	dph,r7
+      001E50 12 35 67         [24]  566 	lcall	__divuint
+      001E53 AA 82            [24]  567 	mov	r2,dpl
+      001E55 AB 83            [24]  568 	mov	r3,dph
+      001E57 15 81            [12]  569 	dec	sp
+      001E59 15 81            [12]  570 	dec	sp
+      001E5B D0 00            [24]  571 	pop	ar0
+      001E5D D0 01            [24]  572 	pop	ar1
+      001E5F D0 04            [24]  573 	pop	ar4
+      001E61 D0 05            [24]  574 	pop	ar5
+      001E63 D0 06            [24]  575 	pop	ar6
+      001E65 D0 07            [24]  576 	pop	ar7
+                                    577 ;	../UI_Manager/Display_Manager/display.c:59: if(value){
+      001E67 EA               [12]  578 	mov	a,r2
+      001E68 4B               [12]  579 	orl	a,r3
+      001E69 60 54            [24]  580 	jz	00107$
+                                    581 ;	../UI_Manager/Display_Manager/display.c:60: chars[0] = charToCode(value + 0x30);
+      001E6B C0 04            [24]  582 	push	ar4
+      001E6D 8A 04            [24]  583 	mov	ar4,r2
+      001E6F 74 30            [12]  584 	mov	a,#0x30
+      001E71 2C               [12]  585 	add	a,r4
+      001E72 F5 82            [12]  586 	mov	dpl,a
+      001E74 C0 07            [24]  587 	push	ar7
+      001E76 C0 06            [24]  588 	push	ar6
+      001E78 C0 04            [24]  589 	push	ar4
+      001E7A C0 03            [24]  590 	push	ar3
+      001E7C C0 02            [24]  591 	push	ar2
+      001E7E C0 01            [24]  592 	push	ar1
+      001E80 C0 00            [24]  593 	push	ar0
+      001E82 12 20 2C         [24]  594 	lcall	_charToCode
+      001E85 E5 82            [12]  595 	mov	a,dpl
+      001E87 D0 00            [24]  596 	pop	ar0
+      001E89 D0 01            [24]  597 	pop	ar1
+      001E8B D0 02            [24]  598 	pop	ar2
+      001E8D D0 03            [24]  599 	pop	ar3
+      001E8F D0 04            [24]  600 	pop	ar4
+      001E91 F7               [12]  601 	mov	@r1,a
+                                    602 ;	../UI_Manager/Display_Manager/display.c:61: higherNumberPresent = 1;
+      001E92 7D 01            [12]  603 	mov	r5,#0x01
+                                    604 ;	../UI_Manager/Display_Manager/display.c:62: number -= value*100;
+      001E94 C0 05            [24]  605 	push	ar5
+      001E96 C0 01            [24]  606 	push	ar1
+      001E98 C0 00            [24]  607 	push	ar0
+      001E9A C0 02            [24]  608 	push	ar2
+      001E9C C0 03            [24]  609 	push	ar3
+      001E9E 90 00 64         [24]  610 	mov	dptr,#0x0064
+      001EA1 12 35 98         [24]  611 	lcall	__mulint
+      001EA4 AB 82            [24]  612 	mov	r3,dpl
+      001EA6 AC 83            [24]  613 	mov	r4,dph
+      001EA8 15 81            [12]  614 	dec	sp
+      001EAA 15 81            [12]  615 	dec	sp
+      001EAC D0 00            [24]  616 	pop	ar0
+      001EAE D0 01            [24]  617 	pop	ar1
+      001EB0 D0 05            [24]  618 	pop	ar5
+      001EB2 D0 06            [24]  619 	pop	ar6
+      001EB4 D0 07            [24]  620 	pop	ar7
+      001EB6 EE               [12]  621 	mov	a,r6
+      001EB7 C3               [12]  622 	clr	c
+      001EB8 9B               [12]  623 	subb	a,r3
+      001EB9 FE               [12]  624 	mov	r6,a
+      001EBA EF               [12]  625 	mov	a,r7
+      001EBB 9C               [12]  626 	subb	a,r4
+      001EBC FF               [12]  627 	mov	r7,a
+                                    628 ;	../UI_Manager/Display_Manager/display.c:75: exe_command(RAM_WRITE | (chars[2] << 8));
+      001EBD D0 04            [24]  629 	pop	ar4
+                                    630 ;	../UI_Manager/Display_Manager/display.c:62: number -= value*100;
+      001EBF                        631 00107$:
+                                    632 ;	../UI_Manager/Display_Manager/display.c:65: value = number/10;
+      001EBF C0 07            [24]  633 	push	ar7
+      001EC1 C0 06            [24]  634 	push	ar6
+      001EC3 C0 05            [24]  635 	push	ar5
+      001EC5 C0 04            [24]  636 	push	ar4
+      001EC7 C0 01            [24]  637 	push	ar1
+      001EC9 C0 00            [24]  638 	push	ar0
+      001ECB 74 0A            [12]  639 	mov	a,#0x0a
+      001ECD C0 E0            [24]  640 	push	acc
+      001ECF E4               [12]  641 	clr	a
+      001ED0 C0 E0            [24]  642 	push	acc
+      001ED2 8E 82            [24]  643 	mov	dpl,r6
+      001ED4 8F 83            [24]  644 	mov	dph,r7
+      001ED6 12 35 67         [24]  645 	lcall	__divuint
+      001ED9 AA 82            [24]  646 	mov	r2,dpl
+      001EDB AB 83            [24]  647 	mov	r3,dph
+      001EDD 15 81            [12]  648 	dec	sp
+      001EDF 15 81            [12]  649 	dec	sp
+      001EE1 D0 00            [24]  650 	pop	ar0
+      001EE3 D0 01            [24]  651 	pop	ar1
+      001EE5 D0 04            [24]  652 	pop	ar4
+      001EE7 D0 05            [24]  653 	pop	ar5
+      001EE9 D0 06            [24]  654 	pop	ar6
+      001EEB D0 07            [24]  655 	pop	ar7
+                                    656 ;	../UI_Manager/Display_Manager/display.c:66: if(higherNumberPresent || value){
+      001EED ED               [12]  657 	mov	a,r5
+      001EEE 70 04            [24]  658 	jnz	00108$
+      001EF0 EA               [12]  659 	mov	a,r2
+      001EF1 4B               [12]  660 	orl	a,r3
+      001EF2 60 4A            [24]  661 	jz	00109$
+      001EF4                        662 00108$:
+                                    663 ;	../UI_Manager/Display_Manager/display.c:67: chars[1] = charToCode(value + 0x30);
+      001EF4 8A 05            [24]  664 	mov	ar5,r2
+      001EF6 74 30            [12]  665 	mov	a,#0x30
+      001EF8 2D               [12]  666 	add	a,r5
+      001EF9 F5 82            [12]  667 	mov	dpl,a
+      001EFB C0 07            [24]  668 	push	ar7
+      001EFD C0 06            [24]  669 	push	ar6
+      001EFF C0 04            [24]  670 	push	ar4
+      001F01 C0 03            [24]  671 	push	ar3
+      001F03 C0 02            [24]  672 	push	ar2
+      001F05 C0 01            [24]  673 	push	ar1
+      001F07 C0 00            [24]  674 	push	ar0
+      001F09 12 20 2C         [24]  675 	lcall	_charToCode
+      001F0C E5 82            [12]  676 	mov	a,dpl
+      001F0E D0 00            [24]  677 	pop	ar0
+      001F10 D0 01            [24]  678 	pop	ar1
+      001F12 D0 02            [24]  679 	pop	ar2
+      001F14 D0 03            [24]  680 	pop	ar3
+      001F16 F6               [12]  681 	mov	@r0,a
+                                    682 ;	../UI_Manager/Display_Manager/display.c:68: number -= value*10;
+      001F17 C0 01            [24]  683 	push	ar1
+      001F19 C0 00            [24]  684 	push	ar0
+      001F1B C0 02            [24]  685 	push	ar2
+      001F1D C0 03            [24]  686 	push	ar3
+      001F1F 90 00 0A         [24]  687 	mov	dptr,#0x000a
+      001F22 12 35 98         [24]  688 	lcall	__mulint
+      001F25 AB 82            [24]  689 	mov	r3,dpl
+      001F27 AD 83            [24]  690 	mov	r5,dph
+      001F29 15 81            [12]  691 	dec	sp
+      001F2B 15 81            [12]  692 	dec	sp
+      001F2D D0 00            [24]  693 	pop	ar0
+      001F2F D0 01            [24]  694 	pop	ar1
+      001F31 D0 04            [24]  695 	pop	ar4
+      001F33 D0 06            [24]  696 	pop	ar6
+      001F35 D0 07            [24]  697 	pop	ar7
+      001F37 EE               [12]  698 	mov	a,r6
+      001F38 C3               [12]  699 	clr	c
+      001F39 9B               [12]  700 	subb	a,r3
+      001F3A FE               [12]  701 	mov	r6,a
+      001F3B EF               [12]  702 	mov	a,r7
+      001F3C 9D               [12]  703 	subb	a,r5
+      001F3D FF               [12]  704 	mov	r7,a
+      001F3E                        705 00109$:
+                                    706 ;	../UI_Manager/Display_Manager/display.c:71: chars[2] = charToCode(number + 0x30);
+      001F3E 74 30            [12]  707 	mov	a,#0x30
+      001F40 2E               [12]  708 	add	a,r6
+      001F41 F5 82            [12]  709 	mov	dpl,a
+      001F43 C0 04            [24]  710 	push	ar4
+      001F45 C0 01            [24]  711 	push	ar1
+      001F47 C0 00            [24]  712 	push	ar0
+      001F49 12 20 2C         [24]  713 	lcall	_charToCode
+      001F4C E5 82            [12]  714 	mov	a,dpl
+      001F4E D0 00            [24]  715 	pop	ar0
+      001F50 D0 01            [24]  716 	pop	ar1
+      001F52 D0 04            [24]  717 	pop	ar4
+      001F54 C0 00            [24]  718 	push	ar0
+      001F56 A8 04            [24]  719 	mov	r0,ar4
+      001F58 F6               [12]  720 	mov	@r0,a
+      001F59 D0 00            [24]  721 	pop	ar0
+                                    722 ;	../UI_Manager/Display_Manager/display.c:73: exe_command(RAM_WRITE | (chars[0] << 8));
+      001F5B 87 07            [24]  723 	mov	ar7,@r1
+      001F5D 8F 06            [24]  724 	mov	ar6,r7
+      001F5F 7F 00            [12]  725 	mov	r7,#0x00
+      001F61 74 80            [12]  726 	mov	a,#0x80
+      001F63 4F               [12]  727 	orl	a,r7
+      001F64 F5 82            [12]  728 	mov	dpl,a
+      001F66 8E 83            [24]  729 	mov	dph,r6
+      001F68 C0 04            [24]  730 	push	ar4
+      001F6A C0 00            [24]  731 	push	ar0
+      001F6C 12 1F E6         [24]  732 	lcall	_exe_command
+      001F6F D0 00            [24]  733 	pop	ar0
+                                    734 ;	../UI_Manager/Display_Manager/display.c:74: exe_command(RAM_WRITE | (chars[1] << 8));
+      001F71 86 07            [24]  735 	mov	ar7,@r0
+      001F73 8F 06            [24]  736 	mov	ar6,r7
+      001F75 7F 00            [12]  737 	mov	r7,#0x00
+      001F77 74 80            [12]  738 	mov	a,#0x80
+      001F79 4F               [12]  739 	orl	a,r7
+      001F7A F5 82            [12]  740 	mov	dpl,a
+      001F7C 8E 83            [24]  741 	mov	dph,r6
+      001F7E 12 1F E6         [24]  742 	lcall	_exe_command
+      001F81 D0 04            [24]  743 	pop	ar4
+                                    744 ;	../UI_Manager/Display_Manager/display.c:75: exe_command(RAM_WRITE | (chars[2] << 8));
+      001F83 A8 04            [24]  745 	mov	r0,ar4
+      001F85 86 07            [24]  746 	mov	ar7,@r0
+      001F87 8F 06            [24]  747 	mov	ar6,r7
+      001F89 7F 00            [12]  748 	mov	r7,#0x00
+      001F8B 74 80            [12]  749 	mov	a,#0x80
+      001F8D 4F               [12]  750 	orl	a,r7
+      001F8E F5 82            [12]  751 	mov	dpl,a
+      001F90 8E 83            [24]  752 	mov	dph,r6
+      001F92 12 1F E6         [24]  753 	lcall	_exe_command
+                                    754 ;	../UI_Manager/Display_Manager/display.c:77: }
+      001F95 85 1A 81         [24]  755 	mov	sp,_bp
+      001F98 D0 1A            [24]  756 	pop	_bp
+      001F9A 22               [24]  757 	ret
+                                    758 ;------------------------------------------------------------
+                                    759 ;Allocation info for local variables in function 'write_char'
+                                    760 ;------------------------------------------------------------
+                                    761 ;index                     Allocated to stack - _bp -3
+                                    762 ;line                      Allocated to stack - _bp -4
+                                    763 ;command                   Allocated to registers r7 
+                                    764 ;------------------------------------------------------------
+                                    765 ;	../UI_Manager/Display_Manager/display.c:79: void write_char(uint8_t command, uint8_t index, uint8_t line){
+                                    766 ;	-----------------------------------------
+                                    767 ;	 function write_char
+                                    768 ;	-----------------------------------------
+      001F9B                        769 _write_char:
+      001F9B C0 1A            [24]  770 	push	_bp
+      001F9D 85 81 1A         [24]  771 	mov	_bp,sp
+      001FA0 AF 82            [24]  772 	mov	r7,dpl
+                                    773 ;	../UI_Manager/Display_Manager/display.c:80: exe_command(DDRAM_ADDRESS_SET | (flipByte((line) ? index + 0x40 : index) << 8));
+      001FA2 E5 1A            [12]  774 	mov	a,_bp
+      001FA4 24 FC            [12]  775 	add	a,#0xfc
+      001FA6 F8               [12]  776 	mov	r0,a
+      001FA7 E6               [12]  777 	mov	a,@r0
+      001FA8 60 0D            [24]  778 	jz	00103$
+      001FAA E5 1A            [12]  779 	mov	a,_bp
+      001FAC 24 FD            [12]  780 	add	a,#0xfd
+      001FAE F8               [12]  781 	mov	r0,a
+      001FAF 86 06            [24]  782 	mov	ar6,@r0
+      001FB1 74 40            [12]  783 	mov	a,#0x40
+      001FB3 2E               [12]  784 	add	a,r6
+      001FB4 FE               [12]  785 	mov	r6,a
+      001FB5 80 07            [24]  786 	sjmp	00104$
+      001FB7                        787 00103$:
+      001FB7 E5 1A            [12]  788 	mov	a,_bp
+      001FB9 24 FD            [12]  789 	add	a,#0xfd
+      001FBB F8               [12]  790 	mov	r0,a
+      001FBC 86 06            [24]  791 	mov	ar6,@r0
+      001FBE                        792 00104$:
+      001FBE 8E 82            [24]  793 	mov	dpl,r6
+      001FC0 C0 07            [24]  794 	push	ar7
+      001FC2 12 22 35         [24]  795 	lcall	_flipByte
+      001FC5 AD 82            [24]  796 	mov	r5,dpl
+      001FC7 7E 00            [12]  797 	mov	r6,#0x00
+      001FC9 8E 82            [24]  798 	mov	dpl,r6
+      001FCB 74 01            [12]  799 	mov	a,#0x01
+      001FCD 4D               [12]  800 	orl	a,r5
+      001FCE F5 83            [12]  801 	mov	dph,a
+      001FD0 12 1F E6         [24]  802 	lcall	_exe_command
+      001FD3 D0 07            [24]  803 	pop	ar7
+                                    804 ;	../UI_Manager/Display_Manager/display.c:81: exe_command(RAM_WRITE | (command << 8));
+      001FD5 8F 06            [24]  805 	mov	ar6,r7
+      001FD7 7F 00            [12]  806 	mov	r7,#0x00
+      001FD9 74 80            [12]  807 	mov	a,#0x80
+      001FDB 4F               [12]  808 	orl	a,r7
+      001FDC F5 82            [12]  809 	mov	dpl,a
+      001FDE 8E 83            [24]  810 	mov	dph,r6
+      001FE0 12 1F E6         [24]  811 	lcall	_exe_command
+                                    812 ;	../UI_Manager/Display_Manager/display.c:82: }
+      001FE3 D0 1A            [24]  813 	pop	_bp
+      001FE5 22               [24]  814 	ret
+                                    815 ;------------------------------------------------------------
+                                    816 ;Allocation info for local variables in function 'exe_command'
+                                    817 ;------------------------------------------------------------
+                                    818 ;command                   Allocated to registers r6 r7 
+                                    819 ;delay                     Allocated to registers r5 r6 
+                                    820 ;------------------------------------------------------------
+                                    821 ;	../UI_Manager/Display_Manager/display.c:86: void exe_command(uint16_t command){
+                                    822 ;	-----------------------------------------
+                                    823 ;	 function exe_command
+                                    824 ;	-----------------------------------------
+      001FE6                        825 _exe_command:
+      001FE6 AE 82            [24]  826 	mov	r6,dpl
+      001FE8 AF 83            [24]  827 	mov	r7,dph
+                                    828 ;	../UI_Manager/Display_Manager/display.c:89: command |= (1 << EXE_BIT);
+      001FEA 43 06 20         [24]  829 	orl	ar6,#0x20
+                                    830 ;	../UI_Manager/Display_Manager/display.c:90: writeShiftReg(command); //execute
+      001FED 8E 82            [24]  831 	mov	dpl,r6
+      001FEF 8F 83            [24]  832 	mov	dph,r7
+      001FF1 C0 07            [24]  833 	push	ar7
+      001FF3 C0 06            [24]  834 	push	ar6
+      001FF5 12 22 01         [24]  835 	lcall	_writeShiftReg
+      001FF8 D0 06            [24]  836 	pop	ar6
+      001FFA D0 07            [24]  837 	pop	ar7
+                                    838 ;	../UI_Manager/Display_Manager/display.c:91: command &= ~(1 << EXE_BIT);
+      001FFC 53 06 DF         [24]  839 	anl	ar6,#0xdf
+                                    840 ;	../UI_Manager/Display_Manager/display.c:92: writeShiftReg(command); //end execution
+      001FFF 8E 82            [24]  841 	mov	dpl,r6
+      002001 8F 83            [24]  842 	mov	dph,r7
+      002003 C0 07            [24]  843 	push	ar7
+      002005 C0 06            [24]  844 	push	ar6
+      002007 12 22 01         [24]  845 	lcall	_writeShiftReg
+      00200A D0 06            [24]  846 	pop	ar6
+      00200C D0 07            [24]  847 	pop	ar7
+                                    848 ;	../UI_Manager/Display_Manager/display.c:95: while(delay-- && command == CLEAR_DISPLAY){;;}
+      00200E E4               [12]  849 	clr	a
+      00200F BE 00 04         [24]  850 	cjne	r6,#0x00,00118$
+      002012 BF 80 01         [24]  851 	cjne	r7,#0x80,00118$
+      002015 04               [12]  852 	inc	a
+      002016                        853 00118$:
+      002016 FF               [12]  854 	mov	r7,a
+      002017 7D 00            [12]  855 	mov	r5,#0x00
+      002019 7E 03            [12]  856 	mov	r6,#0x03
+      00201B                        857 00102$:
+      00201B 8D 03            [24]  858 	mov	ar3,r5
+      00201D 8E 04            [24]  859 	mov	ar4,r6
+      00201F 1D               [12]  860 	dec	r5
+      002020 BD FF 01         [24]  861 	cjne	r5,#0xff,00120$
+      002023 1E               [12]  862 	dec	r6
+      002024                        863 00120$:
+      002024 EB               [12]  864 	mov	a,r3
+      002025 4C               [12]  865 	orl	a,r4
+      002026 60 03            [24]  866 	jz	00105$
+      002028 EF               [12]  867 	mov	a,r7
+      002029 70 F0            [24]  868 	jnz	00102$
+      00202B                        869 00105$:
+                                    870 ;	../UI_Manager/Display_Manager/display.c:96: }
+      00202B 22               [24]  871 	ret
+                                    872 ;------------------------------------------------------------
+                                    873 ;Allocation info for local variables in function 'charToCode'
+                                    874 ;------------------------------------------------------------
+                                    875 ;c                         Allocated to registers r7 
+                                    876 ;------------------------------------------------------------
+                                    877 ;	../UI_Manager/Display_Manager/display.c:100: uint8_t charToCode(char c){
+                                    878 ;	-----------------------------------------
+                                    879 ;	 function charToCode
+                                    880 ;	-----------------------------------------
+      00202C                        881 _charToCode:
+      00202C AF 82            [24]  882 	mov	r7,dpl
+                                    883 ;	../UI_Manager/Display_Manager/display.c:101: switch(c){
+      00202E BF 26 00         [24]  884 	cjne	r7,#0x26,00177$
+      002031                        885 00177$:
+      002031 50 03            [24]  886 	jnc	00178$
+      002033 02 21 FD         [24]  887 	ljmp	00166$
+      002036                        888 00178$:
+      002036 EF               [12]  889 	mov	a,r7
+      002037 24 85            [12]  890 	add	a,#0xff - 0x7a
+      002039 50 03            [24]  891 	jnc	00179$
+      00203B 02 21 FD         [24]  892 	ljmp	00166$
+      00203E                        893 00179$:
+      00203E EF               [12]  894 	mov	a,r7
+      00203F 24 DA            [12]  895 	add	a,#0xda
+      002041 FF               [12]  896 	mov	r7,a
+      002042 24 0A            [12]  897 	add	a,#(00180$-3-.)
+      002044 83               [24]  898 	movc	a,@a+pc
+      002045 F5 82            [12]  899 	mov	dpl,a
+      002047 EF               [12]  900 	mov	a,r7
+      002048 24 59            [12]  901 	add	a,#(00181$-3-.)
+      00204A 83               [24]  902 	movc	a,@a+pc
+      00204B F5 83            [12]  903 	mov	dph,a
+      00204D E4               [12]  904 	clr	a
+      00204E 73               [24]  905 	jmp	@a+dptr
+      00204F                        906 00180$:
+      00204F F5                     907 	.db	00164$
+      002050 FD                     908 	.db	00166$
+      002051 FD                     909 	.db	00166$
+      002052 FD                     910 	.db	00166$
+      002053 FD                     911 	.db	00166$
+      002054 F1                     912 	.db	00163$
+      002055 FD                     913 	.db	00166$
+      002056 FD                     914 	.db	00166$
+      002057 FD                     915 	.db	00166$
+      002058 FD                     916 	.db	00166$
+      002059 C9                     917 	.db	00153$
+      00205A CD                     918 	.db	00154$
+      00205B D1                     919 	.db	00155$
+      00205C D5                     920 	.db	00156$
+      00205D D9                     921 	.db	00157$
+      00205E DD                     922 	.db	00158$
+      00205F E1                     923 	.db	00159$
+      002060 E5                     924 	.db	00160$
+      002061 E9                     925 	.db	00161$
+      002062 ED                     926 	.db	00162$
+      002063 FD                     927 	.db	00166$
+      002064 F9                     928 	.db	00165$
+      002065 FD                     929 	.db	00166$
+      002066 FD                     930 	.db	00166$
+      002067 FD                     931 	.db	00166$
+      002068 FD                     932 	.db	00166$
+      002069 FD                     933 	.db	00166$
+      00206A F9                     934 	.db	00101$
+      00206B 01                     935 	.db	00103$
+      00206C 09                     936 	.db	00105$
+      00206D 11                     937 	.db	00107$
+      00206E 19                     938 	.db	00109$
+      00206F 21                     939 	.db	00111$
+      002070 29                     940 	.db	00113$
+      002071 31                     941 	.db	00115$
+      002072 39                     942 	.db	00117$
+      002073 41                     943 	.db	00119$
+      002074 49                     944 	.db	00121$
+      002075 51                     945 	.db	00123$
+      002076 59                     946 	.db	00125$
+      002077 61                     947 	.db	00127$
+      002078 69                     948 	.db	00129$
+      002079 71                     949 	.db	00131$
+      00207A 79                     950 	.db	00133$
+      00207B 81                     951 	.db	00135$
+      00207C 89                     952 	.db	00137$
+      00207D 91                     953 	.db	00139$
+      00207E 99                     954 	.db	00141$
+      00207F A1                     955 	.db	00143$
+      002080 A9                     956 	.db	00145$
+      002081 B1                     957 	.db	00147$
+      002082 B9                     958 	.db	00149$
+      002083 C1                     959 	.db	00151$
+      002084 FD                     960 	.db	00166$
+      002085 FD                     961 	.db	00166$
+      002086 FD                     962 	.db	00166$
+      002087 FD                     963 	.db	00166$
+      002088 FD                     964 	.db	00166$
+      002089 FD                     965 	.db	00166$
+      00208A FD                     966 	.db	00102$
+      00208B 05                     967 	.db	00104$
+      00208C 0D                     968 	.db	00106$
+      00208D 15                     969 	.db	00108$
+      00208E 1D                     970 	.db	00110$
+      00208F 25                     971 	.db	00112$
+      002090 2D                     972 	.db	00114$
+      002091 35                     973 	.db	00116$
+      002092 3D                     974 	.db	00118$
+      002093 45                     975 	.db	00120$
+      002094 4D                     976 	.db	00122$
+      002095 55                     977 	.db	00124$
+      002096 5D                     978 	.db	00126$
+      002097 65                     979 	.db	00128$
+      002098 6D                     980 	.db	00130$
+      002099 75                     981 	.db	00132$
+      00209A 7D                     982 	.db	00134$
+      00209B 85                     983 	.db	00136$
+      00209C 8D                     984 	.db	00138$
+      00209D 95                     985 	.db	00140$
+      00209E 9D                     986 	.db	00142$
+      00209F A5                     987 	.db	00144$
+      0020A0 AD                     988 	.db	00146$
+      0020A1 B5                     989 	.db	00148$
+      0020A2 BD                     990 	.db	00150$
+      0020A3 C5                     991 	.db	00152$
+      0020A4                        992 00181$:
+      0020A4 21                     993 	.db	00164$>>8
+      0020A5 21                     994 	.db	00166$>>8
+      0020A6 21                     995 	.db	00166$>>8
+      0020A7 21                     996 	.db	00166$>>8
+      0020A8 21                     997 	.db	00166$>>8
+      0020A9 21                     998 	.db	00163$>>8
+      0020AA 21                     999 	.db	00166$>>8
+      0020AB 21                    1000 	.db	00166$>>8
+      0020AC 21                    1001 	.db	00166$>>8
+      0020AD 21                    1002 	.db	00166$>>8
+      0020AE 21                    1003 	.db	00153$>>8
+      0020AF 21                    1004 	.db	00154$>>8
+      0020B0 21                    1005 	.db	00155$>>8
+      0020B1 21                    1006 	.db	00156$>>8
+      0020B2 21                    1007 	.db	00157$>>8
+      0020B3 21                    1008 	.db	00158$>>8
+      0020B4 21                    1009 	.db	00159$>>8
+      0020B5 21                    1010 	.db	00160$>>8
+      0020B6 21                    1011 	.db	00161$>>8
+      0020B7 21                    1012 	.db	00162$>>8
+      0020B8 21                    1013 	.db	00166$>>8
+      0020B9 21                    1014 	.db	00165$>>8
+      0020BA 21                    1015 	.db	00166$>>8
+      0020BB 21                    1016 	.db	00166$>>8
+      0020BC 21                    1017 	.db	00166$>>8
+      0020BD 21                    1018 	.db	00166$>>8
+      0020BE 21                    1019 	.db	00166$>>8
+      0020BF 20                    1020 	.db	00101$>>8
+      0020C0 21                    1021 	.db	00103$>>8
+      0020C1 21                    1022 	.db	00105$>>8
+      0020C2 21                    1023 	.db	00107$>>8
+      0020C3 21                    1024 	.db	00109$>>8
+      0020C4 21                    1025 	.db	00111$>>8
+      0020C5 21                    1026 	.db	00113$>>8
+      0020C6 21                    1027 	.db	00115$>>8
+      0020C7 21                    1028 	.db	00117$>>8
+      0020C8 21                    1029 	.db	00119$>>8
+      0020C9 21                    1030 	.db	00121$>>8
+      0020CA 21                    1031 	.db	00123$>>8
+      0020CB 21                    1032 	.db	00125$>>8
+      0020CC 21                    1033 	.db	00127$>>8
+      0020CD 21                    1034 	.db	00129$>>8
+      0020CE 21                    1035 	.db	00131$>>8
+      0020CF 21                    1036 	.db	00133$>>8
+      0020D0 21                    1037 	.db	00135$>>8
+      0020D1 21                    1038 	.db	00137$>>8
+      0020D2 21                    1039 	.db	00139$>>8
+      0020D3 21                    1040 	.db	00141$>>8
+      0020D4 21                    1041 	.db	00143$>>8
+      0020D5 21                    1042 	.db	00145$>>8
+      0020D6 21                    1043 	.db	00147$>>8
+      0020D7 21                    1044 	.db	00149$>>8
+      0020D8 21                    1045 	.db	00151$>>8
+      0020D9 21                    1046 	.db	00166$>>8
+      0020DA 21                    1047 	.db	00166$>>8
+      0020DB 21                    1048 	.db	00166$>>8
+      0020DC 21                    1049 	.db	00166$>>8
+      0020DD 21                    1050 	.db	00166$>>8
+      0020DE 21                    1051 	.db	00166$>>8
+      0020DF 20                    1052 	.db	00102$>>8
+      0020E0 21                    1053 	.db	00104$>>8
+      0020E1 21                    1054 	.db	00106$>>8
+      0020E2 21                    1055 	.db	00108$>>8
+      0020E3 21                    1056 	.db	00110$>>8
+      0020E4 21                    1057 	.db	00112$>>8
+      0020E5 21                    1058 	.db	00114$>>8
+      0020E6 21                    1059 	.db	00116$>>8
+      0020E7 21                    1060 	.db	00118$>>8
+      0020E8 21                    1061 	.db	00120$>>8
+      0020E9 21                    1062 	.db	00122$>>8
+      0020EA 21                    1063 	.db	00124$>>8
+      0020EB 21                    1064 	.db	00126$>>8
+      0020EC 21                    1065 	.db	00128$>>8
+      0020ED 21                    1066 	.db	00130$>>8
+      0020EE 21                    1067 	.db	00132$>>8
+      0020EF 21                    1068 	.db	00134$>>8
+      0020F0 21                    1069 	.db	00136$>>8
+      0020F1 21                    1070 	.db	00138$>>8
+      0020F2 21                    1071 	.db	00140$>>8
+      0020F3 21                    1072 	.db	00142$>>8
+      0020F4 21                    1073 	.db	00144$>>8
+      0020F5 21                    1074 	.db	00146$>>8
+      0020F6 21                    1075 	.db	00148$>>8
+      0020F7 21                    1076 	.db	00150$>>8
+      0020F8 21                    1077 	.db	00152$>>8
+                                   1078 ;	../UI_Manager/Display_Manager/display.c:102: case 'A':
+      0020F9                       1079 00101$:
+                                   1080 ;	../UI_Manager/Display_Manager/display.c:103: return CHAR_A;
+      0020F9 75 82 82         [24] 1081 	mov	dpl,#0x82
+      0020FC 22               [24] 1082 	ret
+                                   1083 ;	../UI_Manager/Display_Manager/display.c:104: case 'a':
+      0020FD                       1084 00102$:
+                                   1085 ;	../UI_Manager/Display_Manager/display.c:105: return CHAR_a;
+      0020FD 75 82 86         [24] 1086 	mov	dpl,#0x86
+      002100 22               [24] 1087 	ret
+                                   1088 ;	../UI_Manager/Display_Manager/display.c:106: case 'B':
+      002101                       1089 00103$:
+                                   1090 ;	../UI_Manager/Display_Manager/display.c:107: return CHAR_B;
+      002101 75 82 42         [24] 1091 	mov	dpl,#0x42
+      002104 22               [24] 1092 	ret
+                                   1093 ;	../UI_Manager/Display_Manager/display.c:108: case 'b':
+      002105                       1094 00104$:
+                                   1095 ;	../UI_Manager/Display_Manager/display.c:109: return CHAR_b;
+      002105 75 82 46         [24] 1096 	mov	dpl,#0x46
+      002108 22               [24] 1097 	ret
+                                   1098 ;	../UI_Manager/Display_Manager/display.c:110: case 'C':
+      002109                       1099 00105$:
+                                   1100 ;	../UI_Manager/Display_Manager/display.c:111: return CHAR_C;
+      002109 75 82 C2         [24] 1101 	mov	dpl,#0xc2
+      00210C 22               [24] 1102 	ret
+                                   1103 ;	../UI_Manager/Display_Manager/display.c:112: case 'c':
+      00210D                       1104 00106$:
+                                   1105 ;	../UI_Manager/Display_Manager/display.c:113: return CHAR_c;
+      00210D 75 82 C6         [24] 1106 	mov	dpl,#0xc6
+      002110 22               [24] 1107 	ret
+                                   1108 ;	../UI_Manager/Display_Manager/display.c:114: case 'D':
+      002111                       1109 00107$:
+                                   1110 ;	../UI_Manager/Display_Manager/display.c:115: return CHAR_D;
+      002111 75 82 22         [24] 1111 	mov	dpl,#0x22
+      002114 22               [24] 1112 	ret
+                                   1113 ;	../UI_Manager/Display_Manager/display.c:116: case 'd':
+      002115                       1114 00108$:
+                                   1115 ;	../UI_Manager/Display_Manager/display.c:117: return CHAR_d;
+      002115 75 82 26         [24] 1116 	mov	dpl,#0x26
+      002118 22               [24] 1117 	ret
+                                   1118 ;	../UI_Manager/Display_Manager/display.c:118: case 'E':
+      002119                       1119 00109$:
+                                   1120 ;	../UI_Manager/Display_Manager/display.c:119: return CHAR_E;
+      002119 75 82 A2         [24] 1121 	mov	dpl,#0xa2
+      00211C 22               [24] 1122 	ret
+                                   1123 ;	../UI_Manager/Display_Manager/display.c:120: case 'e':
+      00211D                       1124 00110$:
+                                   1125 ;	../UI_Manager/Display_Manager/display.c:121: return CHAR_e;
+      00211D 75 82 A6         [24] 1126 	mov	dpl,#0xa6
+      002120 22               [24] 1127 	ret
+                                   1128 ;	../UI_Manager/Display_Manager/display.c:122: case 'F':
+      002121                       1129 00111$:
+                                   1130 ;	../UI_Manager/Display_Manager/display.c:123: return CHAR_F;
+      002121 75 82 62         [24] 1131 	mov	dpl,#0x62
+      002124 22               [24] 1132 	ret
+                                   1133 ;	../UI_Manager/Display_Manager/display.c:124: case 'f':
+      002125                       1134 00112$:
+                                   1135 ;	../UI_Manager/Display_Manager/display.c:125: return CHAR_f;
+      002125 75 82 66         [24] 1136 	mov	dpl,#0x66
+      002128 22               [24] 1137 	ret
+                                   1138 ;	../UI_Manager/Display_Manager/display.c:126: case 'G':
+      002129                       1139 00113$:
+                                   1140 ;	../UI_Manager/Display_Manager/display.c:127: return CHAR_G;
+      002129 75 82 E2         [24] 1141 	mov	dpl,#0xe2
+      00212C 22               [24] 1142 	ret
+                                   1143 ;	../UI_Manager/Display_Manager/display.c:128: case 'g':
+      00212D                       1144 00114$:
+                                   1145 ;	../UI_Manager/Display_Manager/display.c:129: return CHAR_g;
+      00212D 75 82 E6         [24] 1146 	mov	dpl,#0xe6
+      002130 22               [24] 1147 	ret
+                                   1148 ;	../UI_Manager/Display_Manager/display.c:130: case 'H':
+      002131                       1149 00115$:
+                                   1150 ;	../UI_Manager/Display_Manager/display.c:131: return CHAR_H;
+      002131 75 82 12         [24] 1151 	mov	dpl,#0x12
+      002134 22               [24] 1152 	ret
+                                   1153 ;	../UI_Manager/Display_Manager/display.c:132: case 'h':
+      002135                       1154 00116$:
+                                   1155 ;	../UI_Manager/Display_Manager/display.c:133: return CHAR_h;
+      002135 75 82 16         [24] 1156 	mov	dpl,#0x16
+      002138 22               [24] 1157 	ret
+                                   1158 ;	../UI_Manager/Display_Manager/display.c:134: case 'I':
+      002139                       1159 00117$:
+                                   1160 ;	../UI_Manager/Display_Manager/display.c:135: return CHAR_I;
+      002139 75 82 92         [24] 1161 	mov	dpl,#0x92
+      00213C 22               [24] 1162 	ret
+                                   1163 ;	../UI_Manager/Display_Manager/display.c:136: case 'i':
+      00213D                       1164 00118$:
+                                   1165 ;	../UI_Manager/Display_Manager/display.c:137: return CHAR_i;
+      00213D 75 82 96         [24] 1166 	mov	dpl,#0x96
+      002140 22               [24] 1167 	ret
+                                   1168 ;	../UI_Manager/Display_Manager/display.c:138: case 'J':
+      002141                       1169 00119$:
+                                   1170 ;	../UI_Manager/Display_Manager/display.c:139: return CHAR_J;
+      002141 75 82 52         [24] 1171 	mov	dpl,#0x52
+      002144 22               [24] 1172 	ret
+                                   1173 ;	../UI_Manager/Display_Manager/display.c:140: case 'j':
+      002145                       1174 00120$:
+                                   1175 ;	../UI_Manager/Display_Manager/display.c:141: return CHAR_j;
+      002145 75 82 56         [24] 1176 	mov	dpl,#0x56
+      002148 22               [24] 1177 	ret
+                                   1178 ;	../UI_Manager/Display_Manager/display.c:142: case 'K':
+      002149                       1179 00121$:
+                                   1180 ;	../UI_Manager/Display_Manager/display.c:143: return CHAR_K;
+      002149 75 82 D2         [24] 1181 	mov	dpl,#0xd2
+      00214C 22               [24] 1182 	ret
+                                   1183 ;	../UI_Manager/Display_Manager/display.c:144: case 'k':
+      00214D                       1184 00122$:
+                                   1185 ;	../UI_Manager/Display_Manager/display.c:145: return CHAR_k;
+      00214D 75 82 D6         [24] 1186 	mov	dpl,#0xd6
+      002150 22               [24] 1187 	ret
+                                   1188 ;	../UI_Manager/Display_Manager/display.c:146: case 'L':
+      002151                       1189 00123$:
+                                   1190 ;	../UI_Manager/Display_Manager/display.c:147: return CHAR_L;
+      002151 75 82 32         [24] 1191 	mov	dpl,#0x32
+      002154 22               [24] 1192 	ret
+                                   1193 ;	../UI_Manager/Display_Manager/display.c:148: case 'l':
+      002155                       1194 00124$:
+                                   1195 ;	../UI_Manager/Display_Manager/display.c:149: return CHAR_l;
+      002155 75 82 36         [24] 1196 	mov	dpl,#0x36
+      002158 22               [24] 1197 	ret
+                                   1198 ;	../UI_Manager/Display_Manager/display.c:150: case 'M':
+      002159                       1199 00125$:
+                                   1200 ;	../UI_Manager/Display_Manager/display.c:151: return CHAR_M;
+      002159 75 82 B2         [24] 1201 	mov	dpl,#0xb2
+      00215C 22               [24] 1202 	ret
+                                   1203 ;	../UI_Manager/Display_Manager/display.c:152: case 'm':
+      00215D                       1204 00126$:
+                                   1205 ;	../UI_Manager/Display_Manager/display.c:153: return CHAR_m;
+      00215D 75 82 B6         [24] 1206 	mov	dpl,#0xb6
+      002160 22               [24] 1207 	ret
+                                   1208 ;	../UI_Manager/Display_Manager/display.c:154: case 'N':
+      002161                       1209 00127$:
+                                   1210 ;	../UI_Manager/Display_Manager/display.c:155: return CHAR_N;
+      002161 75 82 72         [24] 1211 	mov	dpl,#0x72
+      002164 22               [24] 1212 	ret
+                                   1213 ;	../UI_Manager/Display_Manager/display.c:156: case 'n':
+      002165                       1214 00128$:
+                                   1215 ;	../UI_Manager/Display_Manager/display.c:157: return CHAR_n;
+      002165 75 82 76         [24] 1216 	mov	dpl,#0x76
+      002168 22               [24] 1217 	ret
+                                   1218 ;	../UI_Manager/Display_Manager/display.c:158: case 'O':
+      002169                       1219 00129$:
+                                   1220 ;	../UI_Manager/Display_Manager/display.c:159: return CHAR_O;
+      002169 75 82 F2         [24] 1221 	mov	dpl,#0xf2
+      00216C 22               [24] 1222 	ret
+                                   1223 ;	../UI_Manager/Display_Manager/display.c:160: case 'o':
+      00216D                       1224 00130$:
+                                   1225 ;	../UI_Manager/Display_Manager/display.c:161: return CHAR_o;
+      00216D 75 82 F6         [24] 1226 	mov	dpl,#0xf6
+      002170 22               [24] 1227 	ret
+                                   1228 ;	../UI_Manager/Display_Manager/display.c:162: case 'P':
+      002171                       1229 00131$:
+                                   1230 ;	../UI_Manager/Display_Manager/display.c:163: return CHAR_P;
+      002171 75 82 0A         [24] 1231 	mov	dpl,#0x0a
+      002174 22               [24] 1232 	ret
+                                   1233 ;	../UI_Manager/Display_Manager/display.c:164: case 'p':
+      002175                       1234 00132$:
+                                   1235 ;	../UI_Manager/Display_Manager/display.c:165: return CHAR_p;
+      002175 75 82 0E         [24] 1236 	mov	dpl,#0x0e
+      002178 22               [24] 1237 	ret
+                                   1238 ;	../UI_Manager/Display_Manager/display.c:166: case 'Q':
+      002179                       1239 00133$:
+                                   1240 ;	../UI_Manager/Display_Manager/display.c:167: return CHAR_Q;
+      002179 75 82 8A         [24] 1241 	mov	dpl,#0x8a
+      00217C 22               [24] 1242 	ret
+                                   1243 ;	../UI_Manager/Display_Manager/display.c:168: case 'q':
+      00217D                       1244 00134$:
+                                   1245 ;	../UI_Manager/Display_Manager/display.c:169: return CHAR_q;
+      00217D 75 82 8E         [24] 1246 	mov	dpl,#0x8e
+      002180 22               [24] 1247 	ret
+                                   1248 ;	../UI_Manager/Display_Manager/display.c:170: case 'R':
+      002181                       1249 00135$:
+                                   1250 ;	../UI_Manager/Display_Manager/display.c:171: return CHAR_R;
+      002181 75 82 4A         [24] 1251 	mov	dpl,#0x4a
+      002184 22               [24] 1252 	ret
+                                   1253 ;	../UI_Manager/Display_Manager/display.c:172: case 'r':
+      002185                       1254 00136$:
+                                   1255 ;	../UI_Manager/Display_Manager/display.c:173: return CHAR_r;
+      002185 75 82 4E         [24] 1256 	mov	dpl,#0x4e
+      002188 22               [24] 1257 	ret
+                                   1258 ;	../UI_Manager/Display_Manager/display.c:174: case 'S':
+      002189                       1259 00137$:
+                                   1260 ;	../UI_Manager/Display_Manager/display.c:175: return CHAR_S;
+      002189 75 82 CA         [24] 1261 	mov	dpl,#0xca
+      00218C 22               [24] 1262 	ret
+                                   1263 ;	../UI_Manager/Display_Manager/display.c:176: case 's':
+      00218D                       1264 00138$:
+                                   1265 ;	../UI_Manager/Display_Manager/display.c:177: return CHAR_s;
+      00218D 75 82 CE         [24] 1266 	mov	dpl,#0xce
+      002190 22               [24] 1267 	ret
+                                   1268 ;	../UI_Manager/Display_Manager/display.c:178: case 'T':
+      002191                       1269 00139$:
+                                   1270 ;	../UI_Manager/Display_Manager/display.c:179: return CHAR_T;
+      002191 75 82 2A         [24] 1271 	mov	dpl,#0x2a
+      002194 22               [24] 1272 	ret
+                                   1273 ;	../UI_Manager/Display_Manager/display.c:180: case 't':
+      002195                       1274 00140$:
+                                   1275 ;	../UI_Manager/Display_Manager/display.c:181: return CHAR_t;
+      002195 75 82 2E         [24] 1276 	mov	dpl,#0x2e
+      002198 22               [24] 1277 	ret
+                                   1278 ;	../UI_Manager/Display_Manager/display.c:182: case 'U':
+      002199                       1279 00141$:
+                                   1280 ;	../UI_Manager/Display_Manager/display.c:183: return CHAR_U;
+      002199 75 82 AA         [24] 1281 	mov	dpl,#0xaa
+      00219C 22               [24] 1282 	ret
+                                   1283 ;	../UI_Manager/Display_Manager/display.c:184: case 'u':
+      00219D                       1284 00142$:
+                                   1285 ;	../UI_Manager/Display_Manager/display.c:185: return CHAR_u;
+      00219D 75 82 AE         [24] 1286 	mov	dpl,#0xae
+      0021A0 22               [24] 1287 	ret
+                                   1288 ;	../UI_Manager/Display_Manager/display.c:186: case 'V':
+      0021A1                       1289 00143$:
+                                   1290 ;	../UI_Manager/Display_Manager/display.c:187: return CHAR_V;
+      0021A1 75 82 6A         [24] 1291 	mov	dpl,#0x6a
+      0021A4 22               [24] 1292 	ret
+                                   1293 ;	../UI_Manager/Display_Manager/display.c:188: case 'v':
+      0021A5                       1294 00144$:
+                                   1295 ;	../UI_Manager/Display_Manager/display.c:189: return CHAR_v;
+      0021A5 75 82 6E         [24] 1296 	mov	dpl,#0x6e
+      0021A8 22               [24] 1297 	ret
+                                   1298 ;	../UI_Manager/Display_Manager/display.c:190: case 'W':
+      0021A9                       1299 00145$:
+                                   1300 ;	../UI_Manager/Display_Manager/display.c:191: return CHAR_W;
+      0021A9 75 82 EA         [24] 1301 	mov	dpl,#0xea
+                                   1302 ;	../UI_Manager/Display_Manager/display.c:192: case 'w':
+      0021AC 22               [24] 1303 	ret
+      0021AD                       1304 00146$:
+                                   1305 ;	../UI_Manager/Display_Manager/display.c:193: return CHAR_w;
+      0021AD 75 82 EE         [24] 1306 	mov	dpl,#0xee
+                                   1307 ;	../UI_Manager/Display_Manager/display.c:194: case 'X':
+      0021B0 22               [24] 1308 	ret
+      0021B1                       1309 00147$:
+                                   1310 ;	../UI_Manager/Display_Manager/display.c:195: return CHAR_X;
+      0021B1 75 82 1A         [24] 1311 	mov	dpl,#0x1a
+                                   1312 ;	../UI_Manager/Display_Manager/display.c:196: case 'x':
+      0021B4 22               [24] 1313 	ret
+      0021B5                       1314 00148$:
+                                   1315 ;	../UI_Manager/Display_Manager/display.c:197: return CHAR_x;
+      0021B5 75 82 1E         [24] 1316 	mov	dpl,#0x1e
+                                   1317 ;	../UI_Manager/Display_Manager/display.c:198: case 'Y':
+      0021B8 22               [24] 1318 	ret
+      0021B9                       1319 00149$:
+                                   1320 ;	../UI_Manager/Display_Manager/display.c:199: return CHAR_Y;
+      0021B9 75 82 9A         [24] 1321 	mov	dpl,#0x9a
+                                   1322 ;	../UI_Manager/Display_Manager/display.c:200: case 'y':
+      0021BC 22               [24] 1323 	ret
+      0021BD                       1324 00150$:
+                                   1325 ;	../UI_Manager/Display_Manager/display.c:201: return CHAR_y;
+      0021BD 75 82 9E         [24] 1326 	mov	dpl,#0x9e
+                                   1327 ;	../UI_Manager/Display_Manager/display.c:202: case 'Z':
+      0021C0 22               [24] 1328 	ret
+      0021C1                       1329 00151$:
+                                   1330 ;	../UI_Manager/Display_Manager/display.c:203: return CHAR_Z;
+      0021C1 75 82 5A         [24] 1331 	mov	dpl,#0x5a
+                                   1332 ;	../UI_Manager/Display_Manager/display.c:204: case 'z':
+      0021C4 22               [24] 1333 	ret
+      0021C5                       1334 00152$:
+                                   1335 ;	../UI_Manager/Display_Manager/display.c:205: return CHAR_z;
+      0021C5 75 82 5E         [24] 1336 	mov	dpl,#0x5e
+                                   1337 ;	../UI_Manager/Display_Manager/display.c:206: case '0':
+      0021C8 22               [24] 1338 	ret
+      0021C9                       1339 00153$:
+                                   1340 ;	../UI_Manager/Display_Manager/display.c:207: return CHAR_0;
+      0021C9 75 82 0C         [24] 1341 	mov	dpl,#0x0c
+                                   1342 ;	../UI_Manager/Display_Manager/display.c:208: case '1':
+      0021CC 22               [24] 1343 	ret
+      0021CD                       1344 00154$:
+                                   1345 ;	../UI_Manager/Display_Manager/display.c:209: return CHAR_1;
+      0021CD 75 82 8C         [24] 1346 	mov	dpl,#0x8c
+                                   1347 ;	../UI_Manager/Display_Manager/display.c:210: case '2':
+      0021D0 22               [24] 1348 	ret
+      0021D1                       1349 00155$:
+                                   1350 ;	../UI_Manager/Display_Manager/display.c:211: return CHAR_2;
+      0021D1 75 82 4C         [24] 1351 	mov	dpl,#0x4c
+                                   1352 ;	../UI_Manager/Display_Manager/display.c:212: case '3':
+      0021D4 22               [24] 1353 	ret
+      0021D5                       1354 00156$:
+                                   1355 ;	../UI_Manager/Display_Manager/display.c:213: return CHAR_3;
+      0021D5 75 82 CC         [24] 1356 	mov	dpl,#0xcc
+                                   1357 ;	../UI_Manager/Display_Manager/display.c:214: case '4':
+      0021D8 22               [24] 1358 	ret
+      0021D9                       1359 00157$:
+                                   1360 ;	../UI_Manager/Display_Manager/display.c:215: return CHAR_4;
+      0021D9 75 82 2C         [24] 1361 	mov	dpl,#0x2c
+                                   1362 ;	../UI_Manager/Display_Manager/display.c:216: case '5':
+      0021DC 22               [24] 1363 	ret
+      0021DD                       1364 00158$:
+                                   1365 ;	../UI_Manager/Display_Manager/display.c:217: return CHAR_5;
+      0021DD 75 82 AC         [24] 1366 	mov	dpl,#0xac
+                                   1367 ;	../UI_Manager/Display_Manager/display.c:218: case '6':
+      0021E0 22               [24] 1368 	ret
+      0021E1                       1369 00159$:
+                                   1370 ;	../UI_Manager/Display_Manager/display.c:219: return CHAR_6;
+      0021E1 75 82 6C         [24] 1371 	mov	dpl,#0x6c
+                                   1372 ;	../UI_Manager/Display_Manager/display.c:220: case '7':
+      0021E4 22               [24] 1373 	ret
+      0021E5                       1374 00160$:
+                                   1375 ;	../UI_Manager/Display_Manager/display.c:221: return CHAR_7;
+      0021E5 75 82 EC         [24] 1376 	mov	dpl,#0xec
+                                   1377 ;	../UI_Manager/Display_Manager/display.c:222: case '8':
+      0021E8 22               [24] 1378 	ret
+      0021E9                       1379 00161$:
+                                   1380 ;	../UI_Manager/Display_Manager/display.c:223: return CHAR_8;
+      0021E9 75 82 1C         [24] 1381 	mov	dpl,#0x1c
+                                   1382 ;	../UI_Manager/Display_Manager/display.c:224: case '9':
+      0021EC 22               [24] 1383 	ret
+      0021ED                       1384 00162$:
+                                   1385 ;	../UI_Manager/Display_Manager/display.c:225: return CHAR_9;
+      0021ED 75 82 9C         [24] 1386 	mov	dpl,#0x9c
+                                   1387 ;	../UI_Manager/Display_Manager/display.c:226: case '+':
+      0021F0 22               [24] 1388 	ret
+      0021F1                       1389 00163$:
+                                   1390 ;	../UI_Manager/Display_Manager/display.c:227: return CHAR_PLUS;
+      0021F1 75 82 D4         [24] 1391 	mov	dpl,#0xd4
+                                   1392 ;	../UI_Manager/Display_Manager/display.c:228: case '&':
+      0021F4 22               [24] 1393 	ret
+      0021F5                       1394 00164$:
+                                   1395 ;	../UI_Manager/Display_Manager/display.c:229: return CHAR_AND;
+      0021F5 75 82 64         [24] 1396 	mov	dpl,#0x64
+                                   1397 ;	../UI_Manager/Display_Manager/display.c:230: case ';':
+      0021F8 22               [24] 1398 	ret
+      0021F9                       1399 00165$:
+                                   1400 ;	../UI_Manager/Display_Manager/display.c:231: return CHAR_STAR_8;
+      0021F9 75 82 E0         [24] 1401 	mov	dpl,#0xe0
+                                   1402 ;	../UI_Manager/Display_Manager/display.c:232: }
+      0021FC 22               [24] 1403 	ret
+      0021FD                       1404 00166$:
+                                   1405 ;	../UI_Manager/Display_Manager/display.c:234: return CHAR_NULL;
+      0021FD 75 82 04         [24] 1406 	mov	dpl,#0x04
+                                   1407 ;	../UI_Manager/Display_Manager/display.c:235: }
+      002200 22               [24] 1408 	ret
+                                   1409 ;------------------------------------------------------------
+                                   1410 ;Allocation info for local variables in function 'writeShiftReg'
+                                   1411 ;------------------------------------------------------------
+                                   1412 ;value                     Allocated to registers r6 r7 
+                                   1413 ;i                         Allocated to registers r5 
+                                   1414 ;------------------------------------------------------------
+                                   1415 ;	../UI_Manager/Display_Manager/display.c:240: void writeShiftReg(uint16_t value){
+                                   1416 ;	-----------------------------------------
+                                   1417 ;	 function writeShiftReg
+                                   1418 ;	-----------------------------------------
+      002201                       1419 _writeShiftReg:
+      002201 AE 82            [24] 1420 	mov	r6,dpl
+      002203 AF 83            [24] 1421 	mov	r7,dph
+                                   1422 ;	../UI_Manager/Display_Manager/display.c:243: for(i = 4; i < USEFUL_BITS+4; i++){
+      002205 7D 04            [12] 1423 	mov	r5,#0x04
+      002207                       1424 00102$:
+                                   1425 ;	../UI_Manager/Display_Manager/display.c:244: SER = value & (1 << i);
+      002207 8D F0            [24] 1426 	mov	b,r5
+      002209 05 F0            [12] 1427 	inc	b
+      00220B 7B 01            [12] 1428 	mov	r3,#0x01
+      00220D 7C 00            [12] 1429 	mov	r4,#0x00
+      00220F 80 06            [24] 1430 	sjmp	00116$
+      002211                       1431 00115$:
+      002211 EB               [12] 1432 	mov	a,r3
+      002212 2B               [12] 1433 	add	a,r3
+      002213 FB               [12] 1434 	mov	r3,a
+      002214 EC               [12] 1435 	mov	a,r4
+      002215 33               [12] 1436 	rlc	a
+      002216 FC               [12] 1437 	mov	r4,a
+      002217                       1438 00116$:
+      002217 D5 F0 F7         [24] 1439 	djnz	b,00115$
+      00221A EE               [12] 1440 	mov	a,r6
+      00221B 52 03            [12] 1441 	anl	ar3,a
+      00221D EF               [12] 1442 	mov	a,r7
+      00221E 52 04            [12] 1443 	anl	ar4,a
+                                   1444 ;	assignBit
+      002220 EB               [12] 1445 	mov	a,r3
+      002221 4C               [12] 1446 	orl	a,r4
+      002222 24 FF            [12] 1447 	add	a,#0xff
+      002224 92 95            [24] 1448 	mov	_SER,c
+                                   1449 ;	../UI_Manager/Display_Manager/display.c:247: SCK = 1;
+                                   1450 ;	assignBit
+      002226 D2 93            [12] 1451 	setb	_SCK
+                                   1452 ;	../UI_Manager/Display_Manager/display.c:248: SCK = 0;
+                                   1453 ;	assignBit
+      002228 C2 93            [12] 1454 	clr	_SCK
+                                   1455 ;	../UI_Manager/Display_Manager/display.c:243: for(i = 4; i < USEFUL_BITS+4; i++){
+      00222A 0D               [12] 1456 	inc	r5
+      00222B BD 10 00         [24] 1457 	cjne	r5,#0x10,00117$
+      00222E                       1458 00117$:
+      00222E 40 D7            [24] 1459 	jc	00102$
+                                   1460 ;	../UI_Manager/Display_Manager/display.c:250: RCK = 1;
+                                   1461 ;	assignBit
+      002230 D2 92            [12] 1462 	setb	_RCK
+                                   1463 ;	../UI_Manager/Display_Manager/display.c:251: RCK = 0;
+                                   1464 ;	assignBit
+      002232 C2 92            [12] 1465 	clr	_RCK
+                                   1466 ;	../UI_Manager/Display_Manager/display.c:252: }
+      002234 22               [24] 1467 	ret
+                                   1468 ;------------------------------------------------------------
+                                   1469 ;Allocation info for local variables in function 'flipByte'
+                                   1470 ;------------------------------------------------------------
+                                   1471 ;line                      Allocated to registers r7 
+                                   1472 ;i                         Allocated to registers r5 
+                                   1473 ;temp                      Allocated to registers r6 
+                                   1474 ;------------------------------------------------------------
+                                   1475 ;	../UI_Manager/Display_Manager/display.c:255: uint8_t flipByte(uint8_t line){
+                                   1476 ;	-----------------------------------------
+                                   1477 ;	 function flipByte
+                                   1478 ;	-----------------------------------------
+      002235                       1479 _flipByte:
+      002235 AF 82            [24] 1480 	mov	r7,dpl
+                                   1481 ;	../UI_Manager/Display_Manager/display.c:256: uint8_t i, temp = 0;
+      002237 7E 00            [12] 1482 	mov	r6,#0x00
+                                   1483 ;	../UI_Manager/Display_Manager/display.c:258: for(i = 0; i < 8; i++){
+      002239 7D 00            [12] 1484 	mov	r5,#0x00
+      00223B                       1485 00102$:
+                                   1486 ;	../UI_Manager/Display_Manager/display.c:259: temp |= (((line & (0x80 >> i)) ? 1 : 0) << i);
+      00223B C0 06            [24] 1487 	push	ar6
+      00223D 8D F0            [24] 1488 	mov	b,r5
+      00223F 05 F0            [12] 1489 	inc	b
+      002241 7B 80            [12] 1490 	mov	r3,#0x80
+      002243 E4               [12] 1491 	clr	a
+      002244 FC               [12] 1492 	mov	r4,a
+      002245 33               [12] 1493 	rlc	a
+      002246 92 D2            [24] 1494 	mov	ov,c
+      002248 80 08            [24] 1495 	sjmp	00122$
+      00224A                       1496 00121$:
+      00224A A2 D2            [12] 1497 	mov	c,ov
+      00224C EC               [12] 1498 	mov	a,r4
+      00224D 13               [12] 1499 	rrc	a
+      00224E FC               [12] 1500 	mov	r4,a
+      00224F EB               [12] 1501 	mov	a,r3
+      002250 13               [12] 1502 	rrc	a
+      002251 FB               [12] 1503 	mov	r3,a
+      002252                       1504 00122$:
+      002252 D5 F0 F5         [24] 1505 	djnz	b,00121$
+      002255 8F 02            [24] 1506 	mov	ar2,r7
+      002257 7E 00            [12] 1507 	mov	r6,#0x00
+      002259 EA               [12] 1508 	mov	a,r2
+      00225A 52 03            [12] 1509 	anl	ar3,a
+      00225C EE               [12] 1510 	mov	a,r6
+      00225D 52 04            [12] 1511 	anl	ar4,a
+      00225F D0 06            [24] 1512 	pop	ar6
+      002261 EB               [12] 1513 	mov	a,r3
+      002262 4C               [12] 1514 	orl	a,r4
+      002263 60 06            [24] 1515 	jz	00106$
+      002265 7B 01            [12] 1516 	mov	r3,#0x01
+      002267 7C 00            [12] 1517 	mov	r4,#0x00
+      002269 80 04            [24] 1518 	sjmp	00107$
+      00226B                       1519 00106$:
+      00226B 7B 00            [12] 1520 	mov	r3,#0x00
+      00226D 7C 00            [12] 1521 	mov	r4,#0x00
+      00226F                       1522 00107$:
+      00226F 8D 04            [24] 1523 	mov	ar4,r5
+      002271 8C F0            [24] 1524 	mov	b,r4
+      002273 05 F0            [12] 1525 	inc	b
+      002275 EB               [12] 1526 	mov	a,r3
+      002276 80 02            [24] 1527 	sjmp	00126$
+      002278                       1528 00124$:
+      002278 25 E0            [12] 1529 	add	a,acc
+      00227A                       1530 00126$:
+      00227A D5 F0 FB         [24] 1531 	djnz	b,00124$
+      00227D FB               [12] 1532 	mov	r3,a
+      00227E 8E 04            [24] 1533 	mov	ar4,r6
+      002280 EC               [12] 1534 	mov	a,r4
+      002281 42 03            [12] 1535 	orl	ar3,a
+      002283 8B 06            [24] 1536 	mov	ar6,r3
+                                   1537 ;	../UI_Manager/Display_Manager/display.c:258: for(i = 0; i < 8; i++){
+      002285 0D               [12] 1538 	inc	r5
+      002286 BD 08 00         [24] 1539 	cjne	r5,#0x08,00127$
+      002289                       1540 00127$:
+      002289 40 B0            [24] 1541 	jc	00102$
+                                   1542 ;	../UI_Manager/Display_Manager/display.c:262: return temp;
+      00228B 8E 82            [24] 1543 	mov	dpl,r6
+                                   1544 ;	../UI_Manager/Display_Manager/display.c:263: }
+      00228D 22               [24] 1545 	ret
+                                   1546 	.area CSEG    (CODE)
+                                   1547 	.area CONST   (CODE)
+                                   1548 	.area XINIT   (CODE)
+                                   1549 	.area CABS    (ABS,CODE)

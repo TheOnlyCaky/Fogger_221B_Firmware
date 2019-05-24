@@ -201,11 +201,6 @@ _CPRL2	=	0x00c8
 ;--------------------------------------------------------
 ; overlayable items in internal ram 
 ;--------------------------------------------------------
-	.area	OSEG    (OVR,DATA)
-_get_adc_value_index_65536_2:
-	.ds 1
-_get_adc_value_level_65536_3:
-	.ds 4
 ;--------------------------------------------------------
 ; indirectly addressable internal ram data
 ;--------------------------------------------------------
@@ -264,11 +259,11 @@ _get_adc_value_level_65536_3:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_adc_value'
 ;------------------------------------------------------------
-;index                     Allocated with name '_get_adc_value_index_65536_2'
-;level                     Allocated with name '_get_adc_value_level_65536_3'
-;temp                      Allocated to registers r7 r6 
+;index                     Allocated to registers r3 
+;level                     Allocated to stack - _bp +1
+;temp                      Allocated to registers r5 r4 
 ;i                         Allocated to registers r2 
-;j                         Allocated to registers r1 
+;j                         Allocated to registers r7 
 ;------------------------------------------------------------
 ;	../ADC_Manager/adc.c:12: uint16_t get_adc_value(uint8_t index){
 ;	-----------------------------------------
@@ -283,18 +278,28 @@ _get_adc_value:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-	mov	_get_adc_value_index_65536_2,dpl
+	push	_bp
+	mov	a,sp
+	mov	_bp,a
+	add	a,#0x04
+	mov	sp,a
+	mov	r3,dpl
 ;	../ADC_Manager/adc.c:13: uint32_t level = 0;
-;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
+	mov	r0,_bp
+	inc	r0
 	clr	a
-	mov	_get_adc_value_level_65536_3,a
-	mov	(_get_adc_value_level_65536_3 + 1),a
-	mov	(_get_adc_value_level_65536_3 + 2),a
-	mov	(_get_adc_value_level_65536_3 + 3),a
-	mov	r2,a
+	mov	@r0,a
+	inc	r0
+	mov	@r0,a
+	inc	r0
+	mov	@r0,a
+	inc	r0
+	mov	@r0,a
+;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
+	mov	r2,#0x00
 00112$:
 ;	../ADC_Manager/adc.c:20: if(index){
-	mov	a,_get_adc_value_index_65536_2
+	mov	a,r3
 	jz	00102$
 ;	../ADC_Manager/adc.c:21: P1_7 = 1;
 ;	assignBit
@@ -310,65 +315,72 @@ _get_adc_value:
 	mov	_ADCSEL,#0x81
 00103$:
 ;	../ADC_Manager/adc.c:28: for(j = 0; j < 8; j++){};
-	mov	r1,#0x08
+	mov	r7,#0x08
 00111$:
-	mov	a,r1
+	mov	a,r7
 	dec	a
-	mov	r1,a
+	mov	r7,a
 	jnz	00111$
 ;	../ADC_Manager/adc.c:29: while((ADCSEL & bVAL_Ready) == 0){};
 00105$:
 	mov	a,_ADCSEL
 	jnb	acc.4,00105$
 ;	../ADC_Manager/adc.c:31: temp = (ADCVAL1 << 2);
-	mov	r0,_ADCVAL1
-	mov	r1,#0x00
-	mov	a,r0
-	add	a,r0
-	mov	r0,a
-	mov	a,r1
+	mov	r6,_ADCVAL1
+	mov	r7,#0x00
+	mov	a,r6
+	add	a,r6
+	mov	r6,a
+	mov	a,r7
 	rlc	a
-	mov	r1,a
-	mov	a,r0
-	add	a,r0
-	mov	r0,a
-	mov	a,r1
+	mov	r7,a
+	mov	a,r6
+	add	a,r6
+	mov	r6,a
+	mov	a,r7
 	rlc	a
-	mov	r1,a
+	mov	r7,a
 ;	../ADC_Manager/adc.c:32: temp = temp | ADCVAL2;	
-	mov	r7,_ADCVAL2
-	mov	r6,#0x00
-	mov	a,r0
-	orl	ar7,a
-	mov	a,r1
-	orl	ar6,a
+	mov	r5,_ADCVAL2
+	mov	r4,#0x00
+	mov	a,r6
+	orl	ar5,a
+	mov	a,r7
+	orl	ar4,a
 ;	../ADC_Manager/adc.c:34: ADCSEL &= ~bVAL_ENADC; //disable adc
 	anl	_ADCSEL,#0x7f
 ;	../ADC_Manager/adc.c:36: level += temp;
-	mov	ar4,r6
-	clr	a
-	mov	r5,a
-	mov	r6,a
+	mov	ar7,r5
+	mov	r5,#0x00
+	mov	r6,#0x00
+	mov	r0,_bp
+	inc	r0
 	mov	a,r7
-	add	a,_get_adc_value_level_65536_3
-	mov	_get_adc_value_level_65536_3,a
+	add	a,@r0
+	mov	@r0,a
 	mov	a,r4
-	addc	a,(_get_adc_value_level_65536_3 + 1)
-	mov	(_get_adc_value_level_65536_3 + 1),a
+	inc	r0
+	addc	a,@r0
+	mov	@r0,a
 	mov	a,r5
-	addc	a,(_get_adc_value_level_65536_3 + 2)
-	mov	(_get_adc_value_level_65536_3 + 2),a
+	inc	r0
+	addc	a,@r0
+	mov	@r0,a
 	mov	a,r6
-	addc	a,(_get_adc_value_level_65536_3 + 3)
-	mov	(_get_adc_value_level_65536_3 + 3),a
+	inc	r0
+	addc	a,@r0
+	mov	@r0,a
 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
 	inc	r2
 	cjne	r2,#0x20,00151$
 00151$:
 	jc	00112$
 ;	../ADC_Manager/adc.c:39: return (uint16_t)(level >> ADC_AVERAGE_SHIFT);
-	mov	r4,_get_adc_value_level_65536_3
-	mov	a,(_get_adc_value_level_65536_3 + 1)
+	mov	r0,_bp
+	inc	r0
+	mov	ar4,@r0
+	inc	r0
+	mov	a,@r0
 	swap	a
 	rr	a
 	xch	a,r4
@@ -382,14 +394,16 @@ _get_adc_value:
 	xrl	a,r4
 	xch	a,r4
 	mov	r5,a
-	mov	a,(_get_adc_value_level_65536_3 + 2)
+	inc	r0
+	mov	a,@r0
 	swap	a
 	rr	a
 	anl	a,#0xf8
 	orl	a,r5
 	mov	r5,a
-	mov	r6,(_get_adc_value_level_65536_3 + 2)
-	mov	a,(_get_adc_value_level_65536_3 + 3)
+	mov	ar6,@r0
+	inc	r0
+	mov	a,@r0
 	swap	a
 	rr	a
 	xch	a,r6
@@ -405,6 +419,8 @@ _get_adc_value:
 	mov	dpl,r4
 	mov	dph,r5
 ;	../ADC_Manager/adc.c:40: }
+	mov	sp,_bp
+	pop	_bp
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

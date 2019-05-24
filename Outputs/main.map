@@ -14,6 +14,7 @@ C:   00000000  l_GSINIT1
 C:   00000000  l_GSINIT5                       
 C:   00000000  l_IABS                          
 C:   00000000  l_ISEG                          
+C:   00000000  l_OSEG                          
 C:   00000000  l_PSEG                          
 C:   00000000  l_REG_BANK_1                    
 C:   00000000  l_REG_BANK_2                    
@@ -44,7 +45,6 @@ C:   00000001  s_XISEG
 C:   00000001  s_XSEG                          
 C:   00000003  l_GSFINAL                       
 C:   00000003  l_GSINIT0                       
-C:   00000005  l_OSEG                          
 C:   00000008  l_REG_BANK_0                    
 C:   00000008  s_REG_BANK_1                    
 C:   0000000A  l_GSINIT2                       
@@ -52,11 +52,11 @@ C:   00000010  s_REG_BANK_2
 C:   00000018  s_REG_BANK_3                    
 C:   00000020  s_BIT_BANK                      
 C:   00000020  s_BSEG_BYTES                    
+C:   00000020  s_OSEG                          
 C:   00000020  s__CODE                         
 C:   00000022  l_GSINIT3                       
 C:   0000002A  l_GSINIT4                       
 C:   00000040  l_CABS2                         
-C:   00000049  l_HOME                          
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
@@ -66,25 +66,25 @@ CABS2                               00000000    00000040 =          64. bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+C:   00000049  l_HOME                          
 C:   00000049  s_GSINIT0                       
 C:   0000004C  s_GSINIT1                       
 C:   0000004C  s_GSINIT2                       
 C:   00000056  s_GSINIT3                       
-C:   0000006E  l_GSINIT                        
-C:   00000076  s_OSEG                          
+C:   00000060  s_SSEG                          
 C:   00000078  s_GSINIT4                       
-C:   0000007B  s_SSEG                          
-C:   00000080  l_DSEG                          
-C:   00000085  l_SSEG                          
+C:   0000007B  l_DSEG                          
+C:   0000007E  l_GSINIT                        
+C:   000000A0  l_SSEG                          
 C:   000000A2  s_GSINIT                        
 C:   000000A2  s_GSINIT5                       
 C:   00000100  l_IRAM                          
-C:   00000110  s_GSFINAL                       
-C:   00000113  s_CSEG                          
+C:   00000120  s_GSFINAL                       
+C:   00000123  s_CSEG                          
 C:   000002CF  l_CONST                         
-C:   00002E72  l_CSEG                          
-C:   00002F85  s_CONST                         
-C:   00003254  s_XINIT                         
+C:   000035AB  l_CSEG                          
+C:   000036CE  s_CONST                         
+C:   0000399D  s_XINIT                         
 C:   00003FC0  _Init_Data                         storage
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
@@ -220,64 +220,31 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-DSEG                                00000000    00000080 =         128. bytes (REL,CON)
+DSEG                                00000000    0000007B =         123. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000017  _set_ui_state_PARM_2               ui
-     00000021  _write_string_PARM_2               display
-     00000022  _write_string_PARM_3               display
-     00000023  _write_string_PARM_4               display
-     00000024  _write_string_PARM_5               display
-     00000025  _write_number_PARM_2               display
-     00000026  _write_number_PARM_3               display
-     00000027  _write_number_PARM_4               display
-     0000002B  _write_char_PARM_2                 display
-     0000002C  _write_char_PARM_3                 display
-     0000002D  _DMX                               dmx
-     00000038  _Has_DMX                           dmx
-     00000044  _play_macro_PARM_2                 led
-     00000045  _play_macro_PARM_3                 led
-     00000057  _set_leds_PARM_2                   led
-     00000058  _set_leds_PARM_3                   led
-     00000069  _set_runtime_data_PARM_2           storage
-     0000006A  _set_runtime_data_PARM_3           storage
-     0000006B  _Timer                             fogger
-     0000006C  _Interval_Or_Duration              fogger
-     0000006D  _Playing                           fogger
-     0000006E  _Heat_Flag                         fogger
-     0000006F  _Fluid_Level                       fogger
+     0000001A  _bp                                _bp
+     00000021  _DMX                               dmx
+     0000002C  _Has_DMX                           dmx
+     0000004C  _Timer                             fogger
+     0000004D  _Interval_Or_Duration              fogger
+     0000004E  _Playing                           fogger
+     0000004F  _Heat_Flag                         fogger
+     00000050  _Fluid_Level                       fogger
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-OSEG                                00000076    00000005 =           5. bytes (REL,OVR)
+SSEG                                00000060    000000A0 =         160. bytes (REL,OVR)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000076  __divsint_PARM_2                   _divuint
-     00000076  __divuint_PARM_2                   _divuint
-     00000076  __modsint_PARM_2                   _moduint
-     00000076  __modslong_PARM_2                  _modulong
-     00000076  __moduint_PARM_2                   _moduint
-     00000076  __modulong_PARM_2                  _modulong
-     00000076  __mulint_PARM_2                    _mulint
-     00000076  _save_load_settings_PARM_2         storage
+     00000060  __start__stack                     main
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-SSEG                                0000007B    00000085 =         133. bytes (REL,OVR)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-     0000007B  __start__stack                     main
-
-ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -288,7 +255,7 @@ HOME                                00000000    00000049 =          73. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000046  __sdcc_program_startup             main
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -299,7 +266,7 @@ GSINIT0                             00000049    00000003 =           3. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000049  __sdcc_gsinit_startup              
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -308,7 +275,7 @@ GSINIT2                             0000004C    0000000A =          10. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -319,7 +286,7 @@ GSINIT3                             00000056    00000022 =          34. bytes (R
       -----  --------------------------------   ------------------------
 C:   00000056  __mcs51_genXINIT                   
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -331,12 +298,21 @@ GSINIT4                             00000078    0000002A =          42. bytes (R
 C:   00000078  __mcs51_genRAMCLEAR                
 C:   0000007E  __mcs51_genXRAMCLEAR               
 
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT                              000000A2    0000007E =         126. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
 ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT                              000000A2    0000006E =         110. bytes (REL,CON,CODE)
+GSFINAL                             00000120    00000003 =           3. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -345,95 +321,89 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSFINAL                             00000110    00000003 =           3. bytes (REL,CON,CODE)
+CSEG                                00000123    000035AB =       13739. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+C:   00000123  _main                              main
+C:   00000481  _get_adc_value                     adc
+C:   0000052A  _tick_ui                           ui
+C:   00000960  _idlePage                          ui
+C:   00000D1A  _fogLevelPage                      ui
+C:   00000EAA  _fogIntervalPage                   ui
+C:   00000F7B  _fogDurationPage                   ui
+C:   0000104C  _macroPage                         ui
+C:   00001116  _macroSpeedPage                    ui
+C:   00001211  _colorPage                         ui
+C:   00001351  _remotePage                        ui
+C:   0000149D  _saveLoadPage                      ui
+C:   000015ED  _dmxAddressPage                    ui
+C:   00001685  _dmxChannelPage                    ui
+C:   00001740  _set_ui_state                      ui
+C:   00001849  _get_ui_state                      ui
+C:   0000184D  _getString                         ui
+C:   00001A56  _get_button_action                 button
+C:   00001CAB  _write_string                      display
+C:   00001D68  _write_number                      display
+C:   00001F9B  _write_char                        display
+C:   00001FE6  _exe_command                       display
+C:   0000202C  _charToCode                        display
+C:   00002201  _writeShiftReg                     display
+C:   00002235  _flipByte                          display
+C:   0000228E  _dmxReceiveByteISR                 dmx
+C:   0000231B  _dmxBreakDetectedISR               dmx
+C:   00002348  _tick_led                          led
+C:   00002574  _dmx_to_macro                      led
+C:   000025B9  _play_macro                        led
+C:   000029AA  _color_wheel                       led
+C:   00002A1D  _whiteout                          led
+C:   00002A2E  _blackout                          led
+C:   00002A3E  _rngU32                            led
+C:   00002A7B  _set_leds                          led
+C:   00002B1B  _wirelessBreakDetectISR            wireless
+C:   00002B77  _tick_wireless                     wireless
+C:   00002BFA  _handleUserConfigAction            wireless
+C:   00002DDA  _getWirelessAction                 wireless
+C:   00002E46  _detectDitDah                      wireless
+C:   00002E9C  _save_load_settings                storage
+C:   00002F00  _get_runtime_data                  storage
+C:   00002FC0  _set_runtime_data                  storage
+C:   00003053  _set_dmx_address                   storage
+C:   000030B3  _get_dmx_address                   storage
+C:   000030C6  _tick_fogger                       fogger
+C:   0000350F  _power_pump                        fogger
+C:   00003556  _power_heater                      fogger
+C:   00003567  __divuint                          _divuint
+C:   00003571  __divint                           _divuint
 ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000113    00002E72 =       11890. bytes (REL,CON,CODE)
+CSEG                                00000123    000035AB =       13739. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000113  _main                              main
-C:   0000045A  _get_adc_value                     adc
-C:   000004F1  _tick_ui                           ui
-C:   00000880  _idlePage                          ui
-C:   00000B66  _fogLevelPage                      ui
-C:   00000CA0  _fogIntervalPage                   ui
-C:   00000D4F  _fogDurationPage                   ui
-C:   00000DFE  _macroPage                         ui
-C:   00000EAA  _macroSpeedPage                    ui
-C:   00000F77  _colorPage                         ui
-C:   0000108A  _remotePage                        ui
-C:   000011A9  _saveLoadPage                      ui
-C:   000012C5  _dmxAddressPage                    ui
-C:   00001349  _dmxChannelPage                    ui
-C:   000013EB  _set_ui_state                      ui
-C:   0000147B  _get_ui_state                      ui
-C:   0000147F  _getString                         ui
-C:   00001688  _get_button_action                 button
-C:   000018DD  _write_string                      display
-C:   000019A1  _write_number                      display
-C:   00001AFB  _write_char                        display
-C:   00001B30  _exe_command                       display
-C:   00001B76  _charToCode                        display
-C:   00001D4B  _writeShiftReg                     display
-C:   00001D7F  _flipByte                          display
-C:   00001DD0  _dmxReceiveByteISR                 dmx
-C:   00001E4C  _dmxBreakDetectedISR               dmx
-C:   00001E79  _tick_led                          led
-C:   000020AF  _dmx_to_macro                      led
-C:   000020F4  _play_macro                        led
-C:   00002438  _color_wheel                       led
-C:   00002498  _whiteout                          led
-C:   000024A4  _blackout                          led
-C:   000024B0  _rngU32                            led
-C:   000024ED  _set_leds                          led
-C:   0000256D  _wirelessBreakDetectISR            wireless
-C:   000025C9  _tick_wireless                     wireless
-C:   0000264C  _handleUserConfigAction            wireless
-C:   000027B0  _getWirelessAction                 wireless
-C:   0000281C  _detectDitDah                      wireless
-C:   00002872  _save_load_settings                storage
-C:   000028C8  _get_runtime_data                  storage
-C:   0000295C  _set_runtime_data                  storage
-C:   000029D5  _set_dmx_address                   storage
-C:   00002A28  _get_dmx_address                   storage
-C:   00002A39  _tick_fogger                       fogger
-C:   00002DC1  _power_pump                        fogger
-C:   00002E08  _power_heater                      fogger
-C:   00002E19  __divuint                          _divuint
-C:   00002E42  __modulong                         _modulong
+C:   00003598  __mulint                           _mulint
+C:   00003598  __mulint_dummy                     _mulint
+C:   000035BA  __modulong                         _modulong
+C:   000035CB  __modlong                          _modulong
+C:   0000362C  __gptrget                          _gptrget
+C:   00003648  __modsint                          _modsint
+C:   00003685  __moduint                          _moduint
+C:   0000368F  __modint                           _moduint
+C:   000036CA  __sdcc_external_startup            _startup
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000113    00002E72 =       11890. bytes (REL,CON,CODE)
+CONST                               000036CE    000002CF =         719. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00002EC5  __mulint                           _mulint
-C:   00002EC5  __mulint_dummy                     _mulint
-C:   00002EE2  __moduint                          _moduint
-C:   00002F2F  __gptrget                          _gptrget
-C:   00002F4B  __modsint                          _modsint
-C:   00002F81  __sdcc_external_startup            _startup
-
 ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-CONST                               00002F85    000002CF =         719. bytes (REL,CON,CODE)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 
 Files Linked                              [ module(s) ]
 
@@ -451,32 +421,34 @@ fogger.rel                                [  ]
 
 Libraries Linked                          [ object file ]
 
-/usr/bin/../share/sdcc/lib/small/libint.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libint.lib
                                           [ _divuint.rel ]
-/usr/bin/../share/sdcc/lib/small/liblong.lib
-                                          [ _modulong.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtclear.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtxinit.rel ]
-/usr/bin/../share/sdcc/lib/small/libint.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libint.lib
                                           [ _mulint.rel ]
-/usr/bin/../share/sdcc/lib/small/libint.lib
-                                          [ _moduint.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtxclear.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/liblong.lib
+                                          [ _modulong.rel ]
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
+                                          [ _bp.rel ]
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtpagesfr.rel ]
-/usr/bin/../share/sdcc/lib/small/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtstart.rel ]
-/usr/bin/../share/sdcc/lib/small/libsdcc.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
                                           [ _gptrget.rel ]
-/usr/bin/../share/sdcc/lib/small/libint.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libint.lib
                                           [ _modsint.rel ]
-/usr/bin/../share/sdcc/lib/small/libsdcc.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libint.lib
+                                          [ _moduint.rel ]
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
                                           [ _startup.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 
 User Base Address Definitions
 

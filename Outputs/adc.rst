@@ -201,212 +201,228 @@
                                     201 ;--------------------------------------------------------
                                     202 ; overlayable items in internal ram 
                                     203 ;--------------------------------------------------------
-                                    204 	.area	OSEG    (OVR,DATA)
-      000076                        205 _get_adc_value_index_65536_2:
-      000076                        206 	.ds 1
-      000077                        207 _get_adc_value_level_65536_3:
-      000077                        208 	.ds 4
-                                    209 ;--------------------------------------------------------
-                                    210 ; indirectly addressable internal ram data
-                                    211 ;--------------------------------------------------------
-                                    212 	.area ISEG    (DATA)
+                                    204 ;--------------------------------------------------------
+                                    205 ; indirectly addressable internal ram data
+                                    206 ;--------------------------------------------------------
+                                    207 	.area ISEG    (DATA)
+                                    208 ;--------------------------------------------------------
+                                    209 ; absolute internal ram data
+                                    210 ;--------------------------------------------------------
+                                    211 	.area IABS    (ABS,DATA)
+                                    212 	.area IABS    (ABS,DATA)
                                     213 ;--------------------------------------------------------
-                                    214 ; absolute internal ram data
+                                    214 ; bit data
                                     215 ;--------------------------------------------------------
-                                    216 	.area IABS    (ABS,DATA)
-                                    217 	.area IABS    (ABS,DATA)
-                                    218 ;--------------------------------------------------------
-                                    219 ; bit data
-                                    220 ;--------------------------------------------------------
-                                    221 	.area BSEG    (BIT)
-                                    222 ;--------------------------------------------------------
-                                    223 ; paged external ram data
-                                    224 ;--------------------------------------------------------
-                                    225 	.area PSEG    (PAG,XDATA)
-                                    226 ;--------------------------------------------------------
-                                    227 ; external ram data
-                                    228 ;--------------------------------------------------------
-                                    229 	.area XSEG    (XDATA)
-                                    230 ;--------------------------------------------------------
-                                    231 ; absolute external ram data
-                                    232 ;--------------------------------------------------------
-                                    233 	.area XABS    (ABS,XDATA)
-                                    234 ;--------------------------------------------------------
-                                    235 ; external initialized ram data
-                                    236 ;--------------------------------------------------------
-                                    237 	.area XISEG   (XDATA)
-                                    238 	.area HOME    (CODE)
-                                    239 	.area GSINIT0 (CODE)
-                                    240 	.area GSINIT1 (CODE)
-                                    241 	.area GSINIT2 (CODE)
-                                    242 	.area GSINIT3 (CODE)
-                                    243 	.area GSINIT4 (CODE)
-                                    244 	.area GSINIT5 (CODE)
-                                    245 	.area GSINIT  (CODE)
-                                    246 	.area GSFINAL (CODE)
-                                    247 	.area CSEG    (CODE)
-                                    248 ;--------------------------------------------------------
-                                    249 ; global & static initialisations
+                                    216 	.area BSEG    (BIT)
+                                    217 ;--------------------------------------------------------
+                                    218 ; paged external ram data
+                                    219 ;--------------------------------------------------------
+                                    220 	.area PSEG    (PAG,XDATA)
+                                    221 ;--------------------------------------------------------
+                                    222 ; external ram data
+                                    223 ;--------------------------------------------------------
+                                    224 	.area XSEG    (XDATA)
+                                    225 ;--------------------------------------------------------
+                                    226 ; absolute external ram data
+                                    227 ;--------------------------------------------------------
+                                    228 	.area XABS    (ABS,XDATA)
+                                    229 ;--------------------------------------------------------
+                                    230 ; external initialized ram data
+                                    231 ;--------------------------------------------------------
+                                    232 	.area XISEG   (XDATA)
+                                    233 	.area HOME    (CODE)
+                                    234 	.area GSINIT0 (CODE)
+                                    235 	.area GSINIT1 (CODE)
+                                    236 	.area GSINIT2 (CODE)
+                                    237 	.area GSINIT3 (CODE)
+                                    238 	.area GSINIT4 (CODE)
+                                    239 	.area GSINIT5 (CODE)
+                                    240 	.area GSINIT  (CODE)
+                                    241 	.area GSFINAL (CODE)
+                                    242 	.area CSEG    (CODE)
+                                    243 ;--------------------------------------------------------
+                                    244 ; global & static initialisations
+                                    245 ;--------------------------------------------------------
+                                    246 	.area HOME    (CODE)
+                                    247 	.area GSINIT  (CODE)
+                                    248 	.area GSFINAL (CODE)
+                                    249 	.area GSINIT  (CODE)
                                     250 ;--------------------------------------------------------
-                                    251 	.area HOME    (CODE)
-                                    252 	.area GSINIT  (CODE)
-                                    253 	.area GSFINAL (CODE)
-                                    254 	.area GSINIT  (CODE)
+                                    251 ; Home
+                                    252 ;--------------------------------------------------------
+                                    253 	.area HOME    (CODE)
+                                    254 	.area HOME    (CODE)
                                     255 ;--------------------------------------------------------
-                                    256 ; Home
+                                    256 ; code
                                     257 ;--------------------------------------------------------
-                                    258 	.area HOME    (CODE)
-                                    259 	.area HOME    (CODE)
-                                    260 ;--------------------------------------------------------
-                                    261 ; code
-                                    262 ;--------------------------------------------------------
-                                    263 	.area CSEG    (CODE)
-                                    264 ;------------------------------------------------------------
-                                    265 ;Allocation info for local variables in function 'get_adc_value'
-                                    266 ;------------------------------------------------------------
-                                    267 ;index                     Allocated with name '_get_adc_value_index_65536_2'
-                                    268 ;level                     Allocated with name '_get_adc_value_level_65536_3'
-                                    269 ;temp                      Allocated to registers r7 r6 
-                                    270 ;i                         Allocated to registers r2 
-                                    271 ;j                         Allocated to registers r1 
-                                    272 ;------------------------------------------------------------
-                                    273 ;	../ADC_Manager/adc.c:12: uint16_t get_adc_value(uint8_t index){
-                                    274 ;	-----------------------------------------
-                                    275 ;	 function get_adc_value
-                                    276 ;	-----------------------------------------
-      00045A                        277 _get_adc_value:
-                           000007   278 	ar7 = 0x07
-                           000006   279 	ar6 = 0x06
-                           000005   280 	ar5 = 0x05
-                           000004   281 	ar4 = 0x04
-                           000003   282 	ar3 = 0x03
-                           000002   283 	ar2 = 0x02
-                           000001   284 	ar1 = 0x01
-                           000000   285 	ar0 = 0x00
-      00045A 85 82 76         [24]  286 	mov	_get_adc_value_index_65536_2,dpl
+                                    258 	.area CSEG    (CODE)
+                                    259 ;------------------------------------------------------------
+                                    260 ;Allocation info for local variables in function 'get_adc_value'
+                                    261 ;------------------------------------------------------------
+                                    262 ;index                     Allocated to registers r3 
+                                    263 ;level                     Allocated to stack - _bp +1
+                                    264 ;temp                      Allocated to registers r5 r4 
+                                    265 ;i                         Allocated to registers r2 
+                                    266 ;j                         Allocated to registers r7 
+                                    267 ;------------------------------------------------------------
+                                    268 ;	../ADC_Manager/adc.c:12: uint16_t get_adc_value(uint8_t index){
+                                    269 ;	-----------------------------------------
+                                    270 ;	 function get_adc_value
+                                    271 ;	-----------------------------------------
+      000481                        272 _get_adc_value:
+                           000007   273 	ar7 = 0x07
+                           000006   274 	ar6 = 0x06
+                           000005   275 	ar5 = 0x05
+                           000004   276 	ar4 = 0x04
+                           000003   277 	ar3 = 0x03
+                           000002   278 	ar2 = 0x02
+                           000001   279 	ar1 = 0x01
+                           000000   280 	ar0 = 0x00
+      000481 C0 1A            [24]  281 	push	_bp
+      000483 E5 81            [12]  282 	mov	a,sp
+      000485 F5 1A            [12]  283 	mov	_bp,a
+      000487 24 04            [12]  284 	add	a,#0x04
+      000489 F5 81            [12]  285 	mov	sp,a
+      00048B AB 82            [24]  286 	mov	r3,dpl
                                     287 ;	../ADC_Manager/adc.c:13: uint32_t level = 0;
-                                    288 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
-      00045D E4               [12]  289 	clr	a
-      00045E F5 77            [12]  290 	mov	_get_adc_value_level_65536_3,a
-      000460 F5 78            [12]  291 	mov	(_get_adc_value_level_65536_3 + 1),a
-      000462 F5 79            [12]  292 	mov	(_get_adc_value_level_65536_3 + 2),a
-      000464 F5 7A            [12]  293 	mov	(_get_adc_value_level_65536_3 + 3),a
-      000466 FA               [12]  294 	mov	r2,a
-      000467                        295 00112$:
-                                    296 ;	../ADC_Manager/adc.c:20: if(index){
-      000467 E5 76            [12]  297 	mov	a,_get_adc_value_index_65536_2
-      000469 60 07            [24]  298 	jz	00102$
-                                    299 ;	../ADC_Manager/adc.c:21: P1_7 = 1;
-                                    300 ;	assignBit
-      00046B D2 97            [12]  301 	setb	_P1_7
-                                    302 ;	../ADC_Manager/adc.c:22: ADCSEL = bVAL_ENADC | bVAL_SADC3; //select ADC3
-      00046D 75 DA 88         [24]  303 	mov	_ADCSEL,#0x88
-      000470 80 05            [24]  304 	sjmp	00103$
-      000472                        305 00102$:
-                                    306 ;	../ADC_Manager/adc.c:24: P1_4 = 1;
-                                    307 ;	assignBit
-      000472 D2 94            [12]  308 	setb	_P1_4
-                                    309 ;	../ADC_Manager/adc.c:25: ADCSEL = bVAL_ENADC | bVAL_SADC0; //select ADC0
-      000474 75 DA 81         [24]  310 	mov	_ADCSEL,#0x81
-      000477                        311 00103$:
-                                    312 ;	../ADC_Manager/adc.c:28: for(j = 0; j < 8; j++){};
-      000477 79 08            [12]  313 	mov	r1,#0x08
-      000479                        314 00111$:
-      000479 E9               [12]  315 	mov	a,r1
-      00047A 14               [12]  316 	dec	a
-      00047B F9               [12]  317 	mov	r1,a
-      00047C 70 FB            [24]  318 	jnz	00111$
-                                    319 ;	../ADC_Manager/adc.c:29: while((ADCSEL & bVAL_Ready) == 0){};
-      00047E                        320 00105$:
-      00047E E5 DA            [12]  321 	mov	a,_ADCSEL
-      000480 30 E4 FB         [24]  322 	jnb	acc.4,00105$
-                                    323 ;	../ADC_Manager/adc.c:31: temp = (ADCVAL1 << 2);
-      000483 A8 DB            [24]  324 	mov	r0,_ADCVAL1
-      000485 79 00            [12]  325 	mov	r1,#0x00
-      000487 E8               [12]  326 	mov	a,r0
-      000488 28               [12]  327 	add	a,r0
-      000489 F8               [12]  328 	mov	r0,a
-      00048A E9               [12]  329 	mov	a,r1
-      00048B 33               [12]  330 	rlc	a
-      00048C F9               [12]  331 	mov	r1,a
-      00048D E8               [12]  332 	mov	a,r0
-      00048E 28               [12]  333 	add	a,r0
-      00048F F8               [12]  334 	mov	r0,a
-      000490 E9               [12]  335 	mov	a,r1
-      000491 33               [12]  336 	rlc	a
-      000492 F9               [12]  337 	mov	r1,a
-                                    338 ;	../ADC_Manager/adc.c:32: temp = temp | ADCVAL2;	
-      000493 AF DC            [24]  339 	mov	r7,_ADCVAL2
-      000495 7E 00            [12]  340 	mov	r6,#0x00
-      000497 E8               [12]  341 	mov	a,r0
-      000498 42 07            [12]  342 	orl	ar7,a
-      00049A E9               [12]  343 	mov	a,r1
-      00049B 42 06            [12]  344 	orl	ar6,a
-                                    345 ;	../ADC_Manager/adc.c:34: ADCSEL &= ~bVAL_ENADC; //disable adc
-      00049D 53 DA 7F         [24]  346 	anl	_ADCSEL,#0x7f
-                                    347 ;	../ADC_Manager/adc.c:36: level += temp;
-      0004A0 8E 04            [24]  348 	mov	ar4,r6
-      0004A2 E4               [12]  349 	clr	a
-      0004A3 FD               [12]  350 	mov	r5,a
-      0004A4 FE               [12]  351 	mov	r6,a
-      0004A5 EF               [12]  352 	mov	a,r7
-      0004A6 25 77            [12]  353 	add	a,_get_adc_value_level_65536_3
-      0004A8 F5 77            [12]  354 	mov	_get_adc_value_level_65536_3,a
-      0004AA EC               [12]  355 	mov	a,r4
-      0004AB 35 78            [12]  356 	addc	a,(_get_adc_value_level_65536_3 + 1)
-      0004AD F5 78            [12]  357 	mov	(_get_adc_value_level_65536_3 + 1),a
-      0004AF ED               [12]  358 	mov	a,r5
-      0004B0 35 79            [12]  359 	addc	a,(_get_adc_value_level_65536_3 + 2)
-      0004B2 F5 79            [12]  360 	mov	(_get_adc_value_level_65536_3 + 2),a
-      0004B4 EE               [12]  361 	mov	a,r6
-      0004B5 35 7A            [12]  362 	addc	a,(_get_adc_value_level_65536_3 + 3)
-      0004B7 F5 7A            [12]  363 	mov	(_get_adc_value_level_65536_3 + 3),a
-                                    364 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
-      0004B9 0A               [12]  365 	inc	r2
-      0004BA BA 20 00         [24]  366 	cjne	r2,#0x20,00151$
-      0004BD                        367 00151$:
-      0004BD 40 A8            [24]  368 	jc	00112$
-                                    369 ;	../ADC_Manager/adc.c:39: return (uint16_t)(level >> ADC_AVERAGE_SHIFT);
-      0004BF AC 77            [24]  370 	mov	r4,_get_adc_value_level_65536_3
-      0004C1 E5 78            [12]  371 	mov	a,(_get_adc_value_level_65536_3 + 1)
-      0004C3 C4               [12]  372 	swap	a
-      0004C4 03               [12]  373 	rr	a
-      0004C5 CC               [12]  374 	xch	a,r4
-      0004C6 C4               [12]  375 	swap	a
-      0004C7 03               [12]  376 	rr	a
-      0004C8 54 07            [12]  377 	anl	a,#0x07
-      0004CA 6C               [12]  378 	xrl	a,r4
-      0004CB CC               [12]  379 	xch	a,r4
-      0004CC 54 07            [12]  380 	anl	a,#0x07
-      0004CE CC               [12]  381 	xch	a,r4
-      0004CF 6C               [12]  382 	xrl	a,r4
-      0004D0 CC               [12]  383 	xch	a,r4
-      0004D1 FD               [12]  384 	mov	r5,a
-      0004D2 E5 79            [12]  385 	mov	a,(_get_adc_value_level_65536_3 + 2)
-      0004D4 C4               [12]  386 	swap	a
-      0004D5 03               [12]  387 	rr	a
-      0004D6 54 F8            [12]  388 	anl	a,#0xf8
-      0004D8 4D               [12]  389 	orl	a,r5
-      0004D9 FD               [12]  390 	mov	r5,a
-      0004DA AE 79            [24]  391 	mov	r6,(_get_adc_value_level_65536_3 + 2)
-      0004DC E5 7A            [12]  392 	mov	a,(_get_adc_value_level_65536_3 + 3)
-      0004DE C4               [12]  393 	swap	a
-      0004DF 03               [12]  394 	rr	a
-      0004E0 CE               [12]  395 	xch	a,r6
-      0004E1 C4               [12]  396 	swap	a
-      0004E2 03               [12]  397 	rr	a
-      0004E3 54 07            [12]  398 	anl	a,#0x07
-      0004E5 6E               [12]  399 	xrl	a,r6
-      0004E6 CE               [12]  400 	xch	a,r6
-      0004E7 54 07            [12]  401 	anl	a,#0x07
-      0004E9 CE               [12]  402 	xch	a,r6
-      0004EA 6E               [12]  403 	xrl	a,r6
-      0004EB CE               [12]  404 	xch	a,r6
-      0004EC 8C 82            [24]  405 	mov	dpl,r4
-      0004EE 8D 83            [24]  406 	mov	dph,r5
-                                    407 ;	../ADC_Manager/adc.c:40: }
-      0004F0 22               [24]  408 	ret
-                                    409 	.area CSEG    (CODE)
-                                    410 	.area CONST   (CODE)
-                                    411 	.area XINIT   (CODE)
-                                    412 	.area CABS    (ABS,CODE)
+      00048D A8 1A            [24]  288 	mov	r0,_bp
+      00048F 08               [12]  289 	inc	r0
+      000490 E4               [12]  290 	clr	a
+      000491 F6               [12]  291 	mov	@r0,a
+      000492 08               [12]  292 	inc	r0
+      000493 F6               [12]  293 	mov	@r0,a
+      000494 08               [12]  294 	inc	r0
+      000495 F6               [12]  295 	mov	@r0,a
+      000496 08               [12]  296 	inc	r0
+      000497 F6               [12]  297 	mov	@r0,a
+                                    298 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
+      000498 7A 00            [12]  299 	mov	r2,#0x00
+      00049A                        300 00112$:
+                                    301 ;	../ADC_Manager/adc.c:20: if(index){
+      00049A EB               [12]  302 	mov	a,r3
+      00049B 60 07            [24]  303 	jz	00102$
+                                    304 ;	../ADC_Manager/adc.c:21: P1_7 = 1;
+                                    305 ;	assignBit
+      00049D D2 97            [12]  306 	setb	_P1_7
+                                    307 ;	../ADC_Manager/adc.c:22: ADCSEL = bVAL_ENADC | bVAL_SADC3; //select ADC3
+      00049F 75 DA 88         [24]  308 	mov	_ADCSEL,#0x88
+      0004A2 80 05            [24]  309 	sjmp	00103$
+      0004A4                        310 00102$:
+                                    311 ;	../ADC_Manager/adc.c:24: P1_4 = 1;
+                                    312 ;	assignBit
+      0004A4 D2 94            [12]  313 	setb	_P1_4
+                                    314 ;	../ADC_Manager/adc.c:25: ADCSEL = bVAL_ENADC | bVAL_SADC0; //select ADC0
+      0004A6 75 DA 81         [24]  315 	mov	_ADCSEL,#0x81
+      0004A9                        316 00103$:
+                                    317 ;	../ADC_Manager/adc.c:28: for(j = 0; j < 8; j++){};
+      0004A9 7F 08            [12]  318 	mov	r7,#0x08
+      0004AB                        319 00111$:
+      0004AB EF               [12]  320 	mov	a,r7
+      0004AC 14               [12]  321 	dec	a
+      0004AD FF               [12]  322 	mov	r7,a
+      0004AE 70 FB            [24]  323 	jnz	00111$
+                                    324 ;	../ADC_Manager/adc.c:29: while((ADCSEL & bVAL_Ready) == 0){};
+      0004B0                        325 00105$:
+      0004B0 E5 DA            [12]  326 	mov	a,_ADCSEL
+      0004B2 30 E4 FB         [24]  327 	jnb	acc.4,00105$
+                                    328 ;	../ADC_Manager/adc.c:31: temp = (ADCVAL1 << 2);
+      0004B5 AE DB            [24]  329 	mov	r6,_ADCVAL1
+      0004B7 7F 00            [12]  330 	mov	r7,#0x00
+      0004B9 EE               [12]  331 	mov	a,r6
+      0004BA 2E               [12]  332 	add	a,r6
+      0004BB FE               [12]  333 	mov	r6,a
+      0004BC EF               [12]  334 	mov	a,r7
+      0004BD 33               [12]  335 	rlc	a
+      0004BE FF               [12]  336 	mov	r7,a
+      0004BF EE               [12]  337 	mov	a,r6
+      0004C0 2E               [12]  338 	add	a,r6
+      0004C1 FE               [12]  339 	mov	r6,a
+      0004C2 EF               [12]  340 	mov	a,r7
+      0004C3 33               [12]  341 	rlc	a
+      0004C4 FF               [12]  342 	mov	r7,a
+                                    343 ;	../ADC_Manager/adc.c:32: temp = temp | ADCVAL2;	
+      0004C5 AD DC            [24]  344 	mov	r5,_ADCVAL2
+      0004C7 7C 00            [12]  345 	mov	r4,#0x00
+      0004C9 EE               [12]  346 	mov	a,r6
+      0004CA 42 05            [12]  347 	orl	ar5,a
+      0004CC EF               [12]  348 	mov	a,r7
+      0004CD 42 04            [12]  349 	orl	ar4,a
+                                    350 ;	../ADC_Manager/adc.c:34: ADCSEL &= ~bVAL_ENADC; //disable adc
+      0004CF 53 DA 7F         [24]  351 	anl	_ADCSEL,#0x7f
+                                    352 ;	../ADC_Manager/adc.c:36: level += temp;
+      0004D2 8D 07            [24]  353 	mov	ar7,r5
+      0004D4 7D 00            [12]  354 	mov	r5,#0x00
+      0004D6 7E 00            [12]  355 	mov	r6,#0x00
+      0004D8 A8 1A            [24]  356 	mov	r0,_bp
+      0004DA 08               [12]  357 	inc	r0
+      0004DB EF               [12]  358 	mov	a,r7
+      0004DC 26               [12]  359 	add	a,@r0
+      0004DD F6               [12]  360 	mov	@r0,a
+      0004DE EC               [12]  361 	mov	a,r4
+      0004DF 08               [12]  362 	inc	r0
+      0004E0 36               [12]  363 	addc	a,@r0
+      0004E1 F6               [12]  364 	mov	@r0,a
+      0004E2 ED               [12]  365 	mov	a,r5
+      0004E3 08               [12]  366 	inc	r0
+      0004E4 36               [12]  367 	addc	a,@r0
+      0004E5 F6               [12]  368 	mov	@r0,a
+      0004E6 EE               [12]  369 	mov	a,r6
+      0004E7 08               [12]  370 	inc	r0
+      0004E8 36               [12]  371 	addc	a,@r0
+      0004E9 F6               [12]  372 	mov	@r0,a
+                                    373 ;	../ADC_Manager/adc.c:17: for(i = 0; i < (1 << ADC_AVERAGE_SHIFT); i++){
+      0004EA 0A               [12]  374 	inc	r2
+      0004EB BA 20 00         [24]  375 	cjne	r2,#0x20,00151$
+      0004EE                        376 00151$:
+      0004EE 40 AA            [24]  377 	jc	00112$
+                                    378 ;	../ADC_Manager/adc.c:39: return (uint16_t)(level >> ADC_AVERAGE_SHIFT);
+      0004F0 A8 1A            [24]  379 	mov	r0,_bp
+      0004F2 08               [12]  380 	inc	r0
+      0004F3 86 04            [24]  381 	mov	ar4,@r0
+      0004F5 08               [12]  382 	inc	r0
+      0004F6 E6               [12]  383 	mov	a,@r0
+      0004F7 C4               [12]  384 	swap	a
+      0004F8 03               [12]  385 	rr	a
+      0004F9 CC               [12]  386 	xch	a,r4
+      0004FA C4               [12]  387 	swap	a
+      0004FB 03               [12]  388 	rr	a
+      0004FC 54 07            [12]  389 	anl	a,#0x07
+      0004FE 6C               [12]  390 	xrl	a,r4
+      0004FF CC               [12]  391 	xch	a,r4
+      000500 54 07            [12]  392 	anl	a,#0x07
+      000502 CC               [12]  393 	xch	a,r4
+      000503 6C               [12]  394 	xrl	a,r4
+      000504 CC               [12]  395 	xch	a,r4
+      000505 FD               [12]  396 	mov	r5,a
+      000506 08               [12]  397 	inc	r0
+      000507 E6               [12]  398 	mov	a,@r0
+      000508 C4               [12]  399 	swap	a
+      000509 03               [12]  400 	rr	a
+      00050A 54 F8            [12]  401 	anl	a,#0xf8
+      00050C 4D               [12]  402 	orl	a,r5
+      00050D FD               [12]  403 	mov	r5,a
+      00050E 86 06            [24]  404 	mov	ar6,@r0
+      000510 08               [12]  405 	inc	r0
+      000511 E6               [12]  406 	mov	a,@r0
+      000512 C4               [12]  407 	swap	a
+      000513 03               [12]  408 	rr	a
+      000514 CE               [12]  409 	xch	a,r6
+      000515 C4               [12]  410 	swap	a
+      000516 03               [12]  411 	rr	a
+      000517 54 07            [12]  412 	anl	a,#0x07
+      000519 6E               [12]  413 	xrl	a,r6
+      00051A CE               [12]  414 	xch	a,r6
+      00051B 54 07            [12]  415 	anl	a,#0x07
+      00051D CE               [12]  416 	xch	a,r6
+      00051E 6E               [12]  417 	xrl	a,r6
+      00051F CE               [12]  418 	xch	a,r6
+      000520 8C 82            [24]  419 	mov	dpl,r4
+      000522 8D 83            [24]  420 	mov	dph,r5
+                                    421 ;	../ADC_Manager/adc.c:40: }
+      000524 85 1A 81         [24]  422 	mov	sp,_bp
+      000527 D0 1A            [24]  423 	pop	_bp
+      000529 22               [24]  424 	ret
+                                    425 	.area CSEG    (CODE)
+                                    426 	.area CONST   (CODE)
+                                    427 	.area XINIT   (CODE)
+                                    428 	.area CABS    (ABS,CODE)

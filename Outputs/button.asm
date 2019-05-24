@@ -255,10 +255,10 @@ _get_button_action_pressOK_65536_3:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_button_action'
 ;------------------------------------------------------------
-;lastAction                Allocated with name '_get_button_action_lastAction_65536_3'
-;pressOK                   Allocated with name '_get_button_action_pressOK_65536_3'
 ;level                     Allocated to registers r6 r7 
 ;retVal                    Allocated to registers r5 
+;lastAction                Allocated with name '_get_button_action_lastAction_65536_3'
+;pressOK                   Allocated with name '_get_button_action_pressOK_65536_3'
 ;------------------------------------------------------------
 ;	../UI_Manager/Button_Manager/button.c:14: static uint8_t lastAction = BUTTON_NA;
 	mov	_get_button_action_lastAction_65536_3,#0x00
@@ -276,10 +276,10 @@ _get_button_action_pressOK_65536_3:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'get_button_action'
 ;------------------------------------------------------------
-;lastAction                Allocated with name '_get_button_action_lastAction_65536_3'
-;pressOK                   Allocated with name '_get_button_action_pressOK_65536_3'
 ;level                     Allocated to registers r6 r7 
 ;retVal                    Allocated to registers r5 
+;lastAction                Allocated with name '_get_button_action_lastAction_65536_3'
+;pressOK                   Allocated with name '_get_button_action_pressOK_65536_3'
 ;------------------------------------------------------------
 ;	../UI_Manager/Button_Manager/button.c:13: uint8_t get_button_action(){
 ;	-----------------------------------------

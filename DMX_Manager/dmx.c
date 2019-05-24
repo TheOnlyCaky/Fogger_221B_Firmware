@@ -20,17 +20,23 @@ static volatile uint16_t Index = 0;
 */
 void dmxReceiveByteISR(void) __interrupt (4){
     uint16_t address = get_dmx_address();
+    uint8_t value = SBUF;
 
     //reset break timout
     TH3 = BREAK_TIMER_RELOAD_HIGH;
     TL3 = BREAK_TIMER_RELOAD_LOW;
     Has_DMX = 0xFF;
 
-    Index++;
+    //bad start code
+    if(!Index && value){
+        Index = DMX_MAX_ADDRESS + 1; 
+    }
 
     if(Index >= address && Index < address + MAX_CHANNEL_MODE){
-        DMX[Index - address] = SBUF; //sbuf is the UART0 buffer reg
+        DMX[Index - address] = value; //sbuf is the UART0 buffer reg
     }
+
+    Index++;
 
     //clear interrupt flag
     RI = 0;

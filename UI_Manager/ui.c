@@ -219,7 +219,23 @@ void idlePage(){
         if(get_fog_fluid_level() == TANK_FULL){
             empty = 0x00;
             Changed = CHANGE_SCREEN_X;
+        } else if(Changed){
+            Changed = 0x00;
+            exe_command(CLEAR_DISPLAY);
+            write_string("PC Load Letter", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
+            write_string("Burst to Refill", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
         }
+
+        return;
+    }
+
+    /* PC Load Letter */
+    if(get_fog_fluid_level() == TANK_EMPTY && get_heated() == HEATED){
+        //TODO PC load letter
+        write_string("PC Load Letter", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
+        write_string("Burst to Refill", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
+
+        empty = 0xFF;
 
         return;
     }
@@ -230,17 +246,6 @@ void idlePage(){
         changed = 0xFF;
         timer = 0xFF;
         intervalOrDuration = 0x55; //guaranteed to not be interval or duration
-
-        /* PC Load Letter */
-        if(get_fog_fluid_level() == TANK_EMPTY && get_heated() == HEATED){
-            //TODO PC load letter
-            write_string("PC Load Letter", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);
-            write_string("Burst to Refill", LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
-
-            empty = 0xFF;
-
-            return;
-        }
         
         if(get_runtime_data(OP_MODE_INDEX)){ /* Manual Mode */
             write_string("Manual Mode", LINE_LENGTH, 1, LINE_0, NOT_SELECTED);

@@ -290,6 +290,7 @@ _Index:
 ;Allocation info for local variables in function 'dmxReceiveByteISR'
 ;------------------------------------------------------------
 ;address                   Allocated to registers r6 r7 
+;value                     Allocated to registers r5 
 ;------------------------------------------------------------
 ;	../DMX_Manager/dmx.c:21: void dmxReceiveByteISR(void) __interrupt (4){
 ;	-----------------------------------------
@@ -323,51 +324,63 @@ _dmxReceiveByteISR:
 	lcall	_get_dmx_address
 	mov	r6,dpl
 	mov	r7,dph
-;	../DMX_Manager/dmx.c:25: TH3 = BREAK_TIMER_RELOAD_HIGH;
+;	../DMX_Manager/dmx.c:23: uint8_t value = SBUF;
+	mov	r5,_SBUF
+;	../DMX_Manager/dmx.c:26: TH3 = BREAK_TIMER_RELOAD_HIGH;
 	mov	_TH3,#0xfc
-;	../DMX_Manager/dmx.c:26: TL3 = BREAK_TIMER_RELOAD_LOW;
-	mov	_TL3,#0xd0
-;	../DMX_Manager/dmx.c:27: Has_DMX = 0xFF;
+;	../DMX_Manager/dmx.c:27: TL3 = BREAK_TIMER_RELOAD_LOW;
+	mov	_TL3,#0xee
+;	../DMX_Manager/dmx.c:28: Has_DMX = 0xFF;
 	mov	_Has_DMX,#0xff
-;	../DMX_Manager/dmx.c:29: Index++;
+;	../DMX_Manager/dmx.c:31: if(!Index && value){
+	mov	a,_Index
+	orl	a,(_Index + 1)
+	jnz	00102$
+	mov	a,r5
+	jz	00102$
+;	../DMX_Manager/dmx.c:32: Index = DMX_MAX_ADDRESS + 1; 
+	mov	_Index,#0x01
+	mov	(_Index + 1),#0x02
+00102$:
+;	../DMX_Manager/dmx.c:35: if(Index >= address && Index < address + MAX_CHANNEL_MODE){
+	clr	c
+	mov	a,_Index
+	subb	a,r6
+	mov	a,(_Index + 1)
+	subb	a,r7
+	jc	00105$
+	mov	a,#0x0b
+	add	a,r6
+	mov	r3,a
+	clr	a
+	addc	a,r7
+	mov	r4,a
+	clr	c
+	mov	a,_Index
+	subb	a,r3
+	mov	a,(_Index + 1)
+	subb	a,r4
+	jnc	00105$
+;	../DMX_Manager/dmx.c:36: DMX[Index - address] = value; //sbuf is the UART0 buffer reg
+	mov	a,_Index
+	mov	r4,a
+	clr	c
+	subb	a,r6
+	add	a,#_DMX
+	mov	r0,a
+	mov	@r0,ar5
+00105$:
+;	../DMX_Manager/dmx.c:39: Index++;
 	mov	a,#0x01
 	add	a,_Index
 	mov	_Index,a
 	clr	a
 	addc	a,(_Index + 1)
 	mov	(_Index + 1),a
-;	../DMX_Manager/dmx.c:31: if(Index >= address && Index < address + MAX_CHANNEL_MODE){
-	clr	c
-	mov	a,_Index
-	subb	a,r6
-	mov	a,(_Index + 1)
-	subb	a,r7
-	jc	00102$
-	mov	a,#0x0b
-	add	a,r6
-	mov	r4,a
-	clr	a
-	addc	a,r7
-	mov	r5,a
-	clr	c
-	mov	a,_Index
-	subb	a,r4
-	mov	a,(_Index + 1)
-	subb	a,r5
-	jnc	00102$
-;	../DMX_Manager/dmx.c:32: DMX[Index - address] = SBUF; //sbuf is the UART0 buffer reg
-	mov	a,_Index
-	mov	r5,a
-	clr	c
-	subb	a,r6
-	add	a,#_DMX
-	mov	r0,a
-	mov	@r0,_SBUF
-00102$:
-;	../DMX_Manager/dmx.c:36: RI = 0;
+;	../DMX_Manager/dmx.c:42: RI = 0;
 ;	assignBit
 	clr	_RI
-;	../DMX_Manager/dmx.c:37: }
+;	../DMX_Manager/dmx.c:43: }
 	pop	psw
 	pop	(0+0)
 	pop	(0+1)
@@ -386,44 +399,44 @@ _dmxReceiveByteISR:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'dmxBreakDetectedISR'
 ;------------------------------------------------------------
-;	../DMX_Manager/dmx.c:40: void dmxBreakDetectedISR(void) __interrupt (8){
+;	../DMX_Manager/dmx.c:46: void dmxBreakDetectedISR(void) __interrupt (8){
 ;	-----------------------------------------
 ;	 function dmxBreakDetectedISR
 ;	-----------------------------------------
 _dmxBreakDetectedISR:
 	push	acc
-;	../DMX_Manager/dmx.c:44: if(!Index){
+;	../DMX_Manager/dmx.c:50: if(!Index){
 	mov	a,_Index
 	orl	a,(_Index + 1)
-;	../DMX_Manager/dmx.c:45: Has_DMX = 0x00;
-;	../DMX_Manager/dmx.c:46: DMX[0] = 0x00;
-;	../DMX_Manager/dmx.c:47: DMX[1] = 0x00;
-;	../DMX_Manager/dmx.c:48: DMX[2] = 0x00;
+;	../DMX_Manager/dmx.c:51: Has_DMX = 0x00;
+;	../DMX_Manager/dmx.c:52: DMX[0] = 0x00;
+;	../DMX_Manager/dmx.c:53: DMX[1] = 0x00;
+;	../DMX_Manager/dmx.c:54: DMX[2] = 0x00;
 	jnz	00102$
 	mov	_Has_DMX,a
 	mov	_DMX,a
 	mov	(_DMX + 0x0001),a
 	mov	(_DMX + 0x0002),a
-;	../DMX_Manager/dmx.c:49: DMX[3] = 0x00;
+;	../DMX_Manager/dmx.c:55: DMX[3] = 0x00;
 	mov	(_DMX + 0x0003),#0x00
-;	../DMX_Manager/dmx.c:50: DMX[4] = 0x00;
+;	../DMX_Manager/dmx.c:56: DMX[4] = 0x00;
 	mov	(_DMX + 0x0004),#0x00
-;	../DMX_Manager/dmx.c:51: DMX[5] = 0x00;
+;	../DMX_Manager/dmx.c:57: DMX[5] = 0x00;
 	mov	(_DMX + 0x0005),#0x00
-;	../DMX_Manager/dmx.c:52: DMX[6] = 0x00;
+;	../DMX_Manager/dmx.c:58: DMX[6] = 0x00;
 	mov	(_DMX + 0x0006),#0x00
-;	../DMX_Manager/dmx.c:53: DMX[7] = 0x00;
+;	../DMX_Manager/dmx.c:59: DMX[7] = 0x00;
 	mov	(_DMX + 0x0007),#0x00
-;	../DMX_Manager/dmx.c:54: DMX[8] = 0x00;
+;	../DMX_Manager/dmx.c:60: DMX[8] = 0x00;
 	mov	(_DMX + 0x0008),#0x00
 00102$:
-;	../DMX_Manager/dmx.c:57: Index = 0;
+;	../DMX_Manager/dmx.c:63: Index = 0;
 	clr	a
 	mov	_Index,a
 	mov	(_Index + 1),a
-;	../DMX_Manager/dmx.c:60: EXIF &= ~EIE_Timer3_Flag;
+;	../DMX_Manager/dmx.c:66: EXIF &= ~EIE_Timer3_Flag;
 	anl	_EXIF,#0xef
-;	../DMX_Manager/dmx.c:61: }
+;	../DMX_Manager/dmx.c:67: }
 	pop	acc
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
