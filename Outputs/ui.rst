@@ -400,7 +400,7 @@
       000551                        400 00175$:
       000551 8D 82            [24]  401 	mov	dpl,r5
       000553 C0 07            [24]  402 	push	ar7
-      000555 12 35 0F         [24]  403 	lcall	_power_pump
+      000555 12 35 2B         [24]  403 	lcall	_power_pump
       000558 D0 07            [24]  404 	pop	ar7
                                     405 ;	../UI_Manager/ui.c:26: bursting |= BURSTING;
       00055A AD 0B            [24]  406 	mov	r5,_tick_ui_bursting_65536_37
@@ -415,7 +415,7 @@
                                     415 ;	../UI_Manager/ui.c:28: power_pump(PUMP_OFF);
       00056A 75 82 00         [24]  416 	mov	dpl,#0x00
       00056D C0 07            [24]  417 	push	ar7
-      00056F 12 35 0F         [24]  418 	lcall	_power_pump
+      00056F 12 35 2B         [24]  418 	lcall	_power_pump
       000572 D0 07            [24]  419 	pop	ar7
                                     420 ;	../UI_Manager/ui.c:29: bursting &= ~BURSTING;
       000574 53 0B 7F         [24]  421 	anl	_tick_ui_bursting_65536_37,#0x7f
@@ -505,7 +505,7 @@
       0005FE C0 E0            [24]  505 	push	acc
       000600 74 0F            [12]  506 	mov	a,#0x0f
       000602 C0 E0            [24]  507 	push	acc
-      000604 90 36 CE         [24]  508 	mov	dptr,#___str_0
+      000604 90 36 EA         [24]  508 	mov	dptr,#___str_0
       000607 75 F0 80         [24]  509 	mov	b,#0x80
       00060A 12 1C AB         [24]  510 	lcall	_write_string
       00060D E5 81            [12]  511 	mov	a,sp
@@ -520,7 +520,7 @@
       00061A C0 E0            [24]  520 	push	acc
       00061C 74 0F            [12]  521 	mov	a,#0x0f
       00061E C0 E0            [24]  522 	push	acc
-      000620 90 36 DE         [24]  523 	mov	dptr,#___str_1
+      000620 90 36 FA         [24]  523 	mov	dptr,#___str_1
       000623 75 F0 80         [24]  524 	mov	b,#0x80
       000626 12 1C AB         [24]  525 	lcall	_write_string
       000629 E5 81            [12]  526 	mov	a,sp
@@ -536,7 +536,7 @@
       000636 C0 E0            [24]  536 	push	acc
       000638 74 0F            [12]  537 	mov	a,#0x0f
       00063A C0 E0            [24]  538 	push	acc
-      00063C 90 36 ED         [24]  539 	mov	dptr,#___str_2
+      00063C 90 37 09         [24]  539 	mov	dptr,#___str_2
       00063F 75 F0 80         [24]  540 	mov	b,#0x80
       000642 12 1C AB         [24]  541 	lcall	_write_string
       000645 E5 81            [12]  542 	mov	a,sp
@@ -605,7 +605,7 @@
       0006A0 C0 E0            [24]  605 	push	acc
       0006A2 74 0F            [12]  606 	mov	a,#0x0f
       0006A4 C0 E0            [24]  607 	push	acc
-      0006A6 90 36 FD         [24]  608 	mov	dptr,#___str_3
+      0006A6 90 37 19         [24]  608 	mov	dptr,#___str_3
       0006A9 75 F0 80         [24]  609 	mov	b,#0x80
       0006AC 12 1C AB         [24]  610 	lcall	_write_string
       0006AF E5 81            [12]  611 	mov	a,sp
@@ -613,7 +613,7 @@
       0006B3 F5 81            [12]  613 	mov	sp,a
                                     614 ;	../UI_Manager/ui.c:86: power_heater(HEATER_DISABLE);
       0006B5 75 82 01         [24]  615 	mov	dpl,#0x01
-      0006B8 12 35 56         [24]  616 	lcall	_power_heater
+      0006B8 12 35 72         [24]  616 	lcall	_power_heater
       0006BB 80 22            [24]  617 	sjmp	00124$
       0006BD                        618 00123$:
                                     619 ;	../UI_Manager/ui.c:88: write_string("Heater On", 15, 2, LINE_0, NOT_SELECTED);
@@ -624,7 +624,7 @@
       0006C4 C0 E0            [24]  624 	push	acc
       0006C6 74 0F            [12]  625 	mov	a,#0x0f
       0006C8 C0 E0            [24]  626 	push	acc
-      0006CA 90 37 08         [24]  627 	mov	dptr,#___str_4
+      0006CA 90 37 24         [24]  627 	mov	dptr,#___str_4
       0006CD 75 F0 80         [24]  628 	mov	b,#0x80
       0006D0 12 1C AB         [24]  629 	lcall	_write_string
       0006D3 E5 81            [12]  630 	mov	a,sp
@@ -632,7 +632,7 @@
       0006D7 F5 81            [12]  632 	mov	sp,a
                                     633 ;	../UI_Manager/ui.c:89: power_heater(HEATER_ENABLE);
       0006D9 75 82 00         [24]  634 	mov	dpl,#0x00
-      0006DC 12 35 56         [24]  635 	lcall	_power_heater
+      0006DC 12 35 72         [24]  635 	lcall	_power_heater
       0006DF                        636 00124$:
                                     637 ;	../UI_Manager/ui.c:92: write_string("Burst+Up to Undo", 16, 0, LINE_1, NOT_SELECTED);
       0006DF E4               [12]  638 	clr	a
@@ -643,7 +643,7 @@
       0006E6 C0 E0            [24]  643 	push	acc
       0006E8 74 10            [12]  644 	mov	a,#0x10
       0006EA C0 E0            [24]  645 	push	acc
-      0006EC 90 37 12         [24]  646 	mov	dptr,#___str_5
+      0006EC 90 37 2E         [24]  646 	mov	dptr,#___str_5
       0006EF 75 F0 80         [24]  647 	mov	b,#0x80
       0006F2 12 1C AB         [24]  648 	lcall	_write_string
       0006F5 E5 81            [12]  649 	mov	a,sp
@@ -717,7 +717,7 @@
       000758 C0 E0            [24]  717 	push	acc
       00075A 8C 82            [24]  718 	mov	dpl,r4
       00075C 8D 83            [24]  719 	mov	dph,r5
-      00075E 12 36 48         [24]  720 	lcall	__modsint
+      00075E 12 36 64         [24]  720 	lcall	__modsint
       000761 AC 82            [24]  721 	mov	r4,dpl
       000763 15 81            [12]  722 	dec	sp
       000765 15 81            [12]  723 	dec	sp
@@ -934,7 +934,7 @@
       0008B7 C0 E0            [24]  934 	push	acc
       0008B9 C4               [12]  935 	swap	a
       0008BA C0 E0            [24]  936 	push	acc
-      0008BC 90 37 23         [24]  937 	mov	dptr,#___str_6
+      0008BC 90 37 3F         [24]  937 	mov	dptr,#___str_6
       0008BF 75 F0 80         [24]  938 	mov	b,#0x80
       0008C2 12 1C AB         [24]  939 	lcall	_write_string
       0008C5 E5 81            [12]  940 	mov	a,sp
@@ -949,7 +949,7 @@
       0008D2 C0 E0            [24]  949 	push	acc
       0008D4 74 10            [12]  950 	mov	a,#0x10
       0008D6 C0 E0            [24]  951 	push	acc
-      0008D8 90 37 32         [24]  952 	mov	dptr,#___str_7
+      0008D8 90 37 4E         [24]  952 	mov	dptr,#___str_7
       0008DB 75 F0 80         [24]  953 	mov	b,#0x80
       0008DE 12 1C AB         [24]  954 	lcall	_write_string
       0008E1 E5 81            [12]  955 	mov	a,sp
@@ -1105,7 +1105,7 @@
       000983 C0 E0            [24] 1105 	push	acc
       000985 C4               [12] 1106 	swap	a
       000986 C0 E0            [24] 1107 	push	acc
-      000988 90 37 42         [24] 1108 	mov	dptr,#___str_8
+      000988 90 37 5E         [24] 1108 	mov	dptr,#___str_8
       00098B 75 F0 80         [24] 1109 	mov	b,#0x80
       00098E 12 1C AB         [24] 1110 	lcall	_write_string
       000991 E5 81            [12] 1111 	mov	a,sp
@@ -1120,7 +1120,7 @@
       00099E C0 E0            [24] 1120 	push	acc
       0009A0 74 10            [12] 1121 	mov	a,#0x10
       0009A2 C0 E0            [24] 1122 	push	acc
-      0009A4 90 37 51         [24] 1123 	mov	dptr,#___str_9
+      0009A4 90 37 6D         [24] 1123 	mov	dptr,#___str_9
       0009A7 75 F0 80         [24] 1124 	mov	b,#0x80
       0009AA 12 1C AB         [24] 1125 	lcall	_write_string
       0009AD E5 81            [12] 1126 	mov	a,sp
@@ -1146,7 +1146,7 @@
       0009CB C0 E0            [24] 1146 	push	acc
       0009CD C4               [12] 1147 	swap	a
       0009CE C0 E0            [24] 1148 	push	acc
-      0009D0 90 37 42         [24] 1149 	mov	dptr,#___str_8
+      0009D0 90 37 5E         [24] 1149 	mov	dptr,#___str_8
       0009D3 75 F0 80         [24] 1150 	mov	b,#0x80
       0009D6 12 1C AB         [24] 1151 	lcall	_write_string
       0009D9 E5 81            [12] 1152 	mov	a,sp
@@ -1161,7 +1161,7 @@
       0009E6 C0 E0            [24] 1161 	push	acc
       0009E8 74 10            [12] 1162 	mov	a,#0x10
       0009EA C0 E0            [24] 1163 	push	acc
-      0009EC 90 37 51         [24] 1164 	mov	dptr,#___str_9
+      0009EC 90 37 6D         [24] 1164 	mov	dptr,#___str_9
       0009EF 75 F0 80         [24] 1165 	mov	b,#0x80
       0009F2 12 1C AB         [24] 1166 	lcall	_write_string
       0009F5 E5 81            [12] 1167 	mov	a,sp
@@ -1201,7 +1201,7 @@
       000A28 C0 E0            [24] 1201 	push	acc
       000A2A C4               [12] 1202 	swap	a
       000A2B C0 E0            [24] 1203 	push	acc
-      000A2D 90 37 61         [24] 1204 	mov	dptr,#___str_10
+      000A2D 90 37 7D         [24] 1204 	mov	dptr,#___str_10
       000A30 75 F0 80         [24] 1205 	mov	b,#0x80
       000A33 12 1C AB         [24] 1206 	lcall	_write_string
       000A36 E5 81            [12] 1207 	mov	a,sp
@@ -1271,7 +1271,7 @@
       000A90 C0 E0            [24] 1271 	push	acc
       000A92 74 04            [12] 1272 	mov	a,#0x04
       000A94 C0 E0            [24] 1273 	push	acc
-      000A96 90 37 6D         [24] 1274 	mov	dptr,#___str_11
+      000A96 90 37 89         [24] 1274 	mov	dptr,#___str_11
       000A99 75 F0 80         [24] 1275 	mov	b,#0x80
       000A9C 12 1C AB         [24] 1276 	lcall	_write_string
       000A9F E5 81            [12] 1277 	mov	a,sp
@@ -1286,7 +1286,7 @@
       000AAD C0 E0            [24] 1286 	push	acc
       000AAF 74 04            [12] 1287 	mov	a,#0x04
       000AB1 C0 E0            [24] 1288 	push	acc
-      000AB3 90 37 72         [24] 1289 	mov	dptr,#___str_12
+      000AB3 90 37 8E         [24] 1289 	mov	dptr,#___str_12
       000AB6 75 F0 80         [24] 1290 	mov	b,#0x80
       000AB9 12 1C AB         [24] 1291 	lcall	_write_string
       000ABC E5 81            [12] 1292 	mov	a,sp
@@ -1500,7 +1500,7 @@
       000C0A C0 E0            [24] 1500 	push	acc
       000C0C 74 06            [12] 1501 	mov	a,#0x06
       000C0E C0 E0            [24] 1502 	push	acc
-      000C10 90 37 77         [24] 1503 	mov	dptr,#___str_13
+      000C10 90 37 93         [24] 1503 	mov	dptr,#___str_13
       000C13 75 F0 80         [24] 1504 	mov	b,#0x80
       000C16 12 1C AB         [24] 1505 	lcall	_write_string
       000C19 E5 81            [12] 1506 	mov	a,sp
@@ -1526,7 +1526,7 @@
       000C38 C0 E0            [24] 1526 	push	acc
       000C3A 74 06            [12] 1527 	mov	a,#0x06
       000C3C C0 E0            [24] 1528 	push	acc
-      000C3E 90 37 7E         [24] 1529 	mov	dptr,#___str_14
+      000C3E 90 37 9A         [24] 1529 	mov	dptr,#___str_14
       000C41 75 F0 80         [24] 1530 	mov	b,#0x80
       000C44 12 1C AB         [24] 1531 	lcall	_write_string
       000C47 E5 81            [12] 1532 	mov	a,sp
@@ -1607,7 +1607,7 @@
       000CB6 C0 E0            [24] 1607 	push	acc
       000CB8 74 09            [12] 1608 	mov	a,#0x09
       000CBA C0 E0            [24] 1609 	push	acc
-      000CBC 90 37 85         [24] 1610 	mov	dptr,#___str_15
+      000CBC 90 37 A1         [24] 1610 	mov	dptr,#___str_15
       000CBF 75 F0 80         [24] 1611 	mov	b,#0x80
       000CC2 12 1C AB         [24] 1612 	lcall	_write_string
       000CC5 E5 81            [12] 1613 	mov	a,sp
@@ -1626,7 +1626,7 @@
       000CD8 C0 E0            [24] 1626 	push	acc
       000CDA 74 09            [12] 1627 	mov	a,#0x09
       000CDC C0 E0            [24] 1628 	push	acc
-      000CDE 90 37 8E         [24] 1629 	mov	dptr,#___str_16
+      000CDE 90 37 AA         [24] 1629 	mov	dptr,#___str_16
       000CE1 75 F0 80         [24] 1630 	mov	b,#0x80
       000CE4 12 1C AB         [24] 1631 	lcall	_write_string
       000CE7 E5 81            [12] 1632 	mov	a,sp
@@ -1758,7 +1758,7 @@
       000D8A C0 E0            [24] 1758 	push	acc
       000D8C 74 0A            [12] 1759 	mov	a,#0x0a
       000D8E C0 E0            [24] 1760 	push	acc
-      000D90 90 37 97         [24] 1761 	mov	dptr,#___str_17
+      000D90 90 37 B3         [24] 1761 	mov	dptr,#___str_17
       000D93 75 F0 80         [24] 1762 	mov	b,#0x80
       000D96 12 1C AB         [24] 1763 	lcall	_write_string
       000D99 E5 81            [12] 1764 	mov	a,sp
@@ -2015,7 +2015,7 @@
       000F24 C0 E0            [24] 2015 	push	acc
       000F26 74 0D            [12] 2016 	mov	a,#0x0d
       000F28 C0 E0            [24] 2017 	push	acc
-      000F2A 90 37 A1         [24] 2018 	mov	dptr,#___str_18
+      000F2A 90 37 BD         [24] 2018 	mov	dptr,#___str_18
       000F2D 75 F0 80         [24] 2019 	mov	b,#0x80
       000F30 12 1C AB         [24] 2020 	lcall	_write_string
       000F33 E5 81            [12] 2021 	mov	a,sp
@@ -2030,7 +2030,7 @@
       000F41 C0 E0            [24] 2030 	push	acc
       000F43 04               [12] 2031 	inc	a
       000F44 C0 E0            [24] 2032 	push	acc
-      000F46 90 37 AE         [24] 2033 	mov	dptr,#___str_19
+      000F46 90 37 CA         [24] 2033 	mov	dptr,#___str_19
       000F49 75 F0 80         [24] 2034 	mov	b,#0x80
       000F4C 12 1C AB         [24] 2035 	lcall	_write_string
       000F4F E5 81            [12] 2036 	mov	a,sp
@@ -2160,7 +2160,7 @@
       000FF5 C0 E0            [24] 2160 	push	acc
       000FF7 74 0D            [12] 2161 	mov	a,#0x0d
       000FF9 C0 E0            [24] 2162 	push	acc
-      000FFB 90 37 B6         [24] 2163 	mov	dptr,#___str_20
+      000FFB 90 37 D2         [24] 2163 	mov	dptr,#___str_20
       000FFE 75 F0 80         [24] 2164 	mov	b,#0x80
       001001 12 1C AB         [24] 2165 	lcall	_write_string
       001004 E5 81            [12] 2166 	mov	a,sp
@@ -2175,7 +2175,7 @@
       001012 C0 E0            [24] 2175 	push	acc
       001014 04               [12] 2176 	inc	a
       001015 C0 E0            [24] 2177 	push	acc
-      001017 90 37 AE         [24] 2178 	mov	dptr,#___str_19
+      001017 90 37 CA         [24] 2178 	mov	dptr,#___str_19
       00101A 75 F0 80         [24] 2179 	mov	b,#0x80
       00101D 12 1C AB         [24] 2180 	lcall	_write_string
       001020 E5 81            [12] 2181 	mov	a,sp
@@ -2305,7 +2305,7 @@
       0010C6 C0 E0            [24] 2305 	push	acc
       0010C8 74 07            [12] 2306 	mov	a,#0x07
       0010CA C0 E0            [24] 2307 	push	acc
-      0010CC 90 37 C3         [24] 2308 	mov	dptr,#___str_21
+      0010CC 90 37 DF         [24] 2308 	mov	dptr,#___str_21
       0010CF 75 F0 80         [24] 2309 	mov	b,#0x80
       0010D2 12 1C AB         [24] 2310 	lcall	_write_string
       0010D5 E5 81            [12] 2311 	mov	a,sp
@@ -2445,7 +2445,7 @@
       001190 C0 E0            [24] 2445 	push	acc
       001192 74 0C            [12] 2446 	mov	a,#0x0c
       001194 C0 E0            [24] 2447 	push	acc
-      001196 90 37 CA         [24] 2448 	mov	dptr,#___str_22
+      001196 90 37 E6         [24] 2448 	mov	dptr,#___str_22
       001199 75 F0 80         [24] 2449 	mov	b,#0x80
       00119C 12 1C AB         [24] 2450 	lcall	_write_string
       00119F E5 81            [12] 2451 	mov	a,sp
@@ -2470,7 +2470,7 @@
       0011BD C0 E0            [24] 2470 	push	acc
       0011BF 74 10            [12] 2471 	mov	a,#0x10
       0011C1 C0 E0            [24] 2472 	push	acc
-      0011C3 90 37 D6         [24] 2473 	mov	dptr,#___str_23
+      0011C3 90 37 F2         [24] 2473 	mov	dptr,#___str_23
       0011C6 75 F0 80         [24] 2474 	mov	b,#0x80
       0011C9 12 1C AB         [24] 2475 	lcall	_write_string
       0011CC E5 81            [12] 2476 	mov	a,sp
@@ -2487,7 +2487,7 @@
       0011DB C0 E0            [24] 2487 	push	acc
       0011DD 74 10            [12] 2488 	mov	a,#0x10
       0011DF C0 E0            [24] 2489 	push	acc
-      0011E1 90 37 DA         [24] 2490 	mov	dptr,#___str_24
+      0011E1 90 37 F6         [24] 2490 	mov	dptr,#___str_24
       0011E4 75 F0 80         [24] 2491 	mov	b,#0x80
       0011E7 12 1C AB         [24] 2492 	lcall	_write_string
       0011EA E5 81            [12] 2493 	mov	a,sp
@@ -2694,7 +2694,7 @@
       0012FB C0 E0            [24] 2694 	push	acc
       0012FD 74 10            [12] 2695 	mov	a,#0x10
       0012FF C0 E0            [24] 2696 	push	acc
-      001301 90 37 D6         [24] 2697 	mov	dptr,#___str_23
+      001301 90 37 F2         [24] 2697 	mov	dptr,#___str_23
       001304 75 F0 80         [24] 2698 	mov	b,#0x80
       001307 12 1C AB         [24] 2699 	lcall	_write_string
       00130A E5 81            [12] 2700 	mov	a,sp
@@ -2712,7 +2712,7 @@
       00131A C0 E0            [24] 2712 	push	acc
       00131C 74 10            [12] 2713 	mov	a,#0x10
       00131E C0 E0            [24] 2714 	push	acc
-      001320 90 37 DA         [24] 2715 	mov	dptr,#___str_24
+      001320 90 37 F6         [24] 2715 	mov	dptr,#___str_24
       001323 75 F0 80         [24] 2716 	mov	b,#0x80
       001326 12 1C AB         [24] 2717 	lcall	_write_string
       001329 E5 81            [12] 2718 	mov	a,sp
@@ -2884,7 +2884,7 @@
       0013FA C0 E0            [24] 2884 	push	acc
       0013FC C4               [12] 2885 	swap	a
       0013FD C0 E0            [24] 2886 	push	acc
-      0013FF 90 37 DB         [24] 2887 	mov	dptr,#___str_25
+      0013FF 90 37 F7         [24] 2887 	mov	dptr,#___str_25
       001402 75 F0 80         [24] 2888 	mov	b,#0x80
       001405 12 1C AB         [24] 2889 	lcall	_write_string
       001408 E5 81            [12] 2890 	mov	a,sp
@@ -3036,7 +3036,7 @@
       0014E5 C0 E0            [24] 3036 	push	acc
       0014E7 74 10            [12] 3037 	mov	a,#0x10
       0014E9 C0 E0            [24] 3038 	push	acc
-      0014EB 90 37 DA         [24] 3039 	mov	dptr,#___str_24
+      0014EB 90 37 F6         [24] 3039 	mov	dptr,#___str_24
       0014EE 75 F0 80         [24] 3040 	mov	b,#0x80
       0014F1 12 1C AB         [24] 3041 	lcall	_write_string
       0014F4 E5 81            [12] 3042 	mov	a,sp
@@ -3054,7 +3054,7 @@
       001507 C0 E0            [24] 3054 	push	acc
       001509 74 10            [12] 3055 	mov	a,#0x10
       00150B C0 E0            [24] 3056 	push	acc
-      00150D 90 37 EB         [24] 3057 	mov	dptr,#___str_26
+      00150D 90 38 07         [24] 3057 	mov	dptr,#___str_26
       001510 75 F0 80         [24] 3058 	mov	b,#0x80
       001513 12 1C AB         [24] 3059 	lcall	_write_string
       001516 E5 81            [12] 3060 	mov	a,sp
@@ -3071,7 +3071,7 @@
       001526 C0 E0            [24] 3071 	push	acc
       001528 74 10            [12] 3072 	mov	a,#0x10
       00152A C0 E0            [24] 3073 	push	acc
-      00152C 90 37 F2         [24] 3074 	mov	dptr,#___str_27
+      00152C 90 38 0E         [24] 3074 	mov	dptr,#___str_27
       00152F 75 F0 80         [24] 3075 	mov	b,#0x80
       001532 12 1C AB         [24] 3076 	lcall	_write_string
       001535 E5 81            [12] 3077 	mov	a,sp
@@ -3138,7 +3138,7 @@
       00157F C0 E0            [24] 3138 	push	acc
       001581 74 0E            [12] 3139 	mov	a,#0x0e
       001583 C0 E0            [24] 3140 	push	acc
-      001585 90 37 FA         [24] 3141 	mov	dptr,#___str_28
+      001585 90 38 16         [24] 3141 	mov	dptr,#___str_28
       001588 75 F0 80         [24] 3142 	mov	b,#0x80
       00158B 12 1C AB         [24] 3143 	lcall	_write_string
       00158E E5 81            [12] 3144 	mov	a,sp
@@ -3154,7 +3154,7 @@
       00159D C0 E0            [24] 3154 	push	acc
       00159F 74 0E            [12] 3155 	mov	a,#0x0e
       0015A1 C0 E0            [24] 3156 	push	acc
-      0015A3 90 38 08         [24] 3157 	mov	dptr,#___str_29
+      0015A3 90 38 24         [24] 3157 	mov	dptr,#___str_29
       0015A6 75 F0 80         [24] 3158 	mov	b,#0x80
       0015A9 12 1C AB         [24] 3159 	lcall	_write_string
       0015AC E5 81            [12] 3160 	mov	a,sp
@@ -3283,7 +3283,7 @@
       001652 C0 E0            [24] 3283 	push	acc
       001654 74 0C            [12] 3284 	mov	a,#0x0c
       001656 C0 E0            [24] 3285 	push	acc
-      001658 90 38 16         [24] 3286 	mov	dptr,#___str_30
+      001658 90 38 32         [24] 3286 	mov	dptr,#___str_30
       00165B 75 F0 80         [24] 3287 	mov	b,#0x80
       00165E 12 1C AB         [24] 3288 	lcall	_write_string
       001661 E5 81            [12] 3289 	mov	a,sp
@@ -3402,7 +3402,7 @@
       0016F3 C0 E0            [24] 3402 	push	acc
       0016F5 74 11            [12] 3403 	mov	a,#0x11
       0016F7 C0 E0            [24] 3404 	push	acc
-      0016F9 90 38 22         [24] 3405 	mov	dptr,#___str_31
+      0016F9 90 38 3E         [24] 3405 	mov	dptr,#___str_31
       0016FC 75 F0 80         [24] 3406 	mov	b,#0x80
       0016FF 12 1C AB         [24] 3407 	lcall	_write_string
       001702 E5 81            [12] 3408 	mov	a,sp
@@ -3789,235 +3789,235 @@
                                    3789 ;	../UI_Manager/ui.c:928: case POWER_STRING_OFFSET + OPTION_FOG_LOW:
       00193E                       3790 00101$:
                                    3791 ;	../UI_Manager/ui.c:929: return "Wimpy";
-      00193E 90 38 33         [24] 3792 	mov	dptr,#___str_32
+      00193E 90 38 4F         [24] 3792 	mov	dptr,#___str_32
       001941 75 F0 80         [24] 3793 	mov	b,#0x80
       001944 22               [24] 3794 	ret
                                    3795 ;	../UI_Manager/ui.c:930: case POWER_STRING_OFFSET + OPTION_FOG_MEDIUM:
       001945                       3796 00102$:
                                    3797 ;	../UI_Manager/ui.c:931: return "Mild";
-      001945 90 38 39         [24] 3798 	mov	dptr,#___str_33
+      001945 90 38 55         [24] 3798 	mov	dptr,#___str_33
       001948 75 F0 80         [24] 3799 	mov	b,#0x80
       00194B 22               [24] 3800 	ret
                                    3801 ;	../UI_Manager/ui.c:932: case POWER_STRING_OFFSET + OPTION_FOG_HIGH:
       00194C                       3802 00103$:
                                    3803 ;	../UI_Manager/ui.c:933: return "Blazin";
-      00194C 90 38 3E         [24] 3804 	mov	dptr,#___str_34
+      00194C 90 38 5A         [24] 3804 	mov	dptr,#___str_34
       00194F 75 F0 80         [24] 3805 	mov	b,#0x80
       001952 22               [24] 3806 	ret
                                    3807 ;	../UI_Manager/ui.c:935: case MACRO_STRING_OFFSET + OPTION_MACRO_NONE:
       001953                       3808 00104$:
                                    3809 ;	../UI_Manager/ui.c:936: return "Off";
-      001953 90 37 D6         [24] 3810 	mov	dptr,#___str_23
+      001953 90 37 F2         [24] 3810 	mov	dptr,#___str_23
       001956 75 F0 80         [24] 3811 	mov	b,#0x80
       001959 22               [24] 3812 	ret
                                    3813 ;	../UI_Manager/ui.c:937: case MACRO_STRING_OFFSET + OPTION_MACRO_RAINBOW_DMX:
       00195A                       3814 00105$:
                                    3815 ;	../UI_Manager/ui.c:938: return "Rainbow";
-      00195A 90 38 45         [24] 3816 	mov	dptr,#___str_35
+      00195A 90 38 61         [24] 3816 	mov	dptr,#___str_35
       00195D 75 F0 80         [24] 3817 	mov	b,#0x80
       001960 22               [24] 3818 	ret
                                    3819 ;	../UI_Manager/ui.c:939: case MACRO_STRING_OFFSET + OPTION_MACRO_FIRE_DMX:
       001961                       3820 00106$:
                                    3821 ;	../UI_Manager/ui.c:940: return "Fire";
-      001961 90 38 4D         [24] 3822 	mov	dptr,#___str_36
+      001961 90 38 69         [24] 3822 	mov	dptr,#___str_36
       001964 75 F0 80         [24] 3823 	mov	b,#0x80
       001967 22               [24] 3824 	ret
                                    3825 ;	../UI_Manager/ui.c:941: case MACRO_STRING_OFFSET + OPTION_MACRO_WATER_DMX:
       001968                       3826 00107$:
                                    3827 ;	../UI_Manager/ui.c:942: return "Water";
-      001968 90 38 52         [24] 3828 	mov	dptr,#___str_37
+      001968 90 38 6E         [24] 3828 	mov	dptr,#___str_37
       00196B 75 F0 80         [24] 3829 	mov	b,#0x80
       00196E 22               [24] 3830 	ret
                                    3831 ;	../UI_Manager/ui.c:943: case MACRO_STRING_OFFSET + OPTION_MACRO_STORM_DMX:
       00196F                       3832 00108$:
                                    3833 ;	../UI_Manager/ui.c:944: return "Storm";
-      00196F 90 38 58         [24] 3834 	mov	dptr,#___str_38
+      00196F 90 38 74         [24] 3834 	mov	dptr,#___str_38
       001972 75 F0 80         [24] 3835 	mov	b,#0x80
       001975 22               [24] 3836 	ret
                                    3837 ;	../UI_Manager/ui.c:945: case MACRO_STRING_OFFSET + OPTION_MACRO_ACID_DMX:
       001976                       3838 00109$:
                                    3839 ;	../UI_Manager/ui.c:946: return "Acid";
-      001976 90 38 5E         [24] 3840 	mov	dptr,#___str_39
+      001976 90 38 7A         [24] 3840 	mov	dptr,#___str_39
       001979 75 F0 80         [24] 3841 	mov	b,#0x80
       00197C 22               [24] 3842 	ret
                                    3843 ;	../UI_Manager/ui.c:947: case MACRO_STRING_OFFSET + OPTION_MACRO_ETHER_DMX:
       00197D                       3844 00110$:
                                    3845 ;	../UI_Manager/ui.c:948: return "Ether";
-      00197D 90 38 63         [24] 3846 	mov	dptr,#___str_40
+      00197D 90 38 7F         [24] 3846 	mov	dptr,#___str_40
       001980 75 F0 80         [24] 3847 	mov	b,#0x80
       001983 22               [24] 3848 	ret
                                    3849 ;	../UI_Manager/ui.c:950: case COLOR_STRING_OFFSET + MANUAL_RED_STATE:
       001984                       3850 00111$:
                                    3851 ;	../UI_Manager/ui.c:951: return "Red Level";
-      001984 90 38 69         [24] 3852 	mov	dptr,#___str_41
+      001984 90 38 85         [24] 3852 	mov	dptr,#___str_41
       001987 75 F0 80         [24] 3853 	mov	b,#0x80
       00198A 22               [24] 3854 	ret
                                    3855 ;	../UI_Manager/ui.c:952: case COLOR_STRING_OFFSET + MANUAL_GREEN_STATE:
       00198B                       3856 00112$:
                                    3857 ;	../UI_Manager/ui.c:953: return "Green Level";
-      00198B 90 38 73         [24] 3858 	mov	dptr,#___str_42
+      00198B 90 38 8F         [24] 3858 	mov	dptr,#___str_42
       00198E 75 F0 80         [24] 3859 	mov	b,#0x80
       001991 22               [24] 3860 	ret
                                    3861 ;	../UI_Manager/ui.c:954: case COLOR_STRING_OFFSET + MANUAL_BLUE_STATE:
       001992                       3862 00113$:
                                    3863 ;	../UI_Manager/ui.c:955: return "Blue Level";
-      001992 90 38 7F         [24] 3864 	mov	dptr,#___str_43
+      001992 90 38 9B         [24] 3864 	mov	dptr,#___str_43
       001995 75 F0 80         [24] 3865 	mov	b,#0x80
       001998 22               [24] 3866 	ret
                                    3867 ;	../UI_Manager/ui.c:956: case COLOR_STRING_OFFSET + MANUAL_STROBE_STATE:
       001999                       3868 00114$:
                                    3869 ;	../UI_Manager/ui.c:957: return "Strobe Level";
-      001999 90 38 8A         [24] 3870 	mov	dptr,#___str_44
+      001999 90 38 A6         [24] 3870 	mov	dptr,#___str_44
       00199C 75 F0 80         [24] 3871 	mov	b,#0x80
       00199F 22               [24] 3872 	ret
                                    3873 ;	../UI_Manager/ui.c:959: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACITON_NONE:
       0019A0                       3874 00115$:
                                    3875 ;	../UI_Manager/ui.c:960: return "No Action";
-      0019A0 90 38 97         [24] 3876 	mov	dptr,#___str_45
+      0019A0 90 38 B3         [24] 3876 	mov	dptr,#___str_45
       0019A3 75 F0 80         [24] 3877 	mov	b,#0x80
       0019A6 22               [24] 3878 	ret
                                    3879 ;	../UI_Manager/ui.c:961: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CHOOSE_MACRO:
       0019A7                       3880 00116$:
                                    3881 ;	../UI_Manager/ui.c:962: return "Choose Macro";
-      0019A7 90 38 A1         [24] 3882 	mov	dptr,#___str_46
+      0019A7 90 38 BD         [24] 3882 	mov	dptr,#___str_46
       0019AA 75 F0 80         [24] 3883 	mov	b,#0x80
       0019AD 22               [24] 3884 	ret
                                    3885 ;	../UI_Manager/ui.c:963: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_RED:
       0019AE                       3886 00117$:
                                    3887 ;	../UI_Manager/ui.c:964: return "Red";
-      0019AE 90 38 AE         [24] 3888 	mov	dptr,#___str_47
+      0019AE 90 38 CA         [24] 3888 	mov	dptr,#___str_47
       0019B1 75 F0 80         [24] 3889 	mov	b,#0x80
       0019B4 22               [24] 3890 	ret
                                    3891 ;	../UI_Manager/ui.c:965: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_YELLOW:
       0019B5                       3892 00118$:
                                    3893 ;	../UI_Manager/ui.c:966: return "Yellow";
-      0019B5 90 38 B2         [24] 3894 	mov	dptr,#___str_48
+      0019B5 90 38 CE         [24] 3894 	mov	dptr,#___str_48
       0019B8 75 F0 80         [24] 3895 	mov	b,#0x80
       0019BB 22               [24] 3896 	ret
                                    3897 ;	../UI_Manager/ui.c:967: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_GREEN:
       0019BC                       3898 00119$:
                                    3899 ;	../UI_Manager/ui.c:968: return "Green";
-      0019BC 90 38 B9         [24] 3900 	mov	dptr,#___str_49
+      0019BC 90 38 D5         [24] 3900 	mov	dptr,#___str_49
       0019BF 75 F0 80         [24] 3901 	mov	b,#0x80
       0019C2 22               [24] 3902 	ret
                                    3903 ;	../UI_Manager/ui.c:969: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_CYAN:
       0019C3                       3904 00120$:
                                    3905 ;	../UI_Manager/ui.c:970: return "Cyan";
-      0019C3 90 38 BF         [24] 3906 	mov	dptr,#___str_50
+      0019C3 90 38 DB         [24] 3906 	mov	dptr,#___str_50
       0019C6 75 F0 80         [24] 3907 	mov	b,#0x80
       0019C9 22               [24] 3908 	ret
                                    3909 ;	../UI_Manager/ui.c:971: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLUE:
       0019CA                       3910 00121$:
                                    3911 ;	../UI_Manager/ui.c:972: return "Blue";
-      0019CA 90 38 C4         [24] 3912 	mov	dptr,#___str_51
+      0019CA 90 38 E0         [24] 3912 	mov	dptr,#___str_51
       0019CD 75 F0 80         [24] 3913 	mov	b,#0x80
       0019D0 22               [24] 3914 	ret
                                    3915 ;	../UI_Manager/ui.c:973: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_MAGENTA:
       0019D1                       3916 00122$:
                                    3917 ;	../UI_Manager/ui.c:974: return "Magenta";
-      0019D1 90 38 C9         [24] 3918 	mov	dptr,#___str_52
+      0019D1 90 38 E5         [24] 3918 	mov	dptr,#___str_52
       0019D4 75 F0 80         [24] 3919 	mov	b,#0x80
       0019D7 22               [24] 3920 	ret
                                    3921 ;	../UI_Manager/ui.c:975: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_SLOW:
       0019D8                       3922 00123$:
                                    3923 ;	../UI_Manager/ui.c:976: return "Strobe Slow";
-      0019D8 90 38 D1         [24] 3924 	mov	dptr,#___str_53
+      0019D8 90 38 ED         [24] 3924 	mov	dptr,#___str_53
       0019DB 75 F0 80         [24] 3925 	mov	b,#0x80
       0019DE 22               [24] 3926 	ret
                                    3927 ;	../UI_Manager/ui.c:977: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_MEDIUM:
       0019DF                       3928 00124$:
                                    3929 ;	../UI_Manager/ui.c:978: return "Strobe Medium";
-      0019DF 90 38 DD         [24] 3930 	mov	dptr,#___str_54
+      0019DF 90 38 F9         [24] 3930 	mov	dptr,#___str_54
       0019E2 75 F0 80         [24] 3931 	mov	b,#0x80
       0019E5 22               [24] 3932 	ret
                                    3933 ;	../UI_Manager/ui.c:979: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_STROBE_FAST:
       0019E6                       3934 00125$:
                                    3935 ;	../UI_Manager/ui.c:980: return "Strobe Fast";
-      0019E6 90 38 EB         [24] 3936 	mov	dptr,#___str_55
+      0019E6 90 39 07         [24] 3936 	mov	dptr,#___str_55
       0019E9 75 F0 80         [24] 3937 	mov	b,#0x80
       0019EC 22               [24] 3938 	ret
                                    3939 ;	../UI_Manager/ui.c:981: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_BLACKOUT:
       0019ED                       3940 00126$:
                                    3941 ;	../UI_Manager/ui.c:982: return "Blackout";
-      0019ED 90 38 F7         [24] 3942 	mov	dptr,#___str_56
+      0019ED 90 39 13         [24] 3942 	mov	dptr,#___str_56
       0019F0 75 F0 80         [24] 3943 	mov	b,#0x80
       0019F3 22               [24] 3944 	ret
                                    3945 ;	../UI_Manager/ui.c:983: case WIRELESS_ACTION_STRING_OFFSET + OPTION_WIRELESS_ACTION_WHITEOUT:
       0019F4                       3946 00127$:
                                    3947 ;	../UI_Manager/ui.c:984: return "Whiteout";         
-      0019F4 90 39 00         [24] 3948 	mov	dptr,#___str_57
+      0019F4 90 39 1C         [24] 3948 	mov	dptr,#___str_57
       0019F7 75 F0 80         [24] 3949 	mov	b,#0x80
       0019FA 22               [24] 3950 	ret
                                    3951 ;	../UI_Manager/ui.c:986: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_1: 
       0019FB                       3952 00128$:
                                    3953 ;	../UI_Manager/ui.c:987: return "Slot 1";   
-      0019FB 90 39 09         [24] 3954 	mov	dptr,#___str_58
+      0019FB 90 39 25         [24] 3954 	mov	dptr,#___str_58
       0019FE 75 F0 80         [24] 3955 	mov	b,#0x80
       001A01 22               [24] 3956 	ret
                                    3957 ;	../UI_Manager/ui.c:988: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_2: 
       001A02                       3958 00129$:
                                    3959 ;	../UI_Manager/ui.c:989: return "Slot 2";   
-      001A02 90 39 10         [24] 3960 	mov	dptr,#___str_59
+      001A02 90 39 2C         [24] 3960 	mov	dptr,#___str_59
       001A05 75 F0 80         [24] 3961 	mov	b,#0x80
       001A08 22               [24] 3962 	ret
                                    3963 ;	../UI_Manager/ui.c:990: case SAVE_LOAD_STRING_OFFSET + OPTION_SLOT_3: 
       001A09                       3964 00130$:
                                    3965 ;	../UI_Manager/ui.c:991: return "Slot 3"; 
-      001A09 90 39 17         [24] 3966 	mov	dptr,#___str_60
+      001A09 90 39 33         [24] 3966 	mov	dptr,#___str_60
       001A0C 75 F0 80         [24] 3967 	mov	b,#0x80
                                    3968 ;	../UI_Manager/ui.c:993: case DMX_STRING_OFFSET + OPTION_DMX_MODE_11: 
       001A0F 22               [24] 3969 	ret
       001A10                       3970 00131$:
                                    3971 ;	../UI_Manager/ui.c:994: return "11 All";     
-      001A10 90 39 1E         [24] 3972 	mov	dptr,#___str_61
+      001A10 90 39 3A         [24] 3972 	mov	dptr,#___str_61
       001A13 75 F0 80         [24] 3973 	mov	b,#0x80
                                    3974 ;	../UI_Manager/ui.c:995: case DMX_STRING_OFFSET + OPTION_DMX_MODE_3: 
       001A16 22               [24] 3975 	ret
       001A17                       3976 00132$:
                                    3977 ;	../UI_Manager/ui.c:996: return " 3 Fog + Macro";   
-      001A17 90 39 25         [24] 3978 	mov	dptr,#___str_62
+      001A17 90 39 41         [24] 3978 	mov	dptr,#___str_62
       001A1A 75 F0 80         [24] 3979 	mov	b,#0x80
                                    3980 ;	../UI_Manager/ui.c:997: case DMX_STRING_OFFSET + OPTION_DMX_MODE_1: 
       001A1D 22               [24] 3981 	ret
       001A1E                       3982 00133$:
                                    3983 ;	../UI_Manager/ui.c:998: return " 1 Fog";    
-      001A1E 90 39 34         [24] 3984 	mov	dptr,#___str_63
+      001A1E 90 39 50         [24] 3984 	mov	dptr,#___str_63
       001A21 75 F0 80         [24] 3985 	mov	b,#0x80
                                    3986 ;	../UI_Manager/ui.c:1000: case SECRET_STRING_OFFSET + 0:
       001A24 22               [24] 3987 	ret
       001A25                       3988 00134$:
                                    3989 ;	../UI_Manager/ui.c:1001: return "0x486F6C6D6573";
-      001A25 90 39 3B         [24] 3990 	mov	dptr,#___str_64
+      001A25 90 39 57         [24] 3990 	mov	dptr,#___str_64
       001A28 75 F0 80         [24] 3991 	mov	b,#0x80
                                    3992 ;	../UI_Manager/ui.c:1002: case SECRET_STRING_OFFSET + 1:
       001A2B 22               [24] 3993 	ret
       001A2C                       3994 00135$:
                                    3995 ;	../UI_Manager/ui.c:1003: return "& 576174736F6E";
-      001A2C 90 39 4A         [24] 3996 	mov	dptr,#___str_65
+      001A2C 90 39 66         [24] 3996 	mov	dptr,#___str_65
       001A2F 75 F0 80         [24] 3997 	mov	b,#0x80
                                    3998 ;	../UI_Manager/ui.c:1004: case SECRET_STRING_OFFSET + 2:
       001A32 22               [24] 3999 	ret
       001A33                       4000 00136$:
                                    4001 ;	../UI_Manager/ui.c:1005: return "626F74684F776E41";
-      001A33 90 39 59         [24] 4002 	mov	dptr,#___str_66
+      001A33 90 39 75         [24] 4002 	mov	dptr,#___str_66
       001A36 75 F0 80         [24] 4003 	mov	b,#0x80
                                    4004 ;	../UI_Manager/ui.c:1006: case SECRET_STRING_OFFSET + 3:
       001A39 22               [24] 4005 	ret
       001A3A                       4006 00137$:
                                    4007 ;	../UI_Manager/ui.c:1007: return "536E6F7762616C6C";
-      001A3A 90 39 6A         [24] 4008 	mov	dptr,#___str_67
+      001A3A 90 39 86         [24] 4008 	mov	dptr,#___str_67
       001A3D 75 F0 80         [24] 4009 	mov	b,#0x80
                                    4010 ;	../UI_Manager/ui.c:1008: case SECRET_STRING_OFFSET + 4:
       001A40 22               [24] 4011 	ret
       001A41                       4012 00138$:
                                    4013 ;	../UI_Manager/ui.c:1009: return "4D6F726961727479";
-      001A41 90 39 7B         [24] 4014 	mov	dptr,#___str_68
+      001A41 90 39 97         [24] 4014 	mov	dptr,#___str_68
       001A44 75 F0 80         [24] 4015 	mov	b,#0x80
                                    4016 ;	../UI_Manager/ui.c:1010: case SECRET_STRING_OFFSET + 5:
       001A47 22               [24] 4017 	ret
       001A48                       4018 00139$:
                                    4019 ;	../UI_Manager/ui.c:1011: return "646F65734E6F74 ;";
-      001A48 90 39 8C         [24] 4020 	mov	dptr,#___str_69
+      001A48 90 39 A8         [24] 4020 	mov	dptr,#___str_69
       001A4B 75 F0 80         [24] 4021 	mov	b,#0x80
                                    4022 ;	../UI_Manager/ui.c:1012: }
       001A4E 22               [24] 4023 	ret
@@ -4029,265 +4029,265 @@
       001A55 22               [24] 4029 	ret
                                    4030 	.area CSEG    (CODE)
                                    4031 	.area CONST   (CODE)
-      0036CE                       4032 ___str_0:
-      0036CE 54 61 6E 6B 20 4C 69  4033 	.ascii "Tank Lights Off"
+      0036EA                       4032 ___str_0:
+      0036EA 54 61 6E 6B 20 4C 69  4033 	.ascii "Tank Lights Off"
              67 68 74 73 20 4F 66
              66
-      0036DD 00                    4034 	.db 0x00
-      0036DE                       4035 ___str_1:
-      0036DE 54 61 6E 6B 20 4C 69  4036 	.ascii "Tank Lights On"
+      0036F9 00                    4034 	.db 0x00
+      0036FA                       4035 ___str_1:
+      0036FA 54 61 6E 6B 20 4C 69  4036 	.ascii "Tank Lights On"
              67 68 74 73 20 4F 6E
-      0036EC 00                    4037 	.db 0x00
-      0036ED                       4038 ___str_2:
-      0036ED 46 75 6E 2B 4D 61 6E  4039 	.ascii "Fun+Man to Undo"
+      003708 00                    4037 	.db 0x00
+      003709                       4038 ___str_2:
+      003709 46 75 6E 2B 4D 61 6E  4039 	.ascii "Fun+Man to Undo"
              20 74 6F 20 55 6E 64
              6F
-      0036FC 00                    4040 	.db 0x00
-      0036FD                       4041 ___str_3:
-      0036FD 48 65 61 74 65 72 20  4042 	.ascii "Heater Off"
+      003718 00                    4040 	.db 0x00
+      003719                       4041 ___str_3:
+      003719 48 65 61 74 65 72 20  4042 	.ascii "Heater Off"
              4F 66 66
-      003707 00                    4043 	.db 0x00
-      003708                       4044 ___str_4:
-      003708 48 65 61 74 65 72 20  4045 	.ascii "Heater On"
+      003723 00                    4043 	.db 0x00
+      003724                       4044 ___str_4:
+      003724 48 65 61 74 65 72 20  4045 	.ascii "Heater On"
              4F 6E
-      003711 00                    4046 	.db 0x00
-      003712                       4047 ___str_5:
-      003712 42 75 72 73 74 2B 55  4048 	.ascii "Burst+Up to Undo"
+      00372D 00                    4046 	.db 0x00
+      00372E                       4047 ___str_5:
+      00372E 42 75 72 73 74 2B 55  4048 	.ascii "Burst+Up to Undo"
              70 20 74 6F 20 55 6E
              64 6F
-      003722 00                    4049 	.db 0x00
-      003723                       4050 ___str_6:
-      003723 41 74 6D 6F 73 46 45  4051 	.ascii "AtmosFEAR 221B"
+      00373E 00                    4049 	.db 0x00
+      00373F                       4050 ___str_6:
+      00373F 41 74 6D 6F 73 46 45  4051 	.ascii "AtmosFEAR 221B"
              41 52 20 32 32 31 42
-      003731 00                    4052 	.db 0x00
-      003732                       4053 ___str_7:
-      003732 42 79 20 42 6C 69 7A  4054 	.ascii "By Blizzard Pro"
+      00374D 00                    4052 	.db 0x00
+      00374E                       4053 ___str_7:
+      00374E 42 79 20 42 6C 69 7A  4054 	.ascii "By Blizzard Pro"
              7A 61 72 64 20 50 72
              6F
-      003741 00                    4055 	.db 0x00
-      003742                       4056 ___str_8:
-      003742 50 43 20 4C 6F 61 64  4057 	.ascii "PC Load Letter"
+      00375D 00                    4055 	.db 0x00
+      00375E                       4056 ___str_8:
+      00375E 50 43 20 4C 6F 61 64  4057 	.ascii "PC Load Letter"
              20 4C 65 74 74 65 72
-      003750 00                    4058 	.db 0x00
-      003751                       4059 ___str_9:
-      003751 42 75 72 73 74 20 74  4060 	.ascii "Burst to Refill"
+      00376C 00                    4058 	.db 0x00
+      00376D                       4059 ___str_9:
+      00376D 42 75 72 73 74 20 74  4060 	.ascii "Burst to Refill"
              6F 20 52 65 66 69 6C
              6C
-      003760 00                    4061 	.db 0x00
-      003761                       4062 ___str_10:
-      003761 4D 61 6E 75 61 6C 20  4063 	.ascii "Manual Mode"
+      00377C 00                    4061 	.db 0x00
+      00377D                       4062 ___str_10:
+      00377D 4D 61 6E 75 61 6C 20  4063 	.ascii "Manual Mode"
              4D 6F 64 65
-      00376C 00                    4064 	.db 0x00
-      00376D                       4065 ___str_11:
-      00376D 41 64 64 72           4066 	.ascii "Addr"
-      003771 00                    4067 	.db 0x00
-      003772                       4068 ___str_12:
-      003772 4D 6F 64 65           4069 	.ascii "Mode"
-      003776 00                    4070 	.db 0x00
-      003777                       4071 ___str_13:
-      003777 44 4D 58 20 4F 6B     4072 	.ascii "DMX Ok"
-      00377D 00                    4073 	.db 0x00
-      00377E                       4074 ___str_14:
-      00377E 4E 6F 20 44 4D 58     4075 	.ascii "No DMX"
-      003784 00                    4076 	.db 0x00
-      003785                       4077 ___str_15:
-      003785 49 6E 74 65 72 76 61  4078 	.ascii "Interval"
+      003788 00                    4064 	.db 0x00
+      003789                       4065 ___str_11:
+      003789 41 64 64 72           4066 	.ascii "Addr"
+      00378D 00                    4067 	.db 0x00
+      00378E                       4068 ___str_12:
+      00378E 4D 6F 64 65           4069 	.ascii "Mode"
+      003792 00                    4070 	.db 0x00
+      003793                       4071 ___str_13:
+      003793 44 4D 58 20 4F 6B     4072 	.ascii "DMX Ok"
+      003799 00                    4073 	.db 0x00
+      00379A                       4074 ___str_14:
+      00379A 4E 6F 20 44 4D 58     4075 	.ascii "No DMX"
+      0037A0 00                    4076 	.db 0x00
+      0037A1                       4077 ___str_15:
+      0037A1 49 6E 74 65 72 76 61  4078 	.ascii "Interval"
              6C
-      00378D 00                    4079 	.db 0x00
-      00378E                       4080 ___str_16:
-      00378E 44 75 72 61 74 69 6F  4081 	.ascii "Duration"
+      0037A9 00                    4079 	.db 0x00
+      0037AA                       4080 ___str_16:
+      0037AA 44 75 72 61 74 69 6F  4081 	.ascii "Duration"
              6E
-      003796 00                    4082 	.db 0x00
-      003797                       4083 ___str_17:
-      003797 46 6F 67 20 4C 65 76  4084 	.ascii "Fog Level"
+      0037B2 00                    4082 	.db 0x00
+      0037B3                       4083 ___str_17:
+      0037B3 46 6F 67 20 4C 65 76  4084 	.ascii "Fog Level"
              65 6C
-      0037A0 00                    4085 	.db 0x00
-      0037A1                       4086 ___str_18:
-      0037A1 46 6F 67 20 49 6E 74  4087 	.ascii "Fog Interval"
+      0037BC 00                    4085 	.db 0x00
+      0037BD                       4086 ___str_18:
+      0037BD 46 6F 67 20 49 6E 74  4087 	.ascii "Fog Interval"
              65 72 76 61 6C
-      0037AD 00                    4088 	.db 0x00
-      0037AE                       4089 ___str_19:
-      0037AE 53 65 63 6F 6E 64 73  4090 	.ascii "Seconds"
-      0037B5 00                    4091 	.db 0x00
-      0037B6                       4092 ___str_20:
-      0037B6 46 6F 67 20 44 75 72  4093 	.ascii "Fog Duration"
+      0037C9 00                    4088 	.db 0x00
+      0037CA                       4089 ___str_19:
+      0037CA 53 65 63 6F 6E 64 73  4090 	.ascii "Seconds"
+      0037D1 00                    4091 	.db 0x00
+      0037D2                       4092 ___str_20:
+      0037D2 46 6F 67 20 44 75 72  4093 	.ascii "Fog Duration"
              61 74 69 6F 6E
-      0037C2 00                    4094 	.db 0x00
-      0037C3                       4095 ___str_21:
-      0037C3 4D 61 63 72 6F 73     4096 	.ascii "Macros"
-      0037C9 00                    4097 	.db 0x00
-      0037CA                       4098 ___str_22:
-      0037CA 4D 61 63 72 6F 20 53  4099 	.ascii "Macro Speed"
+      0037DE 00                    4094 	.db 0x00
+      0037DF                       4095 ___str_21:
+      0037DF 4D 61 63 72 6F 73     4096 	.ascii "Macros"
+      0037E5 00                    4097 	.db 0x00
+      0037E6                       4098 ___str_22:
+      0037E6 4D 61 63 72 6F 20 53  4099 	.ascii "Macro Speed"
              70 65 65 64
-      0037D5 00                    4100 	.db 0x00
-      0037D6                       4101 ___str_23:
-      0037D6 4F 66 66              4102 	.ascii "Off"
-      0037D9 00                    4103 	.db 0x00
-      0037DA                       4104 ___str_24:
-      0037DA 00                    4105 	.db 0x00
-      0037DB                       4106 ___str_25:
-      0037DB 52 65 6D 6F 74 65 20  4107 	.ascii "Remote X Action"
+      0037F1 00                    4100 	.db 0x00
+      0037F2                       4101 ___str_23:
+      0037F2 4F 66 66              4102 	.ascii "Off"
+      0037F5 00                    4103 	.db 0x00
+      0037F6                       4104 ___str_24:
+      0037F6 00                    4105 	.db 0x00
+      0037F7                       4106 ___str_25:
+      0037F7 52 65 6D 6F 74 65 20  4107 	.ascii "Remote X Action"
              58 20 41 63 74 69 6F
              6E
-      0037EA 00                    4108 	.db 0x00
-      0037EB                       4109 ___str_26:
-      0037EB 53 61 76 65 64 21     4110 	.ascii "Saved!"
-      0037F1 00                    4111 	.db 0x00
-      0037F2                       4112 ___str_27:
-      0037F2 4C 6F 61 64 65 64 21  4113 	.ascii "Loaded!"
-      0037F9 00                    4114 	.db 0x00
-      0037FA                       4115 ___str_28:
-      0037FA 53 61 76 65 20 53 65  4116 	.ascii "Save Settings"
+      003806 00                    4108 	.db 0x00
+      003807                       4109 ___str_26:
+      003807 53 61 76 65 64 21     4110 	.ascii "Saved!"
+      00380D 00                    4111 	.db 0x00
+      00380E                       4112 ___str_27:
+      00380E 4C 6F 61 64 65 64 21  4113 	.ascii "Loaded!"
+      003815 00                    4114 	.db 0x00
+      003816                       4115 ___str_28:
+      003816 53 61 76 65 20 53 65  4116 	.ascii "Save Settings"
              74 74 69 6E 67 73
-      003807 00                    4117 	.db 0x00
-      003808                       4118 ___str_29:
-      003808 4C 6F 61 64 20 53 65  4119 	.ascii "Load Settings"
+      003823 00                    4117 	.db 0x00
+      003824                       4118 ___str_29:
+      003824 4C 6F 61 64 20 53 65  4119 	.ascii "Load Settings"
              74 74 69 6E 67 73
-      003815 00                    4120 	.db 0x00
-      003816                       4121 ___str_30:
-      003816 44 4D 58 20 41 64 64  4122 	.ascii "DMX Address"
+      003831 00                    4120 	.db 0x00
+      003832                       4121 ___str_30:
+      003832 44 4D 58 20 41 64 64  4122 	.ascii "DMX Address"
              72 65 73 73
-      003821 00                    4123 	.db 0x00
-      003822                       4124 ___str_31:
-      003822 44 4D 58 20 43 68 61  4125 	.ascii "DMX Channel Mode"
+      00383D 00                    4123 	.db 0x00
+      00383E                       4124 ___str_31:
+      00383E 44 4D 58 20 43 68 61  4125 	.ascii "DMX Channel Mode"
              6E 6E 65 6C 20 4D 6F
              64 65
-      003832 00                    4126 	.db 0x00
-      003833                       4127 ___str_32:
-      003833 57 69 6D 70 79        4128 	.ascii "Wimpy"
-      003838 00                    4129 	.db 0x00
-      003839                       4130 ___str_33:
-      003839 4D 69 6C 64           4131 	.ascii "Mild"
-      00383D 00                    4132 	.db 0x00
-      00383E                       4133 ___str_34:
-      00383E 42 6C 61 7A 69 6E     4134 	.ascii "Blazin"
-      003844 00                    4135 	.db 0x00
-      003845                       4136 ___str_35:
-      003845 52 61 69 6E 62 6F 77  4137 	.ascii "Rainbow"
-      00384C 00                    4138 	.db 0x00
-      00384D                       4139 ___str_36:
-      00384D 46 69 72 65           4140 	.ascii "Fire"
-      003851 00                    4141 	.db 0x00
-      003852                       4142 ___str_37:
-      003852 57 61 74 65 72        4143 	.ascii "Water"
-      003857 00                    4144 	.db 0x00
-      003858                       4145 ___str_38:
-      003858 53 74 6F 72 6D        4146 	.ascii "Storm"
-      00385D 00                    4147 	.db 0x00
-      00385E                       4148 ___str_39:
-      00385E 41 63 69 64           4149 	.ascii "Acid"
-      003862 00                    4150 	.db 0x00
-      003863                       4151 ___str_40:
-      003863 45 74 68 65 72        4152 	.ascii "Ether"
-      003868 00                    4153 	.db 0x00
-      003869                       4154 ___str_41:
-      003869 52 65 64 20 4C 65 76  4155 	.ascii "Red Level"
+      00384E 00                    4126 	.db 0x00
+      00384F                       4127 ___str_32:
+      00384F 57 69 6D 70 79        4128 	.ascii "Wimpy"
+      003854 00                    4129 	.db 0x00
+      003855                       4130 ___str_33:
+      003855 4D 69 6C 64           4131 	.ascii "Mild"
+      003859 00                    4132 	.db 0x00
+      00385A                       4133 ___str_34:
+      00385A 42 6C 61 7A 69 6E     4134 	.ascii "Blazin"
+      003860 00                    4135 	.db 0x00
+      003861                       4136 ___str_35:
+      003861 52 61 69 6E 62 6F 77  4137 	.ascii "Rainbow"
+      003868 00                    4138 	.db 0x00
+      003869                       4139 ___str_36:
+      003869 46 69 72 65           4140 	.ascii "Fire"
+      00386D 00                    4141 	.db 0x00
+      00386E                       4142 ___str_37:
+      00386E 57 61 74 65 72        4143 	.ascii "Water"
+      003873 00                    4144 	.db 0x00
+      003874                       4145 ___str_38:
+      003874 53 74 6F 72 6D        4146 	.ascii "Storm"
+      003879 00                    4147 	.db 0x00
+      00387A                       4148 ___str_39:
+      00387A 41 63 69 64           4149 	.ascii "Acid"
+      00387E 00                    4150 	.db 0x00
+      00387F                       4151 ___str_40:
+      00387F 45 74 68 65 72        4152 	.ascii "Ether"
+      003884 00                    4153 	.db 0x00
+      003885                       4154 ___str_41:
+      003885 52 65 64 20 4C 65 76  4155 	.ascii "Red Level"
              65 6C
-      003872 00                    4156 	.db 0x00
-      003873                       4157 ___str_42:
-      003873 47 72 65 65 6E 20 4C  4158 	.ascii "Green Level"
+      00388E 00                    4156 	.db 0x00
+      00388F                       4157 ___str_42:
+      00388F 47 72 65 65 6E 20 4C  4158 	.ascii "Green Level"
              65 76 65 6C
-      00387E 00                    4159 	.db 0x00
-      00387F                       4160 ___str_43:
-      00387F 42 6C 75 65 20 4C 65  4161 	.ascii "Blue Level"
+      00389A 00                    4159 	.db 0x00
+      00389B                       4160 ___str_43:
+      00389B 42 6C 75 65 20 4C 65  4161 	.ascii "Blue Level"
              76 65 6C
-      003889 00                    4162 	.db 0x00
-      00388A                       4163 ___str_44:
-      00388A 53 74 72 6F 62 65 20  4164 	.ascii "Strobe Level"
+      0038A5 00                    4162 	.db 0x00
+      0038A6                       4163 ___str_44:
+      0038A6 53 74 72 6F 62 65 20  4164 	.ascii "Strobe Level"
              4C 65 76 65 6C
-      003896 00                    4165 	.db 0x00
-      003897                       4166 ___str_45:
-      003897 4E 6F 20 41 63 74 69  4167 	.ascii "No Action"
+      0038B2 00                    4165 	.db 0x00
+      0038B3                       4166 ___str_45:
+      0038B3 4E 6F 20 41 63 74 69  4167 	.ascii "No Action"
              6F 6E
-      0038A0 00                    4168 	.db 0x00
-      0038A1                       4169 ___str_46:
-      0038A1 43 68 6F 6F 73 65 20  4170 	.ascii "Choose Macro"
+      0038BC 00                    4168 	.db 0x00
+      0038BD                       4169 ___str_46:
+      0038BD 43 68 6F 6F 73 65 20  4170 	.ascii "Choose Macro"
              4D 61 63 72 6F
-      0038AD 00                    4171 	.db 0x00
-      0038AE                       4172 ___str_47:
-      0038AE 52 65 64              4173 	.ascii "Red"
-      0038B1 00                    4174 	.db 0x00
-      0038B2                       4175 ___str_48:
-      0038B2 59 65 6C 6C 6F 77     4176 	.ascii "Yellow"
-      0038B8 00                    4177 	.db 0x00
-      0038B9                       4178 ___str_49:
-      0038B9 47 72 65 65 6E        4179 	.ascii "Green"
-      0038BE 00                    4180 	.db 0x00
-      0038BF                       4181 ___str_50:
-      0038BF 43 79 61 6E           4182 	.ascii "Cyan"
-      0038C3 00                    4183 	.db 0x00
-      0038C4                       4184 ___str_51:
-      0038C4 42 6C 75 65           4185 	.ascii "Blue"
-      0038C8 00                    4186 	.db 0x00
-      0038C9                       4187 ___str_52:
-      0038C9 4D 61 67 65 6E 74 61  4188 	.ascii "Magenta"
-      0038D0 00                    4189 	.db 0x00
-      0038D1                       4190 ___str_53:
-      0038D1 53 74 72 6F 62 65 20  4191 	.ascii "Strobe Slow"
+      0038C9 00                    4171 	.db 0x00
+      0038CA                       4172 ___str_47:
+      0038CA 52 65 64              4173 	.ascii "Red"
+      0038CD 00                    4174 	.db 0x00
+      0038CE                       4175 ___str_48:
+      0038CE 59 65 6C 6C 6F 77     4176 	.ascii "Yellow"
+      0038D4 00                    4177 	.db 0x00
+      0038D5                       4178 ___str_49:
+      0038D5 47 72 65 65 6E        4179 	.ascii "Green"
+      0038DA 00                    4180 	.db 0x00
+      0038DB                       4181 ___str_50:
+      0038DB 43 79 61 6E           4182 	.ascii "Cyan"
+      0038DF 00                    4183 	.db 0x00
+      0038E0                       4184 ___str_51:
+      0038E0 42 6C 75 65           4185 	.ascii "Blue"
+      0038E4 00                    4186 	.db 0x00
+      0038E5                       4187 ___str_52:
+      0038E5 4D 61 67 65 6E 74 61  4188 	.ascii "Magenta"
+      0038EC 00                    4189 	.db 0x00
+      0038ED                       4190 ___str_53:
+      0038ED 53 74 72 6F 62 65 20  4191 	.ascii "Strobe Slow"
              53 6C 6F 77
-      0038DC 00                    4192 	.db 0x00
-      0038DD                       4193 ___str_54:
-      0038DD 53 74 72 6F 62 65 20  4194 	.ascii "Strobe Medium"
+      0038F8 00                    4192 	.db 0x00
+      0038F9                       4193 ___str_54:
+      0038F9 53 74 72 6F 62 65 20  4194 	.ascii "Strobe Medium"
              4D 65 64 69 75 6D
-      0038EA 00                    4195 	.db 0x00
-      0038EB                       4196 ___str_55:
-      0038EB 53 74 72 6F 62 65 20  4197 	.ascii "Strobe Fast"
+      003906 00                    4195 	.db 0x00
+      003907                       4196 ___str_55:
+      003907 53 74 72 6F 62 65 20  4197 	.ascii "Strobe Fast"
              46 61 73 74
-      0038F6 00                    4198 	.db 0x00
-      0038F7                       4199 ___str_56:
-      0038F7 42 6C 61 63 6B 6F 75  4200 	.ascii "Blackout"
+      003912 00                    4198 	.db 0x00
+      003913                       4199 ___str_56:
+      003913 42 6C 61 63 6B 6F 75  4200 	.ascii "Blackout"
              74
-      0038FF 00                    4201 	.db 0x00
-      003900                       4202 ___str_57:
-      003900 57 68 69 74 65 6F 75  4203 	.ascii "Whiteout"
+      00391B 00                    4201 	.db 0x00
+      00391C                       4202 ___str_57:
+      00391C 57 68 69 74 65 6F 75  4203 	.ascii "Whiteout"
              74
-      003908 00                    4204 	.db 0x00
-      003909                       4205 ___str_58:
-      003909 53 6C 6F 74 20 31     4206 	.ascii "Slot 1"
-      00390F 00                    4207 	.db 0x00
-      003910                       4208 ___str_59:
-      003910 53 6C 6F 74 20 32     4209 	.ascii "Slot 2"
-      003916 00                    4210 	.db 0x00
-      003917                       4211 ___str_60:
-      003917 53 6C 6F 74 20 33     4212 	.ascii "Slot 3"
-      00391D 00                    4213 	.db 0x00
-      00391E                       4214 ___str_61:
-      00391E 31 31 20 41 6C 6C     4215 	.ascii "11 All"
-      003924 00                    4216 	.db 0x00
-      003925                       4217 ___str_62:
-      003925 20 33 20 46 6F 67 20  4218 	.ascii " 3 Fog + Macro"
+      003924 00                    4204 	.db 0x00
+      003925                       4205 ___str_58:
+      003925 53 6C 6F 74 20 31     4206 	.ascii "Slot 1"
+      00392B 00                    4207 	.db 0x00
+      00392C                       4208 ___str_59:
+      00392C 53 6C 6F 74 20 32     4209 	.ascii "Slot 2"
+      003932 00                    4210 	.db 0x00
+      003933                       4211 ___str_60:
+      003933 53 6C 6F 74 20 33     4212 	.ascii "Slot 3"
+      003939 00                    4213 	.db 0x00
+      00393A                       4214 ___str_61:
+      00393A 31 31 20 41 6C 6C     4215 	.ascii "11 All"
+      003940 00                    4216 	.db 0x00
+      003941                       4217 ___str_62:
+      003941 20 33 20 46 6F 67 20  4218 	.ascii " 3 Fog + Macro"
              2B 20 4D 61 63 72 6F
-      003933 00                    4219 	.db 0x00
-      003934                       4220 ___str_63:
-      003934 20 31 20 46 6F 67     4221 	.ascii " 1 Fog"
-      00393A 00                    4222 	.db 0x00
-      00393B                       4223 ___str_64:
-      00393B 30 78 34 38 36 46 36  4224 	.ascii "0x486F6C6D6573"
+      00394F 00                    4219 	.db 0x00
+      003950                       4220 ___str_63:
+      003950 20 31 20 46 6F 67     4221 	.ascii " 1 Fog"
+      003956 00                    4222 	.db 0x00
+      003957                       4223 ___str_64:
+      003957 30 78 34 38 36 46 36  4224 	.ascii "0x486F6C6D6573"
              43 36 44 36 35 37 33
-      003949 00                    4225 	.db 0x00
-      00394A                       4226 ___str_65:
-      00394A 26 20 35 37 36 31 37  4227 	.ascii "& 576174736F6E"
+      003965 00                    4225 	.db 0x00
+      003966                       4226 ___str_65:
+      003966 26 20 35 37 36 31 37  4227 	.ascii "& 576174736F6E"
              34 37 33 36 46 36 45
-      003958 00                    4228 	.db 0x00
-      003959                       4229 ___str_66:
-      003959 36 32 36 46 37 34 36  4230 	.ascii "626F74684F776E41"
+      003974 00                    4228 	.db 0x00
+      003975                       4229 ___str_66:
+      003975 36 32 36 46 37 34 36  4230 	.ascii "626F74684F776E41"
              38 34 46 37 37 36 45
              34 31
-      003969 00                    4231 	.db 0x00
-      00396A                       4232 ___str_67:
-      00396A 35 33 36 45 36 46 37  4233 	.ascii "536E6F7762616C6C"
+      003985 00                    4231 	.db 0x00
+      003986                       4232 ___str_67:
+      003986 35 33 36 45 36 46 37  4233 	.ascii "536E6F7762616C6C"
              37 36 32 36 31 36 43
              36 43
-      00397A 00                    4234 	.db 0x00
-      00397B                       4235 ___str_68:
-      00397B 34 44 36 46 37 32 36  4236 	.ascii "4D6F726961727479"
+      003996 00                    4234 	.db 0x00
+      003997                       4235 ___str_68:
+      003997 34 44 36 46 37 32 36  4236 	.ascii "4D6F726961727479"
              39 36 31 37 32 37 34
              37 39
-      00398B 00                    4237 	.db 0x00
-      00398C                       4238 ___str_69:
-      00398C 36 34 36 46 36 35 37  4239 	.ascii "646F65734E6F74 ;"
+      0039A7 00                    4237 	.db 0x00
+      0039A8                       4238 ___str_69:
+      0039A8 36 34 36 46 36 35 37  4239 	.ascii "646F65734E6F74 ;"
              33 34 45 36 46 37 34
              20 3B
-      00399C 00                    4240 	.db 0x00
+      0039B8 00                    4240 	.db 0x00
                                    4241 	.area XINIT   (CODE)
                                    4242 	.area CABS    (ABS,CODE)

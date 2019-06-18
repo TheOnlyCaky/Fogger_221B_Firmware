@@ -371,7 +371,7 @@
       001D21 8A 82            [24]  371 	mov	dpl,r2
       001D23 8C 83            [24]  372 	mov	dph,r4
       001D25 8F F0            [24]  373 	mov	b,r7
-      001D27 12 36 2C         [24]  374 	lcall	__gptrget
+      001D27 12 36 48         [24]  374 	lcall	__gptrget
       001D2A FF               [12]  375 	mov	r7,a
       001D2B D0 04            [24]  376 	pop	ar4
       001D2D EF               [12]  377 	mov	a,r7
@@ -563,7 +563,7 @@
       001E4A C0 E0            [24]  563 	push	acc
       001E4C 8E 82            [24]  564 	mov	dpl,r6
       001E4E 8F 83            [24]  565 	mov	dph,r7
-      001E50 12 35 67         [24]  566 	lcall	__divuint
+      001E50 12 35 83         [24]  566 	lcall	__divuint
       001E53 AA 82            [24]  567 	mov	r2,dpl
       001E55 AB 83            [24]  568 	mov	r3,dph
       001E57 15 81            [12]  569 	dec	sp
@@ -608,7 +608,7 @@
       001E9A C0 02            [24]  608 	push	ar2
       001E9C C0 03            [24]  609 	push	ar3
       001E9E 90 00 64         [24]  610 	mov	dptr,#0x0064
-      001EA1 12 35 98         [24]  611 	lcall	__mulint
+      001EA1 12 35 B4         [24]  611 	lcall	__mulint
       001EA4 AB 82            [24]  612 	mov	r3,dpl
       001EA6 AC 83            [24]  613 	mov	r4,dph
       001EA8 15 81            [12]  614 	dec	sp
@@ -642,7 +642,7 @@
       001ED0 C0 E0            [24]  642 	push	acc
       001ED2 8E 82            [24]  643 	mov	dpl,r6
       001ED4 8F 83            [24]  644 	mov	dph,r7
-      001ED6 12 35 67         [24]  645 	lcall	__divuint
+      001ED6 12 35 83         [24]  645 	lcall	__divuint
       001ED9 AA 82            [24]  646 	mov	r2,dpl
       001EDB AB 83            [24]  647 	mov	r3,dph
       001EDD 15 81            [12]  648 	dec	sp
@@ -685,7 +685,7 @@
       001F1B C0 02            [24]  685 	push	ar2
       001F1D C0 03            [24]  686 	push	ar3
       001F1F 90 00 0A         [24]  687 	mov	dptr,#0x000a
-      001F22 12 35 98         [24]  688 	lcall	__mulint
+      001F22 12 35 B4         [24]  688 	lcall	__mulint
       001F25 AB 82            [24]  689 	mov	r3,dpl
       001F27 AD 83            [24]  690 	mov	r5,dph
       001F29 15 81            [12]  691 	dec	sp

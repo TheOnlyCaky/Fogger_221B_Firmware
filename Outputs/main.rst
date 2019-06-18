@@ -353,7 +353,7 @@
       000143 D2 B3            [12]  353 	setb	_P3_3
                                     354 ;	../main.c:48: power_heater(HEATER_DISABLE);
       000145 75 82 01         [24]  355 	mov	dpl,#0x01
-      000148 12 35 56         [24]  356 	lcall	_power_heater
+      000148 12 35 72         [24]  356 	lcall	_power_heater
                                     357 ;	../main.c:51: tick_fogger();
       00014B 12 30 C6         [24]  358 	lcall	_tick_fogger
                                     359 ;	../main.c:55: SCK = 0;
@@ -666,7 +666,7 @@
       00035D C0 06            [24]  666 	push	ar6
       00035F C0 05            [24]  667 	push	ar5
       000361 C0 04            [24]  668 	push	ar4
-      000363 12 35 56         [24]  669 	lcall	_power_heater
+      000363 12 35 72         [24]  669 	lcall	_power_heater
       000366 D0 04            [24]  670 	pop	ar4
       000368 D0 05            [24]  671 	pop	ar5
       00036A D0 06            [24]  672 	pop	ar6
@@ -688,7 +688,7 @@
       000383 8D 83            [24]  688 	mov	dph,r5
       000385 8E F0            [24]  689 	mov	b,r6
       000387 EF               [12]  690 	mov	a,r7
-      000388 12 35 BA         [24]  691 	lcall	__modulong
+      000388 12 35 D6         [24]  691 	lcall	__modulong
       00038B A8 82            [24]  692 	mov	r0,dpl
       00038D A9 83            [24]  693 	mov	r1,dph
       00038F AA F0            [24]  694 	mov	r2,b
@@ -730,7 +730,7 @@
       0003CE 8D 83            [24]  730 	mov	dph,r5
       0003D0 8E F0            [24]  731 	mov	b,r6
       0003D2 EF               [12]  732 	mov	a,r7
-      0003D3 12 35 BA         [24]  733 	lcall	__modulong
+      0003D3 12 35 D6         [24]  733 	lcall	__modulong
       0003D6 A8 82            [24]  734 	mov	r0,dpl
       0003D8 A9 83            [24]  735 	mov	r1,dph
       0003DA AA F0            [24]  736 	mov	r2,b
@@ -772,7 +772,7 @@
       000419 8D 83            [24]  772 	mov	dph,r5
       00041B 8E F0            [24]  773 	mov	b,r6
       00041D EF               [12]  774 	mov	a,r7
-      00041E 12 35 BA         [24]  775 	lcall	__modulong
+      00041E 12 35 D6         [24]  775 	lcall	__modulong
       000421 A8 82            [24]  776 	mov	r0,dpl
       000423 A9 83            [24]  777 	mov	r1,dph
       000425 AA F0            [24]  778 	mov	r2,b

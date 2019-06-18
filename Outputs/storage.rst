@@ -453,7 +453,7 @@
       002F53 C0 E0            [24]  453 	push	acc
       002F55 E4               [12]  454 	clr	a
       002F56 C0 E0            [24]  455 	push	acc
-      002F58 12 36 48         [24]  456 	lcall	__modsint
+      002F58 12 36 64         [24]  456 	lcall	__modsint
       002F5B AD 82            [24]  457 	mov	r5,dpl
       002F5D 15 81            [12]  458 	dec	sp
       002F5F 15 81            [12]  459 	dec	sp
@@ -480,7 +480,7 @@
       002F75 C0 E0            [24]  480 	push	acc
       002F77 8D 82            [24]  481 	mov	dpl,r5
       002F79 8F 83            [24]  482 	mov	dph,r7
-      002F7B 12 36 48         [24]  483 	lcall	__modsint
+      002F7B 12 36 64         [24]  483 	lcall	__modsint
       002F7E AD 82            [24]  484 	mov	r5,dpl
       002F80 15 81            [12]  485 	dec	sp
       002F82 15 81            [12]  486 	dec	sp
@@ -497,7 +497,7 @@
       002F90 C0 E0            [24]  497 	push	acc
       002F92 8D 82            [24]  498 	mov	dpl,r5
       002F94 8F 83            [24]  499 	mov	dph,r7
-      002F96 12 36 48         [24]  500 	lcall	__modsint
+      002F96 12 36 64         [24]  500 	lcall	__modsint
       002F99 AD 82            [24]  501 	mov	r5,dpl
       002F9B 15 81            [12]  502 	dec	sp
       002F9D 15 81            [12]  503 	dec	sp
@@ -514,7 +514,7 @@
       002FAB C0 E0            [24]  514 	push	acc
       002FAD 8D 82            [24]  515 	mov	dpl,r5
       002FAF 8F 83            [24]  516 	mov	dph,r7
-      002FB1 12 36 48         [24]  517 	lcall	__modsint
+      002FB1 12 36 64         [24]  517 	lcall	__modsint
       002FB4 AD 82            [24]  518 	mov	r5,dpl
       002FB6 15 81            [12]  519 	dec	sp
       002FB8 15 81            [12]  520 	dec	sp

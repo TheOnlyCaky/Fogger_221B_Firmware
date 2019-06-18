@@ -45,6 +45,9 @@
 #define DMX_M11_MACRO_SPEED_INDEX 9
 #define DMX_M11_HEATER_ENABLE_INDEX 10
 
+//Mode 11
+#define DMX_FOG_DURATION_CONSTANT 230
+
 //all at high
 //Modes 1 + 3
 #define DMX_FOG_OFF 20

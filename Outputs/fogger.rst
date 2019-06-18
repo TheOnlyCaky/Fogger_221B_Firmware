@@ -409,7 +409,7 @@
       0030F8 A7 F0            [24]  409 	mov	@r1,b
                                     410 ;	../Fogger_Manager/fogger.c:38: for(value = 0; value < MOVING_AVERAGE; value++){
       0030FA 7B 00            [12]  411 	mov	r3,#0x00
-      0030FC                        412 00263$:
+      0030FC                        412 00268$:
                                     413 ;	../Fogger_Manager/fogger.c:39: if(!value){
       0030FC EB               [12]  414 	mov	a,r3
       0030FD 70 1F            [24]  415 	jnz	00102$
@@ -433,7 +433,7 @@
       003117 08               [12]  433 	inc	r0
       003118 76 00            [12]  434 	mov	@r0,#0x00
       00311A D0 03            [24]  435 	pop	ar3
-      00311C 80 25            [24]  436 	sjmp	00264$
+      00311C 80 25            [24]  436 	sjmp	00269$
       00311E                        437 00102$:
                                     438 ;	../Fogger_Manager/fogger.c:42: runningAverage += temperature[value];
       00311E EB               [12]  439 	mov	a,r3
@@ -464,15 +464,15 @@
       00313E 08               [12]  464 	inc	r0
       00313F 36               [12]  465 	addc	a,@r0
       003140 F6               [12]  466 	mov	@r0,a
-                                    467 ;	../Fogger_Manager/fogger.c:312: power_pump(PUMP_OFF);
+                                    467 ;	../Fogger_Manager/fogger.c:316: power_pump(PUMP_OFF);
       003141 D0 03            [24]  468 	pop	ar3
                                     469 ;	../Fogger_Manager/fogger.c:42: runningAverage += temperature[value];
-      003143                        470 00264$:
+      003143                        470 00269$:
                                     471 ;	../Fogger_Manager/fogger.c:38: for(value = 0; value < MOVING_AVERAGE; value++){
       003143 0B               [12]  472 	inc	r3
-      003144 BB 04 00         [24]  473 	cjne	r3,#0x04,00590$
-      003147                        474 00590$:
-      003147 40 B3            [24]  475 	jc	00263$
+      003144 BB 04 00         [24]  473 	cjne	r3,#0x04,00605$
+      003147                        474 00605$:
+      003147 40 B3            [24]  475 	jc	00268$
                                     476 ;	../Fogger_Manager/fogger.c:46: runningAverage = runningAverage >> MOVING_AVERAGE_SHIFT;
       003149 A8 1A            [24]  477 	mov	r0,_bp
       00314B 08               [12]  478 	inc	r0
@@ -677,21 +677,21 @@
       00322B 75 82 10         [24]  677 	mov	dpl,#0x10
       00322E 12 2F 00         [24]  678 	lcall	_get_runtime_data
       003231 E5 82            [12]  679 	mov	a,dpl
-      003233 60 03            [24]  680 	jz	00606$
+      003233 60 03            [24]  680 	jz	00621$
       003235 02 33 FB         [24]  681 	ljmp	00237$
-      003238                        682 00606$:
+      003238                        682 00621$:
                                     683 ;	../Fogger_Manager/fogger.c:115: if(has_dmx()){
       003238 E5 2C            [12]  684 	mov	a,_Has_DMX
-      00323A 70 03            [24]  685 	jnz	00607$
+      00323A 70 03            [24]  685 	jnz	00622$
       00323C 02 33 F6         [24]  686 	ljmp	00228$
-      00323F                        687 00607$:
+      00323F                        687 00622$:
                                     688 ;	../Fogger_Manager/fogger.c:116: Playing = PLAY;
       00323F 75 4E 01         [24]  689 	mov	_Playing,#0x01
                                     690 ;	../Fogger_Manager/fogger.c:117: power = FOG_HIGH;
       003242 75 5E 01         [24]  691 	mov	_tick_fogger_power_65536_36,#0x01
                                     692 ;	../Fogger_Manager/fogger.c:118: power_heater(HEATER_ENABLE);
       003245 75 82 00         [24]  693 	mov	dpl,#0x00
-      003248 12 35 56         [24]  694 	lcall	_power_heater
+      003248 12 35 72         [24]  694 	lcall	_power_heater
                                     695 ;	../Fogger_Manager/fogger.c:120: if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
       00324B 75 82 0E         [24]  696 	mov	dpl,#0x0e
       00324E 12 2F 00         [24]  697 	lcall	_get_runtime_data
@@ -700,24 +700,24 @@
                                     700 ;	../Fogger_Manager/fogger.c:122: value = get_dmx_value(DMX_M11_POWER_INDEX);
       003255 AF 21            [24]  701 	mov	r7,_DMX
                                     702 ;	../Fogger_Manager/fogger.c:124: if(value < DMX_FOG_OFF){
-      003257 BF 14 00         [24]  703 	cjne	r7,#0x14,00609$
-      00325A                        704 00609$:
+      003257 BF 14 00         [24]  703 	cjne	r7,#0x14,00624$
+      00325A                        704 00624$:
       00325A 50 05            [24]  705 	jnc	00148$
                                     706 ;	../Fogger_Manager/fogger.c:125: Playing = PAUSE;
       00325C 75 4E 00         [24]  707 	mov	_Playing,#0x00
       00325F 80 14            [24]  708 	sjmp	00149$
       003261                        709 00148$:
                                     710 ;	../Fogger_Manager/fogger.c:126: } else if(value < DMX_FOG_LOW){
-      003261 BF 64 00         [24]  711 	cjne	r7,#0x64,00611$
-      003264                        712 00611$:
+      003261 BF 64 00         [24]  711 	cjne	r7,#0x64,00626$
+      003264                        712 00626$:
       003264 50 04            [24]  713 	jnc	00145$
                                     714 ;	../Fogger_Manager/fogger.c:127: value = FOG_LO;
       003266 7F 04            [12]  715 	mov	r7,#0x04
       003268 80 0B            [24]  716 	sjmp	00149$
       00326A                        717 00145$:
                                     718 ;	../Fogger_Manager/fogger.c:128: } else if(value < DMX_FOG_MEDIUM){
-      00326A BF C8 00         [24]  719 	cjne	r7,#0xc8,00613$
-      00326D                        720 00613$:
+      00326A BF C8 00         [24]  719 	cjne	r7,#0xc8,00628$
+      00326D                        720 00628$:
       00326D 50 04            [24]  721 	jnc	00142$
                                     722 ;	../Fogger_Manager/fogger.c:129: value = FOG_MED;
       00326F 7F 02            [12]  723 	mov	r7,#0x02
@@ -728,9 +728,9 @@
       003275                        728 00149$:
                                     729 ;	../Fogger_Manager/fogger.c:134: if(value != power){
       003275 EF               [12]  730 	mov	a,r7
-      003276 B5 5E 02         [24]  731 	cjne	a,_tick_fogger_power_65536_36,00615$
+      003276 B5 5E 02         [24]  731 	cjne	a,_tick_fogger_power_65536_36,00630$
       003279 80 02            [24]  732 	sjmp	00151$
-      00327B                        733 00615$:
+      00327B                        733 00630$:
                                     734 ;	../Fogger_Manager/fogger.c:135: power = value;
       00327B 8F 5E            [24]  735 	mov	_tick_fogger_power_65536_36,r7
       00327D                        736 00151$:
@@ -738,9 +738,9 @@
                                     738 ;	../Fogger_Manager/fogger.c:140: if(value != duration){
       00327D E5 22            [12]  739 	mov	a,(_DMX + 0x0001)
       00327F FF               [12]  740 	mov	r7,a
-      003280 B5 5C 02         [24]  741 	cjne	a,_tick_fogger_duration_65536_36,00616$
+      003280 B5 5C 02         [24]  741 	cjne	a,_tick_fogger_duration_65536_36,00631$
       003283 80 08            [24]  742 	sjmp	00153$
-      003285                        743 00616$:
+      003285                        743 00631$:
                                     744 ;	../Fogger_Manager/fogger.c:141: duration = value;
       003285 8F 5C            [24]  745 	mov	_tick_fogger_duration_65536_36,r7
                                     746 ;	../Fogger_Manager/fogger.c:142: Timer = duration;
@@ -752,9 +752,9 @@
                                     752 ;	../Fogger_Manager/fogger.c:148: if(value != interval){
       00328D E5 23            [12]  753 	mov	a,(_DMX + 0x0002)
       00328F FF               [12]  754 	mov	r7,a
-      003290 B5 5D 02         [24]  755 	cjne	a,_tick_fogger_interval_65536_36,00617$
+      003290 B5 5D 02         [24]  755 	cjne	a,_tick_fogger_interval_65536_36,00632$
       003293 80 05            [24]  756 	sjmp	00155$
-      003295                        757 00617$:
+      003295                        757 00632$:
                                     758 ;	../Fogger_Manager/fogger.c:149: interval = value;
       003295 8F 5D            [24]  759 	mov	_tick_fogger_interval_65536_36,r7
                                     760 ;	../Fogger_Manager/fogger.c:150: Playing = RESET;
@@ -764,35 +764,35 @@
                                     764 ;	../Fogger_Manager/fogger.c:155: if(value >= DMX_HEATER_OFF){
       00329A 74 80            [12]  765 	mov	a,#0x100 - 0x80
       00329C 25 2B            [12]  766 	add	a,(_DMX + 0x000a)
-      00329E 40 03            [24]  767 	jc	00618$
+      00329E 40 03            [24]  767 	jc	00633$
       0032A0 02 34 46         [24]  768 	ljmp	00238$
-      0032A3                        769 00618$:
+      0032A3                        769 00633$:
                                     770 ;	../Fogger_Manager/fogger.c:156: power_heater(HEATER_DISABLE);
       0032A3 75 82 01         [24]  771 	mov	dpl,#0x01
-      0032A6 12 35 56         [24]  772 	lcall	_power_heater
+      0032A6 12 35 72         [24]  772 	lcall	_power_heater
       0032A9 02 34 46         [24]  773 	ljmp	00238$
       0032AC                        774 00225$:
                                     775 ;	../Fogger_Manager/fogger.c:163: value = get_dmx_value(DMX_M1_FOG_INDEX);
       0032AC AF 21            [24]  776 	mov	r7,_DMX
                                     777 ;	../Fogger_Manager/fogger.c:166: if(value < DMX_FOG_OFF){
-      0032AE BF 14 00         [24]  778 	cjne	r7,#0x14,00619$
-      0032B1                        779 00619$:
+      0032AE BF 14 00         [24]  778 	cjne	r7,#0x14,00634$
+      0032B1                        779 00634$:
       0032B1 50 06            [24]  780 	jnc	00222$
                                     781 ;	../Fogger_Manager/fogger.c:167: Playing = PAUSE;
       0032B3 75 4E 00         [24]  782 	mov	_Playing,#0x00
       0032B6 02 34 46         [24]  783 	ljmp	00238$
       0032B9                        784 00222$:
                                     785 ;	../Fogger_Manager/fogger.c:169: } else if(value < DMX_FOG_3_13){
-      0032B9 BF 28 00         [24]  786 	cjne	r7,#0x28,00621$
-      0032BC                        787 00621$:
+      0032B9 BF 28 00         [24]  786 	cjne	r7,#0x28,00636$
+      0032BC                        787 00636$:
       0032BC 50 19            [24]  788 	jnc	00219$
                                     789 ;	../Fogger_Manager/fogger.c:170: if(duration != 3 || interval != 13){
       0032BE 74 03            [12]  790 	mov	a,#0x03
       0032C0 B5 5C 08         [24]  791 	cjne	a,_tick_fogger_duration_65536_36,00158$
       0032C3 74 0D            [12]  792 	mov	a,#0x0d
-      0032C5 B5 5D 03         [24]  793 	cjne	a,_tick_fogger_interval_65536_36,00625$
+      0032C5 B5 5D 03         [24]  793 	cjne	a,_tick_fogger_interval_65536_36,00640$
       0032C8 02 34 46         [24]  794 	ljmp	00238$
-      0032CB                        795 00625$:
+      0032CB                        795 00640$:
       0032CB                        796 00158$:
                                     797 ;	../Fogger_Manager/fogger.c:171: duration = 3;
       0032CB 75 5C 03         [24]  798 	mov	_tick_fogger_duration_65536_36,#0x03
@@ -803,16 +803,16 @@
       0032D4 02 34 46         [24]  803 	ljmp	00238$
       0032D7                        804 00219$:
                                     805 ;	../Fogger_Manager/fogger.c:175: } else if(value < DMX_FOG_3_21){
-      0032D7 BF 3C 00         [24]  806 	cjne	r7,#0x3c,00626$
-      0032DA                        807 00626$:
+      0032D7 BF 3C 00         [24]  806 	cjne	r7,#0x3c,00641$
+      0032DA                        807 00641$:
       0032DA 50 19            [24]  808 	jnc	00216$
                                     809 ;	../Fogger_Manager/fogger.c:176: if(duration != 3 || interval != 21){
       0032DC 74 03            [12]  810 	mov	a,#0x03
       0032DE B5 5C 08         [24]  811 	cjne	a,_tick_fogger_duration_65536_36,00161$
       0032E1 74 15            [12]  812 	mov	a,#0x15
-      0032E3 B5 5D 03         [24]  813 	cjne	a,_tick_fogger_interval_65536_36,00630$
+      0032E3 B5 5D 03         [24]  813 	cjne	a,_tick_fogger_interval_65536_36,00645$
       0032E6 02 34 46         [24]  814 	ljmp	00238$
-      0032E9                        815 00630$:
+      0032E9                        815 00645$:
       0032E9                        816 00161$:
                                     817 ;	../Fogger_Manager/fogger.c:177: duration = 3;
       0032E9 75 5C 03         [24]  818 	mov	_tick_fogger_duration_65536_36,#0x03
@@ -823,16 +823,16 @@
       0032F2 02 34 46         [24]  823 	ljmp	00238$
       0032F5                        824 00216$:
                                     825 ;	../Fogger_Manager/fogger.c:181: } else if(value < DMX_FOG_3_34){
-      0032F5 BF 50 00         [24]  826 	cjne	r7,#0x50,00631$
-      0032F8                        827 00631$:
+      0032F5 BF 50 00         [24]  826 	cjne	r7,#0x50,00646$
+      0032F8                        827 00646$:
       0032F8 50 19            [24]  828 	jnc	00213$
                                     829 ;	../Fogger_Manager/fogger.c:182: if(duration != 3 || interval != 34){
       0032FA 74 03            [12]  830 	mov	a,#0x03
       0032FC B5 5C 08         [24]  831 	cjne	a,_tick_fogger_duration_65536_36,00164$
       0032FF 74 22            [12]  832 	mov	a,#0x22
-      003301 B5 5D 03         [24]  833 	cjne	a,_tick_fogger_interval_65536_36,00635$
+      003301 B5 5D 03         [24]  833 	cjne	a,_tick_fogger_interval_65536_36,00650$
       003304 02 34 46         [24]  834 	ljmp	00238$
-      003307                        835 00635$:
+      003307                        835 00650$:
       003307                        836 00164$:
                                     837 ;	../Fogger_Manager/fogger.c:183: duration = 3;
       003307 75 5C 03         [24]  838 	mov	_tick_fogger_duration_65536_36,#0x03
@@ -843,16 +843,16 @@
       003310 02 34 46         [24]  843 	ljmp	00238$
       003313                        844 00213$:
                                     845 ;	../Fogger_Manager/fogger.c:187: } else if(value < DMX_FOG_3_55){
-      003313 BF 64 00         [24]  846 	cjne	r7,#0x64,00636$
-      003316                        847 00636$:
+      003313 BF 64 00         [24]  846 	cjne	r7,#0x64,00651$
+      003316                        847 00651$:
       003316 50 19            [24]  848 	jnc	00210$
                                     849 ;	../Fogger_Manager/fogger.c:188: if(duration != 3 || interval != 55){
       003318 74 03            [12]  850 	mov	a,#0x03
       00331A B5 5C 08         [24]  851 	cjne	a,_tick_fogger_duration_65536_36,00167$
       00331D 74 37            [12]  852 	mov	a,#0x37
-      00331F B5 5D 03         [24]  853 	cjne	a,_tick_fogger_interval_65536_36,00640$
+      00331F B5 5D 03         [24]  853 	cjne	a,_tick_fogger_interval_65536_36,00655$
       003322 02 34 46         [24]  854 	ljmp	00238$
-      003325                        855 00640$:
+      003325                        855 00655$:
       003325                        856 00167$:
                                     857 ;	../Fogger_Manager/fogger.c:189: duration = 3;
       003325 75 5C 03         [24]  858 	mov	_tick_fogger_duration_65536_36,#0x03
@@ -863,16 +863,16 @@
       00332E 02 34 46         [24]  863 	ljmp	00238$
       003331                        864 00210$:
                                     865 ;	../Fogger_Manager/fogger.c:193: } else if(value < DMX_FOG_8_21){
-      003331 BF 78 00         [24]  866 	cjne	r7,#0x78,00641$
-      003334                        867 00641$:
+      003331 BF 78 00         [24]  866 	cjne	r7,#0x78,00656$
+      003334                        867 00656$:
       003334 50 19            [24]  868 	jnc	00207$
                                     869 ;	../Fogger_Manager/fogger.c:194: if(duration != 8 || interval != 21){
       003336 74 08            [12]  870 	mov	a,#0x08
       003338 B5 5C 08         [24]  871 	cjne	a,_tick_fogger_duration_65536_36,00170$
       00333B 74 15            [12]  872 	mov	a,#0x15
-      00333D B5 5D 03         [24]  873 	cjne	a,_tick_fogger_interval_65536_36,00645$
+      00333D B5 5D 03         [24]  873 	cjne	a,_tick_fogger_interval_65536_36,00660$
       003340 02 34 46         [24]  874 	ljmp	00238$
-      003343                        875 00645$:
+      003343                        875 00660$:
       003343                        876 00170$:
                                     877 ;	../Fogger_Manager/fogger.c:195: duration = 8;
       003343 75 5C 08         [24]  878 	mov	_tick_fogger_duration_65536_36,#0x08
@@ -883,16 +883,16 @@
       00334C 02 34 46         [24]  883 	ljmp	00238$
       00334F                        884 00207$:
                                     885 ;	../Fogger_Manager/fogger.c:199: } else if(value < DMX_FOG_8_34){
-      00334F BF 8C 00         [24]  886 	cjne	r7,#0x8c,00646$
-      003352                        887 00646$:
+      00334F BF 8C 00         [24]  886 	cjne	r7,#0x8c,00661$
+      003352                        887 00661$:
       003352 50 19            [24]  888 	jnc	00204$
                                     889 ;	../Fogger_Manager/fogger.c:200: if(duration != 8 || interval != 34){
       003354 74 08            [12]  890 	mov	a,#0x08
       003356 B5 5C 08         [24]  891 	cjne	a,_tick_fogger_duration_65536_36,00173$
       003359 74 22            [12]  892 	mov	a,#0x22
-      00335B B5 5D 03         [24]  893 	cjne	a,_tick_fogger_interval_65536_36,00650$
+      00335B B5 5D 03         [24]  893 	cjne	a,_tick_fogger_interval_65536_36,00665$
       00335E 02 34 46         [24]  894 	ljmp	00238$
-      003361                        895 00650$:
+      003361                        895 00665$:
       003361                        896 00173$:
                                     897 ;	../Fogger_Manager/fogger.c:201: duration = 8;
       003361 75 5C 08         [24]  898 	mov	_tick_fogger_duration_65536_36,#0x08
@@ -903,16 +903,16 @@
       00336A 02 34 46         [24]  903 	ljmp	00238$
       00336D                        904 00204$:
                                     905 ;	../Fogger_Manager/fogger.c:205: } else if(value < DMX_FOG_8_55){
-      00336D BF A0 00         [24]  906 	cjne	r7,#0xa0,00651$
-      003370                        907 00651$:
+      00336D BF A0 00         [24]  906 	cjne	r7,#0xa0,00666$
+      003370                        907 00666$:
       003370 50 19            [24]  908 	jnc	00201$
                                     909 ;	../Fogger_Manager/fogger.c:206: if(duration != 8 || interval != 55){
       003372 74 08            [12]  910 	mov	a,#0x08
       003374 B5 5C 08         [24]  911 	cjne	a,_tick_fogger_duration_65536_36,00176$
       003377 74 37            [12]  912 	mov	a,#0x37
-      003379 B5 5D 03         [24]  913 	cjne	a,_tick_fogger_interval_65536_36,00655$
+      003379 B5 5D 03         [24]  913 	cjne	a,_tick_fogger_interval_65536_36,00670$
       00337C 02 34 46         [24]  914 	ljmp	00238$
-      00337F                        915 00655$:
+      00337F                        915 00670$:
       00337F                        916 00176$:
                                     917 ;	../Fogger_Manager/fogger.c:207: duration = 8;
       00337F 75 5C 08         [24]  918 	mov	_tick_fogger_duration_65536_36,#0x08
@@ -923,16 +923,16 @@
       003388 02 34 46         [24]  923 	ljmp	00238$
       00338B                        924 00201$:
                                     925 ;	../Fogger_Manager/fogger.c:211: } else if(value < DMX_FOG_8_89){
-      00338B BF B4 00         [24]  926 	cjne	r7,#0xb4,00656$
-      00338E                        927 00656$:
+      00338B BF B4 00         [24]  926 	cjne	r7,#0xb4,00671$
+      00338E                        927 00671$:
       00338E 50 19            [24]  928 	jnc	00198$
                                     929 ;	../Fogger_Manager/fogger.c:212: if(duration != 8 || interval != 89){
       003390 74 08            [12]  930 	mov	a,#0x08
       003392 B5 5C 08         [24]  931 	cjne	a,_tick_fogger_duration_65536_36,00179$
       003395 74 59            [12]  932 	mov	a,#0x59
-      003397 B5 5D 03         [24]  933 	cjne	a,_tick_fogger_interval_65536_36,00660$
+      003397 B5 5D 03         [24]  933 	cjne	a,_tick_fogger_interval_65536_36,00675$
       00339A 02 34 46         [24]  934 	ljmp	00238$
-      00339D                        935 00660$:
+      00339D                        935 00675$:
       00339D                        936 00179$:
                                     937 ;	../Fogger_Manager/fogger.c:213: duration = 8;
       00339D 75 5C 08         [24]  938 	mov	_tick_fogger_duration_65536_36,#0x08
@@ -943,16 +943,16 @@
       0033A6 02 34 46         [24]  943 	ljmp	00238$
       0033A9                        944 00198$:
                                     945 ;	../Fogger_Manager/fogger.c:217: } else if(value < DMX_FOG_8_144){
-      0033A9 BF C8 00         [24]  946 	cjne	r7,#0xc8,00661$
-      0033AC                        947 00661$:
+      0033A9 BF C8 00         [24]  946 	cjne	r7,#0xc8,00676$
+      0033AC                        947 00676$:
       0033AC 50 19            [24]  948 	jnc	00195$
                                     949 ;	../Fogger_Manager/fogger.c:218: if(duration != 8 || interval != 144){
       0033AE 74 08            [12]  950 	mov	a,#0x08
       0033B0 B5 5C 08         [24]  951 	cjne	a,_tick_fogger_duration_65536_36,00182$
       0033B3 74 90            [12]  952 	mov	a,#0x90
-      0033B5 B5 5D 03         [24]  953 	cjne	a,_tick_fogger_interval_65536_36,00665$
+      0033B5 B5 5D 03         [24]  953 	cjne	a,_tick_fogger_interval_65536_36,00680$
       0033B8 02 34 46         [24]  954 	ljmp	00238$
-      0033BB                        955 00665$:
+      0033BB                        955 00680$:
       0033BB                        956 00182$:
                                     957 ;	../Fogger_Manager/fogger.c:219: duration = 8;
       0033BB 75 5C 08         [24]  958 	mov	_tick_fogger_duration_65536_36,#0x08
@@ -963,16 +963,16 @@
       0033C4 02 34 46         [24]  963 	ljmp	00238$
       0033C7                        964 00195$:
                                     965 ;	../Fogger_Manager/fogger.c:223: } else if(value < DMX_FOG_21_55){
-      0033C7 BF DC 00         [24]  966 	cjne	r7,#0xdc,00666$
-      0033CA                        967 00666$:
+      0033C7 BF DC 00         [24]  966 	cjne	r7,#0xdc,00681$
+      0033CA                        967 00681$:
       0033CA 50 17            [24]  968 	jnc	00192$
                                     969 ;	../Fogger_Manager/fogger.c:224: if(duration != 21 || interval != 55){
       0033CC 74 15            [12]  970 	mov	a,#0x15
       0033CE B5 5C 07         [24]  971 	cjne	a,_tick_fogger_duration_65536_36,00185$
       0033D1 74 37            [12]  972 	mov	a,#0x37
-      0033D3 B5 5D 02         [24]  973 	cjne	a,_tick_fogger_interval_65536_36,00670$
+      0033D3 B5 5D 02         [24]  973 	cjne	a,_tick_fogger_interval_65536_36,00685$
       0033D6 80 6E            [24]  974 	sjmp	00238$
-      0033D8                        975 00670$:
+      0033D8                        975 00685$:
       0033D8                        976 00185$:
                                     977 ;	../Fogger_Manager/fogger.c:225: duration = 21;
       0033D8 75 5C 15         [24]  978 	mov	_tick_fogger_duration_65536_36,#0x15
@@ -1012,16 +1012,16 @@
       003408 8F F0            [24] 1012 	mov	b,r7
       00340A 05 F0            [12] 1013 	inc	b
       00340C 74 01            [12] 1014 	mov	a,#0x01
-      00340E 80 02            [24] 1015 	sjmp	00675$
-      003410                       1016 00673$:
+      00340E 80 02            [24] 1015 	sjmp	00690$
+      003410                       1016 00688$:
       003410 25 E0            [12] 1017 	add	a,acc
-      003412                       1018 00675$:
-      003412 D5 F0 FB         [24] 1019 	djnz	b,00673$
+      003412                       1018 00690$:
+      003412 D5 F0 FB         [24] 1019 	djnz	b,00688$
                                    1020 ;	../Fogger_Manager/fogger.c:248: if(value != power){
       003415 FF               [12] 1021 	mov	r7,a
-      003416 B5 5E 02         [24] 1022 	cjne	a,_tick_fogger_power_65536_36,00676$
+      003416 B5 5E 02         [24] 1022 	cjne	a,_tick_fogger_power_65536_36,00691$
       003419 80 05            [24] 1023 	sjmp	00231$
-      00341B                       1024 00676$:
+      00341B                       1024 00691$:
                                    1025 ;	../Fogger_Manager/fogger.c:249: power = value;
       00341B 8F 5E            [24] 1026 	mov	_tick_fogger_power_65536_36,r7
                                    1027 ;	../Fogger_Manager/fogger.c:250: Playing = RESET;
@@ -1033,9 +1033,9 @@
                                    1033 ;	../Fogger_Manager/fogger.c:255: if(value != duration){
       003426 E5 82            [12] 1034 	mov	a,dpl
       003428 FF               [12] 1035 	mov	r7,a
-      003429 B5 5C 02         [24] 1036 	cjne	a,_tick_fogger_duration_65536_36,00677$
+      003429 B5 5C 02         [24] 1036 	cjne	a,_tick_fogger_duration_65536_36,00692$
       00342C 80 05            [24] 1037 	sjmp	00233$
-      00342E                       1038 00677$:
+      00342E                       1038 00692$:
                                    1039 ;	../Fogger_Manager/fogger.c:256: duration = value;
       00342E 8F 5C            [24] 1040 	mov	_tick_fogger_duration_65536_36,r7
                                    1041 ;	../Fogger_Manager/fogger.c:257: Playing = RESET;
@@ -1047,9 +1047,9 @@
                                    1047 ;	../Fogger_Manager/fogger.c:262: if(value != interval){
       003439 E5 82            [12] 1048 	mov	a,dpl
       00343B FF               [12] 1049 	mov	r7,a
-      00343C B5 5D 02         [24] 1050 	cjne	a,_tick_fogger_interval_65536_36,00678$
+      00343C B5 5D 02         [24] 1050 	cjne	a,_tick_fogger_interval_65536_36,00693$
       00343F 80 05            [24] 1051 	sjmp	00238$
-      003441                       1052 00678$:
+      003441                       1052 00693$:
                                    1053 ;	../Fogger_Manager/fogger.c:263: interval = value;
       003441 8F 5D            [24] 1054 	mov	_tick_fogger_interval_65536_36,r7
                                    1055 ;	../Fogger_Manager/fogger.c:264: Playing = RESET;
@@ -1067,231 +1067,248 @@
       003454                       1067 00240$:
                                    1068 ;	../Fogger_Manager/fogger.c:276: if(Playing){
       003454 E5 4E            [12] 1069 	mov	a,_Playing
-      003456 70 03            [24] 1070 	jnz	00681$
-      003458 02 35 03         [24] 1071 	ljmp	00261$
-      00345B                       1072 00681$:
+      003456 70 03            [24] 1070 	jnz	00696$
+      003458 02 35 1F         [24] 1071 	ljmp	00266$
+      00345B                       1072 00696$:
                                    1073 ;	../Fogger_Manager/fogger.c:277: tock++;
       00345B 05 5F            [12] 1074 	inc	_tick_fogger_tock_65536_36
                                    1075 ;	../Fogger_Manager/fogger.c:279: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
       00345D 75 82 10         [24] 1076 	mov	dpl,#0x10
       003460 12 2F 00         [24] 1077 	lcall	_get_runtime_data
       003463 E5 82            [12] 1078 	mov	a,dpl
-      003465 70 24            [24] 1079 	jnz	00256$
-                                   1080 ;	../Fogger_Manager/fogger.c:280: && (!duration || !interval)){
+      003465 70 2A            [24] 1079 	jnz	00260$
+                                   1080 ;	../Fogger_Manager/fogger.c:280: && ((duration && !interval) || (duration > DMX_FOG_DURATION_CONSTANT))){
       003467 E5 5C            [12] 1081 	mov	a,_tick_fogger_duration_65536_36
-      003469 60 04            [24] 1082 	jz	00255$
+      003469 60 04            [24] 1082 	jz	00263$
       00346B E5 5D            [12] 1083 	mov	a,_tick_fogger_interval_65536_36
-      00346D 70 1C            [24] 1084 	jnz	00256$
-      00346F                       1085 00255$:
-                                   1086 ;	../Fogger_Manager/fogger.c:282: if(!(tock % power)){
-      00346F 85 5E F0         [24] 1087 	mov	b,_tick_fogger_power_65536_36
-      003472 E5 5F            [12] 1088 	mov	a,_tick_fogger_tock_65536_36
-      003474 84               [48] 1089 	div	ab
-      003475 E5 F0            [12] 1090 	mov	a,b
-      003477 70 09            [24] 1091 	jnz	00242$
-                                   1092 ;	../Fogger_Manager/fogger.c:283: power_pump(PUMP_ON);
-      003479 75 82 01         [24] 1093 	mov	dpl,#0x01
-      00347C 12 35 0F         [24] 1094 	lcall	_power_pump
-      00347F 02 35 09         [24] 1095 	ljmp	00265$
-      003482                       1096 00242$:
-                                   1097 ;	../Fogger_Manager/fogger.c:285: power_pump(PUMP_OFF);
-      003482 75 82 00         [24] 1098 	mov	dpl,#0x00
-      003485 12 35 0F         [24] 1099 	lcall	_power_pump
-      003488 02 35 09         [24] 1100 	ljmp	00265$
-      00348B                       1101 00256$:
-                                   1102 ;	../Fogger_Manager/fogger.c:289: if(!(tock % 8)){
-      00348B AE 5F            [24] 1103 	mov	r6,_tick_fogger_tock_65536_36
-      00348D 7F 00            [12] 1104 	mov	r7,#0x00
-      00348F 74 08            [12] 1105 	mov	a,#0x08
-      003491 C0 E0            [24] 1106 	push	acc
-      003493 E4               [12] 1107 	clr	a
-      003494 C0 E0            [24] 1108 	push	acc
-      003496 8E 82            [24] 1109 	mov	dpl,r6
-      003498 8F 83            [24] 1110 	mov	dph,r7
-      00349A 12 36 48         [24] 1111 	lcall	__modsint
-      00349D AE 82            [24] 1112 	mov	r6,dpl
-      00349F AF 83            [24] 1113 	mov	r7,dph
-      0034A1 15 81            [12] 1114 	dec	sp
-      0034A3 15 81            [12] 1115 	dec	sp
-      0034A5 EE               [12] 1116 	mov	a,r6
-      0034A6 4F               [12] 1117 	orl	a,r7
-      0034A7 70 02            [24] 1118 	jnz	00245$
-                                   1119 ;	../Fogger_Manager/fogger.c:290: Timer--;
-      0034A9 15 4C            [12] 1120 	dec	_Timer
-      0034AB                       1121 00245$:
-                                   1122 ;	../Fogger_Manager/fogger.c:293: if(Timer == 0x00){
-      0034AB E5 4C            [12] 1123 	mov	a,_Timer
-      0034AD 70 2F            [24] 1124 	jnz	00253$
-                                   1125 ;	../Fogger_Manager/fogger.c:294: power_pump((Interval_Or_Duration == INTERVAL) ? PUMP_ON : PUMP_OFF);
-      0034AF E5 4D            [12] 1126 	mov	a,_Interval_Or_Duration
-      0034B1 70 05            [24] 1127 	jnz	00267$
-      0034B3 7E 01            [12] 1128 	mov	r6,#0x01
-      0034B5 FF               [12] 1129 	mov	r7,a
-      0034B6 80 04            [24] 1130 	sjmp	00268$
-      0034B8                       1131 00267$:
-      0034B8 7E 00            [12] 1132 	mov	r6,#0x00
-      0034BA 7F 00            [12] 1133 	mov	r7,#0x00
-      0034BC                       1134 00268$:
-      0034BC 8E 82            [24] 1135 	mov	dpl,r6
-      0034BE 12 35 0F         [24] 1136 	lcall	_power_pump
-                                   1137 ;	../Fogger_Manager/fogger.c:295: Timer = (Interval_Or_Duration == INTERVAL) ? duration : interval;
-      0034C1 E5 4D            [12] 1138 	mov	a,_Interval_Or_Duration
-      0034C3 70 04            [24] 1139 	jnz	00269$
-      0034C5 AF 5C            [24] 1140 	mov	r7,_tick_fogger_duration_65536_36
-      0034C7 80 02            [24] 1141 	sjmp	00270$
-      0034C9                       1142 00269$:
-      0034C9 AF 5D            [24] 1143 	mov	r7,_tick_fogger_interval_65536_36
-      0034CB                       1144 00270$:
-      0034CB 8F 4C            [24] 1145 	mov	_Timer,r7
-                                   1146 ;	../Fogger_Manager/fogger.c:296: Interval_Or_Duration = (Interval_Or_Duration == INTERVAL) ? DURATION : INTERVAL;
-      0034CD E5 4D            [12] 1147 	mov	a,_Interval_Or_Duration
-      0034CF 70 05            [24] 1148 	jnz	00271$
-      0034D1 7E FF            [12] 1149 	mov	r6,#0xff
-      0034D3 FF               [12] 1150 	mov	r7,a
-      0034D4 80 04            [24] 1151 	sjmp	00272$
-      0034D6                       1152 00271$:
-      0034D6 7E 00            [12] 1153 	mov	r6,#0x00
-      0034D8 7F 00            [12] 1154 	mov	r7,#0x00
-      0034DA                       1155 00272$:
-      0034DA 8E 4D            [24] 1156 	mov	_Interval_Or_Duration,r6
-      0034DC 80 2B            [24] 1157 	sjmp	00265$
-      0034DE                       1158 00253$:
-                                   1159 ;	../Fogger_Manager/fogger.c:298: if(Interval_Or_Duration == INTERVAL){
-      0034DE E5 4D            [12] 1160 	mov	a,_Interval_Or_Duration
-                                   1161 ;	../Fogger_Manager/fogger.c:299: power_pump(PUMP_OFF);
-      0034E0 70 07            [24] 1162 	jnz	00250$
-      0034E2 F5 82            [12] 1163 	mov	dpl,a
-      0034E4 12 35 0F         [24] 1164 	lcall	_power_pump
-      0034E7 80 20            [24] 1165 	sjmp	00265$
-      0034E9                       1166 00250$:
-                                   1167 ;	../Fogger_Manager/fogger.c:301: if(!(tock % power)){
-      0034E9 85 5E F0         [24] 1168 	mov	b,_tick_fogger_power_65536_36
-      0034EC E5 5F            [12] 1169 	mov	a,_tick_fogger_tock_65536_36
-      0034EE 84               [48] 1170 	div	ab
-      0034EF E5 F0            [12] 1171 	mov	a,b
-      0034F1 70 08            [24] 1172 	jnz	00247$
-                                   1173 ;	../Fogger_Manager/fogger.c:302: power_pump(PUMP_ON);
-      0034F3 75 82 01         [24] 1174 	mov	dpl,#0x01
-      0034F6 12 35 0F         [24] 1175 	lcall	_power_pump
-      0034F9 80 0E            [24] 1176 	sjmp	00265$
-      0034FB                       1177 00247$:
-                                   1178 ;	../Fogger_Manager/fogger.c:304: power_pump(PUMP_OFF);
-      0034FB 75 82 00         [24] 1179 	mov	dpl,#0x00
-      0034FE 12 35 0F         [24] 1180 	lcall	_power_pump
-      003501 80 06            [24] 1181 	sjmp	00265$
-      003503                       1182 00261$:
-                                   1183 ;	../Fogger_Manager/fogger.c:312: power_pump(PUMP_OFF);
-      003503 75 82 00         [24] 1184 	mov	dpl,#0x00
-      003506 12 35 0F         [24] 1185 	lcall	_power_pump
-      003509                       1186 00265$:
-                                   1187 ;	../Fogger_Manager/fogger.c:315: }
-      003509 85 1A 81         [24] 1188 	mov	sp,_bp
-      00350C D0 1A            [24] 1189 	pop	_bp
-      00350E 22               [24] 1190 	ret
-                                   1191 ;------------------------------------------------------------
-                                   1192 ;Allocation info for local variables in function 'power_pump'
-                                   1193 ;------------------------------------------------------------
-                                   1194 ;action                    Allocated to registers r7 
-                                   1195 ;------------------------------------------------------------
-                                   1196 ;	../Fogger_Manager/fogger.c:317: void power_pump(uint8_t action){
-                                   1197 ;	-----------------------------------------
-                                   1198 ;	 function power_pump
-                                   1199 ;	-----------------------------------------
-      00350F                       1200 _power_pump:
-      00350F AF 82            [24] 1201 	mov	r7,dpl
-                                   1202 ;	../Fogger_Manager/fogger.c:318: switch (action)
-      003511 BF 01 02         [24] 1203 	cjne	r7,#0x01,00139$
-      003514 80 0A            [24] 1204 	sjmp	00101$
-      003516                       1205 00139$:
-      003516 BF 02 02         [24] 1206 	cjne	r7,#0x02,00140$
-      003519 80 1F            [24] 1207 	sjmp	00106$
-      00351B                       1208 00140$:
-                                   1209 ;	../Fogger_Manager/fogger.c:320: case PUMP_ON:
-      00351B BF 03 35         [24] 1210 	cjne	r7,#0x03,00111$
-      00351E 80 30            [24] 1211 	sjmp	00110$
-      003520                       1212 00101$:
-                                   1213 ;	../Fogger_Manager/fogger.c:321: if(get_fog_fluid_level() != TANK_EMPTY && get_heated() == HEATED){
-      003520 E5 50            [12] 1214 	mov	a,_Fluid_Level
-      003522 60 13            [24] 1215 	jz	00103$
-      003524 AE 4F            [24] 1216 	mov	r6,_Heat_Flag
-      003526 53 06 80         [24] 1217 	anl	ar6,#0x80
-      003529 7F 00            [12] 1218 	mov	r7,#0x00
-      00352B BE 80 09         [24] 1219 	cjne	r6,#0x80,00103$
-      00352E BF 00 06         [24] 1220 	cjne	r7,#0x00,00103$
-                                   1221 ;	../Fogger_Manager/fogger.c:322: P2_5 = 0;
-                                   1222 ;	assignBit
-      003531 C2 A5            [12] 1223 	clr	_P2_5
-                                   1224 ;	../Fogger_Manager/fogger.c:323: Heat_Flag &= ~HOT_FLAG;
-      003533 53 4F FD         [24] 1225 	anl	_Heat_Flag,#0xfd
-      003536 22               [24] 1226 	ret
-      003537                       1227 00103$:
-                                   1228 ;	../Fogger_Manager/fogger.c:325: P2_5 = 1;
-                                   1229 ;	assignBit
-      003537 D2 A5            [12] 1230 	setb	_P2_5
-                                   1231 ;	../Fogger_Manager/fogger.c:327: break;
-                                   1232 ;	../Fogger_Manager/fogger.c:328: case PUMP_OVERRIDE:
-      003539 22               [24] 1233 	ret
-      00353A                       1234 00106$:
-                                   1235 ;	../Fogger_Manager/fogger.c:329: if(get_heated() == HEATED){
-      00353A AE 4F            [24] 1236 	mov	r6,_Heat_Flag
-      00353C 53 06 80         [24] 1237 	anl	ar6,#0x80
-      00353F 7F 00            [12] 1238 	mov	r7,#0x00
-      003541 BE 80 09         [24] 1239 	cjne	r6,#0x80,00108$
-      003544 BF 00 06         [24] 1240 	cjne	r7,#0x00,00108$
-                                   1241 ;	../Fogger_Manager/fogger.c:330: P2_5 = 0;
-                                   1242 ;	assignBit
-      003547 C2 A5            [12] 1243 	clr	_P2_5
-                                   1244 ;	../Fogger_Manager/fogger.c:331: Heat_Flag &= ~HOT_FLAG;
-      003549 53 4F FD         [24] 1245 	anl	_Heat_Flag,#0xfd
-      00354C 22               [24] 1246 	ret
-      00354D                       1247 00108$:
-                                   1248 ;	../Fogger_Manager/fogger.c:333: P2_5 = 1;
-                                   1249 ;	assignBit
-      00354D D2 A5            [12] 1250 	setb	_P2_5
-                                   1251 ;	../Fogger_Manager/fogger.c:335: break;
-                                   1252 ;	../Fogger_Manager/fogger.c:336: case PUMP_MASTER_OVERRIDE:
-      00354F 22               [24] 1253 	ret
-      003550                       1254 00110$:
-                                   1255 ;	../Fogger_Manager/fogger.c:337: P2_5 = 0;
-                                   1256 ;	assignBit
-      003550 C2 A5            [12] 1257 	clr	_P2_5
-                                   1258 ;	../Fogger_Manager/fogger.c:338: break;
-                                   1259 ;	../Fogger_Manager/fogger.c:339: default:
-      003552 22               [24] 1260 	ret
-      003553                       1261 00111$:
-                                   1262 ;	../Fogger_Manager/fogger.c:340: P2_5 = 1;
-                                   1263 ;	assignBit
-      003553 D2 A5            [12] 1264 	setb	_P2_5
-                                   1265 ;	../Fogger_Manager/fogger.c:342: }
-                                   1266 ;	../Fogger_Manager/fogger.c:343: }
-      003555 22               [24] 1267 	ret
-                                   1268 ;------------------------------------------------------------
-                                   1269 ;Allocation info for local variables in function 'power_heater'
-                                   1270 ;------------------------------------------------------------
-                                   1271 ;action                    Allocated to registers r7 
-                                   1272 ;------------------------------------------------------------
-                                   1273 ;	../Fogger_Manager/fogger.c:345: void power_heater(uint8_t action){
-                                   1274 ;	-----------------------------------------
-                                   1275 ;	 function power_heater
-                                   1276 ;	-----------------------------------------
-      003556                       1277 _power_heater:
-      003556 AF 82            [24] 1278 	mov	r7,dpl
-                                   1279 ;	../Fogger_Manager/fogger.c:346: switch (action)
-      003558 BF 01 08         [24] 1280 	cjne	r7,#0x01,00102$
-                                   1281 ;	../Fogger_Manager/fogger.c:349: Heat_Flag |= HEAT_DISABLE_FLAG;
-      00355B AE 4F            [24] 1282 	mov	r6,_Heat_Flag
-      00355D 43 06 10         [24] 1283 	orl	ar6,#0x10
-      003560 8E 4F            [24] 1284 	mov	_Heat_Flag,r6
-                                   1285 ;	../Fogger_Manager/fogger.c:350: break;
-                                   1286 ;	../Fogger_Manager/fogger.c:351: default:
-      003562 22               [24] 1287 	ret
-      003563                       1288 00102$:
-                                   1289 ;	../Fogger_Manager/fogger.c:352: Heat_Flag &= ~HEAT_DISABLE_FLAG;
-      003563 53 4F EF         [24] 1290 	anl	_Heat_Flag,#0xef
-                                   1291 ;	../Fogger_Manager/fogger.c:354: }
-                                   1292 ;	../Fogger_Manager/fogger.c:355: }
-      003566 22               [24] 1293 	ret
-                                   1294 	.area CSEG    (CODE)
-                                   1295 	.area CONST   (CODE)
-                                   1296 	.area XINIT   (CODE)
-                                   1297 	.area CABS    (ABS,CODE)
+      00346D 60 06            [24] 1084 	jz	00259$
+      00346F                       1085 00263$:
+      00346F E5 5C            [12] 1086 	mov	a,_tick_fogger_duration_65536_36
+      003471 24 19            [12] 1087 	add	a,#0xff - 0xe6
+      003473 50 1C            [24] 1088 	jnc	00260$
+      003475                       1089 00259$:
+                                   1090 ;	../Fogger_Manager/fogger.c:282: if(!(tock % power)){
+      003475 85 5E F0         [24] 1091 	mov	b,_tick_fogger_power_65536_36
+      003478 E5 5F            [12] 1092 	mov	a,_tick_fogger_tock_65536_36
+      00347A 84               [48] 1093 	div	ab
+      00347B E5 F0            [12] 1094 	mov	a,b
+      00347D 70 09            [24] 1095 	jnz	00242$
+                                   1096 ;	../Fogger_Manager/fogger.c:283: power_pump(PUMP_ON);
+      00347F 75 82 01         [24] 1097 	mov	dpl,#0x01
+      003482 12 35 2B         [24] 1098 	lcall	_power_pump
+      003485 02 35 25         [24] 1099 	ljmp	00270$
+      003488                       1100 00242$:
+                                   1101 ;	../Fogger_Manager/fogger.c:285: power_pump(PUMP_OFF);
+      003488 75 82 00         [24] 1102 	mov	dpl,#0x00
+      00348B 12 35 2B         [24] 1103 	lcall	_power_pump
+      00348E 02 35 25         [24] 1104 	ljmp	00270$
+      003491                       1105 00260$:
+                                   1106 ;	../Fogger_Manager/fogger.c:288: } else if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
+      003491 75 82 10         [24] 1107 	mov	dpl,#0x10
+      003494 12 2F 00         [24] 1108 	lcall	_get_runtime_data
+      003497 E5 82            [12] 1109 	mov	a,dpl
+      003499 70 0C            [24] 1110 	jnz	00256$
+                                   1111 ;	../Fogger_Manager/fogger.c:289: && (!duration)){
+      00349B E5 5C            [12] 1112 	mov	a,_tick_fogger_duration_65536_36
+                                   1113 ;	../Fogger_Manager/fogger.c:290: power_pump(PUMP_OFF);
+      00349D 70 08            [24] 1114 	jnz	00256$
+      00349F F5 82            [12] 1115 	mov	dpl,a
+      0034A1 12 35 2B         [24] 1116 	lcall	_power_pump
+      0034A4 02 35 25         [24] 1117 	ljmp	00270$
+      0034A7                       1118 00256$:
+                                   1119 ;	../Fogger_Manager/fogger.c:293: if(!(tock % 8)){
+      0034A7 AE 5F            [24] 1120 	mov	r6,_tick_fogger_tock_65536_36
+      0034A9 7F 00            [12] 1121 	mov	r7,#0x00
+      0034AB 74 08            [12] 1122 	mov	a,#0x08
+      0034AD C0 E0            [24] 1123 	push	acc
+      0034AF E4               [12] 1124 	clr	a
+      0034B0 C0 E0            [24] 1125 	push	acc
+      0034B2 8E 82            [24] 1126 	mov	dpl,r6
+      0034B4 8F 83            [24] 1127 	mov	dph,r7
+      0034B6 12 36 64         [24] 1128 	lcall	__modsint
+      0034B9 AE 82            [24] 1129 	mov	r6,dpl
+      0034BB AF 83            [24] 1130 	mov	r7,dph
+      0034BD 15 81            [12] 1131 	dec	sp
+      0034BF 15 81            [12] 1132 	dec	sp
+      0034C1 EE               [12] 1133 	mov	a,r6
+      0034C2 4F               [12] 1134 	orl	a,r7
+      0034C3 70 02            [24] 1135 	jnz	00245$
+                                   1136 ;	../Fogger_Manager/fogger.c:294: Timer--;
+      0034C5 15 4C            [12] 1137 	dec	_Timer
+      0034C7                       1138 00245$:
+                                   1139 ;	../Fogger_Manager/fogger.c:297: if(Timer == 0x00){
+      0034C7 E5 4C            [12] 1140 	mov	a,_Timer
+      0034C9 70 2F            [24] 1141 	jnz	00253$
+                                   1142 ;	../Fogger_Manager/fogger.c:298: power_pump((Interval_Or_Duration == INTERVAL) ? PUMP_ON : PUMP_OFF);
+      0034CB E5 4D            [12] 1143 	mov	a,_Interval_Or_Duration
+      0034CD 70 05            [24] 1144 	jnz	00272$
+      0034CF 7E 01            [12] 1145 	mov	r6,#0x01
+      0034D1 FF               [12] 1146 	mov	r7,a
+      0034D2 80 04            [24] 1147 	sjmp	00273$
+      0034D4                       1148 00272$:
+      0034D4 7E 00            [12] 1149 	mov	r6,#0x00
+      0034D6 7F 00            [12] 1150 	mov	r7,#0x00
+      0034D8                       1151 00273$:
+      0034D8 8E 82            [24] 1152 	mov	dpl,r6
+      0034DA 12 35 2B         [24] 1153 	lcall	_power_pump
+                                   1154 ;	../Fogger_Manager/fogger.c:299: Timer = (Interval_Or_Duration == INTERVAL) ? duration : interval;
+      0034DD E5 4D            [12] 1155 	mov	a,_Interval_Or_Duration
+      0034DF 70 04            [24] 1156 	jnz	00274$
+      0034E1 AF 5C            [24] 1157 	mov	r7,_tick_fogger_duration_65536_36
+      0034E3 80 02            [24] 1158 	sjmp	00275$
+      0034E5                       1159 00274$:
+      0034E5 AF 5D            [24] 1160 	mov	r7,_tick_fogger_interval_65536_36
+      0034E7                       1161 00275$:
+      0034E7 8F 4C            [24] 1162 	mov	_Timer,r7
+                                   1163 ;	../Fogger_Manager/fogger.c:300: Interval_Or_Duration = (Interval_Or_Duration == INTERVAL) ? DURATION : INTERVAL;
+      0034E9 E5 4D            [12] 1164 	mov	a,_Interval_Or_Duration
+      0034EB 70 05            [24] 1165 	jnz	00276$
+      0034ED 7E FF            [12] 1166 	mov	r6,#0xff
+      0034EF FF               [12] 1167 	mov	r7,a
+      0034F0 80 04            [24] 1168 	sjmp	00277$
+      0034F2                       1169 00276$:
+      0034F2 7E 00            [12] 1170 	mov	r6,#0x00
+      0034F4 7F 00            [12] 1171 	mov	r7,#0x00
+      0034F6                       1172 00277$:
+      0034F6 8E 4D            [24] 1173 	mov	_Interval_Or_Duration,r6
+      0034F8 80 2B            [24] 1174 	sjmp	00270$
+      0034FA                       1175 00253$:
+                                   1176 ;	../Fogger_Manager/fogger.c:302: if(Interval_Or_Duration == INTERVAL){
+      0034FA E5 4D            [12] 1177 	mov	a,_Interval_Or_Duration
+                                   1178 ;	../Fogger_Manager/fogger.c:303: power_pump(PUMP_OFF);
+      0034FC 70 07            [24] 1179 	jnz	00250$
+      0034FE F5 82            [12] 1180 	mov	dpl,a
+      003500 12 35 2B         [24] 1181 	lcall	_power_pump
+      003503 80 20            [24] 1182 	sjmp	00270$
+      003505                       1183 00250$:
+                                   1184 ;	../Fogger_Manager/fogger.c:305: if(!(tock % power)){
+      003505 85 5E F0         [24] 1185 	mov	b,_tick_fogger_power_65536_36
+      003508 E5 5F            [12] 1186 	mov	a,_tick_fogger_tock_65536_36
+      00350A 84               [48] 1187 	div	ab
+      00350B E5 F0            [12] 1188 	mov	a,b
+      00350D 70 08            [24] 1189 	jnz	00247$
+                                   1190 ;	../Fogger_Manager/fogger.c:306: power_pump(PUMP_ON);
+      00350F 75 82 01         [24] 1191 	mov	dpl,#0x01
+      003512 12 35 2B         [24] 1192 	lcall	_power_pump
+      003515 80 0E            [24] 1193 	sjmp	00270$
+      003517                       1194 00247$:
+                                   1195 ;	../Fogger_Manager/fogger.c:308: power_pump(PUMP_OFF);
+      003517 75 82 00         [24] 1196 	mov	dpl,#0x00
+      00351A 12 35 2B         [24] 1197 	lcall	_power_pump
+      00351D 80 06            [24] 1198 	sjmp	00270$
+      00351F                       1199 00266$:
+                                   1200 ;	../Fogger_Manager/fogger.c:316: power_pump(PUMP_OFF);
+      00351F 75 82 00         [24] 1201 	mov	dpl,#0x00
+      003522 12 35 2B         [24] 1202 	lcall	_power_pump
+      003525                       1203 00270$:
+                                   1204 ;	../Fogger_Manager/fogger.c:319: }
+      003525 85 1A 81         [24] 1205 	mov	sp,_bp
+      003528 D0 1A            [24] 1206 	pop	_bp
+      00352A 22               [24] 1207 	ret
+                                   1208 ;------------------------------------------------------------
+                                   1209 ;Allocation info for local variables in function 'power_pump'
+                                   1210 ;------------------------------------------------------------
+                                   1211 ;action                    Allocated to registers r7 
+                                   1212 ;------------------------------------------------------------
+                                   1213 ;	../Fogger_Manager/fogger.c:321: void power_pump(uint8_t action){
+                                   1214 ;	-----------------------------------------
+                                   1215 ;	 function power_pump
+                                   1216 ;	-----------------------------------------
+      00352B                       1217 _power_pump:
+      00352B AF 82            [24] 1218 	mov	r7,dpl
+                                   1219 ;	../Fogger_Manager/fogger.c:322: switch (action)
+      00352D BF 01 02         [24] 1220 	cjne	r7,#0x01,00139$
+      003530 80 0A            [24] 1221 	sjmp	00101$
+      003532                       1222 00139$:
+      003532 BF 02 02         [24] 1223 	cjne	r7,#0x02,00140$
+      003535 80 1F            [24] 1224 	sjmp	00106$
+      003537                       1225 00140$:
+                                   1226 ;	../Fogger_Manager/fogger.c:324: case PUMP_ON:
+      003537 BF 03 35         [24] 1227 	cjne	r7,#0x03,00111$
+      00353A 80 30            [24] 1228 	sjmp	00110$
+      00353C                       1229 00101$:
+                                   1230 ;	../Fogger_Manager/fogger.c:325: if(get_fog_fluid_level() != TANK_EMPTY && get_heated() == HEATED){
+      00353C E5 50            [12] 1231 	mov	a,_Fluid_Level
+      00353E 60 13            [24] 1232 	jz	00103$
+      003540 AE 4F            [24] 1233 	mov	r6,_Heat_Flag
+      003542 53 06 80         [24] 1234 	anl	ar6,#0x80
+      003545 7F 00            [12] 1235 	mov	r7,#0x00
+      003547 BE 80 09         [24] 1236 	cjne	r6,#0x80,00103$
+      00354A BF 00 06         [24] 1237 	cjne	r7,#0x00,00103$
+                                   1238 ;	../Fogger_Manager/fogger.c:326: P2_5 = 0;
+                                   1239 ;	assignBit
+      00354D C2 A5            [12] 1240 	clr	_P2_5
+                                   1241 ;	../Fogger_Manager/fogger.c:327: Heat_Flag &= ~HOT_FLAG;
+      00354F 53 4F FD         [24] 1242 	anl	_Heat_Flag,#0xfd
+      003552 22               [24] 1243 	ret
+      003553                       1244 00103$:
+                                   1245 ;	../Fogger_Manager/fogger.c:329: P2_5 = 1;
+                                   1246 ;	assignBit
+      003553 D2 A5            [12] 1247 	setb	_P2_5
+                                   1248 ;	../Fogger_Manager/fogger.c:331: break;
+                                   1249 ;	../Fogger_Manager/fogger.c:332: case PUMP_OVERRIDE:
+      003555 22               [24] 1250 	ret
+      003556                       1251 00106$:
+                                   1252 ;	../Fogger_Manager/fogger.c:333: if(get_heated() == HEATED){
+      003556 AE 4F            [24] 1253 	mov	r6,_Heat_Flag
+      003558 53 06 80         [24] 1254 	anl	ar6,#0x80
+      00355B 7F 00            [12] 1255 	mov	r7,#0x00
+      00355D BE 80 09         [24] 1256 	cjne	r6,#0x80,00108$
+      003560 BF 00 06         [24] 1257 	cjne	r7,#0x00,00108$
+                                   1258 ;	../Fogger_Manager/fogger.c:334: P2_5 = 0;
+                                   1259 ;	assignBit
+      003563 C2 A5            [12] 1260 	clr	_P2_5
+                                   1261 ;	../Fogger_Manager/fogger.c:335: Heat_Flag &= ~HOT_FLAG;
+      003565 53 4F FD         [24] 1262 	anl	_Heat_Flag,#0xfd
+      003568 22               [24] 1263 	ret
+      003569                       1264 00108$:
+                                   1265 ;	../Fogger_Manager/fogger.c:337: P2_5 = 1;
+                                   1266 ;	assignBit
+      003569 D2 A5            [12] 1267 	setb	_P2_5
+                                   1268 ;	../Fogger_Manager/fogger.c:339: break;
+                                   1269 ;	../Fogger_Manager/fogger.c:340: case PUMP_MASTER_OVERRIDE:
+      00356B 22               [24] 1270 	ret
+      00356C                       1271 00110$:
+                                   1272 ;	../Fogger_Manager/fogger.c:341: P2_5 = 0;
+                                   1273 ;	assignBit
+      00356C C2 A5            [12] 1274 	clr	_P2_5
+                                   1275 ;	../Fogger_Manager/fogger.c:342: break;
+                                   1276 ;	../Fogger_Manager/fogger.c:343: default:
+      00356E 22               [24] 1277 	ret
+      00356F                       1278 00111$:
+                                   1279 ;	../Fogger_Manager/fogger.c:344: P2_5 = 1;
+                                   1280 ;	assignBit
+      00356F D2 A5            [12] 1281 	setb	_P2_5
+                                   1282 ;	../Fogger_Manager/fogger.c:346: }
+                                   1283 ;	../Fogger_Manager/fogger.c:347: }
+      003571 22               [24] 1284 	ret
+                                   1285 ;------------------------------------------------------------
+                                   1286 ;Allocation info for local variables in function 'power_heater'
+                                   1287 ;------------------------------------------------------------
+                                   1288 ;action                    Allocated to registers r7 
+                                   1289 ;------------------------------------------------------------
+                                   1290 ;	../Fogger_Manager/fogger.c:349: void power_heater(uint8_t action){
+                                   1291 ;	-----------------------------------------
+                                   1292 ;	 function power_heater
+                                   1293 ;	-----------------------------------------
+      003572                       1294 _power_heater:
+      003572 AF 82            [24] 1295 	mov	r7,dpl
+                                   1296 ;	../Fogger_Manager/fogger.c:350: switch (action)
+      003574 BF 01 08         [24] 1297 	cjne	r7,#0x01,00102$
+                                   1298 ;	../Fogger_Manager/fogger.c:353: Heat_Flag |= HEAT_DISABLE_FLAG;
+      003577 AE 4F            [24] 1299 	mov	r6,_Heat_Flag
+      003579 43 06 10         [24] 1300 	orl	ar6,#0x10
+      00357C 8E 4F            [24] 1301 	mov	_Heat_Flag,r6
+                                   1302 ;	../Fogger_Manager/fogger.c:354: break;
+                                   1303 ;	../Fogger_Manager/fogger.c:355: default:
+      00357E 22               [24] 1304 	ret
+      00357F                       1305 00102$:
+                                   1306 ;	../Fogger_Manager/fogger.c:356: Heat_Flag &= ~HEAT_DISABLE_FLAG;
+      00357F 53 4F EF         [24] 1307 	anl	_Heat_Flag,#0xef
+                                   1308 ;	../Fogger_Manager/fogger.c:358: }
+                                   1309 ;	../Fogger_Manager/fogger.c:359: }
+      003582 22               [24] 1310 	ret
+                                   1311 	.area CSEG    (CODE)
+                                   1312 	.area CONST   (CODE)
+                                   1313 	.area XINIT   (CODE)
+                                   1314 	.area CABS    (ABS,CODE)

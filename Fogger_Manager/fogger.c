@@ -277,13 +277,17 @@ void tick_fogger(){
         tock++;
 
         if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
-            && (!duration || !interval)){
+            && ((duration && !interval) || (duration > DMX_FOG_DURATION_CONSTANT))){
 
             if(!(tock % power)){
                 power_pump(PUMP_ON);
             } else {
                 power_pump(PUMP_OFF);
             }
+
+        } else if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
+            && (!duration)){
+            power_pump(PUMP_OFF);
         } else {
 
             if(!(tock % 8)){

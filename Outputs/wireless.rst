@@ -437,7 +437,7 @@
       002BB1                        437 00105$:
                                     438 ;	../Wireless_Manager/wireless.c:78: power_pump(PUMP_OVERRIDE);
       002BB1 75 82 02         [24]  439 	mov	dpl,#0x02
-      002BB4 12 35 0F         [24]  440 	lcall	_power_pump
+      002BB4 12 35 2B         [24]  440 	lcall	_power_pump
                                     441 ;	../Wireless_Manager/wireless.c:79: break;
                                     442 ;	../Wireless_Manager/wireless.c:80: case WIRELESS_ACTION_USER_CONFIG_1: //press
       002BB7 80 2B            [24]  443 	sjmp	00115$
@@ -482,7 +482,7 @@
       002BF0                        482 00157$:
                                     483 ;	../Wireless_Manager/wireless.c:98: power_pump(PUMP_OFF);
       002BF0 75 82 00         [24]  484 	mov	dpl,#0x00
-      002BF3 12 35 0F         [24]  485 	lcall	_power_pump
+      002BF3 12 35 2B         [24]  485 	lcall	_power_pump
       002BF6                        486 00117$:
                                     487 ;	../Wireless_Manager/wireless.c:101: lastAction = Current_Action;
       002BF6 85 16 17         [24]  488 	mov	_tick_wireless_lastAction_65536_45,_Current_Action

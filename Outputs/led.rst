@@ -475,7 +475,7 @@
       002409 86 F0            [24]  475 	mov	b,@r0
       00240B 08               [12]  476 	inc	r0
       00240C E6               [12]  477 	mov	a,@r0
-      00240D 12 35 BA         [24]  478 	lcall	__modulong
+      00240D 12 35 D6         [24]  478 	lcall	__modulong
       002410 AC 82            [24]  479 	mov	r4,dpl
       002412 AD 83            [24]  480 	mov	r5,dph
       002414 AE F0            [24]  481 	mov	r6,b
@@ -658,7 +658,7 @@
       002520 86 F0            [24]  658 	mov	b,@r0
       002522 08               [12]  659 	inc	r0
       002523 E6               [12]  660 	mov	a,@r0
-      002524 12 35 BA         [24]  661 	lcall	__modulong
+      002524 12 35 D6         [24]  661 	lcall	__modulong
       002527 AC 82            [24]  662 	mov	r4,dpl
       002529 AD 83            [24]  663 	mov	r5,dph
       00252B AE F0            [24]  664 	mov	r6,b
@@ -852,7 +852,7 @@
       002606 86 F0            [24]  852 	mov	b,@r0
       002608 08               [12]  853 	inc	r0
       002609 E6               [12]  854 	mov	a,@r0
-      00260A 12 35 BA         [24]  855 	lcall	__modulong
+      00260A 12 35 D6         [24]  855 	lcall	__modulong
       00260D AC 82            [24]  856 	mov	r4,dpl
       00260F AD 83            [24]  857 	mov	r5,dph
       002611 AE F0            [24]  858 	mov	r6,b
@@ -1018,7 +1018,7 @@
       002708 86 F0            [24] 1018 	mov	b,@r0
       00270A 08               [12] 1019 	inc	r0
       00270B E6               [12] 1020 	mov	a,@r0
-      00270C 12 35 BA         [24] 1021 	lcall	__modulong
+      00270C 12 35 D6         [24] 1021 	lcall	__modulong
       00270F AB 82            [24] 1022 	mov	r3,dpl
       002711 AC 83            [24] 1023 	mov	r4,dph
       002713 AD F0            [24] 1024 	mov	r5,b
@@ -1066,7 +1066,7 @@
       002754 86 F0            [24] 1066 	mov	b,@r0
       002756 08               [12] 1067 	inc	r0
       002757 E6               [12] 1068 	mov	a,@r0
-      002758 12 35 BA         [24] 1069 	lcall	__modulong
+      002758 12 35 D6         [24] 1069 	lcall	__modulong
       00275B AA 82            [24] 1070 	mov	r2,dpl
       00275D E5 81            [12] 1071 	mov	a,sp
       00275F 24 FC            [12] 1072 	add	a,#0xfc
@@ -1137,7 +1137,7 @@
       0027C0 86 F0            [24] 1137 	mov	b,@r0
       0027C2 08               [12] 1138 	inc	r0
       0027C3 E6               [12] 1139 	mov	a,@r0
-      0027C4 12 35 BA         [24] 1140 	lcall	__modulong
+      0027C4 12 35 D6         [24] 1140 	lcall	__modulong
       0027C7 AB 82            [24] 1141 	mov	r3,dpl
       0027C9 AC 83            [24] 1142 	mov	r4,dph
       0027CB AD F0            [24] 1143 	mov	r5,b
@@ -1256,7 +1256,7 @@
       002876 86 F0            [24] 1256 	mov	b,@r0
       002878 08               [12] 1257 	inc	r0
       002879 E6               [12] 1258 	mov	a,@r0
-      00287A 12 35 BA         [24] 1259 	lcall	__modulong
+      00287A 12 35 D6         [24] 1259 	lcall	__modulong
       00287D AC 82            [24] 1260 	mov	r4,dpl
       00287F AD 83            [24] 1261 	mov	r5,dph
       002881 AE F0            [24] 1262 	mov	r6,b
@@ -1715,7 +1715,7 @@
       002AC9 C0 04            [24] 1715 	push	ar4
       002ACB 8F 82            [24] 1716 	mov	dpl,r7
       002ACD 8D 83            [24] 1717 	mov	dph,r5
-      002ACF 12 35 98         [24] 1718 	lcall	__mulint
+      002ACF 12 35 B4         [24] 1718 	lcall	__mulint
       002AD2 AF 83            [24] 1719 	mov	r7,dph
       002AD4 15 81            [12] 1720 	dec	sp
       002AD6 15 81            [12] 1721 	dec	sp
@@ -1734,7 +1734,7 @@
       002AED C0 04            [24] 1734 	push	ar4
       002AEF 8D 82            [24] 1735 	mov	dpl,r5
       002AF1 8F 83            [24] 1736 	mov	dph,r7
-      002AF3 12 35 98         [24] 1737 	lcall	__mulint
+      002AF3 12 35 B4         [24] 1737 	lcall	__mulint
       002AF6 AF 83            [24] 1738 	mov	r7,dph
       002AF8 15 81            [12] 1739 	dec	sp
       002AFA 15 81            [12] 1740 	dec	sp
@@ -1747,7 +1747,7 @@
       002B05 7F 00            [12] 1747 	mov	r7,#0x00
       002B07 8D 82            [24] 1748 	mov	dpl,r5
       002B09 8F 83            [24] 1749 	mov	dph,r7
-      002B0B 12 35 98         [24] 1750 	lcall	__mulint
+      002B0B 12 35 B4         [24] 1750 	lcall	__mulint
       002B0E AE 82            [24] 1751 	mov	r6,dpl
       002B10 AF 83            [24] 1752 	mov	r7,dph
       002B12 15 81            [12] 1753 	dec	sp
