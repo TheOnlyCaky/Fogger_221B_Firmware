@@ -111,21 +111,24 @@ void tick_fogger(){
 
     /* Timer and Pump Section*/
     //check for changes
+
+    power_heater(HEATER_ENABLE);
+
     if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
         if(has_dmx()){
             Playing = PLAY;
             power = FOG_HIGH;
-            power_heater(HEATER_ENABLE);
 
             if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
             {
+
                 value = get_dmx_value(DMX_M11_POWER_INDEX);
 
-                if(value < DMX_FOG_OFF){
+                if(value <= DMX_FOG_OFF){
                     Playing = PAUSE;
-                } else if(value < DMX_FOG_LOW){
+                } else if(value <= DMX_FOG_LOW){
                     value = FOG_LO;
-                } else if(value < DMX_FOG_MEDIUM){
+                } else if(value <= DMX_FOG_MEDIUM){
                     value = FOG_MED;
                 } else {
                     value = FOG_HIGH;
@@ -152,7 +155,7 @@ void tick_fogger(){
 
                 value = get_dmx_value(DMX_M11_HEATER_ENABLE_INDEX);
 
-                if(value >= DMX_HEATER_OFF){
+                if(value > DMX_HEATER_OFF){
                     power_heater(HEATER_DISABLE);
                 }
 
@@ -163,72 +166,72 @@ void tick_fogger(){
                 value = get_dmx_value(DMX_M1_FOG_INDEX);
 
 
-                if(value < DMX_FOG_OFF){
+                if(value <= DMX_FOG_OFF){
                     Playing = PAUSE;
 
-                } else if(value < DMX_FOG_3_13){
+                } else if(value <= DMX_FOG_3_13){
                     if(duration != 3 || interval != 13){
                         duration = 3;
                         interval = 13;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_3_21){
+                } else if(value <= DMX_FOG_3_21){
                     if(duration != 3 || interval != 21){
                         duration = 3;
                         interval = 21;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_3_34){
+                } else if(value <= DMX_FOG_3_34){
                     if(duration != 3 || interval != 34){
                         duration = 3;
                         interval = 34;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_3_55){
+                } else if(value <= DMX_FOG_3_55){
                     if(duration != 3 || interval != 55){
                         duration = 3;
                         interval = 55;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_8_21){
+                } else if(value <= DMX_FOG_8_21){
                     if(duration != 8 || interval != 21){
                         duration = 8;
                         interval = 21;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_8_34){
+                } else if(value <= DMX_FOG_8_34){
                     if(duration != 8 || interval != 34){
                         duration = 8;
                         interval = 34;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_8_55){
+                } else if(value <= DMX_FOG_8_55){
                     if(duration != 8 || interval != 55){
                         duration = 8;
                         interval = 55;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_8_89){
+                } else if(value <= DMX_FOG_8_89){
                     if(duration != 8 || interval != 89){
                         duration = 8;
                         interval = 89;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_8_144){
+                } else if(value <= DMX_FOG_8_144){
                     if(duration != 8 || interval != 144){
                         duration = 8;
                         interval = 144;
                         Playing = RESET;
                     } 
-                } else if(value < DMX_FOG_21_55){
+                } else if(value <= DMX_FOG_21_55){
                     if(duration != 21 || interval != 55){
                         duration = 21;
                         interval = 55;
                         Playing = RESET;
                     } 
                 } else { //constant on
-                    if(duration !=  0 || interval != 0){
-                        duration = 0;
+                    if(duration != 0xFF || interval != 0){
+                        duration = 0xFF;
                         interval = 0;
                         Playing = RESET;
                     }    

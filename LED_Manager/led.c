@@ -29,9 +29,9 @@ void tick_led(uint32_t tick){
             case OPTION_DMX_MODE_11:
                 value = get_dmx_value(DMX_M11_MACRO_INDEX);
 
-                if(value >= DMX_MACRO_NONE){
-                    if(value < DMX_MACRO_COLOR_WHEEL){ /* Color wheel Macro */
-                        color_wheel((value - DMX_MACRO_NONE) << 1);
+                if(value > DMX_MACRO_NONE){
+                    if(value <= DMX_MACRO_COLOR_WHEEL){ /* Color wheel Macro */
+                        color_wheel((value - DMX_MACRO_NONE - 1) << 1);
                     } else { /* Other Macros */
                         dimmer = get_dmx_value(DMX_M11_MACRO_SPEED_INDEX);
 
@@ -45,7 +45,7 @@ void tick_led(uint32_t tick){
 
                     strobe = get_dmx_value(DMX_M11_STROBE_INDEX);
 
-                    if(strobe){
+                    if(strobe > 10){
                         if(!(tick % (STROBE_FREQ - (strobe << 1)))){
                             on = ~on;
                         }
@@ -67,9 +67,9 @@ void tick_led(uint32_t tick){
             break;
             case OPTION_DMX_MODE_3: /* Only macros */
                 value = get_dmx_value(DMX_M3_MACRO_INDEX);
-                if(value >= DMX_MACRO_NONE){
+                if(value > DMX_MACRO_NONE){
                     if(value < DMX_MACRO_COLOR_WHEEL){
-                        color_wheel((value - DMX_MACRO_NONE) << 1);
+                        color_wheel((value - DMX_MACRO_NONE - 1) << 1);
                     } else {
                         dimmer = get_dmx_value(DMX_M3_MACRO_SPEED_INDEX);
 
@@ -113,19 +113,19 @@ void tick_led(uint32_t tick){
 
 uint8_t dmx_to_macro(uint8_t dmx_value){
 
-    if(dmx_value < DMX_MACRO_WHITE){
+    if(dmx_value <= DMX_MACRO_WHITE){
         return OPTION_MACRO_WHITE;
-    } else if(dmx_value < DMX_MACRO_RAINBOW){
+    } else if(dmx_value <= DMX_MACRO_RAINBOW){
         return OPTION_MACRO_RAINBOW_DMX;
-    } else if(dmx_value < DMX_MACRO_FIRE){
+    } else if(dmx_value <= DMX_MACRO_FIRE){
         return OPTION_MACRO_FIRE_DMX;
-    } else if(dmx_value < DMX_MACRO_WATER){
+    } else if(dmx_value <= DMX_MACRO_WATER){
         return OPTION_MACRO_WATER_DMX;
-    } else if(dmx_value < DMX_MACRO_ACID){
+    } else if(dmx_value <= DMX_MACRO_ACID){
         return OPTION_MACRO_ACID_DMX;
-    } else if(dmx_value < DMX_MACRO_ETHER){
+    } else if(dmx_value <= DMX_MACRO_ETHER){
         return OPTION_MACRO_ETHER_DMX;
-    } else if(dmx_value < DMX_MACRO_STORM){
+    } else if(dmx_value <= DMX_MACRO_STORM){
         return OPTION_MACRO_STORM_DMX;
     }
 
@@ -141,11 +141,13 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
     uint8_t changed = 0;
     
 
-
     if(!(tick % (MACRO_FREQ - (macro_speed >> 1)))){
         changed = 0xFF;
         rng = rngU32(); /* TODO check back */
-        tock++;
+
+        if(macro_speed){
+            tock++;
+        }
     }
 
     switch (macro)
