@@ -81,10 +81,10 @@ C:   000000A2  s_GSINIT5
 C:   00000100  l_IRAM                          
 C:   00000120  s_GSFINAL                       
 C:   00000123  s_CSEG                          
-C:   000002CF  l_CONST                         
-C:   000035C7  l_CSEG                          
-C:   000036EA  s_CONST                         
-C:   000039B9  s_XINIT                         
+C:   000002F1  l_CONST                         
+C:   00003659  l_CSEG                          
+C:   0000377C  s_CONST                         
+C:   00003A6D  s_XINIT                         
 C:   00003FC0  _Init_Data                         storage
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
@@ -321,85 +321,85 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000123    000035C7 =       13767. bytes (REL,CON,CODE)
+CSEG                                00000123    00003659 =       13913. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
 C:   00000123  _main                              main
 C:   00000481  _get_adc_value                     adc
 C:   0000052A  _tick_ui                           ui
-C:   00000960  _idlePage                          ui
-C:   00000D1A  _fogLevelPage                      ui
-C:   00000EAA  _fogIntervalPage                   ui
-C:   00000F7B  _fogDurationPage                   ui
-C:   0000104C  _macroPage                         ui
-C:   00001116  _macroSpeedPage                    ui
-C:   00001211  _colorPage                         ui
-C:   00001351  _remotePage                        ui
-C:   0000149D  _saveLoadPage                      ui
-C:   000015ED  _dmxAddressPage                    ui
-C:   00001685  _dmxChannelPage                    ui
-C:   00001740  _set_ui_state                      ui
-C:   00001849  _get_ui_state                      ui
-C:   0000184D  _getString                         ui
-C:   00001A56  _get_button_action                 button
-C:   00001CAB  _write_string                      display
-C:   00001D68  _write_number                      display
-C:   00001F9B  _write_char                        display
-C:   00001FE6  _exe_command                       display
-C:   0000202C  _charToCode                        display
-C:   00002201  _writeShiftReg                     display
-C:   00002235  _flipByte                          display
-C:   0000228E  _dmxReceiveByteISR                 dmx
-C:   0000231B  _dmxBreakDetectedISR               dmx
-C:   00002348  _tick_led                          led
-C:   00002574  _dmx_to_macro                      led
-C:   000025B9  _play_macro                        led
-C:   000029AA  _color_wheel                       led
-C:   00002A1D  _whiteout                          led
-C:   00002A2E  _blackout                          led
-C:   00002A3E  _rngU32                            led
-C:   00002A7B  _set_leds                          led
-C:   00002B1B  _wirelessBreakDetectISR            wireless
-C:   00002B77  _tick_wireless                     wireless
-C:   00002BFA  _handleUserConfigAction            wireless
-C:   00002DDA  _getWirelessAction                 wireless
-C:   00002E46  _detectDitDah                      wireless
-C:   00002E9C  _save_load_settings                storage
-C:   00002F00  _get_runtime_data                  storage
-C:   00002FC0  _set_runtime_data                  storage
-C:   00003053  _set_dmx_address                   storage
-C:   000030B3  _get_dmx_address                   storage
-C:   000030C6  _tick_fogger                       fogger
-C:   0000352B  _power_pump                        fogger
-C:   00003572  _power_heater                      fogger
-C:   00003583  __divuint                          _divuint
-C:   0000358D  __divint                           _divuint
+C:   000009C0  _idlePage                          ui
+C:   00000D7A  _fogLevelPage                      ui
+C:   00000F0A  _fogIntervalPage                   ui
+C:   00000FDB  _fogDurationPage                   ui
+C:   000010AC  _macroPage                         ui
+C:   00001176  _macroSpeedPage                    ui
+C:   00001271  _colorPage                         ui
+C:   000013B1  _remotePage                        ui
+C:   000014FD  _saveLoadPage                      ui
+C:   0000164D  _dmxAddressPage                    ui
+C:   000016E5  _dmxChannelPage                    ui
+C:   000017A0  _set_ui_state                      ui
+C:   000018A9  _get_ui_state                      ui
+C:   000018AD  _getString                         ui
+C:   00001AD0  _get_button_action                 button
+C:   00001D25  _write_string                      display
+C:   00001DE2  _write_number                      display
+C:   00002015  _write_char                        display
+C:   00002060  _exe_command                       display
+C:   000020A6  _charToCode                        display
+C:   0000227B  _writeShiftReg                     display
+C:   000022AF  _flipByte                          display
+C:   00002308  _dmxReceiveByteISR                 dmx
+C:   00002395  _dmxBreakDetectedISR               dmx
+C:   000023C2  _tick_led                          led
+C:   000025F0  _dmx_to_macro                      led
+C:   00002635  _play_macro                        led
+C:   00002A3B  _color_wheel                       led
+C:   00002AAE  _whiteout                          led
+C:   00002ABF  _blackout                          led
+C:   00002ACF  _rngU32                            led
+C:   00002B0C  _set_leds                          led
+C:   00002BAC  _wirelessBreakDetectISR            wireless
+C:   00002C08  _tick_wireless                     wireless
+C:   00002C8B  _handleUserConfigAction            wireless
+C:   00002E6B  _getWirelessAction                 wireless
+C:   00002ED7  _detectDitDah                      wireless
+C:   00002F2D  _save_load_settings                storage
+C:   00002F91  _get_runtime_data                  storage
+C:   00003051  _set_runtime_data                  storage
+C:   000030E4  _set_dmx_address                   storage
+C:   00003144  _get_dmx_address                   storage
+C:   00003157  _tick_fogger                       fogger
+C:   000035BD  _power_pump                        fogger
+C:   00003604  _power_heater                      fogger
+C:   00003615  __divuint                          _divuint
+C:   0000361F  __divint                           _divuint
 ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                00000123    000035C7 =       13767. bytes (REL,CON,CODE)
+CSEG                                00000123    00003659 =       13913. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000035B4  __mulint                           _mulint
-C:   000035B4  __mulint_dummy                     _mulint
-C:   000035D6  __modulong                         _modulong
-C:   000035E7  __modlong                          _modulong
-C:   00003648  __gptrget                          _gptrget
-C:   00003664  __modsint                          _modsint
-C:   000036A1  __moduint                          _moduint
-C:   000036AB  __modint                           _moduint
-C:   000036E6  __sdcc_external_startup            _startup
+C:   00003646  __mulint                           _mulint
+C:   00003646  __mulint_dummy                     _mulint
+C:   00003668  __modulong                         _modulong
+C:   00003679  __modlong                          _modulong
+C:   000036DA  __gptrget                          _gptrget
+C:   000036F6  __modsint                          _modsint
+C:   00003733  __moduint                          _moduint
+C:   0000373D  __modint                           _moduint
+C:   00003778  __sdcc_external_startup            _startup
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000036EA    000002CF =         719. bytes (REL,CON,CODE)
+CONST                               0000377C    000002F1 =         753. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------

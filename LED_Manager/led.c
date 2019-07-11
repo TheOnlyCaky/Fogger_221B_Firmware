@@ -143,10 +143,11 @@ void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
 
     if(!(tick % (MACRO_FREQ - (macro_speed >> 1)))){
         changed = 0xFF;
-        rng = rngU32(); /* TODO check back */
+        rng = 0;
 
         if(macro_speed){
             tock++;
+            rng = rngU32();
         }
     }
 

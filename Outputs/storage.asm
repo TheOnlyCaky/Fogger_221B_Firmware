@@ -763,7 +763,7 @@ _get_dmx_address:
 	.area CABS    (ABS,CODE)
 	.org 0x3FC0
 _Init_Data:
-	.db #0x82	; 130
+	.db #0x88	; 136
 	.db #0x06	; 6
 	.db #0x09	; 9
 	.db #0x00	; 0
@@ -779,7 +779,7 @@ _Init_Data:
 	.db #0x01	; 1
 	.db #0x00	; 0
 	.db #0x00	; 0
-	.db #0x82	; 130
+	.db #0x88	; 136
 	.db #0x06	; 6
 	.db #0x09	; 9
 	.db #0x00	; 0
@@ -795,7 +795,7 @@ _Init_Data:
 	.db #0x01	; 1
 	.db #0x00	; 0
 	.db #0x00	; 0
-	.db #0x82	; 130
+	.db #0x88	; 136
 	.db #0x06	; 6
 	.db #0x09	; 9
 	.db #0x00	; 0
@@ -811,7 +811,7 @@ _Init_Data:
 	.db #0x01	; 1
 	.db #0x00	; 0
 	.db #0x00	; 0
-	.db #0x82	; 130
+	.db #0x88	; 136
 	.db #0x06	; 6
 	.db #0x09	; 9
 	.db #0x00	; 0

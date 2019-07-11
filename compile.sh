@@ -27,7 +27,8 @@ if sdcc --verbose --opt-code-size --verbose --stack-auto ../main.c adc.rel ui.re
     echo ""
     echo "--------------------------------------------------"
 
-    sudo mv moriarty.hex /media/data/moriarty.hex
+    sudo cp moriarty.hex /media/data/moriarty.hex
+    sudo mv moriarty.hex ../
 else
     echo "Wah Wah"
 fi

@@ -216,9 +216,9 @@
       000003                        216 	.ds 1
       000004                        217 _play_macro_direction_65536_55:
       000004                        218 	.ds 1
-      000005                        219 _rngU32_past_65536_106:
+      000005                        219 _rngU32_past_65536_107:
       000005                        220 	.ds 4
-      000009                        221 _rngU32_present_65536_106:
+      000009                        221 _rngU32_present_65536_107:
       000009                        222 	.ds 4
                                     223 ;--------------------------------------------------------
                                     224 ; overlayable items in internal ram 
@@ -304,20 +304,20 @@
                                     304 ;------------------------------------------------------------
                                     305 ;Allocation info for local variables in function 'rngU32'
                                     306 ;------------------------------------------------------------
-                                    307 ;past                      Allocated with name '_rngU32_past_65536_106'
-                                    308 ;present                   Allocated with name '_rngU32_present_65536_106'
+                                    307 ;past                      Allocated with name '_rngU32_past_65536_107'
+                                    308 ;present                   Allocated with name '_rngU32_present_65536_107'
                                     309 ;------------------------------------------------------------
-                                    310 ;	../LED_Manager/led.c:313: static uint32_t past = 1;
-      00000F 75*05 01         [24]  311 	mov	_rngU32_past_65536_106,#0x01
+                                    310 ;	../LED_Manager/led.c:316: static uint32_t past = 1;
+      00000F 75*05 01         [24]  311 	mov	_rngU32_past_65536_107,#0x01
       000012 E4               [12]  312 	clr	a
-      000013 F5*06            [12]  313 	mov	(_rngU32_past_65536_106 + 1),a
-      000015 F5*07            [12]  314 	mov	(_rngU32_past_65536_106 + 2),a
-      000017 F5*08            [12]  315 	mov	(_rngU32_past_65536_106 + 3),a
-                                    316 ;	../LED_Manager/led.c:314: static uint32_t present = 1;
-      000019 75*09 01         [24]  317 	mov	_rngU32_present_65536_106,#0x01
-      00001C F5*0A            [12]  318 	mov	(_rngU32_present_65536_106 + 1),a
-      00001E F5*0B            [12]  319 	mov	(_rngU32_present_65536_106 + 2),a
-      000020 F5*0C            [12]  320 	mov	(_rngU32_present_65536_106 + 3),a
+      000013 F5*06            [12]  313 	mov	(_rngU32_past_65536_107 + 1),a
+      000015 F5*07            [12]  314 	mov	(_rngU32_past_65536_107 + 2),a
+      000017 F5*08            [12]  315 	mov	(_rngU32_past_65536_107 + 3),a
+                                    316 ;	../LED_Manager/led.c:317: static uint32_t present = 1;
+      000019 75*09 01         [24]  317 	mov	_rngU32_present_65536_107,#0x01
+      00001C F5*0A            [12]  318 	mov	(_rngU32_present_65536_107 + 1),a
+      00001E F5*0B            [12]  319 	mov	(_rngU32_present_65536_107 + 2),a
+      000020 F5*0C            [12]  320 	mov	(_rngU32_present_65536_107 + 3),a
                                     321 ;--------------------------------------------------------
                                     322 ; Home
                                     323 ;--------------------------------------------------------
@@ -360,7 +360,7 @@
       000010 12r00r00         [24]  360 	lcall	_get_runtime_data
       000013 E5 82            [12]  361 	mov	a,dpl
       000015 60 03            [24]  362 	jz	00227$
-      000017 02r01r71         [24]  363 	ljmp	00143$
+      000017 02r01r73         [24]  363 	ljmp	00143$
       00001A                        364 00227$:
                                     365 ;	../LED_Manager/led.c:28: switch(get_runtime_data(MODE_INDEX)){
       00001A 75 82 0E         [24]  366 	mov	dpl,#0x0e
@@ -370,29 +370,29 @@
       000025 80 09            [24]  370 	sjmp	00101$
       000027                        371 00228$:
       000027 BB 01 03         [24]  372 	cjne	r3,#0x01,00229$
-      00002A 02r01r00         [24]  373 	ljmp	00119$
+      00002A 02r01r02         [24]  373 	ljmp	00119$
       00002D                        374 00229$:
-      00002D 02r01r6B         [24]  375 	ljmp	00129$
+      00002D 02r01r6D         [24]  375 	ljmp	00129$
                                     376 ;	../LED_Manager/led.c:29: case OPTION_DMX_MODE_11:
       000030                        377 00101$:
                                     378 ;	../LED_Manager/led.c:30: value = get_dmx_value(DMX_M11_MACRO_INDEX);
-      000030 AB*08            [24]  379 	mov	r3,(_DMX + 0x0008)
-                                    380 ;	../LED_Manager/led.c:32: if(value >= DMX_MACRO_NONE){
-      000032 BB 14 00         [24]  381 	cjne	r3,#0x14,00230$
-      000035                        382 00230$:
-      000035 40 5E            [24]  383 	jc	00117$
-                                    384 ;	../LED_Manager/led.c:33: if(value < DMX_MACRO_COLOR_WHEEL){ /* Color wheel Macro */
-      000037 BB 94 00         [24]  385 	cjne	r3,#0x94,00232$
-      00003A                        386 00232$:
-      00003A 50 0F            [24]  387 	jnc	00106$
-                                    388 ;	../LED_Manager/led.c:34: color_wheel((value - DMX_MACRO_NONE) << 1);
+                                    379 ;	../LED_Manager/led.c:32: if(value > DMX_MACRO_NONE){
+      000030 E5*08            [12]  380 	mov	a,(_DMX + 0x0008)
+      000032 FB               [12]  381 	mov	r3,a
+      000033 24 EB            [12]  382 	add	a,#0xff - 0x14
+      000035 50 5E            [24]  383 	jnc	00117$
+                                    384 ;	../LED_Manager/led.c:33: if(value <= DMX_MACRO_COLOR_WHEEL){ /* Color wheel Macro */
+      000037 EB               [12]  385 	mov	a,r3
+      000038 24 6B            [12]  386 	add	a,#0xff - 0x94
+      00003A 40 0F            [24]  387 	jc	00106$
+                                    388 ;	../LED_Manager/led.c:34: color_wheel((value - DMX_MACRO_NONE - 1) << 1);
       00003C 8B 02            [24]  389 	mov	ar2,r3
       00003E EA               [12]  390 	mov	a,r2
-      00003F 24 EC            [12]  391 	add	a,#0xec
+      00003F 24 EB            [12]  391 	add	a,#0xeb
       000041 25 E0            [12]  392 	add	a,acc
       000043 F5 82            [12]  393 	mov	dpl,a
-      000045 12r06r62         [24]  394 	lcall	_color_wheel
-      000048 02r02r26         [24]  395 	ljmp	00145$
+      000045 12r06r79         [24]  394 	lcall	_color_wheel
+      000048 02r02r28         [24]  395 	ljmp	00145$
       00004B                        396 00106$:
                                     397 ;	../LED_Manager/led.c:36: dimmer = get_dmx_value(DMX_M11_MACRO_SPEED_INDEX);
                                     398 ;	../LED_Manager/led.c:38: if(dimmer > 10){
@@ -406,7 +406,7 @@
       000055 FA               [12]  406 	mov	r2,a
       000056 8B 82            [24]  407 	mov	dpl,r3
       000058 C0 02            [24]  408 	push	ar2
-      00005A 12r02r2C         [24]  409 	lcall	_dmx_to_macro
+      00005A 12r02r2E         [24]  409 	lcall	_dmx_to_macro
       00005D AF 82            [24]  410 	mov	r7,dpl
       00005F C0 07            [24]  411 	push	ar7
       000061 A8*00            [24]  412 	mov	r0,_bp
@@ -418,14 +418,14 @@
       00006A 86 F0            [24]  418 	mov	b,@r0
       00006C 08               [12]  419 	inc	r0
       00006D E6               [12]  420 	mov	a,@r0
-      00006E 12r02r71         [24]  421 	lcall	_play_macro
+      00006E 12r02r73         [24]  421 	lcall	_play_macro
       000071 15 81            [12]  422 	dec	sp
       000073 15 81            [12]  423 	dec	sp
-      000075 02r02r26         [24]  424 	ljmp	00145$
+      000075 02r02r28         [24]  424 	ljmp	00145$
       000078                        425 00103$:
                                     426 ;	../LED_Manager/led.c:41: play_macro(1, dmx_to_macro(value), 0xFF);
       000078 8B 82            [24]  427 	mov	dpl,r3
-      00007A 12r02r2C         [24]  428 	lcall	_dmx_to_macro
+      00007A 12r02r2E         [24]  428 	lcall	_dmx_to_macro
       00007D AF 82            [24]  429 	mov	r7,dpl
       00007F 74 FF            [12]  430 	mov	a,#0xff
       000081 C0 E0            [24]  431 	push	acc
@@ -433,1331 +433,1350 @@
       000085 90 00 01         [24]  433 	mov	dptr,#(0x01&0x00ff)
       000088 E4               [12]  434 	clr	a
       000089 F5 F0            [12]  435 	mov	b,a
-      00008B 12r02r71         [24]  436 	lcall	_play_macro
+      00008B 12r02r73         [24]  436 	lcall	_play_macro
       00008E 15 81            [12]  437 	dec	sp
       000090 15 81            [12]  438 	dec	sp
-      000092 02r02r26         [24]  439 	ljmp	00145$
+      000092 02r02r28         [24]  439 	ljmp	00145$
       000095                        440 00117$:
                                     441 ;	../LED_Manager/led.c:46: strobe = get_dmx_value(DMX_M11_STROBE_INDEX);
-                                    442 ;	../LED_Manager/led.c:48: if(strobe){
+                                    442 ;	../LED_Manager/led.c:48: if(strobe > 10){
       000095 E5*07            [12]  443 	mov	a,(_DMX + 0x0007)
       000097 FF               [12]  444 	mov	r7,a
-      000098 60 48            [24]  445 	jz	00111$
-                                    446 ;	../LED_Manager/led.c:49: if(!(tick % (STROBE_FREQ - (strobe << 1)))){
-      00009A 7E 00            [12]  447 	mov	r6,#0x00
-      00009C EF               [12]  448 	mov	a,r7
-      00009D 2F               [12]  449 	add	a,r7
-      00009E FF               [12]  450 	mov	r7,a
-      00009F EE               [12]  451 	mov	a,r6
-      0000A0 33               [12]  452 	rlc	a
-      0000A1 FE               [12]  453 	mov	r6,a
-      0000A2 74 1C            [12]  454 	mov	a,#0x1c
-      0000A4 C3               [12]  455 	clr	c
-      0000A5 9F               [12]  456 	subb	a,r7
-      0000A6 FF               [12]  457 	mov	r7,a
-      0000A7 74 02            [12]  458 	mov	a,#0x02
-      0000A9 9E               [12]  459 	subb	a,r6
-      0000AA FE               [12]  460 	mov	r6,a
-      0000AB 33               [12]  461 	rlc	a
-      0000AC 95 E0            [12]  462 	subb	a,acc
-      0000AE FD               [12]  463 	mov	r5,a
-      0000AF FC               [12]  464 	mov	r4,a
-      0000B0 C0 07            [24]  465 	push	ar7
-      0000B2 C0 06            [24]  466 	push	ar6
-      0000B4 C0 05            [24]  467 	push	ar5
-      0000B6 C0 04            [24]  468 	push	ar4
-      0000B8 A8*00            [24]  469 	mov	r0,_bp
-      0000BA 08               [12]  470 	inc	r0
-      0000BB 86 82            [24]  471 	mov	dpl,@r0
-      0000BD 08               [12]  472 	inc	r0
-      0000BE 86 83            [24]  473 	mov	dph,@r0
-      0000C0 08               [12]  474 	inc	r0
-      0000C1 86 F0            [24]  475 	mov	b,@r0
-      0000C3 08               [12]  476 	inc	r0
-      0000C4 E6               [12]  477 	mov	a,@r0
-      0000C5 12r00r00         [24]  478 	lcall	__modulong
-      0000C8 AC 82            [24]  479 	mov	r4,dpl
-      0000CA AD 83            [24]  480 	mov	r5,dph
-      0000CC AE F0            [24]  481 	mov	r6,b
-      0000CE FF               [12]  482 	mov	r7,a
-      0000CF E5 81            [12]  483 	mov	a,sp
-      0000D1 24 FC            [12]  484 	add	a,#0xfc
-      0000D3 F5 81            [12]  485 	mov	sp,a
-      0000D5 EC               [12]  486 	mov	a,r4
-      0000D6 4D               [12]  487 	orl	a,r5
-      0000D7 4E               [12]  488 	orl	a,r6
-      0000D8 4F               [12]  489 	orl	a,r7
-      0000D9 70 0A            [24]  490 	jnz	00112$
-                                    491 ;	../LED_Manager/led.c:50: on = ~on;
-      0000DB E5*00            [12]  492 	mov	a,_tick_led_on_65536_17
-      0000DD F4               [12]  493 	cpl	a
-      0000DE F5*00            [12]  494 	mov	_tick_led_on_65536_17,a
-      0000E0 80 03            [24]  495 	sjmp	00112$
-      0000E2                        496 00111$:
-                                    497 ;	../LED_Manager/led.c:53: on = 0xFF;
-      0000E2 75*00 FF         [24]  498 	mov	_tick_led_on_65536_17,#0xff
-      0000E5                        499 00112$:
-                                    500 ;	../LED_Manager/led.c:56: if(on){
-      0000E5 E5*00            [12]  501 	mov	a,_tick_led_on_65536_17
-      0000E7 60 11            [24]  502 	jz	00114$
-                                    503 ;	../LED_Manager/led.c:60: get_dmx_value(DMX_M11_BLUE_INDEX));
-                                    504 ;	../LED_Manager/led.c:59: get_dmx_value(DMX_M11_GREEN_INDEX),
-                                    505 ;	../LED_Manager/led.c:58: set_leds(get_dmx_value(DMX_M11_RED_INDEX),
-      0000E9 85*04 82         [24]  506 	mov	dpl,(_DMX + 0x0004)
-      0000EC C0*06            [24]  507 	push	(_DMX + 0x0006)
-      0000EE C0*05            [24]  508 	push	(_DMX + 0x0005)
-      0000F0 12r07r33         [24]  509 	lcall	_set_leds
-      0000F3 15 81            [12]  510 	dec	sp
+      000098 24 F5            [12]  445 	add	a,#0xff - 0x0a
+      00009A 50 48            [24]  446 	jnc	00111$
+                                    447 ;	../LED_Manager/led.c:49: if(!(tick % (STROBE_FREQ - (strobe << 1)))){
+      00009C 7E 00            [12]  448 	mov	r6,#0x00
+      00009E EF               [12]  449 	mov	a,r7
+      00009F 2F               [12]  450 	add	a,r7
+      0000A0 FF               [12]  451 	mov	r7,a
+      0000A1 EE               [12]  452 	mov	a,r6
+      0000A2 33               [12]  453 	rlc	a
+      0000A3 FE               [12]  454 	mov	r6,a
+      0000A4 74 1C            [12]  455 	mov	a,#0x1c
+      0000A6 C3               [12]  456 	clr	c
+      0000A7 9F               [12]  457 	subb	a,r7
+      0000A8 FF               [12]  458 	mov	r7,a
+      0000A9 74 02            [12]  459 	mov	a,#0x02
+      0000AB 9E               [12]  460 	subb	a,r6
+      0000AC FE               [12]  461 	mov	r6,a
+      0000AD 33               [12]  462 	rlc	a
+      0000AE 95 E0            [12]  463 	subb	a,acc
+      0000B0 FD               [12]  464 	mov	r5,a
+      0000B1 FC               [12]  465 	mov	r4,a
+      0000B2 C0 07            [24]  466 	push	ar7
+      0000B4 C0 06            [24]  467 	push	ar6
+      0000B6 C0 05            [24]  468 	push	ar5
+      0000B8 C0 04            [24]  469 	push	ar4
+      0000BA A8*00            [24]  470 	mov	r0,_bp
+      0000BC 08               [12]  471 	inc	r0
+      0000BD 86 82            [24]  472 	mov	dpl,@r0
+      0000BF 08               [12]  473 	inc	r0
+      0000C0 86 83            [24]  474 	mov	dph,@r0
+      0000C2 08               [12]  475 	inc	r0
+      0000C3 86 F0            [24]  476 	mov	b,@r0
+      0000C5 08               [12]  477 	inc	r0
+      0000C6 E6               [12]  478 	mov	a,@r0
+      0000C7 12r00r00         [24]  479 	lcall	__modulong
+      0000CA AC 82            [24]  480 	mov	r4,dpl
+      0000CC AD 83            [24]  481 	mov	r5,dph
+      0000CE AE F0            [24]  482 	mov	r6,b
+      0000D0 FF               [12]  483 	mov	r7,a
+      0000D1 E5 81            [12]  484 	mov	a,sp
+      0000D3 24 FC            [12]  485 	add	a,#0xfc
+      0000D5 F5 81            [12]  486 	mov	sp,a
+      0000D7 EC               [12]  487 	mov	a,r4
+      0000D8 4D               [12]  488 	orl	a,r5
+      0000D9 4E               [12]  489 	orl	a,r6
+      0000DA 4F               [12]  490 	orl	a,r7
+      0000DB 70 0A            [24]  491 	jnz	00112$
+                                    492 ;	../LED_Manager/led.c:50: on = ~on;
+      0000DD E5*00            [12]  493 	mov	a,_tick_led_on_65536_17
+      0000DF F4               [12]  494 	cpl	a
+      0000E0 F5*00            [12]  495 	mov	_tick_led_on_65536_17,a
+      0000E2 80 03            [24]  496 	sjmp	00112$
+      0000E4                        497 00111$:
+                                    498 ;	../LED_Manager/led.c:53: on = 0xFF;
+      0000E4 75*00 FF         [24]  499 	mov	_tick_led_on_65536_17,#0xff
+      0000E7                        500 00112$:
+                                    501 ;	../LED_Manager/led.c:56: if(on){
+      0000E7 E5*00            [12]  502 	mov	a,_tick_led_on_65536_17
+      0000E9 60 11            [24]  503 	jz	00114$
+                                    504 ;	../LED_Manager/led.c:60: get_dmx_value(DMX_M11_BLUE_INDEX));
+                                    505 ;	../LED_Manager/led.c:59: get_dmx_value(DMX_M11_GREEN_INDEX),
+                                    506 ;	../LED_Manager/led.c:58: set_leds(get_dmx_value(DMX_M11_RED_INDEX),
+      0000EB 85*04 82         [24]  507 	mov	dpl,(_DMX + 0x0004)
+      0000EE C0*06            [24]  508 	push	(_DMX + 0x0006)
+      0000F0 C0*05            [24]  509 	push	(_DMX + 0x0005)
+      0000F2 12r07r4A         [24]  510 	lcall	_set_leds
       0000F5 15 81            [12]  511 	dec	sp
-      0000F7 02r02r26         [24]  512 	ljmp	00145$
-      0000FA                        513 00114$:
-                                    514 ;	../LED_Manager/led.c:63: blackout();
-      0000FA 12r06rE6         [24]  515 	lcall	_blackout
-                                    516 ;	../LED_Manager/led.c:67: break;
-      0000FD 02r02r26         [24]  517 	ljmp	00145$
-                                    518 ;	../LED_Manager/led.c:68: case OPTION_DMX_MODE_3: /* Only macros */
-      000100                        519 00119$:
-                                    520 ;	../LED_Manager/led.c:69: value = get_dmx_value(DMX_M3_MACRO_INDEX);
-      000100 AF*01            [24]  521 	mov	r7,(_DMX + 0x0001)
-                                    522 ;	../LED_Manager/led.c:70: if(value >= DMX_MACRO_NONE){
-      000102 BF 14 00         [24]  523 	cjne	r7,#0x14,00238$
-      000105                        524 00238$:
-      000105 40 5E            [24]  525 	jc	00127$
-                                    526 ;	../LED_Manager/led.c:71: if(value < DMX_MACRO_COLOR_WHEEL){
-      000107 BF 94 00         [24]  527 	cjne	r7,#0x94,00240$
-      00010A                        528 00240$:
-      00010A 50 0F            [24]  529 	jnc	00124$
-                                    530 ;	../LED_Manager/led.c:72: color_wheel((value - DMX_MACRO_NONE) << 1);
-      00010C 8F 06            [24]  531 	mov	ar6,r7
-      00010E EE               [12]  532 	mov	a,r6
-      00010F 24 EC            [12]  533 	add	a,#0xec
-      000111 25 E0            [12]  534 	add	a,acc
-      000113 F5 82            [12]  535 	mov	dpl,a
-      000115 12r06r62         [24]  536 	lcall	_color_wheel
-      000118 02r02r26         [24]  537 	ljmp	00145$
-      00011B                        538 00124$:
-                                    539 ;	../LED_Manager/led.c:74: dimmer = get_dmx_value(DMX_M3_MACRO_SPEED_INDEX);
-                                    540 ;	../LED_Manager/led.c:76: if(dimmer > 10){
-      00011B E5*02            [12]  541 	mov	a,(_DMX + 0x0002)
-      00011D FE               [12]  542 	mov	r6,a
-      00011E 24 F5            [12]  543 	add	a,#0xff - 0x0a
-      000120 50 26            [24]  544 	jnc	00121$
-                                    545 ;	../LED_Manager/led.c:77: play_macro(tick, dmx_to_macro(value), dimmer - 5);
-      000122 EE               [12]  546 	mov	a,r6
-      000123 24 FB            [12]  547 	add	a,#0xfb
-      000125 FE               [12]  548 	mov	r6,a
-      000126 8F 82            [24]  549 	mov	dpl,r7
-      000128 C0 06            [24]  550 	push	ar6
-      00012A 12r02r2C         [24]  551 	lcall	_dmx_to_macro
-      00012D AD 82            [24]  552 	mov	r5,dpl
-      00012F C0 05            [24]  553 	push	ar5
-      000131 A8*00            [24]  554 	mov	r0,_bp
-      000133 08               [12]  555 	inc	r0
-      000134 86 82            [24]  556 	mov	dpl,@r0
-      000136 08               [12]  557 	inc	r0
-      000137 86 83            [24]  558 	mov	dph,@r0
-      000139 08               [12]  559 	inc	r0
-      00013A 86 F0            [24]  560 	mov	b,@r0
-      00013C 08               [12]  561 	inc	r0
-      00013D E6               [12]  562 	mov	a,@r0
-      00013E 12r02r71         [24]  563 	lcall	_play_macro
-      000141 15 81            [12]  564 	dec	sp
+      0000F7 15 81            [12]  512 	dec	sp
+      0000F9 02r02r28         [24]  513 	ljmp	00145$
+      0000FC                        514 00114$:
+                                    515 ;	../LED_Manager/led.c:63: blackout();
+      0000FC 12r06rFD         [24]  516 	lcall	_blackout
+                                    517 ;	../LED_Manager/led.c:67: break;
+      0000FF 02r02r28         [24]  518 	ljmp	00145$
+                                    519 ;	../LED_Manager/led.c:68: case OPTION_DMX_MODE_3: /* Only macros */
+      000102                        520 00119$:
+                                    521 ;	../LED_Manager/led.c:69: value = get_dmx_value(DMX_M3_MACRO_INDEX);
+                                    522 ;	../LED_Manager/led.c:70: if(value > DMX_MACRO_NONE){
+      000102 E5*01            [12]  523 	mov	a,(_DMX + 0x0001)
+      000104 FF               [12]  524 	mov	r7,a
+      000105 24 EB            [12]  525 	add	a,#0xff - 0x14
+      000107 50 5E            [24]  526 	jnc	00127$
+                                    527 ;	../LED_Manager/led.c:71: if(value < DMX_MACRO_COLOR_WHEEL){
+      000109 BF 94 00         [24]  528 	cjne	r7,#0x94,00237$
+      00010C                        529 00237$:
+      00010C 50 0F            [24]  530 	jnc	00124$
+                                    531 ;	../LED_Manager/led.c:72: color_wheel((value - DMX_MACRO_NONE - 1) << 1);
+      00010E 8F 06            [24]  532 	mov	ar6,r7
+      000110 EE               [12]  533 	mov	a,r6
+      000111 24 EB            [12]  534 	add	a,#0xeb
+      000113 25 E0            [12]  535 	add	a,acc
+      000115 F5 82            [12]  536 	mov	dpl,a
+      000117 12r06r79         [24]  537 	lcall	_color_wheel
+      00011A 02r02r28         [24]  538 	ljmp	00145$
+      00011D                        539 00124$:
+                                    540 ;	../LED_Manager/led.c:74: dimmer = get_dmx_value(DMX_M3_MACRO_SPEED_INDEX);
+                                    541 ;	../LED_Manager/led.c:76: if(dimmer > 10){
+      00011D E5*02            [12]  542 	mov	a,(_DMX + 0x0002)
+      00011F FE               [12]  543 	mov	r6,a
+      000120 24 F5            [12]  544 	add	a,#0xff - 0x0a
+      000122 50 26            [24]  545 	jnc	00121$
+                                    546 ;	../LED_Manager/led.c:77: play_macro(tick, dmx_to_macro(value), dimmer - 5);
+      000124 EE               [12]  547 	mov	a,r6
+      000125 24 FB            [12]  548 	add	a,#0xfb
+      000127 FE               [12]  549 	mov	r6,a
+      000128 8F 82            [24]  550 	mov	dpl,r7
+      00012A C0 06            [24]  551 	push	ar6
+      00012C 12r02r2E         [24]  552 	lcall	_dmx_to_macro
+      00012F AD 82            [24]  553 	mov	r5,dpl
+      000131 C0 05            [24]  554 	push	ar5
+      000133 A8*00            [24]  555 	mov	r0,_bp
+      000135 08               [12]  556 	inc	r0
+      000136 86 82            [24]  557 	mov	dpl,@r0
+      000138 08               [12]  558 	inc	r0
+      000139 86 83            [24]  559 	mov	dph,@r0
+      00013B 08               [12]  560 	inc	r0
+      00013C 86 F0            [24]  561 	mov	b,@r0
+      00013E 08               [12]  562 	inc	r0
+      00013F E6               [12]  563 	mov	a,@r0
+      000140 12r02r73         [24]  564 	lcall	_play_macro
       000143 15 81            [12]  565 	dec	sp
-      000145 02r02r26         [24]  566 	ljmp	00145$
-      000148                        567 00121$:
-                                    568 ;	../LED_Manager/led.c:79: play_macro(1, dmx_to_macro(value), 0xFF);
-      000148 8F 82            [24]  569 	mov	dpl,r7
-      00014A 12r02r2C         [24]  570 	lcall	_dmx_to_macro
-      00014D AF 82            [24]  571 	mov	r7,dpl
-      00014F 74 FF            [12]  572 	mov	a,#0xff
-      000151 C0 E0            [24]  573 	push	acc
-      000153 C0 07            [24]  574 	push	ar7
-      000155 90 00 01         [24]  575 	mov	dptr,#(0x01&0x00ff)
-      000158 E4               [12]  576 	clr	a
-      000159 F5 F0            [12]  577 	mov	b,a
-      00015B 12r02r71         [24]  578 	lcall	_play_macro
-      00015E 15 81            [12]  579 	dec	sp
+      000145 15 81            [12]  566 	dec	sp
+      000147 02r02r28         [24]  567 	ljmp	00145$
+      00014A                        568 00121$:
+                                    569 ;	../LED_Manager/led.c:79: play_macro(1, dmx_to_macro(value), 0xFF);
+      00014A 8F 82            [24]  570 	mov	dpl,r7
+      00014C 12r02r2E         [24]  571 	lcall	_dmx_to_macro
+      00014F AF 82            [24]  572 	mov	r7,dpl
+      000151 74 FF            [12]  573 	mov	a,#0xff
+      000153 C0 E0            [24]  574 	push	acc
+      000155 C0 07            [24]  575 	push	ar7
+      000157 90 00 01         [24]  576 	mov	dptr,#(0x01&0x00ff)
+      00015A E4               [12]  577 	clr	a
+      00015B F5 F0            [12]  578 	mov	b,a
+      00015D 12r02r73         [24]  579 	lcall	_play_macro
       000160 15 81            [12]  580 	dec	sp
-      000162 02r02r26         [24]  581 	ljmp	00145$
-      000165                        582 00127$:
-                                    583 ;	../LED_Manager/led.c:83: blackout();
-      000165 12r06rE6         [24]  584 	lcall	_blackout
-                                    585 ;	../LED_Manager/led.c:85: break;
-      000168 02r02r26         [24]  586 	ljmp	00145$
-                                    587 ;	../LED_Manager/led.c:86: default:
-      00016B                        588 00129$:
-                                    589 ;	../LED_Manager/led.c:87: blackout();
-      00016B 12r06rE6         [24]  590 	lcall	_blackout
-                                    591 ;	../LED_Manager/led.c:89: }
-      00016E 02r02r26         [24]  592 	ljmp	00145$
-      000171                        593 00143$:
-                                    594 ;	../LED_Manager/led.c:91: if(get_runtime_data(MACRO_INDEX) != OPTION_MACRO_NONE){
-      000171 75 82 03         [24]  595 	mov	dpl,#0x03
-      000174 12r00r00         [24]  596 	lcall	_get_runtime_data
-      000177 E5 82            [12]  597 	mov	a,dpl
-      000179 60 2B            [24]  598 	jz	00140$
-                                    599 ;	../LED_Manager/led.c:92: play_macro(tick, get_runtime_data(MACRO_INDEX), get_runtime_data(MACRO_SPEED_INDEX));
-      00017B 75 82 04         [24]  600 	mov	dpl,#0x04
-      00017E 12r00r00         [24]  601 	lcall	_get_runtime_data
-      000181 AF 82            [24]  602 	mov	r7,dpl
-      000183 75 82 03         [24]  603 	mov	dpl,#0x03
-      000186 C0 07            [24]  604 	push	ar7
-      000188 12r00r00         [24]  605 	lcall	_get_runtime_data
-      00018B AE 82            [24]  606 	mov	r6,dpl
-      00018D C0 06            [24]  607 	push	ar6
-      00018F A8*00            [24]  608 	mov	r0,_bp
-      000191 08               [12]  609 	inc	r0
-      000192 86 82            [24]  610 	mov	dpl,@r0
-      000194 08               [12]  611 	inc	r0
-      000195 86 83            [24]  612 	mov	dph,@r0
-      000197 08               [12]  613 	inc	r0
-      000198 86 F0            [24]  614 	mov	b,@r0
-      00019A 08               [12]  615 	inc	r0
-      00019B E6               [12]  616 	mov	a,@r0
-      00019C 12r02r71         [24]  617 	lcall	_play_macro
-      00019F 15 81            [12]  618 	dec	sp
+      000162 15 81            [12]  581 	dec	sp
+      000164 02r02r28         [24]  582 	ljmp	00145$
+      000167                        583 00127$:
+                                    584 ;	../LED_Manager/led.c:83: blackout();
+      000167 12r06rFD         [24]  585 	lcall	_blackout
+                                    586 ;	../LED_Manager/led.c:85: break;
+      00016A 02r02r28         [24]  587 	ljmp	00145$
+                                    588 ;	../LED_Manager/led.c:86: default:
+      00016D                        589 00129$:
+                                    590 ;	../LED_Manager/led.c:87: blackout();
+      00016D 12r06rFD         [24]  591 	lcall	_blackout
+                                    592 ;	../LED_Manager/led.c:89: }
+      000170 02r02r28         [24]  593 	ljmp	00145$
+      000173                        594 00143$:
+                                    595 ;	../LED_Manager/led.c:91: if(get_runtime_data(MACRO_INDEX) != OPTION_MACRO_NONE){
+      000173 75 82 03         [24]  596 	mov	dpl,#0x03
+      000176 12r00r00         [24]  597 	lcall	_get_runtime_data
+      000179 E5 82            [12]  598 	mov	a,dpl
+      00017B 60 2B            [24]  599 	jz	00140$
+                                    600 ;	../LED_Manager/led.c:92: play_macro(tick, get_runtime_data(MACRO_INDEX), get_runtime_data(MACRO_SPEED_INDEX));
+      00017D 75 82 04         [24]  601 	mov	dpl,#0x04
+      000180 12r00r00         [24]  602 	lcall	_get_runtime_data
+      000183 AF 82            [24]  603 	mov	r7,dpl
+      000185 75 82 03         [24]  604 	mov	dpl,#0x03
+      000188 C0 07            [24]  605 	push	ar7
+      00018A 12r00r00         [24]  606 	lcall	_get_runtime_data
+      00018D AE 82            [24]  607 	mov	r6,dpl
+      00018F C0 06            [24]  608 	push	ar6
+      000191 A8*00            [24]  609 	mov	r0,_bp
+      000193 08               [12]  610 	inc	r0
+      000194 86 82            [24]  611 	mov	dpl,@r0
+      000196 08               [12]  612 	inc	r0
+      000197 86 83            [24]  613 	mov	dph,@r0
+      000199 08               [12]  614 	inc	r0
+      00019A 86 F0            [24]  615 	mov	b,@r0
+      00019C 08               [12]  616 	inc	r0
+      00019D E6               [12]  617 	mov	a,@r0
+      00019E 12r02r73         [24]  618 	lcall	_play_macro
       0001A1 15 81            [12]  619 	dec	sp
-      0001A3 02r02r26         [24]  620 	ljmp	00145$
-      0001A6                        621 00140$:
-                                    622 ;	../LED_Manager/led.c:95: strobe = get_runtime_data(STROBE_INDEX);
-      0001A6 75 82 08         [24]  623 	mov	dpl,#0x08
-      0001A9 12r00r00         [24]  624 	lcall	_get_runtime_data
-                                    625 ;	../LED_Manager/led.c:97: if(strobe){
-      0001AC E5 82            [12]  626 	mov	a,dpl
-      0001AE FF               [12]  627 	mov	r7,a
-      0001AF 60 48            [24]  628 	jz	00134$
-                                    629 ;	../LED_Manager/led.c:98: if(!(tick % (STROBE_FREQ - (strobe << 1)))){
-      0001B1 7E 00            [12]  630 	mov	r6,#0x00
-      0001B3 EF               [12]  631 	mov	a,r7
-      0001B4 2F               [12]  632 	add	a,r7
-      0001B5 FF               [12]  633 	mov	r7,a
-      0001B6 EE               [12]  634 	mov	a,r6
-      0001B7 33               [12]  635 	rlc	a
-      0001B8 FE               [12]  636 	mov	r6,a
-      0001B9 74 1C            [12]  637 	mov	a,#0x1c
-      0001BB C3               [12]  638 	clr	c
-      0001BC 9F               [12]  639 	subb	a,r7
-      0001BD FF               [12]  640 	mov	r7,a
-      0001BE 74 02            [12]  641 	mov	a,#0x02
-      0001C0 9E               [12]  642 	subb	a,r6
-      0001C1 FE               [12]  643 	mov	r6,a
-      0001C2 33               [12]  644 	rlc	a
-      0001C3 95 E0            [12]  645 	subb	a,acc
-      0001C5 FD               [12]  646 	mov	r5,a
-      0001C6 FC               [12]  647 	mov	r4,a
-      0001C7 C0 07            [24]  648 	push	ar7
-      0001C9 C0 06            [24]  649 	push	ar6
-      0001CB C0 05            [24]  650 	push	ar5
-      0001CD C0 04            [24]  651 	push	ar4
-      0001CF A8*00            [24]  652 	mov	r0,_bp
-      0001D1 08               [12]  653 	inc	r0
-      0001D2 86 82            [24]  654 	mov	dpl,@r0
-      0001D4 08               [12]  655 	inc	r0
-      0001D5 86 83            [24]  656 	mov	dph,@r0
-      0001D7 08               [12]  657 	inc	r0
-      0001D8 86 F0            [24]  658 	mov	b,@r0
-      0001DA 08               [12]  659 	inc	r0
-      0001DB E6               [12]  660 	mov	a,@r0
-      0001DC 12r00r00         [24]  661 	lcall	__modulong
-      0001DF AC 82            [24]  662 	mov	r4,dpl
-      0001E1 AD 83            [24]  663 	mov	r5,dph
-      0001E3 AE F0            [24]  664 	mov	r6,b
-      0001E5 FF               [12]  665 	mov	r7,a
-      0001E6 E5 81            [12]  666 	mov	a,sp
-      0001E8 24 FC            [12]  667 	add	a,#0xfc
-      0001EA F5 81            [12]  668 	mov	sp,a
-      0001EC EC               [12]  669 	mov	a,r4
-      0001ED 4D               [12]  670 	orl	a,r5
-      0001EE 4E               [12]  671 	orl	a,r6
-      0001EF 4F               [12]  672 	orl	a,r7
-      0001F0 70 0A            [24]  673 	jnz	00135$
-                                    674 ;	../LED_Manager/led.c:99: on = ~on;
-      0001F2 E5*00            [12]  675 	mov	a,_tick_led_on_65536_17
-      0001F4 F4               [12]  676 	cpl	a
-      0001F5 F5*00            [12]  677 	mov	_tick_led_on_65536_17,a
-      0001F7 80 03            [24]  678 	sjmp	00135$
-      0001F9                        679 00134$:
-                                    680 ;	../LED_Manager/led.c:102: on = 0xFF;
-      0001F9 75*00 FF         [24]  681 	mov	_tick_led_on_65536_17,#0xff
-      0001FC                        682 00135$:
-                                    683 ;	../LED_Manager/led.c:105: if(on){
-      0001FC E5*00            [12]  684 	mov	a,_tick_led_on_65536_17
-      0001FE 60 23            [24]  685 	jz	00137$
-                                    686 ;	../LED_Manager/led.c:106: set_leds(get_runtime_data(RED_INDEX), get_runtime_data(GREEN_INDEX), get_runtime_data(BLUE_INDEX));
-      000200 75 82 07         [24]  687 	mov	dpl,#0x07
-      000203 12r00r00         [24]  688 	lcall	_get_runtime_data
-      000206 AF 82            [24]  689 	mov	r7,dpl
-      000208 75 82 06         [24]  690 	mov	dpl,#0x06
-      00020B C0 07            [24]  691 	push	ar7
-      00020D 12r00r00         [24]  692 	lcall	_get_runtime_data
-      000210 AE 82            [24]  693 	mov	r6,dpl
-      000212 75 82 05         [24]  694 	mov	dpl,#0x05
-      000215 C0 06            [24]  695 	push	ar6
-      000217 12r00r00         [24]  696 	lcall	_get_runtime_data
-      00021A 12r07r33         [24]  697 	lcall	_set_leds
-      00021D 15 81            [12]  698 	dec	sp
+      0001A3 15 81            [12]  620 	dec	sp
+      0001A5 02r02r28         [24]  621 	ljmp	00145$
+      0001A8                        622 00140$:
+                                    623 ;	../LED_Manager/led.c:95: strobe = get_runtime_data(STROBE_INDEX);
+      0001A8 75 82 08         [24]  624 	mov	dpl,#0x08
+      0001AB 12r00r00         [24]  625 	lcall	_get_runtime_data
+                                    626 ;	../LED_Manager/led.c:97: if(strobe){
+      0001AE E5 82            [12]  627 	mov	a,dpl
+      0001B0 FF               [12]  628 	mov	r7,a
+      0001B1 60 48            [24]  629 	jz	00134$
+                                    630 ;	../LED_Manager/led.c:98: if(!(tick % (STROBE_FREQ - (strobe << 1)))){
+      0001B3 7E 00            [12]  631 	mov	r6,#0x00
+      0001B5 EF               [12]  632 	mov	a,r7
+      0001B6 2F               [12]  633 	add	a,r7
+      0001B7 FF               [12]  634 	mov	r7,a
+      0001B8 EE               [12]  635 	mov	a,r6
+      0001B9 33               [12]  636 	rlc	a
+      0001BA FE               [12]  637 	mov	r6,a
+      0001BB 74 1C            [12]  638 	mov	a,#0x1c
+      0001BD C3               [12]  639 	clr	c
+      0001BE 9F               [12]  640 	subb	a,r7
+      0001BF FF               [12]  641 	mov	r7,a
+      0001C0 74 02            [12]  642 	mov	a,#0x02
+      0001C2 9E               [12]  643 	subb	a,r6
+      0001C3 FE               [12]  644 	mov	r6,a
+      0001C4 33               [12]  645 	rlc	a
+      0001C5 95 E0            [12]  646 	subb	a,acc
+      0001C7 FD               [12]  647 	mov	r5,a
+      0001C8 FC               [12]  648 	mov	r4,a
+      0001C9 C0 07            [24]  649 	push	ar7
+      0001CB C0 06            [24]  650 	push	ar6
+      0001CD C0 05            [24]  651 	push	ar5
+      0001CF C0 04            [24]  652 	push	ar4
+      0001D1 A8*00            [24]  653 	mov	r0,_bp
+      0001D3 08               [12]  654 	inc	r0
+      0001D4 86 82            [24]  655 	mov	dpl,@r0
+      0001D6 08               [12]  656 	inc	r0
+      0001D7 86 83            [24]  657 	mov	dph,@r0
+      0001D9 08               [12]  658 	inc	r0
+      0001DA 86 F0            [24]  659 	mov	b,@r0
+      0001DC 08               [12]  660 	inc	r0
+      0001DD E6               [12]  661 	mov	a,@r0
+      0001DE 12r00r00         [24]  662 	lcall	__modulong
+      0001E1 AC 82            [24]  663 	mov	r4,dpl
+      0001E3 AD 83            [24]  664 	mov	r5,dph
+      0001E5 AE F0            [24]  665 	mov	r6,b
+      0001E7 FF               [12]  666 	mov	r7,a
+      0001E8 E5 81            [12]  667 	mov	a,sp
+      0001EA 24 FC            [12]  668 	add	a,#0xfc
+      0001EC F5 81            [12]  669 	mov	sp,a
+      0001EE EC               [12]  670 	mov	a,r4
+      0001EF 4D               [12]  671 	orl	a,r5
+      0001F0 4E               [12]  672 	orl	a,r6
+      0001F1 4F               [12]  673 	orl	a,r7
+      0001F2 70 0A            [24]  674 	jnz	00135$
+                                    675 ;	../LED_Manager/led.c:99: on = ~on;
+      0001F4 E5*00            [12]  676 	mov	a,_tick_led_on_65536_17
+      0001F6 F4               [12]  677 	cpl	a
+      0001F7 F5*00            [12]  678 	mov	_tick_led_on_65536_17,a
+      0001F9 80 03            [24]  679 	sjmp	00135$
+      0001FB                        680 00134$:
+                                    681 ;	../LED_Manager/led.c:102: on = 0xFF;
+      0001FB 75*00 FF         [24]  682 	mov	_tick_led_on_65536_17,#0xff
+      0001FE                        683 00135$:
+                                    684 ;	../LED_Manager/led.c:105: if(on){
+      0001FE E5*00            [12]  685 	mov	a,_tick_led_on_65536_17
+      000200 60 23            [24]  686 	jz	00137$
+                                    687 ;	../LED_Manager/led.c:106: set_leds(get_runtime_data(RED_INDEX), get_runtime_data(GREEN_INDEX), get_runtime_data(BLUE_INDEX));
+      000202 75 82 07         [24]  688 	mov	dpl,#0x07
+      000205 12r00r00         [24]  689 	lcall	_get_runtime_data
+      000208 AF 82            [24]  690 	mov	r7,dpl
+      00020A 75 82 06         [24]  691 	mov	dpl,#0x06
+      00020D C0 07            [24]  692 	push	ar7
+      00020F 12r00r00         [24]  693 	lcall	_get_runtime_data
+      000212 AE 82            [24]  694 	mov	r6,dpl
+      000214 75 82 05         [24]  695 	mov	dpl,#0x05
+      000217 C0 06            [24]  696 	push	ar6
+      000219 12r00r00         [24]  697 	lcall	_get_runtime_data
+      00021C 12r07r4A         [24]  698 	lcall	_set_leds
       00021F 15 81            [12]  699 	dec	sp
-      000221 80 03            [24]  700 	sjmp	00145$
-      000223                        701 00137$:
-                                    702 ;	../LED_Manager/led.c:108: blackout();
-      000223 12r06rE6         [24]  703 	lcall	_blackout
-      000226                        704 00145$:
-                                    705 ;	../LED_Manager/led.c:112: }
-      000226 85*00 81         [24]  706 	mov	sp,_bp
-      000229 D0*00            [24]  707 	pop	_bp
-      00022B 22               [24]  708 	ret
-                                    709 ;------------------------------------------------------------
-                                    710 ;Allocation info for local variables in function 'dmx_to_macro'
-                                    711 ;------------------------------------------------------------
-                                    712 ;dmx_value                 Allocated to registers r7 
-                                    713 ;------------------------------------------------------------
-                                    714 ;	../LED_Manager/led.c:114: uint8_t dmx_to_macro(uint8_t dmx_value){
-                                    715 ;	-----------------------------------------
-                                    716 ;	 function dmx_to_macro
-                                    717 ;	-----------------------------------------
-      00022C                        718 _dmx_to_macro:
-      00022C AF 82            [24]  719 	mov	r7,dpl
-                                    720 ;	../LED_Manager/led.c:116: if(dmx_value < DMX_MACRO_WHITE){
-      00022E BF B4 00         [24]  721 	cjne	r7,#0xb4,00151$
-      000231                        722 00151$:
-      000231 50 04            [24]  723 	jnc	00119$
-                                    724 ;	../LED_Manager/led.c:117: return OPTION_MACRO_WHITE;
-      000233 75 82 21         [24]  725 	mov	dpl,#0x21
-      000236 22               [24]  726 	ret
-      000237                        727 00119$:
-                                    728 ;	../LED_Manager/led.c:118: } else if(dmx_value < DMX_MACRO_RAINBOW){
-      000237 BF BE 00         [24]  729 	cjne	r7,#0xbe,00153$
-      00023A                        730 00153$:
-      00023A 50 04            [24]  731 	jnc	00116$
-                                    732 ;	../LED_Manager/led.c:119: return OPTION_MACRO_RAINBOW_DMX;
-      00023C 75 82 01         [24]  733 	mov	dpl,#0x01
-      00023F 22               [24]  734 	ret
-      000240                        735 00116$:
-                                    736 ;	../LED_Manager/led.c:120: } else if(dmx_value < DMX_MACRO_FIRE){
-      000240 BF C8 00         [24]  737 	cjne	r7,#0xc8,00155$
-      000243                        738 00155$:
-      000243 50 04            [24]  739 	jnc	00113$
-                                    740 ;	../LED_Manager/led.c:121: return OPTION_MACRO_FIRE_DMX;
-      000245 75 82 02         [24]  741 	mov	dpl,#0x02
-      000248 22               [24]  742 	ret
-      000249                        743 00113$:
-                                    744 ;	../LED_Manager/led.c:122: } else if(dmx_value < DMX_MACRO_WATER){
-      000249 BF D2 00         [24]  745 	cjne	r7,#0xd2,00157$
-      00024C                        746 00157$:
-      00024C 50 04            [24]  747 	jnc	00110$
-                                    748 ;	../LED_Manager/led.c:123: return OPTION_MACRO_WATER_DMX;
-      00024E 75 82 03         [24]  749 	mov	dpl,#0x03
-      000251 22               [24]  750 	ret
-      000252                        751 00110$:
-                                    752 ;	../LED_Manager/led.c:124: } else if(dmx_value < DMX_MACRO_ACID){
-      000252 BF DC 00         [24]  753 	cjne	r7,#0xdc,00159$
-      000255                        754 00159$:
-      000255 50 04            [24]  755 	jnc	00107$
-                                    756 ;	../LED_Manager/led.c:125: return OPTION_MACRO_ACID_DMX;
-      000257 75 82 04         [24]  757 	mov	dpl,#0x04
-      00025A 22               [24]  758 	ret
-      00025B                        759 00107$:
-                                    760 ;	../LED_Manager/led.c:126: } else if(dmx_value < DMX_MACRO_ETHER){
-      00025B BF E6 00         [24]  761 	cjne	r7,#0xe6,00161$
-      00025E                        762 00161$:
-      00025E 50 04            [24]  763 	jnc	00104$
-                                    764 ;	../LED_Manager/led.c:127: return OPTION_MACRO_ETHER_DMX;
-      000260 75 82 05         [24]  765 	mov	dpl,#0x05
-      000263 22               [24]  766 	ret
-      000264                        767 00104$:
-                                    768 ;	../LED_Manager/led.c:128: } else if(dmx_value < DMX_MACRO_STORM){
-      000264 BF F0 00         [24]  769 	cjne	r7,#0xf0,00163$
-      000267                        770 00163$:
-      000267 50 04            [24]  771 	jnc	00108$
-                                    772 ;	../LED_Manager/led.c:129: return OPTION_MACRO_STORM_DMX;
-      000269 75 82 06         [24]  773 	mov	dpl,#0x06
-      00026C 22               [24]  774 	ret
-      00026D                        775 00108$:
-                                    776 ;	../LED_Manager/led.c:132: return 69; // ;)
-      00026D 75 82 45         [24]  777 	mov	dpl,#0x45
-                                    778 ;	../LED_Manager/led.c:133: }
-      000270 22               [24]  779 	ret
-                                    780 ;------------------------------------------------------------
-                                    781 ;Allocation info for local variables in function 'play_macro'
-                                    782 ;------------------------------------------------------------
-                                    783 ;macro                     Allocated to stack - _bp -3
-                                    784 ;macro_speed               Allocated to stack - _bp -4
-                                    785 ;tick                      Allocated to stack - _bp +1
-                                    786 ;rng                       Allocated to stack - _bp +5
-                                    787 ;changed                   Allocated to registers r3 
-                                    788 ;tock                      Allocated with name '_play_macro_tock_65536_55'
-                                    789 ;primaryCount              Allocated with name '_play_macro_primaryCount_65536_55'
-                                    790 ;secondaryCount            Allocated with name '_play_macro_secondaryCount_65536_55'
-                                    791 ;direction                 Allocated with name '_play_macro_direction_65536_55'
-                                    792 ;------------------------------------------------------------
-                                    793 ;	../LED_Manager/led.c:135: void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
-                                    794 ;	-----------------------------------------
-                                    795 ;	 function play_macro
-                                    796 ;	-----------------------------------------
-      000271                        797 _play_macro:
-      000271 C0*00            [24]  798 	push	_bp
-      000273 85 81*00         [24]  799 	mov	_bp,sp
-      000276 C0 82            [24]  800 	push	dpl
-      000278 C0 83            [24]  801 	push	dph
-      00027A C0 F0            [24]  802 	push	b
-      00027C C0 E0            [24]  803 	push	acc
-      00027E E5 81            [12]  804 	mov	a,sp
-      000280 24 04            [12]  805 	add	a,#0x04
-      000282 F5 81            [12]  806 	mov	sp,a
-                                    807 ;	../LED_Manager/led.c:140: uint32_t rng = 0;
-      000284 E5*00            [12]  808 	mov	a,_bp
-      000286 24 05            [12]  809 	add	a,#0x05
-      000288 F8               [12]  810 	mov	r0,a
-      000289 E4               [12]  811 	clr	a
-      00028A F6               [12]  812 	mov	@r0,a
-      00028B 08               [12]  813 	inc	r0
-      00028C F6               [12]  814 	mov	@r0,a
-      00028D 08               [12]  815 	inc	r0
-      00028E F6               [12]  816 	mov	@r0,a
-      00028F 08               [12]  817 	inc	r0
-      000290 F6               [12]  818 	mov	@r0,a
-                                    819 ;	../LED_Manager/led.c:141: uint8_t changed = 0;
-      000291 7B 00            [12]  820 	mov	r3,#0x00
-                                    821 ;	../LED_Manager/led.c:145: if(!(tick % (MACRO_FREQ - (macro_speed >> 1)))){
-      000293 E5*00            [12]  822 	mov	a,_bp
-      000295 24 FC            [12]  823 	add	a,#0xfc
-      000297 F8               [12]  824 	mov	r0,a
-      000298 E6               [12]  825 	mov	a,@r0
-      000299 C3               [12]  826 	clr	c
-      00029A 13               [12]  827 	rrc	a
-      00029B FC               [12]  828 	mov	r4,a
-      00029C 7D 00            [12]  829 	mov	r5,#0x00
-      00029E 74 85            [12]  830 	mov	a,#0x85
-      0002A0 C3               [12]  831 	clr	c
-      0002A1 9C               [12]  832 	subb	a,r4
-      0002A2 FC               [12]  833 	mov	r4,a
-      0002A3 E4               [12]  834 	clr	a
-      0002A4 9D               [12]  835 	subb	a,r5
-      0002A5 FD               [12]  836 	mov	r5,a
-      0002A6 33               [12]  837 	rlc	a
-      0002A7 95 E0            [12]  838 	subb	a,acc
-      0002A9 FE               [12]  839 	mov	r6,a
-      0002AA FF               [12]  840 	mov	r7,a
-      0002AB C0 03            [24]  841 	push	ar3
-      0002AD C0 04            [24]  842 	push	ar4
-      0002AF C0 05            [24]  843 	push	ar5
-      0002B1 C0 06            [24]  844 	push	ar6
-      0002B3 C0 07            [24]  845 	push	ar7
-      0002B5 A8*00            [24]  846 	mov	r0,_bp
-      0002B7 08               [12]  847 	inc	r0
-      0002B8 86 82            [24]  848 	mov	dpl,@r0
-      0002BA 08               [12]  849 	inc	r0
-      0002BB 86 83            [24]  850 	mov	dph,@r0
-      0002BD 08               [12]  851 	inc	r0
-      0002BE 86 F0            [24]  852 	mov	b,@r0
-      0002C0 08               [12]  853 	inc	r0
-      0002C1 E6               [12]  854 	mov	a,@r0
-      0002C2 12r00r00         [24]  855 	lcall	__modulong
-      0002C5 AC 82            [24]  856 	mov	r4,dpl
-      0002C7 AD 83            [24]  857 	mov	r5,dph
-      0002C9 AE F0            [24]  858 	mov	r6,b
-      0002CB FF               [12]  859 	mov	r7,a
-      0002CC E5 81            [12]  860 	mov	a,sp
-      0002CE 24 FC            [12]  861 	add	a,#0xfc
-      0002D0 F5 81            [12]  862 	mov	sp,a
-      0002D2 D0 03            [24]  863 	pop	ar3
-      0002D4 EC               [12]  864 	mov	a,r4
-      0002D5 4D               [12]  865 	orl	a,r5
-      0002D6 4E               [12]  866 	orl	a,r6
-      0002D7 4F               [12]  867 	orl	a,r7
-      0002D8 70 22            [24]  868 	jnz	00102$
-                                    869 ;	../LED_Manager/led.c:146: changed = 0xFF;
-      0002DA 7B FF            [12]  870 	mov	r3,#0xff
-                                    871 ;	../LED_Manager/led.c:147: rng = rngU32(); /* TODO check back */
-      0002DC C0 03            [24]  872 	push	ar3
-      0002DE 12r06rF6         [24]  873 	lcall	_rngU32
-      0002E1 AC 82            [24]  874 	mov	r4,dpl
-      0002E3 AD 83            [24]  875 	mov	r5,dph
-      0002E5 AE F0            [24]  876 	mov	r6,b
-      0002E7 FF               [12]  877 	mov	r7,a
-      0002E8 D0 03            [24]  878 	pop	ar3
-      0002EA E5*00            [12]  879 	mov	a,_bp
-      0002EC 24 05            [12]  880 	add	a,#0x05
-      0002EE F8               [12]  881 	mov	r0,a
-      0002EF A6 04            [24]  882 	mov	@r0,ar4
-      0002F1 08               [12]  883 	inc	r0
-      0002F2 A6 05            [24]  884 	mov	@r0,ar5
-      0002F4 08               [12]  885 	inc	r0
-      0002F5 A6 06            [24]  886 	mov	@r0,ar6
-      0002F7 08               [12]  887 	inc	r0
-      0002F8 A6 07            [24]  888 	mov	@r0,ar7
-                                    889 ;	../LED_Manager/led.c:148: tock++;
-      0002FA 05*01            [12]  890 	inc	_play_macro_tock_65536_55
-      0002FC                        891 00102$:
-                                    892 ;	../LED_Manager/led.c:151: switch (macro)
-      0002FC E5*00            [12]  893 	mov	a,_bp
-      0002FE 24 FD            [12]  894 	add	a,#0xfd
-      000300 F8               [12]  895 	mov	r0,a
-      000301 B6 01 02         [24]  896 	cjne	@r0,#0x01,00344$
-      000304 80 54            [24]  897 	sjmp	00103$
-      000306                        898 00344$:
-      000306 E5*00            [12]  899 	mov	a,_bp
-      000308 24 FD            [12]  900 	add	a,#0xfd
-      00030A F8               [12]  901 	mov	r0,a
-      00030B B6 02 02         [24]  902 	cjne	@r0,#0x02,00345$
-      00030E 80 53            [24]  903 	sjmp	00104$
-      000310                        904 00345$:
-      000310 E5*00            [12]  905 	mov	a,_bp
-      000312 24 FD            [12]  906 	add	a,#0xfd
-      000314 F8               [12]  907 	mov	r0,a
-      000315 E4               [12]  908 	clr	a
-      000316 B6 03 01         [24]  909 	cjne	@r0,#0x03,00346$
-      000319 04               [12]  910 	inc	a
-      00031A                        911 00346$:
-      00031A FF               [12]  912 	mov	r7,a
-      00031B 60 03            [24]  913 	jz	00348$
-      00031D 02r04r2A         [24]  914 	ljmp	00120$
-      000320                        915 00348$:
-      000320 E5*00            [12]  916 	mov	a,_bp
-      000322 24 FD            [12]  917 	add	a,#0xfd
-      000324 F8               [12]  918 	mov	r0,a
-      000325 B6 04 03         [24]  919 	cjne	@r0,#0x04,00349$
-      000328 02r04r2A         [24]  920 	ljmp	00120$
-      00032B                        921 00349$:
-      00032B E5*00            [12]  922 	mov	a,_bp
-      00032D 24 FD            [12]  923 	add	a,#0xfd
-      00032F F8               [12]  924 	mov	r0,a
-      000330 B6 05 03         [24]  925 	cjne	@r0,#0x05,00350$
-      000333 02r04r2A         [24]  926 	ljmp	00120$
-      000336                        927 00350$:
-      000336 E5*00            [12]  928 	mov	a,_bp
-      000338 24 FD            [12]  929 	add	a,#0xfd
-      00033A F8               [12]  930 	mov	r0,a
-      00033B B6 06 03         [24]  931 	cjne	@r0,#0x06,00351$
-      00033E 02r05r12         [24]  932 	ljmp	00151$
-      000341                        933 00351$:
-      000341 E5*00            [12]  934 	mov	a,_bp
-      000343 24 FD            [12]  935 	add	a,#0xfd
-      000345 F8               [12]  936 	mov	r0,a
-      000346 B6 21 03         [24]  937 	cjne	@r0,#0x21,00352$
-      000349 02r05r85         [24]  938 	ljmp	00165$
-      00034C                        939 00352$:
-      00034C E5*00            [12]  940 	mov	a,_bp
-      00034E 24 FD            [12]  941 	add	a,#0xfd
-      000350 F8               [12]  942 	mov	r0,a
-      000351 B6 45 03         [24]  943 	cjne	@r0,#0x45,00353$
-      000354 02r05r8B         [24]  944 	ljmp	00166$
-      000357                        945 00353$:
-      000357 02r06r59         [24]  946 	ljmp	00185$
-                                    947 ;	../LED_Manager/led.c:153: case OPTION_MACRO_RAINBOW_DMX: //rainbow
-      00035A                        948 00103$:
-                                    949 ;	../LED_Manager/led.c:154: color_wheel(tock);
-      00035A 85*01 82         [24]  950 	mov	dpl,_play_macro_tock_65536_55
-      00035D 12r06r62         [24]  951 	lcall	_color_wheel
-                                    952 ;	../LED_Manager/led.c:155: break;
-      000360 02r06r5C         [24]  953 	ljmp	00187$
-                                    954 ;	../LED_Manager/led.c:156: case OPTION_MACRO_FIRE_DMX: //fire
-      000363                        955 00104$:
-                                    956 ;	../LED_Manager/led.c:157: if(changed) { 
-      000363 EB               [12]  957 	mov	a,r3
-      000364 70 03            [24]  958 	jnz	00354$
-      000366 02r06r5C         [24]  959 	ljmp	00187$
-      000369                        960 00354$:
-                                    961 ;	../LED_Manager/led.c:159: if(primaryCount < 55){ primaryCount = 55; direction |= 0x01;}
-      000369 74 C9            [12]  962 	mov	a,#0x100 - 0x37
-      00036B 25*02            [12]  963 	add	a,_play_macro_primaryCount_65536_55
-      00036D 40 0C            [24]  964 	jc	00106$
-      00036F 75*02 37         [24]  965 	mov	_play_macro_primaryCount_65536_55,#0x37
-      000372 AD*04            [24]  966 	mov	r5,_play_macro_direction_65536_55
-      000374 7E 00            [12]  967 	mov	r6,#0x00
-      000376 43 05 01         [24]  968 	orl	ar5,#0x01
-      000379 8D*04            [24]  969 	mov	_play_macro_direction_65536_55,r5
-      00037B                        970 00106$:
-                                    971 ;	../LED_Manager/led.c:160: if(direction & 0x01){
-      00037B E5*04            [12]  972 	mov	a,_play_macro_direction_65536_55
-      00037D 30 E0 0E         [24]  973 	jnb	acc.0,00114$
-                                    974 ;	../LED_Manager/led.c:161: if(primaryCount == 255){
-      000380 74 FF            [12]  975 	mov	a,#0xff
-      000382 B5*02 05         [24]  976 	cjne	a,_play_macro_primaryCount_65536_55,00108$
-                                    977 ;	../LED_Manager/led.c:162: direction &= ~0x01;
-      000385 53*04 FE         [24]  978 	anl	_play_macro_direction_65536_55,#0xfe
-      000388 80 20            [24]  979 	sjmp	00115$
-      00038A                        980 00108$:
-                                    981 ;	../LED_Manager/led.c:164: primaryCount++;
-      00038A 05*02            [12]  982 	inc	_play_macro_primaryCount_65536_55
-      00038C 80 1C            [24]  983 	sjmp	00115$
-      00038E                        984 00114$:
-                                    985 ;	../LED_Manager/led.c:167: if(primaryCount - 1 == 55){
-      00038E AD*02            [24]  986 	mov	r5,_play_macro_primaryCount_65536_55
-      000390 7E 00            [12]  987 	mov	r6,#0x00
-      000392 1D               [12]  988 	dec	r5
-      000393 BD FF 01         [24]  989 	cjne	r5,#0xff,00359$
-      000396 1E               [12]  990 	dec	r6
-      000397                        991 00359$:
-      000397 BD 37 0E         [24]  992 	cjne	r5,#0x37,00111$
-      00039A BE 00 0B         [24]  993 	cjne	r6,#0x00,00111$
-                                    994 ;	../LED_Manager/led.c:168: direction |= 0x01;
-      00039D AD*04            [24]  995 	mov	r5,_play_macro_direction_65536_55
-      00039F 7E 00            [12]  996 	mov	r6,#0x00
-      0003A1 43 05 01         [24]  997 	orl	ar5,#0x01
-      0003A4 8D*04            [24]  998 	mov	_play_macro_direction_65536_55,r5
-      0003A6 80 02            [24]  999 	sjmp	00115$
-      0003A8                       1000 00111$:
-                                   1001 ;	../LED_Manager/led.c:170: primaryCount--;
-      0003A8 15*02            [12] 1002 	dec	_play_macro_primaryCount_65536_55
-      0003AA                       1003 00115$:
-                                   1004 ;	../LED_Manager/led.c:174: set_leds(primaryCount, (uint8_t) (rng % (primaryCount >> 2)), (!(rng % 13)) ? PWMDATA17H > 1 : 0);
-      0003AA 74 0D            [12] 1005 	mov	a,#0x0d
-      0003AC C0 E0            [24] 1006 	push	acc
-      0003AE E4               [12] 1007 	clr	a
-      0003AF C0 E0            [24] 1008 	push	acc
-      0003B1 C0 E0            [24] 1009 	push	acc
-      0003B3 C0 E0            [24] 1010 	push	acc
-      0003B5 E5*00            [12] 1011 	mov	a,_bp
-      0003B7 24 05            [12] 1012 	add	a,#0x05
-      0003B9 F8               [12] 1013 	mov	r0,a
-      0003BA 86 82            [24] 1014 	mov	dpl,@r0
-      0003BC 08               [12] 1015 	inc	r0
-      0003BD 86 83            [24] 1016 	mov	dph,@r0
-      0003BF 08               [12] 1017 	inc	r0
-      0003C0 86 F0            [24] 1018 	mov	b,@r0
-      0003C2 08               [12] 1019 	inc	r0
-      0003C3 E6               [12] 1020 	mov	a,@r0
-      0003C4 12r00r00         [24] 1021 	lcall	__modulong
-      0003C7 AB 82            [24] 1022 	mov	r3,dpl
-      0003C9 AC 83            [24] 1023 	mov	r4,dph
-      0003CB AD F0            [24] 1024 	mov	r5,b
-      0003CD FE               [12] 1025 	mov	r6,a
-      0003CE E5 81            [12] 1026 	mov	a,sp
-      0003D0 24 FC            [12] 1027 	add	a,#0xfc
-      0003D2 F5 81            [12] 1028 	mov	sp,a
-      0003D4 EB               [12] 1029 	mov	a,r3
-      0003D5 4C               [12] 1030 	orl	a,r4
-      0003D6 4D               [12] 1031 	orl	a,r5
-      0003D7 4E               [12] 1032 	orl	a,r6
-      0003D8 70 0C            [24] 1033 	jnz	00189$
-      0003DA C3               [12] 1034 	clr	c
-      0003DB 74 01            [12] 1035 	mov	a,#0x01
-      0003DD 95 AD            [12] 1036 	subb	a,_PWMDATA17H
-      0003DF E4               [12] 1037 	clr	a
-      0003E0 33               [12] 1038 	rlc	a
-      0003E1 FD               [12] 1039 	mov	r5,a
-      0003E2 7E 00            [12] 1040 	mov	r6,#0x00
-      0003E4 80 04            [24] 1041 	sjmp	00190$
-      0003E6                       1042 00189$:
-      0003E6 7D 00            [12] 1043 	mov	r5,#0x00
-      0003E8 7E 00            [12] 1044 	mov	r6,#0x00
-      0003EA                       1045 00190$:
-      0003EA E5*02            [12] 1046 	mov	a,_play_macro_primaryCount_65536_55
-      0003EC 03               [12] 1047 	rr	a
-      0003ED 03               [12] 1048 	rr	a
-      0003EE 54 3F            [12] 1049 	anl	a,#0x3f
-      0003F0 FE               [12] 1050 	mov	r6,a
-      0003F1 7C 00            [12] 1051 	mov	r4,#0x00
-      0003F3 7B 00            [12] 1052 	mov	r3,#0x00
-      0003F5 7A 00            [12] 1053 	mov	r2,#0x00
-      0003F7 C0 05            [24] 1054 	push	ar5
-      0003F9 C0 06            [24] 1055 	push	ar6
-      0003FB C0 04            [24] 1056 	push	ar4
-      0003FD C0 03            [24] 1057 	push	ar3
-      0003FF C0 02            [24] 1058 	push	ar2
-      000401 E5*00            [12] 1059 	mov	a,_bp
-      000403 24 05            [12] 1060 	add	a,#0x05
-      000405 F8               [12] 1061 	mov	r0,a
-      000406 86 82            [24] 1062 	mov	dpl,@r0
-      000408 08               [12] 1063 	inc	r0
-      000409 86 83            [24] 1064 	mov	dph,@r0
-      00040B 08               [12] 1065 	inc	r0
-      00040C 86 F0            [24] 1066 	mov	b,@r0
-      00040E 08               [12] 1067 	inc	r0
-      00040F E6               [12] 1068 	mov	a,@r0
-      000410 12r00r00         [24] 1069 	lcall	__modulong
-      000413 AA 82            [24] 1070 	mov	r2,dpl
-      000415 E5 81            [12] 1071 	mov	a,sp
-      000417 24 FC            [12] 1072 	add	a,#0xfc
-      000419 F5 81            [12] 1073 	mov	sp,a
-      00041B C0 02            [24] 1074 	push	ar2
-      00041D 85*02 82         [24] 1075 	mov	dpl,_play_macro_primaryCount_65536_55
-      000420 12r07r33         [24] 1076 	lcall	_set_leds
-      000423 15 81            [12] 1077 	dec	sp
-      000425 15 81            [12] 1078 	dec	sp
-                                   1079 ;	../LED_Manager/led.c:177: break;
-      000427 02r06r5C         [24] 1080 	ljmp	00187$
-                                   1081 ;	../LED_Manager/led.c:180: case OPTION_MACRO_ETHER_DMX:
-      00042A                       1082 00120$:
-                                   1083 ;	../LED_Manager/led.c:182: if(changed){
-      00042A EB               [12] 1084 	mov	a,r3
-      00042B 70 03            [24] 1085 	jnz	00363$
-      00042D 02r06r5C         [24] 1086 	ljmp	00187$
-      000430                       1087 00363$:
-                                   1088 ;	../LED_Manager/led.c:184: if(direction & 0x01){
-      000430 E5*04            [12] 1089 	mov	a,_play_macro_direction_65536_55
-      000432 30 E0 14         [24] 1090 	jnb	acc.0,00126$
-                                   1091 ;	../LED_Manager/led.c:185: primaryCount +=2;
-      000435 AE*02            [24] 1092 	mov	r6,_play_macro_primaryCount_65536_55
-      000437 74 02            [12] 1093 	mov	a,#0x02
-      000439 2E               [12] 1094 	add	a,r6
-                                   1095 ;	../LED_Manager/led.c:187: if(primaryCount < 75){
-      00043A F5*02            [12] 1096 	mov	_play_macro_primaryCount_65536_55,a
-      00043C C3               [12] 1097 	clr	c
-      00043D 94 4B            [12] 1098 	subb	a,#0x4b
-      00043F 50 1F            [24] 1099 	jnc	00127$
-                                   1100 ;	../LED_Manager/led.c:188: direction &= ~0x01;
-      000441 53*04 FE         [24] 1101 	anl	_play_macro_direction_65536_55,#0xfe
-                                   1102 ;	../LED_Manager/led.c:189: primaryCount = 255;
-      000444 75*02 FF         [24] 1103 	mov	_play_macro_primaryCount_65536_55,#0xff
-      000447 80 17            [24] 1104 	sjmp	00127$
-      000449                       1105 00126$:
-                                   1106 ;	../LED_Manager/led.c:193: primaryCount -=2;
-      000449 E5*02            [12] 1107 	mov	a,_play_macro_primaryCount_65536_55
-      00044B FE               [12] 1108 	mov	r6,a
-      00044C 24 FE            [12] 1109 	add	a,#0xfe
-                                   1110 ;	../LED_Manager/led.c:195: if(primaryCount <= 130){
-      00044E F5*02            [12] 1111 	mov  _play_macro_primaryCount_65536_55,a
-      000450 24 7D            [12] 1112 	add	a,#0xff - 0x82
-      000452 40 0C            [24] 1113 	jc	00127$
-                                   1114 ;	../LED_Manager/led.c:196: direction |= 0x01;
-      000454 AD*04            [24] 1115 	mov	r5,_play_macro_direction_65536_55
-      000456 7E 00            [12] 1116 	mov	r6,#0x00
-      000458 43 05 01         [24] 1117 	orl	ar5,#0x01
-      00045B 8D*04            [24] 1118 	mov	_play_macro_direction_65536_55,r5
-                                   1119 ;	../LED_Manager/led.c:197: primaryCount = 130;
-      00045D 75*02 82         [24] 1120 	mov	_play_macro_primaryCount_65536_55,#0x82
-      000460                       1121 00127$:
-                                   1122 ;	../LED_Manager/led.c:201: if(rng % 21 == 0){
-      000460 C0 07            [24] 1123 	push	ar7
-      000462 74 15            [12] 1124 	mov	a,#0x15
-      000464 C0 E0            [24] 1125 	push	acc
-      000466 E4               [12] 1126 	clr	a
-      000467 C0 E0            [24] 1127 	push	acc
-      000469 C0 E0            [24] 1128 	push	acc
-      00046B C0 E0            [24] 1129 	push	acc
-      00046D E5*00            [12] 1130 	mov	a,_bp
-      00046F 24 05            [12] 1131 	add	a,#0x05
-      000471 F8               [12] 1132 	mov	r0,a
-      000472 86 82            [24] 1133 	mov	dpl,@r0
-      000474 08               [12] 1134 	inc	r0
-      000475 86 83            [24] 1135 	mov	dph,@r0
-      000477 08               [12] 1136 	inc	r0
-      000478 86 F0            [24] 1137 	mov	b,@r0
-      00047A 08               [12] 1138 	inc	r0
-      00047B E6               [12] 1139 	mov	a,@r0
-      00047C 12r00r00         [24] 1140 	lcall	__modulong
-      00047F AB 82            [24] 1141 	mov	r3,dpl
-      000481 AC 83            [24] 1142 	mov	r4,dph
-      000483 AD F0            [24] 1143 	mov	r5,b
-      000485 FE               [12] 1144 	mov	r6,a
-      000486 E5 81            [12] 1145 	mov	a,sp
-      000488 24 FC            [12] 1146 	add	a,#0xfc
-      00048A F5 81            [12] 1147 	mov	sp,a
-      00048C D0 07            [24] 1148 	pop	ar7
-      00048E EB               [12] 1149 	mov	a,r3
-      00048F 4C               [12] 1150 	orl	a,r4
-      000490 4D               [12] 1151 	orl	a,r5
-      000491 4E               [12] 1152 	orl	a,r6
-      000492 70 15            [24] 1153 	jnz	00139$
-                                   1154 ;	../LED_Manager/led.c:202: if(direction & 0x10){
-      000494 E5*04            [12] 1155 	mov	a,_play_macro_direction_65536_55
-      000496 30 E4 05         [24] 1156 	jnb	acc.4,00129$
-                                   1157 ;	../LED_Manager/led.c:203: direction &= ~0x10;
-      000499 53*04 EF         [24] 1158 	anl	_play_macro_direction_65536_55,#0xef
-      00049C 80 28            [24] 1159 	sjmp	00140$
-      00049E                       1160 00129$:
-                                   1161 ;	../LED_Manager/led.c:205: direction |= 0x10;
-      00049E AD*04            [24] 1162 	mov	r5,_play_macro_direction_65536_55
-      0004A0 7E 00            [12] 1163 	mov	r6,#0x00
-      0004A2 43 05 10         [24] 1164 	orl	ar5,#0x10
-      0004A5 8D*04            [24] 1165 	mov	_play_macro_direction_65536_55,r5
-      0004A7 80 1D            [24] 1166 	sjmp	00140$
-      0004A9                       1167 00139$:
-                                   1168 ;	../LED_Manager/led.c:208: if(direction & 0x10){
-      0004A9 E5*04            [12] 1169 	mov	a,_play_macro_direction_65536_55
-      0004AB 30 E4 0D         [24] 1170 	jnb	acc.4,00136$
-                                   1171 ;	../LED_Manager/led.c:209: secondaryCount++;
-      0004AE 05*03            [12] 1172 	inc	_play_macro_secondaryCount_65536_55
-                                   1173 ;	../LED_Manager/led.c:211: if(secondaryCount >= 34){
-      0004B0 74 DE            [12] 1174 	mov	a,#0x100 - 0x22
-      0004B2 25*03            [12] 1175 	add	a,_play_macro_secondaryCount_65536_55
-      0004B4 50 10            [24] 1176 	jnc	00140$
-                                   1177 ;	../LED_Manager/led.c:212: secondaryCount = 34;
-      0004B6 75*03 22         [24] 1178 	mov	_play_macro_secondaryCount_65536_55,#0x22
-      0004B9 80 0B            [24] 1179 	sjmp	00140$
-      0004BB                       1180 00136$:
-                                   1181 ;	../LED_Manager/led.c:216: secondaryCount--;
-      0004BB 15*03            [12] 1182 	dec	_play_macro_secondaryCount_65536_55
-                                   1183 ;	../LED_Manager/led.c:218: if(secondaryCount > 36){
-      0004BD E5*03            [12] 1184 	mov	a,_play_macro_secondaryCount_65536_55
-      0004BF 24 DB            [12] 1185 	add	a,#0xff - 0x24
-      0004C1 50 03            [24] 1186 	jnc	00140$
-                                   1187 ;	../LED_Manager/led.c:219: secondaryCount = 0;
-      0004C3 75*03 00         [24] 1188 	mov	_play_macro_secondaryCount_65536_55,#0x00
-      0004C6                       1189 00140$:
-                                   1190 ;	../LED_Manager/led.c:224: if(macro == OPTION_MACRO_WATER_DMX){ //water
-      0004C6 EF               [12] 1191 	mov	a,r7
-      0004C7 60 11            [24] 1192 	jz	00147$
-                                   1193 ;	../LED_Manager/led.c:225: set_leds(secondaryCount, secondaryCount, primaryCount);
-      0004C9 C0*02            [24] 1194 	push	_play_macro_primaryCount_65536_55
-      0004CB C0*03            [24] 1195 	push	_play_macro_secondaryCount_65536_55
-      0004CD 85*03 82         [24] 1196 	mov	dpl,_play_macro_secondaryCount_65536_55
-      0004D0 12r07r33         [24] 1197 	lcall	_set_leds
-      0004D3 15 81            [12] 1198 	dec	sp
-      0004D5 15 81            [12] 1199 	dec	sp
-      0004D7 02r06r5C         [24] 1200 	ljmp	00187$
-      0004DA                       1201 00147$:
-                                   1202 ;	../LED_Manager/led.c:226: } else if(macro == OPTION_MACRO_ACID_DMX){ //acid
-      0004DA E5*00            [12] 1203 	mov	a,_bp
-      0004DC 24 FD            [12] 1204 	add	a,#0xfd
-      0004DE F8               [12] 1205 	mov	r0,a
-      0004DF B6 04 12         [24] 1206 	cjne	@r0,#0x04,00144$
-                                   1207 ;	../LED_Manager/led.c:227: set_leds(secondaryCount, primaryCount, 0);
-      0004E2 E4               [12] 1208 	clr	a
-      0004E3 C0 E0            [24] 1209 	push	acc
-      0004E5 C0*02            [24] 1210 	push	_play_macro_primaryCount_65536_55
-      0004E7 85*03 82         [24] 1211 	mov	dpl,_play_macro_secondaryCount_65536_55
-      0004EA 12r07r33         [24] 1212 	lcall	_set_leds
-      0004ED 15 81            [12] 1213 	dec	sp
-      0004EF 15 81            [12] 1214 	dec	sp
-      0004F1 02r06r5C         [24] 1215 	ljmp	00187$
-      0004F4                       1216 00144$:
-                                   1217 ;	../LED_Manager/led.c:228: } else if(macro == OPTION_MACRO_ETHER_DMX){ //ether
-      0004F4 E5*00            [12] 1218 	mov	a,_bp
-      0004F6 24 FD            [12] 1219 	add	a,#0xfd
-      0004F8 F8               [12] 1220 	mov	r0,a
-      0004F9 B6 05 02         [24] 1221 	cjne	@r0,#0x05,00375$
-      0004FC 80 03            [24] 1222 	sjmp	00376$
-      0004FE                       1223 00375$:
-      0004FE 02r06r5C         [24] 1224 	ljmp	00187$
-      000501                       1225 00376$:
-                                   1226 ;	../LED_Manager/led.c:229: set_leds(primaryCount, secondaryCount, primaryCount);
-      000501 C0*02            [24] 1227 	push	_play_macro_primaryCount_65536_55
-      000503 C0*03            [24] 1228 	push	_play_macro_secondaryCount_65536_55
-      000505 85*02 82         [24] 1229 	mov	dpl,_play_macro_primaryCount_65536_55
-      000508 12r07r33         [24] 1230 	lcall	_set_leds
-      00050B 15 81            [12] 1231 	dec	sp
-      00050D 15 81            [12] 1232 	dec	sp
-                                   1233 ;	../LED_Manager/led.c:233: break;
-      00050F 02r06r5C         [24] 1234 	ljmp	00187$
-                                   1235 ;	../LED_Manager/led.c:234: case OPTION_MACRO_STORM_DMX: //storm
-      000512                       1236 00151$:
-                                   1237 ;	../LED_Manager/led.c:235: if(changed){
-      000512 EB               [12] 1238 	mov	a,r3
-      000513 70 03            [24] 1239 	jnz	00377$
-      000515 02r06r5C         [24] 1240 	ljmp	00187$
-      000518                       1241 00377$:
-                                   1242 ;	../LED_Manager/led.c:236: if(!(rng % STORM_FREQ)){
-      000518 74 59            [12] 1243 	mov	a,#0x59
-      00051A C0 E0            [24] 1244 	push	acc
-      00051C E4               [12] 1245 	clr	a
-      00051D C0 E0            [24] 1246 	push	acc
-      00051F C0 E0            [24] 1247 	push	acc
-      000521 C0 E0            [24] 1248 	push	acc
-      000523 E5*00            [12] 1249 	mov	a,_bp
-      000525 24 05            [12] 1250 	add	a,#0x05
-      000527 F8               [12] 1251 	mov	r0,a
-      000528 86 82            [24] 1252 	mov	dpl,@r0
-      00052A 08               [12] 1253 	inc	r0
-      00052B 86 83            [24] 1254 	mov	dph,@r0
-      00052D 08               [12] 1255 	inc	r0
-      00052E 86 F0            [24] 1256 	mov	b,@r0
-      000530 08               [12] 1257 	inc	r0
-      000531 E6               [12] 1258 	mov	a,@r0
-      000532 12r00r00         [24] 1259 	lcall	__modulong
-      000535 AC 82            [24] 1260 	mov	r4,dpl
-      000537 AD 83            [24] 1261 	mov	r5,dph
-      000539 AE F0            [24] 1262 	mov	r6,b
-      00053B FF               [12] 1263 	mov	r7,a
-      00053C E5 81            [12] 1264 	mov	a,sp
-      00053E 24 FC            [12] 1265 	add	a,#0xfc
-      000540 F5 81            [12] 1266 	mov	sp,a
-      000542 EC               [12] 1267 	mov	a,r4
-      000543 4D               [12] 1268 	orl	a,r5
-      000544 4E               [12] 1269 	orl	a,r6
-      000545 4F               [12] 1270 	orl	a,r7
-      000546 70 05            [24] 1271 	jnz	00161$
-                                   1272 ;	../LED_Manager/led.c:237: primaryCount = 255;
-      000548 75*02 FF         [24] 1273 	mov	_play_macro_primaryCount_65536_55,#0xff
-      00054B 80 27            [24] 1274 	sjmp	00162$
-      00054D                       1275 00161$:
-                                   1276 ;	../LED_Manager/led.c:239: if(primaryCount > 200){
-      00054D E5*02            [12] 1277 	mov	a,_play_macro_primaryCount_65536_55
-      00054F 24 37            [12] 1278 	add	a,#0xff - 0xc8
-      000551 50 04            [24] 1279 	jnc	00158$
-                                   1280 ;	../LED_Manager/led.c:240: primaryCount--;
-      000553 15*02            [12] 1281 	dec	_play_macro_primaryCount_65536_55
-      000555 80 1D            [24] 1282 	sjmp	00162$
-      000557                       1283 00158$:
-                                   1284 ;	../LED_Manager/led.c:241: } else if(primaryCount > 130){
-      000557 E5*02            [12] 1285 	mov	a,_play_macro_primaryCount_65536_55
-      000559 24 7D            [12] 1286 	add	a,#0xff - 0x82
-      00055B 50 09            [24] 1287 	jnc	00155$
-                                   1288 ;	../LED_Manager/led.c:242: primaryCount-=2;
-      00055D E5*02            [12] 1289 	mov	a,_play_macro_primaryCount_65536_55
-      00055F FF               [12] 1290 	mov	r7,a
-      000560 24 FE            [12] 1291 	add	a,#0xfe
-      000562 F5*02            [12] 1292 	mov	_play_macro_primaryCount_65536_55,a
-      000564 80 0E            [24] 1293 	sjmp	00162$
-      000566                       1294 00155$:
-                                   1295 ;	../LED_Manager/led.c:244: primaryCount-=3;
-      000566 E5*02            [12] 1296 	mov	a,_play_macro_primaryCount_65536_55
-      000568 FF               [12] 1297 	mov	r7,a
-      000569 24 FD            [12] 1298 	add	a,#0xfd
-                                   1299 ;	../LED_Manager/led.c:245: if(primaryCount > 200){
-      00056B F5*02            [12] 1300 	mov  _play_macro_primaryCount_65536_55,a
-      00056D 24 37            [12] 1301 	add	a,#0xff - 0xc8
-      00056F 50 03            [24] 1302 	jnc	00162$
-                                   1303 ;	../LED_Manager/led.c:246: primaryCount = 0;
-      000571 75*02 00         [24] 1304 	mov	_play_macro_primaryCount_65536_55,#0x00
-      000574                       1305 00162$:
-                                   1306 ;	../LED_Manager/led.c:251: set_leds(primaryCount, primaryCount, primaryCount);
-      000574 C0*02            [24] 1307 	push	_play_macro_primaryCount_65536_55
-      000576 C0*02            [24] 1308 	push	_play_macro_primaryCount_65536_55
-      000578 85*02 82         [24] 1309 	mov	dpl,_play_macro_primaryCount_65536_55
-      00057B 12r07r33         [24] 1310 	lcall	_set_leds
-      00057E 15 81            [12] 1311 	dec	sp
-      000580 15 81            [12] 1312 	dec	sp
-                                   1313 ;	../LED_Manager/led.c:254: break;
-      000582 02r06r5C         [24] 1314 	ljmp	00187$
-                                   1315 ;	../LED_Manager/led.c:255: case OPTION_MACRO_WHITE: //w
-      000585                       1316 00165$:
-                                   1317 ;	../LED_Manager/led.c:256: whiteout();
-      000585 12r06rD5         [24] 1318 	lcall	_whiteout
-                                   1319 ;	../LED_Manager/led.c:257: break;
-      000588 02r06r5C         [24] 1320 	ljmp	00187$
-                                   1321 ;	../LED_Manager/led.c:258: case 69:
-      00058B                       1322 00166$:
-                                   1323 ;	../LED_Manager/led.c:259: if(tock < 32){
-      00058B 74 E0            [12] 1324 	mov	a,#0x100 - 0x20
-      00058D 25*01            [12] 1325 	add	a,_play_macro_tock_65536_55
-      00058F 40 3F            [24] 1326 	jc	00183$
-                                   1327 ;	../LED_Manager/led.c:261: if(rng & (SH_B >> tock)){
-      000591 85*01 F0         [24] 1328 	mov	b,_play_macro_tock_65536_55
-      000594 05 F0            [12] 1329 	inc	b
-      000596 7C 00            [12] 1330 	mov	r4,#0x00
-      000598 7D 00            [12] 1331 	mov	r5,#0x00
-      00059A 7E 00            [12] 1332 	mov	r6,#0x00
-      00059C 7F 80            [12] 1333 	mov	r7,#0x80
-      00059E 80 0D            [24] 1334 	sjmp	00384$
-      0005A0                       1335 00383$:
-      0005A0 C3               [12] 1336 	clr	c
-      0005A1 EF               [12] 1337 	mov	a,r7
-      0005A2 13               [12] 1338 	rrc	a
-      0005A3 FF               [12] 1339 	mov	r7,a
-      0005A4 EE               [12] 1340 	mov	a,r6
-      0005A5 13               [12] 1341 	rrc	a
-      0005A6 FE               [12] 1342 	mov	r6,a
-      0005A7 ED               [12] 1343 	mov	a,r5
-      0005A8 13               [12] 1344 	rrc	a
-      0005A9 FD               [12] 1345 	mov	r5,a
-      0005AA EC               [12] 1346 	mov	a,r4
-      0005AB 13               [12] 1347 	rrc	a
-      0005AC FC               [12] 1348 	mov	r4,a
-      0005AD                       1349 00384$:
-      0005AD D5 F0 F0         [24] 1350 	djnz	b,00383$
-      0005B0 EC               [12] 1351 	mov	a,r4
-      0005B1 54 BA            [12] 1352 	anl	a,#0xba
-      0005B3 70 0F            [24] 1353 	jnz	00385$
-      0005B5 ED               [12] 1354 	mov	a,r5
-      0005B6 54 B8            [12] 1355 	anl	a,#0xb8
-      0005B8 70 0A            [24] 1356 	jnz	00385$
-      0005BA EE               [12] 1357 	mov	a,r6
-      0005BB 54 3B            [12] 1358 	anl	a,#0x3b
-      0005BD 70 05            [24] 1359 	jnz	00385$
-      0005BF EF               [12] 1360 	mov	a,r7
-      0005C0 54 EE            [12] 1361 	anl	a,#0xee
-      0005C2 60 06            [24] 1362 	jz	00168$
-      0005C4                       1363 00385$:
-                                   1364 ;	../LED_Manager/led.c:262: whiteout(); //White - Worth
-      0005C4 12r06rD5         [24] 1365 	lcall	_whiteout
-      0005C7 02r06r5C         [24] 1366 	ljmp	00187$
-      0005CA                       1367 00168$:
-                                   1368 ;	../LED_Manager/led.c:264: blackout();
-      0005CA 12r06rE6         [24] 1369 	lcall	_blackout
-      0005CD 02r06r5C         [24] 1370 	ljmp	00187$
-      0005D0                       1371 00183$:
-                                   1372 ;	../LED_Manager/led.c:266: } else if(tock < 64){
-      0005D0 74 C0            [12] 1373 	mov	a,#0x100 - 0x40
-      0005D2 25*01            [12] 1374 	add	a,_play_macro_tock_65536_55
-      0005D4 40 41            [24] 1375 	jc	00180$
-                                   1376 ;	../LED_Manager/led.c:268: if(rng & (SH_B >> (tock - 32))){
-      0005D6 E5*01            [12] 1377 	mov	a,_play_macro_tock_65536_55
-      0005D8 24 E0            [12] 1378 	add	a,#0xe0
-      0005DA FF               [12] 1379 	mov	r7,a
-      0005DB 8F F0            [24] 1380 	mov	b,r7
-      0005DD 05 F0            [12] 1381 	inc	b
-      0005DF 7F 00            [12] 1382 	mov	r7,#0x00
-      0005E1 7E 00            [12] 1383 	mov	r6,#0x00
-      0005E3 7D 00            [12] 1384 	mov	r5,#0x00
-      0005E5 7C 80            [12] 1385 	mov	r4,#0x80
-      0005E7 80 0D            [24] 1386 	sjmp	00388$
-      0005E9                       1387 00387$:
-      0005E9 C3               [12] 1388 	clr	c
-      0005EA EC               [12] 1389 	mov	a,r4
-      0005EB 13               [12] 1390 	rrc	a
-      0005EC FC               [12] 1391 	mov	r4,a
-      0005ED ED               [12] 1392 	mov	a,r5
-      0005EE 13               [12] 1393 	rrc	a
-      0005EF FD               [12] 1394 	mov	r5,a
-      0005F0 EE               [12] 1395 	mov	a,r6
-      0005F1 13               [12] 1396 	rrc	a
-      0005F2 FE               [12] 1397 	mov	r6,a
-      0005F3 EF               [12] 1398 	mov	a,r7
-      0005F4 13               [12] 1399 	rrc	a
-      0005F5 FF               [12] 1400 	mov	r7,a
-      0005F6                       1401 00388$:
-      0005F6 D5 F0 F0         [24] 1402 	djnz	b,00387$
-      0005F9 EF               [12] 1403 	mov	a,r7
-      0005FA 54 38            [12] 1404 	anl	a,#0x38
-      0005FC 70 0F            [24] 1405 	jnz	00389$
-      0005FE EE               [12] 1406 	mov	a,r6
-      0005FF 54 BA            [12] 1407 	anl	a,#0xba
-      000601 70 0A            [24] 1408 	jnz	00389$
-      000603 ED               [12] 1409 	mov	a,r5
-      000604 54 B8            [12] 1410 	anl	a,#0xb8
-      000606 70 05            [24] 1411 	jnz	00389$
-      000608 EC               [12] 1412 	mov	a,r4
-      000609 54 28            [12] 1413 	anl	a,#0x28
-      00060B 60 05            [24] 1414 	jz	00171$
-      00060D                       1415 00389$:
-                                   1416 ;	../LED_Manager/led.c:269: whiteout(); //White - Worth
-      00060D 12r06rD5         [24] 1417 	lcall	_whiteout
-      000610 80 4A            [24] 1418 	sjmp	00187$
-      000612                       1419 00171$:
-                                   1420 ;	../LED_Manager/led.c:271: blackout();
-      000612 12r06rE6         [24] 1421 	lcall	_blackout
-      000615 80 45            [24] 1422 	sjmp	00187$
-      000617                       1423 00180$:
-                                   1424 ;	../LED_Manager/led.c:273: } else if(tock < 83){
-      000617 74 AD            [12] 1425 	mov	a,#0x100 - 0x53
-      000619 25*01            [12] 1426 	add	a,_play_macro_tock_65536_55
-      00061B 40 37            [24] 1427 	jc	00177$
-                                   1428 ;	../LED_Manager/led.c:275: if(rng & (SH_B >> (tock - 64))){
-      00061D E5*01            [12] 1429 	mov	a,_play_macro_tock_65536_55
-      00061F 24 C0            [12] 1430 	add	a,#0xc0
-      000621 FF               [12] 1431 	mov	r7,a
-      000622 8F F0            [24] 1432 	mov	b,r7
-      000624 05 F0            [12] 1433 	inc	b
-      000626 7F 00            [12] 1434 	mov	r7,#0x00
-      000628 7E 00            [12] 1435 	mov	r6,#0x00
-      00062A 7D 00            [12] 1436 	mov	r5,#0x00
-      00062C 7C 80            [12] 1437 	mov	r4,#0x80
-      00062E 80 0D            [24] 1438 	sjmp	00392$
-      000630                       1439 00391$:
-      000630 C3               [12] 1440 	clr	c
-      000631 EC               [12] 1441 	mov	a,r4
-      000632 13               [12] 1442 	rrc	a
-      000633 FC               [12] 1443 	mov	r4,a
-      000634 ED               [12] 1444 	mov	a,r5
-      000635 13               [12] 1445 	rrc	a
-      000636 FD               [12] 1446 	mov	r5,a
-      000637 EE               [12] 1447 	mov	a,r6
-      000638 13               [12] 1448 	rrc	a
-      000639 FE               [12] 1449 	mov	r6,a
-      00063A EF               [12] 1450 	mov	a,r7
-      00063B 13               [12] 1451 	rrc	a
-      00063C FF               [12] 1452 	mov	r7,a
-      00063D                       1453 00392$:
-      00063D D5 F0 F0         [24] 1454 	djnz	b,00391$
-      000640 ED               [12] 1455 	mov	a,r5
-      000641 54 B8            [12] 1456 	anl	a,#0xb8
-      000643 70 05            [24] 1457 	jnz	00393$
-      000645 EC               [12] 1458 	mov	a,r4
-      000646 54 EB            [12] 1459 	anl	a,#0xeb
-      000648 60 05            [24] 1460 	jz	00174$
-      00064A                       1461 00393$:
-                                   1462 ;	../LED_Manager/led.c:276: whiteout();
-      00064A 12r06rD5         [24] 1463 	lcall	_whiteout
-      00064D 80 0D            [24] 1464 	sjmp	00187$
-      00064F                       1465 00174$:
-                                   1466 ;	../LED_Manager/led.c:278: blackout();
-      00064F 12r06rE6         [24] 1467 	lcall	_blackout
-      000652 80 08            [24] 1468 	sjmp	00187$
-      000654                       1469 00177$:
-                                   1470 ;	../LED_Manager/led.c:281: tock = 0;
-      000654 75*01 00         [24] 1471 	mov	_play_macro_tock_65536_55,#0x00
-                                   1472 ;	../LED_Manager/led.c:283: break;
-                                   1473 ;	../LED_Manager/led.c:284: default:
-      000657 80 03            [24] 1474 	sjmp	00187$
-      000659                       1475 00185$:
-                                   1476 ;	../LED_Manager/led.c:285: blackout();
-      000659 12r06rE6         [24] 1477 	lcall	_blackout
-                                   1478 ;	../LED_Manager/led.c:286: }
-      00065C                       1479 00187$:
-                                   1480 ;	../LED_Manager/led.c:288: }
-      00065C 85*00 81         [24] 1481 	mov	sp,_bp
-      00065F D0*00            [24] 1482 	pop	_bp
-      000661 22               [24] 1483 	ret
-                                   1484 ;------------------------------------------------------------
-                                   1485 ;Allocation info for local variables in function 'color_wheel'
-                                   1486 ;------------------------------------------------------------
-                                   1487 ;color                     Allocated to registers r6 
-                                   1488 ;------------------------------------------------------------
-                                   1489 ;	../LED_Manager/led.c:290: void color_wheel(uint8_t color){
-                                   1490 ;	-----------------------------------------
-                                   1491 ;	 function color_wheel
-                                   1492 ;	-----------------------------------------
-      000662                       1493 _color_wheel:
-      000662 AF 82            [24] 1494 	mov	r7,dpl
-                                   1495 ;	../LED_Manager/led.c:292: if(color < 85){
-      000664 BF 55 00         [24] 1496 	cjne	r7,#0x55,00119$
-      000667                       1497 00119$:
-      000667 50 20            [24] 1498 	jnc	00105$
-                                   1499 ;	../LED_Manager/led.c:293: set_leds(color * 3, 255 - color * 3, 0);
-      000669 8F 06            [24] 1500 	mov	ar6,r7
-      00066B EE               [12] 1501 	mov	a,r6
-      00066C 75 F0 03         [24] 1502 	mov	b,#0x03
-      00066F A4               [48] 1503 	mul	ab
-      000670 D3               [12] 1504 	setb	c
-      000671 94 FF            [12] 1505 	subb	a,#0xff
-      000673 F4               [12] 1506 	cpl	a
-      000674 FE               [12] 1507 	mov	r6,a
-      000675 EF               [12] 1508 	mov	a,r7
-      000676 75 F0 03         [24] 1509 	mov	b,#0x03
-      000679 A4               [48] 1510 	mul	ab
-      00067A F5 82            [12] 1511 	mov	dpl,a
-      00067C E4               [12] 1512 	clr	a
-      00067D C0 E0            [24] 1513 	push	acc
-      00067F C0 06            [24] 1514 	push	ar6
-      000681 12r07r33         [24] 1515 	lcall	_set_leds
-      000684 15 81            [12] 1516 	dec	sp
-      000686 15 81            [12] 1517 	dec	sp
-      000688 22               [24] 1518 	ret
-      000689                       1519 00105$:
-                                   1520 ;	../LED_Manager/led.c:294: } else if(color < 170){
-      000689 BF AA 00         [24] 1521 	cjne	r7,#0xaa,00121$
-      00068C                       1522 00121$:
-      00068C 50 23            [24] 1523 	jnc	00102$
-                                   1524 ;	../LED_Manager/led.c:295: color -= 85;
-      00068E 8F 06            [24] 1525 	mov	ar6,r7
-      000690 EE               [12] 1526 	mov	a,r6
-      000691 24 AB            [12] 1527 	add	a,#0xab
-                                   1528 ;	../LED_Manager/led.c:296: set_leds(255 - color * 3, 0, color * 3);
-      000693 FE               [12] 1529 	mov	r6,a
-      000694 75 F0 03         [24] 1530 	mov	b,#0x03
-      000697 A4               [48] 1531 	mul	ab
-      000698 FD               [12] 1532 	mov	r5,a
-      000699 EE               [12] 1533 	mov	a,r6
-      00069A 75 F0 03         [24] 1534 	mov	b,#0x03
-      00069D A4               [48] 1535 	mul	ab
-      00069E D3               [12] 1536 	setb	c
-      00069F 94 FF            [12] 1537 	subb	a,#0xff
-      0006A1 F4               [12] 1538 	cpl	a
-      0006A2 F5 82            [12] 1539 	mov	dpl,a
-      0006A4 C0 05            [24] 1540 	push	ar5
-      0006A6 E4               [12] 1541 	clr	a
-      0006A7 C0 E0            [24] 1542 	push	acc
-      0006A9 12r07r33         [24] 1543 	lcall	_set_leds
-      0006AC 15 81            [12] 1544 	dec	sp
-      0006AE 15 81            [12] 1545 	dec	sp
-      0006B0 22               [24] 1546 	ret
-      0006B1                       1547 00102$:
-                                   1548 ;	../LED_Manager/led.c:298: color -= 170;
-      0006B1 EF               [12] 1549 	mov	a,r7
-      0006B2 24 56            [12] 1550 	add	a,#0x56
-                                   1551 ;	../LED_Manager/led.c:299: set_leds(0, color * 3, 255 - color * 3);
-      0006B4 FF               [12] 1552 	mov	r7,a
-      0006B5 FE               [12] 1553 	mov	r6,a
-      0006B6 EE               [12] 1554 	mov	a,r6
-      0006B7 75 F0 03         [24] 1555 	mov	b,#0x03
-      0006BA A4               [48] 1556 	mul	ab
-      0006BB D3               [12] 1557 	setb	c
-      0006BC 94 FF            [12] 1558 	subb	a,#0xff
-      0006BE F4               [12] 1559 	cpl	a
-      0006BF FE               [12] 1560 	mov	r6,a
-      0006C0 EF               [12] 1561 	mov	a,r7
-      0006C1 75 F0 03         [24] 1562 	mov	b,#0x03
-      0006C4 A4               [48] 1563 	mul	ab
-      0006C5 FF               [12] 1564 	mov	r7,a
-      0006C6 C0 06            [24] 1565 	push	ar6
-      0006C8 C0 07            [24] 1566 	push	ar7
-      0006CA 75 82 00         [24] 1567 	mov	dpl,#0x00
-      0006CD 12r07r33         [24] 1568 	lcall	_set_leds
-      0006D0 15 81            [12] 1569 	dec	sp
-      0006D2 15 81            [12] 1570 	dec	sp
-                                   1571 ;	../LED_Manager/led.c:301: }
-      0006D4 22               [24] 1572 	ret
-                                   1573 ;------------------------------------------------------------
-                                   1574 ;Allocation info for local variables in function 'whiteout'
-                                   1575 ;------------------------------------------------------------
-                                   1576 ;	../LED_Manager/led.c:303: void whiteout(){
-                                   1577 ;	-----------------------------------------
-                                   1578 ;	 function whiteout
-                                   1579 ;	-----------------------------------------
-      0006D5                       1580 _whiteout:
-                                   1581 ;	../LED_Manager/led.c:304: set_leds(0xFF, 0xFF, 0xFF);
-      0006D5 74 FF            [12] 1582 	mov	a,#0xff
-      0006D7 C0 E0            [24] 1583 	push	acc
-      0006D9 C0 E0            [24] 1584 	push	acc
-      0006DB 75 82 FF         [24] 1585 	mov	dpl,#0xff
-      0006DE 12r07r33         [24] 1586 	lcall	_set_leds
-      0006E1 15 81            [12] 1587 	dec	sp
-      0006E3 15 81            [12] 1588 	dec	sp
-                                   1589 ;	../LED_Manager/led.c:305: }
-      0006E5 22               [24] 1590 	ret
-                                   1591 ;------------------------------------------------------------
-                                   1592 ;Allocation info for local variables in function 'blackout'
-                                   1593 ;------------------------------------------------------------
-                                   1594 ;	../LED_Manager/led.c:307: void blackout(){
-                                   1595 ;	-----------------------------------------
-                                   1596 ;	 function blackout
-                                   1597 ;	-----------------------------------------
-      0006E6                       1598 _blackout:
-                                   1599 ;	../LED_Manager/led.c:308: set_leds(0,0,0);
-      0006E6 E4               [12] 1600 	clr	a
-      0006E7 C0 E0            [24] 1601 	push	acc
-      0006E9 C0 E0            [24] 1602 	push	acc
-      0006EB 75 82 00         [24] 1603 	mov	dpl,#0x00
-      0006EE 12r07r33         [24] 1604 	lcall	_set_leds
-      0006F1 15 81            [12] 1605 	dec	sp
-      0006F3 15 81            [12] 1606 	dec	sp
-                                   1607 ;	../LED_Manager/led.c:309: }
-      0006F5 22               [24] 1608 	ret
-                                   1609 ;------------------------------------------------------------
-                                   1610 ;Allocation info for local variables in function 'rngU32'
-                                   1611 ;------------------------------------------------------------
-                                   1612 ;past                      Allocated with name '_rngU32_past_65536_106'
-                                   1613 ;present                   Allocated with name '_rngU32_present_65536_106'
-                                   1614 ;------------------------------------------------------------
-                                   1615 ;	../LED_Manager/led.c:312: uint32_t rngU32(){
+      000221 15 81            [12]  700 	dec	sp
+      000223 80 03            [24]  701 	sjmp	00145$
+      000225                        702 00137$:
+                                    703 ;	../LED_Manager/led.c:108: blackout();
+      000225 12r06rFD         [24]  704 	lcall	_blackout
+      000228                        705 00145$:
+                                    706 ;	../LED_Manager/led.c:112: }
+      000228 85*00 81         [24]  707 	mov	sp,_bp
+      00022B D0*00            [24]  708 	pop	_bp
+      00022D 22               [24]  709 	ret
+                                    710 ;------------------------------------------------------------
+                                    711 ;Allocation info for local variables in function 'dmx_to_macro'
+                                    712 ;------------------------------------------------------------
+                                    713 ;dmx_value                 Allocated to registers r7 
+                                    714 ;------------------------------------------------------------
+                                    715 ;	../LED_Manager/led.c:114: uint8_t dmx_to_macro(uint8_t dmx_value){
+                                    716 ;	-----------------------------------------
+                                    717 ;	 function dmx_to_macro
+                                    718 ;	-----------------------------------------
+      00022E                        719 _dmx_to_macro:
+                                    720 ;	../LED_Manager/led.c:116: if(dmx_value <= DMX_MACRO_WHITE){
+      00022E E5 82            [12]  721 	mov	a,dpl
+      000230 FF               [12]  722 	mov	r7,a
+      000231 24 4B            [12]  723 	add	a,#0xff - 0xb4
+      000233 40 04            [24]  724 	jc	00119$
+                                    725 ;	../LED_Manager/led.c:117: return OPTION_MACRO_WHITE;
+      000235 75 82 21         [24]  726 	mov	dpl,#0x21
+      000238 22               [24]  727 	ret
+      000239                        728 00119$:
+                                    729 ;	../LED_Manager/led.c:118: } else if(dmx_value <= DMX_MACRO_RAINBOW){
+      000239 EF               [12]  730 	mov	a,r7
+      00023A 24 41            [12]  731 	add	a,#0xff - 0xbe
+      00023C 40 04            [24]  732 	jc	00116$
+                                    733 ;	../LED_Manager/led.c:119: return OPTION_MACRO_RAINBOW_DMX;
+      00023E 75 82 01         [24]  734 	mov	dpl,#0x01
+      000241 22               [24]  735 	ret
+      000242                        736 00116$:
+                                    737 ;	../LED_Manager/led.c:120: } else if(dmx_value <= DMX_MACRO_FIRE){
+      000242 EF               [12]  738 	mov	a,r7
+      000243 24 37            [12]  739 	add	a,#0xff - 0xc8
+      000245 40 04            [24]  740 	jc	00113$
+                                    741 ;	../LED_Manager/led.c:121: return OPTION_MACRO_FIRE_DMX;
+      000247 75 82 02         [24]  742 	mov	dpl,#0x02
+      00024A 22               [24]  743 	ret
+      00024B                        744 00113$:
+                                    745 ;	../LED_Manager/led.c:122: } else if(dmx_value <= DMX_MACRO_WATER){
+      00024B EF               [12]  746 	mov	a,r7
+      00024C 24 2D            [12]  747 	add	a,#0xff - 0xd2
+      00024E 40 04            [24]  748 	jc	00110$
+                                    749 ;	../LED_Manager/led.c:123: return OPTION_MACRO_WATER_DMX;
+      000250 75 82 03         [24]  750 	mov	dpl,#0x03
+      000253 22               [24]  751 	ret
+      000254                        752 00110$:
+                                    753 ;	../LED_Manager/led.c:124: } else if(dmx_value <= DMX_MACRO_ACID){
+      000254 EF               [12]  754 	mov	a,r7
+      000255 24 23            [12]  755 	add	a,#0xff - 0xdc
+      000257 40 04            [24]  756 	jc	00107$
+                                    757 ;	../LED_Manager/led.c:125: return OPTION_MACRO_ACID_DMX;
+      000259 75 82 04         [24]  758 	mov	dpl,#0x04
+      00025C 22               [24]  759 	ret
+      00025D                        760 00107$:
+                                    761 ;	../LED_Manager/led.c:126: } else if(dmx_value <= DMX_MACRO_ETHER){
+      00025D EF               [12]  762 	mov	a,r7
+      00025E 24 19            [12]  763 	add	a,#0xff - 0xe6
+      000260 40 04            [24]  764 	jc	00104$
+                                    765 ;	../LED_Manager/led.c:127: return OPTION_MACRO_ETHER_DMX;
+      000262 75 82 05         [24]  766 	mov	dpl,#0x05
+      000265 22               [24]  767 	ret
+      000266                        768 00104$:
+                                    769 ;	../LED_Manager/led.c:128: } else if(dmx_value <= DMX_MACRO_STORM){
+      000266 EF               [12]  770 	mov	a,r7
+      000267 24 0F            [12]  771 	add	a,#0xff - 0xf0
+      000269 40 04            [24]  772 	jc	00108$
+                                    773 ;	../LED_Manager/led.c:129: return OPTION_MACRO_STORM_DMX;
+      00026B 75 82 06         [24]  774 	mov	dpl,#0x06
+      00026E 22               [24]  775 	ret
+      00026F                        776 00108$:
+                                    777 ;	../LED_Manager/led.c:132: return 69; // ;)
+      00026F 75 82 45         [24]  778 	mov	dpl,#0x45
+                                    779 ;	../LED_Manager/led.c:133: }
+      000272 22               [24]  780 	ret
+                                    781 ;------------------------------------------------------------
+                                    782 ;Allocation info for local variables in function 'play_macro'
+                                    783 ;------------------------------------------------------------
+                                    784 ;macro                     Allocated to stack - _bp -3
+                                    785 ;macro_speed               Allocated to stack - _bp -4
+                                    786 ;tick                      Allocated to stack - _bp +1
+                                    787 ;rng                       Allocated to stack - _bp +5
+                                    788 ;changed                   Allocated to registers r3 
+                                    789 ;tock                      Allocated with name '_play_macro_tock_65536_55'
+                                    790 ;primaryCount              Allocated with name '_play_macro_primaryCount_65536_55'
+                                    791 ;secondaryCount            Allocated with name '_play_macro_secondaryCount_65536_55'
+                                    792 ;direction                 Allocated with name '_play_macro_direction_65536_55'
+                                    793 ;------------------------------------------------------------
+                                    794 ;	../LED_Manager/led.c:135: void play_macro(uint32_t tick, uint8_t macro, uint8_t macro_speed){
+                                    795 ;	-----------------------------------------
+                                    796 ;	 function play_macro
+                                    797 ;	-----------------------------------------
+      000273                        798 _play_macro:
+      000273 C0*00            [24]  799 	push	_bp
+      000275 85 81*00         [24]  800 	mov	_bp,sp
+      000278 C0 82            [24]  801 	push	dpl
+      00027A C0 83            [24]  802 	push	dph
+      00027C C0 F0            [24]  803 	push	b
+      00027E C0 E0            [24]  804 	push	acc
+      000280 E5 81            [12]  805 	mov	a,sp
+      000282 24 04            [12]  806 	add	a,#0x04
+      000284 F5 81            [12]  807 	mov	sp,a
+                                    808 ;	../LED_Manager/led.c:140: uint32_t rng = 0;
+      000286 E5*00            [12]  809 	mov	a,_bp
+      000288 24 05            [12]  810 	add	a,#0x05
+      00028A F8               [12]  811 	mov	r0,a
+      00028B E4               [12]  812 	clr	a
+      00028C F6               [12]  813 	mov	@r0,a
+      00028D 08               [12]  814 	inc	r0
+      00028E F6               [12]  815 	mov	@r0,a
+      00028F 08               [12]  816 	inc	r0
+      000290 F6               [12]  817 	mov	@r0,a
+      000291 08               [12]  818 	inc	r0
+      000292 F6               [12]  819 	mov	@r0,a
+                                    820 ;	../LED_Manager/led.c:141: uint8_t changed = 0;
+      000293 7B 00            [12]  821 	mov	r3,#0x00
+                                    822 ;	../LED_Manager/led.c:144: if(!(tick % (MACRO_FREQ - (macro_speed >> 1)))){
+      000295 E5*00            [12]  823 	mov	a,_bp
+      000297 24 FC            [12]  824 	add	a,#0xfc
+      000299 F8               [12]  825 	mov	r0,a
+      00029A E6               [12]  826 	mov	a,@r0
+      00029B C3               [12]  827 	clr	c
+      00029C 13               [12]  828 	rrc	a
+      00029D FC               [12]  829 	mov	r4,a
+      00029E 7D 00            [12]  830 	mov	r5,#0x00
+      0002A0 74 85            [12]  831 	mov	a,#0x85
+      0002A2 C3               [12]  832 	clr	c
+      0002A3 9C               [12]  833 	subb	a,r4
+      0002A4 FC               [12]  834 	mov	r4,a
+      0002A5 E4               [12]  835 	clr	a
+      0002A6 9D               [12]  836 	subb	a,r5
+      0002A7 FD               [12]  837 	mov	r5,a
+      0002A8 33               [12]  838 	rlc	a
+      0002A9 95 E0            [12]  839 	subb	a,acc
+      0002AB FE               [12]  840 	mov	r6,a
+      0002AC FF               [12]  841 	mov	r7,a
+      0002AD C0 03            [24]  842 	push	ar3
+      0002AF C0 04            [24]  843 	push	ar4
+      0002B1 C0 05            [24]  844 	push	ar5
+      0002B3 C0 06            [24]  845 	push	ar6
+      0002B5 C0 07            [24]  846 	push	ar7
+      0002B7 A8*00            [24]  847 	mov	r0,_bp
+      0002B9 08               [12]  848 	inc	r0
+      0002BA 86 82            [24]  849 	mov	dpl,@r0
+      0002BC 08               [12]  850 	inc	r0
+      0002BD 86 83            [24]  851 	mov	dph,@r0
+      0002BF 08               [12]  852 	inc	r0
+      0002C0 86 F0            [24]  853 	mov	b,@r0
+      0002C2 08               [12]  854 	inc	r0
+      0002C3 E6               [12]  855 	mov	a,@r0
+      0002C4 12r00r00         [24]  856 	lcall	__modulong
+      0002C7 AC 82            [24]  857 	mov	r4,dpl
+      0002C9 AD 83            [24]  858 	mov	r5,dph
+      0002CB AE F0            [24]  859 	mov	r6,b
+      0002CD FF               [12]  860 	mov	r7,a
+      0002CE E5 81            [12]  861 	mov	a,sp
+      0002D0 24 FC            [12]  862 	add	a,#0xfc
+      0002D2 F5 81            [12]  863 	mov	sp,a
+      0002D4 D0 03            [24]  864 	pop	ar3
+      0002D6 EC               [12]  865 	mov	a,r4
+      0002D7 4D               [12]  866 	orl	a,r5
+      0002D8 4E               [12]  867 	orl	a,r6
+      0002D9 4F               [12]  868 	orl	a,r7
+      0002DA 70 37            [24]  869 	jnz	00104$
+                                    870 ;	../LED_Manager/led.c:145: changed = 0xFF;
+      0002DC 7B FF            [12]  871 	mov	r3,#0xff
+                                    872 ;	../LED_Manager/led.c:146: rng = 0;
+      0002DE E5*00            [12]  873 	mov	a,_bp
+      0002E0 24 05            [12]  874 	add	a,#0x05
+      0002E2 F8               [12]  875 	mov	r0,a
+      0002E3 E4               [12]  876 	clr	a
+      0002E4 F6               [12]  877 	mov	@r0,a
+      0002E5 08               [12]  878 	inc	r0
+      0002E6 F6               [12]  879 	mov	@r0,a
+      0002E7 08               [12]  880 	inc	r0
+      0002E8 F6               [12]  881 	mov	@r0,a
+      0002E9 08               [12]  882 	inc	r0
+      0002EA F6               [12]  883 	mov	@r0,a
+                                    884 ;	../LED_Manager/led.c:148: if(macro_speed){
+      0002EB E5*00            [12]  885 	mov	a,_bp
+      0002ED 24 FC            [12]  886 	add	a,#0xfc
+      0002EF F8               [12]  887 	mov	r0,a
+      0002F0 E6               [12]  888 	mov	a,@r0
+      0002F1 60 20            [24]  889 	jz	00104$
+                                    890 ;	../LED_Manager/led.c:149: tock++;
+      0002F3 05*01            [12]  891 	inc	_play_macro_tock_65536_55
+                                    892 ;	../LED_Manager/led.c:150: rng = rngU32();
+      0002F5 C0 03            [24]  893 	push	ar3
+      0002F7 12r07r0D         [24]  894 	lcall	_rngU32
+      0002FA AC 82            [24]  895 	mov	r4,dpl
+      0002FC AD 83            [24]  896 	mov	r5,dph
+      0002FE AE F0            [24]  897 	mov	r6,b
+      000300 FF               [12]  898 	mov	r7,a
+      000301 D0 03            [24]  899 	pop	ar3
+      000303 E5*00            [12]  900 	mov	a,_bp
+      000305 24 05            [12]  901 	add	a,#0x05
+      000307 F8               [12]  902 	mov	r0,a
+      000308 A6 04            [24]  903 	mov	@r0,ar4
+      00030A 08               [12]  904 	inc	r0
+      00030B A6 05            [24]  905 	mov	@r0,ar5
+      00030D 08               [12]  906 	inc	r0
+      00030E A6 06            [24]  907 	mov	@r0,ar6
+      000310 08               [12]  908 	inc	r0
+      000311 A6 07            [24]  909 	mov	@r0,ar7
+      000313                        910 00104$:
+                                    911 ;	../LED_Manager/led.c:154: switch (macro)
+      000313 E5*00            [12]  912 	mov	a,_bp
+      000315 24 FD            [12]  913 	add	a,#0xfd
+      000317 F8               [12]  914 	mov	r0,a
+      000318 B6 01 02         [24]  915 	cjne	@r0,#0x01,00351$
+      00031B 80 54            [24]  916 	sjmp	00105$
+      00031D                        917 00351$:
+      00031D E5*00            [12]  918 	mov	a,_bp
+      00031F 24 FD            [12]  919 	add	a,#0xfd
+      000321 F8               [12]  920 	mov	r0,a
+      000322 B6 02 02         [24]  921 	cjne	@r0,#0x02,00352$
+      000325 80 53            [24]  922 	sjmp	00106$
+      000327                        923 00352$:
+      000327 E5*00            [12]  924 	mov	a,_bp
+      000329 24 FD            [12]  925 	add	a,#0xfd
+      00032B F8               [12]  926 	mov	r0,a
+      00032C E4               [12]  927 	clr	a
+      00032D B6 03 01         [24]  928 	cjne	@r0,#0x03,00353$
+      000330 04               [12]  929 	inc	a
+      000331                        930 00353$:
+      000331 FF               [12]  931 	mov	r7,a
+      000332 60 03            [24]  932 	jz	00355$
+      000334 02r04r41         [24]  933 	ljmp	00122$
+      000337                        934 00355$:
+      000337 E5*00            [12]  935 	mov	a,_bp
+      000339 24 FD            [12]  936 	add	a,#0xfd
+      00033B F8               [12]  937 	mov	r0,a
+      00033C B6 04 03         [24]  938 	cjne	@r0,#0x04,00356$
+      00033F 02r04r41         [24]  939 	ljmp	00122$
+      000342                        940 00356$:
+      000342 E5*00            [12]  941 	mov	a,_bp
+      000344 24 FD            [12]  942 	add	a,#0xfd
+      000346 F8               [12]  943 	mov	r0,a
+      000347 B6 05 03         [24]  944 	cjne	@r0,#0x05,00357$
+      00034A 02r04r41         [24]  945 	ljmp	00122$
+      00034D                        946 00357$:
+      00034D E5*00            [12]  947 	mov	a,_bp
+      00034F 24 FD            [12]  948 	add	a,#0xfd
+      000351 F8               [12]  949 	mov	r0,a
+      000352 B6 06 03         [24]  950 	cjne	@r0,#0x06,00358$
+      000355 02r05r29         [24]  951 	ljmp	00153$
+      000358                        952 00358$:
+      000358 E5*00            [12]  953 	mov	a,_bp
+      00035A 24 FD            [12]  954 	add	a,#0xfd
+      00035C F8               [12]  955 	mov	r0,a
+      00035D B6 21 03         [24]  956 	cjne	@r0,#0x21,00359$
+      000360 02r05r9C         [24]  957 	ljmp	00167$
+      000363                        958 00359$:
+      000363 E5*00            [12]  959 	mov	a,_bp
+      000365 24 FD            [12]  960 	add	a,#0xfd
+      000367 F8               [12]  961 	mov	r0,a
+      000368 B6 45 03         [24]  962 	cjne	@r0,#0x45,00360$
+      00036B 02r05rA2         [24]  963 	ljmp	00168$
+      00036E                        964 00360$:
+      00036E 02r06r70         [24]  965 	ljmp	00187$
+                                    966 ;	../LED_Manager/led.c:156: case OPTION_MACRO_RAINBOW_DMX: //rainbow
+      000371                        967 00105$:
+                                    968 ;	../LED_Manager/led.c:157: color_wheel(tock);
+      000371 85*01 82         [24]  969 	mov	dpl,_play_macro_tock_65536_55
+      000374 12r06r79         [24]  970 	lcall	_color_wheel
+                                    971 ;	../LED_Manager/led.c:158: break;
+      000377 02r06r73         [24]  972 	ljmp	00189$
+                                    973 ;	../LED_Manager/led.c:159: case OPTION_MACRO_FIRE_DMX: //fire
+      00037A                        974 00106$:
+                                    975 ;	../LED_Manager/led.c:160: if(changed) { 
+      00037A EB               [12]  976 	mov	a,r3
+      00037B 70 03            [24]  977 	jnz	00361$
+      00037D 02r06r73         [24]  978 	ljmp	00189$
+      000380                        979 00361$:
+                                    980 ;	../LED_Manager/led.c:162: if(primaryCount < 55){ primaryCount = 55; direction |= 0x01;}
+      000380 74 C9            [12]  981 	mov	a,#0x100 - 0x37
+      000382 25*02            [12]  982 	add	a,_play_macro_primaryCount_65536_55
+      000384 40 0C            [24]  983 	jc	00108$
+      000386 75*02 37         [24]  984 	mov	_play_macro_primaryCount_65536_55,#0x37
+      000389 AD*04            [24]  985 	mov	r5,_play_macro_direction_65536_55
+      00038B 7E 00            [12]  986 	mov	r6,#0x00
+      00038D 43 05 01         [24]  987 	orl	ar5,#0x01
+      000390 8D*04            [24]  988 	mov	_play_macro_direction_65536_55,r5
+      000392                        989 00108$:
+                                    990 ;	../LED_Manager/led.c:163: if(direction & 0x01){
+      000392 E5*04            [12]  991 	mov	a,_play_macro_direction_65536_55
+      000394 30 E0 0E         [24]  992 	jnb	acc.0,00116$
+                                    993 ;	../LED_Manager/led.c:164: if(primaryCount == 255){
+      000397 74 FF            [12]  994 	mov	a,#0xff
+      000399 B5*02 05         [24]  995 	cjne	a,_play_macro_primaryCount_65536_55,00110$
+                                    996 ;	../LED_Manager/led.c:165: direction &= ~0x01;
+      00039C 53*04 FE         [24]  997 	anl	_play_macro_direction_65536_55,#0xfe
+      00039F 80 20            [24]  998 	sjmp	00117$
+      0003A1                        999 00110$:
+                                   1000 ;	../LED_Manager/led.c:167: primaryCount++;
+      0003A1 05*02            [12] 1001 	inc	_play_macro_primaryCount_65536_55
+      0003A3 80 1C            [24] 1002 	sjmp	00117$
+      0003A5                       1003 00116$:
+                                   1004 ;	../LED_Manager/led.c:170: if(primaryCount - 1 == 55){
+      0003A5 AD*02            [24] 1005 	mov	r5,_play_macro_primaryCount_65536_55
+      0003A7 7E 00            [12] 1006 	mov	r6,#0x00
+      0003A9 1D               [12] 1007 	dec	r5
+      0003AA BD FF 01         [24] 1008 	cjne	r5,#0xff,00366$
+      0003AD 1E               [12] 1009 	dec	r6
+      0003AE                       1010 00366$:
+      0003AE BD 37 0E         [24] 1011 	cjne	r5,#0x37,00113$
+      0003B1 BE 00 0B         [24] 1012 	cjne	r6,#0x00,00113$
+                                   1013 ;	../LED_Manager/led.c:171: direction |= 0x01;
+      0003B4 AD*04            [24] 1014 	mov	r5,_play_macro_direction_65536_55
+      0003B6 7E 00            [12] 1015 	mov	r6,#0x00
+      0003B8 43 05 01         [24] 1016 	orl	ar5,#0x01
+      0003BB 8D*04            [24] 1017 	mov	_play_macro_direction_65536_55,r5
+      0003BD 80 02            [24] 1018 	sjmp	00117$
+      0003BF                       1019 00113$:
+                                   1020 ;	../LED_Manager/led.c:173: primaryCount--;
+      0003BF 15*02            [12] 1021 	dec	_play_macro_primaryCount_65536_55
+      0003C1                       1022 00117$:
+                                   1023 ;	../LED_Manager/led.c:177: set_leds(primaryCount, (uint8_t) (rng % (primaryCount >> 2)), (!(rng % 13)) ? PWMDATA17H > 1 : 0);
+      0003C1 74 0D            [12] 1024 	mov	a,#0x0d
+      0003C3 C0 E0            [24] 1025 	push	acc
+      0003C5 E4               [12] 1026 	clr	a
+      0003C6 C0 E0            [24] 1027 	push	acc
+      0003C8 C0 E0            [24] 1028 	push	acc
+      0003CA C0 E0            [24] 1029 	push	acc
+      0003CC E5*00            [12] 1030 	mov	a,_bp
+      0003CE 24 05            [12] 1031 	add	a,#0x05
+      0003D0 F8               [12] 1032 	mov	r0,a
+      0003D1 86 82            [24] 1033 	mov	dpl,@r0
+      0003D3 08               [12] 1034 	inc	r0
+      0003D4 86 83            [24] 1035 	mov	dph,@r0
+      0003D6 08               [12] 1036 	inc	r0
+      0003D7 86 F0            [24] 1037 	mov	b,@r0
+      0003D9 08               [12] 1038 	inc	r0
+      0003DA E6               [12] 1039 	mov	a,@r0
+      0003DB 12r00r00         [24] 1040 	lcall	__modulong
+      0003DE AB 82            [24] 1041 	mov	r3,dpl
+      0003E0 AC 83            [24] 1042 	mov	r4,dph
+      0003E2 AD F0            [24] 1043 	mov	r5,b
+      0003E4 FE               [12] 1044 	mov	r6,a
+      0003E5 E5 81            [12] 1045 	mov	a,sp
+      0003E7 24 FC            [12] 1046 	add	a,#0xfc
+      0003E9 F5 81            [12] 1047 	mov	sp,a
+      0003EB EB               [12] 1048 	mov	a,r3
+      0003EC 4C               [12] 1049 	orl	a,r4
+      0003ED 4D               [12] 1050 	orl	a,r5
+      0003EE 4E               [12] 1051 	orl	a,r6
+      0003EF 70 0C            [24] 1052 	jnz	00191$
+      0003F1 C3               [12] 1053 	clr	c
+      0003F2 74 01            [12] 1054 	mov	a,#0x01
+      0003F4 95 AD            [12] 1055 	subb	a,_PWMDATA17H
+      0003F6 E4               [12] 1056 	clr	a
+      0003F7 33               [12] 1057 	rlc	a
+      0003F8 FD               [12] 1058 	mov	r5,a
+      0003F9 7E 00            [12] 1059 	mov	r6,#0x00
+      0003FB 80 04            [24] 1060 	sjmp	00192$
+      0003FD                       1061 00191$:
+      0003FD 7D 00            [12] 1062 	mov	r5,#0x00
+      0003FF 7E 00            [12] 1063 	mov	r6,#0x00
+      000401                       1064 00192$:
+      000401 E5*02            [12] 1065 	mov	a,_play_macro_primaryCount_65536_55
+      000403 03               [12] 1066 	rr	a
+      000404 03               [12] 1067 	rr	a
+      000405 54 3F            [12] 1068 	anl	a,#0x3f
+      000407 FE               [12] 1069 	mov	r6,a
+      000408 7C 00            [12] 1070 	mov	r4,#0x00
+      00040A 7B 00            [12] 1071 	mov	r3,#0x00
+      00040C 7A 00            [12] 1072 	mov	r2,#0x00
+      00040E C0 05            [24] 1073 	push	ar5
+      000410 C0 06            [24] 1074 	push	ar6
+      000412 C0 04            [24] 1075 	push	ar4
+      000414 C0 03            [24] 1076 	push	ar3
+      000416 C0 02            [24] 1077 	push	ar2
+      000418 E5*00            [12] 1078 	mov	a,_bp
+      00041A 24 05            [12] 1079 	add	a,#0x05
+      00041C F8               [12] 1080 	mov	r0,a
+      00041D 86 82            [24] 1081 	mov	dpl,@r0
+      00041F 08               [12] 1082 	inc	r0
+      000420 86 83            [24] 1083 	mov	dph,@r0
+      000422 08               [12] 1084 	inc	r0
+      000423 86 F0            [24] 1085 	mov	b,@r0
+      000425 08               [12] 1086 	inc	r0
+      000426 E6               [12] 1087 	mov	a,@r0
+      000427 12r00r00         [24] 1088 	lcall	__modulong
+      00042A AA 82            [24] 1089 	mov	r2,dpl
+      00042C E5 81            [12] 1090 	mov	a,sp
+      00042E 24 FC            [12] 1091 	add	a,#0xfc
+      000430 F5 81            [12] 1092 	mov	sp,a
+      000432 C0 02            [24] 1093 	push	ar2
+      000434 85*02 82         [24] 1094 	mov	dpl,_play_macro_primaryCount_65536_55
+      000437 12r07r4A         [24] 1095 	lcall	_set_leds
+      00043A 15 81            [12] 1096 	dec	sp
+      00043C 15 81            [12] 1097 	dec	sp
+                                   1098 ;	../LED_Manager/led.c:180: break;
+      00043E 02r06r73         [24] 1099 	ljmp	00189$
+                                   1100 ;	../LED_Manager/led.c:183: case OPTION_MACRO_ETHER_DMX:
+      000441                       1101 00122$:
+                                   1102 ;	../LED_Manager/led.c:185: if(changed){
+      000441 EB               [12] 1103 	mov	a,r3
+      000442 70 03            [24] 1104 	jnz	00370$
+      000444 02r06r73         [24] 1105 	ljmp	00189$
+      000447                       1106 00370$:
+                                   1107 ;	../LED_Manager/led.c:187: if(direction & 0x01){
+      000447 E5*04            [12] 1108 	mov	a,_play_macro_direction_65536_55
+      000449 30 E0 14         [24] 1109 	jnb	acc.0,00128$
+                                   1110 ;	../LED_Manager/led.c:188: primaryCount +=2;
+      00044C AE*02            [24] 1111 	mov	r6,_play_macro_primaryCount_65536_55
+      00044E 74 02            [12] 1112 	mov	a,#0x02
+      000450 2E               [12] 1113 	add	a,r6
+                                   1114 ;	../LED_Manager/led.c:190: if(primaryCount < 75){
+      000451 F5*02            [12] 1115 	mov	_play_macro_primaryCount_65536_55,a
+      000453 C3               [12] 1116 	clr	c
+      000454 94 4B            [12] 1117 	subb	a,#0x4b
+      000456 50 1F            [24] 1118 	jnc	00129$
+                                   1119 ;	../LED_Manager/led.c:191: direction &= ~0x01;
+      000458 53*04 FE         [24] 1120 	anl	_play_macro_direction_65536_55,#0xfe
+                                   1121 ;	../LED_Manager/led.c:192: primaryCount = 255;
+      00045B 75*02 FF         [24] 1122 	mov	_play_macro_primaryCount_65536_55,#0xff
+      00045E 80 17            [24] 1123 	sjmp	00129$
+      000460                       1124 00128$:
+                                   1125 ;	../LED_Manager/led.c:196: primaryCount -=2;
+      000460 E5*02            [12] 1126 	mov	a,_play_macro_primaryCount_65536_55
+      000462 FE               [12] 1127 	mov	r6,a
+      000463 24 FE            [12] 1128 	add	a,#0xfe
+                                   1129 ;	../LED_Manager/led.c:198: if(primaryCount <= 130){
+      000465 F5*02            [12] 1130 	mov  _play_macro_primaryCount_65536_55,a
+      000467 24 7D            [12] 1131 	add	a,#0xff - 0x82
+      000469 40 0C            [24] 1132 	jc	00129$
+                                   1133 ;	../LED_Manager/led.c:199: direction |= 0x01;
+      00046B AD*04            [24] 1134 	mov	r5,_play_macro_direction_65536_55
+      00046D 7E 00            [12] 1135 	mov	r6,#0x00
+      00046F 43 05 01         [24] 1136 	orl	ar5,#0x01
+      000472 8D*04            [24] 1137 	mov	_play_macro_direction_65536_55,r5
+                                   1138 ;	../LED_Manager/led.c:200: primaryCount = 130;
+      000474 75*02 82         [24] 1139 	mov	_play_macro_primaryCount_65536_55,#0x82
+      000477                       1140 00129$:
+                                   1141 ;	../LED_Manager/led.c:204: if(rng % 21 == 0){
+      000477 C0 07            [24] 1142 	push	ar7
+      000479 74 15            [12] 1143 	mov	a,#0x15
+      00047B C0 E0            [24] 1144 	push	acc
+      00047D E4               [12] 1145 	clr	a
+      00047E C0 E0            [24] 1146 	push	acc
+      000480 C0 E0            [24] 1147 	push	acc
+      000482 C0 E0            [24] 1148 	push	acc
+      000484 E5*00            [12] 1149 	mov	a,_bp
+      000486 24 05            [12] 1150 	add	a,#0x05
+      000488 F8               [12] 1151 	mov	r0,a
+      000489 86 82            [24] 1152 	mov	dpl,@r0
+      00048B 08               [12] 1153 	inc	r0
+      00048C 86 83            [24] 1154 	mov	dph,@r0
+      00048E 08               [12] 1155 	inc	r0
+      00048F 86 F0            [24] 1156 	mov	b,@r0
+      000491 08               [12] 1157 	inc	r0
+      000492 E6               [12] 1158 	mov	a,@r0
+      000493 12r00r00         [24] 1159 	lcall	__modulong
+      000496 AB 82            [24] 1160 	mov	r3,dpl
+      000498 AC 83            [24] 1161 	mov	r4,dph
+      00049A AD F0            [24] 1162 	mov	r5,b
+      00049C FE               [12] 1163 	mov	r6,a
+      00049D E5 81            [12] 1164 	mov	a,sp
+      00049F 24 FC            [12] 1165 	add	a,#0xfc
+      0004A1 F5 81            [12] 1166 	mov	sp,a
+      0004A3 D0 07            [24] 1167 	pop	ar7
+      0004A5 EB               [12] 1168 	mov	a,r3
+      0004A6 4C               [12] 1169 	orl	a,r4
+      0004A7 4D               [12] 1170 	orl	a,r5
+      0004A8 4E               [12] 1171 	orl	a,r6
+      0004A9 70 15            [24] 1172 	jnz	00141$
+                                   1173 ;	../LED_Manager/led.c:205: if(direction & 0x10){
+      0004AB E5*04            [12] 1174 	mov	a,_play_macro_direction_65536_55
+      0004AD 30 E4 05         [24] 1175 	jnb	acc.4,00131$
+                                   1176 ;	../LED_Manager/led.c:206: direction &= ~0x10;
+      0004B0 53*04 EF         [24] 1177 	anl	_play_macro_direction_65536_55,#0xef
+      0004B3 80 28            [24] 1178 	sjmp	00142$
+      0004B5                       1179 00131$:
+                                   1180 ;	../LED_Manager/led.c:208: direction |= 0x10;
+      0004B5 AD*04            [24] 1181 	mov	r5,_play_macro_direction_65536_55
+      0004B7 7E 00            [12] 1182 	mov	r6,#0x00
+      0004B9 43 05 10         [24] 1183 	orl	ar5,#0x10
+      0004BC 8D*04            [24] 1184 	mov	_play_macro_direction_65536_55,r5
+      0004BE 80 1D            [24] 1185 	sjmp	00142$
+      0004C0                       1186 00141$:
+                                   1187 ;	../LED_Manager/led.c:211: if(direction & 0x10){
+      0004C0 E5*04            [12] 1188 	mov	a,_play_macro_direction_65536_55
+      0004C2 30 E4 0D         [24] 1189 	jnb	acc.4,00138$
+                                   1190 ;	../LED_Manager/led.c:212: secondaryCount++;
+      0004C5 05*03            [12] 1191 	inc	_play_macro_secondaryCount_65536_55
+                                   1192 ;	../LED_Manager/led.c:214: if(secondaryCount >= 34){
+      0004C7 74 DE            [12] 1193 	mov	a,#0x100 - 0x22
+      0004C9 25*03            [12] 1194 	add	a,_play_macro_secondaryCount_65536_55
+      0004CB 50 10            [24] 1195 	jnc	00142$
+                                   1196 ;	../LED_Manager/led.c:215: secondaryCount = 34;
+      0004CD 75*03 22         [24] 1197 	mov	_play_macro_secondaryCount_65536_55,#0x22
+      0004D0 80 0B            [24] 1198 	sjmp	00142$
+      0004D2                       1199 00138$:
+                                   1200 ;	../LED_Manager/led.c:219: secondaryCount--;
+      0004D2 15*03            [12] 1201 	dec	_play_macro_secondaryCount_65536_55
+                                   1202 ;	../LED_Manager/led.c:221: if(secondaryCount > 36){
+      0004D4 E5*03            [12] 1203 	mov	a,_play_macro_secondaryCount_65536_55
+      0004D6 24 DB            [12] 1204 	add	a,#0xff - 0x24
+      0004D8 50 03            [24] 1205 	jnc	00142$
+                                   1206 ;	../LED_Manager/led.c:222: secondaryCount = 0;
+      0004DA 75*03 00         [24] 1207 	mov	_play_macro_secondaryCount_65536_55,#0x00
+      0004DD                       1208 00142$:
+                                   1209 ;	../LED_Manager/led.c:227: if(macro == OPTION_MACRO_WATER_DMX){ //water
+      0004DD EF               [12] 1210 	mov	a,r7
+      0004DE 60 11            [24] 1211 	jz	00149$
+                                   1212 ;	../LED_Manager/led.c:228: set_leds(secondaryCount, secondaryCount, primaryCount);
+      0004E0 C0*02            [24] 1213 	push	_play_macro_primaryCount_65536_55
+      0004E2 C0*03            [24] 1214 	push	_play_macro_secondaryCount_65536_55
+      0004E4 85*03 82         [24] 1215 	mov	dpl,_play_macro_secondaryCount_65536_55
+      0004E7 12r07r4A         [24] 1216 	lcall	_set_leds
+      0004EA 15 81            [12] 1217 	dec	sp
+      0004EC 15 81            [12] 1218 	dec	sp
+      0004EE 02r06r73         [24] 1219 	ljmp	00189$
+      0004F1                       1220 00149$:
+                                   1221 ;	../LED_Manager/led.c:229: } else if(macro == OPTION_MACRO_ACID_DMX){ //acid
+      0004F1 E5*00            [12] 1222 	mov	a,_bp
+      0004F3 24 FD            [12] 1223 	add	a,#0xfd
+      0004F5 F8               [12] 1224 	mov	r0,a
+      0004F6 B6 04 12         [24] 1225 	cjne	@r0,#0x04,00146$
+                                   1226 ;	../LED_Manager/led.c:230: set_leds(secondaryCount, primaryCount, 0);
+      0004F9 E4               [12] 1227 	clr	a
+      0004FA C0 E0            [24] 1228 	push	acc
+      0004FC C0*02            [24] 1229 	push	_play_macro_primaryCount_65536_55
+      0004FE 85*03 82         [24] 1230 	mov	dpl,_play_macro_secondaryCount_65536_55
+      000501 12r07r4A         [24] 1231 	lcall	_set_leds
+      000504 15 81            [12] 1232 	dec	sp
+      000506 15 81            [12] 1233 	dec	sp
+      000508 02r06r73         [24] 1234 	ljmp	00189$
+      00050B                       1235 00146$:
+                                   1236 ;	../LED_Manager/led.c:231: } else if(macro == OPTION_MACRO_ETHER_DMX){ //ether
+      00050B E5*00            [12] 1237 	mov	a,_bp
+      00050D 24 FD            [12] 1238 	add	a,#0xfd
+      00050F F8               [12] 1239 	mov	r0,a
+      000510 B6 05 02         [24] 1240 	cjne	@r0,#0x05,00382$
+      000513 80 03            [24] 1241 	sjmp	00383$
+      000515                       1242 00382$:
+      000515 02r06r73         [24] 1243 	ljmp	00189$
+      000518                       1244 00383$:
+                                   1245 ;	../LED_Manager/led.c:232: set_leds(primaryCount, secondaryCount, primaryCount);
+      000518 C0*02            [24] 1246 	push	_play_macro_primaryCount_65536_55
+      00051A C0*03            [24] 1247 	push	_play_macro_secondaryCount_65536_55
+      00051C 85*02 82         [24] 1248 	mov	dpl,_play_macro_primaryCount_65536_55
+      00051F 12r07r4A         [24] 1249 	lcall	_set_leds
+      000522 15 81            [12] 1250 	dec	sp
+      000524 15 81            [12] 1251 	dec	sp
+                                   1252 ;	../LED_Manager/led.c:236: break;
+      000526 02r06r73         [24] 1253 	ljmp	00189$
+                                   1254 ;	../LED_Manager/led.c:237: case OPTION_MACRO_STORM_DMX: //storm
+      000529                       1255 00153$:
+                                   1256 ;	../LED_Manager/led.c:238: if(changed){
+      000529 EB               [12] 1257 	mov	a,r3
+      00052A 70 03            [24] 1258 	jnz	00384$
+      00052C 02r06r73         [24] 1259 	ljmp	00189$
+      00052F                       1260 00384$:
+                                   1261 ;	../LED_Manager/led.c:239: if(!(rng % STORM_FREQ)){
+      00052F 74 59            [12] 1262 	mov	a,#0x59
+      000531 C0 E0            [24] 1263 	push	acc
+      000533 E4               [12] 1264 	clr	a
+      000534 C0 E0            [24] 1265 	push	acc
+      000536 C0 E0            [24] 1266 	push	acc
+      000538 C0 E0            [24] 1267 	push	acc
+      00053A E5*00            [12] 1268 	mov	a,_bp
+      00053C 24 05            [12] 1269 	add	a,#0x05
+      00053E F8               [12] 1270 	mov	r0,a
+      00053F 86 82            [24] 1271 	mov	dpl,@r0
+      000541 08               [12] 1272 	inc	r0
+      000542 86 83            [24] 1273 	mov	dph,@r0
+      000544 08               [12] 1274 	inc	r0
+      000545 86 F0            [24] 1275 	mov	b,@r0
+      000547 08               [12] 1276 	inc	r0
+      000548 E6               [12] 1277 	mov	a,@r0
+      000549 12r00r00         [24] 1278 	lcall	__modulong
+      00054C AC 82            [24] 1279 	mov	r4,dpl
+      00054E AD 83            [24] 1280 	mov	r5,dph
+      000550 AE F0            [24] 1281 	mov	r6,b
+      000552 FF               [12] 1282 	mov	r7,a
+      000553 E5 81            [12] 1283 	mov	a,sp
+      000555 24 FC            [12] 1284 	add	a,#0xfc
+      000557 F5 81            [12] 1285 	mov	sp,a
+      000559 EC               [12] 1286 	mov	a,r4
+      00055A 4D               [12] 1287 	orl	a,r5
+      00055B 4E               [12] 1288 	orl	a,r6
+      00055C 4F               [12] 1289 	orl	a,r7
+      00055D 70 05            [24] 1290 	jnz	00163$
+                                   1291 ;	../LED_Manager/led.c:240: primaryCount = 255;
+      00055F 75*02 FF         [24] 1292 	mov	_play_macro_primaryCount_65536_55,#0xff
+      000562 80 27            [24] 1293 	sjmp	00164$
+      000564                       1294 00163$:
+                                   1295 ;	../LED_Manager/led.c:242: if(primaryCount > 200){
+      000564 E5*02            [12] 1296 	mov	a,_play_macro_primaryCount_65536_55
+      000566 24 37            [12] 1297 	add	a,#0xff - 0xc8
+      000568 50 04            [24] 1298 	jnc	00160$
+                                   1299 ;	../LED_Manager/led.c:243: primaryCount--;
+      00056A 15*02            [12] 1300 	dec	_play_macro_primaryCount_65536_55
+      00056C 80 1D            [24] 1301 	sjmp	00164$
+      00056E                       1302 00160$:
+                                   1303 ;	../LED_Manager/led.c:244: } else if(primaryCount > 130){
+      00056E E5*02            [12] 1304 	mov	a,_play_macro_primaryCount_65536_55
+      000570 24 7D            [12] 1305 	add	a,#0xff - 0x82
+      000572 50 09            [24] 1306 	jnc	00157$
+                                   1307 ;	../LED_Manager/led.c:245: primaryCount-=2;
+      000574 E5*02            [12] 1308 	mov	a,_play_macro_primaryCount_65536_55
+      000576 FF               [12] 1309 	mov	r7,a
+      000577 24 FE            [12] 1310 	add	a,#0xfe
+      000579 F5*02            [12] 1311 	mov	_play_macro_primaryCount_65536_55,a
+      00057B 80 0E            [24] 1312 	sjmp	00164$
+      00057D                       1313 00157$:
+                                   1314 ;	../LED_Manager/led.c:247: primaryCount-=3;
+      00057D E5*02            [12] 1315 	mov	a,_play_macro_primaryCount_65536_55
+      00057F FF               [12] 1316 	mov	r7,a
+      000580 24 FD            [12] 1317 	add	a,#0xfd
+                                   1318 ;	../LED_Manager/led.c:248: if(primaryCount > 200){
+      000582 F5*02            [12] 1319 	mov  _play_macro_primaryCount_65536_55,a
+      000584 24 37            [12] 1320 	add	a,#0xff - 0xc8
+      000586 50 03            [24] 1321 	jnc	00164$
+                                   1322 ;	../LED_Manager/led.c:249: primaryCount = 0;
+      000588 75*02 00         [24] 1323 	mov	_play_macro_primaryCount_65536_55,#0x00
+      00058B                       1324 00164$:
+                                   1325 ;	../LED_Manager/led.c:254: set_leds(primaryCount, primaryCount, primaryCount);
+      00058B C0*02            [24] 1326 	push	_play_macro_primaryCount_65536_55
+      00058D C0*02            [24] 1327 	push	_play_macro_primaryCount_65536_55
+      00058F 85*02 82         [24] 1328 	mov	dpl,_play_macro_primaryCount_65536_55
+      000592 12r07r4A         [24] 1329 	lcall	_set_leds
+      000595 15 81            [12] 1330 	dec	sp
+      000597 15 81            [12] 1331 	dec	sp
+                                   1332 ;	../LED_Manager/led.c:257: break;
+      000599 02r06r73         [24] 1333 	ljmp	00189$
+                                   1334 ;	../LED_Manager/led.c:258: case OPTION_MACRO_WHITE: //w
+      00059C                       1335 00167$:
+                                   1336 ;	../LED_Manager/led.c:259: whiteout();
+      00059C 12r06rEC         [24] 1337 	lcall	_whiteout
+                                   1338 ;	../LED_Manager/led.c:260: break;
+      00059F 02r06r73         [24] 1339 	ljmp	00189$
+                                   1340 ;	../LED_Manager/led.c:261: case 69:
+      0005A2                       1341 00168$:
+                                   1342 ;	../LED_Manager/led.c:262: if(tock < 32){
+      0005A2 74 E0            [12] 1343 	mov	a,#0x100 - 0x20
+      0005A4 25*01            [12] 1344 	add	a,_play_macro_tock_65536_55
+      0005A6 40 3F            [24] 1345 	jc	00185$
+                                   1346 ;	../LED_Manager/led.c:264: if(rng & (SH_B >> tock)){
+      0005A8 85*01 F0         [24] 1347 	mov	b,_play_macro_tock_65536_55
+      0005AB 05 F0            [12] 1348 	inc	b
+      0005AD 7C 00            [12] 1349 	mov	r4,#0x00
+      0005AF 7D 00            [12] 1350 	mov	r5,#0x00
+      0005B1 7E 00            [12] 1351 	mov	r6,#0x00
+      0005B3 7F 80            [12] 1352 	mov	r7,#0x80
+      0005B5 80 0D            [24] 1353 	sjmp	00391$
+      0005B7                       1354 00390$:
+      0005B7 C3               [12] 1355 	clr	c
+      0005B8 EF               [12] 1356 	mov	a,r7
+      0005B9 13               [12] 1357 	rrc	a
+      0005BA FF               [12] 1358 	mov	r7,a
+      0005BB EE               [12] 1359 	mov	a,r6
+      0005BC 13               [12] 1360 	rrc	a
+      0005BD FE               [12] 1361 	mov	r6,a
+      0005BE ED               [12] 1362 	mov	a,r5
+      0005BF 13               [12] 1363 	rrc	a
+      0005C0 FD               [12] 1364 	mov	r5,a
+      0005C1 EC               [12] 1365 	mov	a,r4
+      0005C2 13               [12] 1366 	rrc	a
+      0005C3 FC               [12] 1367 	mov	r4,a
+      0005C4                       1368 00391$:
+      0005C4 D5 F0 F0         [24] 1369 	djnz	b,00390$
+      0005C7 EC               [12] 1370 	mov	a,r4
+      0005C8 54 BA            [12] 1371 	anl	a,#0xba
+      0005CA 70 0F            [24] 1372 	jnz	00392$
+      0005CC ED               [12] 1373 	mov	a,r5
+      0005CD 54 B8            [12] 1374 	anl	a,#0xb8
+      0005CF 70 0A            [24] 1375 	jnz	00392$
+      0005D1 EE               [12] 1376 	mov	a,r6
+      0005D2 54 3B            [12] 1377 	anl	a,#0x3b
+      0005D4 70 05            [24] 1378 	jnz	00392$
+      0005D6 EF               [12] 1379 	mov	a,r7
+      0005D7 54 EE            [12] 1380 	anl	a,#0xee
+      0005D9 60 06            [24] 1381 	jz	00170$
+      0005DB                       1382 00392$:
+                                   1383 ;	../LED_Manager/led.c:265: whiteout(); //White - Worth
+      0005DB 12r06rEC         [24] 1384 	lcall	_whiteout
+      0005DE 02r06r73         [24] 1385 	ljmp	00189$
+      0005E1                       1386 00170$:
+                                   1387 ;	../LED_Manager/led.c:267: blackout();
+      0005E1 12r06rFD         [24] 1388 	lcall	_blackout
+      0005E4 02r06r73         [24] 1389 	ljmp	00189$
+      0005E7                       1390 00185$:
+                                   1391 ;	../LED_Manager/led.c:269: } else if(tock < 64){
+      0005E7 74 C0            [12] 1392 	mov	a,#0x100 - 0x40
+      0005E9 25*01            [12] 1393 	add	a,_play_macro_tock_65536_55
+      0005EB 40 41            [24] 1394 	jc	00182$
+                                   1395 ;	../LED_Manager/led.c:271: if(rng & (SH_B >> (tock - 32))){
+      0005ED E5*01            [12] 1396 	mov	a,_play_macro_tock_65536_55
+      0005EF 24 E0            [12] 1397 	add	a,#0xe0
+      0005F1 FF               [12] 1398 	mov	r7,a
+      0005F2 8F F0            [24] 1399 	mov	b,r7
+      0005F4 05 F0            [12] 1400 	inc	b
+      0005F6 7F 00            [12] 1401 	mov	r7,#0x00
+      0005F8 7E 00            [12] 1402 	mov	r6,#0x00
+      0005FA 7D 00            [12] 1403 	mov	r5,#0x00
+      0005FC 7C 80            [12] 1404 	mov	r4,#0x80
+      0005FE 80 0D            [24] 1405 	sjmp	00395$
+      000600                       1406 00394$:
+      000600 C3               [12] 1407 	clr	c
+      000601 EC               [12] 1408 	mov	a,r4
+      000602 13               [12] 1409 	rrc	a
+      000603 FC               [12] 1410 	mov	r4,a
+      000604 ED               [12] 1411 	mov	a,r5
+      000605 13               [12] 1412 	rrc	a
+      000606 FD               [12] 1413 	mov	r5,a
+      000607 EE               [12] 1414 	mov	a,r6
+      000608 13               [12] 1415 	rrc	a
+      000609 FE               [12] 1416 	mov	r6,a
+      00060A EF               [12] 1417 	mov	a,r7
+      00060B 13               [12] 1418 	rrc	a
+      00060C FF               [12] 1419 	mov	r7,a
+      00060D                       1420 00395$:
+      00060D D5 F0 F0         [24] 1421 	djnz	b,00394$
+      000610 EF               [12] 1422 	mov	a,r7
+      000611 54 38            [12] 1423 	anl	a,#0x38
+      000613 70 0F            [24] 1424 	jnz	00396$
+      000615 EE               [12] 1425 	mov	a,r6
+      000616 54 BA            [12] 1426 	anl	a,#0xba
+      000618 70 0A            [24] 1427 	jnz	00396$
+      00061A ED               [12] 1428 	mov	a,r5
+      00061B 54 B8            [12] 1429 	anl	a,#0xb8
+      00061D 70 05            [24] 1430 	jnz	00396$
+      00061F EC               [12] 1431 	mov	a,r4
+      000620 54 28            [12] 1432 	anl	a,#0x28
+      000622 60 05            [24] 1433 	jz	00173$
+      000624                       1434 00396$:
+                                   1435 ;	../LED_Manager/led.c:272: whiteout(); //White - Worth
+      000624 12r06rEC         [24] 1436 	lcall	_whiteout
+      000627 80 4A            [24] 1437 	sjmp	00189$
+      000629                       1438 00173$:
+                                   1439 ;	../LED_Manager/led.c:274: blackout();
+      000629 12r06rFD         [24] 1440 	lcall	_blackout
+      00062C 80 45            [24] 1441 	sjmp	00189$
+      00062E                       1442 00182$:
+                                   1443 ;	../LED_Manager/led.c:276: } else if(tock < 83){
+      00062E 74 AD            [12] 1444 	mov	a,#0x100 - 0x53
+      000630 25*01            [12] 1445 	add	a,_play_macro_tock_65536_55
+      000632 40 37            [24] 1446 	jc	00179$
+                                   1447 ;	../LED_Manager/led.c:278: if(rng & (SH_B >> (tock - 64))){
+      000634 E5*01            [12] 1448 	mov	a,_play_macro_tock_65536_55
+      000636 24 C0            [12] 1449 	add	a,#0xc0
+      000638 FF               [12] 1450 	mov	r7,a
+      000639 8F F0            [24] 1451 	mov	b,r7
+      00063B 05 F0            [12] 1452 	inc	b
+      00063D 7F 00            [12] 1453 	mov	r7,#0x00
+      00063F 7E 00            [12] 1454 	mov	r6,#0x00
+      000641 7D 00            [12] 1455 	mov	r5,#0x00
+      000643 7C 80            [12] 1456 	mov	r4,#0x80
+      000645 80 0D            [24] 1457 	sjmp	00399$
+      000647                       1458 00398$:
+      000647 C3               [12] 1459 	clr	c
+      000648 EC               [12] 1460 	mov	a,r4
+      000649 13               [12] 1461 	rrc	a
+      00064A FC               [12] 1462 	mov	r4,a
+      00064B ED               [12] 1463 	mov	a,r5
+      00064C 13               [12] 1464 	rrc	a
+      00064D FD               [12] 1465 	mov	r5,a
+      00064E EE               [12] 1466 	mov	a,r6
+      00064F 13               [12] 1467 	rrc	a
+      000650 FE               [12] 1468 	mov	r6,a
+      000651 EF               [12] 1469 	mov	a,r7
+      000652 13               [12] 1470 	rrc	a
+      000653 FF               [12] 1471 	mov	r7,a
+      000654                       1472 00399$:
+      000654 D5 F0 F0         [24] 1473 	djnz	b,00398$
+      000657 ED               [12] 1474 	mov	a,r5
+      000658 54 B8            [12] 1475 	anl	a,#0xb8
+      00065A 70 05            [24] 1476 	jnz	00400$
+      00065C EC               [12] 1477 	mov	a,r4
+      00065D 54 EB            [12] 1478 	anl	a,#0xeb
+      00065F 60 05            [24] 1479 	jz	00176$
+      000661                       1480 00400$:
+                                   1481 ;	../LED_Manager/led.c:279: whiteout();
+      000661 12r06rEC         [24] 1482 	lcall	_whiteout
+      000664 80 0D            [24] 1483 	sjmp	00189$
+      000666                       1484 00176$:
+                                   1485 ;	../LED_Manager/led.c:281: blackout();
+      000666 12r06rFD         [24] 1486 	lcall	_blackout
+      000669 80 08            [24] 1487 	sjmp	00189$
+      00066B                       1488 00179$:
+                                   1489 ;	../LED_Manager/led.c:284: tock = 0;
+      00066B 75*01 00         [24] 1490 	mov	_play_macro_tock_65536_55,#0x00
+                                   1491 ;	../LED_Manager/led.c:286: break;
+                                   1492 ;	../LED_Manager/led.c:287: default:
+      00066E 80 03            [24] 1493 	sjmp	00189$
+      000670                       1494 00187$:
+                                   1495 ;	../LED_Manager/led.c:288: blackout();
+      000670 12r06rFD         [24] 1496 	lcall	_blackout
+                                   1497 ;	../LED_Manager/led.c:289: }
+      000673                       1498 00189$:
+                                   1499 ;	../LED_Manager/led.c:291: }
+      000673 85*00 81         [24] 1500 	mov	sp,_bp
+      000676 D0*00            [24] 1501 	pop	_bp
+      000678 22               [24] 1502 	ret
+                                   1503 ;------------------------------------------------------------
+                                   1504 ;Allocation info for local variables in function 'color_wheel'
+                                   1505 ;------------------------------------------------------------
+                                   1506 ;color                     Allocated to registers r6 
+                                   1507 ;------------------------------------------------------------
+                                   1508 ;	../LED_Manager/led.c:293: void color_wheel(uint8_t color){
+                                   1509 ;	-----------------------------------------
+                                   1510 ;	 function color_wheel
+                                   1511 ;	-----------------------------------------
+      000679                       1512 _color_wheel:
+      000679 AF 82            [24] 1513 	mov	r7,dpl
+                                   1514 ;	../LED_Manager/led.c:295: if(color < 85){
+      00067B BF 55 00         [24] 1515 	cjne	r7,#0x55,00119$
+      00067E                       1516 00119$:
+      00067E 50 20            [24] 1517 	jnc	00105$
+                                   1518 ;	../LED_Manager/led.c:296: set_leds(color * 3, 255 - color * 3, 0);
+      000680 8F 06            [24] 1519 	mov	ar6,r7
+      000682 EE               [12] 1520 	mov	a,r6
+      000683 75 F0 03         [24] 1521 	mov	b,#0x03
+      000686 A4               [48] 1522 	mul	ab
+      000687 D3               [12] 1523 	setb	c
+      000688 94 FF            [12] 1524 	subb	a,#0xff
+      00068A F4               [12] 1525 	cpl	a
+      00068B FE               [12] 1526 	mov	r6,a
+      00068C EF               [12] 1527 	mov	a,r7
+      00068D 75 F0 03         [24] 1528 	mov	b,#0x03
+      000690 A4               [48] 1529 	mul	ab
+      000691 F5 82            [12] 1530 	mov	dpl,a
+      000693 E4               [12] 1531 	clr	a
+      000694 C0 E0            [24] 1532 	push	acc
+      000696 C0 06            [24] 1533 	push	ar6
+      000698 12r07r4A         [24] 1534 	lcall	_set_leds
+      00069B 15 81            [12] 1535 	dec	sp
+      00069D 15 81            [12] 1536 	dec	sp
+      00069F 22               [24] 1537 	ret
+      0006A0                       1538 00105$:
+                                   1539 ;	../LED_Manager/led.c:297: } else if(color < 170){
+      0006A0 BF AA 00         [24] 1540 	cjne	r7,#0xaa,00121$
+      0006A3                       1541 00121$:
+      0006A3 50 23            [24] 1542 	jnc	00102$
+                                   1543 ;	../LED_Manager/led.c:298: color -= 85;
+      0006A5 8F 06            [24] 1544 	mov	ar6,r7
+      0006A7 EE               [12] 1545 	mov	a,r6
+      0006A8 24 AB            [12] 1546 	add	a,#0xab
+                                   1547 ;	../LED_Manager/led.c:299: set_leds(255 - color * 3, 0, color * 3);
+      0006AA FE               [12] 1548 	mov	r6,a
+      0006AB 75 F0 03         [24] 1549 	mov	b,#0x03
+      0006AE A4               [48] 1550 	mul	ab
+      0006AF FD               [12] 1551 	mov	r5,a
+      0006B0 EE               [12] 1552 	mov	a,r6
+      0006B1 75 F0 03         [24] 1553 	mov	b,#0x03
+      0006B4 A4               [48] 1554 	mul	ab
+      0006B5 D3               [12] 1555 	setb	c
+      0006B6 94 FF            [12] 1556 	subb	a,#0xff
+      0006B8 F4               [12] 1557 	cpl	a
+      0006B9 F5 82            [12] 1558 	mov	dpl,a
+      0006BB C0 05            [24] 1559 	push	ar5
+      0006BD E4               [12] 1560 	clr	a
+      0006BE C0 E0            [24] 1561 	push	acc
+      0006C0 12r07r4A         [24] 1562 	lcall	_set_leds
+      0006C3 15 81            [12] 1563 	dec	sp
+      0006C5 15 81            [12] 1564 	dec	sp
+      0006C7 22               [24] 1565 	ret
+      0006C8                       1566 00102$:
+                                   1567 ;	../LED_Manager/led.c:301: color -= 170;
+      0006C8 EF               [12] 1568 	mov	a,r7
+      0006C9 24 56            [12] 1569 	add	a,#0x56
+                                   1570 ;	../LED_Manager/led.c:302: set_leds(0, color * 3, 255 - color * 3);
+      0006CB FF               [12] 1571 	mov	r7,a
+      0006CC FE               [12] 1572 	mov	r6,a
+      0006CD EE               [12] 1573 	mov	a,r6
+      0006CE 75 F0 03         [24] 1574 	mov	b,#0x03
+      0006D1 A4               [48] 1575 	mul	ab
+      0006D2 D3               [12] 1576 	setb	c
+      0006D3 94 FF            [12] 1577 	subb	a,#0xff
+      0006D5 F4               [12] 1578 	cpl	a
+      0006D6 FE               [12] 1579 	mov	r6,a
+      0006D7 EF               [12] 1580 	mov	a,r7
+      0006D8 75 F0 03         [24] 1581 	mov	b,#0x03
+      0006DB A4               [48] 1582 	mul	ab
+      0006DC FF               [12] 1583 	mov	r7,a
+      0006DD C0 06            [24] 1584 	push	ar6
+      0006DF C0 07            [24] 1585 	push	ar7
+      0006E1 75 82 00         [24] 1586 	mov	dpl,#0x00
+      0006E4 12r07r4A         [24] 1587 	lcall	_set_leds
+      0006E7 15 81            [12] 1588 	dec	sp
+      0006E9 15 81            [12] 1589 	dec	sp
+                                   1590 ;	../LED_Manager/led.c:304: }
+      0006EB 22               [24] 1591 	ret
+                                   1592 ;------------------------------------------------------------
+                                   1593 ;Allocation info for local variables in function 'whiteout'
+                                   1594 ;------------------------------------------------------------
+                                   1595 ;	../LED_Manager/led.c:306: void whiteout(){
+                                   1596 ;	-----------------------------------------
+                                   1597 ;	 function whiteout
+                                   1598 ;	-----------------------------------------
+      0006EC                       1599 _whiteout:
+                                   1600 ;	../LED_Manager/led.c:307: set_leds(0xFF, 0xFF, 0xFF);
+      0006EC 74 FF            [12] 1601 	mov	a,#0xff
+      0006EE C0 E0            [24] 1602 	push	acc
+      0006F0 C0 E0            [24] 1603 	push	acc
+      0006F2 75 82 FF         [24] 1604 	mov	dpl,#0xff
+      0006F5 12r07r4A         [24] 1605 	lcall	_set_leds
+      0006F8 15 81            [12] 1606 	dec	sp
+      0006FA 15 81            [12] 1607 	dec	sp
+                                   1608 ;	../LED_Manager/led.c:308: }
+      0006FC 22               [24] 1609 	ret
+                                   1610 ;------------------------------------------------------------
+                                   1611 ;Allocation info for local variables in function 'blackout'
+                                   1612 ;------------------------------------------------------------
+                                   1613 ;	../LED_Manager/led.c:310: void blackout(){
+                                   1614 ;	-----------------------------------------
+                                   1615 ;	 function blackout
                                    1616 ;	-----------------------------------------
-                                   1617 ;	 function rngU32
-                                   1618 ;	-----------------------------------------
-      0006F6                       1619 _rngU32:
-                                   1620 ;	../LED_Manager/led.c:316: present = past + present;
-      0006F6 E5*09            [12] 1621 	mov	a,_rngU32_present_65536_106
-      0006F8 25*05            [12] 1622 	add	a,_rngU32_past_65536_106
-      0006FA F5*09            [12] 1623 	mov	_rngU32_present_65536_106,a
-      0006FC E5*0A            [12] 1624 	mov	a,(_rngU32_present_65536_106 + 1)
-      0006FE 35*06            [12] 1625 	addc	a,(_rngU32_past_65536_106 + 1)
-      000700 F5*0A            [12] 1626 	mov	(_rngU32_present_65536_106 + 1),a
-      000702 E5*0B            [12] 1627 	mov	a,(_rngU32_present_65536_106 + 2)
-      000704 35*07            [12] 1628 	addc	a,(_rngU32_past_65536_106 + 2)
-      000706 F5*0B            [12] 1629 	mov	(_rngU32_present_65536_106 + 2),a
-      000708 E5*0C            [12] 1630 	mov	a,(_rngU32_present_65536_106 + 3)
-      00070A 35*08            [12] 1631 	addc	a,(_rngU32_past_65536_106 + 3)
-      00070C F5*0C            [12] 1632 	mov	(_rngU32_present_65536_106 + 3),a
-                                   1633 ;	../LED_Manager/led.c:317: past = present - past;
-      00070E E5*09            [12] 1634 	mov	a,_rngU32_present_65536_106
-      000710 C3               [12] 1635 	clr	c
-      000711 95*05            [12] 1636 	subb	a,_rngU32_past_65536_106
-      000713 F5*05            [12] 1637 	mov	_rngU32_past_65536_106,a
-      000715 E5*0A            [12] 1638 	mov	a,(_rngU32_present_65536_106 + 1)
-      000717 95*06            [12] 1639 	subb	a,(_rngU32_past_65536_106 + 1)
-      000719 F5*06            [12] 1640 	mov	(_rngU32_past_65536_106 + 1),a
-      00071B E5*0B            [12] 1641 	mov	a,(_rngU32_present_65536_106 + 2)
-      00071D 95*07            [12] 1642 	subb	a,(_rngU32_past_65536_106 + 2)
-      00071F F5*07            [12] 1643 	mov	(_rngU32_past_65536_106 + 2),a
-      000721 E5*0C            [12] 1644 	mov	a,(_rngU32_present_65536_106 + 3)
-      000723 95*08            [12] 1645 	subb	a,(_rngU32_past_65536_106 + 3)
-      000725 F5*08            [12] 1646 	mov	(_rngU32_past_65536_106 + 3),a
-                                   1647 ;	../LED_Manager/led.c:319: return present;
-      000727 85*09 82         [24] 1648 	mov	dpl,_rngU32_present_65536_106
-      00072A 85*0A 83         [24] 1649 	mov	dph,(_rngU32_present_65536_106 + 1)
-      00072D 85*0B F0         [24] 1650 	mov	b,(_rngU32_present_65536_106 + 2)
-      000730 E5*0C            [12] 1651 	mov	a,(_rngU32_present_65536_106 + 3)
-                                   1652 ;	../LED_Manager/led.c:320: }
-      000732 22               [24] 1653 	ret
-                                   1654 ;------------------------------------------------------------
-                                   1655 ;Allocation info for local variables in function 'set_leds'
-                                   1656 ;------------------------------------------------------------
-                                   1657 ;green                     Allocated to stack - _bp -3
-                                   1658 ;blue                      Allocated to stack - _bp -4
-                                   1659 ;red                       Allocated to registers r7 
-                                   1660 ;dimmer                    Allocated to registers r6 
-                                   1661 ;------------------------------------------------------------
-                                   1662 ;	../LED_Manager/led.c:322: void set_leds(uint8_t red, uint8_t green, uint8_t blue){
-                                   1663 ;	-----------------------------------------
-                                   1664 ;	 function set_leds
-                                   1665 ;	-----------------------------------------
-      000733                       1666 _set_leds:
-      000733 C0*00            [24] 1667 	push	_bp
-      000735 85 81*00         [24] 1668 	mov	_bp,sp
-      000738 AF 82            [24] 1669 	mov	r7,dpl
-                                   1670 ;	../LED_Manager/led.c:323: uint8_t dimmer = 0xFF;
-      00073A 7E FF            [12] 1671 	mov	r6,#0xff
-                                   1672 ;	../LED_Manager/led.c:325: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
-      00073C 75 82 10         [24] 1673 	mov	dpl,#0x10
-      00073F C0 07            [24] 1674 	push	ar7
-      000741 C0 06            [24] 1675 	push	ar6
-      000743 12r00r00         [24] 1676 	lcall	_get_runtime_data
-      000746 E5 82            [12] 1677 	mov	a,dpl
-      000748 D0 06            [24] 1678 	pop	ar6
-      00074A D0 07            [24] 1679 	pop	ar7
-      00074C 70 14            [24] 1680 	jnz	00104$
-                                   1681 ;	../LED_Manager/led.c:326: if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11){
-      00074E 75 82 0E         [24] 1682 	mov	dpl,#0x0e
-      000751 C0 07            [24] 1683 	push	ar7
-      000753 C0 06            [24] 1684 	push	ar6
-      000755 12r00r00         [24] 1685 	lcall	_get_runtime_data
-      000758 E5 82            [12] 1686 	mov	a,dpl
-      00075A D0 06            [24] 1687 	pop	ar6
-      00075C D0 07            [24] 1688 	pop	ar7
-      00075E 70 02            [24] 1689 	jnz	00104$
-                                   1690 ;	../LED_Manager/led.c:327: dimmer = get_dmx_value(DMX_M11_DIMMER_INDEX);
-      000760 AE*03            [24] 1691 	mov	r6,(_DMX + 0x0003)
-      000762                       1692 00104$:
-                                   1693 ;	../LED_Manager/led.c:331: if(dimmer == 0xFF){
-      000762 BE FF 12         [24] 1694 	cjne	r6,#0xff,00106$
-                                   1695 ;	../LED_Manager/led.c:332: PWMDATA11H = red;
-      000765 8F BD            [24] 1696 	mov	_PWMDATA11H,r7
-                                   1697 ;	../LED_Manager/led.c:333: PWMDATA17H = green;
-      000767 E5*00            [12] 1698 	mov	a,_bp
-      000769 24 FD            [12] 1699 	add	a,#0xfd
-      00076B F8               [12] 1700 	mov	r0,a
-      00076C 86 AD            [24] 1701 	mov	_PWMDATA17H,@r0
-                                   1702 ;	../LED_Manager/led.c:334: PWMDATA14H = blue;
-      00076E E5*00            [12] 1703 	mov	a,_bp
-      000770 24 FC            [12] 1704 	add	a,#0xfc
-      000772 F8               [12] 1705 	mov	r0,a
-      000773 86 B5            [24] 1706 	mov	_PWMDATA14H,@r0
-      000775 80 59            [24] 1707 	sjmp	00108$
-      000777                       1708 00106$:
-                                   1709 ;	../LED_Manager/led.c:336: PWMDATA11H = ((uint8_t)((((uint16_t) red) * ((uint16_t)dimmer)) >> 8));
-      000777 7D 00            [12] 1710 	mov	r5,#0x00
-      000779 7C 00            [12] 1711 	mov	r4,#0x00
-      00077B C0 06            [24] 1712 	push	ar6
-      00077D C0 04            [24] 1713 	push	ar4
-      00077F C0 06            [24] 1714 	push	ar6
-      000781 C0 04            [24] 1715 	push	ar4
-      000783 8F 82            [24] 1716 	mov	dpl,r7
-      000785 8D 83            [24] 1717 	mov	dph,r5
-      000787 12r00r00         [24] 1718 	lcall	__mulint
-      00078A AF 83            [24] 1719 	mov	r7,dph
-      00078C 15 81            [12] 1720 	dec	sp
-      00078E 15 81            [12] 1721 	dec	sp
-      000790 D0 04            [24] 1722 	pop	ar4
-      000792 D0 06            [24] 1723 	pop	ar6
-      000794 8F BD            [24] 1724 	mov	_PWMDATA11H,r7
-                                   1725 ;	../LED_Manager/led.c:337: PWMDATA17H = ((uint8_t)((((uint16_t) green) * ((uint16_t)dimmer)) >> 8));
-      000796 E5*00            [12] 1726 	mov	a,_bp
-      000798 24 FD            [12] 1727 	add	a,#0xfd
-      00079A F8               [12] 1728 	mov	r0,a
-      00079B 86 05            [24] 1729 	mov	ar5,@r0
-      00079D 7F 00            [12] 1730 	mov	r7,#0x00
-      00079F C0 06            [24] 1731 	push	ar6
-      0007A1 C0 04            [24] 1732 	push	ar4
-      0007A3 C0 06            [24] 1733 	push	ar6
-      0007A5 C0 04            [24] 1734 	push	ar4
-      0007A7 8D 82            [24] 1735 	mov	dpl,r5
-      0007A9 8F 83            [24] 1736 	mov	dph,r7
-      0007AB 12r00r00         [24] 1737 	lcall	__mulint
-      0007AE AF 83            [24] 1738 	mov	r7,dph
-      0007B0 15 81            [12] 1739 	dec	sp
-      0007B2 15 81            [12] 1740 	dec	sp
-      0007B4 8F AD            [24] 1741 	mov	_PWMDATA17H,r7
-                                   1742 ;	../LED_Manager/led.c:338: PWMDATA14H = ((uint8_t)((((uint16_t) blue) * ((uint16_t)dimmer)) >> 8));
-      0007B6 E5*00            [12] 1743 	mov	a,_bp
-      0007B8 24 FC            [12] 1744 	add	a,#0xfc
-      0007BA F8               [12] 1745 	mov	r0,a
-      0007BB 86 05            [24] 1746 	mov	ar5,@r0
-      0007BD 7F 00            [12] 1747 	mov	r7,#0x00
-      0007BF 8D 82            [24] 1748 	mov	dpl,r5
-      0007C1 8F 83            [24] 1749 	mov	dph,r7
-      0007C3 12r00r00         [24] 1750 	lcall	__mulint
-      0007C6 AE 82            [24] 1751 	mov	r6,dpl
-      0007C8 AF 83            [24] 1752 	mov	r7,dph
-      0007CA 15 81            [12] 1753 	dec	sp
-      0007CC 15 81            [12] 1754 	dec	sp
-      0007CE 8F B5            [24] 1755 	mov	_PWMDATA14H,r7
-      0007D0                       1756 00108$:
-                                   1757 ;	../LED_Manager/led.c:340: }
-      0007D0 D0*00            [24] 1758 	pop	_bp
-      0007D2 22               [24] 1759 	ret
-                                   1760 	.area CSEG    (CODE)
-                                   1761 	.area CONST   (CODE)
-                                   1762 	.area XINIT   (CODE)
-                                   1763 	.area CABS    (ABS,CODE)
+      0006FD                       1617 _blackout:
+                                   1618 ;	../LED_Manager/led.c:311: set_leds(0,0,0);
+      0006FD E4               [12] 1619 	clr	a
+      0006FE C0 E0            [24] 1620 	push	acc
+      000700 C0 E0            [24] 1621 	push	acc
+      000702 75 82 00         [24] 1622 	mov	dpl,#0x00
+      000705 12r07r4A         [24] 1623 	lcall	_set_leds
+      000708 15 81            [12] 1624 	dec	sp
+      00070A 15 81            [12] 1625 	dec	sp
+                                   1626 ;	../LED_Manager/led.c:312: }
+      00070C 22               [24] 1627 	ret
+                                   1628 ;------------------------------------------------------------
+                                   1629 ;Allocation info for local variables in function 'rngU32'
+                                   1630 ;------------------------------------------------------------
+                                   1631 ;past                      Allocated with name '_rngU32_past_65536_107'
+                                   1632 ;present                   Allocated with name '_rngU32_present_65536_107'
+                                   1633 ;------------------------------------------------------------
+                                   1634 ;	../LED_Manager/led.c:315: uint32_t rngU32(){
+                                   1635 ;	-----------------------------------------
+                                   1636 ;	 function rngU32
+                                   1637 ;	-----------------------------------------
+      00070D                       1638 _rngU32:
+                                   1639 ;	../LED_Manager/led.c:319: present = past + present;
+      00070D E5*09            [12] 1640 	mov	a,_rngU32_present_65536_107
+      00070F 25*05            [12] 1641 	add	a,_rngU32_past_65536_107
+      000711 F5*09            [12] 1642 	mov	_rngU32_present_65536_107,a
+      000713 E5*0A            [12] 1643 	mov	a,(_rngU32_present_65536_107 + 1)
+      000715 35*06            [12] 1644 	addc	a,(_rngU32_past_65536_107 + 1)
+      000717 F5*0A            [12] 1645 	mov	(_rngU32_present_65536_107 + 1),a
+      000719 E5*0B            [12] 1646 	mov	a,(_rngU32_present_65536_107 + 2)
+      00071B 35*07            [12] 1647 	addc	a,(_rngU32_past_65536_107 + 2)
+      00071D F5*0B            [12] 1648 	mov	(_rngU32_present_65536_107 + 2),a
+      00071F E5*0C            [12] 1649 	mov	a,(_rngU32_present_65536_107 + 3)
+      000721 35*08            [12] 1650 	addc	a,(_rngU32_past_65536_107 + 3)
+      000723 F5*0C            [12] 1651 	mov	(_rngU32_present_65536_107 + 3),a
+                                   1652 ;	../LED_Manager/led.c:320: past = present - past;
+      000725 E5*09            [12] 1653 	mov	a,_rngU32_present_65536_107
+      000727 C3               [12] 1654 	clr	c
+      000728 95*05            [12] 1655 	subb	a,_rngU32_past_65536_107
+      00072A F5*05            [12] 1656 	mov	_rngU32_past_65536_107,a
+      00072C E5*0A            [12] 1657 	mov	a,(_rngU32_present_65536_107 + 1)
+      00072E 95*06            [12] 1658 	subb	a,(_rngU32_past_65536_107 + 1)
+      000730 F5*06            [12] 1659 	mov	(_rngU32_past_65536_107 + 1),a
+      000732 E5*0B            [12] 1660 	mov	a,(_rngU32_present_65536_107 + 2)
+      000734 95*07            [12] 1661 	subb	a,(_rngU32_past_65536_107 + 2)
+      000736 F5*07            [12] 1662 	mov	(_rngU32_past_65536_107 + 2),a
+      000738 E5*0C            [12] 1663 	mov	a,(_rngU32_present_65536_107 + 3)
+      00073A 95*08            [12] 1664 	subb	a,(_rngU32_past_65536_107 + 3)
+      00073C F5*08            [12] 1665 	mov	(_rngU32_past_65536_107 + 3),a
+                                   1666 ;	../LED_Manager/led.c:322: return present;
+      00073E 85*09 82         [24] 1667 	mov	dpl,_rngU32_present_65536_107
+      000741 85*0A 83         [24] 1668 	mov	dph,(_rngU32_present_65536_107 + 1)
+      000744 85*0B F0         [24] 1669 	mov	b,(_rngU32_present_65536_107 + 2)
+      000747 E5*0C            [12] 1670 	mov	a,(_rngU32_present_65536_107 + 3)
+                                   1671 ;	../LED_Manager/led.c:323: }
+      000749 22               [24] 1672 	ret
+                                   1673 ;------------------------------------------------------------
+                                   1674 ;Allocation info for local variables in function 'set_leds'
+                                   1675 ;------------------------------------------------------------
+                                   1676 ;green                     Allocated to stack - _bp -3
+                                   1677 ;blue                      Allocated to stack - _bp -4
+                                   1678 ;red                       Allocated to registers r7 
+                                   1679 ;dimmer                    Allocated to registers r6 
+                                   1680 ;------------------------------------------------------------
+                                   1681 ;	../LED_Manager/led.c:325: void set_leds(uint8_t red, uint8_t green, uint8_t blue){
+                                   1682 ;	-----------------------------------------
+                                   1683 ;	 function set_leds
+                                   1684 ;	-----------------------------------------
+      00074A                       1685 _set_leds:
+      00074A C0*00            [24] 1686 	push	_bp
+      00074C 85 81*00         [24] 1687 	mov	_bp,sp
+      00074F AF 82            [24] 1688 	mov	r7,dpl
+                                   1689 ;	../LED_Manager/led.c:326: uint8_t dimmer = 0xFF;
+      000751 7E FF            [12] 1690 	mov	r6,#0xff
+                                   1691 ;	../LED_Manager/led.c:328: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
+      000753 75 82 10         [24] 1692 	mov	dpl,#0x10
+      000756 C0 07            [24] 1693 	push	ar7
+      000758 C0 06            [24] 1694 	push	ar6
+      00075A 12r00r00         [24] 1695 	lcall	_get_runtime_data
+      00075D E5 82            [12] 1696 	mov	a,dpl
+      00075F D0 06            [24] 1697 	pop	ar6
+      000761 D0 07            [24] 1698 	pop	ar7
+      000763 70 14            [24] 1699 	jnz	00104$
+                                   1700 ;	../LED_Manager/led.c:329: if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11){
+      000765 75 82 0E         [24] 1701 	mov	dpl,#0x0e
+      000768 C0 07            [24] 1702 	push	ar7
+      00076A C0 06            [24] 1703 	push	ar6
+      00076C 12r00r00         [24] 1704 	lcall	_get_runtime_data
+      00076F E5 82            [12] 1705 	mov	a,dpl
+      000771 D0 06            [24] 1706 	pop	ar6
+      000773 D0 07            [24] 1707 	pop	ar7
+      000775 70 02            [24] 1708 	jnz	00104$
+                                   1709 ;	../LED_Manager/led.c:330: dimmer = get_dmx_value(DMX_M11_DIMMER_INDEX);
+      000777 AE*03            [24] 1710 	mov	r6,(_DMX + 0x0003)
+      000779                       1711 00104$:
+                                   1712 ;	../LED_Manager/led.c:334: if(dimmer == 0xFF){
+      000779 BE FF 12         [24] 1713 	cjne	r6,#0xff,00106$
+                                   1714 ;	../LED_Manager/led.c:335: PWMDATA11H = red;
+      00077C 8F BD            [24] 1715 	mov	_PWMDATA11H,r7
+                                   1716 ;	../LED_Manager/led.c:336: PWMDATA17H = green;
+      00077E E5*00            [12] 1717 	mov	a,_bp
+      000780 24 FD            [12] 1718 	add	a,#0xfd
+      000782 F8               [12] 1719 	mov	r0,a
+      000783 86 AD            [24] 1720 	mov	_PWMDATA17H,@r0
+                                   1721 ;	../LED_Manager/led.c:337: PWMDATA14H = blue;
+      000785 E5*00            [12] 1722 	mov	a,_bp
+      000787 24 FC            [12] 1723 	add	a,#0xfc
+      000789 F8               [12] 1724 	mov	r0,a
+      00078A 86 B5            [24] 1725 	mov	_PWMDATA14H,@r0
+      00078C 80 59            [24] 1726 	sjmp	00108$
+      00078E                       1727 00106$:
+                                   1728 ;	../LED_Manager/led.c:339: PWMDATA11H = ((uint8_t)((((uint16_t) red) * ((uint16_t)dimmer)) >> 8));
+      00078E 7D 00            [12] 1729 	mov	r5,#0x00
+      000790 7C 00            [12] 1730 	mov	r4,#0x00
+      000792 C0 06            [24] 1731 	push	ar6
+      000794 C0 04            [24] 1732 	push	ar4
+      000796 C0 06            [24] 1733 	push	ar6
+      000798 C0 04            [24] 1734 	push	ar4
+      00079A 8F 82            [24] 1735 	mov	dpl,r7
+      00079C 8D 83            [24] 1736 	mov	dph,r5
+      00079E 12r00r00         [24] 1737 	lcall	__mulint
+      0007A1 AF 83            [24] 1738 	mov	r7,dph
+      0007A3 15 81            [12] 1739 	dec	sp
+      0007A5 15 81            [12] 1740 	dec	sp
+      0007A7 D0 04            [24] 1741 	pop	ar4
+      0007A9 D0 06            [24] 1742 	pop	ar6
+      0007AB 8F BD            [24] 1743 	mov	_PWMDATA11H,r7
+                                   1744 ;	../LED_Manager/led.c:340: PWMDATA17H = ((uint8_t)((((uint16_t) green) * ((uint16_t)dimmer)) >> 8));
+      0007AD E5*00            [12] 1745 	mov	a,_bp
+      0007AF 24 FD            [12] 1746 	add	a,#0xfd
+      0007B1 F8               [12] 1747 	mov	r0,a
+      0007B2 86 05            [24] 1748 	mov	ar5,@r0
+      0007B4 7F 00            [12] 1749 	mov	r7,#0x00
+      0007B6 C0 06            [24] 1750 	push	ar6
+      0007B8 C0 04            [24] 1751 	push	ar4
+      0007BA C0 06            [24] 1752 	push	ar6
+      0007BC C0 04            [24] 1753 	push	ar4
+      0007BE 8D 82            [24] 1754 	mov	dpl,r5
+      0007C0 8F 83            [24] 1755 	mov	dph,r7
+      0007C2 12r00r00         [24] 1756 	lcall	__mulint
+      0007C5 AF 83            [24] 1757 	mov	r7,dph
+      0007C7 15 81            [12] 1758 	dec	sp
+      0007C9 15 81            [12] 1759 	dec	sp
+      0007CB 8F AD            [24] 1760 	mov	_PWMDATA17H,r7
+                                   1761 ;	../LED_Manager/led.c:341: PWMDATA14H = ((uint8_t)((((uint16_t) blue) * ((uint16_t)dimmer)) >> 8));
+      0007CD E5*00            [12] 1762 	mov	a,_bp
+      0007CF 24 FC            [12] 1763 	add	a,#0xfc
+      0007D1 F8               [12] 1764 	mov	r0,a
+      0007D2 86 05            [24] 1765 	mov	ar5,@r0
+      0007D4 7F 00            [12] 1766 	mov	r7,#0x00
+      0007D6 8D 82            [24] 1767 	mov	dpl,r5
+      0007D8 8F 83            [24] 1768 	mov	dph,r7
+      0007DA 12r00r00         [24] 1769 	lcall	__mulint
+      0007DD AE 82            [24] 1770 	mov	r6,dpl
+      0007DF AF 83            [24] 1771 	mov	r7,dph
+      0007E1 15 81            [12] 1772 	dec	sp
+      0007E3 15 81            [12] 1773 	dec	sp
+      0007E5 8F B5            [24] 1774 	mov	_PWMDATA14H,r7
+      0007E7                       1775 00108$:
+                                   1776 ;	../LED_Manager/led.c:343: }
+      0007E7 D0*00            [24] 1777 	pop	_bp
+      0007E9 22               [24] 1778 	ret
+                                   1779 	.area CSEG    (CODE)
+                                   1780 	.area CONST   (CODE)
+                                   1781 	.area XINIT   (CODE)
+                                   1782 	.area CABS    (ABS,CODE)

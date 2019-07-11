@@ -107,10 +107,15 @@ void tick_ui(void){
 
         exe_command(CLEAR_DISPLAY);
         
-        write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2), LINE_LENGTH, 0, LINE_0, NOT_SELECTED);
-        write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2 + 1), LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
-
-        ss++;
+        if(!ss){
+            write_string(getString(SECRET_STRING_OFFSET + 6), LINE_LENGTH, 0, LINE_0, NOT_SELECTED);
+            write_string(getString(SECRET_STRING_OFFSET + 7), LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
+            ss = 3;
+        } else {
+            write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2), LINE_LENGTH, 0, LINE_0, NOT_SELECTED);
+            write_string(getString(SECRET_STRING_OFFSET + (ss % 3)*2 + 1), LINE_LENGTH, 0, LINE_1, NOT_SELECTED);
+            ss++;
+        }
 
         bursting &= BURSTING;
         bursting |= (ss & ~BURSTING);
@@ -1009,6 +1014,10 @@ char* getString(uint8_t index){
             return "4D6F726961727479";
         case SECRET_STRING_OFFSET + 5:
             return "646F65734E6F74 ;";
+        case SECRET_STRING_OFFSET + 6:
+            return "FirmwareCrafter:";
+        case SECRET_STRING_OFFSET + 7:
+            return "ChristianKrueger";
     }
 
     return 0;

@@ -464,7 +464,7 @@ _tick_fogger:
 	inc	r0
 	addc	a,@r0
 	mov	@r0,a
-;	../Fogger_Manager/fogger.c:316: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:319: power_pump(PUMP_OFF);
 	pop	ar3
 ;	../Fogger_Manager/fogger.c:42: runningAverage += temperature[value];
 00269$:
@@ -673,338 +673,338 @@ _tick_fogger:
 ;	assignBit
 	setb	_P2_0
 00140$:
-;	../Fogger_Manager/fogger.c:114: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
+;	../Fogger_Manager/fogger.c:115: power_heater(HEATER_ENABLE);
+	mov	dpl,#0x00
+	lcall	_power_heater
+;	../Fogger_Manager/fogger.c:117: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX){
 	mov	dpl,#0x10
 	lcall	_get_runtime_data
 	mov	a,dpl
 	jz	00621$
 	ljmp	00237$
 00621$:
-;	../Fogger_Manager/fogger.c:115: if(has_dmx()){
+;	../Fogger_Manager/fogger.c:118: if(has_dmx()){
 	mov	a,_Has_DMX
 	jnz	00622$
 	ljmp	00228$
 00622$:
-;	../Fogger_Manager/fogger.c:116: Playing = PLAY;
+;	../Fogger_Manager/fogger.c:119: Playing = PLAY;
 	mov	_Playing,#0x01
-;	../Fogger_Manager/fogger.c:117: power = FOG_HIGH;
+;	../Fogger_Manager/fogger.c:120: power = FOG_HIGH;
 	mov	_tick_fogger_power_65536_36,#0x01
-;	../Fogger_Manager/fogger.c:118: power_heater(HEATER_ENABLE);
-	mov	dpl,#0x00
-	lcall	_power_heater
-;	../Fogger_Manager/fogger.c:120: if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
+;	../Fogger_Manager/fogger.c:122: if(get_runtime_data(MODE_INDEX) == OPTION_DMX_MODE_11)
 	mov	dpl,#0x0e
 	lcall	_get_runtime_data
 	mov	a,dpl
 	jnz	00225$
-;	../Fogger_Manager/fogger.c:122: value = get_dmx_value(DMX_M11_POWER_INDEX);
-	mov	r7,_DMX
-;	../Fogger_Manager/fogger.c:124: if(value < DMX_FOG_OFF){
-	cjne	r7,#0x14,00624$
-00624$:
-	jnc	00148$
-;	../Fogger_Manager/fogger.c:125: Playing = PAUSE;
+;	../Fogger_Manager/fogger.c:125: value = get_dmx_value(DMX_M11_POWER_INDEX);
+;	../Fogger_Manager/fogger.c:127: if(value <= DMX_FOG_OFF){
+	mov	a,_DMX
+	mov	r7,a
+	add	a,#0xff - 0x14
+	jc	00148$
+;	../Fogger_Manager/fogger.c:128: Playing = PAUSE;
 	mov	_Playing,#0x00
 	sjmp	00149$
 00148$:
-;	../Fogger_Manager/fogger.c:126: } else if(value < DMX_FOG_LOW){
-	cjne	r7,#0x64,00626$
-00626$:
-	jnc	00145$
-;	../Fogger_Manager/fogger.c:127: value = FOG_LO;
+;	../Fogger_Manager/fogger.c:129: } else if(value <= DMX_FOG_LOW){
+	mov	a,r7
+	add	a,#0xff - 0x64
+	jc	00145$
+;	../Fogger_Manager/fogger.c:130: value = FOG_LO;
 	mov	r7,#0x04
 	sjmp	00149$
 00145$:
-;	../Fogger_Manager/fogger.c:128: } else if(value < DMX_FOG_MEDIUM){
-	cjne	r7,#0xc8,00628$
-00628$:
-	jnc	00142$
-;	../Fogger_Manager/fogger.c:129: value = FOG_MED;
+;	../Fogger_Manager/fogger.c:131: } else if(value <= DMX_FOG_MEDIUM){
+	mov	a,r7
+	add	a,#0xff - 0xc8
+	jc	00142$
+;	../Fogger_Manager/fogger.c:132: value = FOG_MED;
 	mov	r7,#0x02
 	sjmp	00149$
 00142$:
-;	../Fogger_Manager/fogger.c:131: value = FOG_HIGH;
+;	../Fogger_Manager/fogger.c:134: value = FOG_HIGH;
 	mov	r7,#0x01
 00149$:
-;	../Fogger_Manager/fogger.c:134: if(value != power){
+;	../Fogger_Manager/fogger.c:137: if(value != power){
 	mov	a,r7
-	cjne	a,_tick_fogger_power_65536_36,00630$
+	cjne	a,_tick_fogger_power_65536_36,00627$
 	sjmp	00151$
-00630$:
-;	../Fogger_Manager/fogger.c:135: power = value;
+00627$:
+;	../Fogger_Manager/fogger.c:138: power = value;
 	mov	_tick_fogger_power_65536_36,r7
 00151$:
-;	../Fogger_Manager/fogger.c:138: value = get_dmx_value(DMX_M11_DURATION_INDEX);
-;	../Fogger_Manager/fogger.c:140: if(value != duration){
+;	../Fogger_Manager/fogger.c:141: value = get_dmx_value(DMX_M11_DURATION_INDEX);
+;	../Fogger_Manager/fogger.c:143: if(value != duration){
 	mov	a,(_DMX + 0x0001)
 	mov	r7,a
-	cjne	a,_tick_fogger_duration_65536_36,00631$
+	cjne	a,_tick_fogger_duration_65536_36,00628$
 	sjmp	00153$
-00631$:
-;	../Fogger_Manager/fogger.c:141: duration = value;
+00628$:
+;	../Fogger_Manager/fogger.c:144: duration = value;
 	mov	_tick_fogger_duration_65536_36,r7
-;	../Fogger_Manager/fogger.c:142: Timer = duration;
+;	../Fogger_Manager/fogger.c:145: Timer = duration;
 	mov	_Timer,_tick_fogger_duration_65536_36
-;	../Fogger_Manager/fogger.c:143: Interval_Or_Duration = DURATION;
+;	../Fogger_Manager/fogger.c:146: Interval_Or_Duration = DURATION;
 	mov	_Interval_Or_Duration,#0xff
 00153$:
-;	../Fogger_Manager/fogger.c:146: value = get_dmx_value(DMX_M11_INTERVAL_INDEX);
-;	../Fogger_Manager/fogger.c:148: if(value != interval){
+;	../Fogger_Manager/fogger.c:149: value = get_dmx_value(DMX_M11_INTERVAL_INDEX);
+;	../Fogger_Manager/fogger.c:151: if(value != interval){
 	mov	a,(_DMX + 0x0002)
 	mov	r7,a
-	cjne	a,_tick_fogger_interval_65536_36,00632$
+	cjne	a,_tick_fogger_interval_65536_36,00629$
 	sjmp	00155$
-00632$:
-;	../Fogger_Manager/fogger.c:149: interval = value;
+00629$:
+;	../Fogger_Manager/fogger.c:152: interval = value;
 	mov	_tick_fogger_interval_65536_36,r7
-;	../Fogger_Manager/fogger.c:150: Playing = RESET;
+;	../Fogger_Manager/fogger.c:153: Playing = RESET;
 	mov	_Playing,#0x02
 00155$:
-;	../Fogger_Manager/fogger.c:153: value = get_dmx_value(DMX_M11_HEATER_ENABLE_INDEX);
-;	../Fogger_Manager/fogger.c:155: if(value >= DMX_HEATER_OFF){
-	mov	a,#0x100 - 0x80
-	add	a,(_DMX + 0x000a)
-	jc	00633$
+;	../Fogger_Manager/fogger.c:156: value = get_dmx_value(DMX_M11_HEATER_ENABLE_INDEX);
+;	../Fogger_Manager/fogger.c:158: if(value > DMX_HEATER_OFF){
+	mov	a,(_DMX + 0x000a)
+	add	a,#0xff - 0x80
+	jc	00630$
 	ljmp	00238$
-00633$:
-;	../Fogger_Manager/fogger.c:156: power_heater(HEATER_DISABLE);
+00630$:
+;	../Fogger_Manager/fogger.c:159: power_heater(HEATER_DISABLE);
 	mov	dpl,#0x01
 	lcall	_power_heater
 	ljmp	00238$
 00225$:
-;	../Fogger_Manager/fogger.c:163: value = get_dmx_value(DMX_M1_FOG_INDEX);
-	mov	r7,_DMX
-;	../Fogger_Manager/fogger.c:166: if(value < DMX_FOG_OFF){
-	cjne	r7,#0x14,00634$
-00634$:
-	jnc	00222$
-;	../Fogger_Manager/fogger.c:167: Playing = PAUSE;
+;	../Fogger_Manager/fogger.c:166: value = get_dmx_value(DMX_M1_FOG_INDEX);
+;	../Fogger_Manager/fogger.c:169: if(value <= DMX_FOG_OFF){
+	mov	a,_DMX
+	mov	r7,a
+	add	a,#0xff - 0x14
+	jc	00222$
+;	../Fogger_Manager/fogger.c:170: Playing = PAUSE;
 	mov	_Playing,#0x00
 	ljmp	00238$
 00222$:
-;	../Fogger_Manager/fogger.c:169: } else if(value < DMX_FOG_3_13){
-	cjne	r7,#0x28,00636$
-00636$:
-	jnc	00219$
-;	../Fogger_Manager/fogger.c:170: if(duration != 3 || interval != 13){
+;	../Fogger_Manager/fogger.c:172: } else if(value <= DMX_FOG_3_13){
+	mov	a,r7
+	add	a,#0xff - 0x28
+	jc	00219$
+;	../Fogger_Manager/fogger.c:173: if(duration != 3 || interval != 13){
 	mov	a,#0x03
 	cjne	a,_tick_fogger_duration_65536_36,00158$
 	mov	a,#0x0d
-	cjne	a,_tick_fogger_interval_65536_36,00640$
+	cjne	a,_tick_fogger_interval_65536_36,00635$
 	ljmp	00238$
-00640$:
+00635$:
 00158$:
-;	../Fogger_Manager/fogger.c:171: duration = 3;
+;	../Fogger_Manager/fogger.c:174: duration = 3;
 	mov	_tick_fogger_duration_65536_36,#0x03
-;	../Fogger_Manager/fogger.c:172: interval = 13;
+;	../Fogger_Manager/fogger.c:175: interval = 13;
 	mov	_tick_fogger_interval_65536_36,#0x0d
-;	../Fogger_Manager/fogger.c:173: Playing = RESET;
+;	../Fogger_Manager/fogger.c:176: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00219$:
-;	../Fogger_Manager/fogger.c:175: } else if(value < DMX_FOG_3_21){
-	cjne	r7,#0x3c,00641$
-00641$:
-	jnc	00216$
-;	../Fogger_Manager/fogger.c:176: if(duration != 3 || interval != 21){
+;	../Fogger_Manager/fogger.c:178: } else if(value <= DMX_FOG_3_21){
+	mov	a,r7
+	add	a,#0xff - 0x3c
+	jc	00216$
+;	../Fogger_Manager/fogger.c:179: if(duration != 3 || interval != 21){
 	mov	a,#0x03
 	cjne	a,_tick_fogger_duration_65536_36,00161$
 	mov	a,#0x15
-	cjne	a,_tick_fogger_interval_65536_36,00645$
+	cjne	a,_tick_fogger_interval_65536_36,00639$
 	ljmp	00238$
-00645$:
+00639$:
 00161$:
-;	../Fogger_Manager/fogger.c:177: duration = 3;
+;	../Fogger_Manager/fogger.c:180: duration = 3;
 	mov	_tick_fogger_duration_65536_36,#0x03
-;	../Fogger_Manager/fogger.c:178: interval = 21;
+;	../Fogger_Manager/fogger.c:181: interval = 21;
 	mov	_tick_fogger_interval_65536_36,#0x15
-;	../Fogger_Manager/fogger.c:179: Playing = RESET;
+;	../Fogger_Manager/fogger.c:182: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00216$:
-;	../Fogger_Manager/fogger.c:181: } else if(value < DMX_FOG_3_34){
-	cjne	r7,#0x50,00646$
-00646$:
-	jnc	00213$
-;	../Fogger_Manager/fogger.c:182: if(duration != 3 || interval != 34){
+;	../Fogger_Manager/fogger.c:184: } else if(value <= DMX_FOG_3_34){
+	mov	a,r7
+	add	a,#0xff - 0x50
+	jc	00213$
+;	../Fogger_Manager/fogger.c:185: if(duration != 3 || interval != 34){
 	mov	a,#0x03
 	cjne	a,_tick_fogger_duration_65536_36,00164$
 	mov	a,#0x22
-	cjne	a,_tick_fogger_interval_65536_36,00650$
+	cjne	a,_tick_fogger_interval_65536_36,00643$
 	ljmp	00238$
-00650$:
+00643$:
 00164$:
-;	../Fogger_Manager/fogger.c:183: duration = 3;
+;	../Fogger_Manager/fogger.c:186: duration = 3;
 	mov	_tick_fogger_duration_65536_36,#0x03
-;	../Fogger_Manager/fogger.c:184: interval = 34;
+;	../Fogger_Manager/fogger.c:187: interval = 34;
 	mov	_tick_fogger_interval_65536_36,#0x22
-;	../Fogger_Manager/fogger.c:185: Playing = RESET;
+;	../Fogger_Manager/fogger.c:188: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00213$:
-;	../Fogger_Manager/fogger.c:187: } else if(value < DMX_FOG_3_55){
-	cjne	r7,#0x64,00651$
-00651$:
-	jnc	00210$
-;	../Fogger_Manager/fogger.c:188: if(duration != 3 || interval != 55){
+;	../Fogger_Manager/fogger.c:190: } else if(value <= DMX_FOG_3_55){
+	mov	a,r7
+	add	a,#0xff - 0x64
+	jc	00210$
+;	../Fogger_Manager/fogger.c:191: if(duration != 3 || interval != 55){
 	mov	a,#0x03
 	cjne	a,_tick_fogger_duration_65536_36,00167$
 	mov	a,#0x37
-	cjne	a,_tick_fogger_interval_65536_36,00655$
+	cjne	a,_tick_fogger_interval_65536_36,00647$
 	ljmp	00238$
-00655$:
+00647$:
 00167$:
-;	../Fogger_Manager/fogger.c:189: duration = 3;
+;	../Fogger_Manager/fogger.c:192: duration = 3;
 	mov	_tick_fogger_duration_65536_36,#0x03
-;	../Fogger_Manager/fogger.c:190: interval = 55;
+;	../Fogger_Manager/fogger.c:193: interval = 55;
 	mov	_tick_fogger_interval_65536_36,#0x37
-;	../Fogger_Manager/fogger.c:191: Playing = RESET;
+;	../Fogger_Manager/fogger.c:194: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00210$:
-;	../Fogger_Manager/fogger.c:193: } else if(value < DMX_FOG_8_21){
-	cjne	r7,#0x78,00656$
-00656$:
-	jnc	00207$
-;	../Fogger_Manager/fogger.c:194: if(duration != 8 || interval != 21){
+;	../Fogger_Manager/fogger.c:196: } else if(value <= DMX_FOG_8_21){
+	mov	a,r7
+	add	a,#0xff - 0x78
+	jc	00207$
+;	../Fogger_Manager/fogger.c:197: if(duration != 8 || interval != 21){
 	mov	a,#0x08
 	cjne	a,_tick_fogger_duration_65536_36,00170$
 	mov	a,#0x15
-	cjne	a,_tick_fogger_interval_65536_36,00660$
+	cjne	a,_tick_fogger_interval_65536_36,00651$
 	ljmp	00238$
-00660$:
+00651$:
 00170$:
-;	../Fogger_Manager/fogger.c:195: duration = 8;
+;	../Fogger_Manager/fogger.c:198: duration = 8;
 	mov	_tick_fogger_duration_65536_36,#0x08
-;	../Fogger_Manager/fogger.c:196: interval = 21;
+;	../Fogger_Manager/fogger.c:199: interval = 21;
 	mov	_tick_fogger_interval_65536_36,#0x15
-;	../Fogger_Manager/fogger.c:197: Playing = RESET;
+;	../Fogger_Manager/fogger.c:200: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00207$:
-;	../Fogger_Manager/fogger.c:199: } else if(value < DMX_FOG_8_34){
-	cjne	r7,#0x8c,00661$
-00661$:
-	jnc	00204$
-;	../Fogger_Manager/fogger.c:200: if(duration != 8 || interval != 34){
+;	../Fogger_Manager/fogger.c:202: } else if(value <= DMX_FOG_8_34){
+	mov	a,r7
+	add	a,#0xff - 0x8c
+	jc	00204$
+;	../Fogger_Manager/fogger.c:203: if(duration != 8 || interval != 34){
 	mov	a,#0x08
 	cjne	a,_tick_fogger_duration_65536_36,00173$
 	mov	a,#0x22
-	cjne	a,_tick_fogger_interval_65536_36,00665$
+	cjne	a,_tick_fogger_interval_65536_36,00655$
 	ljmp	00238$
-00665$:
+00655$:
 00173$:
-;	../Fogger_Manager/fogger.c:201: duration = 8;
+;	../Fogger_Manager/fogger.c:204: duration = 8;
 	mov	_tick_fogger_duration_65536_36,#0x08
-;	../Fogger_Manager/fogger.c:202: interval = 34;
+;	../Fogger_Manager/fogger.c:205: interval = 34;
 	mov	_tick_fogger_interval_65536_36,#0x22
-;	../Fogger_Manager/fogger.c:203: Playing = RESET;
+;	../Fogger_Manager/fogger.c:206: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00204$:
-;	../Fogger_Manager/fogger.c:205: } else if(value < DMX_FOG_8_55){
-	cjne	r7,#0xa0,00666$
-00666$:
-	jnc	00201$
-;	../Fogger_Manager/fogger.c:206: if(duration != 8 || interval != 55){
+;	../Fogger_Manager/fogger.c:208: } else if(value <= DMX_FOG_8_55){
+	mov	a,r7
+	add	a,#0xff - 0xa0
+	jc	00201$
+;	../Fogger_Manager/fogger.c:209: if(duration != 8 || interval != 55){
 	mov	a,#0x08
 	cjne	a,_tick_fogger_duration_65536_36,00176$
 	mov	a,#0x37
-	cjne	a,_tick_fogger_interval_65536_36,00670$
+	cjne	a,_tick_fogger_interval_65536_36,00659$
 	ljmp	00238$
-00670$:
+00659$:
 00176$:
-;	../Fogger_Manager/fogger.c:207: duration = 8;
+;	../Fogger_Manager/fogger.c:210: duration = 8;
 	mov	_tick_fogger_duration_65536_36,#0x08
-;	../Fogger_Manager/fogger.c:208: interval = 55;
+;	../Fogger_Manager/fogger.c:211: interval = 55;
 	mov	_tick_fogger_interval_65536_36,#0x37
-;	../Fogger_Manager/fogger.c:209: Playing = RESET;
+;	../Fogger_Manager/fogger.c:212: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00201$:
-;	../Fogger_Manager/fogger.c:211: } else if(value < DMX_FOG_8_89){
-	cjne	r7,#0xb4,00671$
-00671$:
-	jnc	00198$
-;	../Fogger_Manager/fogger.c:212: if(duration != 8 || interval != 89){
+;	../Fogger_Manager/fogger.c:214: } else if(value <= DMX_FOG_8_89){
+	mov	a,r7
+	add	a,#0xff - 0xb4
+	jc	00198$
+;	../Fogger_Manager/fogger.c:215: if(duration != 8 || interval != 89){
 	mov	a,#0x08
 	cjne	a,_tick_fogger_duration_65536_36,00179$
 	mov	a,#0x59
-	cjne	a,_tick_fogger_interval_65536_36,00675$
+	cjne	a,_tick_fogger_interval_65536_36,00663$
 	ljmp	00238$
-00675$:
+00663$:
 00179$:
-;	../Fogger_Manager/fogger.c:213: duration = 8;
+;	../Fogger_Manager/fogger.c:216: duration = 8;
 	mov	_tick_fogger_duration_65536_36,#0x08
-;	../Fogger_Manager/fogger.c:214: interval = 89;
+;	../Fogger_Manager/fogger.c:217: interval = 89;
 	mov	_tick_fogger_interval_65536_36,#0x59
-;	../Fogger_Manager/fogger.c:215: Playing = RESET;
+;	../Fogger_Manager/fogger.c:218: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00198$:
-;	../Fogger_Manager/fogger.c:217: } else if(value < DMX_FOG_8_144){
-	cjne	r7,#0xc8,00676$
-00676$:
-	jnc	00195$
-;	../Fogger_Manager/fogger.c:218: if(duration != 8 || interval != 144){
+;	../Fogger_Manager/fogger.c:220: } else if(value <= DMX_FOG_8_144){
+	mov	a,r7
+	add	a,#0xff - 0xc8
+	jc	00195$
+;	../Fogger_Manager/fogger.c:221: if(duration != 8 || interval != 144){
 	mov	a,#0x08
 	cjne	a,_tick_fogger_duration_65536_36,00182$
 	mov	a,#0x90
-	cjne	a,_tick_fogger_interval_65536_36,00680$
+	cjne	a,_tick_fogger_interval_65536_36,00667$
 	ljmp	00238$
-00680$:
+00667$:
 00182$:
-;	../Fogger_Manager/fogger.c:219: duration = 8;
+;	../Fogger_Manager/fogger.c:222: duration = 8;
 	mov	_tick_fogger_duration_65536_36,#0x08
-;	../Fogger_Manager/fogger.c:220: interval = 144;
+;	../Fogger_Manager/fogger.c:223: interval = 144;
 	mov	_tick_fogger_interval_65536_36,#0x90
-;	../Fogger_Manager/fogger.c:221: Playing = RESET;
+;	../Fogger_Manager/fogger.c:224: Playing = RESET;
 	mov	_Playing,#0x02
 	ljmp	00238$
 00195$:
-;	../Fogger_Manager/fogger.c:223: } else if(value < DMX_FOG_21_55){
-	cjne	r7,#0xdc,00681$
-00681$:
-	jnc	00192$
-;	../Fogger_Manager/fogger.c:224: if(duration != 21 || interval != 55){
+;	../Fogger_Manager/fogger.c:226: } else if(value <= DMX_FOG_21_55){
+	mov	a,r7
+	add	a,#0xff - 0xdc
+	jc	00192$
+;	../Fogger_Manager/fogger.c:227: if(duration != 21 || interval != 55){
 	mov	a,#0x15
 	cjne	a,_tick_fogger_duration_65536_36,00185$
 	mov	a,#0x37
-	cjne	a,_tick_fogger_interval_65536_36,00685$
+	cjne	a,_tick_fogger_interval_65536_36,00671$
 	sjmp	00238$
-00685$:
+00671$:
 00185$:
-;	../Fogger_Manager/fogger.c:225: duration = 21;
+;	../Fogger_Manager/fogger.c:228: duration = 21;
 	mov	_tick_fogger_duration_65536_36,#0x15
-;	../Fogger_Manager/fogger.c:226: interval = 55;
+;	../Fogger_Manager/fogger.c:229: interval = 55;
 	mov	_tick_fogger_interval_65536_36,#0x37
-;	../Fogger_Manager/fogger.c:227: Playing = RESET;
+;	../Fogger_Manager/fogger.c:230: Playing = RESET;
 	mov	_Playing,#0x02
 	sjmp	00238$
 00192$:
-;	../Fogger_Manager/fogger.c:230: if(duration !=  0 || interval != 0){
-	mov	a,_tick_fogger_duration_65536_36
-	jnz	00188$
+;	../Fogger_Manager/fogger.c:233: if(duration != 0xFF || interval != 0){
+	mov	a,#0xff
+	cjne	a,_tick_fogger_duration_65536_36,00188$
 	mov	a,_tick_fogger_interval_65536_36
 	jz	00238$
 00188$:
-;	../Fogger_Manager/fogger.c:231: duration = 0;
-	mov	_tick_fogger_duration_65536_36,#0x00
-;	../Fogger_Manager/fogger.c:232: interval = 0;
+;	../Fogger_Manager/fogger.c:234: duration = 0xFF;
+	mov	_tick_fogger_duration_65536_36,#0xff
+;	../Fogger_Manager/fogger.c:235: interval = 0;
 	mov	_tick_fogger_interval_65536_36,#0x00
-;	../Fogger_Manager/fogger.c:233: Playing = RESET;
+;	../Fogger_Manager/fogger.c:236: Playing = RESET;
 	mov	_Playing,#0x02
 	sjmp	00238$
 00228$:
-;	../Fogger_Manager/fogger.c:239: Playing = RESET;
+;	../Fogger_Manager/fogger.c:242: Playing = RESET;
 	mov	_Playing,#0x02
 	sjmp	00238$
 00237$:
-;	../Fogger_Manager/fogger.c:242: value = get_runtime_data(FOG_POWER_INDEX);
+;	../Fogger_Manager/fogger.c:245: value = get_runtime_data(FOG_POWER_INDEX);
 	mov	dpl,#0x00
 	lcall	_get_runtime_data
 	mov	r7,dpl
-;	../Fogger_Manager/fogger.c:246: value = 0x01 << (2 - value);
+;	../Fogger_Manager/fogger.c:249: value = 0x01 << (2 - value);
 	mov	a,#0x02
 	clr	c
 	subb	a,r7
@@ -1012,72 +1012,72 @@ _tick_fogger:
 	mov	b,r7
 	inc	b
 	mov	a,#0x01
-	sjmp	00690$
-00688$:
+	sjmp	00677$
+00675$:
 	add	a,acc
-00690$:
-	djnz	b,00688$
-;	../Fogger_Manager/fogger.c:248: if(value != power){
+00677$:
+	djnz	b,00675$
+;	../Fogger_Manager/fogger.c:251: if(value != power){
 	mov	r7,a
-	cjne	a,_tick_fogger_power_65536_36,00691$
+	cjne	a,_tick_fogger_power_65536_36,00678$
 	sjmp	00231$
-00691$:
-;	../Fogger_Manager/fogger.c:249: power = value;
+00678$:
+;	../Fogger_Manager/fogger.c:252: power = value;
 	mov	_tick_fogger_power_65536_36,r7
-;	../Fogger_Manager/fogger.c:250: Playing = RESET;
+;	../Fogger_Manager/fogger.c:253: Playing = RESET;
 	mov	_Playing,#0x02
 00231$:
-;	../Fogger_Manager/fogger.c:253: value = get_runtime_data(FOG_DURATION_INDEX);
+;	../Fogger_Manager/fogger.c:256: value = get_runtime_data(FOG_DURATION_INDEX);
 	mov	dpl,#0x01
 	lcall	_get_runtime_data
-;	../Fogger_Manager/fogger.c:255: if(value != duration){
+;	../Fogger_Manager/fogger.c:258: if(value != duration){
 	mov	a,dpl
 	mov	r7,a
-	cjne	a,_tick_fogger_duration_65536_36,00692$
+	cjne	a,_tick_fogger_duration_65536_36,00679$
 	sjmp	00233$
-00692$:
-;	../Fogger_Manager/fogger.c:256: duration = value;
+00679$:
+;	../Fogger_Manager/fogger.c:259: duration = value;
 	mov	_tick_fogger_duration_65536_36,r7
-;	../Fogger_Manager/fogger.c:257: Playing = RESET;
+;	../Fogger_Manager/fogger.c:260: Playing = RESET;
 	mov	_Playing,#0x02
 00233$:
-;	../Fogger_Manager/fogger.c:260: value = get_runtime_data(FOG_INTERVAL_INDEX);
+;	../Fogger_Manager/fogger.c:263: value = get_runtime_data(FOG_INTERVAL_INDEX);
 	mov	dpl,#0x02
 	lcall	_get_runtime_data
-;	../Fogger_Manager/fogger.c:262: if(value != interval){
+;	../Fogger_Manager/fogger.c:265: if(value != interval){
 	mov	a,dpl
 	mov	r7,a
-	cjne	a,_tick_fogger_interval_65536_36,00693$
+	cjne	a,_tick_fogger_interval_65536_36,00680$
 	sjmp	00238$
-00693$:
-;	../Fogger_Manager/fogger.c:263: interval = value;
+00680$:
+;	../Fogger_Manager/fogger.c:266: interval = value;
 	mov	_tick_fogger_interval_65536_36,r7
-;	../Fogger_Manager/fogger.c:264: Playing = RESET;
+;	../Fogger_Manager/fogger.c:267: Playing = RESET;
 	mov	_Playing,#0x02
 00238$:
-;	../Fogger_Manager/fogger.c:269: if(Playing == RESET){
+;	../Fogger_Manager/fogger.c:272: if(Playing == RESET){
 	mov	a,#0x02
 	cjne	a,_Playing,00240$
-;	../Fogger_Manager/fogger.c:270: Playing = PAUSE;
+;	../Fogger_Manager/fogger.c:273: Playing = PAUSE;
 	mov	_Playing,#0x00
-;	../Fogger_Manager/fogger.c:271: Timer = interval;
+;	../Fogger_Manager/fogger.c:274: Timer = interval;
 	mov	_Timer,_tick_fogger_interval_65536_36
-;	../Fogger_Manager/fogger.c:272: Interval_Or_Duration = INTERVAL;
+;	../Fogger_Manager/fogger.c:275: Interval_Or_Duration = INTERVAL;
 	mov	_Interval_Or_Duration,#0x00
 00240$:
-;	../Fogger_Manager/fogger.c:276: if(Playing){
+;	../Fogger_Manager/fogger.c:279: if(Playing){
 	mov	a,_Playing
-	jnz	00696$
+	jnz	00683$
 	ljmp	00266$
-00696$:
-;	../Fogger_Manager/fogger.c:277: tock++;
+00683$:
+;	../Fogger_Manager/fogger.c:280: tock++;
 	inc	_tick_fogger_tock_65536_36
-;	../Fogger_Manager/fogger.c:279: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
+;	../Fogger_Manager/fogger.c:282: if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
 	mov	dpl,#0x10
 	lcall	_get_runtime_data
 	mov	a,dpl
 	jnz	00260$
-;	../Fogger_Manager/fogger.c:280: && ((duration && !interval) || (duration > DMX_FOG_DURATION_CONSTANT))){
+;	../Fogger_Manager/fogger.c:283: && ((duration && !interval) || (duration > DMX_FOG_DURATION_CONSTANT))){
 	mov	a,_tick_fogger_duration_65536_36
 	jz	00263$
 	mov	a,_tick_fogger_interval_65536_36
@@ -1087,36 +1087,36 @@ _tick_fogger:
 	add	a,#0xff - 0xe6
 	jnc	00260$
 00259$:
-;	../Fogger_Manager/fogger.c:282: if(!(tock % power)){
+;	../Fogger_Manager/fogger.c:285: if(!(tock % power)){
 	mov	b,_tick_fogger_power_65536_36
 	mov	a,_tick_fogger_tock_65536_36
 	div	ab
 	mov	a,b
 	jnz	00242$
-;	../Fogger_Manager/fogger.c:283: power_pump(PUMP_ON);
+;	../Fogger_Manager/fogger.c:286: power_pump(PUMP_ON);
 	mov	dpl,#0x01
 	lcall	_power_pump
 	ljmp	00270$
 00242$:
-;	../Fogger_Manager/fogger.c:285: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:288: power_pump(PUMP_OFF);
 	mov	dpl,#0x00
 	lcall	_power_pump
 	ljmp	00270$
 00260$:
-;	../Fogger_Manager/fogger.c:288: } else if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
+;	../Fogger_Manager/fogger.c:291: } else if(get_runtime_data(OP_MODE_INDEX) == MODE_DMX
 	mov	dpl,#0x10
 	lcall	_get_runtime_data
 	mov	a,dpl
 	jnz	00256$
-;	../Fogger_Manager/fogger.c:289: && (!duration)){
+;	../Fogger_Manager/fogger.c:292: && (!duration)){
 	mov	a,_tick_fogger_duration_65536_36
-;	../Fogger_Manager/fogger.c:290: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:293: power_pump(PUMP_OFF);
 	jnz	00256$
 	mov	dpl,a
 	lcall	_power_pump
 	ljmp	00270$
 00256$:
-;	../Fogger_Manager/fogger.c:293: if(!(tock % 8)){
+;	../Fogger_Manager/fogger.c:296: if(!(tock % 8)){
 	mov	r6,_tick_fogger_tock_65536_36
 	mov	r7,#0x00
 	mov	a,#0x08
@@ -1133,13 +1133,13 @@ _tick_fogger:
 	mov	a,r6
 	orl	a,r7
 	jnz	00245$
-;	../Fogger_Manager/fogger.c:294: Timer--;
+;	../Fogger_Manager/fogger.c:297: Timer--;
 	dec	_Timer
 00245$:
-;	../Fogger_Manager/fogger.c:297: if(Timer == 0x00){
+;	../Fogger_Manager/fogger.c:300: if(Timer == 0x00){
 	mov	a,_Timer
 	jnz	00253$
-;	../Fogger_Manager/fogger.c:298: power_pump((Interval_Or_Duration == INTERVAL) ? PUMP_ON : PUMP_OFF);
+;	../Fogger_Manager/fogger.c:301: power_pump((Interval_Or_Duration == INTERVAL) ? PUMP_ON : PUMP_OFF);
 	mov	a,_Interval_Or_Duration
 	jnz	00272$
 	mov	r6,#0x01
@@ -1151,7 +1151,7 @@ _tick_fogger:
 00273$:
 	mov	dpl,r6
 	lcall	_power_pump
-;	../Fogger_Manager/fogger.c:299: Timer = (Interval_Or_Duration == INTERVAL) ? duration : interval;
+;	../Fogger_Manager/fogger.c:302: Timer = (Interval_Or_Duration == INTERVAL) ? duration : interval;
 	mov	a,_Interval_Or_Duration
 	jnz	00274$
 	mov	r7,_tick_fogger_duration_65536_36
@@ -1160,7 +1160,7 @@ _tick_fogger:
 	mov	r7,_tick_fogger_interval_65536_36
 00275$:
 	mov	_Timer,r7
-;	../Fogger_Manager/fogger.c:300: Interval_Or_Duration = (Interval_Or_Duration == INTERVAL) ? DURATION : INTERVAL;
+;	../Fogger_Manager/fogger.c:303: Interval_Or_Duration = (Interval_Or_Duration == INTERVAL) ? DURATION : INTERVAL;
 	mov	a,_Interval_Or_Duration
 	jnz	00276$
 	mov	r6,#0xff
@@ -1173,35 +1173,35 @@ _tick_fogger:
 	mov	_Interval_Or_Duration,r6
 	sjmp	00270$
 00253$:
-;	../Fogger_Manager/fogger.c:302: if(Interval_Or_Duration == INTERVAL){
+;	../Fogger_Manager/fogger.c:305: if(Interval_Or_Duration == INTERVAL){
 	mov	a,_Interval_Or_Duration
-;	../Fogger_Manager/fogger.c:303: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:306: power_pump(PUMP_OFF);
 	jnz	00250$
 	mov	dpl,a
 	lcall	_power_pump
 	sjmp	00270$
 00250$:
-;	../Fogger_Manager/fogger.c:305: if(!(tock % power)){
+;	../Fogger_Manager/fogger.c:308: if(!(tock % power)){
 	mov	b,_tick_fogger_power_65536_36
 	mov	a,_tick_fogger_tock_65536_36
 	div	ab
 	mov	a,b
 	jnz	00247$
-;	../Fogger_Manager/fogger.c:306: power_pump(PUMP_ON);
+;	../Fogger_Manager/fogger.c:309: power_pump(PUMP_ON);
 	mov	dpl,#0x01
 	lcall	_power_pump
 	sjmp	00270$
 00247$:
-;	../Fogger_Manager/fogger.c:308: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:311: power_pump(PUMP_OFF);
 	mov	dpl,#0x00
 	lcall	_power_pump
 	sjmp	00270$
 00266$:
-;	../Fogger_Manager/fogger.c:316: power_pump(PUMP_OFF);
+;	../Fogger_Manager/fogger.c:319: power_pump(PUMP_OFF);
 	mov	dpl,#0x00
 	lcall	_power_pump
 00270$:
-;	../Fogger_Manager/fogger.c:319: }
+;	../Fogger_Manager/fogger.c:322: }
 	mov	sp,_bp
 	pop	_bp
 	ret
@@ -1210,24 +1210,24 @@ _tick_fogger:
 ;------------------------------------------------------------
 ;action                    Allocated to registers r7 
 ;------------------------------------------------------------
-;	../Fogger_Manager/fogger.c:321: void power_pump(uint8_t action){
+;	../Fogger_Manager/fogger.c:324: void power_pump(uint8_t action){
 ;	-----------------------------------------
 ;	 function power_pump
 ;	-----------------------------------------
 _power_pump:
 	mov	r7,dpl
-;	../Fogger_Manager/fogger.c:322: switch (action)
+;	../Fogger_Manager/fogger.c:325: switch (action)
 	cjne	r7,#0x01,00139$
 	sjmp	00101$
 00139$:
 	cjne	r7,#0x02,00140$
 	sjmp	00106$
 00140$:
-;	../Fogger_Manager/fogger.c:324: case PUMP_ON:
+;	../Fogger_Manager/fogger.c:327: case PUMP_ON:
 	cjne	r7,#0x03,00111$
 	sjmp	00110$
 00101$:
-;	../Fogger_Manager/fogger.c:325: if(get_fog_fluid_level() != TANK_EMPTY && get_heated() == HEATED){
+;	../Fogger_Manager/fogger.c:328: if(get_fog_fluid_level() != TANK_EMPTY && get_heated() == HEATED){
 	mov	a,_Fluid_Level
 	jz	00103$
 	mov	r6,_Heat_Flag
@@ -1235,78 +1235,78 @@ _power_pump:
 	mov	r7,#0x00
 	cjne	r6,#0x80,00103$
 	cjne	r7,#0x00,00103$
-;	../Fogger_Manager/fogger.c:326: P2_5 = 0;
+;	../Fogger_Manager/fogger.c:329: P2_5 = 0;
 ;	assignBit
 	clr	_P2_5
-;	../Fogger_Manager/fogger.c:327: Heat_Flag &= ~HOT_FLAG;
+;	../Fogger_Manager/fogger.c:330: Heat_Flag &= ~HOT_FLAG;
 	anl	_Heat_Flag,#0xfd
 	ret
 00103$:
-;	../Fogger_Manager/fogger.c:329: P2_5 = 1;
+;	../Fogger_Manager/fogger.c:332: P2_5 = 1;
 ;	assignBit
 	setb	_P2_5
-;	../Fogger_Manager/fogger.c:331: break;
-;	../Fogger_Manager/fogger.c:332: case PUMP_OVERRIDE:
+;	../Fogger_Manager/fogger.c:334: break;
+;	../Fogger_Manager/fogger.c:335: case PUMP_OVERRIDE:
 	ret
 00106$:
-;	../Fogger_Manager/fogger.c:333: if(get_heated() == HEATED){
+;	../Fogger_Manager/fogger.c:336: if(get_heated() == HEATED){
 	mov	r6,_Heat_Flag
 	anl	ar6,#0x80
 	mov	r7,#0x00
 	cjne	r6,#0x80,00108$
 	cjne	r7,#0x00,00108$
-;	../Fogger_Manager/fogger.c:334: P2_5 = 0;
+;	../Fogger_Manager/fogger.c:337: P2_5 = 0;
 ;	assignBit
 	clr	_P2_5
-;	../Fogger_Manager/fogger.c:335: Heat_Flag &= ~HOT_FLAG;
+;	../Fogger_Manager/fogger.c:338: Heat_Flag &= ~HOT_FLAG;
 	anl	_Heat_Flag,#0xfd
 	ret
 00108$:
-;	../Fogger_Manager/fogger.c:337: P2_5 = 1;
+;	../Fogger_Manager/fogger.c:340: P2_5 = 1;
 ;	assignBit
 	setb	_P2_5
-;	../Fogger_Manager/fogger.c:339: break;
-;	../Fogger_Manager/fogger.c:340: case PUMP_MASTER_OVERRIDE:
+;	../Fogger_Manager/fogger.c:342: break;
+;	../Fogger_Manager/fogger.c:343: case PUMP_MASTER_OVERRIDE:
 	ret
 00110$:
-;	../Fogger_Manager/fogger.c:341: P2_5 = 0;
+;	../Fogger_Manager/fogger.c:344: P2_5 = 0;
 ;	assignBit
 	clr	_P2_5
-;	../Fogger_Manager/fogger.c:342: break;
-;	../Fogger_Manager/fogger.c:343: default:
+;	../Fogger_Manager/fogger.c:345: break;
+;	../Fogger_Manager/fogger.c:346: default:
 	ret
 00111$:
-;	../Fogger_Manager/fogger.c:344: P2_5 = 1;
+;	../Fogger_Manager/fogger.c:347: P2_5 = 1;
 ;	assignBit
 	setb	_P2_5
-;	../Fogger_Manager/fogger.c:346: }
-;	../Fogger_Manager/fogger.c:347: }
+;	../Fogger_Manager/fogger.c:349: }
+;	../Fogger_Manager/fogger.c:350: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'power_heater'
 ;------------------------------------------------------------
 ;action                    Allocated to registers r7 
 ;------------------------------------------------------------
-;	../Fogger_Manager/fogger.c:349: void power_heater(uint8_t action){
+;	../Fogger_Manager/fogger.c:352: void power_heater(uint8_t action){
 ;	-----------------------------------------
 ;	 function power_heater
 ;	-----------------------------------------
 _power_heater:
 	mov	r7,dpl
-;	../Fogger_Manager/fogger.c:350: switch (action)
+;	../Fogger_Manager/fogger.c:353: switch (action)
 	cjne	r7,#0x01,00102$
-;	../Fogger_Manager/fogger.c:353: Heat_Flag |= HEAT_DISABLE_FLAG;
+;	../Fogger_Manager/fogger.c:356: Heat_Flag |= HEAT_DISABLE_FLAG;
 	mov	r6,_Heat_Flag
 	orl	ar6,#0x10
 	mov	_Heat_Flag,r6
-;	../Fogger_Manager/fogger.c:354: break;
-;	../Fogger_Manager/fogger.c:355: default:
+;	../Fogger_Manager/fogger.c:357: break;
+;	../Fogger_Manager/fogger.c:358: default:
 	ret
 00102$:
-;	../Fogger_Manager/fogger.c:356: Heat_Flag &= ~HEAT_DISABLE_FLAG;
+;	../Fogger_Manager/fogger.c:359: Heat_Flag &= ~HEAT_DISABLE_FLAG;
 	anl	_Heat_Flag,#0xef
-;	../Fogger_Manager/fogger.c:358: }
-;	../Fogger_Manager/fogger.c:359: }
+;	../Fogger_Manager/fogger.c:361: }
+;	../Fogger_Manager/fogger.c:362: }
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

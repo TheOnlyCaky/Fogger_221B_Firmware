@@ -304,8 +304,8 @@ Hexadecimal [24-Bits]
 Symbol Table
 
     _get_runtime_data                                              ****** GX
- 17 _power_heater                                                  0004AC GR
- 17 _power_pump                                                    000465 GR
+ 17 _power_heater                                                  0004AD GR
+ 17 _power_pump                                                    000466 GR
  17 _tick_fogger                                                   000000 GR
   6 _tick_fogger_duration_65536_36                                 000010 R
   6 _tick_fogger_fullCount_65536_36                                000005 R
@@ -552,7 +552,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size     22   flags   20
   16 GSFINAL                                    size      0   flags   20
-  17 CSEG                                       size    4BD   flags   20
+  17 CSEG                                       size    4BE   flags   20
   18 CONST                                      size      0   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

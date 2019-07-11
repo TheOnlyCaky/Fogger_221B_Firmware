@@ -291,12 +291,12 @@ Symbol Table
     _TR2                                                        =  0000CA G
     __modulong                                                     ****** GX
     __mulint                                                       ****** GX
- 16 _blackout                                                      0006E6 GR
+ 16 _blackout                                                      0006FD GR
     _bp                                                            ****** GX
- 16 _color_wheel                                                   000662 GR
- 16 _dmx_to_macro                                                  00022C GR
+ 16 _color_wheel                                                   000679 GR
+ 16 _dmx_to_macro                                                  00022E GR
     _get_runtime_data                                              ****** GX
- 16 _play_macro                                                    000271 GR
+ 16 _play_macro                                                    000273 GR
   5 _play_macro_direction_65536_55                                 000004 R
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 6.
 Hexadecimal [24-Bits]
@@ -306,13 +306,13 @@ Symbol Table
   5 _play_macro_primaryCount_65536_55                              000002 R
   5 _play_macro_secondaryCount_65536_55                            000003 R
   5 _play_macro_tock_65536_55                                      000001 R
- 16 _rngU32                                                        0006F6 GR
-  5 _rngU32_past_65536_106                                         000005 R
-  5 _rngU32_present_65536_106                                      000009 R
- 16 _set_leds                                                      000733 GR
+ 16 _rngU32                                                        00070D GR
+  5 _rngU32_past_65536_107                                         000005 R
+  5 _rngU32_present_65536_107                                      000009 R
+ 16 _set_leds                                                      00074A GR
  16 _tick_led                                                      000000 GR
   5 _tick_led_on_65536_17                                          000000 R
- 16 _whiteout                                                      0006D5 GR
+ 16 _whiteout                                                      0006EC GR
     a                                                           =  0000E0 L
     a.0                                                         =  0000E0 L
     a.1                                                         =  0000E1 L
@@ -541,7 +541,7 @@ Area Table
   13 GSINIT5                                    size      0   flags   20
   14 GSINIT                                     size     22   flags   20
   15 GSFINAL                                    size      0   flags   20
-  16 CSEG                                       size    7D3   flags   20
+  16 CSEG                                       size    7EA   flags   20
   17 CONST                                      size      0   flags   20
   18 XINIT                                      size      0   flags   20
   19 CABS                                       size      0   flags   28

@@ -374,41 +374,43 @@ Symbol Table
  17 ___str_68                                                      0002AD R
  17 ___str_69                                                      0002BE R
  17 ___str_7                                                       000064 R
+ 17 ___str_70                                                      0002CF R
+ 17 ___str_71                                                      0002E0 R
  17 ___str_8                                                       000074 R
  17 ___str_9                                                       000083 R
     __modsint                                                      ****** GX
     _bp                                                            ****** GX
   5 _changed                                                       000002 R
- 16 _colorPage                                                     000CE7 GR
- 16 _dmxAddressPage                                                0010C3 GR
- 16 _dmxChannelPage                                                00115B GR
+ 16 _colorPage                                                     000D47 GR
+ 16 _dmxAddressPage                                                001123 GR
+ 16 _dmxChannelPage                                                0011BB GR
     _exe_command                                                   ****** GX
- 16 _fogDurationPage                                               000A51 GR
- 16 _fogIntervalPage                                               000980 GR
- 16 _fogLevelPage                                                  0007F0 GR
- 16 _getString                                                     001323 GR
+ 16 _fogDurationPage                                               000AB1 GR
+ 16 _fogIntervalPage                                               0009E0 GR
+ 16 _fogLevelPage                                                  000850 GR
+ 16 _getString                                                     001383 GR
     _get_button_action                                             ****** GX
     _get_dmx_address                                               ****** GX
     _get_runtime_data                                              ****** GX
- 16 _get_ui_state                                                  00131F GR
- 16 _idlePage                                                      000436 GR
-  5 _idlePage_empty_65536_59                                       000006 R
-  5 _idlePage_iconChange_65536_59                                  000008 R
-  5 _idlePage_intervalOrDuration_65536_59                          000005 R
-  5 _idlePage_playing_65536_59                                     000009 R
-  5 _idlePage_timer_65536_59                                       000004 R
-  5 _idlePage_tock_65536_59                                        000007 R
- 16 _macroPage                                                     000B22 GR
- 16 _macroSpeedPage                                                000BEC GR
+ 16 _get_ui_state                                                  00137F GR
+ 16 _idlePage                                                      000496 GR
+  5 _idlePage_empty_65536_61                                       000006 R
+  5 _idlePage_iconChange_65536_61                                  000008 R
+  5 _idlePage_intervalOrDuration_65536_61                          000005 R
+  5 _idlePage_playing_65536_61                                     000009 R
+  5 _idlePage_timer_65536_61                                       000004 R
+  5 _idlePage_tock_65536_61                                        000007 R
+ 16 _macroPage                                                     000B82 GR
+ 16 _macroSpeedPage                                                000C4C GR
     _power_heater                                                  ****** GX
     _power_pump                                                    ****** GX
- 16 _remotePage                                                    000E27 GR
- 16 _saveLoadPage                                                  000F73 GR
-  5 _saveLoadPage_slot_65536_142                                   00000A R
+ 16 _remotePage                                                    000E87 GR
+ 16 _saveLoadPage                                                  000FD3 GR
+  5 _saveLoadPage_slot_65536_144                                   00000A R
     _save_load_settings                                            ****** GX
     _set_dmx_address                                               ****** GX
     _set_runtime_data                                              ****** GX
- 16 _set_ui_state                                                  001216 GR
+ 16 _set_ui_state                                                  001276 GR
     _tick_fogger                                                   ****** GX
  16 _tick_ui                                                       000000 GR
   5 _tick_ui_bursting_65536_37                                     000003 R
@@ -416,13 +418,13 @@ Symbol Table
     _write_number                                                  ****** GX
     _write_string                                                  ****** GX
     a                                                           =  0000E0 L
-    a.0                                                         =  0000E0 L
-    a.1                                                         =  0000E1 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 8.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    a.0                                                         =  0000E0 L
+    a.1                                                         =  0000E1 L
     a.2                                                         =  0000E2 L
     a.3                                                         =  0000E3 L
     a.4                                                         =  0000E4 L
@@ -476,13 +478,13 @@ Symbol Table
     ie.1                                                        =  0000A9 L
     ie.2                                                        =  0000AA L
     ie.3                                                        =  0000AB L
-    ie.4                                                        =  0000AC L
-    ie.5                                                        =  0000AD L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    ie.4                                                        =  0000AC L
+    ie.5                                                        =  0000AD L
     ie.7                                                        =  0000AF L
     ie0                                                         =  000089 L
     ie1                                                         =  00008B L
@@ -536,13 +538,13 @@ Symbol Table
     p3.6                                                        =  0000B6 L
     p3.7                                                        =  0000B7 L
     pcon                                                        =  000087 L
-    ps                                                          =  0000BC L
-    psw                                                         =  0000D0 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    ps                                                          =  0000BC L
+    psw                                                         =  0000D0 L
     psw.0                                                       =  0000D0 L
     psw.1                                                       =  0000D1 L
     psw.2                                                       =  0000D2 L
@@ -596,13 +598,13 @@ Symbol Table
     tcon.2                                                      =  00008A L
     tcon.3                                                      =  00008B L
     tcon.4                                                      =  00008C L
-    tcon.5                                                      =  00008D L
-    tcon.6                                                      =  00008E L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    tcon.5                                                      =  00008D L
+    tcon.6                                                      =  00008E L
     tcon.7                                                      =  00008F L
     tf0                                                         =  00008D L
     tf1                                                         =  00008F L
@@ -648,8 +650,8 @@ Area Table
   13 GSINIT5                                    size      0   flags   20
   14 GSINIT                                     size     1E   flags   20
   15 GSFINAL                                    size      0   flags   20
-  16 CSEG                                       size   152C   flags   20
-  17 CONST                                      size    2CF   flags   20
+  16 CSEG                                       size   15A6   flags   20
+  17 CONST                                      size    2F1   flags   20
   18 XINIT                                      size      0   flags   20
   19 CABS                                       size      0   flags   28
 
