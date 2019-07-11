@@ -1015,7 +1015,7 @@ char* getString(uint8_t index){
         case SECRET_STRING_OFFSET + 5:
             return "646F65734E6F74 ;";
         case SECRET_STRING_OFFSET + 6:
-            return "FirmwareCrafter:";
+            return "Firmware Crafter";
         case SECRET_STRING_OFFSET + 7:
             return "ChristianKrueger";
     }
